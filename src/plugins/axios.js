@@ -88,7 +88,7 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   // 请求成功
-  res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
+  response => response.status === 200 ? Promise.resolve(response) : Promise.reject(responseres),
   // 请求失败
   error => {
     const {

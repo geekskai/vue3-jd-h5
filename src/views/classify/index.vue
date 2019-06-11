@@ -1,37 +1,25 @@
 <template>
   <div class="classify">
-    <p>商品分类</p>
+    <!-- <p class="header">商品分类</p> -->
     <div class="munu_all">
       <div class="meun_classify" ref="meun_classify">
         <ul>
-          <van-sidebar :active-key="activeKey" @change="onChange">
-            <van-sidebar-item title="运动 户外"/>
-            <van-sidebar-item title="美妆 护肤"/>
-            <van-sidebar-item title="个护 清理"/>
-            <van-sidebar-item title="钟表 珠宝"/>
-            <van-sidebar-item title="运动 户外"/>
-            <van-sidebar-item title="美妆 护肤"/>
-            <van-sidebar-item title="个护 清理"/>
-            <van-sidebar-item title="钟表 珠宝"/>
-            <van-sidebar-item title="运动 户外"/>
-            <van-sidebar-item title="美妆 护肤"/>
-            <van-sidebar-item title="个护 清理"/>
-            <van-sidebar-item title="钟表 珠宝"/>
-            <van-sidebar-item title="运动 户外"/>
-            <van-sidebar-item title="美妆 护肤"/>
-            <van-sidebar-item title="个护 清理"/>
-            <van-sidebar-item title="钟表 珠宝"/>
-            <van-sidebar-item title="运动 户外"/>
-            <van-sidebar-item title="美妆 护肤"/>
-            <van-sidebar-item title="美妆 护肤"/>
-          </van-sidebar>
+          <li
+            v-for="(list,index) in tabslabel"
+            :key="index"
+            @click="selectList(index)"
+            :class="list.active?'active':''"
+          >{{list.label}}</li>
         </ul>
       </div>
       <div class="classify_content" ref="classify_content">
         <ul>
-          <li v-for="(list,index) in lists" :key="index">
-            <img :src="list.image">
-            <p>{{list.label}}</p>
+          <li v-for="(tag,index) in tags" :key="index">
+            <img :src="tag.image" alt>
+            <p>
+              {{tag.label}}
+              <i class="cubeic-add" @click="addToCart($event,tag)"></i>
+            </p>
           </li>
         </ul>
       </div>
@@ -45,113 +33,95 @@ export default {
   name: "",
   data() {
     return {
-      activeKey: 0,
-      lists: [
+      tags: [],
+      tabslabel: [
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "热门推荐",
+          active: true
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "手机数码",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "电脑办公",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "计生情趣",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "美妆护肤",
+          active: false
+        },
+
+        {
+          label: "个人清洁",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "汽车生活",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "男装",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "女装",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "超市",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "户外运动",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "男装",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "女装",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "超市",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "户外运动",
+          active: false
         },
         {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
-        },
-        {
-          url: "https://m.cdclass.net",
-          image:
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/bannner/1901/learn.png",
-          label: "分类一"
+          label: "其他",
+          active: false
         }
       ]
     };
   },
   created() {
-    console.log("=====分类==>");
+    this.getClassify(0);
   },
   methods: {
-    onChange(key) {
-      this.activeKey = key;
+    selectList(index) {
+      this.tabslabel.forEach((tab, idx) => {
+        if (idx === index) {
+          tab.active = true;
+        } else {
+          tab.active = false;
+        }
+      });
+      this.getClassify(index);
+    },
+    async getClassify(index) {
+      const { data } = await this.$http.get("/api/classify", {
+        params: { type: index }
+      });
+      this.tags = data.data;
     }
   },
   mounted() {
@@ -163,8 +133,10 @@ export default {
     meun_classify.style.height = bodyheight - 50 + "px";
     classify_content.style.height = bodyheight - 50 + "px";
     this.$nextTick(() => {
-      this.scroll_menu = new BScroll(this.$refs.meun_classify, {});
-      this.scroll_content = new BScroll(this.$refs.classify_content, {});
+      this.scroll_menu = new BScroll(this.$refs.meun_classify, { click: true });
+      this.scroll_content = new BScroll(this.$refs.classify_content, {
+        click: true
+      });
     });
   }
 };
@@ -172,6 +144,9 @@ export default {
 
 <style scoped lang="scss">
 .classify {
+  .header {
+    background-color: #ffffff;
+  }
   .munu_all {
     display: flex;
     .meun_classify {
@@ -185,10 +160,15 @@ export default {
         background-color: #f8f8f8;
         font-size: 14px;
       }
+      .active {
+        background-color: #ffffff;
+        color: #e93b3d;
+      }
     }
     .classify_content {
       width: 75%;
       ul {
+        background-color: #ffffff;
         display: flex;
         flex-wrap: wrap;
 

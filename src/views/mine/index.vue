@@ -1,23 +1,16 @@
 <template>
-<div>
-  我的
-</div>
+  <div>我的</div>
 </template>
 
 <script>
 export default {
   name: "",
   data() {
-    return {
-     
-    };
+    return {};
   },
   created() {},
-  computed: {
-   
-  },
+  computed: {},
   mounted() {
-    
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {}

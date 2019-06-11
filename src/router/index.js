@@ -48,6 +48,6 @@ let router = new Router({
 })
 
 // router.beforeEach((to, from, next) => {
- 
+
 // })
 export default router

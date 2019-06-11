@@ -14,9 +14,9 @@ import EventBus from './utils/eventBus'
 Vue.use(EventBus)
 
 import Vconsole from 'vconsole'
-const vConsole = new Vconsole()
 if (process.env.NODE_ENV !== 'production') {
-  Vue.use(vConsole)
+  // const vConsole = new Vconsole()
+  // Vue.use(vConsole)
 }
 
 Vue.use(axios)
@@ -24,8 +24,6 @@ Vue.use(axios)
 import {
   Swipe,
   SwipeItem,
-  Sidebar,
-  SidebarItem,
   Button,
   Tabbar,
   TabbarItem,
@@ -34,7 +32,7 @@ import {
   Lazyload,
   Icon
 } from 'vant';
-Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload).use(Sidebar).use(SidebarItem);
+Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload);
 
 Vue.config.productionTip = false
 
