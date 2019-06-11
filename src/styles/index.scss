@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: "Avenir", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        background: rgba(239, 239, 244, 1);
+    }
+}
