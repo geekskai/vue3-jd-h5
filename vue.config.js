@@ -1,15 +1,19 @@
 module.exports = {
+  lintOnSave: false,
   configureWebpack: {
     devServer: {
+      disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
       before(app) { //改完接口需要重启才能生效
         // 用户信息池
         let userpoor = [{
-          username: 'admin',
-          password: '123'
-        }, {
-          username: 'grists',
-          password: '123456'
-        }]
+            username: 'admin',
+            password: '123'
+          },
+          {
+            username: 'grists',
+            password: '123456'
+          }
+        ]
         // mock注册数据
         app.get('/api/register', (req, res) => {
           const {

@@ -1,5 +1,5 @@
 <template>
-  <div>我的</div>
+  <div class="fullAll">我的页面</div>
 </template>
 
 <script>
@@ -18,4 +18,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$red: red;
+.fullAlls {
+  color: $red;
+}
 </style>

@@ -1,0 +1,16 @@
+
+@mixin left($value: 10px) {
+    float: left;
+    margin-right: $value;
+};
+// 背景图片地址和大小
+@mixin backImg($url) {
+    background: url($url) no-repeat center;
+    background-size: 100% 100%;
+}
+
+@mixin disFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

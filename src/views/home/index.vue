@@ -89,6 +89,7 @@ export default {
 .home {
   .header_search {
     // position: fixed;
+    text-align: center;
     display: inline-block;
     padding-top: 20px;
     // top: 0;

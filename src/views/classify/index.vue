@@ -151,6 +151,7 @@ export default {
     display: flex;
     .meun_classify {
       width: 25%;
+      text-align: center;
       flex-wrap: wrap;
       li {
         height: 50px;
@@ -166,6 +167,7 @@ export default {
       }
     }
     .classify_content {
+      text-align: center;
       width: 75%;
       ul {
         background-color: #ffffff;
