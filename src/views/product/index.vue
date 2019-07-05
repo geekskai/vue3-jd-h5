@@ -72,10 +72,6 @@ export default {
       position: fixed;
       left: 16px;
       top: 54px;
-    //   .svg-icon{
-    //       width: 72px;
-    //       height: 72px;
-    //   }
   }
   .product-content {
     font-size: 14px;
