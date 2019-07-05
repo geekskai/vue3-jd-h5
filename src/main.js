@@ -3,13 +3,15 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-// require styles
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */ )
 import './components'
 import 'amfe-flexible'
 import axios from './plugins/axios'
-import './styles/index.scss'
+Vue.use(axios)
+import './mock/mock'
+
+import '@/icons' // icon
 import EventBus from './utils/eventBus'
 Vue.use(EventBus)
 
@@ -19,7 +21,6 @@ if (process.env.NODE_ENV !== 'production') {
   // Vue.use(vConsole)
 }
 
-Vue.use(axios)
 
 import {
   Swipe,
@@ -28,11 +29,14 @@ import {
   Tabbar,
   TabbarItem,
   NavBar,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton,
   Search,
   Lazyload,
   Icon
 } from 'vant';
-Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload);
+Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton);
 
 Vue.config.productionTip = false
 

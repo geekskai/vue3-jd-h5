@@ -1,24 +1,81 @@
 <template>
   <div class="home">
-    <div class="header_search">
-      <!-- <li class="left_icon"></li> -->
-      <van-search placeholder="推荐搜索 关键词"/>
-      <!-- <li>
-        <img src="@/assets/image/home/header_detail.png" alt>
-      </li>-->
-    </div>
+    <header class="home-header" :class="{'active' : headerActive}">
+      <div class="header-search">
+        <svg-icon class="search-icon" icon-class="search"></svg-icon>
+        <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
+      </div>
+    </header>
     <van-swipe class="swiper_carousel" :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img class="lazy_img" v-lazy="image">
+        <img class="lazy_img" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
     <div class="swiperCls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images" :key="index">
-          <img class="slide_img" :src="img" alt>
+          <img class="slide_img" :src="img.imgUrl" alt />
         </swiper-slide>
       </swiper>
     </div>
+    <section class="goods-box">
+      <span class="good-things">精选好物</span>
+      <ul class="goods-content">
+        <li>
+          <img src="../../assets/image/home/test1.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">娜扎新装LOOK</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="../../assets/image/home/test1.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">娜扎新装LOOK</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="../../assets/image/home/test1.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">娜扎新装LOOK</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="../../assets/image/home/test1.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">娜扎新装LOOK</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <tabbar></tabbar>
   </div>
 </template>
 
@@ -27,14 +84,26 @@ export default {
   name: "home",
   data() {
     return {
+      isLogin: false,
+      headerActive: false,
       images: [
-        // require('@/assets/image/home/xx.png'),
-        "https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg",
-        "https://img.yzcdn.cn/public_files/2017/09/05/3bd347e44233a868c99cf0fe560232be.jpg",
-        "https://img.yzcdn.cn/public_files/2017/09/05/c0dab461920687911536621b345a0bc9.jpg"
+        {
+          imgUrl:
+            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t29188/301/133996293/200131/61f42a01/5be8eed6Nda6a18a5.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          categoryId: 100008
+        },
+        {
+          imgUrl:
+            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t30757/316/208746402/123953/9fa18794/5beb7d13Ne77e9f29.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          categoryId: 100016
+        },
+        {
+          imgUrl:
+            "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
+          categoryId: 100035
+        }
       ],
       swiperOption: {
-        // swiper configs 所有的配置同swiper官方api配置
         loop: true,
         autoplay: false,
         loadOnTransitionStart: true,
@@ -52,22 +121,24 @@ export default {
         touchRatio: 1, // 默认为1，按照1:1的触摸比例滑动。设置为0时，完全无法滑动
         // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
         debugger: true,
-        // swiper的各种回调函数也可以出现在这个对象中，和swiper官方一样,
         effect: "coverflow",
         slidesPerView: 2, //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
         centeredSlides: true,
         coverflowEffect: {
           rotate: 0, //slide做3d旋转时Y轴的旋转角度。默认50。
-          stretch: 22, //每个slide之间的拉伸值，越大slide靠得越紧。 默认0。
-          depth: 200, // slide的位置深度。值越大z轴距离越远，看起来越小。 默认100。
+          stretch: 18, //每个slide之间的拉伸值，越大slide靠得越紧。 默认0。
+          depth: 150, // slide的位置深度。值越大z轴距离越远，看起来越小。 默认100。
           modifier: 2, //  depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。默认1。
           slideShadows: false // 开启slide阴影。默认 true
         }
       }
     };
   },
+
   created() {
-    console.log("=====首页==>");
+    this.$http.get("http://test.happymmall.com/home/data").then(res => {
+      const { data } = res.data;
+    });
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
@@ -76,7 +147,17 @@ export default {
     console.log("this is current swiper instance object", this.swiper);
     this.swiper.slideTo(3, 1000, false);
   },
-  methods: {},
+  methods: {
+    pageScroll() {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      scrollTop > 100
+        ? (this.headerActive = true)
+        : (this.headerActive = false);
+    }
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
@@ -86,59 +167,113 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/mixin.scss";
 .home {
-  .header_search {
-    // position: fixed;
-    text-align: center;
-    display: inline-block;
-    padding-top: 20px;
-    // top: 0;
-    // left: 0;
+  background-color: #efeff4;
+  .home-header {
+    position: fixed;
+    left: 0;
+    top: 24px;
     width: 100%;
-    .van-search {
-      width: 350px;
-      display: inline-block;
-      background-color: transparent !important;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: flex-start;
+    @include boxSizing;
+    font-size: 30px;
+    color: #fdc;
+    z-index: 10000;
+    .header-search {
+      border-radius: 3px;
+      display: flex;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      color: #232326;
+      background: #fff;
+      .search-icon {
+        line-height: 40px;
+        padding: 8px 10px;
+      }
+      .app-name {
+        padding: 0 20px;
+        color: $red;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .icon-search {
+        padding: 0 20px;
+        font-size: 34px;
+      }
+      .search-title {
+        font-size: 16px;
+        color: #dbdbdb;
+        width: 100%;
+        padding-left: 80px;
+      }
     }
   }
+
   .swiper_carousel {
-    // position: absolute;
-    // top: 100px;
-    // right: 0;
-    // left: 0;
     padding-bottom: 10px;
     .lazy_img {
       width: 100%;
-      height: 203px;
+      height: 313px;
     }
   }
   .swiperCls {
     .slide_img {
-      width: 130px;
+      width: 187px;
+      height: 90px;
     }
   }
-  // background: url("../../assets/image/home/header_bag.png") no-repeat top;
-  // background-size: 100% 50%;
-  // padding-top: 20px;
-  //   .header {
-  //     position: fixed;
-  //     height: 40px;
-  //     width: 343px;
-  //     text-align: center;
-  //     padding-top: 40px;
-  //     z-index: 1000;
-  //     .left_icon {
-  //       width: 24px;
-  //       height: 24px;
-  //       background: url("../../assets/image/left_icon.png") no-repeat center;
-  //       background-size: 100% 100%;
-  //       line-height: 24px;
-  //       border-radius: 50%;
-  //       margin-left: 16px;
-  //       text-align: center;
-  //       vertical-align: middle;
-  //       display: inline-block;
-  //     }
-  //   }
+  .goods-box {
+    padding: 16px;
+    .good-things {
+      font-size: 18px;
+      color: #fe4f70;
+    }
+    .goods-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      li {
+        display: inline-block;
+        width: 165px;
+        border-radius: 8px;
+        margin-top: 10px;
+        padding-right: 10px;
+        background-color: white;
+      }
+      li:nth-of-type(even) {
+        padding-right: 0;
+      }
+      .goods-layout {
+        width: 165px;
+        padding: 0 10px;
+        .goods-title {
+          color: #3a3a3a;
+          font-size: 14px;
+          font-weight: 700;
+        }
+        .goods-div {
+          color: #949497;
+          font-size: 11px;
+        }
+        .goods-desc {
+          background-color: #fff;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 12px;
+          .goods-price {
+            font-size: 14px;
+            color: #fe4f70;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

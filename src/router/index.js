@@ -17,17 +17,26 @@ let routes = [
   {
     path: '/login',
     name: 'login',
+    meta: {
+      index: 1
+    },
     component: () => import( /* webpackChunkName: "login" */ '@/views/login/index')
   },
   // 无权限页面
   {
     path: '/nopermission',
     name: 'nopermission',
+    meta: {
+      index: 1
+    },
     component: () => import( /* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
   },
   {
     path: '*',
     name: '404',
+    meta: {
+      index: 1
+    },
     component: () => import( /* webpackChunkName: "404" */ '@/views/error/404')
   },
   indexRouter

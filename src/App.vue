@@ -1,11 +1,32 @@
 <template>
   <div id="app">
-    <router-view/>
+      <router-view class="router-view" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {};
+  }
 };
 </script>
+<style lang="scss">
+@import "./styles/base.scss";
+body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+#app {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  margin: 0 auto;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+</style>

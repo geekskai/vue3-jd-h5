@@ -1,5 +1,7 @@
 <template>
-  <div class="container">购物车</div>
+  <div class="container">购物车
+     <tabbar></tabbar>
+  </div>
 </template>
 
 <script>

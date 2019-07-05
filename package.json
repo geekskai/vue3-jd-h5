@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "test": "vue-cli-service serve --mode test",
     "lint": "vue-cli-service lint"
@@ -29,10 +29,12 @@
     "babel-plugin-import": "^1.12.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
     "postcss-px2rem": "^0.3.0",
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
+    "svg-sprite-loader": "^4.1.6",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {

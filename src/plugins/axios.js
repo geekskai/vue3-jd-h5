@@ -65,6 +65,7 @@ const errorHandle = (status, other) => {
 // 创建axios实例
 var instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
+  // baseURL: '',
   timeout: 1000 * 12
 });
 // 设置post请求头

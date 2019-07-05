@@ -1,5 +1,7 @@
 <template>
-  <div class="fullAll">我的页面</div>
+  <div class="fullAll">我的页面
+     <tabbar></tabbar>
+  </div>
 </template>
 
 <script>
