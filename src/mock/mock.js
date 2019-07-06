@@ -1,5 +1,34 @@
 const Mock = require('mockjs')
 
+
+let hotData = {
+    status: 0,
+    data: [
+        {
+            title: '小米手机',
+            hot: 1
+        }, {
+            title: '笔记本',
+            hot: 1
+        }, {
+            title: '电脑',
+            hot: 0
+        }, {
+            title: '平板',
+            hot: 0
+        }, {
+            title: '液晶电视',
+            hot: 1
+        }, {
+            title: '家电',
+            hot: 0
+        }, {
+            title: '玩具',
+            hot: 0
+        }
+    ]
+}
+
 let homeData = {
     status: 0,
     data: {
@@ -640,4 +669,5 @@ let categoryData = {
 }
 
 Mock.mock('http://test.happymmall.com/home/data', homeData)
+Mock.mock('http://test.happymmall.com/search/hot', hotData)
 Mock.mock('http://test.happymmall.com/category/data', categoryData)

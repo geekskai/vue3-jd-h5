@@ -1,4 +1,4 @@
-# jckj-app-h5
+# whale-mall-h5
 
 ## Project setup
 ```

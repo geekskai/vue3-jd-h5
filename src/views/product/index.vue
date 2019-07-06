@@ -5,7 +5,7 @@
         <img class="lazy_img" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-    <span class="btn-left">
+    <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="white-btn"></svg-icon>
     </span>
     <ul class="product-content">
@@ -20,7 +20,7 @@
           <span class="store-name">店铺名称</span>
         </div>
         <div class="store-btn">
-          <van-button plain size="small" type="danger">联系店家</van-button>
+          <van-button plain size="small" @click="handleConnectStore" type="danger">联系店家</van-button>
         </div>
       </li>
       <li class="product-detail">
@@ -58,7 +58,11 @@ export default {
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleConnectStore(){
+      this.$router.push('/storeDetail')
+    }
+  }
 };
 </script>
 

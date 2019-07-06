@@ -1,6 +1,6 @@
 export default [{
     path: 'index',
-    name: 'home',
+    name: 'index',
     meta: {
       index: 1
     },

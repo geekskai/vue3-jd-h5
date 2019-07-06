@@ -4,7 +4,7 @@
       <span class="btn-left">
         <svg-icon icon-class="left-btn"></svg-icon>
       </span>
-      <div class="header-search">
+      <div class="header-search" @click="handleSearch">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
         <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
       </div>
@@ -144,6 +144,9 @@ export default {
     });
   },
   methods: {
+    handleSearch(){
+      this.$router.push('/search')
+    },
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
