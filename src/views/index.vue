@@ -19,10 +19,8 @@ export default {
     $route(to, from) {
       if (to.meta.index > from.meta.index) {
         //外---》内
-        console.log('=====外---》内==>');
         this.transitionName = "slide-left";
       } else if (to.meta.index < from.meta.index) {
-        console.log('=====内---》外==>');
         //内---》外
         this.transitionName = "slide-right";
       } else {
