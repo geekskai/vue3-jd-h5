@@ -1,7 +1,7 @@
 <template>
   <div class="setting-page">
     <header class="page-header">
-      <van-icon name="arrow-left" />
+      <van-icon name="arrow-left" @click="$router.go(-1)" />
       <div class="header-content">设置</div>
     </header>
 
