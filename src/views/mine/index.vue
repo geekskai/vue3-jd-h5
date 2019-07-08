@@ -23,48 +23,48 @@
     </section>
     <section class="mine-content">
       <ul class="options-list">
-        <li class="option-item">
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>李四</span>
           </div>
           <van-icon name="arrow" />
-        </li>
-        <li class="option-item">
+        </router-link>
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="shipping-address"></svg-icon>
             <span>收货地址</span>
           </div>
           <van-icon name="arrow" />
-        </li>
-        <li class="option-item">
+        </router-link>
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="message-center"></svg-icon>
             <span>消息中心</span>
           </div>
           <van-icon name="arrow" />
-        </li>
-        <li class="option-item">
+        </router-link>
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="help-center"></svg-icon>
             <span>帮助中心</span>
           </div>
           <van-icon name="arrow" />
-        </li>
-        <li class="option-item">
+        </router-link>
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
             <span>我的申诉</span>
           </div>
           <van-icon name="arrow" />
-        </li>
-        <li class="option-item">
+        </router-link>
+        <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="setting"></svg-icon>
             <span>设置</span>
           </div>
           <van-icon name="arrow" />
-        </li>
+        </router-link>
       </ul>
     </section>
     <tabbar></tabbar>
