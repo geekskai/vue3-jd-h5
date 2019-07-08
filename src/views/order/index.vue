@@ -7,13 +7,6 @@
 
     <list-scroll :scroll-data="categoryData" class="nav-side-wrapper" :scrollX="true">
       <section class="order-tag" ref="searchWrap">
-        <!-- <span
-          :class="{'active' : orderType===1}"
-          v-for="(item,index) in categoryData"
-          :key="index"
-          data-type="1"
-          @click="selectTag"
-        >{{item}}</span>-->
         <span :class="{'active' : orderType===1}" data-type="1" @click="selectTag">全部(20)</span>
         <span :class="{'active' : orderType===2}" data-type="2" @click="selectTag">已取消(3)</span>
         <span :class="{'active' : orderType===3}" data-type="3" @click="selectTag">待支付(3)</span>
@@ -35,7 +28,7 @@ export default {
   data() {
     return {
       orderType: 1,
-      categoryData: ["全部", "已取消", "待支付", "待发货", "已支付", "已完成"]
+      categoryData: []
     };
   },
   created() {},
