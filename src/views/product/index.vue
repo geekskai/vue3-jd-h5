@@ -15,7 +15,7 @@
         <i>月销:888</i>
       </li>
       <li class="store-info">
-        <div class="store-detail">
+        <div class="store-detail" @click="handleStoreName">
           <img src="../../assets/image/product/store-header.png" class="store-header" />
           <span class="store-name">店铺名称</span>
         </div>
@@ -59,6 +59,9 @@ export default {
   },
   created() {},
   methods: {
+      handleStoreName(){
+        this.$router.push('/storeDetail')
+      },
     handleConnectStore(){
       this.$router.push('/storeDetail')
     }

@@ -19,8 +19,10 @@ export default {
     $route(to, from) {
       if (to.meta.index > from.meta.index) {
         //外---》内
+        console.log('=====外---》内==>');
         this.transitionName = "slide-left";
       } else if (to.meta.index < from.meta.index) {
+        console.log('=====内---》外==>');
         //内---》外
         this.transitionName = "slide-right";
       } else {
@@ -34,12 +36,11 @@ export default {
 
 <style lang="scss" scoped>
 .index {
-  background-color: rgba(239, 239, 244, 1);
-
   /*切换样式出错处理*/
+  height: 100%;
   .router-view {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     // position: absolute;
     top: 0;
     bottom: 0;

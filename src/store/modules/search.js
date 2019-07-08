@@ -4,7 +4,10 @@ const state = {
 }
 const getters = {}
 const mutations = {
-  addHistory(state, searchHistory) {
+  addHistory(state, searchHistory){
+    state.searchHistory.unshift(searchHistory)
+  },
+  setHistory(state, searchHistory) {
     state.searchHistory = searchHistory
     setStore('searchHistory', searchHistory)
   },

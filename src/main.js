@@ -34,9 +34,11 @@ import {
   GoodsActionButton,
   Search,
   Lazyload,
+  Popup ,
   Icon
 } from 'vant';
-Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton);
+Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon)
+.use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup);
 
 Vue.config.productionTip = false
 

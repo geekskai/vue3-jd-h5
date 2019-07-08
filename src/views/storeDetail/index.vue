@@ -30,9 +30,186 @@
         </li>
       </ul>
     </section>
-    <section>
-      
-    </section>
+    <div class="goods-all">
+      <section class="select-menu" :class="{'isFixed' : seclectActive}">
+        <div
+          class="select-item default-sort"
+          :class="{'active' : orderBy === 'default'}"
+          data-order-by="default"
+          @click="selectOrder($event)"
+        >默认排序</div>
+        <div class="select-item" :class="{'active' : orderBy === 'price_asc'}">
+          按价格
+          <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
+          <span class="select-arrows">
+            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
+            <i
+              class="sort-caret descending"
+              data-order-by="price_desc"
+              @click="selectOrder($event)"
+            ></i>
+          </span>
+        </div>
+        <div
+          class="select-item"
+          :class="{'active' : orderBy === 'price_desc'}"
+          data-order-by="price_desc"
+          @click="selectOrder($event)"
+        >
+          按销量
+          <!-- <i class="iconfont icon-down1" :class="{'active' : orderBy === 'price_desc'}"></i> -->
+          <span class="select-arrows">
+            <i
+              class="sort-caret ascending"
+              data-order-by="saleCount_asc"
+              @click="selectOrder($event)"
+            ></i>
+            <i
+              class="sort-caret descending"
+              data-order-by="saleCount_desc"
+              @click="selectOrder($event)"
+            ></i>
+          </span>
+        </div>
+        <div class="search-icon select-item" @click="handleSearch">
+          <svg-icon icon-class="search"></svg-icon>
+        </div>
+      </section>
+      <section class="goods-box">
+        <ul class="goods-content">
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test1.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -43,12 +220,43 @@ export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      orderBy: "default",
+      seclectActive: false
+    };
   },
-  methods: {},
+  methods: {
+     handleSearch(){
+      this.$router.push('/search')
+    },
+    selectOrder(e) {
+      let orderBy = e.currentTarget.getAttribute("data-order-by");
+      console.log("=====orderBy==>", orderBy);
+      if (orderBy === this.orderBy) {
+        return;
+      }
+      // this.productList = []    //重置list
+      this.orderBy = orderBy;
+      // this.params.orderBy = orderBy
+      // this.params.pageNum = 1
+      // this.isLoading = true
+      // this.getProductList(this.params)
+    },
+    pageScroll() {
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      scrollTop > 100
+        ? (this.seclectActive = true)
+        : (this.seclectActive = false);
+    }
+  },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    window.addEventListener("scroll", this.pageScroll);
+  },
   watch: {}
 };
 </script>
@@ -104,6 +312,111 @@ export default {
         padding-top: 20px;
         /deep/ .van-button--danger {
           background-color: #fe4f70;
+        }
+      }
+    }
+  }
+  .goods-all {
+    padding-top: 10px;
+    background-color: #efeff4;
+    .select-menu {
+      background-color: #fff;
+      line-height: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #949497;
+      font-size: 11px;
+      //  &.isFixed {
+      //   position: fixed;
+      //   left: 0;
+      //   top: 0;
+      // }
+      .select-item.active {
+        color: #fe4f70;
+      }
+      .select-item {
+        .search-icon {
+          transform: rotate(90deg);
+        }
+      }
+      .default-sort {
+        padding-left: 16px;
+      }
+      .search-icon {
+        padding-right: 16px;
+      }
+      .select-arrows {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        height: 34px;
+        width: 20px;
+        vertical-align: middle;
+        cursor: pointer;
+        overflow: initial;
+        position: relative;
+        .sort-caret {
+          width: 0;
+          height: 0;
+          border: 5px solid transparent;
+          position: absolute;
+          left: 7px;
+        }
+        .sort-caret.ascending {
+          border-bottom-color: #c0c4cc;
+          top: 5px;
+        }
+        .sort-caret.descending {
+          border-top-color: #c0c4cc;
+          bottom: 7px;
+        }
+      }
+    }
+    .goods-box {
+      padding: 16px;
+      .good-things {
+        font-size: 18px;
+        color: #fe4f70;
+      }
+      .goods-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        li {
+          display: inline-block;
+          width: 165px;
+          border-radius: 8px;
+          margin-top: 10px;
+          padding-right: 10px;
+          background-color: white;
+        }
+        li:nth-of-type(even) {
+          padding-right: 0;
+        }
+        .goods-layout {
+          width: 165px;
+          padding: 0 10px;
+          .goods-title {
+            color: #3a3a3a;
+            font-size: 14px;
+            font-weight: 700;
+          }
+          .goods-div {
+            color: #949497;
+            font-size: 11px;
+          }
+          .goods-desc {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            .goods-price {
+              font-size: 14px;
+              color: #fe4f70;
+            }
+          }
         }
       }
     }

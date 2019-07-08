@@ -1,6 +1,73 @@
 <template>
-  <div class="fullAll">我的页面
-     <tabbar></tabbar>
+  <div class="mine-layout">
+    <section class="order-top">
+      <span class="my-order">我的订单</span>
+      <ul class="order-list">
+        <router-link to="/pendingPay" class="order-item" tag="li">
+          <svg-icon icon-class="pending-pay"></svg-icon>
+          <span>待付款</span>
+        </router-link>
+        <router-link to="/order" class="order-item" tag="li">
+          <svg-icon icon-class="be-delivered"></svg-icon>
+          <span>待发货</span>
+        </router-link>
+        <router-link to="/order" class="order-item" tag="li">
+          <svg-icon icon-class="pending-receipt"></svg-icon>
+          <span>待收货</span>
+        </router-link>
+        <router-link to="/order" class="order-item" tag="li">
+          <svg-icon icon-class="all-orders"></svg-icon>
+          <span>全部订单</span>
+        </router-link>
+      </ul>
+    </section>
+    <section class="mine-content">
+      <ul class="options-list">
+        <li class="option-item">
+          <div class="item-info">
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>李四</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="shipping-address"></svg-icon>
+            <span>收货地址</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="message-center"></svg-icon>
+            <span>消息中心</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="help-center"></svg-icon>
+            <span>帮助中心</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
+            <span>我的申诉</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="setting"></svg-icon>
+            <span>设置</span>
+          </div>
+          <van-icon name="arrow" />
+        </li>
+      </ul>
+    </section>
+    <tabbar></tabbar>
   </div>
 </template>
 
@@ -20,8 +87,53 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$red: red;
-.fullAlls {
-  color: $red;
+.mine-layout {
+  padding: 16px;
+  .order-top {
+    .my-order {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .order-list {
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .order-item {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        span {
+          padding-top: 5px;
+        }
+      }
+    }
+  }
+  .mine-content {
+    .options-list {
+      .option-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        padding: 20px 0;
+        .item-info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .incon {
+            padding-right: 16px;
+          }
+          .header-img {
+            width: 50px;
+            height: 50px;
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

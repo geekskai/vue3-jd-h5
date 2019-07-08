@@ -1,7 +1,7 @@
 <template>
   <div class="classify">
     <header class="home-header">
-      <span class="btn-left">
+      <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="left-btn"></svg-icon>
       </span>
       <div class="header-search" @click="handleSearch">
@@ -171,6 +171,7 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/mixin.scss";
 .classify {
+  height: 100%;
   .home-header {
     position: fixed;
     left: 0;

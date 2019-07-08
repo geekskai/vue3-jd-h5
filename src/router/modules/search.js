@@ -3,7 +3,7 @@ export default [
     path: '/search',
     name: 'search',
     meta: {
-      index: 2
+      index: 12
     },
     component: () => import('@/views/search/index.vue')
   }
