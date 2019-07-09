@@ -186,6 +186,10 @@ export default {
       padding-left: 0;
       padding-right: 0;
     }
+    /deep/ .van-field__control:disabled{
+      color: #3a3a3a;
+      font-size: 13px;
+    }
     /deep/ .van-image img {
       border-radius: 8px;
     }

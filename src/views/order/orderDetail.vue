@@ -17,7 +17,7 @@
           <span>待支付</span>
         </li>
         <li class="order-info">
-          <img src alt />
+          <img/>
           <div class="order-detail">
             <p class="info-one">
               <span>娜扎新装LOOK</span>
@@ -55,15 +55,15 @@
         </li>
         <li class="info-item">
           <label>总价：</label>
-          <span>2019/05/01 13:40:40</span>
+          <span>￥222 </span>
         </li>
         <li class="info-item">
           <label>优惠券：</label>
-          <span>2019/05/01 13:40:40</span>
+          <span>￥0.00 </span>
         </li>
         <li class="info-item">
           <label>支付金额：</label>
-          <span>2019/05/01 13:40:40</span>
+          <span>￥222 </span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>

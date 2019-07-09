@@ -9,12 +9,12 @@
 
     <list-scroll :scroll-data="categoryData" :scrollX="true">
       <section class="order-tag" ref="searchWrap">
-        <span :class="{'active' : orderType===1}" data-type="1" @click="selectTag">全部(20)</span>
-        <span :class="{'active' : orderType===2}" data-type="2" @click="selectTag">已取消(3)</span>
-        <span :class="{'active' : orderType===3}" data-type="3" @click="selectTag">待支付(3)</span>
-        <span :class="{'active' : orderType===4}" data-type="4" @click="selectTag">待发货(4)</span>
-        <span :class="{'active' : orderType===5}" data-type="5" @click="selectTag">已支付(11)</span>
-        <span :class="{'active' : orderType===6}" data-type="6" @click="selectTag">已完成(2)</span>
+        <span :class="{'active' : orderType===1}" data-type="1" @click="selectTag">全部(5)</span>
+        <span :class="{'active' : orderType===2}" data-type="2" @click="selectTag">已取消(1)</span>
+        <span :class="{'active' : orderType===3}" data-type="3" @click="selectTag">待支付(1)</span>
+        <span :class="{'active' : orderType===4}" data-type="4" @click="selectTag">待发货(1)</span>
+        <span :class="{'active' : orderType===5}" data-type="5" @click="selectTag">已支付(1)</span>
+        <span :class="{'active' : orderType===6}" data-type="6" @click="selectTag">已完成(1)</span>
       </section>
     </list-scroll>
     <section class="order-card" v-show="orderType==1||orderType ==3">
@@ -44,7 +44,7 @@
           <i>$496</i>
         </li>
         <li class="order-btn">
-          <span>取消订单</span>
+          <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
           <router-link tag="span" to="/order/orderDetail">去支付</router-link>
         </li>
       </ul>
@@ -58,6 +58,102 @@
             <span>订单号:201905211540350025</span>
           </div>
           <span>已支付</span>
+        </li>
+        <li class="order-info">
+          <img src alt />
+          <div class="order-detail">
+            <p class="info-one">
+              <span>娜扎新装LOOK</span>
+              <span>$248</span>
+            </p>
+            <p class="info-two">
+              <span>型号;规格;颜色;</span>
+              <span>×2</span>
+            </p>
+          </div>
+        </li>
+        <li class="order-count">
+          <span>共2件商品,小计:</span>
+          <i>$496</i>
+        </li>
+        <li class="order-btn">
+          <router-link to="/order/appeal" tag="span">申诉</router-link>
+        </li>
+      </ul>
+    </section>
+    <section class="order-card" v-show="orderType==1||orderType ==2">
+      <ul class="order-list">
+        <li class="order-item">
+          <div class="store-info">
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>
+            <span>订单号:201905211540350025</span>
+          </div>
+          <span>已取消</span>
+        </li>
+        <li class="order-info">
+          <img src alt />
+          <div class="order-detail">
+            <p class="info-one">
+              <span>娜扎新装LOOK</span>
+              <span>$248</span>
+            </p>
+            <p class="info-two">
+              <span>型号;规格;颜色;</span>
+              <span>×2</span>
+            </p>
+          </div>
+        </li>
+        <li class="order-count">
+          <span>共2件商品,小计:</span>
+          <i>$496</i>
+        </li>
+        <li class="order-btn">
+          <router-link to="/order/appeal" tag="span">申诉</router-link>
+        </li>
+      </ul>
+    </section>
+    <section class="order-card" v-show="orderType==1||orderType ==4">
+      <ul class="order-list">
+        <li class="order-item">
+          <div class="store-info">
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>
+            <span>订单号:201905211540350025</span>
+          </div>
+          <span>待发货</span>
+        </li>
+        <li class="order-info">
+          <img src alt />
+          <div class="order-detail">
+            <p class="info-one">
+              <span>娜扎新装LOOK</span>
+              <span>$248</span>
+            </p>
+            <p class="info-two">
+              <span>型号;规格;颜色;</span>
+              <span>×2</span>
+            </p>
+          </div>
+        </li>
+        <li class="order-count">
+          <span>共2件商品,小计:</span>
+          <i>$496</i>
+        </li>
+        <li class="order-btn">
+          <router-link to="/order/appeal" tag="span">申诉</router-link>
+        </li>
+      </ul>
+    </section>
+    <section class="order-card" v-show="orderType==1||orderType ==6">
+      <ul class="order-list">
+        <li class="order-item">
+          <div class="store-info">
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>
+            <span>订单号:201905211540350025</span>
+          </div>
+          <span>已完成</span>
         </li>
         <li class="order-info">
           <img src alt />
