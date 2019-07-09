@@ -93,7 +93,7 @@ export default {
   name: "",
   data() {
     return {
-      columns: ["支付宝", "微信", "银行卡"],
+      columns: ['Top-Pay',"支付宝", "微信", "银行卡"],
       show: false
     };
   },

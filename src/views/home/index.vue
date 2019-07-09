@@ -11,6 +11,15 @@
         <img class="lazy_img" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
+<van-swipe :autoplay="3000" :width="300">
+  <van-swipe-item style=" background: red;">1</van-swipe-item>
+  <van-swipe-item style=" background: blue;">2</van-swipe-item>
+  <van-swipe-item style=" background: orange;">3</van-swipe-item>
+  <van-swipe-item style=" background: white">4</van-swipe-item>
+</van-swipe>
+
+
+
     <div class="swiperCls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images" :key="index">

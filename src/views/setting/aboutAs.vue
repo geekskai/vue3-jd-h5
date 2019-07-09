@@ -1,70 +1,84 @@
 <template>
-  <div class="setting-page">
+  <div class="about-as">
     <header class="page-header">
-      <van-icon name="arrow-left" @click="$router.go(-1)" />
-      <div class="header-content">设置</div>
+      <span class="btn-left" @click="$router.go(-1)">
+        <svg-icon icon-class="white-btn"></svg-icon>
+      </span>
+      <div class="header-content">关于我们</div>
     </header>
-
+    <div class="logo-version">
+      <img src="../../assets/image/setting/logo.png" alt />
+      <span class="version">版本1.0.1</span>
+    </div>
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item">
-          <span class="setting-msg">消息提醒</span>
-          <van-switch v-model="checked" active-color="#FE4F70" size="20px" />
-        </li>
-        <li class="setting-item">
-          <span class="setting-msg">清除缓存</span>
+          <span class="setting-msg">服务协议</span>
           <van-icon class="icon" name="arrow" />
         </li>
         <router-link tag="li" class="setting-item" to="/setting/aboutAs">
-          <span class="setting-msg">关于我们</span>
+          <span class="setting-msg">隐私条款</span>
           <van-icon class="icon" name="arrow" />
         </router-link>
       </ul>
     </section>
-    <van-button plain size="large" type="danger">退出登录</van-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Setting",
-
-  components: {},
-  props: {},
+  name: "aboutAs",
   data() {
-    return {
-      checked: false
-    };
+    return {};
   },
-  methods: {},
-  computed: {},
   created() {},
-  mounted() {},
-  watch: {}
+  methods: {}
 };
 </script>
 
 <style scoped lang="scss">
-.setting-page {
-  padding: 0 16px;
-  height: 100vh;
+.about-as {
+  min-height: 100vh;
+//   background-color: #fff;
   .page-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
+    .btn-left{
+        position: absolute;
+        left: 20px;
+    }
     .header-content {
       text-align: center;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 18px;
+      color: #3a3a3a;
       flex: 1;
+    }
+    .appeal-record {
+      color: #fe4f70;
+      font-size: 13px;
+    }
+  }
+  .logo-version {
+       padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 70px;
+      height: 70px;
+    }
+    .version {
+      font-size: 14px;
+      padding-top: 16px;
+      color: #3a3a3a;
     }
   }
   .setting-content {
-    padding: 20px 20px 0 20px;
+    padding: 20px 37px 0 37px;
     margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 8px;
     .setting-list {
       .setting-item {
         display: flex;
@@ -82,10 +96,6 @@ export default {
         }
       }
     }
-  }
-  /deep/ .van-button--large {
-    height: 44px;
-    line-height: 44px;
   }
 }
 </style>

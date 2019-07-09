@@ -67,6 +67,14 @@
         </router-link>
       </ul>
     </section>
+<button @click="show = true">点击我</button>
+     <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"></vue-pickers>
     <tabbar></tabbar>
   </div>
 </template>
@@ -75,14 +83,49 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+           show: false,
+      columns: 1,
+      defaultData: [
+        {
+          text: 1999,
+          value: 1999
+        }
+      ],
+      pickData: {
+        // 第一列的数据结构
+        data1: [
+          {
+            text: 1999,
+            value: 1999
+          },
+          {
+            text: 2001,
+            value: 2001
+          }
+        ]
+      }
+    };
   },
   created() {},
   computed: {},
   mounted() {
+    
     this.$eventBus.$emit("changeTag", 3);
   },
-  methods: {}
+  methods: {
+        close() {
+      this.show = false
+    },
+    confirmFn(val) {
+      this.show = false
+      this.defaultData = [val.select1]
+    },
+    toShow() {
+      this.show = true
+    }
+ 
+  }
 };
 </script>
 
