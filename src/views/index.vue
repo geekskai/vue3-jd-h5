@@ -35,10 +35,8 @@ export default {
 <style lang="scss" scoped>
 .index {
   /*切换样式出错处理*/
-  height: 100%;
   .router-view {
     width: 100%;
-    // height: 100%;
     // position: absolute;
     top: 0;
     bottom: 0;

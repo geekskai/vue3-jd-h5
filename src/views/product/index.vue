@@ -72,6 +72,7 @@ export default {
 <style scoped lang="scss">
 .product-layout {
   background-color: white;
+  min-height: 100vh;
   .lazy_img {
     height: 500px;
   }

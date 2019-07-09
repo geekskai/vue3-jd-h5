@@ -318,7 +318,6 @@ export default {
   }
   .goods-all {
     padding-top: 10px;
-    background-color: #efeff4;
     .select-menu {
       background-color: #fff;
       line-height: 44px;

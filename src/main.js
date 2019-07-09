@@ -35,11 +35,15 @@ import {
   GoodsActionButton,
   Search,
   Lazyload,
-  Popup ,
+  Popup,
+  Picker,
+  ActionSheet,
+  Field,
+  Uploader, 
   Icon
 } from 'vant';
-Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon)
-.use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup)
+Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field)
+.use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader)
   .use(Switch);
 
 

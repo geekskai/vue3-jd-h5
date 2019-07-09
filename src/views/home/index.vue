@@ -169,7 +169,6 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/mixin.scss";
 .home {
-  background-color: #efeff4;
   .home-header {
     position: fixed;
     left: 0;

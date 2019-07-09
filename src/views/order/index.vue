@@ -1,7 +1,9 @@
 <template>
   <div class="page-order">
     <header class="page-header">
-      <van-icon name="arrow-left" />
+      <span class="btn-left" @click="$router.go(-1)">
+        <svg-icon icon-class="white-btn"></svg-icon>
+      </span>
       <div class="header-content">我的订单</div>
     </header>
 
@@ -15,7 +17,7 @@
         <span :class="{'active' : orderType===6}" data-type="6" @click="selectTag">已完成(2)</span>
       </section>
     </list-scroll>
-    <section class="order-card">
+    <section class="order-card" v-show="orderType==1||orderType ==3">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
@@ -39,15 +41,15 @@
         </li>
         <li class="order-count">
           <span>共2件商品,小计:</span>
-          <span>$496</span>
+          <i>$496</i>
         </li>
         <li class="order-btn">
           <span>取消订单</span>
-          <span>去支付</span>
+          <router-link tag="span" to="/order/orderDetail">去支付</router-link>
         </li>
       </ul>
     </section>
-    <section class="order-card">
+    <section class="order-card" v-show="orderType==1||orderType ==5">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
@@ -55,7 +57,7 @@
             <span>店铺名称</span>
             <span>订单号:201905211540350025</span>
           </div>
-          <span>待支付</span>
+          <span>已支付</span>
         </li>
         <li class="order-info">
           <img src alt />
@@ -72,11 +74,43 @@
         </li>
         <li class="order-count">
           <span>共2件商品,小计:</span>
-          <span>$496</span>
+          <i>$496</i>
         </li>
         <li class="order-btn">
-          <span>取消订单</span>
-          <span>去支付</span>
+          <router-link to="/order/appeal" tag="span">申诉</router-link>
+        </li>
+      </ul>
+    </section>
+    <section class="may-like">
+      <ul class="like-list">
+        <span class="like-title">猜你喜欢</span>
+        <li class="like-item">
+          <img class="item-picture" />
+          <div class="item-detail">
+            <p class="store-info">
+              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+              <label>店铺名称</label>
+            </p>
+            <p class="item-title">娜扎新装LOOK</p>
+            <p class="item-count">
+              <i>$248</i>
+              <span>月销:888</span>
+            </p>
+          </div>
+        </li>
+        <li class="like-item">
+          <img class="item-picture" />
+          <div class="item-detail">
+            <p class="store-info">
+              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+              <label>店铺名称</label>
+            </p>
+            <p class="item-title">娜扎新装LOOK</p>
+            <p class="item-count">
+              <i>$248</i>
+              <span>月销:888</span>
+            </p>
+          </div>
         </li>
       </ul>
     </section>
@@ -122,10 +156,8 @@ export default {
 <style scoped lang="scss">
 .page-order {
   padding: 0 16px;
-  background-color: #EFEFF4;
-  height: 100vh;
-  .scroll-wrapper{
-  
+  height: 100%;
+  .scroll-wrapper {
     height: 40px;
   }
   .page-header {
@@ -133,9 +165,11 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
+    
     .header-content {
       text-align: center;
-      font-size: 24px;
+      font-size: 18px;
+      color: #3a3a3a;
       flex: 1;
     }
   }
@@ -155,14 +189,14 @@ export default {
       text-align: center;
       &.active {
         color: red;
-        border-bottom: 3px solid red;
+        border-bottom: 2px solid red;
       }
     }
   }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px 16px;
+    padding: 10px 20px;
     margin-top: 20px;
     .order-list {
       .order-item {
@@ -197,20 +231,23 @@ export default {
           height: 80px;
           display: inline-block;
           background-color: #fe4f70;
+          border-radius: 4px;
         }
-        .order-detail{
+        .order-detail {
           flex: 1;
           padding-left: 16px;
           padding-bottom: 4px;
-          .info-one, .info-two{
+          .info-one,
+          .info-two {
             display: flex;
             justify-content: space-between;
             font-size: 11px;
           }
-          .info-one{
-            color: #3A3A3A;
+          .info-one {
+            color: #3a3a3a;
+            padding-bottom: 5px;
           }
-          .info-two{
+          .info-two {
             color: #949497;
           }
         }
@@ -218,9 +255,14 @@ export default {
       .order-count {
         display: flex;
         justify-content: flex-end;
-        span{
-          color: #3A3A3A;
-        font-size: 11px;
+        i {
+          color: #fe4f70;
+          font-size: 14px;
+          padding-left: 5px;
+        }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
         }
       }
       .order-btn {
@@ -236,6 +278,72 @@ export default {
           padding: 2px 15px;
           border-radius: 2px;
           margin-left: 10px;
+        }
+      }
+    }
+  }
+  .may-like {
+    padding-bottom: 20px;
+    .like-list {
+      .like-title {
+        color: #fe4f70;
+        font-size: 18px;
+      }
+      .like-item {
+        background-color: #fff;
+        margin-top: 8px;
+        border-radius: 4px;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .item-picture {
+          width: 80px;
+          height: 80px;
+          display: inline-block;
+          background-color: #fe4f70;
+          border-radius: 4px;
+        }
+        .item-detail {
+          padding-left: 16px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex: 1px;
+          .store-info {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            img {
+              width: 24px;
+              height: 24px;
+            }
+            label {
+              color: #3a3a3a;
+              font-size: 11px;
+              padding-left: 4px;
+            }
+          }
+          .item-title {
+            color: #3a3a3a;
+            font-size: 14px;
+            padding-top: 10px;
+          }
+          .item-count {
+            padding-top: 4px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            i {
+              color: #fe4f70;
+              font-size: 14px;
+            }
+            span {
+              font-size: 11px;
+              color: #949497;
+            }
+          }
         }
       }
     }

@@ -21,9 +21,10 @@ body {
 #app {
   width: 100%;
   max-width: 800px;
-  height: 100%;
+  min-height: 100%;
   margin: 0 auto;
-  background: #fff;
+  // background: #fff;
+  background-color: #efeff4;
   -webkit-overflow-scrolling: touch;
   position: absolute;
   left: 0;

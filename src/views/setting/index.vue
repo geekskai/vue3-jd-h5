@@ -48,7 +48,6 @@ export default {
 .setting-page {
   padding: 0 16px;
   height: 100vh;
-  background-color: #efeff4;
   .page-header {
     display: flex;
     justify-content: flex-start;
