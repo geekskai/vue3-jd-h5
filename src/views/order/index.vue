@@ -206,7 +206,7 @@
           <i>$496</i>
         </li>
         <li class="order-btn">
-          <router-link to="/order/appeal" tag="span">查看物流</router-link>
+          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
           <router-link to="/order/appeal" tag="span">商品申诉</router-link>
         </li>
       </ul>

@@ -45,7 +45,7 @@
         <van-steps direction="vertical" active-color="#FE4F70" :active="0">
           <van-step>
             <i slot="active-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22<br/>08:28</span>
               <svg-icon icon-class="correct"></svg-icon>
             </i>
             <h3>正在派送</h3>
@@ -53,14 +53,14 @@
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22<br/>08:28</span>
               <svg-icon icon-class="point"></svg-icon>
             </i>
             <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22<br/>08:28</span>
               <svg-icon icon-class="courier"></svg-icon>
             </i>
             <h3>【江苏市】快件到达连云港市</h3>
@@ -68,28 +68,31 @@
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22<br/>08:28</span>
               <svg-icon icon-class="point"></svg-icon>
             </i>
             <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">
+                <i>05/22</i>
+                <i>08:28</i>
+              </span>
               <svg-icon icon-class="aircraft"></svg-icon>
             </i>
             <h3>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</h3>
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22 <br/> 08:28</span>
               <svg-icon icon-class="point"></svg-icon>
             </i>
-            <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
+            <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门1111</p>
           </van-step>
           <van-step>
             <i slot="inactive-icon">
-              <span class="logistics-time">05/22 08:28</span>
+              <span class="logistics-time">05/22<br/>08:28</span>
               <svg-icon icon-class="shipped"></svg-icon>
             </i>
             <h3>快件已发货</h3>
@@ -201,12 +204,14 @@ export default {
     }
     .logistics-time {
       position: absolute;
-      left: -40px;
+      left: -30px;
       font-size: 8px;
       color: #dbdbdb;
+      display: flex;
+      flex-direction: column;
     }
     /deep/ .van-steps__items {
-      padding-left: 40px;
+      padding-left: 30px;
     }
     /deep/ .van-step__title {
       padding-left: 12px;
