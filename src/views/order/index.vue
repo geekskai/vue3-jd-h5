@@ -6,7 +6,6 @@
       </span>
       <div class="header-content">我的订单</div>
     </header>
-
     <list-scroll :scroll-data="categoryData" :scrollX="true">
       <section class="order-tag" ref="searchWrap">
         <span :class="{'active' : orderType===1}" data-type="1" @click="selectTag">全部(5)</span>
@@ -174,7 +173,7 @@
           <i>$496</i>
         </li>
         <li class="order-btn">
-          <router-link to="/order/appeal" tag="span">查看物流</router-link>
+          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
           <router-link to="/order/appeal" tag="span">商品申诉</router-link>
         </li>
       </ul>

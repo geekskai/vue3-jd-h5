@@ -43,12 +43,14 @@ import {
   Field,
   Uploader,
   Cell,
+  Step,
+  Steps,
   CellGroup,
   Icon
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
   .use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog).use(Checkbox).use(CheckboxGroup)
-  .use(Switch);
+  .use(Switch).use(Step).use(Steps);
 
 
 Vue.config.productionTip = false
