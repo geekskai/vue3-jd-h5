@@ -27,7 +27,7 @@ import {
   SwipeItem,
   Button,
   Tabbar,
-  Switch ,
+  Switch,
   TabbarItem,
   NavBar,
   GoodsAction,
@@ -38,14 +38,17 @@ import {
   Popup,
   Dialog,
   Picker,
+  Checkbox,
+  CheckboxGroup,
   ActionSheet,
   Field,
-  Uploader, 
-  Cell, CellGroup,
+  Uploader,
+  Cell,
+  CellGroup,
   Icon
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
-.use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog)
+  .use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog).use(Checkbox).use(CheckboxGroup)
   .use(Switch);
 
 
