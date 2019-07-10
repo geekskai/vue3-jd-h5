@@ -10,7 +10,6 @@ import 'amfe-flexible'
 import axios from './plugins/axios'
 Vue.use(axios)
 import './mock/mock'
-
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
 Vue.use(EventBus)

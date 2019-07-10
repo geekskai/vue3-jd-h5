@@ -243,8 +243,10 @@ export default {
         width: 165px;
         border-radius: 8px;
         margin-top: 10px;
-        padding-right: 10px;
         background-color: white;
+        img{
+          width: 100%;
+        }
       }
       li:nth-of-type(even) {
         padding-right: 0;
