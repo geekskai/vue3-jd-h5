@@ -17,7 +17,7 @@
           <span>待支付</span>
         </li>
         <li class="order-info">
-          <img/>
+          <img />
           <div class="order-detail">
             <p class="info-one">
               <span>娜扎新装LOOK</span>
@@ -55,15 +55,15 @@
         </li>
         <li class="info-item">
           <label>总价：</label>
-          <span>￥222 </span>
+          <span>￥222</span>
         </li>
         <li class="info-item">
           <label>优惠券：</label>
-          <span>￥0.00 </span>
+          <span>￥0.00</span>
         </li>
         <li class="info-item">
           <label>支付金额：</label>
-          <span>￥222 </span>
+          <span>￥222</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -71,9 +71,18 @@
         </li>
       </ul>
     </section>
-    <van-action-sheet v-model="show" title="请选择支付方式">
+
+    <!-- <van-action-sheet v-model="show" title="请选择支付方式">
       <van-picker :columns="columns" @change="onChange" />
-    </van-action-sheet>
+    </van-action-sheet>-->
+    <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"
+    ></vue-pickers>
 
     <div class="pay-btn">
       <div class="pay-count">
@@ -93,13 +102,44 @@ export default {
   name: "",
   data() {
     return {
-      columns: ['Top-Pay',"支付宝", "微信", "银行卡"],
+      columns: 1,
+      defaultData: [
+        {
+          text: "Top-Pay",
+          value: "Top-Pay"
+        }
+      ],
+      pickData: {
+        data1: [
+          {
+            text: "Top-Pay",
+            value: "Top-Pay"
+          },
+          {
+            text: "支付宝",
+            value: "支付宝"
+          },
+          {
+            text: "微信",
+            value: "微信"
+          },
+          {
+            text: "银行卡",
+            value: "银行卡"
+          }
+        ]
+      },
       show: false
     };
   },
   created() {},
   methods: {
-    onChange() {},
+    close() {
+      this.show = false;
+    },
+    confirmFn() {
+      this.show = false;
+    },
     handlePay() {
       this.show = true;
     }

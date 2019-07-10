@@ -5,7 +5,7 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">商品申诉</div>
-      <router-link class="appeal-record" to='/order/appealRecord' tag="span">申诉记录</router-link>
+      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
     <section class="order-card">
       <ul class="order-list">
@@ -50,7 +50,7 @@
       <van-uploader v-model="fileList" multiple :max-count="5" />
     </section>
     <div class="pay-btn">
-      <van-button type="danger" @click="handlePay" size="large">提交</van-button>
+      <van-button type="danger" size="large">提交</van-button>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
 
 <style scoped lang="scss">
 .appeal-page {
-    height: 100%;
+  height: 100%;
   padding: 0 16px;
   .page-header {
     display: flex;
@@ -184,7 +184,7 @@ export default {
   .pay-btn {
     width: 100%;
     padding: 0 16px;
-    padding-top:50px;
+    padding-top: 50px;
     padding-bottom: 30px;
     /deep/ .van-button--danger {
       background-color: #fe4f70;

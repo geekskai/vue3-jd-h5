@@ -21,7 +21,12 @@
                 @touchmove="gearTouchMove"
                 @touchend="gearTouchEnd"
               >
-                <div class="tooth" v-for="(item,index) in pData1" :key="index">{{item.text}}</div>
+                <div
+                  class="tooth"
+                  :class="{redCls:index == setIndex}"
+                  v-for="(item,index) in pData1"
+                  :key="index"
+                >{{item.text}}</div>
               </div>
               <div class="area_grid"></div>
             </div>
@@ -67,7 +72,7 @@
 
 <script>
 export default {
-    name:'vuePickers',
+  name: "vuePickers",
   props: {
     show: {
       type: Boolean,
@@ -98,6 +103,7 @@ export default {
   },
   data() {
     return {
+      setIndex: -1,
       pData1: [],
       pData2: [],
       pData3: [],
@@ -237,6 +243,7 @@ export default {
     },
     setGear(target, val) {
       var endVal = Math.round(val);
+      this.setIndex = endVal;
       var type = target.getAttribute("data-type");
       // 不是联级
       if (!this.link) {
@@ -290,6 +297,7 @@ export default {
           this.selects.select1 = defaultData[0];
           for (var i = 0, len = this.pData1.length; i < len; i++) {
             if (this.pData1[i].value == defaultData[0].value) {
+              this.setIndex = i;
               pos1 = -(i * 2);
               break;
             }
@@ -408,6 +416,10 @@ export default {
 </script>
 
 <style scoped>
+.redCls {
+  color: #fe4f70;
+  font-size: 20px;
+}
 .gearArea {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 10px;
@@ -427,7 +439,7 @@ export default {
   font-size: 12px;
   vertical-align: middle;
   background-color: #fff;
-  color: #3A3A3A;
+  color: #3a3a3a;
   margin: 0;
   height: auto;
   width: 100%;
@@ -529,7 +541,7 @@ export default {
   height: 1px;
   width: 100%;
   display: block;
-  background-color: #96979b;
+  /* background-color: #96979b; */
   z-index: 15;
   -webkit-transform: scaleY(0.33);
   transform: scaleY(0.33);
@@ -547,16 +559,16 @@ export default {
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  background-color: #f1f2f4;
+  /* background-color: #f1f2f4; */
   position: relative;
 }
-.larea_finish{
-    color: #FE4F70;
-    font-size: 15px;
+.larea_finish {
+  color: #fe4f70;
+  font-size: 15px;
 }
-.larea_cancel{
-    color: #3A3A3A;
-    font-size: 15px;
+.larea_cancel {
+  color: #3a3a3a;
+  font-size: 15px;
 }
 .area_btn_box:before {
   left: 0;

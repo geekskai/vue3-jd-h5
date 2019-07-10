@@ -21,7 +21,10 @@
             v-for="(item,index) in hotData"
             @click="selectTag(item.title)"
             :key="index"
-          >{{item.title}}</span>
+            :class="{'hot' : item.hot}"
+          >{{item.title}}
+          <svg-icon v-if="item.hot == 1" icon-class='hot'></svg-icon>
+          </span>
         </div>
       </div>
 
@@ -200,6 +203,15 @@ export default {
         border-radius: 3px;
         display: inline-block;
       }
+      .hot-detail.hot {
+        border: 1px solid #fe4f70;
+         color: #fe4f70;
+         .svg-icon{
+           width: 12px;
+           height: 14px;
+         }
+      }
+
     }
     .search-list {
       width: 100%;

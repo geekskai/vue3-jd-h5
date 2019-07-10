@@ -23,7 +23,7 @@
     </section>
     <section class="mine-content">
       <ul class="options-list">
-        <router-link to="/setting" class="option-item" tag="li">
+        <router-link to="/mine/personInfo" class="option-item" tag="li">
           <div class="item-info">
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>李四</span>
@@ -67,14 +67,6 @@
         </router-link>
       </ul>
     </section>
-<button @click="show = true">点击我</button>
-     <vue-pickers
-      :show="show"
-      :columns="columns"
-      :defaultData="defaultData"
-      :selectData="pickData"
-      @cancel="close"
-      @confirm="confirmFn"></vue-pickers>
     <tabbar></tabbar>
   </div>
 </template>
@@ -84,12 +76,12 @@ export default {
   name: "",
   data() {
     return {
-           show: false,
+      show: false,
       columns: 1,
       defaultData: [
         {
-          text: 1999,
-          value: 1999
+          text: 1997,
+          value: 1997
         }
       ],
       pickData: {
@@ -98,6 +90,18 @@ export default {
           {
             text: 1999,
             value: 1999
+          },
+          {
+            text: 1998,
+            value: 1998
+          },
+          {
+            text: 1997,
+            value: 1997
+          },
+          {
+            text: 1996,
+            value: 1996
           },
           {
             text: 2001,
@@ -110,21 +114,20 @@ export default {
   created() {},
   computed: {},
   mounted() {
-    
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
-        close() {
-      this.show = false
+    close() {
+      this.show = false;
     },
     confirmFn(val) {
-      this.show = false
-      this.defaultData = [val.select1]
+      this.show = false;
+      console.log("=====confirm==>", val.select1);
+      this.defaultData = [val.select1];
     },
     toShow() {
-      this.show = true
+      this.show = true;
     }
- 
   }
 };
 </script>
