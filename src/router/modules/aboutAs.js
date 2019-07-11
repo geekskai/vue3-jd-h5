@@ -5,6 +5,6 @@ export default[
         meta: {
           index: 13
         },
-        component: () => import('@/views/setting/aboutAs.vue')
+        component: () => import('@/views/mine/aboutAs.vue')
     }
 ]
