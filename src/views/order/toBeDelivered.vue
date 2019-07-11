@@ -15,9 +15,9 @@
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
-          <span>待支付</span>
+          <span>待发货</span>
         </li>
-        <li class="order-info">
+        <li class="order-desc">
           <img />
           <div class="order-detail">
             <p class="info-one">
@@ -30,8 +30,12 @@
             </p>
           </div>
         </li>
+        <li class="order-total">
+          <span>订单总价：</span>
+          <i>$444</i>
+        </li>
         <li class="order-count">
-          <span>共2件商品,小计:</span>
+          <span>实付款：</span>
           <i>￥444</i>
         </li>
       </ul>
@@ -47,24 +51,16 @@
           <span>201905211540350025</span>
         </li>
         <li class="info-item">
+          <label>支付单号：</label>
+          <span>201905211540350025</span>
+        </li>
+        <li class="info-item">
+          <label>创建时间：</label>
+          <span>2019/05/01 13:40:40</span>
+        </li>
+        <li class="info-item">
           <label>付款时间：</label>
           <span>2019/05/01 13:40:40</span>
-        </li>
-        <li class="info-item">
-          <label>完成时间：</label>
-          <span>2019/05/01 13:40:40</span>
-        </li>
-        <li class="info-item">
-          <label>总价：</label>
-          <span>￥222</span>
-        </li>
-        <li class="info-item">
-          <label>优惠券：</label>
-          <span>￥0.00</span>
-        </li>
-        <li class="info-item">
-          <label>支付金额：</label>
-          <span>￥222</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -131,7 +127,7 @@ export default {
           }
         }
       }
-      .order-info {
+      .order-desc {
         padding-top: 10px;
         display: flex;
         justify-content: space-between;
@@ -163,6 +159,13 @@ export default {
             color: #949497;
           }
         }
+      }
+      .order-total {
+        color: #949497;
+        font-size: 11px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: flex-end;
       }
       .order-count {
         display: flex;
@@ -200,6 +203,9 @@ export default {
         font-size: 11px;
         padding-left: 34px;
         padding-bottom: 6px;
+      }
+      .info-title:last-child {
+        padding-top: 14px;
       }
     }
   }
