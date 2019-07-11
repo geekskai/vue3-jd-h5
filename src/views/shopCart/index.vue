@@ -4,39 +4,93 @@
       <div class="header-content">购物车</div>
       <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link>
     </header>
-    <section class="cart-empty">
+    <!-- <section class="cart-empty">
       <img class="img-cart" src="../../assets/image/cart/cart-empty.png" alt />
-    </section>
-    <!-- <van-checkbox-group v-model="result">
-            <van-checkbox v-for="(item, index) in list" :key="index" :name="item">{{ item }}</van-checkbox>
-    </van-checkbox-group>-->
-    <!-- <section class="order-card">
-      <ul class="order-list">
-        <li class="order-item">
+    </section>-->
+    <section class="order-card">
+      <van-checkbox v-model="checked" checked-color="#91C95B">
+        <li class="checkbox-all">
           <div class="store-info">
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
         </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
+      </van-checkbox>
+      <van-checkbox-group class="order-list" v-model="result">
+        <ul v-for="(item, index) in list" :key="index">
+          <div class="order-info">
+            <li class="check-item">
+              <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
+            </li>
+            <img
+              src="http://m.360buyimg.com/mobilecms/jfs/t1/7091/11/2919/441267/5bd578bfE03e7166a/c5d5222c1802fd21.jpg!q70.jpg.dpg"
+            />
+            <li class="order-detail">
+              <ul>
+                <li class="info-one">
+                  <span>三彩预售新款短裙淑女裙淑女裙淑女裙淑女</span>
+                </li>
+                <li class="info-two">
+                  <span>型号;规格;颜色;</span>
+                </li>
+              </ul>
+              <div class="info-count">
+                <span>￥200</span>
+                <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+              </div>
+            </li>
+          </div>
+          <div class="order-total">
+            <label>合计：</label>
+            <span>123000</span>
+          </div>
+        </ul>
+      </van-checkbox-group>
+    </section>
+    <section class="order-card">
+      <van-checkbox v-model="checked" checked-color="#91C95B">
+        <li class="checkbox-all">
+          <div class="store-info">
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>
           </div>
         </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>￥444</i>
-        </li>
-      </ul>
-    </section>-->
+      </van-checkbox>
+      <van-checkbox-group class="order-list" v-model="result">
+        <ul v-for="(item, index) in lists" :key="index">
+          <div class="order-info">
+            <li class="check-item">
+              <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
+            </li>
+            <img
+              src="http://m.360buyimg.com/mobilecms/jfs/t1/7091/11/2919/441267/5bd578bfE03e7166a/c5d5222c1802fd21.jpg!q70.jpg.dpg"
+            />
+            <li class="order-detail">
+              <ul>
+                <li class="info-one">
+                  <span>三彩预售新款短裙淑女裙淑女裙淑女裙淑女</span>
+                </li>
+                <li class="info-two">
+                  <span>型号;规格;颜色;</span>
+                </li>
+              </ul>
+              <div class="info-count">
+                <span>￥200</span>
+                <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+              </div>
+            </li>
+          </div>
+          <div class="order-total">
+            <label>合计：</label>
+            <span>123000</span>
+          </div>
+        </ul>
+      </van-checkbox-group>
+    </section>
+
+    <van-submit-bar :price="20000" button-text="结算" @submit="onSubmit">
+      <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
+    </van-submit-bar>
     <tabbar></tabbar>
   </div>
 </template>
@@ -46,7 +100,10 @@ export default {
   name: "",
   data() {
     return {
-      list: ["a", "b", "c"],
+      list: ["a"],
+      lists: ["a", "b", "c"],
+      checked: false,
+      stepperValue: "",
       result: ["a", "b"]
     };
   },
@@ -55,6 +112,9 @@ export default {
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 2);
+  },
+  methods: {
+    onSubmit() {}
   }
 };
 </script>
@@ -63,6 +123,7 @@ export default {
 .shop-cart {
   height: 100%;
   padding: 0 16px;
+  padding-bottom: 100px;
   .page-header {
     display: flex;
     justify-content: space-between;
@@ -90,78 +151,118 @@ export default {
   .order-card {
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px;
     margin-top: 20px;
-    .order-list {
-      .order-item {
+    .checkbox-all {
+      .store-info {
         display: flex;
-        justify-content: space-between;
-        & > span {
-          color: #fe4f70;
-          font-size: 11px;
+        justify-content: center;
+        align-items: center;
+        .header-img {
+          width: 24px;
+          height: 24px;
         }
-        .store-info {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 10px;
-          .header-img {
-            width: 24px;
-            height: 24px;
-          }
-          span {
-            color: #3a3a3a;
-            padding-left: 3px;
-            font-size: 11px;
-          }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
+          padding-left: 4px;
         }
       }
+    }
+    .order-list {
       .order-info {
+        width: 100%;
         padding-top: 10px;
+        padding-bottom: 16px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        .check-item {
+          display: flex;
+          align-items: center;
+        }
         img {
-          width: 80px;
-          height: 80px;
+          margin-left: 5px;
+          width: 100px;
+          height: 100px;
           display: inline-block;
           background-color: #fe4f70;
           border-radius: 4px;
         }
         .order-detail {
-          flex: 1;
-          padding-left: 16px;
-          padding-bottom: 4px;
+          width: 55%;
+          padding-left: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           .info-one,
           .info-two {
             display: flex;
+            padding-top: 4px;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 13px;
           }
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            span {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
             color: #949497;
           }
+          .info-count {
+            color: #fe4f70;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
         }
       }
-      .order-count {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 13px;
-        i {
-          color: #fe4f70;
-          padding-left: 5px;
-          font-weight: 700;
-        }
+      .order-total {
+        color: #949497;
+        font-size: 14px;
+        text-align: right;
         span {
-          color: #3a3a3a;
+          font-weight: 600;
         }
       }
+    }
+  }
+  /deep/ .van-submit-bar {
+    .van-submit-bar__bar {
+      height: 44px;
+      line-height: 44px;
+    }
+    bottom: 50px;
+    .van-submit-bar__text {
+      font-size: 17px;
+      color: #333333;
+    }
+  }
+  /deep/ .van-submit-bar__price {
+    color: #fe4f70;
+    font-size: 17px;
+    font-weight: 600;
+    padding-left: 5px;
+  }
+  /deep/ .van-button--danger {
+    background-color: #fe4f70;
+    height: 44px;
+    line-height: 44px;
+    .van-button__text {
+      font-size: 18px;
+    }
+  }
+  /deep/ .van-checkbox {
+    padding-left: 24px;
+    .van-checkbox__label {
+      font-size: 13px;
+      color: #949497;
     }
   }
 }

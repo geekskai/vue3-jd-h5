@@ -59,11 +59,11 @@ export default {
   },
   created() {},
   methods: {
-      handleStoreName(){
-        this.$router.push('/storeDetail')
-      },
-    handleConnectStore(){
-      this.$router.push('/storeDetail')
+    handleStoreName() {
+      this.$router.push("/storeDetail");
+    },
+    handleConnectStore() {
+      this.$router.push("/storeDetail");
     }
   }
 };
@@ -73,13 +73,20 @@ export default {
 .product-layout {
   background-color: white;
   min-height: 100vh;
-  .lazy_img {
-    height: 500px;
+  margin-bottom: 45px;
+  /deep/ .van-swipe-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .btn-left{
-      position: fixed;
-      left: 16px;
-      top: 54px;
+  .lazy_img {
+    height: 355px;
+    width: 100%;
+  }
+  .btn-left {
+    position: fixed;
+    left: 16px;
+    top: 54px;
   }
   .product-content {
     font-size: 14px;
@@ -135,8 +142,12 @@ export default {
     /deep/ .van-button--warning {
       background-color: #00b6d2;
       border: 1px solid #00b6d2;
+      height: 44px;
+      line-height: 44px;
     }
     /deep/ .van-button--danger {
+      height: 44px;
+      line-height: 44px;
       background-color: #fe4f70;
       border: 1px solid #fe4f70;
     }
