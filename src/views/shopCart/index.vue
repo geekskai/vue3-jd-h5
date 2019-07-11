@@ -4,13 +4,15 @@
       <div class="header-content">购物车</div>
       <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link>
     </header>
-    <section class="order-card">
+    <section class="cart-empty">
+      <img class="img-cart" src="../../assets/image/cart/cart-empty.png" alt />
+    </section>
+    <!-- <van-checkbox-group v-model="result">
+            <van-checkbox v-for="(item, index) in list" :key="index" :name="item">{{ item }}</van-checkbox>
+    </van-checkbox-group>-->
+    <!-- <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
-          <van-checkbox-group v-model="result">
-            <van-checkbox v-for="(item, index) in list" :key="index" :name="item">{{ item }}</van-checkbox>
-          </van-checkbox-group>
-
           <div class="store-info">
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
@@ -34,7 +36,7 @@
           <i>￥444</i>
         </li>
       </ul>
-    </section>
+    </section>-->
     <tabbar></tabbar>
   </div>
 </template>
@@ -75,6 +77,14 @@ export default {
     .appeal-record {
       color: #fe4f70;
       font-size: 13px;
+    }
+  }
+  .cart-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .img-cart {
+      flex: 1;
     }
   }
   .order-card {
