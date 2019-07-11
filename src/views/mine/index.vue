@@ -3,7 +3,7 @@
     <section class="order-top">
       <span class="my-order">我的订单</span>
       <ul class="order-list">
-        <router-link to="/pendingPay" class="order-item" tag="li">
+        <router-link to="/order/orderDetail" class="order-item" tag="li">
           <svg-icon icon-class="pending-pay"></svg-icon>
           <span>待付款</span>
         </router-link>
@@ -11,7 +11,7 @@
           <svg-icon icon-class="be-delivered"></svg-icon>
           <span>待发货</span>
         </router-link>
-        <router-link to="/order" class="order-item" tag="li">
+        <router-link to="/order/pendingReceipt" class="order-item" tag="li">
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>

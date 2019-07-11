@@ -1,5 +1,6 @@
 <template>
-  <div class="order-detail-page">
+  <!--  待发货 -->
+  <div class="pending-receipt">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
@@ -14,9 +15,9 @@
             <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
-          <span>待支付</span>
+          <span>待收货</span>
         </li>
-        <li class="order-info">
+        <li class="order-desc">
           <img />
           <div class="order-detail">
             <p class="info-one">
@@ -29,9 +30,17 @@
             </p>
           </div>
         </li>
+        <li class="order-total">
+          <span>订单总价：</span>
+          <i>$444</i>
+        </li>
         <li class="order-count">
-          <span>共2件商品,小计:</span>
+          <span>实付款：</span>
           <i>￥444</i>
+        </li>
+        <li class="order-btn">
+          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          <!-- <router-link to="/order/appeal" tag="span">商品申诉</router-link> -->
         </li>
       </ul>
     </section>
@@ -46,24 +55,16 @@
           <span>201905211540350025</span>
         </li>
         <li class="info-item">
+          <label>支付单号：</label>
+          <span>201905211540350025</span>
+        </li>
+        <li class="info-item">
+          <label>创建时间：</label>
+          <span>2019/05/01 13:40:40</span>
+        </li>
+        <li class="info-item">
           <label>付款时间：</label>
           <span>2019/05/01 13:40:40</span>
-        </li>
-        <li class="info-item">
-          <label>完成时间：</label>
-          <span>2019/05/01 13:40:40</span>
-        </li>
-        <li class="info-item">
-          <label>总价：</label>
-          <span>￥222</span>
-        </li>
-        <li class="info-item">
-          <label>优惠券：</label>
-          <span>￥0.00</span>
-        </li>
-        <li class="info-item">
-          <label>支付金额：</label>
-          <span>￥222</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -71,84 +72,22 @@
         </li>
       </ul>
     </section>
-
-    <!-- <van-action-sheet v-model="show" title="请选择支付方式">
-      <van-picker :columns="columns" @change="onChange" />
-    </van-action-sheet>-->
-    <vue-pickers
-      :show="show"
-      :columns="columns"
-      :defaultData="defaultData"
-      :selectData="pickData"
-      @cancel="close"
-      @confirm="confirmFn"
-    ></vue-pickers>
-
-    <div class="pay-btn">
-      <div class="pay-count">
-        <span>
-          共2件商品，小计：
-          <i>￥222</i>
-        </span>
-        <span>59：59后取消订单</span>
-      </div>
-      <van-button type="danger" @click="handlePay" size="large">立即支付</van-button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "",
+  name: "pendingReceipt",
   data() {
-    return {
-      columns: 1,
-      defaultData: [
-        {
-          text: "Top-Pay",
-          value: "Top-Pay"
-        }
-      ],
-      pickData: {
-        data1: [
-          {
-            text: "Top-Pay",
-            value: "Top-Pay"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
-          }
-        ]
-      },
-      show: false
-    };
+    return {};
   },
   created() {},
-  methods: {
-    close() {
-      this.show = false;
-    },
-    confirmFn() {
-      this.show = false;
-    },
-    handlePay() {
-      this.show = true;
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style scoped lang="scss">
-.order-detail-page {
+.pending-receipt {
   height: 100%;
   padding: 0 16px;
   .page-header {
@@ -192,7 +131,7 @@ export default {
           }
         }
       }
-      .order-info {
+      .order-desc {
         padding-top: 10px;
         display: flex;
         justify-content: space-between;
@@ -225,6 +164,13 @@ export default {
           }
         }
       }
+      .order-total {
+        color: #949497;
+        font-size: 11px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: flex-end;
+      }
       .order-count {
         display: flex;
         justify-content: flex-end;
@@ -236,6 +182,21 @@ export default {
         }
         span {
           color: #3a3a3a;
+        }
+      }
+      .order-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 14px;
+        span {
+          height: 26px;
+          line-height: 20px;
+          border: 1px solid #949497;
+          color: #949497;
+          font-size: 11px;
+          padding: 2px 15px;
+          border-radius: 2px;
+          margin-left: 10px;
         }
       }
     }
@@ -262,28 +223,9 @@ export default {
         padding-left: 34px;
         padding-bottom: 6px;
       }
-    }
-  }
-  .pay-btn {
-    width: 100%;
-    padding: 0 16px;
-    padding-top: 50px;
-    padding-bottom: 30px;
-    .pay-count {
-      display: flex;
-      justify-content: space-between;
-      color: #949497;
-      font-size: 11px;
-      padding-bottom: 12px;
-      i {
-        color: #fe4f70;
-        font-weight: 700;
+      .info-title:last-child {
+        padding-top: 14px;
       }
-    }
-    /deep/ .van-button--danger {
-      background-color: #fe4f70;
-      line-height: 44px;
-      font-size: 18px;
     }
   }
 }
