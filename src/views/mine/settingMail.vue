@@ -4,7 +4,7 @@
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">手机号设置</div>
+      <div class="header-content">邮箱设置</div>
       <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
@@ -39,7 +39,7 @@
 
     <div class="address-btn">
       <router-link to="/mine/addAddress">
-        <van-button type="danger" size="large">保存</van-button>
+        <van-button type="danger" size="large">设置</van-button>
       </router-link>
     </div>
   </div>
