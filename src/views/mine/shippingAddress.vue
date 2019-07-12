@@ -66,7 +66,9 @@
     </section>
 
     <div class="address-btn">
-      <van-button plain type="danger" icon="plus" size="large">新增地址</van-button>
+      <router-link to="/mine/addAddress">
+        <van-button plain type="danger" icon="plus" size="large">新增地址</van-button>
+      </router-link>
     </div>
   </div>
 </template>

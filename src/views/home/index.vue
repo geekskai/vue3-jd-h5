@@ -19,10 +19,11 @@
         </swiper-slide>
       </swiper>
     </div>
+     <list-scroll :scroll-data="[]">
     <section class="goods-box">
       <span class="good-things">精选好物</span>
       <ul class="goods-content">
-        <li>
+        <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
             <div class="goods-title">娜扎新装LOOK</div>
@@ -34,8 +35,8 @@
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </div>
           </div>
-        </li>
-        <li>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
             <div class="goods-title">娜扎新装LOOK</div>
@@ -47,8 +48,8 @@
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </div>
           </div>
-        </li>
-        <li>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
             <div class="goods-title">娜扎新装LOOK</div>
@@ -60,8 +61,8 @@
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </div>
           </div>
-        </li>
-        <li>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
             <div class="goods-title">娜扎新装LOOK</div>
@@ -73,9 +74,10 @@
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </div>
           </div>
-        </li>
+        </router-link>
       </ul>
     </section>
+      </list-scroll>
     <tabbar></tabbar>
   </div>
 </template>
@@ -244,7 +246,7 @@ export default {
         border-radius: 8px;
         margin-top: 10px;
         background-color: white;
-        img{
+        img {
           width: 100%;
         }
       }

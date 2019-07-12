@@ -1,11 +1,17 @@
 <template>
   <div class="store-detail">
-    <span class="btn-left" @click="$router.go(-1)">
+    <!-- <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="gray-btn"></svg-icon>
-    </span>
+    </span>-->
+    <header class="page-header">
+      <span class="btn-left" @click="$router.go(-1)">
+        <svg-icon icon-class="green-btn"></svg-icon>
+      </span>
+      <div class="header-content">店铺详情</div>
+    </header>
     <section class="store-info">
       <ul class="store-top">
-        <li class="store-title">店铺详情</li>
+        <!-- <li class="store-title">店铺详情</li> -->
         <img src="../../assets/image/product/store-headerM.png" class="store-header" />
         <li class="store-name">店铺名称</li>
         <li class="store-introd">
@@ -226,8 +232,8 @@ export default {
     };
   },
   methods: {
-     handleSearch(){
-      this.$router.push('/search')
+    handleSearch() {
+      this.$router.push("/search");
     },
     selectOrder(e) {
       let orderBy = e.currentTarget.getAttribute("data-order-by");
@@ -263,26 +269,42 @@ export default {
 
 <style scoped lang="scss">
 .store-detail {
-  .btn-left {
-    position: fixed;
-    left: 16px;
-    top: 40px;
-    color: #efeff4;
+  display: flex;
+  flex-direction: column;
+  .page-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    padding-top: 44px;
+    position: relative;
+    background-color: white;
+    .btn-left {
+      position: absolute;
+      left: 16px;
+      background-color: #efeff4;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+    }
+    .header-content {
+      text-align: center;
+      font-size: 18px;
+      flex: 1;
+      font-weight: 700;
+    }
   }
   .store-info {
     background-color: #fff;
     min-height: 383px;
     margin-bottom: 10px;
     .store-top {
-      margin-top: 44px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      .store-title {
-        color: #3a3a3a;
-        font-size: 18px;
-        font-weight: 700;
-      }
       .store-header {
         width: 100px;
         height: 100px;

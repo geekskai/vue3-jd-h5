@@ -46,6 +46,7 @@ import {
   Cell,
   Step,
   Steps,
+  Tag ,
   CellGroup,
   SubmitBar,
   Stepper,
@@ -53,7 +54,7 @@ import {
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
   .use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog).use(Checkbox).use(CheckboxGroup)
-  .use(Switch).use(Step).use(Steps).use(Card).use(Stepper).use(SubmitBar);
+  .use(Switch).use(Step).use(Steps).use(Card).use(Stepper).use(SubmitBar).use(Tag);
 
 
 Vue.config.productionTip = false
