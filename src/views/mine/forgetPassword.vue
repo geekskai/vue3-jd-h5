@@ -1,52 +1,36 @@
 <template>
-  <div class="add-address">
+  <div class="forget-password">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">新增所在地区</div>
+      <div class="header-content">忘记密码</div>
       <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <van-cell title="联系人" />
+          <!-- <div class="address-name"> -->
+          <van-field v-model="value" placeholder="手机/邮箱" />
+          <!-- </div> -->
+        </li>
+        <li class="address-item">
           <div class="address-name">
-            <van-field v-model="value" placeholder="请输入姓名" />
-            <div class="gender-tags">
-              <van-tag color="#E96258" plain>女士</van-tag>
-              <van-tag color="#3A3A3A" plain>男士</van-tag>
+            <van-field v-model="value" placeholder="验证码" />
+            <div class="verification-code">
+              <van-tag color="#3C96FF" plain>获取验证码</van-tag>
             </div>
           </div>
         </li>
         <li class="address-item">
-          <van-cell title="电话" />
-          <div class="address-name">
-            <van-field v-model="value" placeholder="手机号码" />
-          </div>
+          <!-- <div class="address-name"> -->
+          <van-field v-model="value" placeholder="设置登录密码" />
+          <!-- </div> -->
         </li>
         <li class="address-item">
-          <van-cell title="所在地区" />
-          <div class="address-name">
-            <van-field v-model="value" placeholder="请选择省市区" />
-            <div>
-              <svg-icon icon-class="arrow"></svg-icon>
-            </div>
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="地址" />
-          <div class="address-name">
-            <van-field v-model="value" placeholder="如：道路、门牌号、小区、楼栋号、单元室等" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="标签" />
-          <div class="address-tags">
-            <van-tag color="#E96258" plain>家</van-tag>
-            <van-tag color="#E96258" plain>学校</van-tag>
-            <van-tag color="#E96258" plain>公司</van-tag>
-          </div>
+          <!-- <div class="address-name"> -->
+          <van-field v-model="value" placeholder="重复登录密码" />
+          <!-- </div> -->
         </li>
       </ul>
     </section>
@@ -61,7 +45,7 @@
 
 <script>
 export default {
-  name: "addAddress",
+  name: "forgetPassword",
   data() {
     return {
       value: ""
@@ -73,7 +57,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.add-address {
+.forget-password {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
@@ -129,7 +113,7 @@ export default {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          .gender-tags {
+          .verification-code {
             display: flex;
             flex: 1;
             justify-content: center;
@@ -138,18 +122,11 @@ export default {
               border-radius: 8px;
             }
             /deep/ .van-tag {
-              width: 40px;
+              width: 78px;
               text-align: center;
               height: 22px;
               margin-right: 10px;
             }
-          }
-        }
-        .address-tags {
-          /deep/ .van-tag {
-            margin-right: 20px;
-            width: 40px;
-            text-align: center;
           }
         }
       }
