@@ -8,19 +8,18 @@
     </header>
     <van-swipe class="swiper_carousel" :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img class="lazy_img" v-lazy="image.imgUrl" />
+        <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
 
     <div class="swiperCls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images" :key="index">
-          <img class="slide_img" :src="img.imgUrl" alt />
+          <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
         </swiper-slide>
       </swiper>
     </div>
-     <list-scroll :scroll-data="[]">
-    <section class="goods-box">
+    <section class="goods-box search-wrap">
       <span class="good-things">精选好物</span>
       <ul class="goods-content">
         <router-link tag="li" to="/classify/product">
@@ -77,7 +76,6 @@
         </router-link>
       </ul>
     </section>
-      </list-scroll>
     <tabbar></tabbar>
   </div>
 </template>
@@ -145,12 +143,13 @@ export default {
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
-    // current swiper instance
-    // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
-    console.log("this is current swiper instance object", this.swiper);
     this.swiper.slideTo(3, 1000, false);
+    window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    handleClick() {
+      this.$router.push("/classify/product");
+    },
     pageScroll() {
       let scrollTop =
         window.pageYOffset ||
@@ -173,6 +172,9 @@ export default {
 @import "../../styles/mixin.scss";
 .home {
   .home-header {
+    &.active {
+      top: 24px;
+    }
     position: fixed;
     left: 0;
     top: 24px;

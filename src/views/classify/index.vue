@@ -158,7 +158,7 @@ export default {
     },
     selectProduct(title) {
       console.log("=====res==>", title);
-      this.$router.push("/classify/product");
+      this.$router.push("/classify/recommend");
     }
   },
   mounted() {

@@ -29,8 +29,8 @@
     </ul>
     <div class="product-footer">
       <van-goods-action>
-        <van-goods-action-button type="warning" text="加入购物车" />
-        <van-goods-action-button type="danger" text="立即购买" />
+        <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
+        <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
       </van-goods-action>
     </div>
   </div>
@@ -59,6 +59,16 @@ export default {
   },
   created() {},
   methods: {
+    handleAddToCart() {
+      this.$toast.success({
+        message: "添加成功~",
+        duration: 1500,
+        icon: "like-o"
+      });
+    },
+    handleToBuy() {
+      this.$router.push("/order/orderDetail");
+    },
     handleStoreName() {
       this.$router.push("/storeDetail");
     },
@@ -74,7 +84,7 @@ export default {
   background-color: white;
   min-height: 100vh;
   margin-bottom: 45px;
-  /deep/ .van-swipe-item{
+  /deep/ .van-swipe-item {
     display: flex;
     justify-content: center;
     align-items: center;
