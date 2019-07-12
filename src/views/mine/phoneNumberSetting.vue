@@ -1,27 +1,38 @@
 <template>
-  <div class="change-password">
+  <div class="phone-number-setting">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">修改密码</div>
+      <div class="header-content">忘记密码</div>
       <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <van-field v-model="value" placeholder="135227899006" />
-        </li>
-        <li class="address-item">
           <div class="address-name">
-            <van-field v-model="value" placeholder="输入当前登录密码" />
+            <van-field v-model="value" placeholder="国家/地区" />
+            <div>
+              <svg-icon icon-class="arrow"></svg-icon>
+            </div>
           </div>
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="设置登录密码" />
+          <div class="address-name">
+            <van-field v-model="value" placeholder="请输入手机号" />
+            <div class="verification-code">
+              <van-tag color="#3C96FF" plain>获取验证码</van-tag>
+            </div>
+          </div>
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="重复登录密码" />
+          <van-field v-model="value" placeholder="验证码" />
+        </li>
+        <li class="address-item">
+          <van-field v-model="value" placeholder="密码" />
+        </li>
+        <li class="address-item">
+          <van-field v-model="value" placeholder="再次确认" />
         </li>
       </ul>
     </section>
@@ -36,7 +47,7 @@
 
 <script>
 export default {
-  name: "changePassword",
+  name: "phoneNumberSetting",
   data() {
     return {
       value: ""
@@ -48,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.change-password {
+.phone-number-setting {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
@@ -90,7 +101,7 @@ export default {
         justify-content: space-between;
         align-items: flex-start;
         flex-direction: column;
-         padding: 10px 0;
+        padding: 10px 0;
         /deep/ .van-cell {
           padding-left: 0;
         }
@@ -105,6 +116,21 @@ export default {
           display: flex;
           justify-content: space-between;
           width: 100%;
+          .verification-code {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            /deep/ .van-tag::after {
+              border-radius: 8px;
+            }
+            /deep/ .van-tag {
+              width: 78px;
+              text-align: center;
+              height: 22px;
+              margin-right: 10px;
+            }
+          }
         }
       }
     }

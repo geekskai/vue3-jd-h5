@@ -16,10 +16,12 @@
           <van-field label="昵称" disabled placeholder="昵称显示" />
           <van-icon class="icon" name="arrow" />
         </li>
-        <li class="setting-item" @click="handlePhone">
+        <!-- <li class="setting-item" @click="handlePhone"> -->
+        <router-link class="setting-item" to="/mine/phoneNumberSetting" tag="li">
           <van-field label="手机号" disabled placeholder="13547008799" />
           <van-icon class="icon" name="arrow" />
-        </li>
+          <!-- </li> -->
+        </router-link>
         <li class="setting-item" @click="handlePhone">
           <van-field label="邮箱号" disabled placeholder="未设置" />
           <van-icon class="icon" name="arrow" />

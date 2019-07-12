@@ -10,9 +10,7 @@
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <!-- <div class="address-name"> -->
           <van-field v-model="value" placeholder="手机/邮箱" />
-          <!-- </div> -->
         </li>
         <li class="address-item">
           <div class="address-name">
@@ -99,6 +97,7 @@ export default {
         justify-content: space-between;
         align-items: flex-start;
         flex-direction: column;
+         padding: 10px 0;
         /deep/ .van-cell {
           padding-left: 0;
         }
