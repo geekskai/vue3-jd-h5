@@ -27,8 +27,8 @@
         </li>
         <li class="address-item">
           <van-cell title="所在地区" />
-          <div class="address-name">
-            <van-field v-model="value" placeholder="请选择省市区" />
+          <div class="address-name" @click="show = true">
+            <van-field v-model="value" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -56,19 +56,37 @@
         <van-button type="danger" size="large">保存</van-button>
       </router-link>
     </div>
+    <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
+      <van-area
+        :area-list="areaList"
+        @cancel="handleCancel"
+        @confirm="handleConfirm"
+        value="110101"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
+import areaList from "../../mock/area";
 export default {
   name: "addAddress",
   data() {
     return {
-      value: ""
+      value: "",
+      show: false,
+      areaList: areaList
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleCancel() {
+      this.show = false;
+    },
+    handleConfirm() {
+      this.show = false;
+    }
+  }
 };
 </script>
 
