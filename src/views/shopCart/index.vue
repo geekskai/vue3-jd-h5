@@ -2,7 +2,7 @@
   <div class="shop-cart">
     <header class="page-header">
       <div class="header-content">购物车</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link>
+      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link> -->
     </header>
     <!-- <section class="cart-empty">
       <img class="img-cart" src="../../assets/image/cart/cart-empty.png" alt />

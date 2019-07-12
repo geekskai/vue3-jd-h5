@@ -168,7 +168,7 @@ export default {
   }
   .address-btn {
     position: fixed;
-    bottom: 44px;
+    bottom: 10px;
     width: 92%;
     /deep/ .van-button--large {
       height: 44px;

@@ -158,7 +158,7 @@ export default {
       this.$refs.searchWrap.style.height = $screenHeight - 150 + "px";
     },
     selectProduct(title) {
-      this.$router.push("/classify/recommend");
+      this.$router.push("/recommend");
     }
   },
   mounted() {

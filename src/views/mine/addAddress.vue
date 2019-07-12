@@ -5,7 +5,7 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">新增所在地区</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link>
+      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -29,6 +29,9 @@
           <van-cell title="所在地区" />
           <div class="address-name">
             <van-field v-model="value" placeholder="请选择省市区" />
+            <div>
+               <svg-icon icon-class="arrow"></svg-icon>
+            </div>
           </div>
         </li>
         <li class="address-item">
@@ -40,12 +43,19 @@
         <li class="address-item">
           <van-cell title="标签" />
           <div class="address-tags">
-            <van-tag color="#E96258" plain>女士</van-tag>
-            <van-tag color="#3A3A3A" plain>男士</van-tag>
+            <van-tag color="#E96258" plain>家</van-tag>
+            <van-tag color="#E96258" plain>学校</van-tag>
+            <van-tag color="#E96258" plain>公司</van-tag>
           </div>
         </li>
       </ul>
     </section>
+
+     <div class="address-btn">
+      <router-link to="/mine/addAddress">
+        <van-button type="danger" size="large">保存</van-button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -66,6 +76,7 @@ export default {
 .add-address {
   height: 100%;
   padding: 0 16px;
+  padding-bottom: 45px;
   .page-header {
     display: flex;
     justify-content: flex-start;
@@ -137,9 +148,28 @@ export default {
         .address-tags {
           /deep/ .van-tag {
             margin-right: 20px;
+            width: 40px;
+            text-align: center;
           }
         }
       }
+    }
+  }
+   .address-btn {
+    position: fixed;
+    bottom: 10px;
+    width: 92%;
+    color: #fff;
+
+    /deep/ .van-button--large {
+      height: 44px;
+      line-height: 44px;
+    }
+    /deep/ .van-button--danger {
+      background-color: #FE4F70;
+    }
+    /deep/ .van-button__text {
+      color: #fff;
     }
   }
 }
