@@ -23,6 +23,7 @@ Axios | 前端HTTP框架 | [https://github.com/axios/axios](https://github.com/a
 nprogress | 进度条控件 | [https://github.com/rstacruz/nprogress](https://github.com/rstacruz/nprogress)
 vue-clipboard2 | 复制控件 | [https://github.com/Inndy/vue-clipboard2](https://github.com/Inndy/vue-clipboard2)
 vue-element-admin | 项目脚手架参考 | [https://github.com/PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+前端H5 UI地址 | UI高保真地址 | [https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d](https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d)
 
 ### 项目布局
 
