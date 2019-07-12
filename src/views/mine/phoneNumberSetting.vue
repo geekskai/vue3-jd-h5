@@ -10,12 +10,12 @@
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <div class="address-name">
-            <van-field v-model="value" placeholder="国家/地区" />
+          <router-link tag="div" class="address-name" to="/mine/countryRegion">
+            <van-field v-model="value" disabled placeholder="国家/地区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
-          </div>
+          </router-link>
         </li>
         <li class="address-item">
           <div class="address-name">
