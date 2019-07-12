@@ -19,7 +19,7 @@
         </li>
         <li class="address-item">
           <div class="address-name">
-            <van-field v-model="value" placeholder="请输入手机号" />
+            <van-field v-model="value" placeholder="邮箱验证码" />
             <div class="verification-code">
               <van-tag color="#3C96FF" plain>获取验证码</van-tag>
             </div>
