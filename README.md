@@ -38,13 +38,14 @@ src -- 源码目录
 ├── store -- vuex的状态管理
 ├── styles -- 全局css样式
 ├── utils -- 工具类
+├── App.vue -- 入口页面
 └── views -- 前端页面
     ├── home -- 首页
-    ├── layout -- 通用页面加载框架
+    ├── classify -- 分类
     ├── login -- 登录页
-    ├── oms -- 订单模块页面
-    ├── pms -- 商品模块页面
-    └── sms -- 营销模块页面
+    ├── mine -- 我的页面
+    ├── shopCart -- 购物车页面
+    └── error -- 错误页面
 ```
 
 ## 搭建步骤
@@ -58,32 +59,6 @@ src -- 源码目录
 - 如果遇到无法运行该命令，需要配置npm的环境变量，如在path变量中添加：C:\Users\zhenghong\AppData\Roaming\npm。
 
 ## 许可证
-
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
 
 [Apache License 2.0](https://github.com/macrozheng/mall-admin-web/blob/master/LICENSE)
 
