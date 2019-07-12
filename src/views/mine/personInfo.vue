@@ -24,12 +24,11 @@
           <van-field label="邮箱号" disabled placeholder="未设置" />
           <van-icon class="icon" name="arrow" />
         </li>
-        <!-- <li class="setting-item" @click="handlePhone"> -->
-          <router-link class="setting-item" to="/mine/forgetPassword" tag="li">
-            <van-field label="修改密码" disabled placeholder />
-            <van-icon class="icon" name="arrow" />
-          </router-link>
-        <!-- </li> -->
+        <router-link class="setting-item" to="/mine/changePassword" tag="li">
+          <!-- <router-link class="setting-item" to="/mine/forgetPassword" tag="li"> -->
+          <van-field label="修改密码" disabled placeholder />
+          <van-icon class="icon" name="arrow" />
+        </router-link>
       </ul>
     </section>
 
