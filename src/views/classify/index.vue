@@ -30,6 +30,7 @@
               <template v-for="(category,index) in categoryData">
                 <div class="swiper-slide" :key="index" v-if="currentIndex === index">
                   <img
+                   @click="selectProduct"
                     class="category-main-img"
                     :src="category.mainImgUrl"
                     v-if="category.mainImgUrl"
@@ -157,7 +158,6 @@ export default {
       this.$refs.searchWrap.style.height = $screenHeight - 150 + "px";
     },
     selectProduct(title) {
-      console.log("=====res==>", title);
       this.$router.push("/classify/recommend");
     }
   },
