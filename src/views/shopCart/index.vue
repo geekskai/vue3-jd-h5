@@ -91,6 +91,14 @@
     <van-submit-bar :price="20000" button-text="结算" @submit="onSubmit">
       <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
     </van-submit-bar>
+    <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"
+    ></vue-pickers>
     <tabbar></tabbar>
   </div>
 </template>
@@ -100,6 +108,34 @@ export default {
   name: "",
   data() {
     return {
+      columns: 1,
+      defaultData: [
+        {
+          text: "Top-Pay",
+          value: "Top-Pay"
+        }
+      ],
+      pickData: {
+        data1: [
+          {
+            text: "Top-Pay",
+            value: "Top-Pay"
+          },
+          {
+            text: "支付宝",
+            value: "支付宝"
+          },
+          {
+            text: "微信",
+            value: "微信"
+          },
+          {
+            text: "银行卡",
+            value: "银行卡"
+          }
+        ]
+      },
+      show: false,
       list: ["a"],
       lists: ["a", "b", "c"],
       checked: false,
@@ -114,7 +150,15 @@ export default {
     this.$eventBus.$emit("changeTag", 2);
   },
   methods: {
-    onSubmit() {}
+    close() {
+      this.show = false;
+    },
+    confirmFn() {
+      this.show = false;
+    },
+    onSubmit() {
+      this.show = true;
+    }
   }
 };
 </script>
