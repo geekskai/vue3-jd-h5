@@ -378,6 +378,7 @@ export default {
       font-weight: 600;
     }
     .shop-content {
+      padding-top: 10px;
       .shop-item {
         background-color: #fff;
         border-radius: 8px;
