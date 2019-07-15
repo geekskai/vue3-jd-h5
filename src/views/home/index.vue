@@ -13,6 +13,12 @@
     </van-swipe>
 
     <div class="swiperCls">
+      <!-- <van-swipe :loop="true" :width="250" @change="onChange">
+        <van-swipe-item v-for="(img ,index) in images" :key="index">
+          <img class="slide_img" v-lazy="img.imgUrl" @click="handleClick" />
+        </van-swipe-item>
+      </van-swipe>-->
+
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images" :key="index">
           <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
@@ -122,16 +128,8 @@ export default {
         touchRatio: 1, // 默认为1，按照1:1的触摸比例滑动。设置为0时，完全无法滑动
         // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
         debugger: true,
-        effect: "coverflow",
-        slidesPerView: 2, //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
-        centeredSlides: true,
-        coverflowEffect: {
-          rotate: 0, //slide做3d旋转时Y轴的旋转角度。默认50。
-          stretch: 18, //每个slide之间的拉伸值，越大slide靠得越紧。 默认0。
-          depth: 150, // slide的位置深度。值越大z轴距离越远，看起来越小。 默认100。
-          modifier: 2, //  depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。默认1。
-          slideShadows: false // 开启slide阴影。默认 true
-        }
+        slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
+       
       }
     };
   },
@@ -147,6 +145,9 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    onChange(index) {
+      this.$toast("当前 Swipe 索引：" + index);
+    },
     handleClick() {
       this.$router.push("/classify/product");
     },
@@ -227,8 +228,12 @@ export default {
     }
   }
   .swiperCls {
+    padding-left: 16px;
+    .swiper-slide-active {
+      margin-right: 60px;
+    }
     .slide_img {
-      width: 187px;
+      width: 222px;
       height: 90px;
     }
   }
