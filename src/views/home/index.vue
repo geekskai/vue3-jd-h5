@@ -250,11 +250,11 @@ export default {
 .home {
   .home-header {
     &.active {
-      top: 24px;
+      top: 10px;
     }
     position: fixed;
     left: 0;
-    top: 24px;
+    top: 10px;
     width: 100%;
     height: 40px;
     line-height: 40px;

@@ -175,7 +175,7 @@ export default {
   .home-header {
     position: fixed;
     left: 0;
-    top: 24px;
+    top: 10px;
     width: 100%;
     height: 40px;
     line-height: 40px;
@@ -225,7 +225,7 @@ export default {
   .search-wrap {
     @include fj;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 70px;
     background: #f8f8f8;
     .nav-side-wrapper {
       width: 88px;
