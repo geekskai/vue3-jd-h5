@@ -153,22 +153,20 @@ export default {
       headerActive: false,
       images: [
         {
-          imgUrl: require("../../assets/image/home/huawei1.png"),
+          // imgUrl: require("../../assets/image/home/huawei1.png"),
+          imgUrl: require("../../assets/image/home/banner5.jpg"),
           categoryId: 100018
         },
         {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t29188/301/133996293/200131/61f42a01/5be8eed6Nda6a18a5.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          imgUrl: require("../../assets/image/home/banner6.jpg"),
           categoryId: 100008
         },
         {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t30757/316/208746402/123953/9fa18794/5beb7d13Ne77e9f29.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          imgUrl: require("../../assets/image/home/banner7.jpg"),
           categoryId: 100016
         },
         {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
+          imgUrl: require("../../assets/image/home/banner8.jpg"),
           categoryId: 100035
         }
       ],
