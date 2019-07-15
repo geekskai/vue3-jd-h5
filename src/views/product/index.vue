@@ -7,7 +7,7 @@
     </van-swipe>
     <span class="btn-left" @click="$router.go(-1)">
       <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
-       <svg-icon icon-class="green-btn"></svg-icon>
+      <svg-icon icon-class="green-btn"></svg-icon>
     </span>
     <ul class="product-content">
       <li class="product-title">多功能料理机</li>
@@ -61,13 +61,21 @@
             <span class="item-colors">选择颜色；尺码</span>
           </li>
         </ul>
+         <!-- <ul class="popup-center">
+          <li>
+            <span>颜色</span>
+            <div>
+              <van-button plain hairline size="small" icon="https://img.yzcdn.cn/vant/logo.png" type="danger">褐色</van-button>
+            </div>
+          </li>
+        </ul> -->
       </section>
-       <div class="product-footer">
-      <van-goods-action>
-        <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
-        <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
-      </van-goods-action>
-    </div>
+      <div class="product-footer">
+        <van-goods-action>
+          <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
+          <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
+        </van-goods-action>
+      </div>
     </van-popup>
     <div class="product-footer">
       <van-goods-action>
@@ -246,6 +254,11 @@ export default {
         img {
           width: 100px;
           height: 100px;
+        }
+      }
+      .popup-center{
+        /deep/ .van-button__icon{
+          vertical-align: middle;
         }
       }
     }
