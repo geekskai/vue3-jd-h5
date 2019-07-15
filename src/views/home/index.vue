@@ -104,38 +104,40 @@
     <section class="recommended-shop">
       <span class="shop-things">推荐店铺</span>
       <ul class="shop-content">
-        <router-link class="shop-item" tag="li" to="/classify/product">
+        <li class="shop-item">
           <div class="item-header">
             <img class="store-logo" src="../../assets/image/home/store-logo.png" />
             <div class="item-text">
               <p>品炫旗舰店</p>
               <i>正品大牌 产家直营</i>
             </div>
-            <svg-icon class="into-store" icon-class="into-store"></svg-icon>
-            <!-- <van-button plain hairline size="small" type="danger">进店</van-button> -->
+            <router-link to="/storeDetail">
+              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
+            </router-link>
           </div>
           <div class="item-iamgs">
             <img src="../../assets/image/home/store1.png" />
             <img src="../../assets/image/home/store2.png" />
             <img src="../../assets/image/home/store3.png" />
           </div>
-        </router-link>
-        <router-link class="shop-item" tag="li" to="/classify/product">
+        </li>
+        <li class="shop-item">
           <div class="item-header">
             <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
             <div class="item-text">
               <p>北欧家居旗舰店</p>
               <i>正品大牌 产家直营</i>
             </div>
-            <router-link  to='/storeDetail'></router-link>
-            <svg-icon  class="into-store" icon-class="into-store"></svg-icon>
+            <router-link to="/storeDetail">
+              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
+            </router-link>
           </div>
           <div class="item-iamgs">
             <img src="../../assets/image/home/store4.png" />
             <img src="../../assets/image/home/store5.png" />
             <img src="../../assets/image/home/store6.png" />
           </div>
-        </router-link>
+        </li>
       </ul>
     </section>
     <tabbar></tabbar>
