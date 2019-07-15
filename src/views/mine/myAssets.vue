@@ -1,6 +1,6 @@
 <template>
   <div class="my-assets">
-      我的资产.....
+      我的资产,正在建设中.....
   </div>
 </template>
 
