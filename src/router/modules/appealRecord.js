@@ -1,6 +1,6 @@
 export default [
   {
-  path: '/order/appealRecord',
+  path: '/mine/appealRecord',
   name: 'appealRecord',
   meta: {
     index: 12

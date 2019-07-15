@@ -51,7 +51,14 @@
           </div>
           <van-icon name="arrow" />
         </router-link> -->
-        <router-link to="/order/appealRecord" class="option-item" tag="li">
+        <router-link to="/mine/myAssets" class="option-item" tag="li">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="my-assets"></svg-icon>
+            <span>我的资产</span>
+          </div>
+          <van-icon name="arrow" />
+        </router-link>
+        <router-link to="/mine/appealRecord" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
             <span>我的申诉</span>

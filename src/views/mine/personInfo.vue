@@ -9,7 +9,7 @@
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item">
-          <van-field label="头像" />
+          <van-field label="头像" disabled/>
           <img src="../../assets/image/product/store-headerM.png" class="header-img" />
         </li>
         <li @click="handlePhone" class="setting-item">

@@ -11,27 +11,20 @@
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-
     <div class="swiperCls">
-      <!-- <van-swipe :loop="true" :width="250" @change="onChange">
-        <van-swipe-item v-for="(img ,index) in images" :key="index">
-          <img class="slide_img" v-lazy="img.imgUrl" @click="handleClick" />
-        </van-swipe-item>
-      </van-swipe>-->
-
       <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in images" :key="index">
+        <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
         </swiper-slide>
       </swiper>
     </div>
     <section class="goods-box search-wrap">
-      <span class="good-things">精选好物</span>
+      <span class="good-things">链猫自营</span>
       <ul class="goods-content">
         <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">多功能料理机</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -42,9 +35,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test2.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">遥控制空调扇</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -55,9 +48,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test3.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">时尚双肩包</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -68,9 +61,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test4.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">商务行李箱</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -78,6 +71,69 @@
               </span>
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </div>
+          </div>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
+          <img src="../../assets/image/home/test5.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">无线消噪耳机</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
+          <img src="../../assets/image/home/test6.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">无线蓝牙耳机</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </router-link>
+      </ul>
+    </section>
+    <section class="recommended-shop">
+      <span class="shop-things">推荐店铺</span>
+      <ul class="shop-content">
+        <router-link class="shop-item" tag="li" to="/classify/product">
+          <div class="item-header">
+            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
+            <div class="item-text">
+              <p>品炫旗舰店</p>
+              <i>正品大牌 产家直营</i>
+            </div>
+            <svg-icon class="into-store" icon-class="into-store"></svg-icon>
+            <!-- <van-button plain hairline size="small" type="danger">进店</van-button> -->
+          </div>
+          <div class="item-iamgs">
+            <img src="../../assets/image/home/store1.png" />
+            <img src="../../assets/image/home/store2.png" />
+            <img src="../../assets/image/home/store3.png" />
+          </div>
+        </router-link>
+        <router-link class="shop-item" tag="li" to="/classify/product">
+          <div class="item-header">
+            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
+            <div class="item-text">
+              <p>北欧家居旗舰店</p>
+              <i>正品大牌 产家直营</i>
+            </div>
+            <router-link  to='/storeDetail'></router-link>
+            <svg-icon  class="into-store" icon-class="into-store"></svg-icon>
+          </div>
+          <div class="item-iamgs">
+            <img src="../../assets/image/home/store4.png" />
+            <img src="../../assets/image/home/store5.png" />
+            <img src="../../assets/image/home/store6.png" />
           </div>
         </router-link>
       </ul>
@@ -105,9 +161,29 @@ export default {
           categoryId: 100016
         },
         {
+          imgUrl: require("../../assets/image/home/huawei1.png"),
+          categoryId: 100018
+        },
+        {
           imgUrl:
             "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
           categoryId: 100035
+        }
+      ],
+      images2: [
+        {
+          imgUrl:
+            "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
+          categoryId: 100035
+        },
+
+        {
+          imgUrl: require("../../assets/image/home/test11.png"),
+          categoryId: 100020
+        },
+        {
+          imgUrl: require("../../assets/image/home/test10.png"),
+          categoryId: 100019
         }
       ],
       swiperOption: {
@@ -229,24 +305,16 @@ export default {
   }
   .swiperCls {
     background-color: #efeff4;
-      // padding-left: 16px;
     .swiper-slide {
-      // .swiper-slide-active {
       padding-left: 16px;
-      // margin-left: 16px;
-      // margin-right: 20px;
       background-color: #efeff4;
       display: flex;
       justify-content: center;
       align-items: center;
-
-      // margin-left: 30px;
     }
     .slide_img {
       width: 222px;
       height: 90px;
-      // margin-left: 20px;
-      // margin-right: 20px;
       border-radius: 5px;
     }
   }
@@ -255,6 +323,7 @@ export default {
     .good-things {
       font-size: 18px;
       color: #fe4f70;
+      font-weight: 600;
     }
     .goods-content {
       display: flex;
@@ -294,6 +363,68 @@ export default {
           .goods-price {
             font-size: 14px;
             color: #fe4f70;
+          }
+        }
+      }
+    }
+  }
+  .recommended-shop {
+    padding: 16px;
+    .shop-things {
+      font-size: 18px;
+      color: #fe4f70;
+      font-weight: 600;
+    }
+    .shop-content {
+      .shop-item {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 11px;
+        .item-iamgs {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding-bottom: 5px;
+          padding-left: 5px;
+          img {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-right: 7px;
+          }
+        }
+        .item-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+          .into-store {
+            width: 41px;
+            height: 16px;
+            margin-right: 12px;
+          }
+          .item-text {
+            flex: 1;
+            height: 37px;
+            padding-left: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: column;
+            p {
+              font-size: 14px;
+              color: #3a3a3a;
+              font-weight: 600;
+            }
+            i {
+              font-size: 11px;
+              color: #949497;
+            }
+          }
+          .store-logo {
+            width: 37px;
+            height: 37px;
           }
         }
       }

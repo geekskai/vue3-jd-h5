@@ -6,13 +6,17 @@
       </van-swipe-item>
     </van-swipe>
     <span class="btn-left" @click="$router.go(-1)">
-      <svg-icon icon-class="white-btn"></svg-icon>
+      <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
+       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
     <ul class="product-content">
-      <li class="product-title">娜扎新装LOOK</li>
+      <li class="product-title">多功能料理机</li>
       <li class="product-info">
         <span class="product-price">$248</span>
-        <i>月销:888</i>
+        <div>
+          <i>快递包邮</i>
+          <i>月销:888</i>
+        </div>
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
@@ -21,12 +25,44 @@
         </div>
         <div class="store-btn">
           <van-button plain size="small" @click="handleConnectStore" type="danger">联系店家</van-button>
+          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
         </div>
       </li>
-      <li class="product-detail">
-        <span>商品详情</span>
+      <li class="item-info">
+        <van-field label="发货地" disabled placeholder="福建泉州 " />
       </li>
+      <li class="item-info">
+        <van-field label="品牌" disabled placeholder="CHANEL" />
+      </li>
+      <li class="item-info" @click="show = true">
+        <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
+        <van-icon name="arrow" />
+      </li>
+      <!-- <li class="product-detail">
+        <span>商品详情</span>
+      </li>-->
     </ul>
+    <van-popup
+      class="select-popup"
+      v-model="show"
+      round
+      position="bottom"
+      :style="{ height: '60%' }"
+    >
+      <section class="popup-content">
+        <span class="close-icon" @click="show = false">
+          <svg-icon icon-class="close-popup"></svg-icon>
+        </span>
+        <ul class="popup-top">
+          <img :src="imgSrc" />
+          <li class="item-specification">
+            <span class="item-price">￥568</span>
+            <span class="item-count">库存2279件</span>
+            <span class="item-colors">选择颜色；尺码</span>
+          </li>
+        </ul>
+      </section>
+    </van-popup>
     <div class="product-footer">
       <van-goods-action>
         <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
@@ -41,18 +77,24 @@ export default {
   name: "",
   data() {
     return {
+      show: false,
+      imgSrc: require("../../assets/image/home/test2.png"),
       images: [
         {
-          imgUrl: require("../../assets/image/product/product1.png"),
+          imgUrl: require("../../assets/image/home/test1.png"),
           categoryId: 100008
         },
         {
-          imgUrl: require("../../assets/image/product/product1.png"),
+          imgUrl: require("../../assets/image/home/test2.png"),
           categoryId: 100016
         },
         {
-          imgUrl: require("../../assets/image/product/product1.png"),
+          imgUrl: require("../../assets/image/home/test3.png"),
           categoryId: 100035
+        },
+        {
+          imgUrl: require("../../assets/image/home/test4.png"),
+          categoryId: 100016
         }
       ]
     };
@@ -84,6 +126,7 @@ export default {
   background-color: white;
   min-height: 100vh;
   margin-bottom: 45px;
+  padding-bottom: 45px;
   /deep/ .van-swipe-item {
     display: flex;
     justify-content: center;
@@ -111,6 +154,7 @@ export default {
       padding-top: 4px;
       .product-price {
         color: #fe4f70;
+        font-weight: 600;
         padding-left: 16px;
       }
       i {
@@ -122,6 +166,8 @@ export default {
     .store-info {
       display: flex;
       justify-content: space-between;
+      margin-top: 10px;
+      margin-bottom: 10px;
       .store-detail {
         padding-left: 16px;
         padding-top: 16px;
@@ -140,7 +186,16 @@ export default {
       .store-btn {
         padding-right: 16px;
         padding-top: 10px;
+        /deep/ .van-button {
+          margin-left: 10px;
+        }
       }
+    }
+    .item-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 95%;
     }
     .product-detail {
       padding-left: 16px;
@@ -148,10 +203,54 @@ export default {
       color: #fe4f70;
     }
   }
+  .select-popup {
+    padding: 20px;
+    .popup-content {
+      .close-icon {
+        float: right;
+      }
+      .popup-top {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .item-specification {
+          display: flex;
+          padding-left: 10px;
+          justify-content: flex-end;
+          align-items: flex-start;
+          flex-direction: column;
+          font-size: 14px;
+          height: 100px;
+          color: #3a3a3a;
+          .item-count {
+            font-size: 14px;
+            padding: 3px 0;
+          }
+          .item-colors {
+            font-size: 11px;
+            padding: 3px 0;
+          }
+          .item-price {
+            padding: 3px 0;
+            color: #fe4f70;
+            font-size: 17px;
+            font-weight: 600;
+          }
+        }
+        img {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
+  /deep/ .van-popup--bottom {
+    border-radius: 16px 16px 0 0;
+  }
   .product-footer {
     /deep/ .van-button--warning {
-      background-color: #00b6d2;
-      border: 1px solid #00b6d2;
+      background-color: #7cd1ff;
+      border: 1px solid #7cd1ff;
       height: 44px;
       line-height: 44px;
     }
