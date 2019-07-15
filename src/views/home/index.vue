@@ -113,6 +113,7 @@ export default {
       swiperOption: {
         loop: true,
         autoplay: false,
+        width: 480,
         loadOnTransitionStart: true,
         notNextTick: true, //notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
         direction: "horizontal", //水平方向移动
@@ -129,7 +130,6 @@ export default {
         // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
         debugger: true,
         slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
-       
       }
     };
   },
@@ -228,13 +228,26 @@ export default {
     }
   }
   .swiperCls {
-    padding-left: 16px;
-    .swiper-slide-active {
-      margin-right: 60px;
+    background-color: #efeff4;
+      // padding-left: 16px;
+    .swiper-slide {
+      // .swiper-slide-active {
+      padding-left: 16px;
+      // margin-left: 16px;
+      // margin-right: 20px;
+      background-color: #efeff4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      // margin-left: 30px;
     }
     .slide_img {
       width: 222px;
       height: 90px;
+      // margin-left: 20px;
+      // margin-right: 20px;
+      border-radius: 5px;
     }
   }
   .goods-box {

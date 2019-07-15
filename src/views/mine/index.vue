@@ -37,7 +37,7 @@
           </div>
           <van-icon name="arrow" />
         </router-link>
-        <router-link to="/setting" class="option-item" tag="li">
+        <!-- <router-link to="/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="message-center"></svg-icon>
             <span>消息中心</span>
@@ -50,7 +50,7 @@
             <span>帮助中心</span>
           </div>
           <van-icon name="arrow" />
-        </router-link>
+        </router-link> -->
         <router-link to="/order/appealRecord" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
