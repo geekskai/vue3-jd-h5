@@ -42,7 +42,7 @@
                       :key="index"
                       @click="selectProduct(product.title)"
                     >
-                      <img :src="product.imgUrl" class="product-img" />
+                      <img :src="product.imgUrl"/>
                       <p v-text="product.title" class="product-title"></p>
                     </div>
                   </div>
@@ -284,8 +284,7 @@ export default {
               margin-bottom: 20px;
               text-align: center;
               font-size: 30px;
-              .product-img {
-              }
+             
               .product-title {
                 color: #3a3a3a;
                 font-size: 11px;
