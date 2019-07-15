@@ -276,7 +276,6 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    padding-top: 44px;
     position: relative;
     background-color: white;
     .btn-left {

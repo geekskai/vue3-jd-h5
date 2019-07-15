@@ -156,7 +156,6 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    // padding-top: 44px;
     padding-bottom: 29px;
     position: relative;
     .btn-left {

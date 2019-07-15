@@ -153,7 +153,7 @@ export default {
   .btn-left {
     position: fixed;
     left: 16px;
-    top: 54px;
+    top: 14px;
   }
   .product-content {
     font-size: 14px;

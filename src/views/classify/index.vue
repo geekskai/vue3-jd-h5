@@ -155,7 +155,7 @@ export default {
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.searchWrap.style.height = $screenHeight - 150 + "px";
+      this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(title) {
       this.$router.push("/recommend");
