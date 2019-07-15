@@ -122,7 +122,7 @@
         </router-link>
         <router-link class="shop-item" tag="li" to="/classify/product">
           <div class="item-header">
-            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
+            <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
             <div class="item-text">
               <p>北欧家居旗舰店</p>
               <i>正品大牌 产家直营</i>
@@ -300,7 +300,7 @@ export default {
     padding-bottom: 10px;
     .lazy_img {
       width: 100%;
-      height: 313px;
+      height: 250px;
     }
   }
   .swiperCls {
@@ -380,6 +380,7 @@ export default {
         background-color: #fff;
         border-radius: 8px;
         padding: 11px;
+        margin-bottom: 10px;
         .item-iamgs {
           display: flex;
           justify-content: space-around;
