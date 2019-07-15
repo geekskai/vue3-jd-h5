@@ -62,6 +62,12 @@
           </li>
         </ul>
       </section>
+       <div class="product-footer">
+      <van-goods-action>
+        <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
+        <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
+      </van-goods-action>
+    </div>
     </van-popup>
     <div class="product-footer">
       <van-goods-action>
