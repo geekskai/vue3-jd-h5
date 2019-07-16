@@ -292,6 +292,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       flex: 1;
       font-weight: 700;
     }

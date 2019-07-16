@@ -30,7 +30,7 @@
               <template v-for="(category,index) in categoryData">
                 <div class="swiper-slide" :key="index" v-if="currentIndex === index">
                   <img
-                   @click="selectProduct"
+                    @click="selectProduct"
                     class="category-main-img"
                     :src="category.mainImgUrl"
                     v-if="category.mainImgUrl"
@@ -42,7 +42,7 @@
                       :key="index"
                       @click="selectProduct(product.title)"
                     >
-                      <img :src="product.imgUrl"/>
+                      <img :src="product.imgUrl" />
                       <p v-text="product.title" class="product-title"></p>
                     </div>
                   </div>
@@ -53,7 +53,7 @@
         </list-scroll>
       </div>
     </section>
-     <tabbar></tabbar>
+    <tabbar></tabbar>
   </div>
 </template>
 
@@ -145,8 +145,8 @@ export default {
     });
   },
   methods: {
-    handleSearch(){
-      this.$router.push('/search')
+    handleSearch() {
+      this.$router.push("/search");
     },
     //左侧菜单和右侧区域联动
     selectMenu($index) {
@@ -284,7 +284,7 @@ export default {
               margin-bottom: 20px;
               text-align: center;
               font-size: 30px;
-             
+
               .product-title {
                 color: #3a3a3a;
                 font-size: 11px;

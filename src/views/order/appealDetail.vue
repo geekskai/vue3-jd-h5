@@ -92,6 +92,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }

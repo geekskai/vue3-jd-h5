@@ -173,7 +173,7 @@ export default {
       text-align: center;
       font-size: 18px;
       flex: 1;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
   .classify-search {

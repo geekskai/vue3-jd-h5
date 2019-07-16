@@ -139,6 +139,14 @@ export default {
     },
     confirmFn() {
       this.show = false;
+      this.$toast.loading({
+        mask: true,
+        duration: 1000, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "支付中..."
+      });
+      setTimeout(()=>this.$router.push('/order/transactionDetails'),1300)
     },
     handlePay() {
       this.show = true;
@@ -159,6 +167,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }

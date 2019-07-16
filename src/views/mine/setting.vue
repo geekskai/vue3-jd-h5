@@ -56,7 +56,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       flex: 1;
     }
   }

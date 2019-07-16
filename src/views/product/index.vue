@@ -61,14 +61,14 @@
             <span class="item-colors">选择颜色；尺码</span>
           </li>
         </ul>
-         <!-- <ul class="popup-center">
+         <ul class="popup-center">
           <li>
             <span>颜色</span>
             <div>
               <van-button plain hairline size="small" icon="https://img.yzcdn.cn/vant/logo.png" type="danger">褐色</van-button>
             </div>
           </li>
-        </ul> -->
+        </ul>
       </section>
       <div class="product-footer">
         <van-goods-action>

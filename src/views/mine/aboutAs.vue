@@ -53,6 +53,7 @@ export default {
       text-align: center;
       font-size: 18px;
       color: #3a3a3a;
+      font-weight: 600;
       flex: 1;
     }
     .appeal-record {
