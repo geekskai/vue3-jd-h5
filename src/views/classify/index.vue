@@ -239,6 +239,7 @@ export default {
           width: 100%;
           height: 77px;
           text-align: center;
+          font-weight: 600;
           font-size: 14px;
           display: flex;
           justify-content: center;
