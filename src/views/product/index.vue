@@ -23,7 +23,6 @@
           <span class="store-name">店铺名称</span>
         </div>
         <div class="store-btn">
-          <van-button plain size="small" @click="handleConnectStore" type="danger">联系店家</van-button>
           <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
         </div>
       </li>
@@ -181,6 +180,10 @@ export default {
       justify-content: space-between;
       margin-top: 10px;
       margin-bottom: 10px;
+       /deep/ .van-button--danger {
+      background-color: #D8182D;
+      border: 1px solid #D8182D;
+    }
       .store-detail {
         padding-left: 16px;
         padding-top: 16px;
@@ -267,8 +270,8 @@ export default {
   }
   .product-footer {
     /deep/ .van-button--warning {
-      background-color: #7cd1ff;
-      border: 1px solid #7cd1ff;
+      background-color: #F3CA43;
+      border: 1px solid #F3CA43;
       height: 44px;
       line-height: 44px;
     }
