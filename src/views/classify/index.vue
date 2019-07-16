@@ -246,9 +246,9 @@ export default {
           color: #949497;
           flex-direction: column;
           &.active {
-            color: #fe4f70;
+            color: #D8182D;
             border-left: 3px solid transparent;
-            border-color: #fe4f70;
+            border-color: #D8182D;
             background: #fff;
           }
         }

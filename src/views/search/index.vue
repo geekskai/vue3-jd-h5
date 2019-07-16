@@ -180,7 +180,7 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-      color: #fe4f70;
+      color: #D8182D;
       font-size: 16px;
     }
   }
@@ -191,7 +191,7 @@ export default {
     .hot-list {
       .hot-words {
         position: relative;
-        color: #fe4f70;
+        color: #D8182D;
         font-size: 14px;
       }
       .hot-detail {
@@ -204,8 +204,8 @@ export default {
         display: inline-block;
       }
       .hot-detail.hot {
-        border: 1px solid #fe4f70;
-         color: #fe4f70;
+        border: 1px solid #D8182D;
+         color: #D8182D;
          .svg-icon{
            width: 12px;
            height: 14px;
@@ -232,7 +232,7 @@ export default {
           padding-top: 20px;
           display: flex;
           justify-content: space-between;
-          color: #fe4f70;
+          color: #D8182D;
         }
         .icon-delete {
           width: 16px;

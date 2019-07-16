@@ -6,11 +6,11 @@
       }
 
       .cls-1 {
-        stroke: #fe4f70;
+        stroke: #D8182D;
       }
 
       .cls-2 {
-        fill: #fe4f70;
+        fill: #D8182D;
         font-size: 33px;
         font-family: PingFangSC-Regular, PingFang SC;
       }

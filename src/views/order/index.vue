@@ -334,7 +334,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #fe4f70;
+          color: #D8182D;
           font-size: 11px;
         }
         .store-info {
@@ -361,7 +361,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
@@ -387,7 +387,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         i {
-          color: #fe4f70;
+          color: #D8182D;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -417,7 +417,7 @@ export default {
     padding-bottom: 20px;
     .like-list {
       .like-title {
-        color: #fe4f70;
+        color: #D8182D;
         font-size: 18px;
       }
       .like-item {
@@ -432,7 +432,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .item-detail {
@@ -467,7 +467,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #fe4f70;
+              color: #D8182D;
               font-size: 14px;
             }
             span {

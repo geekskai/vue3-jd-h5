@@ -97,7 +97,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #fe4f70;
+      color: #D8182D;
       font-size: 13px;
     }
   }
@@ -111,7 +111,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #fe4f70;
+          color: #D8182D;
           font-size: 11px;
         }
         .store-info {
@@ -138,7 +138,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
@@ -168,7 +168,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #fe4f70;
+          color: #D8182D;
           padding-left: 5px;
           font-weight: 700;
         }
@@ -201,7 +201,7 @@ export default {
     padding-top: 50px;
     padding-bottom: 30px;
     /deep/ .van-button--danger {
-      background-color: #fe4f70;
+      background-color: #D8182D;
       line-height: 44px;
       font-size: 18px;
     }

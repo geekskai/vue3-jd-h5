@@ -20,7 +20,7 @@
           </div>
           <div class="info-address">
             <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" color="#FE4F70" />
+            <van-icon name="arrow" color="#D8182D" />
           </div>
           <span>136778769907</span>
         </li>
@@ -113,7 +113,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #fe4f70;
+        background-color: #D8182D;
       }
       .card-triangle {
         position: absolute;
@@ -175,7 +175,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #fe4f70;
+      color: #D8182D;
     }
   }
 }

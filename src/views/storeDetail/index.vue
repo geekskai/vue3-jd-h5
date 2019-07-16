@@ -331,7 +331,7 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #fe4f70;
+          background-color: #D8182D;
         }
       }
     }
@@ -352,7 +352,7 @@ export default {
       //   top: 0;
       // }
       .select-item.active {
-        color: #fe4f70;
+        color: #D8182D;
       }
       .select-item {
         .search-icon {
@@ -396,7 +396,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #fe4f70;
+        color: #D8182D;
       }
       .goods-content {
         display: flex;
@@ -433,7 +433,7 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #fe4f70;
+              color: #D8182D;
             }
           }
         }

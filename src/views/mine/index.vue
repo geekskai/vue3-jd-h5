@@ -155,7 +155,7 @@ export default {
 .mine-layout {
   padding: 16px;
   min-height: 812px;
-  background: linear-gradient(#fe4f70, #ff9351);
+  background: linear-gradient(#D8182D, #ff9351);
   .mine-header {
     display: flex;
     justify-content: center;

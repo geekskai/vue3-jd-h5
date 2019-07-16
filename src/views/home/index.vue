@@ -322,7 +322,7 @@ export default {
     padding: 16px;
     .good-things {
       font-size: 18px;
-      color: #fe4f70;
+      color: #D8182D;
       font-weight: 600;
     }
     .goods-content {
@@ -365,7 +365,7 @@ export default {
           padding-bottom: 12px;
           .goods-price {
             font-size: 14px;
-            color: #fe4f70;
+            color: #D8182D;
           }
         }
       }
@@ -375,7 +375,7 @@ export default {
     padding: 16px;
     .shop-things {
       font-size: 18px;
-      color: #fe4f70;
+      color: #D8182D;
       font-weight: 600;
     }
     .shop-content {

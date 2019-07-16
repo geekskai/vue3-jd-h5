@@ -180,7 +180,7 @@ export default {
       color: #3a3a3a;
     }
     .appeal-record {
-      color: #fe4f70;
+      color: #D8182D;
       font-size: 13px;
     }
   }
@@ -232,7 +232,7 @@ export default {
           width: 100px;
           height: 100px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
@@ -261,7 +261,7 @@ export default {
             color: #949497;
           }
           .info-count {
-            color: #fe4f70;
+            color: #D8182D;
             font-size: 14px;
             font-weight: 600;
             display: flex;
@@ -292,13 +292,13 @@ export default {
     }
   }
   /deep/ .van-submit-bar__price {
-    color: #fe4f70;
+    color: #D8182D;
     font-size: 17px;
     font-weight: 600;
     padding-left: 5px;
   }
   /deep/ .van-button--danger {
-    background-color: #fe4f70;
+    background-color: #D8182D;
     height: 44px;
     line-height: 44px;
     .van-button__text {

@@ -42,7 +42,7 @@
     </section>
     <section class="logistics-status">
       <div>
-        <van-steps direction="vertical" active-color="#FE4F70" :active="0">
+        <van-steps direction="vertical" active-color="#D8182D" :active="0">
           <van-step>
             <i slot="active-icon">
               <span class="logistics-time">05/22<br/>08:28</span>
@@ -132,7 +132,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #fe4f70;
+      color: #D8182D;
       font-size: 13px;
     }
   }
@@ -152,7 +152,7 @@ export default {
           width: 60px;
           height: 60px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 50%;
         }
         .order-detail {

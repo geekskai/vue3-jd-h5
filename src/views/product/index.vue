@@ -166,7 +166,7 @@ export default {
       justify-content: space-between;
       padding-top: 4px;
       .product-price {
-        color: #fe4f70;
+        color: #D8182D;
         font-weight: 600;
         padding-left: 16px;
       }
@@ -213,7 +213,7 @@ export default {
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #fe4f70;
+      color: #D8182D;
     }
   }
   .select-popup {
@@ -245,7 +245,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #fe4f70;
+            color: #D8182D;
             font-size: 17px;
             font-weight: 600;
           }
@@ -275,8 +275,8 @@ export default {
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #fe4f70;
-      border: 1px solid #fe4f70;
+      background-color: #D8182D;
+      border: 1px solid #D8182D;
     }
   }
 }

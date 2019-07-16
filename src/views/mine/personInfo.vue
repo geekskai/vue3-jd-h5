@@ -154,7 +154,7 @@ export default {
       border: 0 solid #ebedf0;
       border-left-width: 1px;
       span {
-        color: #fe4f70;
+        color: #D8182D;
         font-size: 15px;
       }
     }
