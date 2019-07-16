@@ -6,7 +6,6 @@
       </van-swipe-item>
     </van-swipe>
     <span class="btn-left" @click="$router.go(-1)">
-      <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
     <ul class="product-content">
