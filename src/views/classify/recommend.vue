@@ -223,9 +223,9 @@ export default {
         font-size: 18px;
       }
       .like-item {
-        background-color: #fff;
+        background: url('../../assets/image/back-show.png') no-repeat center center;
+        background-size:100% 100%; 
         margin-top: 8px;
-        border-radius: 4px;
         padding: 20px;
         display: flex;
         justify-content: flex-start;

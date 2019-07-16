@@ -269,8 +269,6 @@ export default {
 
 <style scoped lang="scss">
 .store-detail {
-  display: flex;
-  flex-direction: column;
   .page-header {
     display: flex;
     justify-content: flex-start;

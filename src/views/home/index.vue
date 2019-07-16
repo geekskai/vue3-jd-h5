@@ -332,9 +332,12 @@ export default {
       li {
         display: inline-block;
         width: 165px;
-        border-radius: 8px;
         margin-top: 10px;
+        border-radius: 8px;
         background-color: white;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+        // background: url('../../assets/image/back-show.png') no-repeat center center;
+        // background-size:100% 100%;
         img {
           width: 100%;
         }
@@ -379,6 +382,7 @@ export default {
       padding-top: 10px;
       .shop-item {
         background-color: #fff;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         padding: 11px;
         margin-bottom: 10px;

@@ -195,6 +195,9 @@ export default {
   .order-card {
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    // background: url('../../assets/image/back-show.png') no-repeat center center;
+    //   background-size:100% 100%;
     padding: 10px;
     margin-top: 20px;
     .checkbox-all {
@@ -303,7 +306,6 @@ export default {
     }
   }
   /deep/ .van-checkbox {
-    padding-left: 24px;
     .van-checkbox__label {
       font-size: 13px;
       color: #949497;
