@@ -38,7 +38,7 @@
           </div>
           <van-icon name="arrow" />
         </router-link>-->
-        <router-link to="/mine/shippingAddress" class="option-item" tag="li">
+        <router-link to="/mine/myAssets" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-assets"></svg-icon>
             <span>我的资产</span>
