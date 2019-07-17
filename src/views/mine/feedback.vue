@@ -126,6 +126,7 @@ export default {
         .radio-item {
           display: inline-block;
           margin-right: 12px;
+          margin-bottom: 10px;
           /deep/ .van-radio__icon {
             width: 14px;
           }
