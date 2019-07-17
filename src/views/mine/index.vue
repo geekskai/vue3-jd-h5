@@ -4,7 +4,7 @@
       <img src="../../assets/image/product/store-headerM.png" class="header-img" />
       <div class="login-regist">
         <router-link to="/login" class="order-item" tag="span">登录</router-link>
-        <router-link to="/register" class="order-item" tag="span">/注册</router-link>
+        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
       </div>
     </section>
     <section class="order-all">
