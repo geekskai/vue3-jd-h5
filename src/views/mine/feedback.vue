@@ -36,9 +36,6 @@
             :error="isDisInput"
           >
             <span slot="right-icon">{{remnant}}/200</span>
-            <!-- <div slot="label">
-              <textarea name maxlength='100' id cols="30" rows="10"></textarea>
-            </div>-->
           </van-field>
         </van-cell-group>
       </ul>
