@@ -5,8 +5,19 @@
       <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link> -->
     </header>
     <!-- <section class="cart-empty">
-      <img class="img-cart" src="../../assets/image/cart/cart-empty.png" alt />
-    </section>-->
+      <ul class="empty-content">
+        <li class="img-cart">
+          <svg-icon icon-class="shopping-cart"></svg-icon>
+        </li>
+        <li class="item-text">
+          <p>您的购物车空空的哦~</p>
+          <p>去看看心仪的商品吧~</p>
+        </li>
+        <li class="item-btn">
+          <router-link to="/classify" class="hairline-btn" tag="span">立即去购物</router-link>
+        </li>
+      </ul>
+    </section> -->
     <section class="order-card">
       <van-checkbox v-model="checked" checked-color="#91C95B">
         <li class="checkbox-all">
@@ -105,7 +116,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "shopCart",
   data() {
     return {
       columns: 1,
@@ -180,16 +191,41 @@ export default {
       color: #3a3a3a;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #d8182d;
       font-size: 13px;
     }
   }
   .cart-empty {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .img-cart {
-      flex: 1;
+    .empty-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 40px;
+      padding-bottom: 50px;
+      .img-cart {
+        margin-bottom: 50px;
+        .svg-icon {
+          width: 156px;
+          height: 161px;
+        }
+      }
+      .item-text {
+        color: #3a3a3a;
+        font-size: 17px;
+      }
+      .item-btn {
+        margin-top: 18px;
+        .hairline-btn {
+          width: 150px;
+          height: 44px;
+          font-size: 17px;
+          color: #d8182d;
+          border: 1px solid #d8182d;
+          padding: 10px 32px;
+          border-radius: 4px;
+        }
+      }
     }
   }
   .order-card {
@@ -232,7 +268,7 @@ export default {
           width: 100px;
           height: 100px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #d8182d;
           border-radius: 4px;
         }
         .order-detail {
@@ -261,7 +297,7 @@ export default {
             color: #949497;
           }
           .info-count {
-            color: #D8182D;
+            color: #d8182d;
             font-size: 14px;
             font-weight: 600;
             display: flex;
@@ -280,6 +316,7 @@ export default {
       }
     }
   }
+
   /deep/ .van-submit-bar {
     .van-submit-bar__bar {
       height: 44px;
@@ -292,13 +329,13 @@ export default {
     }
   }
   /deep/ .van-submit-bar__price {
-    color: #D8182D;
+    color: #d8182d;
     font-size: 17px;
     font-weight: 600;
     padding-left: 5px;
   }
   /deep/ .van-button--danger {
-    background-color: #D8182D;
+    background-color: #d8182d;
     height: 44px;
     line-height: 44px;
     .van-button__text {

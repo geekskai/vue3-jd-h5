@@ -3,27 +3,9 @@
     <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
     <title>我的 copy</title>
     <desc>Created with Sketch.</desc>
-    <defs>
-        <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-1">
-            <stop stop-color="#FF9351" offset="0%"></stop>
-            <stop stop-color="#D8182D" offset="100%"></stop>
-        </linearGradient>
-        <rect id="path-2" x="0" y="0.513881442" width="1029" height="610" rx="24"></rect>
-        <filter x="-8.7%" y="-9.8%" width="117.5%" height="129.5%" filterUnits="objectBoundingBox" id="filter-3">
-            <feOffset dx="0" dy="30" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="25" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="我的-copy" transform="translate(-96.000000, -1257.000000)">
-            <rect fill="#EFEFF4" x="0" y="0" width="1125" height="2436"></rect>
-            <rect id="Rectangle" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="1125" height="2436"></rect>
-            <g id="Group-8" transform="translate(48.000000, 1055.000000)" fill-rule="nonzero">
-                <g id="Rectangle-Copy-4">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
-                    <use fill="#FFFFFF" xlink:href="#path-2"></use>
-                </g>
+        <g id="我的-copy" transform="translate(-96.000000, -1257.000000)" fill-rule="nonzero">
+            <g id="Group-8" transform="translate(48.000000, 1055.000000)">
                 <g id="Group-6" transform="translate(48.000000, 202.433747)">
                     <g id="收货人">
                         <circle id="椭圆形-copy-4" fill="#3C96FF" cx="36" cy="36" r="36"></circle>

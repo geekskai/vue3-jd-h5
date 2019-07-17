@@ -5,7 +5,7 @@
         route
         v-model="active"
         @change="tabChange(active)"
-        active-color="#D8182D"
+        active-color="#FE4F70"
         inactive-color="#949497"
       >
         <van-tabbar-item name="index" to="/index">

@@ -9,7 +9,6 @@
     </section>
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
-      <!-- <span class="look-orders">查看全部订单>></span> -->
       <ul class="order-list">
         <router-link to="/order/orderDetail" class="order-item" tag="li">
           <svg-icon icon-class="pending-pay"></svg-icon>
@@ -31,13 +30,6 @@
     </section>
     <section class="mine-content">
       <ul class="options-list">
-        <!-- <router-link to="/mine/personInfo" class="option-item" tag="li">
-          <div class="item-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>李四</span>
-          </div>
-          <van-icon name="arrow" />
-        </router-link>-->
         <router-link to="/mine/myAssets" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-assets"></svg-icon>
