@@ -9,7 +9,7 @@
     <section class="order-card">
       <ul class="order-list">
         <li class="order-info">
-          <img src alt />
+          <svg-icon icon-class="logistics-logo"></svg-icon>
           <div class="order-detail">
             <p class="info-one">
               <span>【3350980779986900】</span>
@@ -41,65 +41,90 @@
       </ul>
     </section>
     <section class="logistics-status">
-      <div>
-        <van-steps direction="vertical" active-color="#D8182D" :active="0">
-          <van-step>
-            <i slot="active-icon">
-              <span class="logistics-time">05/22<br/>08:28</span>
-              <svg-icon icon-class="correct"></svg-icon>
-            </i>
+      <van-steps direction="vertical" active-color="#D8182D" :active="0">
+        <van-step>
+          <i slot="active-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="correct"></svg-icon>
+          </i>
+          <div class="active-text">
             <h3>正在派送</h3>
             <p>包裹正在等待揽收</p>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">05/22<br/>08:28</span>
-              <svg-icon icon-class="point"></svg-icon>
-            </i>
-            <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">05/22<br/>08:28</span>
-              <svg-icon icon-class="courier"></svg-icon>
-            </i>
+          </div>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="point"></svg-icon>
+          </i>
+          <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="courier"></svg-icon>
+          </i>
+          <div class="normaol-text">
             <h3>【江苏市】快件到达连云港市</h3>
-            <p>2016-07-11 10:00</p>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">05/22<br/>08:28</span>
-              <svg-icon icon-class="point"></svg-icon>
-            </i>
-            <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">
-                <i>05/22</i>
-                <i>08:28</i>
-              </span>
-              <svg-icon icon-class="aircraft"></svg-icon>
-            </i>
-            <h3>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</h3>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">05/22 <br/> 08:28</span>
-              <svg-icon icon-class="point"></svg-icon>
-            </i>
-            <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门1111</p>
-          </van-step>
-          <van-step>
-            <i slot="inactive-icon">
-              <span class="logistics-time">05/22<br/>08:28</span>
-              <svg-icon icon-class="shipped"></svg-icon>
-            </i>
+            <!-- <p>2016-07-11 10:00</p> -->
+          </div>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="point"></svg-icon>
+          </i>
+          <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门</p>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              <i>05/22</i>
+              <i>08:28</i>
+            </span>
+            <svg-icon icon-class="aircraft"></svg-icon>
+          </i>
+          <div class="normaol-text">
+            <h3>运输中</h3>
+            <p>包裹正在等待揽收</p>
+          </div>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="point"></svg-icon>
+          </i>
+          <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门1111</p>
+        </van-step>
+        <van-step>
+          <i slot="inactive-icon">
+            <span class="logistics-time">
+              05/22
+              <br />08:28
+            </span>
+            <svg-icon icon-class="shipped"></svg-icon>
+          </i>
+          <div class="normaol-text">
             <h3>快件已发货</h3>
-            <p>2016-07-10 09:30</p>
-          </van-step>
-        </van-steps>
-      </div>
+            <!-- <p>2016-07-10 09:30</p> -->
+          </div>
+        </van-step>
+      </van-steps>
     </section>
   </div>
 </template>
@@ -132,7 +157,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #d8182d;
       font-size: 13px;
     }
   }
@@ -148,11 +173,11 @@ export default {
         display: flex;
         justify-content: space-between;
         font-size: 13px;
-        img {
+        .svg-icon {
           width: 60px;
           height: 60px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #d8182d;
           border-radius: 50%;
         }
         .order-detail {
@@ -198,6 +223,7 @@ export default {
     border-radius: 5px;
     width: 100%;
     background-color: #fff;
+
     .svg-icon {
       width: 20px;
       height: 20px;
@@ -215,13 +241,22 @@ export default {
     }
     /deep/ .van-step__title {
       padding-left: 12px;
+      .active-text {
+        color: #d8182d;
+      }
       h3 {
         font-size: 13px;
-        color: #000;
       }
       p {
         font-size: 11px;
-        color: #888;
+      }
+      .normaol-text {
+        h3 {
+          color: #000;
+        }
+        p {
+          color: #888;
+        }
       }
     }
   }
