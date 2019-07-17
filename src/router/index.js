@@ -14,14 +14,23 @@ let indexRouter = {
 }
 let routes = [
   // 登录页面
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      index: 1
-    },
-    component: () => import( /* webpackChunkName: "login" */ '@/views/login/index')
-  },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   meta: {
+  //     index: 2
+  //   },
+  //   component: () => import( /* webpackChunkName: "login" */ '@/views/login/index')
+  // },
+  // // 注册页面
+  // {
+  //   path: '/register',
+  //   name: 'register',
+  //   meta: {
+  //     index: 2
+  //   },
+  //   component: () => import( /* webpackChunkName: "register" */ '@/views/register/index')
+  // },
   // 无权限页面
   {
     path: '/nopermission',
@@ -54,11 +63,14 @@ let router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: routes,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {
-      return { x: 0, y: 0 }
+      return {
+        x: 0,
+        y: 0
+      }
     }
   }
 })

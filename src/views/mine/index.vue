@@ -3,8 +3,8 @@
     <section class="mine-header">
       <img src="../../assets/image/product/store-headerM.png" class="header-img" />
       <div class="login-regist">
-        <span>登录</span>
-        <span>/注册</span>
+        <router-link to="/login" class="order-item" tag="span">登录</router-link>
+        <router-link to="/register" class="order-item" tag="span">/注册</router-link>
       </div>
     </section>
     <section class="order-all">
@@ -155,7 +155,7 @@ export default {
 .mine-layout {
   padding: 16px;
   min-height: 812px;
-  background: linear-gradient(#D8182D, #ff9351);
+  background: linear-gradient(#d8182d, #ff9351);
   .mine-header {
     display: flex;
     justify-content: center;
