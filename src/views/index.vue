@@ -20,9 +20,11 @@ export default {
       if (to.meta.index > from.meta.index) {
         //外---》内
         this.transitionName = "slide-left";
+        console.log('=====//外---》内==>',to.meta.index,from.meta.index,this.transitionName);
       } else if (to.meta.index < from.meta.index) {
         //内---》外
         this.transitionName = "slide-right";
+        console.log('=====//内---》外==>',to.meta.index,from.meta.index,this.transitionName);
       } else {
         this.transitionName = ""; //同级 无过渡效果
       }
@@ -35,13 +37,10 @@ export default {
 <style lang="scss" scoped>
 .index {
   /*切换样式出错处理*/
+    height: 100%;
   .router-view {
     width: 100%;
     height: 100%;
-    // position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: 0 auto;
     -webkit-overflow-scrolling: touch;
   }
   /*切换动画*/

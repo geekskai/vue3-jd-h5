@@ -1,5 +1,5 @@
 export default [{
-  path: '/classify/recommend',
+  path: '/recommend',
   name: 'recommend',
   meta: {
     index: 12

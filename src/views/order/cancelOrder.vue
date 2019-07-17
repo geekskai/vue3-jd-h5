@@ -7,17 +7,46 @@
       <div class="header-content">取消原因</div>
       <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
-    <div class="tips-box">
+    <div class="content-box">
       <span class="icon-svg" @click="$router.go(-1)">
         <svg-icon icon-class="sigh"></svg-icon>
       </span>
       <i>订单取消成功</i>
     </div>
     <section class="reason-list">
-      <van-picker :columns="columns" @change="onChange" />
-      <van-field v-model="value" type="textarea " rows="4" autosize placeholder="请输入原因" />
+      <div class="item-content">
+        <van-radio-group v-model="radio">
+          <van-cell-group>
+            <van-cell title="想了想，我不想要了" clickable @click="radio = '1'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="1" />
+            </van-cell>
+            <van-cell title="买多了/买错了" clickable @click="radio = '2'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="2" />
+            </van-cell>
+            <van-cell title="支付遇到问题" clickable @click="radio = '3'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="3" />
+            </van-cell>
+            <van-cell title="地址填写错误" clickable @click="radio = '4'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="4" />
+            </van-cell>
+            <van-cell title="其他原因" clickable @click="radio = '5'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="5" />
+            </van-cell>
+          </van-cell-group>
+        </van-radio-group>
+        <van-field
+          v-model="value"
+          type="textarea"
+          v-if="radio =='5'"
+          rows="4"
+          @input="descInput"
+          :autosize="{ maxHeight: 200, minHeight: 120 }"
+          placeholder="请输入原因"
+        >
+          <span slot="right-icon">{{remnant}}/100</span>
+        </van-field>
+      </div>
     </section>
-
     <div class="pay-btn">
       <div class="pay-count">请选择取消订单原因，帮助我们改进，提高服务</div>
       <van-button type="danger" size="large">提交</van-button>
@@ -37,13 +66,28 @@ export default {
         "地址填写错误",
         "其他原因"
       ],
-      value: ""
+      value: "",
+      remnant: 0,
+      radio: "1"
     };
   },
   created() {},
   methods: {
     onChange(picker, value, index) {
       console.log(`当前值：${value}, 当前索引：${index}`);
+    },
+    descInput(value) {
+      var txtVal = this.value.length;
+      this.remnant = 100 - txtVal;
+      if (this.remnant < 0) {
+        this.remnant = 0;
+      }
+      if (100 - txtVal < 0) {
+        this.value = value.slice(0, 100);
+        this.isDisInput = true;
+      } else {
+        this.isDisInput = false;
+      }
     }
   }
 };
@@ -52,6 +96,9 @@ export default {
 <style scoped lang="scss">
 .cancel-order {
   padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   .page-header {
     display: flex;
     justify-content: flex-start;
@@ -60,21 +107,17 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }
     .appeal-record {
-      color: #fe4f70;
+      color: #d8182d;
       font-size: 13px;
     }
   }
-  .reason-list {
-    border-radius: 5px;
-    /deep/ input {
-      padding-left: 20px;
-    }
-  }
-  .tips-box {
+
+  .content-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,18 +129,43 @@ export default {
       padding-bottom: 44px;
     }
     .icon-svg {
-        display: inline-block;
+      display: inline-block;
       .svg-icon {
         width: 32px;
         height: 32px;
       }
     }
   }
+  .reason-list {
+    max-height: 376px;
+    padding: 0 16px;
+    border-radius: 8px;
+    background-color: white;
+    .item-content {
+      /deep/ .van-cell:not(:last-child)::after {
+        display: none;
+      }
+      /deep/ .van-hairline--top-bottom::after {
+        display: none;
+      }
+      /deep/ .van-field__right-icon {
+        position: absolute;
+        bottom: 5px;
+        right: 0;
+      }
+      /deep/ .van-cell {
+        padding:10px 0;
+        // padding-top: 20px;
+      }
+    }
+  }
   .pay-btn {
     width: 100%;
-    padding: 0 16px;
-    padding-top: 50px;
-    padding-bottom: 30px;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding-bottom: 10px;
     .pay-count {
       display: flex;
       justify-content: center;
@@ -106,7 +174,7 @@ export default {
       padding-bottom: 12px;
     }
     /deep/ .van-button--danger {
-      background-color: #fe4f70;
+      background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;
     }

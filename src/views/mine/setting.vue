@@ -9,7 +9,7 @@
       <ul class="setting-list">
         <li class="setting-item">
           <span class="setting-msg">消息提醒</span>
-          <van-switch v-model="checked" active-color="#FE4F70" size="20px" />
+          <van-switch v-model="checked" active-color="#D8182D" size="20px" />
         </li>
         <li class="setting-item">
           <span class="setting-msg">清除缓存</span>
@@ -56,7 +56,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       flex: 1;
     }
   }

@@ -84,7 +84,85 @@
       <section class="goods-box">
         <ul class="goods-content">
           <li>
-            <img src="../../assets/image/home/test1.png" alt />
+            <img src="../../assets/image/home/test8.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test9.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">娜扎新装LOOK</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test3.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">时尚双肩包</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test4.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">商务行李箱</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test5.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">无线消噪耳机</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test6.png" alt />
+            <div class="goods-layout">
+              <div class="goods-title">无线蓝牙耳机</div>
+              <span class="goods-div">限量套装 新品上市</span>
+              <div class="goods-desc">
+                <span class="goods-price">
+                  <i>$</i>245
+                </span>
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img src="../../assets/image/home/test7.png" alt />
             <div class="goods-layout">
               <div class="goods-title">娜扎新装LOOK</div>
               <span class="goods-div">限量套装 新品上市</span>
@@ -110,85 +188,7 @@
             </div>
           </li>
           <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
-            <div class="goods-layout">
-              <div class="goods-title">娜扎新装LOOK</div>
-              <span class="goods-div">限量套装 新品上市</span>
-              <div class="goods-desc">
-                <span class="goods-price">
-                  <i>$</i>245
-                </span>
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </div>
-            </div>
-          </li>
-          <li>
-            <img src="../../assets/image/home/test1.png" alt />
+            <img src="../../assets/image/home/test2.png" alt />
             <div class="goods-layout">
               <div class="goods-title">娜扎新装LOOK</div>
               <span class="goods-div">限量套装 新品上市</span>
@@ -269,14 +269,11 @@ export default {
 
 <style scoped lang="scss">
 .store-detail {
-  display: flex;
-  flex-direction: column;
   .page-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    padding-top: 44px;
     position: relative;
     background-color: white;
     .btn-left {
@@ -293,13 +290,14 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       flex: 1;
       font-weight: 700;
     }
   }
   .store-info {
     background-color: #fff;
-    min-height: 383px;
+    min-height: 300px;
     margin-bottom: 10px;
     .store-top {
       display: flex;
@@ -333,7 +331,7 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #fe4f70;
+          background-color: #D8182D;
         }
       }
     }
@@ -354,7 +352,7 @@ export default {
       //   top: 0;
       // }
       .select-item.active {
-        color: #fe4f70;
+        color: #D8182D;
       }
       .select-item {
         .search-icon {
@@ -398,7 +396,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #fe4f70;
+        color: #D8182D;
       }
       .goods-content {
         display: flex;
@@ -435,7 +433,7 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #fe4f70;
+              color: #D8182D;
             }
           }
         }

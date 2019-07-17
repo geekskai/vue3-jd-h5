@@ -417,7 +417,7 @@ export default {
 
 <style scoped>
 .redCls {
-  color: #fe4f70;
+  color: #D8182D;
   font-size: 20px;
 }
 .gearArea {
@@ -563,7 +563,7 @@ export default {
   position: relative;
 }
 .larea_finish {
-  color: #fe4f70;
+  color: #D8182D;
   font-size: 15px;
 }
 .larea_cancel {

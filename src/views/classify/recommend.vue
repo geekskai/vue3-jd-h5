@@ -156,7 +156,6 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    padding-top: 44px;
     padding-bottom: 29px;
     position: relative;
     .btn-left {
@@ -174,7 +173,7 @@ export default {
       text-align: center;
       font-size: 18px;
       flex: 1;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
   .classify-search {
@@ -220,13 +219,13 @@ export default {
     padding: 16px;
     .like-list {
       .like-title {
-        color: #fe4f70;
+        color: #D8182D;
         font-size: 18px;
       }
       .like-item {
-        background-color: #fff;
+        background: url('../../assets/image/back-show.png') no-repeat center center;
+        background-size:100% 100%; 
         margin-top: 8px;
-        border-radius: 4px;
         padding: 20px;
         display: flex;
         justify-content: flex-start;
@@ -235,7 +234,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .item-detail {
@@ -270,7 +269,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #fe4f70;
+              color: #D8182D;
               font-size: 14px;
             }
             span {

@@ -9,25 +9,25 @@
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item">
-          <van-field label="头像" />
+          <van-field label="头像" disabled/>
           <img src="../../assets/image/product/store-headerM.png" class="header-img" />
         </li>
         <li @click="handlePhone" class="setting-item">
           <van-field label="昵称" disabled placeholder="昵称显示" />
           <van-icon class="icon" name="arrow" />
         </li>
-        <li class="setting-item" @click="handlePhone">
+        <router-link class="setting-item" to="/mine/phoneNumberSetting" tag="li">
           <van-field label="手机号" disabled placeholder="13547008799" />
           <van-icon class="icon" name="arrow" />
-        </li>
-        <li class="setting-item" @click="handlePhone">
+        </router-link>
+        <router-link class="setting-item" to="/mine/settingMail" tag="li">
           <van-field label="邮箱号" disabled placeholder="未设置" />
           <van-icon class="icon" name="arrow" />
-        </li>
-        <li class="setting-item" @click="handlePhone">
+        </router-link>
+        <router-link class="setting-item" to="/mine/changePassword" tag="li">
           <van-field label="修改密码" disabled placeholder />
           <van-icon class="icon" name="arrow" />
-        </li>
+        </router-link>
       </ul>
     </section>
 
@@ -83,6 +83,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }
@@ -153,7 +154,7 @@ export default {
       border: 0 solid #ebedf0;
       border-left-width: 1px;
       span {
-        color: #fe4f70;
+        color: #D8182D;
         font-size: 15px;
       }
     }

@@ -1,7 +1,14 @@
 <template>
   <div class="mine-layout">
-    <section class="order-top">
-      <span class="my-order">我的订单</span>
+    <section class="mine-header">
+      <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+      <div class="login-regist">
+        <router-link to="/login" class="order-item" tag="span">登录</router-link>
+        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
+      </div>
+    </section>
+    <section class="order-all">
+      <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
         <router-link to="/order/orderDetail" class="order-item" tag="li">
           <svg-icon icon-class="pending-pay"></svg-icon>
@@ -17,53 +24,57 @@
         </router-link>
         <router-link to="/order" class="order-item" tag="li">
           <svg-icon icon-class="all-orders"></svg-icon>
-          <span>全部订单</span>
+          <span>退换/售后</span>
         </router-link>
       </ul>
     </section>
     <section class="mine-content">
       <ul class="options-list">
-        <router-link to="/mine/personInfo" class="option-item" tag="li">
+        <router-link to="/mine/myAssets" class="option-item" tag="li">
           <div class="item-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>李四</span>
+            <svg-icon class="incon" icon-class="my-assets"></svg-icon>
+            <span>我的资产</span>
           </div>
-          <van-icon name="arrow" />
+          <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
         <router-link to="/mine/shippingAddress" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="shipping-address"></svg-icon>
             <span>收货地址</span>
           </div>
-          <van-icon name="arrow" />
+          <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/setting" class="option-item" tag="li">
-          <div class="item-info">
-            <svg-icon class="incon" icon-class="message-center"></svg-icon>
-            <span>消息中心</span>
-          </div>
-          <van-icon name="arrow" />
-        </router-link>
-        <router-link to="/classify/product" class="option-item" tag="li">
-          <div class="item-info">
-            <svg-icon class="incon" icon-class="help-center"></svg-icon>
-            <span>帮助中心</span>
-          </div>
-          <van-icon name="arrow" />
-        </router-link>
-        <router-link to="/order/appealRecord" class="option-item" tag="li">
+        <router-link to="/mine/appealRecord" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
             <span>我的申诉</span>
           </div>
-          <van-icon name="arrow" />
+          <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
         <router-link to="/mine/setting" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="setting"></svg-icon>
             <span>设置</span>
           </div>
-          <van-icon name="arrow" />
+          <van-icon color="#DBDBDB" name="arrow" />
+        </router-link>
+      </ul>
+    </section>
+    <section class="mine-content">
+      <ul class="options-list">
+        <router-link to="/mine/messageCenter" class="option-item" tag="li">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="message-center"></svg-icon>
+            <span>消息中心</span>
+          </div>
+          <van-icon color="#DBDBDB" name="arrow" />
+        </router-link>
+        <router-link to="/mine/helpCenter" class="option-item" tag="li">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="help-center"></svg-icon>
+            <span>帮助中心</span>
+          </div>
+          <van-icon color="#DBDBDB" name="arrow" />
         </router-link>
       </ul>
     </section>
@@ -135,15 +146,43 @@ export default {
 <style scoped lang="scss">
 .mine-layout {
   padding: 16px;
-  .order-top {
-    .my-order {
-      font-size: 16px;
-      font-weight: 700;
+  min-height: 812px;
+  background: linear-gradient(#d8182d, #ff9351);
+  .mine-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 14px;
+    padding-bottom: 30px;
+    .header-img {
+      width: 70px;
+      height: 70px;
+    }
+    .login-regist {
+      font-size: 15px;
+      color: #fff;
+      padding-top: 20px;
+    }
+  }
+  .order-all {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    .look-orders {
+      font-size: 11px;
+      font-weight: 600;
+      color: #3a3a3a;
+      padding-left: 19px;
+      padding-top: 14px;
+      padding-bottom: 18px;
     }
     .order-list {
-      padding-top: 20px;
+      padding-bottom: 18px;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       .order-item {
         font-size: 14px;
@@ -153,22 +192,31 @@ export default {
         align-items: center;
         span {
           padding-top: 5px;
+          font-weight: 600;
         }
       }
     }
   }
   .mine-content {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 16px;
+    margin-top: 18px;
     .options-list {
+      padding-top: 20px;
       .option-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 16px;
-        padding: 20px 0;
+        padding-bottom: 22px;
         .item-info {
           display: flex;
           justify-content: center;
           align-items: center;
+          font-size: 15px;
+          color: #888;
           .incon {
             padding-right: 16px;
           }

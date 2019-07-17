@@ -139,6 +139,21 @@ export default {
     },
     confirmFn() {
       this.show = false;
+      this.$toast.loading({
+        mask: true,
+        duration: 1000, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "支付中..."
+      });
+
+      // setTimeout(()=>this.$router.push('/order/transactionDetails'),1300)
+      setTimeout(() => {
+        this.$toast({
+          mask: false,
+          message: "支付成功~"
+        });
+      }, 1300);
     },
     handlePay() {
       this.show = true;
@@ -159,6 +174,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }
@@ -173,7 +189,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #fe4f70;
+          color: #D8182D;
           font-size: 11px;
         }
         .store-info {
@@ -200,7 +216,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
@@ -230,7 +246,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #fe4f70;
+          color: #D8182D;
           padding-left: 5px;
           font-weight: 700;
         }
@@ -276,12 +292,12 @@ export default {
       font-size: 11px;
       padding-bottom: 12px;
       i {
-        color: #fe4f70;
+        color: #D8182D;
         font-weight: 700;
       }
     }
     /deep/ .van-button--danger {
-      background-color: #fe4f70;
+      background-color: #D8182D;
       line-height: 44px;
       font-size: 18px;
     }

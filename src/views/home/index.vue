@@ -11,21 +11,20 @@
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-
     <div class="swiperCls">
       <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in images" :key="index">
+        <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
         </swiper-slide>
       </swiper>
     </div>
     <section class="goods-box search-wrap">
-      <span class="good-things">精选好物</span>
+      <span class="good-things">链猫自营</span>
       <ul class="goods-content">
         <router-link tag="li" to="/classify/product">
           <img src="../../assets/image/home/test1.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">多功能料理机</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -36,9 +35,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test2.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">遥控制空调扇</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -49,9 +48,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test3.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">时尚双肩包</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -62,9 +61,9 @@
           </div>
         </router-link>
         <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+          <img src="../../assets/image/home/test4.png" alt />
           <div class="goods-layout">
-            <div class="goods-title">娜扎新装LOOK</div>
+            <div class="goods-title">商务行李箱</div>
             <span class="goods-div">限量套装 新品上市</span>
             <div class="goods-desc">
               <span class="goods-price">
@@ -74,6 +73,71 @@
             </div>
           </div>
         </router-link>
+        <router-link tag="li" to="/classify/product">
+          <img src="../../assets/image/home/test5.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">无线消噪耳机</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </router-link>
+        <router-link tag="li" to="/classify/product">
+          <img src="../../assets/image/home/test6.png" alt />
+          <div class="goods-layout">
+            <div class="goods-title">无线蓝牙耳机</div>
+            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-desc">
+              <span class="goods-price">
+                <i>$</i>245
+              </span>
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </div>
+          </div>
+        </router-link>
+      </ul>
+    </section>
+    <section class="recommended-shop">
+      <span class="shop-things">推荐店铺</span>
+      <ul class="shop-content">
+        <li class="shop-item">
+          <div class="item-header">
+            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
+            <div class="item-text">
+              <p>品炫旗舰店</p>
+              <i>正品大牌 产家直营</i>
+            </div>
+            <router-link to="/storeDetail">
+              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
+            </router-link>
+          </div>
+          <div class="item-iamgs">
+            <img src="../../assets/image/home/store1.png" />
+            <img src="../../assets/image/home/store2.png" />
+            <img src="../../assets/image/home/store3.png" />
+          </div>
+        </li>
+        <li class="shop-item">
+          <div class="item-header">
+            <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
+            <div class="item-text">
+              <p>北欧家居旗舰店</p>
+              <i>正品大牌 产家直营</i>
+            </div>
+            <router-link to="/storeDetail">
+              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
+            </router-link>
+          </div>
+          <div class="item-iamgs">
+            <img src="../../assets/image/home/store4.png" />
+            <img src="../../assets/image/home/store5.png" />
+            <img src="../../assets/image/home/store6.png" />
+          </div>
+        </li>
       </ul>
     </section>
     <tabbar></tabbar>
@@ -89,24 +153,43 @@ export default {
       headerActive: false,
       images: [
         {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t29188/301/133996293/200131/61f42a01/5be8eed6Nda6a18a5.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          // imgUrl: require("../../assets/image/home/huawei1.png"),
+          imgUrl: require("../../assets/image/home/banner5.jpg"),
+          categoryId: 100018
+        },
+        {
+          imgUrl: require("../../assets/image/home/banner6.jpg"),
           categoryId: 100008
         },
         {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/s1125x690_jfs/t30757/316/208746402/123953/9fa18794/5beb7d13Ne77e9f29.jpg!cr_1125x549_0_72!q70.jpg.dpg",
+          imgUrl: require("../../assets/image/home/banner7.jpg"),
           categoryId: 100016
         },
+        {
+          imgUrl: require("../../assets/image/home/banner8.jpg"),
+          categoryId: 100035
+        }
+      ],
+      images2: [
         {
           imgUrl:
             "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
           categoryId: 100035
+        },
+
+        {
+          imgUrl: require("../../assets/image/home/test11.png"),
+          categoryId: 100020
+        },
+        {
+          imgUrl: require("../../assets/image/home/test10.png"),
+          categoryId: 100019
         }
       ],
       swiperOption: {
         loop: true,
         autoplay: false,
+        width: 480,
         loadOnTransitionStart: true,
         notNextTick: true, //notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
         direction: "horizontal", //水平方向移动
@@ -122,16 +205,7 @@ export default {
         touchRatio: 1, // 默认为1，按照1:1的触摸比例滑动。设置为0时，完全无法滑动
         // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
         debugger: true,
-        effect: "coverflow",
-        slidesPerView: 2, //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
-        centeredSlides: true,
-        coverflowEffect: {
-          rotate: 0, //slide做3d旋转时Y轴的旋转角度。默认50。
-          stretch: 18, //每个slide之间的拉伸值，越大slide靠得越紧。 默认0。
-          depth: 150, // slide的位置深度。值越大z轴距离越远，看起来越小。 默认100。
-          modifier: 2, //  depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。默认1。
-          slideShadows: false // 开启slide阴影。默认 true
-        }
+        slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
       }
     };
   },
@@ -147,6 +221,9 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    onChange(index) {
+      this.$toast("当前 Swipe 索引：" + index);
+    },
     handleClick() {
       this.$router.push("/classify/product");
     },
@@ -173,11 +250,11 @@ export default {
 .home {
   .home-header {
     &.active {
-      top: 24px;
+      top: 10px;
     }
     position: fixed;
     left: 0;
-    top: 24px;
+    top: 10px;
     width: 100%;
     height: 40px;
     line-height: 40px;
@@ -223,20 +300,30 @@ export default {
     padding-bottom: 10px;
     .lazy_img {
       width: 100%;
-      height: 313px;
+      height: 250px;
     }
   }
   .swiperCls {
+    background-color: #efeff4;
+    .swiper-slide {
+      padding-left: 16px;
+      background-color: #efeff4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .slide_img {
-      width: 187px;
+      width: 222px;
       height: 90px;
+      border-radius: 5px;
     }
   }
   .goods-box {
     padding: 16px;
     .good-things {
       font-size: 18px;
-      color: #fe4f70;
+      color: #D8182D;
+      font-weight: 600;
     }
     .goods-content {
       display: flex;
@@ -245,9 +332,12 @@ export default {
       li {
         display: inline-block;
         width: 165px;
-        border-radius: 8px;
         margin-top: 10px;
+        border-radius: 8px;
         background-color: white;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+        // background: url('../../assets/image/back-show.png') no-repeat center center;
+        // background-size:100% 100%;
         img {
           width: 100%;
         }
@@ -275,7 +365,72 @@ export default {
           padding-bottom: 12px;
           .goods-price {
             font-size: 14px;
-            color: #fe4f70;
+            color: #D8182D;
+          }
+        }
+      }
+    }
+  }
+  .recommended-shop {
+    padding: 16px;
+    .shop-things {
+      font-size: 18px;
+      color: #D8182D;
+      font-weight: 600;
+    }
+    .shop-content {
+      padding-top: 10px;
+      .shop-item {
+        background-color: #fff;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 11px;
+        margin-bottom: 10px;
+        .item-iamgs {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          padding-bottom: 5px;
+          padding-left: 5px;
+          img {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-right: 7px;
+          }
+        }
+        .item-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+          .into-store {
+            width: 41px;
+            height: 16px;
+            margin-right: 12px;
+          }
+          .item-text {
+            flex: 1;
+            height: 37px;
+            padding-left: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: column;
+            p {
+              font-size: 14px;
+              color: #3a3a3a;
+              font-weight: 600;
+            }
+            i {
+              font-size: 11px;
+              color: #949497;
+            }
+          }
+          .store-logo {
+            width: 37px;
+            height: 37px;
           }
         }
       }

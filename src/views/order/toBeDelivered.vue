@@ -94,6 +94,7 @@ export default {
     .header-content {
       text-align: center;
       font-size: 18px;
+      font-weight: 600;
       color: #3a3a3a;
       flex: 1;
     }
@@ -108,7 +109,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #fe4f70;
+          color: #D8182D;
           font-size: 11px;
         }
         .store-info {
@@ -135,7 +136,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #fe4f70;
+          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
@@ -172,7 +173,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #fe4f70;
+          color: #D8182D;
           padding-left: 5px;
           font-weight: 700;
         }
