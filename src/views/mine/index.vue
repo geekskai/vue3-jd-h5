@@ -44,7 +44,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/mine/appealRecord" class="option-item" tag="li">
+        <router-link to="/order/appealRecord" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
             <span>我的申诉</span>
