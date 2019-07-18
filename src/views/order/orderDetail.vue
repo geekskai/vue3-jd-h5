@@ -134,13 +134,12 @@ export default {
         loadingType: "spinner",
         message: "支付中..."
       });
-
-      // setTimeout(()=>this.$router.push('/order/transactionDetails'),1300)
       setTimeout(() => {
-        this.$toast({
-          mask: false,
-          message: "支付成功~"
-        });
+        // this.$toast({
+        //   mask: false,
+        //   message: "支付成功~"
+        // });
+        this.$router.push("/order/transactionDetails");
       }, 1300);
     },
     handlePay() {

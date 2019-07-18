@@ -38,7 +38,7 @@
       </ul>
       <div class="login-register-btns">
         <router-link class="register-btn" to="/classify" tag="span">完成</router-link>
-        <router-link class="login-btn" to="/recommend" tag="span">返回商家</router-link>
+        <router-link class="login-btn" to="/storeDetail" tag="span">返回商家</router-link>
       </div>
     </section>
   </div>
