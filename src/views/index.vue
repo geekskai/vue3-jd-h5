@@ -20,11 +20,9 @@ export default {
       if (to.meta.index > from.meta.index) {
         //外---》内
         this.transitionName = "slide-left";
-        console.log('=====//外---》内==>',to.meta.index,from.meta.index,this.transitionName);
       } else if (to.meta.index < from.meta.index) {
         //内---》外
         this.transitionName = "slide-right";
-        console.log('=====//内---》外==>',to.meta.index,from.meta.index,this.transitionName);
       } else {
         this.transitionName = ""; //同级 无过渡效果
       }

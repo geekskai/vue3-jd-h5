@@ -1,9 +1,9 @@
 export default [
   {
-    path:'storeDetail',
+    path:'/storeDetail',
     name:'storeDetail',
     meta: {
-      index: 3
+      index: 21
     },
     component: () => import('@/views/storeDetail/index.vue')
   }

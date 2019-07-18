@@ -2,7 +2,6 @@
   <div class="recommend">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">推荐</div>
@@ -15,119 +14,21 @@
     </div>
 
     <section class="recommend-classify">
-      <ul class="like-list">
-        <li class="like-item">
+      <ul class="like-list" v-for="(item,index) in likeList" :key="index">
+        <router-link tag="li" class="like-item" to="/classify/product">
           <img class="item-picture" />
           <div class="item-detail">
             <p class="store-info">
               <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
+              <label>{{item.storeName}}</label>
             </p>
-            <p class="item-title">娜扎新装LOOK</p>
+            <p class="item-title">{{item.itemTitle}}</p>
             <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
+              <i>{{item.itemPrice}}</i>
+              <span>{{item.itemCount}}</span>
             </p>
           </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
+        </router-link>
       </ul>
     </section>
   </div>
@@ -137,7 +38,38 @@
 export default {
   name: "recommend",
   data() {
-    return {};
+    return {
+      likeList: [
+        {
+          id: 0,
+          storeName: "店铺名称",
+          itemTitle: "娜扎新装LOOK",
+          itemPrice: "$248",
+          itemCount: "月销:888"
+        },
+        {
+          id: 1,
+          storeName: "店铺名称",
+          itemTitle: "娜扎新装LOOK",
+          itemPrice: "$248",
+          itemCount: "月销:888"
+        },
+        {
+          id: 2,
+          storeName: "店铺名称",
+          itemTitle: "娜扎新装LOOK",
+          itemPrice: "$248",
+          itemCount: "月销:888"
+        },
+        {
+          id: 3,
+          storeName: "店铺名称",
+          itemTitle: "娜扎新装LOOK",
+          itemPrice: "$248",
+          itemCount: "月销:888"
+        }
+      ]
+    };
   },
   created() {},
   methods: {
@@ -219,12 +151,13 @@ export default {
     padding: 16px;
     .like-list {
       .like-title {
-        color: #D8182D;
+        color: #d8182d;
         font-size: 18px;
       }
       .like-item {
-        background: url('../../assets/image/back-show.png') no-repeat center center;
-        background-size:100% 100%; 
+        background: url("../../assets/image/back-show.png") no-repeat center
+          center;
+        background-size: 100% 100%;
         margin-top: 8px;
         padding: 20px;
         display: flex;
@@ -234,7 +167,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #d8182d;
           border-radius: 4px;
         }
         .item-detail {
@@ -269,7 +202,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #D8182D;
+              color: #d8182d;
               font-size: 14px;
             }
             span {
