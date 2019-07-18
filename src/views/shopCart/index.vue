@@ -188,13 +188,12 @@ export default {
         message: "支付中..."
       });
 
-      // setTimeout(()=>this.$router.push('/order/transactionDetails'),1300)
       setTimeout(() => {
-        this.$toast({
-          mask: false,
-          message: "支付成功~"
-        });
-        this.clearCart = true;
+        // this.$toast({
+        //   mask: false,
+        //   message: "支付成功~"
+        // });
+        this.$router.push("/order/transactionDetails");
       }, 1300);
     },
     submitDelete() {
