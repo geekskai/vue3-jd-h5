@@ -71,10 +71,6 @@
         </li>
       </ul>
     </section>
-
-    <!-- <van-action-sheet v-model="show" title="请选择支付方式">
-      <van-picker :columns="columns" @change="onChange" />
-    </van-action-sheet>-->
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -281,10 +277,14 @@ export default {
     }
   }
   .pay-btn {
+    position: fixed;
     width: 100%;
+     bottom: 10px;
+    left: 0;
+    right: 0;
     padding: 0 16px;
-    padding-top: 50px;
-    padding-bottom: 30px;
+    // padding-top: 50px;
+    // padding-bottom: 30px;
     .pay-count {
       display: flex;
       justify-content: space-between;

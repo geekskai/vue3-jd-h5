@@ -30,14 +30,13 @@
               <van-radio slot="right-icon" checked-color="#91C95B" name="4" />
             </van-cell>
             <van-cell title="其他原因" clickable @click="radio = '5'">
-              <van-radio slot="right-icon" checked-color="#91C95B" name="5" />
+              <!-- <van-radio slot="right-icon" checked-color="#91C95B" name="5" /> -->
             </van-cell>
           </van-cell-group>
         </van-radio-group>
         <van-field
           v-model="value"
           type="textarea"
-          v-if="radio =='5'"
           rows="4"
           @input="descInput"
           :autosize="{ maxHeight: 200, minHeight: 120 }"
@@ -99,11 +98,13 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: 667px;
+  max-height: 812px;
   .page-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 10px;
+    padding: 16px 0;
     .header-content {
       text-align: center;
       font-size: 18px;
@@ -130,15 +131,17 @@ export default {
     }
     .icon-svg {
       display: inline-block;
+      padding-top: 30px;
       .svg-icon {
-        width: 32px;
-        height: 32px;
+        width: 33px;
+        height: 33px;
       }
     }
   }
   .reason-list {
     max-height: 376px;
     padding: 0 16px;
+    margin-bottom: 55px;
     border-radius: 8px;
     background-color: white;
     .item-content {
@@ -160,18 +163,20 @@ export default {
     }
   }
   .pay-btn {
-    width: 100%;
-    flex: 1;
+    padding: 0 16px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-direction: column;
-    padding-bottom: 10px;
     .pay-count {
       display: flex;
       justify-content: center;
       color: #949497;
       font-size: 14px;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
     /deep/ .van-button--danger {
       background-color: #d8182d;

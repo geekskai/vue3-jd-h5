@@ -2,7 +2,8 @@
   <div class="shop-cart">
     <header class="page-header">
       <div class="header-content">购物车</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">完成</router-link> -->
+      <span v-if="cartMode ===false" class="appeal-record">完成</span>
+      <span v-if="cartMode ===true" class="appeal-record">编辑</span>
     </header>
     <!-- <section class="cart-empty">
       <ul class="empty-content">
@@ -17,7 +18,7 @@
           <router-link to="/classify" class="hairline-btn" tag="span">立即去购物</router-link>
         </li>
       </ul>
-    </section> -->
+    </section>-->
     <section class="order-card">
       <van-checkbox v-model="checked" checked-color="#91C95B">
         <li class="checkbox-all">
@@ -98,10 +99,11 @@
         </ul>
       </van-checkbox-group>
     </section>
-
-    <van-submit-bar :price="20000" button-text="结算" @submit="onSubmit">
-      <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
-    </van-submit-bar>
+    <section>
+      <van-submit-bar :price="20000" button-text="结算" @submit="onSubmit">
+        <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
+      </van-submit-bar>
+    </section>
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -120,6 +122,7 @@ export default {
   data() {
     return {
       columns: 1,
+      cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
           text: "Top-Pay",
@@ -176,9 +179,8 @@ export default {
 
 <style scoped lang="scss">
 .shop-cart {
-  height: 100%;
   padding: 0 16px;
-  padding-bottom: 100px;
+  margin-bottom: 100px;
   .page-header {
     display: flex;
     justify-content: space-between;
@@ -228,6 +230,38 @@ export default {
       }
     }
   }
+  /deep/ .van-checkbox {
+    padding-left: 24px;
+    .van-checkbox__label {
+      font-size: 13px;
+      color: #949497;
+    }
+  }
+  /deep/ .van-submit-bar {
+    .van-submit-bar__bar {
+      height: 44px;
+      line-height: 44px;
+    }
+    bottom: 50px;
+    .van-submit-bar__text {
+      font-size: 17px;
+      color: #333333;
+    }
+  }
+  /deep/ .van-submit-bar__price {
+    color: #d8182d;
+    font-size: 17px;
+    font-weight: 600;
+    padding-left: 5px;
+  }
+  /deep/ .van-button--danger {
+    background-color: #d8182d;
+    height: 44px;
+    line-height: 44px;
+    .van-button__text {
+      font-size: 18px;
+    }
+  }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -236,6 +270,13 @@ export default {
     //   background-size:100% 100%;
     padding: 10px;
     margin-top: 20px;
+    /deep/ .van-checkbox {
+      padding-left: 0;
+      .van-checkbox__label {
+        font-size: 13px;
+        color: #949497;
+      }
+    }
     .checkbox-all {
       .store-info {
         display: flex;
@@ -303,6 +344,29 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /deep/ .van-stepper__input {
+              width: 31px;
+              height: 20px;
+              padding: 0;
+              color: #949497;
+              font-weight: normal;
+              background-color: transparent;
+              border: 1px solid #dbdbdb;
+            }
+            /deep/ .van-stepper__plus {
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+              border-radius: 0;
+            }
+            /deep/ .van-stepper__minus {
+              border-radius: 0;
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+            }
           }
         }
       }
@@ -314,38 +378,6 @@ export default {
           font-weight: 600;
         }
       }
-    }
-  }
-
-  /deep/ .van-submit-bar {
-    .van-submit-bar__bar {
-      height: 44px;
-      line-height: 44px;
-    }
-    bottom: 50px;
-    .van-submit-bar__text {
-      font-size: 17px;
-      color: #333333;
-    }
-  }
-  /deep/ .van-submit-bar__price {
-    color: #d8182d;
-    font-size: 17px;
-    font-weight: 600;
-    padding-left: 5px;
-  }
-  /deep/ .van-button--danger {
-    background-color: #d8182d;
-    height: 44px;
-    line-height: 44px;
-    .van-button__text {
-      font-size: 18px;
-    }
-  }
-  /deep/ .van-checkbox {
-    .van-checkbox__label {
-      font-size: 13px;
-      color: #949497;
     }
   }
 }
