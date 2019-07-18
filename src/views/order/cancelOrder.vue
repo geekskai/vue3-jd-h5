@@ -30,7 +30,6 @@
               <van-radio slot="right-icon" checked-color="#91C95B" name="4" />
             </van-cell>
             <van-cell title="其他原因" clickable @click="radio = '5'">
-              <!-- <van-radio slot="right-icon" checked-color="#91C95B" name="5" /> -->
             </van-cell>
           </van-cell-group>
         </van-radio-group>
