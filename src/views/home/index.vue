@@ -721,7 +721,7 @@ export default {
       // line-height: 45px
     }
     /deep/ .van-tabs__nav {
-      background-color: transparent;
+      background-color: #EFEFF4;
       // height: 60px;
       // line-height: 60px;
     }

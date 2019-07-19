@@ -7,6 +7,7 @@
         @change="tabChange(active)"
         active-color="#FE4F70"
         inactive-color="#949497"
+        style="z-index: 100;"
       >
         <van-tabbar-item name="index" to="/index">
           <span>首页</span>
@@ -97,6 +98,7 @@ export default {
 .tabbar {
   ul {
     height: 50px;
+      
   }
 }
 </style>
