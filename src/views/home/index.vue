@@ -136,19 +136,39 @@
     </section>
 
     <div class="page-tabs">
-      <van-tabs v-model="active" animated title-active-color="#D8182D">
-        <van-tab v-for="index in tabList" :title="index" :key="index">
-
-
-
-
+      <van-tabs swipe-threshold="6" v-model="active" animated title-active-color="#D8182D">
+        <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
+          <div slot="title" class="slot-title">
+            <h3>{{item.title}}</h3>
+            <span>{{item.name}}</span>
+          </div>
+          <section class="goods-box search-wrap">
+            <!-- <span class="good-things">链猫自营</span> -->
+            <ul class="goods-content">
+              <li v-for="(item,index) in list" :key="index">
+                <router-link tag="div" to="/classify/product">
+                  <img :src="item.img" />
+                </router-link>
+                <div class="goods-layout">
+                  <div class="goods-title">{{item.name}}</div>
+                  <span class="goods-div">{{item.title}}</span>
+                  <div class="goods-desc">
+                    <span class="goods-price">
+                      <i>{{item.price}}</i>
+                    </span>
+                    <span class="add-icon" @click="addToCart($event,item)">
+                      <svg-icon icon-class="add"></svg-icon>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
         </van-tab>
       </van-tabs>
     </div>
 
-
-
-    <section class="goods-box search-wrap">
+    <!-- <section class="goods-box search-wrap">
       <span class="good-things">链猫自营</span>
       <ul class="goods-content">
         <li v-for="(item,index) in list" :key="index">
@@ -169,8 +189,8 @@
           </div>
         </li>
       </ul>
-    </section>
-    <section class="recommended-shop">
+    </section>-->
+    <!-- <section class="recommended-shop">
       <span class="shop-things">推荐店铺</span>
       <ul class="shop-content">
         <li class="shop-item">
@@ -208,10 +228,7 @@
           </div>
         </li>
       </ul>
-    </section>
-
-
-
+    </section>-->
 
     <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
@@ -234,7 +251,29 @@ export default {
   data() {
     return {
       active: "",
-      tabList: ["猜你喜欢", "潮流百搭", "3C数码", "百货生鲜", "居家日用"],
+      // tabList: ["猜你喜欢", "潮流百搭", "3C数码", "百货生鲜", "居家日用"],
+      tabList: [
+        {
+          title: "精选",
+          name: "猜你喜欢"
+        },
+        {
+          title: "时尚",
+          name: "潮流百搭"
+        },
+        {
+          title: "数码",
+          name: "3C数码"
+        },
+        {
+          title: "超市",
+          name: "百货生鲜"
+        },
+        {
+          title: "生活",
+          name: "居家日用"
+        }
+      ],
       list: [
         {
           name: "多功能料理机",
@@ -676,76 +715,150 @@ export default {
     }
   }
   .page-tabs {
-    height: 100px;
+    /deep/ .van-tabs--line {
+      padding-top: 35px;
+      // line-height: 45px
+    }
     /deep/ .van-tabs__nav {
       background-color: transparent;
+      // height: 60px;
+      // line-height: 60px;
     }
-
-
-
-    
-  }
-  .goods-box {
-    padding: 16px;
-    .good-things {
-      font-size: 18px;
-      color: #d8182d;
-      font-weight: 600;
-    }
-    .goods-content {
+    .slot-title {
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      li {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 20px;
+      span,
+      h3 {
         display: inline-block;
-        width: 165px;
-        margin-top: 10px;
-        border-radius: 8px;
-        background-color: white;
-        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-        // background: url('../../assets/image/back-show.png') no-repeat center center;
-        // background-size:100% 100%;
-        img {
-          width: 100%;
-        }
+        height: 20px;
       }
-      li:nth-of-type(even) {
-        padding-right: 0;
+    }
+    .goods-box {
+      padding: 16px;
+      .good-things {
+        font-size: 18px;
+        color: #d8182d;
+        font-weight: 600;
       }
-      .goods-layout {
-        width: 165px;
-        padding: 0 10px;
+      .goods-content {
         display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        .goods-title {
-          color: #3a3a3a;
-          font-size: 14px;
-          font-weight: 600;
-        }
-        .goods-div {
-          color: #949497;
-          font-size: 11px;
-        }
-        .goods-desc {
-          background-color: #fff;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-bottom: 10px;
-          .goods-price {
-            font-size: 14px;
-            color: #d8182d;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        li {
+          display: inline-block;
+          width: 165px;
+          margin-top: 10px;
+          border-radius: 8px;
+          background-color: white;
+          box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+          // background: url('../../assets/image/back-show.png') no-repeat center center;
+          // background-size:100% 100%;
+          img {
+            width: 100%;
           }
-          .add-icon {
+        }
+        li:nth-of-type(even) {
+          padding-right: 0;
+        }
+        .goods-layout {
+          width: 165px;
+          padding: 0 10px;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          .goods-title {
+            color: #3a3a3a;
+            font-size: 14px;
+            font-weight: 600;
+          }
+          .goods-div {
+            color: #949497;
+            font-size: 11px;
+          }
+          .goods-desc {
+            background-color: #fff;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            padding-bottom: 10px;
+            .goods-price {
+              font-size: 14px;
+              color: #d8182d;
+            }
+            .add-icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
         }
       }
     }
   }
+  // .goods-box {
+  //   padding: 16px;
+  //   .good-things {
+  //     font-size: 18px;
+  //     color: #d8182d;
+  //     font-weight: 600;
+  //   }
+  //   .goods-content {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     flex-wrap: wrap;
+  //     li {
+  //       display: inline-block;
+  //       width: 165px;
+  //       margin-top: 10px;
+  //       border-radius: 8px;
+  //       background-color: white;
+  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+  //       // background: url('../../assets/image/back-show.png') no-repeat center center;
+  //       // background-size:100% 100%;
+  //       img {
+  //         width: 100%;
+  //       }
+  //     }
+  //     li:nth-of-type(even) {
+  //       padding-right: 0;
+  //     }
+  //     .goods-layout {
+  //       width: 165px;
+  //       padding: 0 10px;
+  //       display: flex;
+  //       justify-content: flex-start;
+  //       flex-direction: column;
+  //       .goods-title {
+  //         color: #3a3a3a;
+  //         font-size: 14px;
+  //         font-weight: 600;
+  //       }
+  //       .goods-div {
+  //         color: #949497;
+  //         font-size: 11px;
+  //       }
+  //       .goods-desc {
+  //         background-color: #fff;
+  //         display: flex;
+  //         justify-content: space-between;
+  //         align-items: center;
+  //         padding-bottom: 10px;
+  //         .goods-price {
+  //           font-size: 14px;
+  //           color: #d8182d;
+  //         }
+  //         .add-icon {
+  //           display: flex;
+  //           justify-content: center;
+  //           align-items: center;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
   .recommended-shop {
     padding: 16px;
     .shop-things {
