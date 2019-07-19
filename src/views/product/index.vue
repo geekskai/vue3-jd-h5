@@ -37,6 +37,9 @@
         <van-icon name="arrow" />
       </li>
     </ul>
+    <div class="item-details">
+      <span>宝贝详情</span>
+    </div>
     <van-popup
       class="select-popup"
       v-model="show"
@@ -88,7 +91,7 @@
           <li class="popup-quantity">
             <span class="quantity-text">购买数量</span>
             <!-- <div> -->
-              <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+            <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
             <!-- </div> -->
           </li>
         </ul>
@@ -276,6 +279,15 @@ export default {
       padding-left: 16px;
       padding-top: 20px;
       color: #d8182d;
+    }
+  }
+  .item-details {
+    text-align: center;
+    font-size: 16px;
+    color: #3a3a3a;
+    margin-top: 50px;
+    span {
+      box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }
   }
   .select-popup {
