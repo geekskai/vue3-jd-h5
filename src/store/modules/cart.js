@@ -1,11 +1,20 @@
 const state = {
   items: [],
   name: 'test',
+  count:0,
+  // cartArray: JSON.parse(localStorage.getItem('cartArray')) || [],
   checkoutStatus: null
 }
 
 // getters
 const getters = {
+  // goodsCount(state) {
+  //   let count = 0
+  //   state.cartArray.forEach(it => {
+  //     count += it.count
+  //   })
+  //   return count
+  // },
   cartProducts: (state, getters, rootState) => {
     return state.items.map(({
       id,
@@ -66,6 +75,10 @@ const actions = {
 
 // mutations
 const mutations = {
+  addToCart(state) {
+    state.count++
+    console.log('=====res==>',state.count);
+  },
   pushProductToCart(state, {
     id
   }) {

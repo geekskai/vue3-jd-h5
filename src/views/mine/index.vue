@@ -146,8 +146,8 @@ export default {
 <style scoped lang="scss">
 .mine-layout {
   padding: 30px 16px;
-  min-height: 667px;
-  max-height: 812px;
+  min-height: 812px;
+  // max-height: 812px;
   padding-bottom: 50px;
   background: linear-gradient(#d8182d, #ff9351);
   .mine-header {

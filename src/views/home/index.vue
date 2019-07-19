@@ -21,84 +21,23 @@
     <section class="goods-box search-wrap">
       <span class="good-things">链猫自营</span>
       <ul class="goods-content">
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test1.png" alt />
+        <!-- <router-link tag="li" to="/classify/product"> -->
+
+        <li v-for="(item,index) in list" :key="index">
+          <img :src="item.img" />
           <div class="goods-layout">
-            <div class="goods-title">多功能料理机</div>
-            <span class="goods-div">限量套装 新品上市</span>
+            <div class="goods-title">{{item.name}}</div>
+            <span class="goods-div">{{item.title}}</span>
             <div class="goods-desc">
               <span class="goods-price">
-                <i>$</i>245
+                <i>{{item.price}}</i>
               </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              <span class="add-icon" @click="addToCart($event,item)">
+                <svg-icon icon-class="add"></svg-icon>
+              </span>
             </div>
           </div>
-        </router-link>
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test2.png" alt />
-          <div class="goods-layout">
-            <div class="goods-title">遥控制空调扇</div>
-            <span class="goods-div">限量套装 新品上市</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>$</i>245
-              </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </div>
-          </div>
-        </router-link>
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test3.png" alt />
-          <div class="goods-layout">
-            <div class="goods-title">时尚双肩包</div>
-            <span class="goods-div">限量套装 新品上市</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>$</i>245
-              </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </div>
-          </div>
-        </router-link>
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test4.png" alt />
-          <div class="goods-layout">
-            <div class="goods-title">商务行李箱</div>
-            <span class="goods-div">限量套装 新品上市</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>$</i>245
-              </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </div>
-          </div>
-        </router-link>
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test5.png" alt />
-          <div class="goods-layout">
-            <div class="goods-title">无线消噪耳机</div>
-            <span class="goods-div">限量套装 新品上市</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>$</i>245
-              </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </div>
-          </div>
-        </router-link>
-        <router-link tag="li" to="/classify/product">
-          <img src="../../assets/image/home/test6.png" alt />
-          <div class="goods-layout">
-            <div class="goods-title">无线蓝牙耳机</div>
-            <span class="goods-div">限量套装 新品上市</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>$</i>245
-              </span>
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </div>
-          </div>
-        </router-link>
+        </li>
       </ul>
     </section>
     <section class="recommended-shop">
@@ -140,6 +79,19 @@
         </li>
       </ul>
     </section>
+    <div>
+      <div class="ballWrap">
+        <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
+          <div class="ball" v-if="ball.show">
+            <li class="inner">
+              <span class="cubeic-add" @click="addToCart($event,item)">
+                <svg-icon class="add-icon" icon-class="add"></svg-icon>
+              </span>
+            </li>
+          </div>
+        </transition>
+      </div>
+    </div>
     <tabbar></tabbar>
   </div>
 </template>
@@ -149,6 +101,48 @@ export default {
   name: "home",
   data() {
     return {
+      list: [
+        {
+          name: "多功能料理机",
+          img: require("../../assets/image/home/test1.png"),
+          title: "限量套装 新品上市",
+          price: "$125"
+        },
+        {
+          name: "遥控制空调扇",
+          img: require("../../assets/image/home/test2.png"),
+          title: "限量套装 新品上市",
+          price: "$245"
+        },
+        {
+          name: "时尚双肩包",
+          img: require("../../assets/image/home/test3.png"),
+          title: "限量套装 新品上市",
+          price: "$21"
+        },
+        {
+          name: "商务行李箱",
+          img: require("../../assets/image/home/test4.png"),
+          title: "限量套装 新品上市",
+          price: "$218"
+        },
+        {
+          name: "无线消噪耳机",
+          img: require("../../assets/image/home/test5.png"),
+          title: "限量套装 新品上市",
+          price: "$218"
+        },
+        {
+          name: "无线蓝牙耳机",
+          img: require("../../assets/image/home/test6.png"),
+          title: "限量套装 新品上市",
+          price: "$218"
+        }
+      ],
+      ball: {
+        show: false,
+        el: ""
+      },
       isLogin: false,
       headerActive: false,
       images: [
@@ -221,6 +215,32 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    addToCart(event, tag) {
+      this.$store.commit("cart/addToCart", tag);
+      this.ball.show = true;
+      this.ball.el = event.target;
+    },
+    beforeEnter(el) {
+      const dom = this.ball.el;
+      const rect = dom.getBoundingClientRect();
+      const x = rect.left - window.innerWidth * 0.6;
+      const y = -(window.innerHeight - rect.top);
+      el.style.display = "block";
+      el.style.transform = `translate3d(0,${y}px,0)`;
+      const inner = el.querySelector(".inner");
+      inner.style.transform = `translate3d(${x}px,0,0)`;
+    },
+    enter(el, done) {
+      document.body.offsetHeight;
+      el.style.transform = `translate3d(0,0,0)`;
+      const inner = el.querySelector(".inner");
+      inner.style.transform = `translate3d(0,0,0)`;
+      el.addEventListener("transitionend", done);
+    },
+    afterEnter(el) {
+      this.ball.show = false;
+      el.style.display = "none";
+    },
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
     },
@@ -322,7 +342,7 @@ export default {
     padding: 16px;
     .good-things {
       font-size: 18px;
-      color: #D8182D;
+      color: #d8182d;
       font-weight: 600;
     }
     .goods-content {
@@ -348,10 +368,13 @@ export default {
       .goods-layout {
         width: 165px;
         padding: 0 10px;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
         .goods-title {
           color: #3a3a3a;
           font-size: 14px;
-          font-weight: 700;
+          font-weight: 600;
         }
         .goods-div {
           color: #949497;
@@ -362,10 +385,15 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding-bottom: 12px;
+          padding-bottom: 10px;
           .goods-price {
             font-size: 14px;
-            color: #D8182D;
+            color: #d8182d;
+          }
+          .add-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }
@@ -375,7 +403,7 @@ export default {
     padding: 16px;
     .shop-things {
       font-size: 18px;
-      color: #D8182D;
+      color: #d8182d;
       font-weight: 600;
     }
     .shop-content {
@@ -433,6 +461,21 @@ export default {
             height: 37px;
           }
         }
+      }
+    }
+  }
+  .ballWrap {
+    .ball {
+      position: fixed;
+      left: 60%;
+      bottom: 10px;
+      z-index: 1003;
+      color: red;
+      transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+      .inner {
+        width: 16px;
+        height: 16px;
+        transition: all 0.5s linear;
       }
     }
   }
