@@ -136,7 +136,7 @@
     </section>
 
     <div class="page-tabs">
-      <van-tabs swipe-threshold="6" v-model="active" animated title-active-color="#D8182D">
+      <van-tabs :swipe-threshold="5" title-inactive-color='#3a3a3a' v-model="active" animated title-active-color="#D8182D">
         <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
           <div slot="title" class="slot-title">
             <h3>{{item.title}}</h3>
