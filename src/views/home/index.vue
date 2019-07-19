@@ -61,12 +61,12 @@
               <span class="old-price">¥399</span>
             </div>
             <div class="item-content">
-              <img src="../../assets/image/home/demo1.png" />
+              <img src="../../assets/image/home/demo2.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>
             <div class="item-content">
-              <img src="../../assets/image/home/demo1.png" />
+              <img src="../../assets/image/home/demo3.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>
@@ -79,8 +79,8 @@
           </div>
           <span class="good-item">好物不贵</span>
           <div class="item-imgs">
-            <img src="../../assets/image/home/demo1.png" />
-            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo4.png" />
+            <img src="../../assets/image/home/demo5.png" />
           </div>
         </li>
       </ul>
@@ -88,22 +88,22 @@
         <li class="center-item">
           <span class="center-title">特价秒杀</span>
           <span class="center-descr">10元抢购</span>
-          <img src="../../assets/image/home/demo1.png" />
+          <img src="../../assets/image/home/demo6.png" />
         </li>
         <li class="center-item">
           <span class="center-title">品牌秒杀</span>
-          <span class="center-descr">笔记本秒杀</span>
-          <img src="../../assets/image/home/demo1.png" />
+          <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
+          <img src="../../assets/image/home/demo7.png" />
         </li>
         <li class="center-item">
           <span class="center-title">新品首发</span>
-          <span class="center-descr">小黑盒新品</span>
-          <img src="../../assets/image/home/demo1.png" />
+          <span class="center-descr" style="#FC6380">小黑盒新品</span>
+          <img src="../../assets/image/home/demo8.png" />
         </li>
         <li class="center-item">
           <span class="center-title">优品排行</span>
-          <span class="center-descr">榜上好物购</span>
-          <img src="../../assets/image/home/demo1.png" />
+          <span class="center-descr" style="color:#91C95B">榜上好物购</span>
+          <img src="../../assets/image/home/demo9.png" />
         </li>
       </ul>
       <ul class="spike-bottom">
@@ -117,8 +117,8 @@
           </div>
           <span class="belive-big">信赖大品牌</span>
           <div class="bottom-images">
-            <img src="../../assets/image/home/demo1.png" />
-            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo10.png" />
+            <img src="../../assets/image/home/demo11.png" />
           </div>
         </li>
         <li class="bottom-left">
@@ -128,8 +128,8 @@
           </div>
           <span class="belive-big">来逛个够</span>
           <div class="bottom-images">
-            <img src="../../assets/image/home/demo1.png" />
-            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo12.png" />
+            <img src="../../assets/image/home/demo13.png" />
           </div>
         </li>
       </ul>
@@ -596,6 +596,7 @@ export default {
             .new-price {
               font-size: 11px;
               color: #d8182d;
+              font-weight: 600;
             }
             .old-price {
               font-size: 9px;
