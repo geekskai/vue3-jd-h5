@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="129" height="129" viewBox="0 0 129 129">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.202" y1="0.235" x2="0.663" y2="0.635" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fedd86"/>
+      <stop offset="1" stop-color="#fbbf38"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="0.5" x2="0.665" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.376"/>
+    </linearGradient>
+  </defs>
+  <g id="Page-1" transform="translate(-0.372 -0.638)">
+    <g id="画板" transform="translate(0.372 0.638)">
+      <g id="分组1" transform="translate(0 0)">
+        <ellipse id="Oval" class="cls-1" cx="64.5" cy="64.5" rx="64.5" ry="64.5" transform="translate(0 0)"/>
+        <path id="路径" class="cls-2" d="M99.34,42.725a9.975,9.975,0,0,0-13.54,0,8.722,8.722,0,0,0-2.795,6.39A8.883,8.883,0,0,0,87.078,56.5,11.153,11.153,0,0,1,74.351,58.32a13.433,13.433,0,0,1-6.7-7.536c-.511-1.777.305-5.83.507-6.19l.061-.115a9.606,9.606,0,0,0,2.562-1.723,8.682,8.682,0,0,0,0-12.777,9.965,9.965,0,0,0-13.532,0,8.682,8.682,0,0,0,0,12.777,9.546,9.546,0,0,0,2.562,1.723l.057.115c.206.36,1.022,4.413.507,6.19a13.419,13.419,0,0,1-6.7,7.536A11.148,11.148,0,0,1,40.954,56.5a8.875,8.875,0,0,0,4.072-7.384,8.714,8.714,0,0,0-2.8-6.39,9.97,9.97,0,0,0-13.536,0,8.678,8.678,0,0,0,0,12.78,9.657,9.657,0,0,0,4.11,2.286l7.992,31.326a3.637,3.637,0,0,0,3.573,2.656h39.3a3.636,3.636,0,0,0,3.569-2.656L95.23,57.791A9.678,9.678,0,0,0,99.34,55.5a8.686,8.686,0,0,0,0-12.78" transform="translate(0 2.646)"/>
+      </g>
+    </g>
+  </g>
+</svg>

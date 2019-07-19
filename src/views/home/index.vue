@@ -5,6 +5,7 @@
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
         <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
       </div>
+      <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
     <van-swipe class="swiper_carousel" :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -18,6 +19,135 @@
         </swiper-slide>
       </swiper>
     </div>
+    <section class="home-tags">
+      <ul class="tags-content">
+        <router-link tag="li" class="tags-item" to="./search">
+          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
+          <span class="item-text">链猫精品</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./search">
+          <svg-icon class="tags-icon" icon-class="cm-area"></svg-icon>
+          <span class="item-text">CM专区</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./search">
+          <svg-icon class="tags-icon" icon-class="collar-cm"></svg-icon>
+          <span class="item-text">领CM币</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./search">
+          <svg-icon class="tags-icon" icon-class="coupon-svg"></svg-icon>
+          <span class="item-text">领券</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./search">
+          <svg-icon class="tags-icon" icon-class="chain-cat-member"></svg-icon>
+          <span class="item-text">链猫会员</span>
+        </router-link>
+      </ul>
+    </section>
+
+    <section class="spike-area">
+      <ul class="spike-top">
+        <li class="top-left">
+          <div class="item-top">
+            <span class="item-title">链猫秒杀</span>
+            <div class="time-text">
+              <span class="eight-time">8点场</span>
+              <span class="spike-time">00 : 17 : 55</span>
+            </div>
+          </div>
+          <div class="item-info">
+            <div class="item-content">
+              <img src="../../assets/image/home/demo1.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo1.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo1.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+          </div>
+        </li>
+        <li class="top-right">
+          <div class="right-header">
+            <span class="cat-spike-text">链猫秒杀</span>
+            <span class="tag-text">品质好物</span>
+          </div>
+          <span class="good-item">好物不贵</span>
+          <div class="item-imgs">
+            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo1.png" />
+          </div>
+        </li>
+      </ul>
+      <ul class="spike-center">
+        <li class="center-item">
+          <span class="center-title">特价秒杀</span>
+          <span class="center-descr">10元抢购</span>
+          <img src="../../assets/image/home/demo1.png" />
+        </li>
+        <li class="center-item">
+          <span class="center-title">品牌秒杀</span>
+          <span class="center-descr">笔记本秒杀</span>
+          <img src="../../assets/image/home/demo1.png" />
+        </li>
+        <li class="center-item">
+          <span class="center-title">新品首发</span>
+          <span class="center-descr">小黑盒新品</span>
+          <img src="../../assets/image/home/demo1.png" />
+        </li>
+        <li class="center-item">
+          <span class="center-title">优品排行</span>
+          <span class="center-descr">榜上好物购</span>
+          <img src="../../assets/image/home/demo1.png" />
+        </li>
+      </ul>
+      <ul class="spike-bottom">
+        <li class="bottom-left">
+          <div class="bottom-left-header">
+            <span class="big-buy">大牌购走</span>
+            <span class="goods-name">
+              戴尔
+              <svg-icon icon-class="right-arrow"></svg-icon>
+            </span>
+          </div>
+          <span class="belive-big">信赖大品牌</span>
+          <div class="bottom-images">
+            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo1.png" />
+          </div>
+        </li>
+        <li class="bottom-left">
+          <div class="bottom-left-header">
+            <span class="big-buy">爱逛好店</span>
+            <span class="goods-name addColor">懂你所要</span>
+          </div>
+          <span class="belive-big">来逛个够</span>
+          <div class="bottom-images">
+            <img src="../../assets/image/home/demo1.png" />
+            <img src="../../assets/image/home/demo1.png" />
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="page-tabs">
+      <van-tabs v-model="active" animated title-active-color="#D8182D">
+        <van-tab v-for="index in tabList" :title="index" :key="index">
+
+
+
+
+        </van-tab>
+      </van-tabs>
+    </div>
+
+
+
     <section class="goods-box search-wrap">
       <span class="good-things">链猫自营</span>
       <ul class="goods-content">
@@ -79,6 +209,10 @@
         </li>
       </ul>
     </section>
+
+
+
+
     <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
         <div class="ball" v-if="ball.show">
@@ -99,6 +233,8 @@ export default {
   name: "home",
   data() {
     return {
+      active: "",
+      tabList: ["猜你喜欢", "潮流百搭", "3C数码", "百货生鲜", "居家日用"],
       list: [
         {
           name: "多功能料理机",
@@ -283,7 +419,8 @@ export default {
     line-height: 40px;
     padding: 0 16px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     @include boxSizing;
     font-size: 30px;
     color: #fdc;
@@ -291,7 +428,7 @@ export default {
     .header-search {
       border-radius: 3px;
       display: flex;
-      width: 100%;
+      width: 90%;
       height: 40px;
       line-height: 40px;
       color: #232326;
@@ -340,6 +477,213 @@ export default {
       height: 90px;
       border-radius: 5px;
     }
+  }
+  .home-tags {
+    margin-top: 23px;
+    .tags-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .tags-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .tags-icon {
+          width: 43px;
+          height: 43px;
+        }
+        .item-text {
+          padding-top: 5px;
+          font-size: 11px;
+          color: #3a3a3a;
+        }
+      }
+    }
+  }
+  .spike-area {
+    margin: 12px;
+    padding-top: 5px;
+    border-radius: 4px;
+    background-color: white;
+    .spike-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      .top-left {
+        padding: 12px;
+        .item-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .item-title {
+            font-size: 14px;
+            color: #3a3a3a;
+            padding-right: 5px;
+            font-weight: 600;
+          }
+          .time-text {
+            border: 1px solid #ccc;
+            width: 110px;
+            height: 18px;
+            line-height: 18px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .eight-time {
+              font-size: 11px;
+              color: white;
+              text-align: center;
+              width: 42px;
+              background-color: #d8182d;
+            }
+            .spike-time {
+              padding-left: 2px;
+              font-size: 9px;
+              color: #dd3749;
+              text-align: center;
+            }
+          }
+        }
+        .item-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .item-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 4px;
+            .new-price {
+              font-size: 11px;
+              color: #d8182d;
+            }
+            .old-price {
+              font-size: 9px;
+              color: #949497;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+      .top-right {
+        background-color: white;
+        font-size: 11px;
+        padding: 12px;
+        border-radius: 4px;
+        flex: 1;
+        .right-header {
+          .cat-spike-text {
+            font-size: 14px;
+            color: #3a3a3a;
+            font-weight: 600;
+          }
+          .tag-text {
+            border: 1px solid #d8182d;
+            display: inline-block;
+            text-align: center;
+            margin-left: 7px;
+            border-radius: 2px;
+            color: #d8182d;
+            width: 64px;
+          }
+        }
+        .good-item {
+          color: #949497;
+          font-size: 11px;
+        }
+        .item-imgs {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          img {
+            width: 63px;
+            height: 63px;
+          }
+        }
+      }
+    }
+    .spike-center {
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .center-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .center-title {
+          font-size: 14px;
+          color: #3a3a3a;
+          font-weight: 600;
+        }
+        .center-descr {
+          font-size: 11px;
+          color: #ff9351;
+        }
+        img {
+          width: 70px;
+          height: 70px;
+        }
+      }
+    }
+    .spike-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .bottom-left {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+
+        .bottom-left-header {
+          .big-buy {
+            font-size: 14px;
+            color: #3a3a3a;
+            font-weight: 600;
+          }
+          .goods-name {
+            width: 66px;
+            height: 18px;
+            display: inline-block;
+            border-radius: 2px;
+            margin-left: 8px;
+            text-align: center;
+            border: 1px solid #d8182d;
+            font-size: 11px;
+            color: #dd3749;
+            .svg-icon {
+              width: 4px;
+              height: 7px;
+            }
+          }
+          .addColor {
+            color: #dbbaff;
+            border: 1px solid #dbbaff;
+          }
+        }
+        .belive-big {
+          font-size: 11px;
+          color: #949497;
+        }
+        .bottom-images {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+    }
+  }
+  .page-tabs {
+    height: 100px;
+    /deep/ .van-tabs__nav {
+      background-color: transparent;
+    }
+
+
+
+    
   }
   .goods-box {
     padding: 16px;
@@ -467,6 +811,7 @@ export default {
       }
     }
   }
+
   .ballWrap {
     .ball {
       position: fixed;
