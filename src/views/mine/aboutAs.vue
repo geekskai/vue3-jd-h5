@@ -40,14 +40,14 @@ export default {
 <style scoped lang="scss">
 .about-as {
   min-height: 100vh;
-    background-color: #fff;
+  background-color: #fff;
   .page-header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
     .btn-left {
-      position: absolute;
+      position: fixed;
       left: 20px;
     }
     .header-content {

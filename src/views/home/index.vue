@@ -79,18 +79,16 @@
         </li>
       </ul>
     </section>
-    <div>
-      <div class="ballWrap">
-        <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
-          <div class="ball" v-if="ball.show">
-            <li class="inner">
-              <span class="cubeic-add" @click="addToCart($event,item)">
-                <svg-icon class="add-icon" icon-class="add"></svg-icon>
-              </span>
-            </li>
-          </div>
-        </transition>
-      </div>
+    <div class="ballWrap">
+      <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
+        <div class="ball" v-if="ball.show">
+          <li class="inner">
+            <span class="cubeic-add" @click="addToCart($event,item)">
+              <svg-icon class="add-icon" icon-class="add"></svg-icon>
+            </span>
+          </li>
+        </div>
+      </transition>
     </div>
     <tabbar></tabbar>
   </div>
@@ -215,6 +213,9 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    // handleToProduct() {
+    //   this.$router.push("/classify/product");
+    // },
     addToCart(event, tag) {
       this.$store.commit("cart/addToCart", tag);
       this.ball.show = true;
@@ -270,7 +271,9 @@ export default {
 .home {
   .home-header {
     &.active {
-      top: 10px;
+      display: none;
+      // top: 10px;
+      // background-color: #efeff4;
     }
     position: fixed;
     left: 0;

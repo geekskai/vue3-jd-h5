@@ -91,7 +91,7 @@ export default {
     padding-bottom: 29px;
     position: relative;
     .btn-left {
-      position: absolute;
+      position: fixed;
       left: 16px;
       background-color: #efeff4;
       width: 24px;

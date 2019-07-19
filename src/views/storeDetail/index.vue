@@ -198,7 +198,7 @@ export default {
     position: relative;
     background-color: white;
     .btn-left {
-      position: absolute;
+      position: fixed;
       left: 16px;
       background-color: #efeff4;
       width: 24px;
