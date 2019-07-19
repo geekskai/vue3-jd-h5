@@ -13,4 +13,7 @@ const store = new Vuex.Store({
   },
   strict: process.env.NODE_ENV !== 'production'
 })
+// store.subscribe((mutations, state) => {
+//   localStorage.setItem('cartArray', JSON.stringify(state.cartArray))
+// })
 export default store

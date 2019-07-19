@@ -186,7 +186,7 @@ export default {
     width: 100%;
     padding: 0 16px;
     padding-top: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     /deep/ .van-button--danger {
       background-color: #D8182D;
       line-height: 44px;

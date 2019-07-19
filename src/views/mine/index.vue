@@ -44,7 +44,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/mine/appealRecord" class="option-item" tag="li">
+        <router-link to="/order/appealRecord" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-complaint"></svg-icon>
             <span>我的申诉</span>
@@ -145,15 +145,16 @@ export default {
 
 <style scoped lang="scss">
 .mine-layout {
-  padding: 16px;
+  padding: 30px 16px;
   min-height: 812px;
+  // max-height: 812px;
+  padding-bottom: 50px;
   background: linear-gradient(#d8182d, #ff9351);
   .mine-header {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 14px;
     padding-bottom: 30px;
     .header-img {
       width: 70px;

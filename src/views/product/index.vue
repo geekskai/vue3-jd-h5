@@ -27,7 +27,11 @@
         </div>
       </li>
       <li class="item-info">
-        <van-field label="发货地" disabled placeholder="福建泉州 " />
+        <van-field label="发货地" disabled placeholder="福建泉州 ">
+          <span slot="left-icon" class="anchor-point">
+            <svg-icon icon-class="anchor-point"></svg-icon>
+          </span>
+        </van-field>
       </li>
       <li class="item-info">
         <van-field label="品牌" disabled placeholder="CHANEL" />
@@ -36,16 +40,16 @@
         <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
         <van-icon name="arrow" />
       </li>
-      <!-- <li class="product-detail">
-        <span>商品详情</span>
-      </li>-->
     </ul>
+    <div class="item-details">
+      <span>宝贝详情</span>
+    </div>
     <van-popup
       class="select-popup"
       v-model="show"
       round
       position="bottom"
-      :style="{ height: '60%' }"
+      :style="{ height: '70%' }"
     >
       <section class="popup-content">
         <span class="close-icon" @click="show = false">
@@ -59,12 +63,40 @@
             <span class="item-colors">选择颜色；尺码</span>
           </li>
         </ul>
-         <ul class="popup-center">
-          <li>
-            <span>颜色</span>
-            <div>
-              <van-button plain hairline size="small" icon="https://img.yzcdn.cn/vant/logo.png" type="danger">褐色</van-button>
+        <ul class="popup-center">
+          <li class="popup-color">
+            <span class="color-text">颜色</span>
+            <div class="color-list">
+              <span
+                class="color-tag"
+                :class="{active:item.selected}"
+                v-for="(item,index) in listData"
+                :key="index"
+                @click="handleSelected(item)"
+              >
+                <img :src="item.imgSrc" />
+                <span>{{item.colorName}}</span>
+              </span>
             </div>
+          </li>
+          <li class="popup-size">
+            <span class="size-text">尺码</span>
+            <div class="size-list">
+              <span class="size-item">S</span>
+              <span class="size-item">M</span>
+              <span class="size-item">L</span>
+              <span class="size-item">XL</span>
+              <span class="size-item">4XL</span>
+              <span class="size-item">5XL</span>
+              <span class="size-item">6XL</span>
+              <span class="size-item">7XL</span>
+            </div>
+          </li>
+          <li class="popup-quantity">
+            <span class="quantity-text">购买数量</span>
+            <!-- <div> -->
+            <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+            <!-- </div> -->
           </li>
         </ul>
       </section>
@@ -86,10 +118,38 @@
 
 <script>
 export default {
-  name: "",
+  name: "product",
   data() {
     return {
       show: false,
+      stepperValue: "",
+      listData: [
+        {
+          imgSrc: require("../../assets/image/home/store3.png"),
+          colorName: "黑色",
+          selected: false
+        },
+        {
+          imgSrc: require("../../assets/image/home/store3.png"),
+          colorName: "黑色",
+          selected: false
+        },
+        {
+          imgSrc: require("../../assets/image/home/store3.png"),
+          colorName: "黑色",
+          selected: false
+        },
+        {
+          imgSrc: require("../../assets/image/home/store3.png"),
+          colorName: "黑色",
+          selected: false
+        },
+        {
+          imgSrc: require("../../assets/image/home/store3.png"),
+          colorName: "黑色",
+          selected: false
+        }
+      ],
       imgSrc: require("../../assets/image/home/test2.png"),
       images: [
         {
@@ -113,6 +173,12 @@ export default {
   },
   created() {},
   methods: {
+    handleSelected(item) {
+      item.selected = true;
+      this.listData.map(it => {
+        it == item ? (it.selected = true) : (it.selected = false);
+      });
+    },
     handleAddToCart() {
       this.$toast.success({
         message: "添加成功~",
@@ -145,7 +211,7 @@ export default {
     align-items: center;
   }
   .lazy_img {
-    height: 355px;
+    height: 350px;
     width: 100%;
   }
   .btn-left {
@@ -165,7 +231,7 @@ export default {
       justify-content: space-between;
       padding-top: 4px;
       .product-price {
-        color: #D8182D;
+        color: #d8182d;
         font-weight: 600;
         padding-left: 16px;
       }
@@ -180,10 +246,10 @@ export default {
       justify-content: space-between;
       margin-top: 10px;
       margin-bottom: 10px;
-       /deep/ .van-button--danger {
-      background-color: #D8182D;
-      border: 1px solid #D8182D;
-    }
+      /deep/ .van-button--danger {
+        background-color: #d8182d;
+        border: 1px solid #d8182d;
+      }
       .store-detail {
         padding-left: 16px;
         padding-top: 16px;
@@ -212,11 +278,29 @@ export default {
       justify-content: center;
       align-items: center;
       width: 95%;
+      position: relative;
+      .anchor-point {
+        position: absolute;
+        left: 90px;
+        .svg-icon {
+          width: 15px;
+          height: 15px;
+        }
+      }
     }
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #D8182D;
+      color: #d8182d;
+    }
+  }
+  .item-details {
+    text-align: center;
+    font-size: 16px;
+    color: #3a3a3a;
+    padding-top: 50px;
+    span {
+      box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }
   }
   .select-popup {
@@ -248,7 +332,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #D8182D;
+            color: #d8182d;
             font-size: 17px;
             font-weight: 600;
           }
@@ -258,9 +342,107 @@ export default {
           height: 100px;
         }
       }
-      .popup-center{
-        /deep/ .van-button__icon{
-          vertical-align: middle;
+      .popup-center {
+        .popup-color {
+          .color-text {
+            font-size: 14px;
+            color: #3a3a3a;
+            font-weight: 600;
+            padding-bottom: 10px;
+          }
+          .color-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .color-tag {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              width: 75px;
+              height: 29px;
+              font-size: 14px;
+              background-color: #efeff4;
+              border: 1px solid #efeff4;
+              border-radius: 4px;
+              margin-right: 16px;
+              padding-right: 10px;
+              margin-top: 10px;
+              img {
+                padding-right: 10px;
+                padding-left: 2px;
+                width: 24px;
+                height: 24px;
+              }
+              span {
+                min-width: 30px;
+              }
+            }
+            .color-tag.active {
+              border: 1px solid #d8182d;
+              background-color: white;
+              color: #d8182d;
+            }
+          }
+        }
+        .popup-size {
+          .size-text {
+            font-size: 14px;
+            color: #3a3a3a;
+            font-weight: 600;
+            padding-bottom: 10px;
+          }
+          .size-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            .size-item {
+              font-size: 13px;
+              width: 42px;
+              height: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 4px;
+              background-color: #efeff4;
+              margin-right: 16px;
+              margin-top: 10px;
+            }
+          }
+        }
+        .popup-quantity {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 32px;
+          .quantity-text {
+            font-weight: 600;
+            font-size: 14px;
+            color: #3a3a3a;
+          }
+          /deep/ .van-stepper__input {
+            width: 31px;
+            height: 20px;
+            padding: 0;
+            color: #949497;
+            font-weight: normal;
+            background-color: transparent;
+            border: 1px solid #dbdbdb;
+          }
+          /deep/ .van-stepper__plus {
+            border: 1px solid #dbdbdb;
+            background-color: transparent;
+            width: 16px;
+            height: 22px;
+            border-radius: 0;
+          }
+          /deep/ .van-stepper__minus {
+            border-radius: 0;
+            border: 1px solid #dbdbdb;
+            background-color: transparent;
+            width: 16px;
+            height: 22px;
+          }
         }
       }
     }
@@ -270,16 +452,16 @@ export default {
   }
   .product-footer {
     /deep/ .van-button--warning {
-      background-color: #F3CA43;
-      border: 1px solid #F3CA43;
+      background-color: #f3ca43;
+      border: 1px solid #f3ca43;
       height: 44px;
       line-height: 44px;
     }
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #D8182D;
-      border: 1px solid #D8182D;
+      background-color: #d8182d;
+      border: 1px solid #d8182d;
     }
   }
 }

@@ -158,7 +158,7 @@ export default {
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(title) {
-      this.$router.push("/recommend");
+      this.$router.push("/classify/recommend");
     }
   },
   mounted() {
@@ -247,9 +247,9 @@ export default {
           color: #949497;
           flex-direction: column;
           &.active {
-            color: #D8182D;
+            color: #d8182d;
             border-left: 3px solid transparent;
-            border-color: #D8182D;
+            border-color: #d8182d;
             background: #fff;
           }
         }
@@ -260,6 +260,7 @@ export default {
       height: 100%;
       padding: 0 20px;
       background: #fff;
+      padding-bottom: 30px;
       @include boxSizing;
       .swiper-container {
         width: 100%;
@@ -297,53 +298,5 @@ export default {
       }
     }
   }
-
-  // .munu_all {
-  //   display: flex;
-  //   .meun_classify {
-  //     width: 25%;
-  //     text-align: center;
-  //     flex-wrap: wrap;
-  //     li {
-  //       height: 50px;
-  //       line-height: 50px;
-  //       border-bottom: 1px solid #ffffff;
-  //       color: #333;
-  //       background-color: #f8f8f8;
-  //       font-size: 14px;
-  //     }
-  //     .active {
-  //       background-color: #ffffff;
-  //       color: #e93b3d;
-  //     }
-  //   }
-  //   .classify_content {
-  //     text-align: center;
-  //     width: 75%;
-  //     ul {
-  //       background-color: #ffffff;
-  //       display: flex;
-  //       flex-wrap: wrap;
-
-  //       li {
-  //         width: 50%;
-  //         justify-content: center;
-  //         align-items: center;
-  //         font-size: 15px;
-
-  //         img {
-  //           width: 80px;
-  //           height: 80px;
-  //         }
-
-  //         .cubeic-add,
-  //         .cubeic-remove {
-  //           font-size: 18px;
-  //           color: red;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 }
 </style>

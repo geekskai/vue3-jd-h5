@@ -1,5 +1,5 @@
 <template>
-  <!--  待发货 -->
+  <!--  待收货 -->
   <div class="pending-receipt">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">

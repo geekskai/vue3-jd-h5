@@ -1,1 +1,23 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1562641095581" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="62179" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M403.2 441.6c-19.2 0-38.4 19.2-38.4 32 0 19.2 19.2 38.4 38.4 38.4s32-12.8 32-32-19.2-38.4-32-38.4z m224 0c-19.2 0-32 12.8-32 32-6.4 19.2 12.8 38.4 32 38.4s32-12.8 32-32-19.2-38.4-32-38.4z m-115.2 0c-19.2 0-32 12.8-32 32s12.8 38.4 32 38.4 32-12.8 32-32-12.8-38.4-32-38.4zM512 0C230.4 0 0 230.4 0 512s230.4 512 512 512 512-230.4 512-512S793.6 0 512 0z m224 646.4c0 25.6-19.2 44.8-44.8 44.8h-224C403.2 761.6 288 736 288 736c57.6-12.8 64-44.8 64-44.8h-19.2c-25.6 0-44.8-19.2-44.8-44.8v-313.6c0-25.6 19.2-44.8 44.8-44.8h358.4c25.6 0 44.8 19.2 44.8 44.8v313.6z" fill="#FFE100" p-id="62180"></path></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>订单信息 copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="订单详情-待收货" transform="translate(-108.000000, -1470.000000)" fill-rule="nonzero">
+            <g id="Group" transform="translate(48.000000, 1006.000000)">
+                <g id="分组-7" transform="translate(60.000000, 464.000000)">
+                    <g id="订单信息-copy-3">
+                        <g id="买家留言">
+                            <circle id="椭圆形-copy-5" fill="#F3CA43" cx="36" cy="36" r="36"></circle>
+                            <path d="M36.5,57.1035636 L43.2717319,48.5 L53,48.5 C55.4852814,48.5 57.5,46.4852814 57.5,44 L57.5,25 C57.5,22.5147186 55.4852814,20.5 53,20.5 L20,20.5 C17.5147186,20.5 15.5,22.5147186 15.5,25 L15.5,44 C15.5,46.4852814 17.5147186,48.5 20,48.5 L29.7282681,48.5 L36.5,57.1035636 Z" id="矩形" stroke="#FFFFFF" stroke-width="3"></path>
+                            <circle id="椭圆形" fill="#FFFFFF" cx="25.5" cy="34.5" r="2.5"></circle>
+                            <circle id="椭圆形-copy" fill="#FFFFFF" cx="36.5" cy="34.5" r="2.5"></circle>
+                            <circle id="椭圆形-copy-2" fill="#FFFFFF" cx="47.5" cy="34.5" r="2.5"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

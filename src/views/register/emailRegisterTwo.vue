@@ -98,6 +98,9 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
+    /deep/ .van-hairline--top-bottom::after{
+        display: none;
+    }
     /deep/ .temp-empty {
       display: none;
     }
@@ -106,6 +109,8 @@ export default {
     }
     /deep/ .van-cell {
       background-color: transparent;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   .login-register-btns {

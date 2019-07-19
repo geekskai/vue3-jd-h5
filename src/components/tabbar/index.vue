@@ -7,6 +7,7 @@
         @change="tabChange(active)"
         active-color="#FE4F70"
         inactive-color="#949497"
+        style="z-index: 100;"
       >
         <van-tabbar-item name="index" to="/index">
           <span>首页</span>
@@ -14,7 +15,7 @@
             slot="icon"
             slot-scope="props"
             :src="props.active ? icon_home.active : icon_home.normal"
-          >
+          />
         </van-tabbar-item>
         <van-tabbar-item name="classify" to="/classify">
           <span>分类</span>
@@ -22,15 +23,16 @@
             slot="icon"
             slot-scope="props"
             :src="props.active ? icon_classify.active : icon_classify.normal"
-          >
+          />
         </van-tabbar-item>
-        <van-tabbar-item name="shopCart" to="/shopCart">
+        <van-tabbar-item name="shopCart" to="/shopCart" :info="count">
+          <!-- <van-tabbar-item name="shopCart" to="/shopCart"> -->
           <span>购物车</span>
           <img
             slot="icon"
             slot-scope="props"
             :src="props.active ? icon_cart.active : icon_cart.normal"
-          >
+          />
         </van-tabbar-item>
         <van-tabbar-item name="mine" to="/mine">
           <span>我</span>
@@ -38,7 +40,7 @@
             slot="icon"
             slot-scope="props"
             :src="props.active ? icon_mine.active : icon_mine.normal"
-          >
+          />
         </van-tabbar-item>
       </van-tabbar>
     </ul>
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "tabbar",
   data() {
@@ -78,6 +81,11 @@ export default {
       this
     );
   },
+  computed: {
+    ...mapState({
+      count: state => state.cart.count
+    })
+  },
   methods: {
     tabChange(active) {
       console.log("==active=====>", active);
@@ -90,6 +98,7 @@ export default {
 .tabbar {
   ul {
     height: 50px;
+      
   }
 }
 </style>

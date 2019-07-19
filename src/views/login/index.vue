@@ -120,7 +120,10 @@ export default {
   }
   .login-register-btns {
     text-align: center;
-    padding-top: 35px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
     .login-btn {
       display: inline-block;
       width: 150px;
