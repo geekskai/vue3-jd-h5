@@ -27,7 +27,11 @@
         </div>
       </li>
       <li class="item-info">
-        <van-field label="发货地" disabled placeholder="福建泉州 " />
+        <van-field label="发货地" disabled placeholder="福建泉州 ">
+          <span slot="left-icon" class="anchor-point">
+            <svg-icon icon-class="anchor-point"></svg-icon>
+          </span>
+        </van-field>
       </li>
       <li class="item-info">
         <van-field label="品牌" disabled placeholder="CHANEL" />
@@ -207,7 +211,7 @@ export default {
     align-items: center;
   }
   .lazy_img {
-    height: 355px;
+    height: 350px;
     width: 100%;
   }
   .btn-left {
@@ -274,6 +278,15 @@ export default {
       justify-content: center;
       align-items: center;
       width: 95%;
+      position: relative;
+      .anchor-point {
+        position: absolute;
+        left: 90px;
+        .svg-icon {
+          width: 15px;
+          height: 15px;
+        }
+      }
     }
     .product-detail {
       padding-left: 16px;
@@ -285,7 +298,7 @@ export default {
     text-align: center;
     font-size: 16px;
     color: #3a3a3a;
-    margin-top: 50px;
+    padding-top: 50px;
     span {
       box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }
