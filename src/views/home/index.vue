@@ -21,10 +21,10 @@
     <section class="goods-box search-wrap">
       <span class="good-things">链猫自营</span>
       <ul class="goods-content">
-        <!-- <router-link tag="li" to="/classify/product"> -->
-
         <li v-for="(item,index) in list" :key="index">
-          <img :src="item.img" />
+          <router-link tag="div" to="/classify/product">
+            <img :src="item.img" />
+          </router-link>
           <div class="goods-layout">
             <div class="goods-title">{{item.name}}</div>
             <span class="goods-div">{{item.title}}</span>
