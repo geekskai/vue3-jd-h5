@@ -3,7 +3,7 @@
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E9%B2%B8%E5%88%9B%E7%A7%91%E6%8A%80-%E5%95%86%E5%AE%B6%E5%95%86%E5%9F%8E-green.svg" alt="后台项目"></a>
   <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
-  <a href="https://gitee.com/gankai/jckj-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E7%A0%81%E4%BA%91-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80-orange.svg" alt="码云"></a>
+  
   <a href="#"><img src="https://img.shields.io/badge/npm-6.9.0-green.svg" alt="npm"></a>
  <a href="https://codecov.io/gh/GitHubGanKai/vue-jd-h5">
   <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
@@ -14,6 +14,8 @@
 ## 项目介绍
 
 `whale-mall-h5`是一个电商H5页面前端项目，基于Vue+Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
+
+[demo地址](https://githubgankai.github.io/vue-jd-h5/index)
 
 ### 技术选型
 
