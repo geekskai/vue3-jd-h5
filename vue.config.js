@@ -5,6 +5,9 @@ function resolve(dir) {
 }
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/vue-jd-h5/'
+    : '/',
   lintOnSave: false,
   chainWebpack: config => {
     config.module.rules.delete("svg"); //重点:删除默认配置中处理svg,
