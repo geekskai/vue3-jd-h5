@@ -1,12 +1,12 @@
 <template>
-  <div class="premium-ranking">
+  <div class="special-spike">
     <header class="page-header">
       <span class="return-btn" @click="$router.go(-1)">
         <svg-icon icon-class="transparent-btn"></svg-icon>
       </span>
-      <div class="header-content">优品排行</div>
+      <div class="header-content">特价秒杀</div>
       <span class="share-btn">
-        <svg-icon icon-class="share-btn"></svg-icon>
+        <svg-icon icon-class="bell-icon"></svg-icon>
       </span>
     </header>
 
@@ -15,6 +15,7 @@
         v-model="active"
         swipeable
         color="#fff"
+          :swipe-threshold="5"
         title-inactive-color="#FEFFFE"
         title-active-color="#FEFFFE"
         background="transparent"
@@ -151,11 +152,11 @@
 
 <script>
 export default {
-  name: "PremiumRanking", // 优品排行
+  name: "SpecialSpike", // 特价秒杀
   data() {
     return {
       active: "1",
-      tabList: ["3C数码", "进口食品", "生活电器", "家居软饰", "平板电视"]
+      tabList: ["秒杀", "疯抢", "生活电器", "家居软饰", "平板电视"]
     };
   },
   created() {},
@@ -164,9 +165,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.premium-ranking {
+.special-spike {
   background-color: #efefef;
-  //   height: 100%;
   min-height: 812px;
   padding: 0 16px;
   .page-header {
@@ -174,7 +174,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(#874bfe, #efefef);
+    background: linear-gradient(#ff9351, #efefef);
     height: 250px;
     display: flex;
     justify-content: flex-start;

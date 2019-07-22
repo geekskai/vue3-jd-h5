@@ -1,6 +1,6 @@
 //   优品排行
 export default [{
-  path: 'premiumRanking',
+  path: '/premiumRanking',
   name: 'premiumRanking',
   meta: {
     index: 2
