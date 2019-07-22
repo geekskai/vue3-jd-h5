@@ -95,7 +95,7 @@
           <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
           <img src="../../assets/image/home/demo7.png" />
         </router-link>
-        <router-link class="center-item" to="/premiumRanking" tag="li">
+        <router-link class="center-item" to="/newProductLaunch" tag="li">
           <span class="center-title">新品首发</span>
           <span class="center-descr" style="#FC6380">小黑盒新品</span>
           <img src="../../assets/image/home/demo8.png" />

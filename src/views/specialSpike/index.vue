@@ -10,7 +10,7 @@
       </span>
     </header>
 
-    <section class="page-content">
+    <ul class="page-content">
       <van-tabs
         v-model="active"
         swipeable
@@ -23,6 +23,46 @@
         :border="false"
       >
         <van-tab v-for="index in tabList" :title="index" :key="index">
+          <section class="header-card">
+            <div class="card-top">
+              <div class="top-left">
+                <span class="special-spike-text">特价秒杀 |</span>
+                <i class="low-sale">超低价特卖</i>
+              </div>
+              <div class="top-right">
+                <label class="only-left">仅剩</label>
+                <span>15:40:37</span>
+              </div>
+            </div>
+
+            <ul class="card-content">
+              <li class="item-content">
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
+                <svg-icon icon-class="processbar"></svg-icon>
+                <div class="prices-content">
+                  <span class="real-price">¥988</span>
+                  <i class="false-price">¥1199</i>
+                </div>
+              </li>
+              <li class="item-content">
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
+                <svg-icon icon-class="processbar"></svg-icon>
+                <div class="prices-content">
+                  <span class="real-price">¥988</span>
+                  <i class="false-price">¥1199</i>
+                </div>
+              </li>
+              <li class="item-content">
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
+                <svg-icon icon-class="processbar"></svg-icon>
+                <div class="prices-content">
+                  <span class="real-price">¥988</span>
+                  <i class="false-price">¥1199</i>
+                </div>
+              </li>
+            </ul>
+          </section>
+
           <ul class="list-item">
             <li class="card-item">
               <div class="card-img">
@@ -147,7 +187,7 @@
           </ul>
         </van-tab>
       </van-tabs>
-    </section>
+    </ul>
   </div>
 </template>
 
@@ -205,13 +245,73 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    // /deep/ .van-tabs--line {
-    //   padding-top: 60px;
-    // }
+    /deep/ .van-tabs--line{
+      padding-top: 60px;
+    }
+    .header-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+      .card-top {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #ee2a2a;
+        .top-left {
+          .special-spike-text {
+            font-size: 17px;
+          }
+          .low-sale {
+            font-size: 11px;
+          }
+        }
+        .top-right {
+          .only-left {
+            font-size: 11px;
+          }
+        }
+      }
+      .card-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        .item-content {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-direction: column;
+          padding-left: 5px;
+          .item-img {
+            width: 100px;
+            height: 105px;
+            display: inline-block;
+          }
+          .svg-icon {
+            width: 70px;
+            height: 6px;
+            padding: 10px 0;
+          }
+          .prices-content {
+            font-size: 11px;
+            .real-price {
+              color: #d8182d;
+              font-weight: 600;
+            }
+            .false-price {
+              text-decoration: line-through;
+              color: #949497;
+              padding-left: 6px;
+            }
+          }
+        }
+      }
+    }
     .list-item {
       .card-item {
         margin: 20px auto;
-        background-color: white;
+        background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
         display: flex;

@@ -167,7 +167,6 @@ export default {
 <style scoped lang="scss">
 .premium-ranking {
   background-color: #efefef;
-  //   height: 100%;
   min-height: 812px;
   padding: 0 16px;
   .page-header {
@@ -205,9 +204,6 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    // /deep/ .van-tabs--line {
-    //   padding-top: 60px;
-    // }
     .list-item {
       .card-item {
         margin: 20px auto;
