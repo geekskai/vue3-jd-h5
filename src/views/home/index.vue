@@ -7,12 +7,12 @@
       </div>
       <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
-    <van-swipe class="swiper_carousel" :autoplay="3000">
+    <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators='false'>
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-    <div class="swiperCls">
+    <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
@@ -236,7 +236,7 @@
           </div>
         </li>
       </ul>
-    </section> -->
+    </section>-->
 
     <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
@@ -328,7 +328,6 @@ export default {
       headerActive: false,
       images: [
         {
-          // imgUrl: require("../../assets/image/home/huawei1.png"),
           imgUrl: require("../../assets/image/home/banner5.jpg"),
           categoryId: 100018
         },
@@ -503,14 +502,14 @@ export default {
     }
   }
 
-  .swiper_carousel {
+  .swiper-carousel {
     padding-bottom: 10px;
     .lazy_img {
       width: 100%;
       height: 250px;
     }
   }
-  .swiperCls {
+  .swiper-cls {
     background-color: #efeff4;
     .swiper-slide {
       padding-left: 16px;
