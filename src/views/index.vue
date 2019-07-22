@@ -1,8 +1,8 @@
 <template>
   <div class="index">
-    <transition :name="transitionName">
-      <router-view class="router-view" />
-    </transition>
+    <!-- <transition :name="transitionName"> -->
+    <router-view class="router-view" />
+    <!-- </transition> -->
   </div>
 </template>
 
