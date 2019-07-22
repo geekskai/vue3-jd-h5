@@ -15,7 +15,8 @@
         v-model="active"
         swipeable
         color="#fff"
-          :swipe-threshold="5"
+        animated
+        :swipe-threshold="5"
         title-inactive-color="#FEFFFE"
         title-active-color="#FEFFFE"
         background="transparent"

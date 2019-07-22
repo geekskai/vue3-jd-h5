@@ -20,6 +20,7 @@
         title-active-color="#FEFFFE"
         background="transparent"
         :border="false"
+        animated
       >
         <van-tab v-for="index in tabList" :title="index" :key="index">
           <section class="recommended-shop">
