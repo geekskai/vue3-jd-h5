@@ -9,11 +9,12 @@
         <span class="search-btn">
           <svg-icon class="search-icon" icon-class="search"></svg-icon>
         </span>
-        <span class="therr-point-icon">
+        <span class="therr-point-icon" v-click-outside="hidden" @click="handleShow">
           <svg-icon icon-class="therr-point"></svg-icon>
         </span>
       </div>
     </header>
+    <drop-list :config="configData" ref="droplist"></drop-list>
 
     <ul class="page-tabs">
       <van-tabs
@@ -67,11 +68,62 @@
 </template>
 
 <script>
+import ClickOutside from "vue-click-outside";
 export default {
-  name: "chainCatSpike", // 链猫秒杀
+  name: "chainCatSpike", // 链猫秒杀,
+  directives: {
+    ClickOutside
+  },
   data() {
     return {
       active: "1",
+      configData: {
+        position: {
+          // 设置显示位置，position
+          top: "50px",
+          right: "8px",
+          bottom: "",
+          left: ""
+        },
+        width: "25%", // 设置宽度
+        list: [
+          // 设置下拉列表数据和对应的点击事件
+          { text: "修改资料", action: this.updateUserInfo },
+          { text: "分享", action: this.updateTheme },
+          { text: "我的关注", action: this.signOut }
+        ],
+        defaultData: [
+          {
+            text: 1997,
+            value: 1997
+          }
+        ],
+        pickData: {
+          // 第一列的数据结构
+          data1: [
+            {
+              text: 1999,
+              value: 1999
+            },
+            {
+              text: 1998,
+              value: 1998
+            },
+            {
+              text: 1997,
+              value: 1997
+            },
+            {
+              text: 1996,
+              value: 1996
+            },
+            {
+              text: 2001,
+              value: 2001
+            }
+          ]
+        }
+      },
       cardList: [
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
@@ -195,7 +247,17 @@ export default {
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    updateUserInfo() {},
+    updateTheme() {},
+    signOut() {},
+    hidden() {
+      this.$refs.droplist.hidden();
+    },
+    handleShow() {
+      this.$refs.droplist.show();
+    }
+  }
 };
 </script>
 

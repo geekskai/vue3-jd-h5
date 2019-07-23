@@ -89,37 +89,7 @@ export default {
     return {
       show: false,
       columns: 1,
-      defaultData: [
-        {
-          text: 1997,
-          value: 1997
-        }
-      ],
-      pickData: {
-        // 第一列的数据结构
-        data1: [
-          {
-            text: 1999,
-            value: 1999
-          },
-          {
-            text: 1998,
-            value: 1998
-          },
-          {
-            text: 1997,
-            value: 1997
-          },
-          {
-            text: 1996,
-            value: 1996
-          },
-          {
-            text: 2001,
-            value: 2001
-          }
-        ]
-      }
+     
     };
   },
   created() {},
@@ -128,6 +98,7 @@ export default {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
+   
     close() {
       this.show = false;
     },
