@@ -1,5 +1,5 @@
 <template>
-  <div class="new-product-launch">
+  <ul class="new-product-launch">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
@@ -18,7 +18,7 @@
       </swiper>
     </div>
 
-    <div class="page-tabs">
+    <ul class="page-tabs">
       <van-tabs
         :swipe-threshold="4"
         title-inactive-color="#3a3a3a"
@@ -30,37 +30,32 @@
         :line-width="0"
       >
         <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
-          <!-- <div class="slot-box"> -->
           <div class="slot-title" slot="title">
             <p class="tab-title">{{item.title}}</p>
             <span class="tab-name">{{item.name}}</span>
           </div>
-          <!-- </div> -->
-          <section class="goods-box search-wrap">
-            <ul class="goods-content">
-              <li v-for="(item,index) in list" :key="index">
-                <router-link tag="div" to="/classify/product">
-                  <img :src="item.img" />
-                </router-link>
-                <div class="goods-layout">
-                  <div class="goods-title">{{item.name}}</div>
-                  <span class="goods-div">{{item.title}}</span>
-                  <div class="goods-desc">
-                    <span class="goods-price">
-                      <i>{{item.price}}</i>
-                    </span>
-                    <span class="add-icon" @click="addToCart($event,item)">
-                      <svg-icon icon-class="add"></svg-icon>
-                    </span>
-                  </div>
-                </div>
-              </li>
+
+          <main class="main-box">
+            <ul class="card-box">
+              <aside>
+                <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
+              </aside>
+              <div class="card-right">
+                <li>
+                  <cite>【玻尿酸巨补水新款面膜】控…</cite>
+                  <small>迪丽热巴同款</small>
+                </li>
+                <li>
+                  <b>￥200</b>
+                  <button>去抢购</button>
+                </li>
+              </div>
             </ul>
-          </section>
+          </main>
         </van-tab>
       </van-tabs>
-    </div>
-  </div>
+    </ul>
+  </ul>
 </template>
 
 <script>
@@ -222,6 +217,7 @@ export default {
     }
   }
   .page-tabs {
+    padding-top: 10px;
     /deep/ .van-tabs--line .van-tabs__wrap {
       height: 50px;
     }
@@ -255,68 +251,22 @@ export default {
         display: inline-block;
       }
     }
-
-    .goods-box {
-      padding: 16px;
-      .good-things {
-        font-size: 18px;
-        color: #d8182d;
-        font-weight: 600;
-      }
-      .goods-content {
+    .main-box {
+      .card-box {
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
-        li {
+        align-items: center;
+        .card-img {
+          width: 110px;
+          height: 110px;
           display: inline-block;
-          width: 165px;
-          margin-top: 10px;
-          border-radius: 8px;
-          background-color: white;
-          box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-          // background: url('../../assets/image/back-show.png') no-repeat center center;
-          // background-size:100% 100%;
-          img {
-            width: 100%;
-          }
         }
-        li:nth-of-type(even) {
-          padding-right: 0;
-        }
-        .goods-layout {
-          width: 165px;
-          padding: 0 10px;
-          display: flex;
-          justify-content: flex-start;
-          flex-direction: column;
-          .goods-title {
-            color: #3a3a3a;
-            font-size: 14px;
-            font-weight: 600;
-          }
-          .goods-div {
-            color: #949497;
-            font-size: 11px;
-          }
-          .goods-desc {
-            background-color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 10px;
-            .goods-price {
-              font-size: 14px;
-              color: #d8182d;
-            }
-            .add-icon {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-          }
+        .card-right{
+
         }
       }
     }
+
   }
 }
 </style>

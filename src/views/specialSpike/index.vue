@@ -41,7 +41,7 @@
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
-                  <i class="false-price">¥1199</i>
+                  <del>¥1199</del>
                 </div>
               </li>
               <li class="item-content">
@@ -49,7 +49,7 @@
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
-                  <i class="false-price">¥1199</i>
+                  <del>¥1199</del>
                 </div>
               </li>
               <li class="item-content">
@@ -57,7 +57,7 @@
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
-                  <i class="false-price">¥1199</i>
+                  <del>¥1199</del>
                 </div>
               </li>
             </ul>
@@ -245,7 +245,7 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    /deep/ .van-tabs--line{
+    /deep/ .van-tabs--line {
       padding-top: 60px;
     }
     .header-card {
@@ -298,11 +298,7 @@ export default {
             .real-price {
               color: #d8182d;
               font-weight: 600;
-            }
-            .false-price {
-              text-decoration: line-through;
-              color: #949497;
-              padding-left: 6px;
+              padding-right: 6px;
             }
           }
         }
