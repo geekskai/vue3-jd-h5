@@ -36,20 +36,20 @@
           </div>
 
           <main class="main-box">
-            <ul class="card-box">
+            <ul class="card-box" v-for="(item,index) in cardList" :key="index">
               <aside>
                 <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
               </aside>
-              <div class="card-right">
-                <li>
-                  <cite>【玻尿酸巨补水新款面膜】控…</cite>
-                  <small>迪丽热巴同款</small>
+              <ul class="card-right">
+                <li class="item-title">
+                  <cite class="card-cite">{{item.title}}</cite>
+                  <small class="card-small">{{item.name}}</small>
                 </li>
-                <li>
-                  <b>￥200</b>
-                  <button>去抢购</button>
+                <li class="item-desc">
+                  <b class="item-price">{{item.price}}</b>
+                  <button class="my-btn">去抢购</button>
                 </li>
-              </div>
+              </ul>
             </ul>
           </main>
         </van-tab>
@@ -64,6 +64,33 @@ export default {
   data() {
     return {
       active: "1",
+      cardList: [
+        {
+          title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
+          name: "迪丽热巴同款",
+          price: "￥200"
+        },
+        {
+          title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
+          name: "迪丽热巴同款",
+          price: "￥200"
+        },
+        {
+          title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
+          name: "迪丽热巴同款",
+          price: "￥200"
+        },
+        {
+          title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
+          name: "迪丽热巴同款",
+          price: "￥200"
+        },
+        {
+          title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
+          name: "迪丽热巴同款",
+          price: "￥200"
+        }
+      ],
       tabList: [
         {
           title: "精选",
@@ -197,7 +224,7 @@ export default {
     }
   }
   .my-swiper {
-    margin-top: 60px;
+    margin-top: 70px;
     width: 100%;
     .swiper-slide-active {
       display: flex;
@@ -252,21 +279,67 @@ export default {
       }
     }
     .main-box {
+      margin: 16px;
       .card-box {
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+        background-color: #fff;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: inherit;
+        margin-top: 10px;
         .card-img {
           width: 110px;
           height: 110px;
           display: inline-block;
         }
-        .card-right{
-
+        .card-right {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-left: 10px;
+          .item-title {
+            display: flex;
+            flex-direction: column;
+            .card-cite {
+              font-size: 13px;
+              color: #3a3a3a;
+              padding-bottom: 6px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              width: 200px;
+            }
+            .card-small {
+              font-size: 11px;
+              color: #d8182d;
+            }
+          }
+          .item-desc {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-right: 16px;
+            .item-price {
+              font-size: 17px;
+              color: #d8182d;
+            }
+            .my-btn {
+              background-color: #d8182d;
+              border-radius: 2px;
+              width: 74px;
+              height: 24px;
+              color: #fff;
+              font-size: 11px;
+              text-align: center;
+            }
+          }
         }
       }
     }
-
   }
 }
 </style>
