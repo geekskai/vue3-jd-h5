@@ -7,12 +7,12 @@
       </div>
       <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
-    <van-swipe class="swiper_carousel" :autoplay="3000">
+    <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-    <div class="swiperCls">
+    <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
@@ -46,35 +46,35 @@
 
     <section class="spike-area">
       <ul class="spike-top">
-        <li class="top-left">
-          <div class="item-top">
-            <span class="item-title">链猫秒杀</span>
-            <div class="time-text">
-              <span class="eight-time">8点场</span>
-              <span class="spike-time">00 : 17 : 55</span>
+        <router-link class="top-left" to="/chainCatSpike" tag="li">
+            <div class="item-top">
+              <span class="item-title">链猫秒杀</span>
+              <div class="time-text">
+                <span class="eight-time">8点场</span>
+                <span class="spike-time">00 : 17 : 55</span>
+              </div>
             </div>
-          </div>
-          <div class="item-info">
-            <div class="item-content">
-              <img src="../../assets/image/home/demo1.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
+            <div class="item-info">
+              <div class="item-content">
+                <img src="../../assets/image/home/demo1.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
+              <div class="item-content">
+                <img src="../../assets/image/home/demo2.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
+              <div class="item-content">
+                <img src="../../assets/image/home/demo3.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
             </div>
-            <div class="item-content">
-              <img src="../../assets/image/home/demo2.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
-            </div>
-            <div class="item-content">
-              <img src="../../assets/image/home/demo3.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
-            </div>
-          </div>
-        </li>
-        <li class="top-right">
+        </router-link>
+        <router-link class="top-right" to="/foundGoodGoods" tag="li">
           <div class="right-header">
-            <span class="cat-spike-text">链猫秒杀</span>
+            <span class="cat-spike-text">发现好货</span>
             <span class="tag-text">品质好物</span>
           </div>
           <span class="good-item">好物不贵</span>
@@ -82,29 +82,30 @@
             <img src="../../assets/image/home/demo4.png" />
             <img src="../../assets/image/home/demo5.png" />
           </div>
-        </li>
+        </router-link>
       </ul>
+
       <ul class="spike-center">
-        <li class="center-item">
+        <router-link class="center-item" to="/specialSpike" tag="li">
           <span class="center-title">特价秒杀</span>
           <span class="center-descr">10元抢购</span>
           <img src="../../assets/image/home/demo6.png" />
-        </li>
-        <li class="center-item">
+        </router-link>
+        <router-link class="center-item" to="/brandSpike" tag="li">
           <span class="center-title">品牌秒杀</span>
           <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
           <img src="../../assets/image/home/demo7.png" />
-        </li>
-        <li class="center-item">
+        </router-link>
+        <router-link class="center-item" to="/newProductLaunch" tag="li">
           <span class="center-title">新品首发</span>
           <span class="center-descr" style="#FC6380">小黑盒新品</span>
           <img src="../../assets/image/home/demo8.png" />
-        </li>
-        <li class="center-item">
+        </router-link>
+        <router-link class="center-item" to="/premiumRanking" tag="li">
           <span class="center-title">优品排行</span>
           <span class="center-descr" style="color:#91C95B">榜上好物购</span>
           <img src="../../assets/image/home/demo9.png" />
-        </li>
+        </router-link>
       </ul>
       <ul class="spike-bottom">
         <li class="bottom-left">
@@ -121,7 +122,8 @@
             <img src="../../assets/image/home/demo11.png" />
           </div>
         </li>
-        <li class="bottom-left">
+        <router-link class="bottom-left" to="/loveShop" tag="li">
+          <!-- <li class="bottom-left"> -->
           <div class="bottom-left-header">
             <span class="big-buy">爱逛好店</span>
             <span class="goods-name addColor">懂你所要</span>
@@ -131,19 +133,26 @@
             <img src="../../assets/image/home/demo12.png" />
             <img src="../../assets/image/home/demo13.png" />
           </div>
-        </li>
+        </router-link>
+        <!-- </li> -->
       </ul>
     </section>
 
     <div class="page-tabs">
-      <van-tabs :swipe-threshold="5" title-inactive-color='#3a3a3a' v-model="active" animated title-active-color="#D8182D">
+      <van-tabs
+        :swipe-threshold="5"
+        title-inactive-color="#3a3a3a"
+        title-active-color="#D8182D"
+        background="transparent"
+        v-model="active"
+        animated
+      >
         <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
           <div slot="title" class="slot-title">
             <h3>{{item.title}}</h3>
             <span>{{item.name}}</span>
           </div>
           <section class="goods-box search-wrap">
-            <!-- <span class="good-things">链猫自营</span> -->
             <ul class="goods-content">
               <li v-for="(item,index) in list" :key="index">
                 <router-link tag="div" to="/classify/product">
@@ -320,7 +329,6 @@ export default {
       headerActive: false,
       images: [
         {
-          // imgUrl: require("../../assets/image/home/huawei1.png"),
           imgUrl: require("../../assets/image/home/banner5.jpg"),
           categoryId: 100018
         },
@@ -495,14 +503,14 @@ export default {
     }
   }
 
-  .swiper_carousel {
+  .swiper-carousel {
     padding-bottom: 10px;
     .lazy_img {
       width: 100%;
       height: 250px;
     }
   }
-  .swiperCls {
+  .swiper-cls {
     background-color: #efeff4;
     .swiper-slide {
       padding-left: 16px;
@@ -718,13 +726,8 @@ export default {
   .page-tabs {
     /deep/ .van-tabs--line {
       padding-top: 35px;
-      // line-height: 45px
     }
-    /deep/ .van-tabs__nav {
-      background-color: #EFEFF4;
-      // height: 60px;
-      // line-height: 60px;
-    }
+
     .slot-title {
       display: flex;
       justify-content: center;
@@ -799,6 +802,7 @@ export default {
       }
     }
   }
+
   // .goods-box {
   //   padding: 16px;
   //   .good-things {
@@ -860,71 +864,72 @@ export default {
   //     }
   //   }
   // }
-  .recommended-shop {
-    padding: 16px;
-    .shop-things {
-      font-size: 18px;
-      color: #d8182d;
-      font-weight: 600;
-    }
-    .shop-content {
-      padding-top: 10px;
-      .shop-item {
-        background-color: #fff;
-        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        padding: 11px;
-        margin-bottom: 10px;
-        .item-iamgs {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          padding-bottom: 5px;
-          padding-left: 5px;
-          img {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            margin-right: 7px;
-          }
-        }
-        .item-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 10px;
-          .into-store {
-            width: 41px;
-            height: 16px;
-            margin-right: 12px;
-          }
-          .item-text {
-            flex: 1;
-            height: 37px;
-            padding-left: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-direction: column;
-            p {
-              font-size: 14px;
-              color: #3a3a3a;
-              font-weight: 600;
-            }
-            i {
-              font-size: 11px;
-              color: #949497;
-            }
-          }
-          .store-logo {
-            width: 37px;
-            height: 37px;
-          }
-        }
-      }
-    }
-  }
+
+  // .recommended-shop {
+  //   padding: 16px;
+  //   .shop-things {
+  //     font-size: 18px;
+  //     color: #d8182d;
+  //     font-weight: 600;
+  //   }
+  //   .shop-content {
+  //     padding-top: 10px;
+  //     .shop-item {
+  //       background-color: #fff;
+  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+  //       border-radius: 8px;
+  //       padding: 11px;
+  //       margin-bottom: 10px;
+  //       .item-iamgs {
+  //         display: flex;
+  //         justify-content: space-around;
+  //         align-items: center;
+  //         padding-bottom: 5px;
+  //         padding-left: 5px;
+  //         img {
+  //           display: inline-block;
+  //           width: 100px;
+  //           height: 100px;
+  //           border-radius: 10px;
+  //           margin-right: 7px;
+  //         }
+  //       }
+  //       .item-header {
+  //         display: flex;
+  //         justify-content: space-between;
+  //         align-items: center;
+  //         margin-bottom: 10px;
+  //         .into-store {
+  //           width: 41px;
+  //           height: 16px;
+  //           margin-right: 12px;
+  //         }
+  //         .item-text {
+  //           flex: 1;
+  //           height: 37px;
+  //           padding-left: 5px;
+  //           display: flex;
+  //           justify-content: space-between;
+  //           align-items: flex-start;
+  //           flex-direction: column;
+  //           p {
+  //             font-size: 14px;
+  //             color: #3a3a3a;
+  //             font-weight: 600;
+  //           }
+  //           i {
+  //             font-size: 11px;
+  //             color: #949497;
+  //           }
+  //         }
+  //         .store-logo {
+  //           width: 37px;
+  //           height: 37px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   .ballWrap {
     .ball {

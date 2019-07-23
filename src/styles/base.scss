@@ -10,6 +10,7 @@ article,
 ul,
 dl,
 dt,
+cite,
 dd,
 li,
 a,
@@ -50,6 +51,10 @@ figcaption {
 html,
 body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+del {
+    color: #949497;
 }
 
 input {

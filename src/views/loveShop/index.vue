@@ -1,0 +1,408 @@
+<template>
+  <div class="love-shop">
+    <header class="page-header">
+      <span class="return-btn" @click="$router.go(-1)">
+        <svg-icon icon-class="transparent-btn"></svg-icon>
+      </span>
+      <div class="header-content">爱逛好店</div>
+      <span class="share-btn">
+        <svg-icon icon-class="share-btn"></svg-icon>
+      </span>
+    </header>
+
+    <section class="page-content">
+      <van-tabs
+        v-model="active"
+        swipeable
+        color="#fff"
+        :swipe-threshold="5"
+        title-inactive-color="#FEFFFE"
+        title-active-color="#FEFFFE"
+        background="transparent"
+        :border="false"
+        animated
+      >
+        <van-tab v-for="index in tabList" :title="index" :key="index">
+          <section class="recommended-shop">
+            <ul class="shop-content">
+              <li class="shop-item">
+                <div class="item-header">
+                  <img class="store-logo" src="../../assets/image/home/store-logo.png" />
+                  <div class="item-text">
+                    <p>品炫旗舰店</p>
+                    <i>正品大牌 产家直营</i>
+                  </div>
+                  <router-link to="/storeDetail">
+                    <span class="into-store">进店</span>
+                  </router-link>
+                </div>
+                <div class="item-iamgs">
+                  <div class="left-imags">
+                    <img src="../../assets/image/premiumRanking/demo2.png" />
+                  </div>
+                  <div class="right-imags">
+                    <img src="../../assets/image/home/store2.png" />
+                    <img src="../../assets/image/home/store3.png" />
+                  </div>
+                </div>
+              </li>
+              <li class="shop-item">
+                <div class="item-header">
+                  <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
+                  <div class="item-text">
+                    <p>北欧家居旗舰店</p>
+                    <i>正品大牌 产家直营</i>
+                  </div>
+                  <router-link to="/storeDetail">
+                    <span class="into-store">进店</span>
+                  </router-link>
+                </div>
+                <div class="item-iamgs">
+                  <div class="left-imags">
+                    <img src="../../assets/image/premiumRanking/demo3.png" />
+                  </div>
+                  <div class="right-imags">
+                    <img src="../../assets/image/home/store5.png" />
+                    <img src="../../assets/image/home/store6.png" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- <ul class="list-item">
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo0.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo1.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo1.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo1.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo1.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+            <li class="card-item">
+              <div class="card-img">
+                <img src="../../assets/image/premiumRanking/demo1.png" />
+              </div>
+              <ul class="card-info">
+                <li class="info-top">
+                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+                  <span class="item-desc">正品大牌 产家直营</span>
+                </li>
+                <li>
+                  <p class="item-price">¥1988</p>
+                  <span class="item-hot">
+                    <span class="hot-text">热卖指数</span>
+                    <span class="hot-index">
+                      <i>99</i>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </li>
+          </ul>-->
+        </van-tab>
+      </van-tabs>
+    </section>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "LoveShop", // 爱逛好店
+  data() {
+    return {
+      active: "1",
+      tabList: ["链猫好店", "有趣好店", "品牌店", "发现好店"]
+    };
+  },
+  created() {},
+  methods: {}
+};
+</script>
+
+<style scoped lang="scss">
+.love-shop {
+  background-color: #efefef;
+  min-height: 812px;
+  padding: 0 16px;
+  .page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(#fe4f70, #efefef);
+    height: 250px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    .return-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .header-content {
+      text-align: center;
+      font-size: 18px;
+      color: #fefffe;
+      font-weight: 600;
+      flex: 1;
+    }
+    .share-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .svg-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .page-content {
+    margin-top: 60px;
+    .recommended-shop {
+      .shop-content {
+        padding-top: 10px;
+        .shop-item {
+          background-color: #fff;
+          box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          padding: 16px;
+          margin-bottom: 10px;
+          .item-iamgs {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 5px;
+            padding-left: 5px;
+
+            .left-imags {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 8px;
+              padding-right: 12px;
+              img {
+                width: 205px;
+                height: 212px;
+              }
+            }
+            .right-imags {
+              img {
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                border-radius: 8px;
+                // margin-right: 7px;
+              }
+            }
+          }
+          .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            .into-store {
+              width: 60px;
+              height: 26px;
+              border-radius: 2px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: #d8172c;
+              color: #fff;
+              font-size: 11px;
+            }
+            .item-text {
+              flex: 1;
+              height: 37px;
+              padding-left: 5px;
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              flex-direction: column;
+              p {
+                font-size: 14px;
+                color: #3a3a3a;
+                font-weight: 600;
+              }
+              i {
+                font-size: 11px;
+                color: #949497;
+              }
+            }
+            .store-logo {
+              width: 37px;
+              height: 37px;
+            }
+          }
+        }
+      }
+    }
+
+    // .list-item {
+    //   .card-item {
+    //     margin: 20px auto;
+    //     background-color: white;
+    //     border-radius: 8px;
+    //     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: flex-start;
+    //     font-size: 14px;
+    //     padding: 14px;
+    //     .card-img {
+    //       width: 110px;
+    //       height: 110px;
+    //     }
+    //     .card-info {
+    //       display: flex;
+    //       height: 110px;
+    //       justify-content: space-between;
+    //       flex-direction: column;
+    //       align-items: flex-start;
+    //       .info-top {
+    //         .item-title {
+    //           overflow: hidden;
+    //           text-overflow: ellipsis;
+    //           white-space: nowrap;
+    //           font-size: 14px;
+    //           color: #3a3a3a;
+    //           font-weight: 600;
+    //           width: 200px;
+    //         }
+    //         .item-desc {
+    //           font-size: 11px;
+    //           color: #d8182d;
+    //         }
+    //       }
+    //       .item-price {
+    //         font-size: 17px;
+    //         color: #3a3a3a;
+    //         font-weight: 600;
+    //         padding-bottom: 2px;
+    //       }
+    //       .item-hot {
+    //         border: 1px solid #d8182d;
+    //         border-radius: 2px;
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         background: linear-gradient(to right, #d8182d 64%, #fff 36%);
+    //         .hot-text {
+    //           display: inline-block;
+    //           line-height: 15px;
+    //           width: 54px;
+    //           font-size: 11px;
+    //           text-align: center;
+    //           height: 16px;
+    //           color: #fff;
+    //           border-radius: 2px;
+    //         }
+
+    //         .hot-index {
+    //           width: 30px;
+    //           font-size: 11px;
+    //           text-align: center;
+    //           display: inline-block;
+    //           color: #d8182d;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+  }
+}
+</style>

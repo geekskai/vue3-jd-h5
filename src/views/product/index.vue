@@ -8,24 +8,50 @@
     <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
+    <section v-if="isSpike" class="progress-bar">
+      <ul class="progress-left">
+        <li class="spike-price">
+          <span class="true-price">￥1498.00</span>
+          <span class="exchange-rate">1688USDT≈5600CM</span>
+        </li>
+        <li class="spike-bottom">
+          <del class="old-price">￥1498.00</del>
+          <progress class="lm-progress" value="22" max="100"></progress>
+        </li>
+      </ul>
+      <ul class="progress-right">
+        <div class="right-content">
+          <li class="end-time">
+            <i>距结束还剩:</i>
+          </li>
+          <li class="time-value">
+            <i>18:26:50</i>
+          </li>
+        </div>
+      </ul>
+    </section>
     <ul class="product-content">
-      <li class="product-title">多功能料理机</li>
-      <li class="product-info">
-        <span class="product-price">$248</span>
+      <li class="product-title">
+        <div class="text-left">
+          <span class="force-value">205算力值</span>
+          <span class="item-desc">遥控制空调扇</span>
+        </div>
         <div>
-          <i>快递包邮</i>
-          <i>月销:888</i>
+          <span class="heart-full" @click="isLike=!isLike">
+            <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+            <svg-icon v-else icon-class="heart-null"></svg-icon>
+          </span>
         </div>
       </li>
-      <li class="store-info">
-        <div class="store-detail" @click="handleStoreName">
-          <img src="../../assets/image/product/store-header.png" class="store-header" />
-          <span class="store-name">店铺名称</span>
-        </div>
-        <div class="store-btn">
-          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
-        </div>
+      <li class="product-price">
+        <span>购买该商品可获得算力值，算力值可兑换CM币</span>
       </li>
+
+      <li class="product-info">
+        <i>快递包邮</i>
+        <i>月销:888</i>
+      </li>
+
       <li class="item-info">
         <van-field label="发货地" disabled placeholder="福建泉州 ">
           <span slot="left-icon" class="anchor-point">
@@ -40,6 +66,16 @@
         <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
         <van-icon name="arrow" />
       </li>
+      <li class="store-info">
+        <div class="store-detail" @click="handleStoreName">
+          <img src="../../assets/image/product/store-header.png" class="store-header" />
+          <span class="store-name">店铺名称</span>
+        </div>
+        <div class="store-btn">
+          <svg-icon icon-class="message-round"></svg-icon>
+          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
+        </div>
+      </li>
     </ul>
     <div class="item-details">
       <span>宝贝详情</span>
@@ -49,7 +85,7 @@
       v-model="show"
       round
       position="bottom"
-      :style="{ height: '70%' }"
+      :style="{ height: '75%' }"
     >
       <section class="popup-content">
         <span class="close-icon" @click="show = false">
@@ -94,9 +130,7 @@
           </li>
           <li class="popup-quantity">
             <span class="quantity-text">购买数量</span>
-            <!-- <div> -->
             <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
-            <!-- </div> -->
           </li>
         </ul>
       </section>
@@ -122,6 +156,9 @@ export default {
   data() {
     return {
       show: false,
+      isSpike: false, // 是否是秒杀商品 默认是false
+      isLike: false, // 是否点赞喜欢
+      current: 0,
       stepperValue: "",
       listData: [
         {
@@ -214,32 +251,138 @@ export default {
     height: 350px;
     width: 100%;
   }
+
   .btn-left {
     position: fixed;
     left: 16px;
     top: 14px;
   }
+
+  .progress-bar {
+    .progress-left {
+      display: inline-block;
+      position: relative;
+      min-width: 375px;
+      height: 50px;
+      background: url("../../assets/image/product/rectangle-left.png") no-repeat
+        left center;
+      background-size: 76% 100%;
+      z-index: 2;
+      padding: 6px 16px;
+      .spike-price {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: white;
+        .true-price {
+          font-size: 17px;
+        }
+        .exchange-rate {
+          font-size: 9px;
+          border: 1px solid white;
+          border-radius: 6px;
+          display: inline-block;
+          width: 108px;
+          text-align: center;
+          line-height: 20px;
+          height: 20px;
+          margin-left: 10px;
+        }
+      }
+      .spike-bottom {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .old-price {
+          font-size: 11px;
+          color: #fff;
+          margin-right: 16px;
+        }
+        .lm-progress {
+          width: 70px;
+          height: 10px;
+          border-radius: 5px;
+          color: #d8182d;
+          display: inline-block;
+        }
+      }
+    }
+    .progress-right {
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      background: url("../../assets/image/product/rectangle-right.png")
+        no-repeat right center;
+      background-size: 32% 100%;
+      padding-right: 16px 20px;
+      .right-content {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 10px;
+        .end-time {
+          padding-top: 10px;
+          padding-right: 20px;
+          font-size: 10px;
+          color: white;
+        }
+        .time-value {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
   .product-content {
+    padding-top: 20px;
     font-size: 14px;
     .product-title {
-      color: #3a3a3a;
       padding-left: 16px;
-      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .text-left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .force-value {
+        display: inline-block;
+        width: 54px;
+        text-align: center;
+        line-height: 20px;
+        height: 20px;
+        color: #fff;
+        font-size: 9px;
+        background-color: #d8182d;
+        border-radius: 10px 10px;
+      }
+      .heart-full {
+        padding: 0 17px;
+      }
+      .item-desc {
+        font-size: 14px;
+        color: #3a3a3a;
+        padding-left: 7px;
+      }
+    }
+    .product-price {
+      color: #949497;
+      font-size: 9px;
+      padding-top: 8px;
+      font-weight: 600;
+      padding-left: 16px;
     }
     .product-info {
       display: flex;
-      justify-content: space-between;
-      padding-top: 4px;
-      .product-price {
-        color: #d8182d;
-        font-weight: 600;
-        padding-left: 16px;
-      }
-      i {
-        padding-right: 31px;
-        color: #949497;
-        font-size: 11px;
-      }
+      justify-content: space-around;
+      padding-left: 16px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      font-size: 11px;
+      color: #949497;
     }
     .store-info {
       display: flex;
