@@ -9,7 +9,7 @@
         <span class="search-btn">
           <svg-icon class="search-icon" icon-class="search"></svg-icon>
         </span>
-        <span class="therr-point-icon">
+        <span class="therr-point-icon" @click="handleMeun">
           <svg-icon icon-class="therr-point"></svg-icon>
         </span>
       </div>
@@ -28,63 +28,21 @@
         :border="false"
       >
         <van-tab v-for="index in tabList" :title="index" :key="index">
-          <section class="header-card">
-            <div class="card-top">
-              <div class="top-left">
-                <span class="found-good-goods-text">特价秒杀 |</span>
-                <i class="low-sale">超低价特卖</i>
-              </div>
-              <div class="top-right">
-                <label class="only-left">仅剩</label>
-                <span>15:40:37</span>
-              </div>
-            </div>
-
-            <ul class="card-content">
-              <li class="item-content">
-                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
-                <svg-icon icon-class="processbar"></svg-icon>
-                <div class="prices-content">
-                  <span class="real-price">¥988</span>
-                  <del>¥1199</del>
-                </div>
-              </li>
-              <li class="item-content">
-                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
-                <svg-icon icon-class="processbar"></svg-icon>
-                <div class="prices-content">
-                  <span class="real-price">¥988</span>
-                  <del>¥1199</del>
-                </div>
-              </li>
-              <li class="item-content">
-                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
-                <svg-icon icon-class="processbar"></svg-icon>
-                <div class="prices-content">
-                  <span class="real-price">¥988</span>
-                  <del>¥1199</del>
-                </div>
-              </li>
-            </ul>
-          </section>
-
           <ul class="list-item">
             <li class="card-item">
               <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo0.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
                   <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
+                  <span class="item-desc">轻量化设计，重量轻到超乎你的想象，让你行车过程更加…</span>
                 </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
+                <li class="info-buttom">
+                  <p class="item-price">52人关注</p>
+                  <span class="item-attention" @click="isLike=!isLike">
+                    <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+                    <svg-icon v-else icon-class="heart-null"></svg-icon>
                   </span>
                 </li>
               </ul>
@@ -96,95 +54,13 @@
               <ul class="card-info">
                 <li class="info-top">
                   <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
+                  <span class="item-desc">轻量化设计，重量轻到超乎你的想象，让你行车过程更加…</span>
                 </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
+                <li class="info-buttom">
+                  <p class="item-price">922人关注</p>
+                  <span class="item-attention" @click="isLike=!isLike">
+                    <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+                    <svg-icon v-else icon-class="heart-null"></svg-icon>
                   </span>
                 </li>
               </ul>
@@ -202,11 +78,16 @@ export default {
   data() {
     return {
       active: "1",
+      isLike: false,
       tabList: ["推荐", "生活家", "数码控", "手机控", "时髦精", "型男精"]
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleMeun(){
+      this.$router.push('/myFocus')
+    }
+  }
 };
 </script>
 
@@ -266,62 +147,6 @@ export default {
     /deep/ .van-tabs--line {
       padding-top: 60px;
     }
-    .header-card {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-      .card-top {
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #ee2a2a;
-        .top-left {
-          .found-good-goods-text {
-            font-size: 17px;
-          }
-          .low-sale {
-            font-size: 11px;
-          }
-        }
-        .top-right {
-          .only-left {
-            font-size: 11px;
-          }
-        }
-      }
-      .card-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        .item-content {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          flex-direction: column;
-          padding-left: 5px;
-          .item-img {
-            width: 100px;
-            height: 105px;
-            display: inline-block;
-          }
-          .svg-icon {
-            width: 70px;
-            height: 6px;
-            padding: 10px 0;
-          }
-          .prices-content {
-            font-size: 11px;
-            .real-price {
-              color: #d8182d;
-              font-weight: 600;
-              padding-right: 6px;
-            }
-          }
-        }
-      }
-    }
     .list-item {
       .card-item {
         margin: 20px auto;
@@ -343,6 +168,7 @@ export default {
           justify-content: space-between;
           flex-direction: column;
           align-items: flex-start;
+          padding-left: 15px;
           .info-top {
             .item-title {
               overflow: hidden;
@@ -355,39 +181,21 @@ export default {
             }
             .item-desc {
               font-size: 11px;
-              color: #d8182d;
+              color: #3a3a3a;
+              opacity: 0.6;
             }
           }
-          .item-price {
-            font-size: 17px;
-            color: #3a3a3a;
-            font-weight: 600;
-            padding-bottom: 2px;
-          }
-          .item-hot {
-            border: 1px solid #d8182d;
-            border-radius: 2px;
+          .info-buttom {
+            width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
-            background: linear-gradient(to right, #d8182d 64%, #fff 36%);
-            .hot-text {
-              display: inline-block;
-              line-height: 15px;
-              width: 54px;
+            .item-price {
               font-size: 11px;
-              text-align: center;
-              height: 16px;
-              color: #fff;
-              border-radius: 2px;
-            }
-
-            .hot-index {
-              width: 30px;
-              font-size: 11px;
-              text-align: center;
-              display: inline-block;
-              color: #d8182d;
+              color: #fe4f70;
+              font-weight: 600;
+              padding-bottom: 2px;
+              margin-right: 10px;
             }
           }
         }

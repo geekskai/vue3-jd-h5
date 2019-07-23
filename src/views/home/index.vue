@@ -91,7 +91,7 @@
           <span class="center-descr">10元抢购</span>
           <img src="../../assets/image/home/demo6.png" />
         </router-link>
-        <router-link class="center-item" to="/premiumRanking" tag="li">
+        <router-link class="center-item" to="/brandSpike" tag="li">
           <span class="center-title">品牌秒杀</span>
           <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
           <img src="../../assets/image/home/demo7.png" />
