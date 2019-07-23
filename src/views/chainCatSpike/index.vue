@@ -27,12 +27,11 @@
         swipeable
         :line-width="0"
       >
-        <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
+        <van-tab v-for="(tab,index) in tabList" :title="tab.name" :key="index">
           <div class="slot-title" slot="title">
-            <p class="tab-title">{{item.title}}</p>
-            <span class="tab-name">{{item.name}}</span>
+            <p class="tab-title">{{tab.title}}</p>
+            <span class="tab-name">{{tab.name}}</span>
           </div>
-
           <main class="main-box">
             <ul class="card-box" v-for="(item,index) in cardList" :key="index">
               <aside>
@@ -44,14 +43,18 @@
                   <small class="card-small">{{item.name}}</small>
                 </li>
                 <div class="item-bottom">
+                  <li class="item-low-price">
+                    <i>历史最低价</i>
+                  </li>
                   <li class="item-desc">
                     <b class="item-price">{{item.price}}</b>
-                    <button class="my-btn">去抢购</button>
+                    <button v-if="tab.name === '抢购中'" class="my-btn">去抢购</button>
+                    <button v-else class="remind-me-btn">提醒我</button>
                   </li>
                   <li class="item-desc">
                     <del class="item-del">{{item.oldPrice}}</del>
-                    <!-- <button class="my-btn">进度条</button> -->
-                    <!-- <progress class="lm-progress" value="22" max="100"></progress> -->
+                    <progress v-if="tab.name == '抢购中'" class="lm-progress" value="22" max="100"></progress>
+                    <i v-else class="set-reminder">200已设置提醒</i>
                   </li>
                 </div>
               </ul>
@@ -212,7 +215,7 @@ export default {
     .btn-left {
       position: fixed;
       left: 16px;
-      top: 5px;
+      top: 15px;
     }
     .header-content {
       text-align: center;
@@ -255,14 +258,6 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-    /deep/ .van-tab--active {
-      display: flex;
-      justify-content: center;
-      .tab-title {
-        border: 1px solid #d8182d;
-        border-radius: 10px 10px;
-      }
     }
     .slot-title {
       display: flex;
@@ -308,7 +303,7 @@ export default {
             .card-cite {
               font-size: 13px;
               color: #3a3a3a;
-              padding-bottom: 6px;
+              padding-bottom: 3px;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
@@ -321,18 +316,44 @@ export default {
           }
           .item-bottom {
             width: 100%;
+            .item-low-price {
+              // display: flex;
+              // justify-content: flex-start;
+              // align-items: center;
+              background-color: #efeff4;
+              font-size: 9px;
+              color: #949497;
+              width: 64px;
+              text-align: center;
+              border-radius: 4px;
+              height: 18px;
+              line-height: 18px;
+            }
             .item-desc {
               display: flex;
               justify-content: space-between;
               align-items: center;
               padding-right: 16px;
-              padding-top: 7px;
+              padding-top: 2px;
               .item-price {
                 font-size: 17px;
                 color: #d8182d;
               }
+              .remind-me-btn {
+                background-color: #91c95b;
+                border-radius: 2px;
+                width: 74px;
+                height: 24px;
+                color: #fff;
+                font-size: 11px;
+                text-align: center;
+              }
               .item-del {
                 font-size: 13px;
+              }
+              .set-reminder {
+                font-size: 9px;
+                color: #949497;
               }
               .lm-progress {
                 width: 70px;

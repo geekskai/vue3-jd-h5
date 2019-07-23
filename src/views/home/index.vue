@@ -45,36 +45,36 @@
     </section>
 
     <section class="spike-area">
-      <router-link class="spike-top" to="/chainCatSpike" tag="ul">
-        <li class="top-left">
-          <div class="item-top">
-            <span class="item-title">链猫秒杀</span>
-            <div class="time-text">
-              <span class="eight-time">8点场</span>
-              <span class="spike-time">00 : 17 : 55</span>
+      <ul class="spike-top">
+        <router-link class="top-left" to="/chainCatSpike" tag="li">
+            <div class="item-top">
+              <span class="item-title">链猫秒杀</span>
+              <div class="time-text">
+                <span class="eight-time">8点场</span>
+                <span class="spike-time">00 : 17 : 55</span>
+              </div>
             </div>
-          </div>
-          <div class="item-info">
-            <div class="item-content">
-              <img src="../../assets/image/home/demo1.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
+            <div class="item-info">
+              <div class="item-content">
+                <img src="../../assets/image/home/demo1.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
+              <div class="item-content">
+                <img src="../../assets/image/home/demo2.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
+              <div class="item-content">
+                <img src="../../assets/image/home/demo3.png" />
+                <span class="new-price">¥298</span>
+                <span class="old-price">¥399</span>
+              </div>
             </div>
-            <div class="item-content">
-              <img src="../../assets/image/home/demo2.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
-            </div>
-            <div class="item-content">
-              <img src="../../assets/image/home/demo3.png" />
-              <span class="new-price">¥298</span>
-              <span class="old-price">¥399</span>
-            </div>
-          </div>
-        </li>
-        <li class="top-right">
+        </router-link>
+        <router-link class="top-right" to="/foundGoodGoods" tag="li">
           <div class="right-header">
-            <span class="cat-spike-text">链猫秒杀</span>
+            <span class="cat-spike-text">发现好货</span>
             <span class="tag-text">品质好物</span>
           </div>
           <span class="good-item">好物不贵</span>
@@ -82,8 +82,9 @@
             <img src="../../assets/image/home/demo4.png" />
             <img src="../../assets/image/home/demo5.png" />
           </div>
-        </li>
-      </router-link>
+        </router-link>
+      </ul>
+
       <ul class="spike-center">
         <router-link class="center-item" to="/specialSpike" tag="li">
           <span class="center-title">特价秒杀</span>

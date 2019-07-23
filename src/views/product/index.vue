@@ -8,6 +8,28 @@
     <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
+    <section class="progress-bar">
+      <ul class="progress-left">
+        <li class="spike-price">
+          <span class="true-price">￥1498.00</span>
+          <span class="exchange-rate">1688USDT≈5600CM</span>
+        </li>
+        <li class="spike-bottom">
+          <del class="old-price">￥1498.00</del>
+          <progress class="lm-progress" value="22" max="100"></progress>
+        </li>
+      </ul>
+      <ul class="progress-right">
+        <div class="right-content">
+          <li class="end-time">
+            <i>距结束还剩:</i>
+          </li>
+          <li class="time-value">
+            <i>18:26:50</i>
+          </li>
+        </div>
+      </ul>
+    </section>
     <ul class="product-content">
       <li class="product-title">
         <div class="text-left">
@@ -15,11 +37,11 @@
           <span class="item-desc">遥控制空调扇</span>
         </div>
         <div>
-          <span>
-            <svg-icon icon-class="heart-full"></svg-icon>
-          </span>
-          <span class="heart-full">
-            <svg-icon icon-class="heart-null"></svg-icon>
+          <!-- <span>
+          </span>-->
+          <span class="heart-full" @click="isLike=!isLike">
+            <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+            <svg-icon v-else icon-class="heart-null"></svg-icon>
           </span>
         </div>
       </li>
@@ -65,7 +87,7 @@
       v-model="show"
       round
       position="bottom"
-      :style="{ height: '70%' }"
+      :style="{ height: '75%' }"
     >
       <section class="popup-content">
         <span class="close-icon" @click="show = false">
@@ -110,9 +132,7 @@
           </li>
           <li class="popup-quantity">
             <span class="quantity-text">购买数量</span>
-            <!-- <div> -->
             <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
-            <!-- </div> -->
           </li>
         </ul>
       </section>
@@ -138,6 +158,8 @@ export default {
   data() {
     return {
       show: false,
+      isLike: false,
+      current: 0,
       stepperValue: "",
       listData: [
         {
@@ -230,10 +252,89 @@ export default {
     height: 350px;
     width: 100%;
   }
+
   .btn-left {
     position: fixed;
     left: 16px;
     top: 14px;
+  }
+
+  .progress-bar {
+    .progress-left {
+      display: inline-block;
+      position: relative;
+      min-width: 375px;
+      height: 50px;
+      background: url("../../assets/image/product/rectangle-left.png") no-repeat
+        left center;
+      background-size: 76% 100%;
+      z-index: 2;
+      padding: 6px 16px;
+      .spike-price {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: white;
+        .true-price {
+          font-size: 17px;
+        }
+        .exchange-rate {
+          font-size: 9px;
+          border: 1px solid white;
+          border-radius: 6px;
+          display: inline-block;
+          width: 108px;
+          text-align: center;
+          line-height: 20px;
+          height: 20px;
+          margin-left: 10px;
+        }
+      }
+      .spike-bottom {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .old-price {
+          font-size: 11px;
+          color: #fff;
+          margin-right: 16px;
+        }
+        .lm-progress {
+          width: 70px;
+          height: 10px;
+          border-radius: 5px;
+          color: #d8182d;
+          display: inline-block;
+        }
+      }
+    }
+    .progress-right {
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 50px;
+      background: url("../../assets/image/product/rectangle-right.png")
+        no-repeat right center;
+      background-size: 32% 100%;
+      padding-right: 16px 20px;
+      .right-content {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 10px;
+        .end-time {
+          padding-top: 10px;
+          padding-right: 20px;
+          font-size: 10px;
+          color: white;
+        }
+        .time-value {
+          padding-right: 10px;
+        }
+      }
+    }
   }
   .product-content {
     padding-top: 20px;
