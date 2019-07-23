@@ -8,7 +8,7 @@
     <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
-    <section class="progress-bar">
+    <section v-if="isSpike" class="progress-bar">
       <ul class="progress-left">
         <li class="spike-price">
           <span class="true-price">￥1498.00</span>
@@ -37,8 +37,6 @@
           <span class="item-desc">遥控制空调扇</span>
         </div>
         <div>
-          <!-- <span>
-          </span>-->
           <span class="heart-full" @click="isLike=!isLike">
             <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
             <svg-icon v-else icon-class="heart-null"></svg-icon>
@@ -158,7 +156,8 @@ export default {
   data() {
     return {
       show: false,
-      isLike: false,
+      isSpike: false, // 是否是秒杀商品 默认是false
+      isLike: false, // 是否点赞喜欢
       current: 0,
       stepperValue: "",
       listData: [
