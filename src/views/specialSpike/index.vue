@@ -30,7 +30,7 @@
                 <i class="low-sale">超低价特卖</i>
               </div>
               <div class="top-right">
-                <label class="only-left">仅剩</label>
+                <label class="only-left">仅剩:</label>
                 <span>15:40:37</span>
               </div>
             </div>
@@ -267,9 +267,11 @@ export default {
           }
         }
         .top-right {
+          font-size: 14px;// TODO
           .only-left {
             font-size: 11px;
           }
+          
         }
       }
       .card-content {
