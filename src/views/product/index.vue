@@ -9,23 +9,29 @@
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
     <ul class="product-content">
-      <li class="product-title">多功能料理机</li>
-      <li class="product-info">
-        <span class="product-price">$248</span>
+      <li class="product-title">
+        <div class="text-left">
+          <span class="force-value">205算力值</span>
+          <span class="item-desc">遥控制空调扇</span>
+        </div>
         <div>
-          <i>快递包邮</i>
-          <i>月销:888</i>
+          <span>
+            <svg-icon icon-class="heart-full"></svg-icon>
+          </span>
+          <span class="heart-full">
+            <svg-icon icon-class="heart-null"></svg-icon>
+          </span>
         </div>
       </li>
-      <li class="store-info">
-        <div class="store-detail" @click="handleStoreName">
-          <img src="../../assets/image/product/store-header.png" class="store-header" />
-          <span class="store-name">店铺名称</span>
-        </div>
-        <div class="store-btn">
-          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
-        </div>
+      <li class="product-price">
+        <span>购买该商品可获得算力值，算力值可兑换CM币</span>
       </li>
+
+      <li class="product-info">
+        <i>快递包邮</i>
+        <i>月销:888</i>
+      </li>
+
       <li class="item-info">
         <van-field label="发货地" disabled placeholder="福建泉州 ">
           <span slot="left-icon" class="anchor-point">
@@ -39,6 +45,16 @@
       <li class="item-info" @click="show = true">
         <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
         <van-icon name="arrow" />
+      </li>
+      <li class="store-info">
+        <div class="store-detail" @click="handleStoreName">
+          <img src="../../assets/image/product/store-header.png" class="store-header" />
+          <span class="store-name">店铺名称</span>
+        </div>
+        <div class="store-btn">
+          <svg-icon icon-class="message-round"></svg-icon>
+          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
+        </div>
       </li>
     </ul>
     <div class="item-details">
@@ -220,26 +236,53 @@ export default {
     top: 14px;
   }
   .product-content {
+    padding-top: 20px;
     font-size: 14px;
     .product-title {
-      color: #3a3a3a;
       padding-left: 16px;
-      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .text-left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .force-value {
+        display: inline-block;
+        width: 54px;
+        text-align: center;
+        line-height: 20px;
+        height: 20px;
+        color: #fff;
+        font-size: 9px;
+        background-color: #d8182d;
+        border-radius: 10px 10px;
+      }
+      .heart-full {
+        padding: 0 17px;
+      }
+      .item-desc {
+        font-size: 14px;
+        color: #3a3a3a;
+        padding-left: 7px;
+      }
+    }
+    .product-price {
+      color: #949497;
+      font-size: 9px;
+      padding-top: 8px;
+      font-weight: 600;
+      padding-left: 16px;
     }
     .product-info {
       display: flex;
-      justify-content: space-between;
-      padding-top: 4px;
-      .product-price {
-        color: #d8182d;
-        font-weight: 600;
-        padding-left: 16px;
-      }
-      i {
-        padding-right: 31px;
-        color: #949497;
-        font-size: 11px;
-      }
+      justify-content: space-around;
+      padding-left: 16px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      font-size: 11px;
+      color: #949497;
     }
     .store-info {
       display: flex;

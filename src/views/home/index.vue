@@ -7,7 +7,7 @@
       </div>
       <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
-    <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators='false'>
+    <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
@@ -45,7 +45,7 @@
     </section>
 
     <section class="spike-area">
-      <ul class="spike-top">
+      <router-link class="spike-top" to="/chainCatSpike" tag="ul">
         <li class="top-left">
           <div class="item-top">
             <span class="item-title">链猫秒杀</span>
@@ -83,7 +83,7 @@
             <img src="../../assets/image/home/demo5.png" />
           </div>
         </li>
-      </ul>
+      </router-link>
       <ul class="spike-center">
         <router-link class="center-item" to="/specialSpike" tag="li">
           <span class="center-title">特价秒杀</span>

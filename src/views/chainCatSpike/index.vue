@@ -1,32 +1,29 @@
 <template>
-  <ul class="new-product-launch">
+  <ul class="chain-cat-spike">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
-         <img src="../../assets/icons/left-green-white.png" alt="">
+        <img src="../../assets/icons/left-green-white.png" alt />
       </span>
-      <div class="header-content">新品首发</div>
-      <span class="share-btn">
-        <svg-icon icon-class="share-btn-black"></svg-icon>
-      </span>
+      <div class="header-content">链猫秒杀</div>
+      <div class="option-btns">
+        <span class="search-btn">
+          <svg-icon class="search-icon" icon-class="search"></svg-icon>
+        </span>
+        <span class="therr-point-icon">
+          <svg-icon icon-class="therr-point"></svg-icon>
+        </span>
+      </div>
     </header>
-
-    <div class="my-swiper">
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <img class="slide-img" :src="img.imgUrl" alt />
-        </swiper-slide>
-      </swiper>
-    </div>
 
     <ul class="page-tabs">
       <van-tabs
         :swipe-threshold="4"
-        title-inactive-color="#3a3a3a"
-        title-active-color="#D8182D"
-        background="#FFFFFF"
+        title-inactive-color="#fff"
+        title-active-color="#fff"
+        background="transparent"
         v-model="active"
         animated
+        :border="false"
         swipeable
         :line-width="0"
       >
@@ -46,10 +43,17 @@
                   <cite class="card-cite">{{item.title}}</cite>
                   <small class="card-small">{{item.name}}</small>
                 </li>
-                <li class="item-desc">
-                  <b class="item-price">{{item.price}}</b>
-                  <button class="my-btn">去抢购</button>
-                </li>
+                <div class="item-bottom">
+                  <li class="item-desc">
+                    <b class="item-price">{{item.price}}</b>
+                    <button class="my-btn">去抢购</button>
+                  </li>
+                  <li class="item-desc">
+                    <del class="item-del">{{item.oldPrice}}</del>
+                    <!-- <button class="my-btn">进度条</button> -->
+                    <!-- <progress class="lm-progress" value="22" max="100"></progress> -->
+                  </li>
+                </div>
               </ul>
             </ul>
           </main>
@@ -61,7 +65,7 @@
 
 <script>
 export default {
-  name: "newProductLaunch", // 新品首发
+  name: "chainCatSpike", // 链猫秒杀
   data() {
     return {
       active: "1",
@@ -69,17 +73,20 @@ export default {
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
           name: "迪丽热巴同款",
-          price: "￥200"
+          price: "￥200",
+          oldPrice: "￥400"
         },
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
           name: "迪丽热巴同款",
-          price: "￥200"
+          price: "￥200",
+          oldPrice: "￥400"
         },
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
           name: "迪丽热巴同款",
-          price: "￥200"
+          price: "￥200",
+          oldPrice: "￥400"
         },
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
@@ -94,24 +101,24 @@ export default {
       ],
       tabList: [
         {
-          title: "精选",
-          name: "最近很火"
+          title: "10:00",
+          name: "抢购中"
         },
         {
-          title: "手机",
-          name: "新机速递"
+          title: "12:00",
+          name: "即将开始"
         },
         {
-          title: "电器",
-          name: "3C家电"
+          title: "14:00",
+          name: "即将开始"
         },
         {
-          title: "时尚",
-          name: "美妆穿搭"
+          title: "16:00",
+          name: "即将开始"
         },
         {
-          title: "生活",
-          name: "居家日用"
+          title: "18:00",
+          name: "即将开始"
         }
       ],
       list: [
@@ -190,13 +197,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.new-product-launch {
+.chain-cat-spike {
   .page-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    // background: linear-gradient(#874bfe, #efefef);
+    background: linear-gradient(#d8182d, #efeff4);
     height: 250px;
     display: flex;
     justify-content: flex-start;
@@ -205,46 +212,40 @@ export default {
     .btn-left {
       position: fixed;
       left: 16px;
-      top: 14px;
+      top: 5px;
     }
     .header-content {
       text-align: center;
       font-size: 18px;
-      color: #3a3a3a;
+      color: #ffffff;
       font-weight: 600;
       flex: 1;
     }
-    .share-btn {
+    .option-btns {
+      position: fixed;
+      right: 16px;
       display: flex;
-      justify-content: center;
+      flex-direction: row;
       align-items: center;
-      .svg-icon {
-        width: 20px;
-        height: 20px;
+      .therr-point-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .search-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20px;
+        .svg-icon {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }
-  .my-swiper {
-    margin-top: 70px;
-    width: 100%;
-    .swiper-slide-active {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .swiper-slide-prev {
-      right: -16%;
-    }
-    .swiper-slide-next {
-      left: -5%;
-    }
-    .slide-img {
-      width: 333px;
-      height: 200px;
-      border-radius: 5px;
-    }
-  }
   .page-tabs {
+    margin-top: 70px;
     padding-top: 10px;
     /deep/ .van-tabs--line .van-tabs__wrap {
       height: 50px;
@@ -318,24 +319,37 @@ export default {
               color: #d8182d;
             }
           }
-          .item-desc {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+          .item-bottom {
             width: 100%;
-            padding-right: 16px;
-            .item-price {
-              font-size: 17px;
-              color: #d8182d;
-            }
-            .my-btn {
-              background-color: #d8182d;
-              border-radius: 2px;
-              width: 74px;
-              height: 24px;
-              color: #fff;
-              font-size: 11px;
-              text-align: center;
+            .item-desc {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-right: 16px;
+              padding-top: 7px;
+              .item-price {
+                font-size: 17px;
+                color: #d8182d;
+              }
+              .item-del {
+                font-size: 13px;
+              }
+              .lm-progress {
+                width: 70px;
+                height: 10px;
+                border-radius: 5px;
+                color: #d8182d;
+                display: inline-block;
+              }
+              .my-btn {
+                background-color: #d8182d;
+                border-radius: 2px;
+                width: 74px;
+                height: 24px;
+                color: #fff;
+                font-size: 11px;
+                text-align: center;
+              }
             }
           }
         }
