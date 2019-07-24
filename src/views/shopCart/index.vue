@@ -35,9 +35,7 @@
               <li class="check-item">
                 <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
               </li>
-              <img
-                src="http://m.360buyimg.com/mobilecms/jfs/t1/7091/11/2919/441267/5bd578bfE03e7166a/c5d5222c1802fd21.jpg!q70.jpg.dpg"
-              />
+              <img src="../../assets/image/shopCart/购物车-1.png" />
               <li class="order-detail">
                 <ul>
                   <li class="info-one">
@@ -49,7 +47,7 @@
                 </ul>
                 <div class="info-count">
                   <span>￥200</span>
-                  <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+                  <van-stepper v-model="stepperValue"  />
                 </div>
               </li>
             </div>
@@ -75,27 +73,25 @@
               <li class="check-item">
                 <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
               </li>
-              <img
-                src="http://m.360buyimg.com/mobilecms/jfs/t1/7091/11/2919/441267/5bd578bfE03e7166a/c5d5222c1802fd21.jpg!q70.jpg.dpg"
-              />
+              <img :src="item.imgSrc" />
               <li class="order-detail">
                 <ul>
                   <li class="info-one">
-                    <span>三彩预售新款短裙淑女裙淑女裙淑女裙淑女</span>
+                    <span>{{item.desc}}</span>
                   </li>
                   <li class="info-two">
-                    <span>型号;规格;颜色;</span>
+                    <span>{{item.info}}</span>
                   </li>
                 </ul>
                 <div class="info-count">
-                  <span>￥200</span>
-                  <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
+                  <span>{{item.price}}</span>
+                  <van-stepper v-model="stepperValue"  />
                 </div>
               </li>
             </div>
             <div class="order-total">
               <label>合计：</label>
-              <span>123000</span>
+              <span>{{item.total}}</span>
             </div>
           </ul>
         </van-checkbox-group>
@@ -162,7 +158,50 @@ export default {
       },
       show: false,
       list: ["a"],
-      lists: ["a", "b", "c"],
+      lists: [
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-2.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        },
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-3.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        },
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-4.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        },
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-5.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        },
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-6.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        },
+        {
+          imgSrc: require("../../assets/image/shopCart/购物车-7.png"),
+          info: "型号;规格;颜色;",
+          price: "￥200",
+          total: "123000",
+          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
+        }
+      ],
       checked: false,
       stepperValue: "",
       result: ["a", "b"]
@@ -406,7 +445,7 @@ export default {
             align-items: center;
             /deep/ .van-stepper__input {
               width: 31px;
-              height: 20px;
+              height: 22px;
               padding: 0;
               color: #949497;
               font-weight: normal;
