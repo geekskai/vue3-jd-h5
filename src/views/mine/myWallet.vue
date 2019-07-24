@@ -48,7 +48,7 @@
             </div>
             <div class="three-big-icons">
               <svg-icon class="three-big-icon" icon-class="wallet-three-big"></svg-icon>
-              <svg-icon class="right-arrow-icon" icon-class="wallet-right-arrow"></svg-icon>
+                <img class="right-arrow-icon" src="../../assets/image/wallet-right-white.png" alt="">
             </div>
           </div>
         </li>
@@ -63,7 +63,7 @@
             </div>
             <div class="four-big-icons">
               <svg-icon class="four-big-icon" icon-class="wallet-four-big"></svg-icon>
-              <svg-icon class="right-arrow-icon" icon-class="wallet-right-arrow"></svg-icon>
+              <img class="right-arrow-icon" src="../../assets/image/wallet-right-white.png" alt="">
             </div>
           </div>
         </li>
@@ -280,6 +280,10 @@ export default {
               height: 46px;
               margin-right: 20px;
             }
+            .right-arrow-icon {
+              widows: 35px;
+              height: 20px;
+            }
           }
         }
       }
@@ -341,6 +345,12 @@ export default {
               width: 50px;
               height: 46px;
               margin-right: 20px;
+            }
+            .right-arrow-icon {
+              .svg-icon {
+                widows: 35px;
+                height: 20px;
+              }
             }
           }
         }
