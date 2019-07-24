@@ -14,8 +14,9 @@
         </span>
       </div>
     </header>
-    <drop-list :config="configData" ref="droplist"></drop-list>
 
+
+    <drop-list :config="configData" ref="droplist"></drop-list>
     <ul class="page-tabs">
       <van-tabs
         :swipe-threshold="4"

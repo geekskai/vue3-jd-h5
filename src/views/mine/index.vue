@@ -30,10 +30,10 @@
     </section>
     <section class="mine-content">
       <ul class="options-list">
-        <router-link to="/mine/myAssets" class="option-item" tag="li">
+        <router-link to="/mine/myWallet" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="my-assets"></svg-icon>
-            <span>我的资产</span>
+            <span>我的钱包</span>
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>

@@ -164,6 +164,7 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{item.price}}</i>
+                      <span class="force-value">205算力值</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -176,69 +177,6 @@
         </van-tab>
       </van-tabs>
     </div>
-
-    <!-- <section class="goods-box search-wrap">
-      <span class="good-things">链猫自营</span>
-      <ul class="goods-content">
-        <li v-for="(item,index) in list" :key="index">
-          <router-link tag="div" to="/classify/product">
-            <img :src="item.img" />
-          </router-link>
-          <div class="goods-layout">
-            <div class="goods-title">{{item.name}}</div>
-            <span class="goods-div">{{item.title}}</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>{{item.price}}</i>
-              </span>
-              <span class="add-icon" @click="addToCart($event,item)">
-                <svg-icon icon-class="add"></svg-icon>
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>-->
-    <!-- <section class="recommended-shop">
-      <span class="shop-things">推荐店铺</span>
-      <ul class="shop-content">
-        <li class="shop-item">
-          <div class="item-header">
-            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
-            <div class="item-text">
-              <p>品炫旗舰店</p>
-              <i>正品大牌 产家直营</i>
-            </div>
-            <router-link to="/storeDetail">
-              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
-            </router-link>
-          </div>
-          <div class="item-iamgs">
-            <img src="../../assets/image/home/store1.png" />
-            <img src="../../assets/image/home/store2.png" />
-            <img src="../../assets/image/home/store3.png" />
-          </div>
-        </li>
-        <li class="shop-item">
-          <div class="item-header">
-            <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
-            <div class="item-text">
-              <p>北欧家居旗舰店</p>
-              <i>正品大牌 产家直营</i>
-            </div>
-            <router-link to="/storeDetail">
-              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
-            </router-link>
-          </div>
-          <div class="item-iamgs">
-            <img src="../../assets/image/home/store4.png" />
-            <img src="../../assets/image/home/store5.png" />
-            <img src="../../assets/image/home/store6.png" />
-          </div>
-        </li>
-      </ul>
-    </section>-->
-
     <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
         <div class="ball" v-if="ball.show">
@@ -792,8 +730,24 @@ export default {
             align-items: center;
             padding-bottom: 10px;
             .goods-price {
+              padding-top: 5px;
               font-size: 14px;
               color: #d8182d;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #d8182d;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 42px;
+                height: 17px;
+              }
             }
             .add-icon {
               display: flex;
