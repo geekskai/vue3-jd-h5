@@ -47,30 +47,30 @@
     <section class="spike-area">
       <ul class="spike-top">
         <router-link class="top-left" to="/chainCatSpike" tag="li">
-            <div class="item-top">
-              <span class="item-title">链猫秒杀</span>
-              <div class="time-text">
-                <span class="eight-time">8点场</span>
-                <span class="spike-time">00 : 17 : 55</span>
-              </div>
+          <div class="item-top">
+            <span class="item-title">链猫秒杀</span>
+            <div class="time-text">
+              <span class="eight-time">8点场</span>
+              <span class="spike-time">00 : 17 : 55</span>
             </div>
-            <div class="item-info">
-              <div class="item-content">
-                <img src="../../assets/image/home/demo1.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
-              <div class="item-content">
-                <img src="../../assets/image/home/demo2.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
-              <div class="item-content">
-                <img src="../../assets/image/home/demo3.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
+          </div>
+          <div class="item-info">
+            <div class="item-content">
+              <img src="../../assets/image/home/demo1.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
             </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo2.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo3.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+          </div>
         </router-link>
         <router-link class="top-right" to="/foundGoodGoods" tag="li">
           <div class="right-header">
@@ -138,7 +138,7 @@
       </ul>
     </section>
 
-    <div class="page-tabs">
+    <div class="content-tabs">
       <van-tabs
         :swipe-threshold="5"
         title-inactive-color="#3a3a3a"
@@ -149,8 +149,8 @@
       >
         <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
           <div slot="title" class="slot-title">
-            <h3>{{item.title}}</h3>
-            <span>{{item.name}}</span>
+            <b class="tab-title">{{item.title}}</b>
+            <span class="tab-name">{{item.name}}</span>
           </div>
           <section class="goods-box search-wrap">
             <ul class="goods-content">
@@ -723,25 +723,30 @@ export default {
       }
     }
   }
-  .page-tabs {
-    /deep/ .van-tabs--line {
-      padding-top: 35px;
-    }
-
+  .content-tabs {
+    padding-top: 10px;
     .slot-title {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 20px;
-      span,
-      h3 {
+      .tab-title {
+        font-size: 14px;
+        font-weight: 600;
+        font-size: 17px;
+        height: 24px;
         display: inline-block;
-        height: 20px;
+        width: 40px;
+        line-height: 22px;
+      }
+      .tab-name {
+        line-height: 16px;
+        font-size: 10px;
+        display: inline-block;
       }
     }
     .goods-box {
-      padding: 16px;
+      padding: 10px 16px;
       .good-things {
         font-size: 18px;
         color: #d8182d;
@@ -758,8 +763,6 @@ export default {
           border-radius: 8px;
           background-color: white;
           box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-          // background: url('../../assets/image/back-show.png') no-repeat center center;
-          // background-size:100% 100%;
           img {
             width: 100%;
           }
@@ -802,134 +805,6 @@ export default {
       }
     }
   }
-
-  // .goods-box {
-  //   padding: 16px;
-  //   .good-things {
-  //     font-size: 18px;
-  //     color: #d8182d;
-  //     font-weight: 600;
-  //   }
-  //   .goods-content {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     flex-wrap: wrap;
-  //     li {
-  //       display: inline-block;
-  //       width: 165px;
-  //       margin-top: 10px;
-  //       border-radius: 8px;
-  //       background-color: white;
-  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-  //       // background: url('../../assets/image/back-show.png') no-repeat center center;
-  //       // background-size:100% 100%;
-  //       img {
-  //         width: 100%;
-  //       }
-  //     }
-  //     li:nth-of-type(even) {
-  //       padding-right: 0;
-  //     }
-  //     .goods-layout {
-  //       width: 165px;
-  //       padding: 0 10px;
-  //       display: flex;
-  //       justify-content: flex-start;
-  //       flex-direction: column;
-  //       .goods-title {
-  //         color: #3a3a3a;
-  //         font-size: 14px;
-  //         font-weight: 600;
-  //       }
-  //       .goods-div {
-  //         color: #949497;
-  //         font-size: 11px;
-  //       }
-  //       .goods-desc {
-  //         background-color: #fff;
-  //         display: flex;
-  //         justify-content: space-between;
-  //         align-items: center;
-  //         padding-bottom: 10px;
-  //         .goods-price {
-  //           font-size: 14px;
-  //           color: #d8182d;
-  //         }
-  //         .add-icon {
-  //           display: flex;
-  //           justify-content: center;
-  //           align-items: center;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // .recommended-shop {
-  //   padding: 16px;
-  //   .shop-things {
-  //     font-size: 18px;
-  //     color: #d8182d;
-  //     font-weight: 600;
-  //   }
-  //   .shop-content {
-  //     padding-top: 10px;
-  //     .shop-item {
-  //       background-color: #fff;
-  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-  //       border-radius: 8px;
-  //       padding: 11px;
-  //       margin-bottom: 10px;
-  //       .item-iamgs {
-  //         display: flex;
-  //         justify-content: space-around;
-  //         align-items: center;
-  //         padding-bottom: 5px;
-  //         padding-left: 5px;
-  //         img {
-  //           display: inline-block;
-  //           width: 100px;
-  //           height: 100px;
-  //           border-radius: 10px;
-  //           margin-right: 7px;
-  //         }
-  //       }
-  //       .item-header {
-  //         display: flex;
-  //         justify-content: space-between;
-  //         align-items: center;
-  //         margin-bottom: 10px;
-  //         .into-store {
-  //           width: 41px;
-  //           height: 16px;
-  //           margin-right: 12px;
-  //         }
-  //         .item-text {
-  //           flex: 1;
-  //           height: 37px;
-  //           padding-left: 5px;
-  //           display: flex;
-  //           justify-content: space-between;
-  //           align-items: flex-start;
-  //           flex-direction: column;
-  //           p {
-  //             font-size: 14px;
-  //             color: #3a3a3a;
-  //             font-weight: 600;
-  //           }
-  //           i {
-  //             font-size: 11px;
-  //             color: #949497;
-  //           }
-  //         }
-  //         .store-logo {
-  //           width: 37px;
-  //           height: 37px;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   .ballWrap {
     .ball {

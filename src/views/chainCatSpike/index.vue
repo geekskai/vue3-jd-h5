@@ -327,8 +327,8 @@ export default {
     }
   }
   .page-tabs {
-    margin-top: 70px;
-    padding-top: 10px;
+    margin-top: 60px;
+    // padding-top: 10px;
     /deep/ .van-tabs--line .van-tabs__wrap {
       height: 50px;
     }

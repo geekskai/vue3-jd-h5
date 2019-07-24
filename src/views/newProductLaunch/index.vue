@@ -1,5 +1,5 @@
 <template>
-  <ul class="new-product-launch">
+  <ul class="new-product-launch" id="new-product-launch">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
@@ -19,7 +19,7 @@
       </swiper>
     </div>
 
-    <ul class="page-tabs">
+    <ul class="new-product-tags">
       <van-tabs
         :swipe-threshold="4"
         title-inactive-color="#3a3a3a"
@@ -60,7 +60,7 @@
       v-model="show"
       round
       :overlay="false"
-      get-container="#premium-ranking"
+      get-container="#new-product-launch"
       position="bottom"
       :style="{ height: '47%' }"
     >
@@ -288,7 +288,7 @@ export default {
       border-radius: 5px;
     }
   }
-  .page-tabs {
+  .new-product-tags {
     padding-top: 10px;
     /deep/ .van-tabs--line .van-tabs__wrap {
       height: 50px;

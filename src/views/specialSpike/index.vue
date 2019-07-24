@@ -245,10 +245,11 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    /deep/ .van-tabs--line {
-      padding-top: 60px;
-    }
+    // /deep/ .van-tabs--line {
+    //   padding-top: 60px;
+    // }
     .header-card {
+      margin-top: 16px;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);

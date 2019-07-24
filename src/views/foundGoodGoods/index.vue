@@ -216,9 +216,9 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    /deep/ .van-tabs--line {
-      padding-top: 60px;
-    }
+    // /deep/ .van-tabs--line {
+    //   padding-top: 60px;
+    // }
     .list-item {
       .card-item {
         margin: 20px auto;

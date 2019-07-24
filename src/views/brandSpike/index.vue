@@ -218,14 +218,15 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    /deep/ .van-tabs--line {
-      padding-top: 60px;
+     /deep/ .van-tabs--line .van-tabs__wrap {
+      height: 35px;
     }
+   
     .header-card {
+      margin-top: 16px;
       margin-bottom: 20px;
       background-color: #fff;
       height: 300px;
-      //   padding: 29px 50px;
       background: url("../../assets/image/product/spike0.png") no-repeat center
         center;
       background-size: 100% 100%;
