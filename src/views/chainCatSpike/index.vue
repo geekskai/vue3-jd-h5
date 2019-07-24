@@ -54,7 +54,8 @@
                   </li>
                   <li class="item-desc">
                     <del class="item-del">{{item.oldPrice}}</del>
-                    <progress v-if="tab.name == '抢购中'" class="lm-progress" value="22" max="100"></progress>
+                    <progress-bar v-if="tab.name == '抢购中'"></progress-bar>
+                    <!-- <progress v-if="tab.name == '抢购中'" class="lm-progress" value="22" max="100"></progress> -->
                     <i v-else class="set-reminder">200已设置提醒</i>
                   </li>
                 </div>
