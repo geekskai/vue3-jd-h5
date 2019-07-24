@@ -1,20 +1,20 @@
 <template>
-  <div class="found-good-goods">
+  <div class="found-good-goods" id="found-good-goods">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <img src="../../assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">发现好货</div>
       <div class="option-btns">
-        <span class="search-btn">
+        <router-link to="/search" class="search-btn" tag="span">
           <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        </span>
+        </router-link>
         <span class="therr-point-icon" @click="handleMeun">
           <svg-icon icon-class="therr-point"></svg-icon>
         </span>
       </div>
     </header>
-
+    <drop-list :config="configData" ref="droplist"></drop-list>
     <ul class="page-content">
       <van-tabs
         v-model="active"
@@ -69,6 +69,49 @@
         </van-tab>
       </van-tabs>
     </ul>
+    <van-popup
+      v-model="show"
+      round
+      :overlay="false"
+      get-container="#found-good-goods"
+      position="bottom"
+      :style="{ height: '47%' }"
+    >
+      <article>
+        <van-divider
+          :style="{ borderColor: 'rgb(58, 58, 58,.14)', color: '#3A3A3A', padding: '0 10px',margin:'15px 0'}"
+        >分享到</van-divider>
+        <ul class="share-list">
+          <li class="share-item">
+            <svg-icon icon-class="we-char"></svg-icon>
+            <span class="share-text">微信好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-chat-friends"></svg-icon>
+            <span class="share-text">朋友圈</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-blog"></svg-icon>
+            <span class="share-text">新浪微博</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-icon"></svg-icon>
+            <span class="share-text">QQ好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-space"></svg-icon>
+            <span class="share-text">QQ空间</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="copy-link"></svg-icon>
+            <span class="share-text">复制链接</span>
+          </li>
+        </ul>
+        <li class="cancle-btn" @click="show = false">
+          <b class="cancle-text">取消</b>
+        </li>
+      </article>
+    </van-popup>
   </div>
 </template>
 
@@ -78,14 +121,43 @@ export default {
   data() {
     return {
       active: "1",
+      show: false,
       isLike: false,
+      configData: {
+        position: {
+          // 设置显示位置，position
+          top: "60px",
+          right: "8px",
+          bottom: "",
+          left: ""
+        },
+        width: "33%", // 设置宽度
+        list: [
+          // 设置下拉列表数据和对应的点击事件
+          { text: "分享", icon: "share-btn-black", action: this.handleShare },
+          {
+            text: "我的关注",
+            icon: "heart-null-black",
+            action: this.handleMyFocus
+          }
+        ]
+      },
       tabList: ["推荐", "生活家", "数码控", "手机控", "时髦精", "型男精"]
     };
   },
   created() {},
   methods: {
-    handleMeun(){
-      this.$router.push('/myFocus')
+    handleMeun() {
+      this.$refs.droplist.show();
+    },
+    handleMyFocus() {
+      this.$router.push("/myFocus");
+    },
+    handleShare() {
+      this.show = true;
+    },
+    hidden() {
+      this.$refs.droplist.hidden();
     }
   }
 };
@@ -200,6 +272,44 @@ export default {
           }
         }
       }
+    }
+  }
+  .share-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    .share-item {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 12px;
+      color: #3a3a3a;
+      .svg-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .share-text {
+        padding-top: 6px;
+      }
+    }
+  }
+  .cancle-btn {
+    padding-top: 20px;
+    text-align: center;
+    color: #3a3a3a;
+    font-size: 14px;
+    .cancle-text {
+      display: inline-block;
+      width: 290px;
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 13px;
+      border: 0 solid #3a3a3a1a;
+      border-top-width: 1px;
     }
   }
 }

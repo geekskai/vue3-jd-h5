@@ -1,11 +1,11 @@
 <template>
-  <div class="love-shop">
+  <div class="love-shop" id="love-shop">
     <header class="page-header">
       <span class="return-btn" @click="$router.go(-1)">
         <svg-icon icon-class="transparent-btn"></svg-icon>
       </span>
       <div class="header-content">爱逛好店</div>
-      <span class="share-btn">
+      <span class="share-btn" @click="show = true">
         <svg-icon icon-class="share-btn"></svg-icon>
       </span>
     </header>
@@ -195,6 +195,50 @@
         </van-tab>
       </van-tabs>
     </section>
+
+    <van-popup
+      v-model="show"
+      round
+      :overlay="false"
+      get-container="#premium-ranking"
+      position="bottom"
+      :style="{ height: '47%' }"
+    >
+      <article>
+        <van-divider
+          :style="{ borderColor: 'rgb(58, 58, 58,.14)', color: '#3A3A3A', padding: '0 10px',margin:'15px 0'}"
+        >分享到</van-divider>
+        <ul class="share-list">
+          <li class="share-item">
+            <svg-icon icon-class="we-char"></svg-icon>
+            <span class="share-text">微信好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-chat-friends"></svg-icon>
+            <span class="share-text">朋友圈</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-blog"></svg-icon>
+            <span class="share-text">新浪微博</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-icon"></svg-icon>
+            <span class="share-text">QQ好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-space"></svg-icon>
+            <span class="share-text">QQ空间</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="copy-link"></svg-icon>
+            <span class="share-text">复制链接</span>
+          </li>
+        </ul>
+        <li class="cancle-btn" @click="show = false">
+          <b class="cancle-text">取消</b>
+        </li>
+      </article>
+    </van-popup>
   </div>
 </template>
 
@@ -204,6 +248,7 @@ export default {
   data() {
     return {
       active: "1",
+      show: false,
       tabList: ["链猫好店", "有趣好店", "品牌店", "发现好店"]
     };
   },
@@ -331,78 +376,44 @@ export default {
         }
       }
     }
-
-    // .list-item {
-    //   .card-item {
-    //     margin: 20px auto;
-    //     background-color: white;
-    //     border-radius: 8px;
-    //     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-    //     display: flex;
-    //     justify-content: space-between;
-    //     align-items: flex-start;
-    //     font-size: 14px;
-    //     padding: 14px;
-    //     .card-img {
-    //       width: 110px;
-    //       height: 110px;
-    //     }
-    //     .card-info {
-    //       display: flex;
-    //       height: 110px;
-    //       justify-content: space-between;
-    //       flex-direction: column;
-    //       align-items: flex-start;
-    //       .info-top {
-    //         .item-title {
-    //           overflow: hidden;
-    //           text-overflow: ellipsis;
-    //           white-space: nowrap;
-    //           font-size: 14px;
-    //           color: #3a3a3a;
-    //           font-weight: 600;
-    //           width: 200px;
-    //         }
-    //         .item-desc {
-    //           font-size: 11px;
-    //           color: #d8182d;
-    //         }
-    //       }
-    //       .item-price {
-    //         font-size: 17px;
-    //         color: #3a3a3a;
-    //         font-weight: 600;
-    //         padding-bottom: 2px;
-    //       }
-    //       .item-hot {
-    //         border: 1px solid #d8182d;
-    //         border-radius: 2px;
-    //         display: flex;
-    //         justify-content: center;
-    //         align-items: center;
-    //         background: linear-gradient(to right, #d8182d 64%, #fff 36%);
-    //         .hot-text {
-    //           display: inline-block;
-    //           line-height: 15px;
-    //           width: 54px;
-    //           font-size: 11px;
-    //           text-align: center;
-    //           height: 16px;
-    //           color: #fff;
-    //           border-radius: 2px;
-    //         }
-
-    //         .hot-index {
-    //           width: 30px;
-    //           font-size: 11px;
-    //           text-align: center;
-    //           display: inline-block;
-    //           color: #d8182d;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+  }
+  .share-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    .share-item {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 12px;
+      color: #3a3a3a;
+      .svg-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .share-text {
+        padding-top: 6px;
+      }
+    }
+  }
+  .cancle-btn {
+    padding-top: 20px;
+    text-align: center;
+    color: #3a3a3a;
+    font-size: 14px;
+    .cancle-text {
+      display: inline-block;
+      width: 290px;
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 13px;
+      border: 0 solid #3a3a3a1a;
+      border-top-width: 1px;
+    }
   }
 }
 </style>

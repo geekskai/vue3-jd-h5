@@ -3,10 +3,10 @@
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
-         <img src="../../assets/icons/left-green-white.png" alt="">
+        <img src="../../assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">新品首发</div>
-      <span class="share-btn">
+      <span class="share-btn" @click="show = true">
         <svg-icon icon-class="share-btn-black"></svg-icon>
       </span>
     </header>
@@ -56,6 +56,49 @@
         </van-tab>
       </van-tabs>
     </ul>
+    <van-popup
+      v-model="show"
+      round
+      :overlay="false"
+      get-container="#premium-ranking"
+      position="bottom"
+      :style="{ height: '47%' }"
+    >
+      <article>
+        <van-divider
+          :style="{ borderColor: 'rgb(58, 58, 58,.14)', color: '#3A3A3A', padding: '0 10px',margin:'15px 0'}"
+        >分享到</van-divider>
+        <ul class="share-list">
+          <li class="share-item">
+            <svg-icon icon-class="we-char"></svg-icon>
+            <span class="share-text">微信好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-chat-friends"></svg-icon>
+            <span class="share-text">朋友圈</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="we-blog"></svg-icon>
+            <span class="share-text">新浪微博</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-icon"></svg-icon>
+            <span class="share-text">QQ好友</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="qq-space"></svg-icon>
+            <span class="share-text">QQ空间</span>
+          </li>
+          <li class="share-item">
+            <svg-icon icon-class="copy-link"></svg-icon>
+            <span class="share-text">复制链接</span>
+          </li>
+        </ul>
+        <li class="cancle-btn" @click="show = false">
+          <b class="cancle-text">取消</b>
+        </li>
+      </article>
+    </van-popup>
   </ul>
 </template>
 
@@ -65,6 +108,7 @@ export default {
   data() {
     return {
       active: "1",
+      show: false,
       cardList: [
         {
           title: "【玻尿酸巨补水新款面膜】大大发送的发送到发顺丰",
@@ -340,6 +384,44 @@ export default {
           }
         }
       }
+    }
+  }
+  .share-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    .share-item {
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 12px;
+      color: #3a3a3a;
+      .svg-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .share-text {
+        padding-top: 6px;
+      }
+    }
+  }
+  .cancle-btn {
+    padding-top: 20px;
+    text-align: center;
+    color: #3a3a3a;
+    font-size: 14px;
+    .cancle-text {
+      display: inline-block;
+      width: 290px;
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 13px;
+      border: 0 solid #3a3a3a1a;
+      border-top-width: 1px;
     }
   }
 }
