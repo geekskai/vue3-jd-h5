@@ -51,7 +51,19 @@
             <span class="item-title">链猫秒杀</span>
             <div class="time-text">
               <span class="eight-time">8点场</span>
-              <span class="spike-time">00 : 17 : 55</span>
+
+              <van-count-down :time="timeData" class="time-count-down">
+                <template v-slot="timeData">
+                  <span class="time-item" v-if="timeData.hours<10">{{ '0'+timeData.hours }}</span>
+                  <span class="time-item" v-else>{{ timeData.hours }}</span>
+                  <i class="tow-point">:</i>
+                  <span class="time-item" v-if="timeData.minutes<10">{{'0'+ timeData.minutes }}</span>
+                  <span class="time-item" v-else>{{ timeData.minutes }}</span>
+                  <i class="tow-point">:</i>
+                  <span class="time-item" v-if="timeData.seconds<10">{{ '0'+timeData.seconds }}</span>
+                  <span class="time-item" v-else>{{ timeData.seconds }}</span>
+                </template>
+              </van-count-down>
             </div>
           </div>
           <div class="item-info">
@@ -147,14 +159,15 @@
         v-model="active"
         animated
       >
-        <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
+        <van-tab v-for="(item,index) in tabList" :title="item.name" :name="item.name" :key="index">
           <div slot="title" class="slot-title">
             <b class="tab-title">{{item.title}}</b>
             <span class="tab-name">{{item.name}}</span>
           </div>
+
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <li v-for="(item,index) in list" :key="index">
+              <li v-for="(item,index) in item.list" :key="index">
                 <router-link tag="div" to="/classify/product">
                   <img :src="item.img" />
                 </router-link>
@@ -198,107 +211,16 @@ export default {
   data() {
     return {
       active: "",
-      // tabList: ["猜你喜欢", "潮流百搭", "3C数码", "百货生鲜", "居家日用"],
-      tabList: [
-        {
-          title: "精选",
-          name: "猜你喜欢"
-        },
-        {
-          title: "时尚",
-          name: "潮流百搭"
-        },
-        {
-          title: "数码",
-          name: "3C数码"
-        },
-        {
-          title: "超市",
-          name: "百货生鲜"
-        },
-        {
-          title: "生活",
-          name: "居家日用"
-        }
-      ],
-      list: [
-        {
-          name: "多功能料理机",
-          img: require("../../assets/image/home/test1.png"),
-          title: "限量套装 新品上市",
-          price: "$125"
-        },
-        {
-          name: "遥控制空调扇",
-          img: require("../../assets/image/home/test2.png"),
-          title: "限量套装 新品上市",
-          price: "$245"
-        },
-        {
-          name: "时尚双肩包",
-          img: require("../../assets/image/home/test3.png"),
-          title: "限量套装 新品上市",
-          price: "$21"
-        },
-        {
-          name: "商务行李箱",
-          img: require("../../assets/image/home/test4.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        },
-        {
-          name: "无线消噪耳机",
-          img: require("../../assets/image/home/test5.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        },
-        {
-          name: "无线蓝牙耳机",
-          img: require("../../assets/image/home/test6.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        }
-      ],
+      timeData: 36000000,
+      tabList: [],
       ball: {
         show: false,
         el: ""
       },
       isLogin: false,
       headerActive: false,
-      images: [
-        {
-          imgUrl: require("../../assets/image/home/banner5.jpg"),
-          categoryId: 100018
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner6.jpg"),
-          categoryId: 100008
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner7.jpg"),
-          categoryId: 100016
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner8.jpg"),
-          categoryId: 100035
-        }
-      ],
-      images2: [
-        {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
-          categoryId: 100035
-        },
-
-        {
-          imgUrl: require("../../assets/image/home/test11.png"),
-          categoryId: 100020
-        },
-        {
-          imgUrl: require("../../assets/image/home/test10.png"),
-          categoryId: 100019
-        }
-      ],
+      images: [],
+      images2: [],
       swiperOption: {
         loop: true,
         autoplay: false,
@@ -324,8 +246,13 @@ export default {
   },
 
   created() {
-    this.$http.get("http://test.happymmall.com/home/data").then(res => {
-      const { data } = res.data;
+    this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
+      const { tabList } = res.data;
+      const { images } = res.data;
+      const { images2 } = res.data;
+      this.tabList = tabList;
+      this.images = images;
+      this.images2 = images2;
     });
   },
   mounted() {
@@ -334,9 +261,6 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
-    // handleToProduct() {
-    //   this.$router.push("/classify/product");
-    // },
     addToCart(event, tag) {
       this.$store.commit("cart/addToCart", tag);
       this.ball.show = true;
@@ -363,12 +287,14 @@ export default {
       this.ball.show = false;
       el.style.display = "none";
     },
+
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
     },
     handleClick() {
       this.$router.push("/classify/product");
     },
+
     pageScroll() {
       let scrollTop =
         window.pageYOffset ||
@@ -513,7 +439,7 @@ export default {
             height: 18px;
             line-height: 18px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             .eight-time {
               font-size: 11px;
@@ -522,11 +448,13 @@ export default {
               width: 42px;
               background-color: #d8182d;
             }
-            .spike-time {
-              padding-left: 2px;
+            .time-count-down {
+              flex: 1;
               font-size: 9px;
               color: #dd3749;
-              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
           }
         }

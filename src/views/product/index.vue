@@ -1,7 +1,7 @@
 <template>
   <div class="product-layout">
     <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
+      <van-swipe-item v-for="(image, index) in productImages" :key="index">
         <img class="lazy_img" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
@@ -188,27 +188,33 @@ export default {
         }
       ],
       imgSrc: require("../../assets/image/home/test2.png"),
-      images: [
-        {
-          imgUrl: require("../../assets/image/home/test1.png"),
-          categoryId: 100008
-        },
-        {
-          imgUrl: require("../../assets/image/home/test2.png"),
-          categoryId: 100016
-        },
-        {
-          imgUrl: require("../../assets/image/home/test3.png"),
-          categoryId: 100035
-        },
-        {
-          imgUrl: require("../../assets/image/home/test4.png"),
-          categoryId: 100016
-        }
+      productImages: [
+        // {
+        //   imgUrl: require("../../assets/image/home/test1.png"),
+        //   categoryId: 100008
+        // },
+        // {
+        //   imgUrl: require("../../assets/image/home/test2.png"),
+        //   categoryId: 100016
+        // },
+        // {
+        //   imgUrl: require("../../assets/image/home/test3.png"),
+        //   categoryId: 100035
+        // },
+        // {
+        //   imgUrl: require("../../assets/image/home/test4.png"),
+        //   categoryId: 100016
+        // }
       ]
     };
   },
-  created() {},
+  created() {
+    this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
+      const { productImages } = res.data;
+      let i = Math.floor(Math.random() * 6);
+      this.productImages = productImages[i];
+    });
+  },
   methods: {
     handleSelected(item) {
       item.selected = true;

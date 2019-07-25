@@ -16,7 +16,7 @@
     <section class="recommend-classify">
       <ul class="like-list" v-for="(item,index) in likeList" :key="index">
         <router-link tag="li" class="like-item" to="/classify/product">
-          <img class="item-picture" />
+          <img class="item-picture" :src="item.imgUrl" />
           <div class="item-detail">
             <p class="store-info">
               <img src="../../assets/image/product/store-headerM.png" class="header-img" />
@@ -40,38 +40,43 @@ export default {
   data() {
     return {
       likeList: [
-        {
-          id: 0,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 1,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 2,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 3,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        }
+        // {
+        //   id: 0,
+        //   storeName: "店铺名称",
+        //   itemTitle: "娜扎新装LOOK",
+        //   itemPrice: "$248",
+        //   itemCount: "月销:888"
+        // },
+        // {
+        //   id: 1,
+        //   storeName: "店铺名称",
+        //   itemTitle: "娜扎新装LOOK",
+        //   itemPrice: "$248",
+        //   itemCount: "月销:888"
+        // },
+        // {
+        //   id: 2,
+        //   storeName: "店铺名称",
+        //   itemTitle: "娜扎新装LOOK",
+        //   itemPrice: "$248",
+        //   itemCount: "月销:888"
+        // },
+        // {
+        //   id: 3,
+        //   storeName: "店铺名称",
+        //   itemTitle: "娜扎新装LOOK",
+        //   itemPrice: "$248",
+        //   itemCount: "月销:888"
+        // }
       ]
     };
   },
-  created() {},
+  created() {
+    this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
+      const { data } = res.data;
+      this.likeList = data;
+    });
+  },
   methods: {
     handleSearch() {
       this.$router.push("/search");

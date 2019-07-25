@@ -30,8 +30,19 @@
                 <i class="low-sale">超低价特卖</i>
               </div>
               <div class="top-right">
-                <label class="only-left">仅剩:</label>
-                <span>15:40:37</span>
+                <label class="only-left">仅剩</label>
+                <van-count-down :time="timeData" class="time-count-down">
+                  <template v-slot="timeData">
+                    <span class="time-item" v-if="timeData.hours<10">{{ '0'+timeData.hours }}</span>
+                    <span class="time-item" v-else>{{ timeData.hours }}</span>
+                    <i class="tow-point">:</i>
+                    <span class="time-item" v-if="timeData.minutes<10">{{'0'+ timeData.minutes }}</span>
+                    <span class="time-item" v-else>{{ timeData.minutes }}</span>
+                    <i class="tow-point">:</i>
+                    <span class="time-item" v-if="timeData.seconds<10">{{ '0'+timeData.seconds }}</span>
+                    <span class="time-item" v-else>{{ timeData.seconds }}</span>
+                  </template>
+                </van-count-down>
               </div>
             </div>
 
@@ -197,6 +208,7 @@ export default {
   data() {
     return {
       active: "1",
+      timeData: 36000000,
       tabList: ["秒杀", "疯抢", "生活电器", "家居软饰", "平板电视"]
     };
   },
@@ -245,16 +257,13 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    // /deep/ .van-tabs--line {
-    //   padding-top: 60px;
-    // }
     .header-card {
       margin-top: 16px;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
       .card-top {
-        padding: 10px;
+        padding: 10px 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -268,11 +277,36 @@ export default {
           }
         }
         .top-right {
-          font-size: 14px;// TODO
+          font-size: 14px; // TODO
+          display: flex;
+          justify-content: center;
+          align-items: center;
           .only-left {
             font-size: 11px;
+            padding-right: 5px;
           }
-          
+          .time-count-down {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .time-item {
+              display: inline-block;
+              text-align: center;
+              font-size: 11px;
+              width: 17px;
+              height: 17px;
+              background-color: #3a3a3a;
+              border-radius: 2px;
+              color: #fff;
+            }
+            .tow-point {
+              display: inline-block;
+              width: 10px;
+              height: 17px;
+              text-align: center;
+              line-height: 17px;
+            }
+          }
         }
       }
       .card-content {
