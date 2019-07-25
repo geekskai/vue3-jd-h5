@@ -70,78 +70,16 @@ export default {
       currentIndex: 0,
       categoryData: [],
       tabslabel: [
-        {
-          label: "热门推荐",
-          active: true
-        },
-        {
-          label: "手机数码",
-          active: false
-        },
-        {
-          label: "电脑办公",
-          active: false
-        },
-        {
-          label: "计生情趣",
-          active: false
-        },
-        {
-          label: "美妆护肤",
-          active: false
-        },
-
-        {
-          label: "个人清洁",
-          active: false
-        },
-        {
-          label: "汽车生活",
-          active: false
-        },
-        {
-          label: "男装",
-          active: false
-        },
-        {
-          label: "女装",
-          active: false
-        },
-        {
-          label: "超市",
-          active: false
-        },
-        {
-          label: "户外运动",
-          active: false
-        },
-        {
-          label: "男装",
-          active: false
-        },
-        {
-          label: "女装",
-          active: false
-        },
-        {
-          label: "超市",
-          active: false
-        },
-        {
-          label: "户外运动",
-          active: false
-        },
-        {
-          label: "其他",
-          active: false
-        }
+        
       ]
     };
   },
   created() {
-    this.$http.get("http://test.happymmall.com/category/data").then(res => {
-      const { data } = res.data;
-      this.categoryData = data;
+    this.$http.get("http://test.happymmall.com/category/categoryData").then(res => {
+      const { categoryData } = res.data;
+      const { tabslabel } = res.data;
+      this.categoryData = categoryData;
+      this.tabslabel = tabslabel;
     });
   },
   methods: {

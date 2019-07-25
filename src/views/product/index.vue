@@ -188,24 +188,7 @@ export default {
         }
       ],
       imgSrc: require("../../assets/image/home/test2.png"),
-      productImages: [
-        // {
-        //   imgUrl: require("../../assets/image/home/test1.png"),
-        //   categoryId: 100008
-        // },
-        // {
-        //   imgUrl: require("../../assets/image/home/test2.png"),
-        //   categoryId: 100016
-        // },
-        // {
-        //   imgUrl: require("../../assets/image/home/test3.png"),
-        //   categoryId: 100035
-        // },
-        // {
-        //   imgUrl: require("../../assets/image/home/test4.png"),
-        //   categoryId: 100016
-        // }
-      ]
+      productImages: []
     };
   },
   created() {

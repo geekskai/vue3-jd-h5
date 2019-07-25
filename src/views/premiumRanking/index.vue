@@ -23,121 +23,25 @@
       >
         <van-tab v-for="index in tabList" :title="index" :key="index">
           <ul class="list-item">
-            <li class="card-item">
+            <li class="card-item" v-for="(item,index) in listItems" :key="index">
+              <span class="flag-box">
+                <svg-icon icon-class="red-flag"></svg-icon>
+                <i class="flag-number">{{index+1}}</i>
+              </span>
               <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo0.png" />
+                <img :src="item.img" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
+                  <div class="item-title">{{item.title}}</div>
+                  <span class="item-desc">{{item.desc}}</span>
                 </li>
                 <li>
-                  <p class="item-price">¥1988</p>
+                  <p class="item-price">{{item.price}}</p>
                   <span class="item-hot">
                     <span class="hot-text">热卖指数</span>
                     <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
+                      <i>{{item.hotIndex}}</i>
                     </span>
                   </span>
                 </li>
@@ -148,7 +52,7 @@
       </van-tabs>
     </section>
 
-     <van-popup
+    <van-popup
       v-model="show"
       round
       :overlay="false"
@@ -191,8 +95,6 @@
         </li>
       </article>
     </van-popup>
-
-    
   </div>
 </template>
 
@@ -203,6 +105,40 @@ export default {
     return {
       active: "1",
       show: false,
+      listItems: [
+        {
+          img: require("../../assets/image/premiumRanking/demo0.png"),
+          title:
+            "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
+          desc: "正品大牌 产家直营",
+          price: "¥1988",
+          hotIndex: "99"
+        },
+        {
+          img: require("../../assets/image/premiumRanking/demo0.png"),
+          title:
+            "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
+          desc: "正品大牌 产家直营",
+          price: "¥1988",
+          hotIndex: "99"
+        },
+        {
+          img: require("../../assets/image/premiumRanking/demo0.png"),
+          title:
+            "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
+          desc: "正品大牌 产家直营",
+          price: "¥1988",
+          hotIndex: "99"
+        },
+        {
+          img: require("../../assets/image/premiumRanking/demo0.png"),
+          title:
+            "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
+          desc: "正品大牌 产家直营",
+          price: "¥1988",
+          hotIndex: "99"
+        }
+      ],
       tabList: ["3C数码", "进口食品", "生活电器", "家居软饰", "平板电视"]
     };
   },
@@ -262,6 +198,20 @@ export default {
         align-items: flex-start;
         font-size: 14px;
         padding: 14px;
+        .flag-box {
+          margin-top: -14px;
+          position: absolute;
+          .flag-number{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 8px;
+            right: 0;
+            margin: 0 auto;
+            color: #fff;
+            font-size: 11px;
+          }
+        }
         .card-img {
           width: 110px;
           height: 110px;
@@ -323,7 +273,7 @@ export default {
       }
     }
   }
-   .share-list {
+  .share-list {
     display: flex;
     justify-content: flex-start;
     align-items: center;

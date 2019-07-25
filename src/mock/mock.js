@@ -344,7 +344,72 @@ let homeData = {
 
 let categoryData = {
   status: 0,
-  data: [{
+  tabslabel:[{
+    label: "热门推荐",
+    active: true
+  },
+  {
+    label: "手机数码",
+    active: false
+  },
+  {
+    label: "电脑办公",
+    active: false
+  },
+  {
+    label: "计生情趣",
+    active: false
+  },
+  {
+    label: "美妆护肤",
+    active: false
+  },
+
+  {
+    label: "个人清洁",
+    active: false
+  },
+  {
+    label: "汽车生活",
+    active: false
+  },
+  {
+    label: "男装",
+    active: false
+  },
+  {
+    label: "女装",
+    active: false
+  },
+  {
+    label: "超市",
+    active: false
+  },
+  {
+    label: "户外运动",
+    active: false
+  },
+  {
+    label: "男装",
+    active: false
+  },
+  {
+    label: "女装",
+    active: false
+  },
+  {
+    label: "超市",
+    active: false
+  },
+  {
+    label: "户外运动",
+    active: false
+  },
+  {
+    label: "其他",
+    active: false
+  }],
+  categoryData: [{
       name: '手机数码',
       mainImgUrl: '//img20.360buyimg.com/mcoss/jfs/t16273/143/46476745/45673/cba0840c/5a28ef10N82ab81d3.jpg',
       list: [{
@@ -1244,4 +1309,4 @@ Mock.mock('http://test.happymmall.com/home/remderImg', remderImg) // 推荐页�
 Mock.mock('http://test.happymmall.com/home/recommend', recommend) // 推荐页面mock数据
 Mock.mock('http://test.happymmall.com/home/homeData', homeData)
 Mock.mock('http://test.happymmall.com/search/hot', hotData)
-Mock.mock('http://test.happymmall.com/category/data', categoryData)
+Mock.mock('http://test.happymmall.com/category/categoryData', categoryData)
