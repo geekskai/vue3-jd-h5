@@ -293,7 +293,7 @@ export default {
         padding: 46px 40px;
         position: absolute;
         z-index: 7;
-        height: 672px;
+        height: 650px;
         background: linear-gradient(to right, #fc9863, #fe735d);
         border-radius: 0 0 0 103px;
         display: flex;
