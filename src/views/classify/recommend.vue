@@ -1,7 +1,7 @@
 <template>
   <div class="recommend">
     <header class="page-header">
-       <span class="btn-left" @click="$router.go(-1)">
+      <span class="btn-left" @click="$router.go(-1)">
         <img src="../../assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">推荐</div>
@@ -15,20 +15,24 @@
 
     <section class="recommend-classify">
       <ul class="like-list" v-for="(item,index) in likeList" :key="index">
-        <router-link tag="li" class="like-item" to="/classify/product">
-          <img class="item-picture" :src="item.imgUrl" />
+        <!-- <router-link tag="li"  to="/classify/product"> -->
+        <li class="like-item" @click="handleToDetail(item.sku)">
+          <img class="item-picture" :src="item.imagePath" />
           <div class="item-detail">
             <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>{{item.storeName}}</label>
+              <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" /> -->
+              <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
+              <!-- <label>{{item.storeName}}</label> -->
+              <label>京东商城</label>
             </p>
-            <p class="item-title">{{item.itemTitle}}</p>
+            <p class="item-title">{{item.name}}</p>
             <p class="item-count">
-              <i>{{item.itemPrice}}</i>
+              <i>￥：{{item.price}}</i>
               <span>{{item.itemCount}}</span>
             </p>
           </div>
-        </router-link>
+        </li>
+        <!-- </router-link> -->
       </ul>
     </section>
   </div>
@@ -39,45 +43,27 @@ export default {
   name: "recommend",
   data() {
     return {
-      likeList: [
-        // {
-        //   id: 0,
-        //   storeName: "店铺名称",
-        //   itemTitle: "娜扎新装LOOK",
-        //   itemPrice: "$248",
-        //   itemCount: "月销:888"
-        // },
-        // {
-        //   id: 1,
-        //   storeName: "店铺名称",
-        //   itemTitle: "娜扎新装LOOK",
-        //   itemPrice: "$248",
-        //   itemCount: "月销:888"
-        // },
-        // {
-        //   id: 2,
-        //   storeName: "店铺名称",
-        //   itemTitle: "娜扎新装LOOK",
-        //   itemPrice: "$248",
-        //   itemCount: "月销:888"
-        // },
-        // {
-        //   id: 3,
-        //   storeName: "店铺名称",
-        //   itemTitle: "娜扎新装LOOK",
-        //   itemPrice: "$248",
-        //   itemCount: "月销:888"
-        // }
-      ]
+      likeList: []
     };
   },
   created() {
-    this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
-      const { data } = res.data;
-      this.likeList = data;
+    // this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
+    //   const { data } = res.data;
+    //   this.likeList = data;
+    // });
+
+    this.$http.get(`/api/goods/list?page=1&size=20`).then(response => {
+      this.likeList = response.data;
+      console.log("=====response.data.content==>", response.data);
     });
   },
   methods: {
+    handleToDetail(sku) {
+      this.$router.push({
+        path: "/classify/product",
+        query: { sku: sku }
+      });
+    },
     handleSearch() {
       this.$router.push("/search");
     }
@@ -200,6 +186,10 @@ export default {
             color: #3a3a3a;
             font-size: 14px;
             padding-top: 10px;
+            width: 223px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
           }
           .item-count {
             padding-top: 4px;

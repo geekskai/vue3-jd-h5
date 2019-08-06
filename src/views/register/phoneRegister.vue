@@ -13,8 +13,19 @@
       <span class="phone-number">请输入手机号</span>
       <p class="number-tips">请输入6位数验证码</p>
       <van-cell-group class="info-list">
-        <van-field v-model="password" type="password" clearable placeholder="请输入手机号" />
-        <van-field v-model="sms" label-width="150" clearable placeholder="验证码">
+        <van-field
+          v-model="phoneRegisterForm.mobile"
+          type="tel"
+          required
+          clearable
+          placeholder="请输入手机号"
+        />
+        <van-field
+          v-model="phoneRegisterForm.verifyCode"
+          label-width="150"
+          clearable
+          placeholder="验证码"
+        >
           <van-button slot="button" size="small" type="default">获取验证码</van-button>
         </van-field>
         <van-field class="temp-empty" />
@@ -39,6 +50,7 @@ export default {
   name: "phoneRegister",
   data() {
     return {
+      phoneRegisterForm: {},
       sms: "",
       value: "",
       showPicker: false,
@@ -88,8 +100,8 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
-     /deep/ .van-hairline--top-bottom::after{
-        display: none;
+    /deep/ .van-hairline--top-bottom::after {
+      display: none;
     }
     /deep/ .temp-empty {
       display: none;

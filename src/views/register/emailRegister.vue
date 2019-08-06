@@ -13,7 +13,7 @@
       <span class="phone-number">请输入邮箱号</span>
       <p class="number-tips">请输入6位数验证码</p>
       <van-cell-group class="info-list">
-        <van-field v-model="password" type="password" clearable placeholder="请输入邮箱" />
+        <van-field v-model="password" type="textarea" clearable placeholder="请输入邮箱" />
         <van-field v-model="sms" label-width="150" clearable placeholder="邮箱验证码">
           <van-button slot="button" size="small" type="default">获取验证码</van-button>
         </van-field>
@@ -47,6 +47,9 @@ export default {
   },
   created() {},
   methods: {
+    // /api/user/getVerifyCode
+    getVerifyCode() {
+    },
     onConfirm() {}
   }
 };
@@ -88,8 +91,8 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
-      /deep/ .van-hairline--top-bottom::after{
-        display: none;
+    /deep/ .van-hairline--top-bottom::after {
+      display: none;
     }
     /deep/ .temp-empty {
       display: none;
@@ -99,7 +102,7 @@ export default {
     }
     /deep/ .van-cell {
       background-color: transparent;
-        padding-left: 0;
+      padding-left: 0;
       padding-right: 0;
     }
   }

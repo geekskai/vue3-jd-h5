@@ -14,14 +14,14 @@
       <p class="number-tips">6-20位数字、字母或字符</p>
       <van-cell-group class="info-list">
         <van-field
-          v-model="password"
+          v-model="phoneRegisterTwoForm.password"
           type="password"
           right-icon="eye-o"
           clearable
           placeholder="密码"
         />
         <van-field
-          v-model="password"
+          v-model="phoneRegisterTwoForm.password"
           type="password"
           right-icon="closed-eye"
           clearable
@@ -49,6 +49,9 @@ export default {
   name: "phoneRegisterTwo",
   data() {
     return {
+      phoneRegisterTwoForm: {
+        password: ""
+      },
       sms: "",
       value: "",
       showPicker: false,

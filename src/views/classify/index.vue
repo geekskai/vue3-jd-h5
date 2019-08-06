@@ -1,14 +1,6 @@
 <template>
   <div class="classify">
-    <header class="home-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="left-btn"></svg-icon>
-      </span>
-      <div class="header-search" @click="handleSearch">
-        <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
-      </div>
-    </header>
+    <header class="home-header">商品分类</header>
     <section class="search-wrap" ref="searchWrap">
       <list-scroll :scroll-data="categoryData" class="nav-side-wrapper">
         <ul class="nav-side">
@@ -18,8 +10,8 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <span>{{item.name.slice(0,2)}}</span>
-            <span>{{item.name.slice(2)}}</span>
+            <span>{{item.label.slice(0,2)}}</span>
+            <span>{{item.label.slice(2)}}</span>
           </li>
         </ul>
       </list-scroll>
@@ -29,21 +21,14 @@
             <div class="swiper-wrapper">
               <template v-for="(category,index) in categoryData">
                 <div class="swiper-slide" :key="index" v-if="currentIndex === index">
-                  <img
-                    @click="selectProduct"
-                    class="category-main-img"
-                    :src="category.mainImgUrl"
-                    v-if="category.mainImgUrl"
-                  />
-                  <div class="category-list" v-for="(products,index) in category.list" :key="index">
-                    <div
-                      class="product-item"
-                      v-for="(product,index) in products.productList"
-                      :key="index"
-                      @click="selectProduct(product.title)"
-                    >
-                      <img class="item-img" :src="product.imgUrl" />
-                      <p v-text="product.title" class="product-title"></p>
+                  <img @click="selectProduct(category.value)" class="category-main-img" :src="category.imageUrl" v-if="category.imageUrl"/>
+                  <div v-for="(products,index) in category.children"  :key="index" >
+                    <p class="goods-title">{{products.label}}</p>
+                    <div class="category-list">
+                      <div class="product-item" @click="selectProduct(product.value)" v-for="(product,index) in products.children" :key="index" >
+                        <img class="item-img" :src="product.imageUrl"/>
+                        <p class="product-title">{{product.label}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -67,36 +52,44 @@ export default {
   data() {
     return {
       tags: [],
-      currentIndex: 0,
+      currentIndex: 1,
       categoryData: [],
-      tabslabel: [
-        
-      ]
+      templateCategoryData: []
     };
   },
   created() {
-    this.$http.get("http://test.happymmall.com/category/categoryData").then(res => {
-      const { categoryData } = res.data;
-      const { tabslabel } = res.data;
-      this.categoryData = categoryData;
-      this.tabslabel = tabslabel;
-    });
+    // this.$http
+    //   .get("http://test.happymmall.com/category/categoryData")
+    //   .then(res => {
+    //     const { categoryData } = res.data;
+    //     this.templateCategoryData = categoryData;
+    //   });
+    this.getGoodsList();
   },
   methods: {
+    // 获取分类
+    getGoodsList() {
+      // this.$http.get(`/api/product/category`).then(response => {
+      this.$http.get(`/api/goods/category`).then(response => {
+        const categoryData = response.data.content;
+        this.categoryData = categoryData;
+      });
+    },
     handleSearch() {
       this.$router.push("/search");
     },
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
+      this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
+      this.$refs.searchWrap.style.height = $screenHeight - 80 + "px";
     },
-    selectProduct(title) {
-      this.$router.push("/classify/recommend");
+    selectProduct(sku) {
+      this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
     }
   },
   mounted() {
@@ -111,60 +104,17 @@ export default {
 .classify {
   height: 100%;
   .home-header {
-    position: fixed;
-    left: 0;
-    top: 10px;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 16px;
-    display: flex;
-    justify-content: flex-start;
-    @include boxSizing;
-    font-size: 30px;
-    color: #fdc;
-    z-index: 10000;
-    .btn-left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .header-search {
-      border-radius: 3px;
-      margin-left: 16px;
-      display: flex;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      color: #232326;
-      background: #fff;
-      .search-icon {
-        line-height: 40px;
-        padding: 8px 10px;
-      }
-      .app-name {
-        padding: 0 20px;
-        color: $red;
-        font-size: 40px;
-        font-weight: bold;
-      }
-      .icon-search {
-        padding: 0 20px;
-        font-size: 34px;
-      }
-      .search-title {
-        font-size: 16px;
-        color: #dbdbdb;
-        width: 100%;
-        padding-left: 60px;
-      }
-    }
+    font-size: 18px;
+    color: #3a3a3a;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    background-color: #fff;
   }
   .search-wrap {
     @include fj;
     width: 100%;
-    margin-top: 70px;
-    background: #f8f8f8;
+    background: #fff;
     .nav-side-wrapper {
       width: 88px;
       height: 100%;
@@ -194,9 +144,9 @@ export default {
       }
     }
     .search-content {
-      width: 100%;
+      width: 80%;
       height: 100%;
-      padding: 0 20px;
+      padding: 0 16px;
       background: #fff;
       padding-bottom: 30px;
       @include boxSizing;
@@ -205,6 +155,12 @@ export default {
         .swiper-slide {
           width: 100%;
           padding-top: 20px;
+          .goods-title{
+            font-size: 14px;
+            color: #D8182D;
+            font-weight: 600;
+            padding-bottom: 10px;
+          }
           .category-main-img {
             width: 100%;
           }
@@ -220,11 +176,11 @@ export default {
               padding: 40px 0;
             }
             .product-item {
-              width: 49%;
+              width: 33%;
               margin-bottom: 20px;
               text-align: center;
               font-size: 30px;
-              .item-img{
+              .item-img {
                 width: 65px;
                 height: 80px;
               }
@@ -232,6 +188,8 @@ export default {
                 color: #3a3a3a;
                 font-size: 11px;
                 font-weight: 600;
+                // width: 50%;
+                white-space: nowrap;
               }
             }
           }

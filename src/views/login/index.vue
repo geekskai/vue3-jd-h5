@@ -11,12 +11,12 @@
     <section class="login-info">
       <van-cell-group class="info-list">
         <van-field
-          v-model="emailPhone"
+          v-model="loginForm.emailPhone"
           clearable
           placeholder="手机/邮箱"
           @click-right-icon="$toast('question')"
         />
-        <van-field v-model="password" type="password" clearable placeholder="请输入密码" />
+        <van-field v-model="loginForm.password" type="password" clearable placeholder="请输入密码" />
         <van-field class="temp-empty" />
         <span class="forget-pwd">
           <svg-icon icon-class="question-mark"></svg-icon>
@@ -31,8 +31,8 @@
       <img src="../../assets/image/top-logo.png" alt />
     </ul>
     <div class="login-register-btns">
-      <span class="login-btn">登录</span>
-      <span class="register-btn">注册</span>
+      <span class="login-btn" @click="handleUserLogin">登录</span>
+      <span class="register-btn" @click="handleUserRegister">注册</span>
     </div>
   </div>
 </template>
@@ -42,12 +42,17 @@ export default {
   name: "login",
   data() {
     return {
-      emailPhone: "",
-      password: ""
+      loginForm: {
+        emailPhone: "",
+        password: ""
+      }
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleUserLogin() {},
+    handleUserRegister() {}
+  }
 };
 </script>
 

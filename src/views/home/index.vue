@@ -9,13 +9,15 @@
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
+        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" /> -->
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
+          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imageUrl"/> -->
+          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl"/>
         </swiper-slide>
       </swiper>
     </div>
@@ -135,7 +137,6 @@
           </div>
         </li>
         <router-link class="bottom-left" to="/loveShop" tag="li">
-          <!-- <li class="bottom-left"> -->
           <div class="bottom-left-header">
             <span class="big-buy">爱逛好店</span>
             <span class="goods-name addColor">懂你所要</span>
@@ -146,7 +147,6 @@
             <img src="../../assets/image/home/demo13.png" />
           </div>
         </router-link>
-        <!-- </li> -->
       </ul>
     </section>
 
@@ -159,25 +159,35 @@
         v-model="active"
         animated
       >
-        <van-tab v-for="(item,index) in tabList" :title="item.name" :name="item.name" :key="index">
+        <!-- @click="handleTabClick" -->
+        <!-- v-for="(item,index) in catList" -->
+        <van-tab
+          v-for="(list,index) in tabList"
+          :title="list.describe"
+          :name="list.type"
+          :key="index"
+        >
           <div slot="title" class="slot-title">
-            <b class="tab-title">{{item.title}}</b>
-            <span class="tab-name">{{item.name}}</span>
+            <b class="tab-title">{{list.title}}</b>
+            <!-- <span class="tab-name">{{item.describe}}</span> -->
+            <span class="tab-name">{{list.name}}</span>
           </div>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <li v-for="(item,index) in item.list" :key="index">
-                <router-link tag="div" to="/classify/product">
+              <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
+              <li v-for="(item,index) in list.list" :key="index">
+                <router-link class="goods-img" tag="div" to="/classify/product">
+                  <!-- <img :src="item.productMainImage" /> -->
                   <img :src="item.img" />
                 </router-link>
                 <div class="goods-layout">
-                  <div class="goods-title">{{item.name}}</div>
+                  <div class="goods-title">{{item.productName}}</div>
                   <span class="goods-div">{{item.title}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
-                      <i>{{item.price}}</i>
-                      <span class="force-value">205算力值</span>
+                      <i>{{item.productCnyPrice}}</i>
+                      <span class="force-value">8%算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -212,6 +222,8 @@ export default {
     return {
       active: "",
       timeData: 36000000,
+      catList: [],
+      tabItemLists: [],
       tabList: [],
       ball: {
         show: false,
@@ -246,6 +258,7 @@ export default {
   },
 
   created() {
+    // this.initData();
     this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { tabList } = res.data;
       const { images } = res.data;
@@ -261,6 +274,21 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    initData() {
+      this.$http.get(`api/index`).then(response => {
+        console.log("=====res==>", response.data.content);
+        this.images = response.data.content.bannerList;
+        this.images2 = response.data.content.adList;
+        this.catList = response.data.content.catList;
+      });
+      this.handleTabClick(0);
+    },
+    handleTabClick(type) {
+      console.log("=====type==>", type);
+      this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
+        this.tabItemLists = response.data.content;
+      });
+    },
     addToCart(event, tag) {
       this.$store.commit("cart/addToCart", tag);
       this.ball.show = true;
@@ -291,7 +319,7 @@ export default {
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
     },
-    handleClick() {
+    handleClick(linkUrl) {
       this.$router.push("/classify/product");
     },
 
@@ -635,6 +663,13 @@ export default {
         }
         li:nth-of-type(even) {
           padding-right: 0;
+        }
+        .goods-img {
+          img {
+            width: 165px;
+            height: 196px;
+            border-radius: 8px 8px 0 0;
+          }
         }
         .goods-layout {
           width: 165px;
