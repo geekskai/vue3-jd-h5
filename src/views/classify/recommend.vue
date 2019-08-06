@@ -13,59 +13,94 @@
       </div>
     </div>
 
-    <section class="recommend-classify">
-      <ul class="like-list" v-for="(item,index) in likeList" :key="index">
-        <!-- <router-link tag="li"  to="/classify/product"> -->
-        <li class="like-item" @click="handleToDetail(item.sku)">
-          <img class="item-picture" :src="item.imagePath" />
-          <div class="item-detail">
-            <p class="store-info">
-              <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" /> -->
-              <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
-              <!-- <label>{{item.storeName}}</label> -->
-              <label>京东商城</label>
-            </p>
-            <p class="item-title">{{item.name}}</p>
-            <p class="item-count">
-              <i>￥：{{item.price}}</i>
-              <span>{{item.itemCount}}</span>
-            </p>
-          </div>
-        </li>
-        <!-- </router-link> -->
-      </ul>
+    <section class="recommend-classify" ref="wrapper">
+      <list-scroll
+        :scroll-data="likeList"
+        class="likeList"
+        :pullup="true"
+        @scrollToEnd="handleScrollToEnd"
+        :pulldown="true"
+        @pulldown="handlePullDown"
+      >
+        <div>
+          <ul class="like-list" v-for="(item,index) in likeList" :key="index">
+            <li class="like-item" @click="handleToDetail(item.sku)">
+              <img class="item-picture" v-lazy="item.imagePath" />
+              <div class="item-detail">
+                <p class="store-info">
+                  <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" /> -->
+                  <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
+                  <!-- <label>{{item.storeName}}</label> -->
+                  <label>京东商城</label>
+                </p>
+                <p class="item-title">{{item.name}}</p>
+                <p class="item-count">
+                  <i>￥：{{item.price}}</i>
+                  <span>{{item.itemCount}}</span>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </list-scroll>
     </section>
   </div>
 </template>
 
 <script>
+import ListScroll from "../../components/scroll/ListScroll";
 export default {
   name: "recommend",
+  components: {
+    ListScroll
+  },
   data() {
     return {
-      likeList: []
+      likeList: [],
+      page: 1
     };
+  },
+  mounted() {
+    this.setWrapHeight();
   },
   created() {
     // this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
     //   const { data } = res.data;
     //   this.likeList = data;
     // });
-
-    this.$http.get(`/api/goods/list?page=1&size=20`).then(response => {
-      this.likeList = response.data;
-      console.log("=====response.data.content==>", response.data);
-    });
+    this.initData();
   },
   methods: {
+    // 当滑块滑动到低不低的时候。
+    handleScrollToEnd() {
+      console.log("=====滑动到底了==>");
+      this.page++;
+      this.initData();
+    },
+    handlePullDown() {
+      console.log("=====handlePullDown==>");
+    },
     handleToDetail(sku) {
       this.$router.push({
         path: "/classify/product",
         query: { sku: sku }
       });
     },
+    initData() {
+      this.$http
+        .get(`/api/goods/list?page=${this.page}&size=15`)
+        .then(response => {
+          this.likeList.push(...response.data);
+          // console.log("=====this.likeList==>", this.likeList);
+        });
+    },
     handleSearch() {
       this.$router.push("/search");
+    },
+    //动态设置searc-wrap的高
+    setWrapHeight() {
+      let $screenHeight = document.documentElement.clientHeight;
+      this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
     }
   }
 };
@@ -79,7 +114,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    padding-bottom: 29px;
+    padding-bottom: 20px;
     position: relative;
     .btn-left {
       position: fixed;
@@ -158,7 +193,6 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #d8182d;
           border-radius: 4px;
         }
         .item-detail {

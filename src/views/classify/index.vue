@@ -15,18 +15,27 @@
           </li>
         </ul>
       </list-scroll>
-      <div class="search-content">
-        <list-scroll :scroll-data="categoryData">
+        <list-scroll class="search-content" :scroll-data="categoryData">
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <template v-for="(category,index) in categoryData">
                 <div class="swiper-slide" :key="index" v-if="currentIndex === index">
-                  <img @click="selectProduct(category.value)" class="category-main-img" :src="category.imageUrl" v-if="category.imageUrl"/>
-                  <div v-for="(products,index) in category.children"  :key="index" >
+                  <img
+                    @click="selectProduct(category.value)"
+                    class="category-main-img"
+                    :src="category.imageUrl"
+                    v-if="category.imageUrl"
+                  />
+                  <div v-for="(products,index) in category.children" :key="index">
                     <p class="goods-title">{{products.label}}</p>
                     <div class="category-list">
-                      <div class="product-item" @click="selectProduct(product.value)" v-for="(product,index) in products.children" :key="index" >
-                        <img class="item-img" :src="product.imageUrl"/>
+                      <div
+                        class="product-item"
+                        @click="selectProduct(product.value)"
+                        v-for="(product,index) in products.children"
+                        :key="index"
+                      >
+                        <img class="item-img" :src="product.imageUrl" />
                         <p class="product-title">{{product.label}}</p>
                       </div>
                     </div>
@@ -36,7 +45,6 @@
             </div>
           </div>
         </list-scroll>
-      </div>
     </section>
     <tabbar></tabbar>
   </div>
@@ -86,7 +94,7 @@ export default {
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.searchWrap.style.height = $screenHeight - 80 + "px";
+      this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(sku) {
       this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
@@ -155,9 +163,9 @@ export default {
         .swiper-slide {
           width: 100%;
           padding-top: 20px;
-          .goods-title{
+          .goods-title {
             font-size: 14px;
-            color: #D8182D;
+            color: #d8182d;
             font-weight: 600;
             padding-bottom: 10px;
           }
