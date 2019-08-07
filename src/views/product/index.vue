@@ -34,7 +34,7 @@
     <ul class="product-content">
       <li class="product-title">
         <div class="text-left">
-          <span class="force-value">8%算力</span>
+          <span class="force-value">0.5倍算力</span>
           <span class="item-desc">{{detailForm.name}}</span>
         </div>
         <div>

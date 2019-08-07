@@ -187,7 +187,7 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{item.productCnyPrice}}</i>
-                      <span class="force-value">8%算力</span>
+                      <span class="force-value">0.5倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>

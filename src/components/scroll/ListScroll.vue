@@ -110,7 +110,7 @@
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
           this.scroll.on('touchend', (pos) => {
-          console.log('=====休息休息==>');
+          console.log('=====休息休息==>',pos);
             // 下拉动作
             if (pos.y > 50) {
               this.$emit('pulldown')

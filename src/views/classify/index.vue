@@ -10,41 +10,43 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <span>{{item.label.slice(0,2)}}</span>
-            <span>{{item.label.slice(2)}}</span>
+            <span>{{handleSplit(item.label).slice(0,2)}}</span>
+            <span>{{handleSplit(item.label).slice(2)}}</span>
+            <!-- <span>{{item.label.slice(0,2)}}</span>
+            <span>{{item.label.slice(2)}}</span>-->
           </li>
         </ul>
       </list-scroll>
-        <list-scroll class="search-content" :scroll-data="categoryData">
-          <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <template v-for="(category,index) in categoryData">
-                <div class="swiper-slide" :key="index" v-if="currentIndex === index">
-                  <img
-                    @click="selectProduct(category.value)"
-                    class="category-main-img"
-                    :src="category.imageUrl"
-                    v-if="category.imageUrl"
-                  />
-                  <div v-for="(products,index) in category.children" :key="index">
-                    <p class="goods-title">{{products.label}}</p>
-                    <div class="category-list">
-                      <div
-                        class="product-item"
-                        @click="selectProduct(product.value)"
-                        v-for="(product,index) in products.children"
-                        :key="index"
-                      >
-                        <img class="item-img" :src="product.imageUrl" />
-                        <p class="product-title">{{product.label}}</p>
-                      </div>
+      <list-scroll class="search-content" :scroll-data="categoryData">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <template v-for="(category,index) in categoryData">
+              <div class="swiper-slide" :key="index" v-if="currentIndex === index">
+                <img
+                  @click="selectProduct(category.value)"
+                  class="category-main-img"
+                  :src="category.imageUrl"
+                  v-if="category.imageUrl"
+                />
+                <div v-for="(products,index) in category.children" :key="index">
+                  <p class="goods-title">{{products.label}}</p>
+                  <div class="category-list">
+                    <div
+                      class="product-item"
+                      @click="selectProduct(product.value)"
+                      v-for="(product,index) in products.children"
+                      :key="index"
+                    >
+                      <img class="item-img" :src="product.imageUrl" />
+                      <p class="product-title">{{product.label}}</p>
                     </div>
                   </div>
                 </div>
-              </template>
-            </div>
+              </div>
+            </template>
           </div>
-        </list-scroll>
+        </div>
+      </list-scroll>
     </section>
     <tabbar></tabbar>
   </div>
@@ -60,7 +62,7 @@ export default {
   data() {
     return {
       tags: [],
-      currentIndex: 1,
+      currentIndex: 0,
       categoryData: [],
       templateCategoryData: []
     };
@@ -75,6 +77,14 @@ export default {
     this.getGoodsList();
   },
   methods: {
+    handleSplit(name) {
+      if (~name.indexOf("、")) {
+        let temName = name;
+        return temName.slice(0, 2) + name.slice(3);
+      } else {
+        return name;
+      }
+    },
     // 获取分类
     getGoodsList() {
       // this.$http.get(`/api/product/category`).then(response => {

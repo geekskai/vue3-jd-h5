@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="48px" viewBox="0 0 49 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>分组</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="25" cy="24" r="24"></circle>
+        <path d="M19.499675,0 C8.730475,0 0,8.50661667 0,19 C0,29.4933833 8.730475,38 19.499675,38 C30.269525,38 39,29.4933833 39,19 C39,8.50661667 30.269525,0 19.499675,0 Z" id="path-3"></path>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-5">
+            <stop stop-color="#E49E02" offset="0%"></stop>
+            <stop stop-color="#E4C400" offset="100%"></stop>
+        </linearGradient>
+        <path d="M0.15809901,15.5 C0.15809901,24.06034 7.25069307,31 16,31 C24.7489901,31 31.8412673,24.06034 31.8412673,15.5 C31.8412673,6.93966 24.7489901,0 16,0 C7.25069307,0 0.15809901,6.93966 0.15809901,15.5" id="path-6"></path>
+        <linearGradient x1="0.001%" y1="50%" x2="100.001%" y2="50%" id="linearGradient-8">
+            <stop stop-color="#E49E02" offset="0%"></stop>
+            <stop stop-color="#E4C400" offset="100%"></stop>
+        </linearGradient>
+        <path d="M5.30766667,0 C2.616,0 0.299,2.069 0.172333333,4.758 C0.037,7.62966667 2.32533333,10 5.16633333,10 L14.1663333,10 C15.6396667,10 16.8333333,8.806 16.8333333,7.33333333 L16.8333333,2.66666667 C16.8333333,1.194 15.6396667,0 14.1663333,0 L5.30766667,0 Z" id="path-9"></path>
+        <linearGradient x1="0.00031484097%" y1="49.9999873%" x2="100%" y2="49.9999873%" id="linearGradient-11">
+            <stop stop-color="#E49E02" offset="0%"></stop>
+            <stop stop-color="#E4C400" offset="100%"></stop>
+        </linearGradient>
+        <path d="M4.27275,0.181607143 L0.181607143,4.27275 C0.0559285714,4.39842857 0.0559285714,4.60157143 0.181607143,4.72725 L4.27275,8.81839286 C4.39842857,8.94407143 4.60189286,8.94407143 4.72725,8.81839286 L8.81871429,4.72725 C8.94407143,4.60157143 8.94407143,4.39842857 8.81871429,4.27275 L4.72725,0.181607143 C4.66457143,0.118928571 4.58228571,0.0874285714 4.5,0.0874285714 C4.41771429,0.0874285714 4.33542857,0.118928571 4.27275,0.181607143" id="path-12"></path>
+        <linearGradient x1="24.2460677%" y1="75.7534907%" x2="75.7530218%" y2="24.2455987%" id="linearGradient-14">
+            <stop stop-color="#E49E02" offset="0%"></stop>
+            <stop stop-color="#E4C400" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="节点申请--copy" transform="translate(-693.000000, -1191.000000)">
+            <g id="分组-7" transform="translate(158.500000, 709.000000)">
+                <g id="分组-6" transform="translate(60.000000, 476.000000)">
+                    <g id="分组" transform="translate(474.000000, 6.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g mask="url(#mask-2)">
+                            <g transform="translate(4.000000, 5.000000)">
+                                <g id="分组" stroke-width="1" fill="none">
+                                    <mask id="mask-4" fill="white">
+                                        <use xlink:href="#path-3"></use>
+                                    </mask>
+                                    <g id="Clip-2"></g>
+                                    <path d="M19.499675,0 C8.730475,0 0,8.50661667 0,19 C0,29.4933833 8.730475,38 19.499675,38 C30.269525,38 39,29.4933833 39,19 C39,8.50661667 30.269525,0 19.499675,0 Z" id="Fill-1" fill="url(#linearGradient-5)" mask="url(#mask-4)"></path>
+                                </g>
+                                <g id="分组" stroke-width="1" fill="none" transform="translate(0.000000, 4.000000)">
+                                    <mask id="mask-7" fill="white">
+                                        <use xlink:href="#path-6"></use>
+                                    </mask>
+                                    <g id="Clip-4"></g>
+                                    <path d="M0.15809901,15.5 C0.15809901,24.06034 7.25069307,31 16,31 C24.7489901,31 31.8412673,24.06034 31.8412673,15.5 C31.8412673,6.93966 24.7489901,0 16,0 C7.25069307,0 0.15809901,6.93966 0.15809901,15.5" id="Fill-3" fill="url(#linearGradient-8)" mask="url(#mask-7)"></path>
+                                </g>
+                                <path d="M24.25,14 C20.7984375,14 18,16.6862 18,20 C18,23.3138 20.7984375,26 24.25,26 L43,26 L43,14 L24.25,14 Z" id="Fill-5" fill="#FFFFFF"></path>
+                                <g id="分组" stroke-width="1" fill="none" transform="translate(24.000000, 15.000000)">
+                                    <mask id="mask-10" fill="white">
+                                        <use xlink:href="#path-9"></use>
+                                    </mask>
+                                    <g id="Clip-8"></g>
+                                    <path d="M5.30766667,0 C2.616,0 0.299,2.069 0.172333333,4.758 C0.037,7.62966667 2.32533333,10 5.16633333,10 L14.1663333,10 C15.6396667,10 16.8333333,8.806 16.8333333,7.33333333 L16.8333333,2.66666667 C16.8333333,1.194 15.6396667,0 14.1663333,0 L5.30766667,0 Z" id="Fill-7" fill="url(#linearGradient-11)" mask="url(#mask-10)"></path>
+                                </g>
+                                <path d="M29,19.5 C29,24.7465333 24.74685,29 19.5,29 C14.2534667,29 10,24.7465333 10,19.5 C10,14.2534667 14.2534667,10 19.5,10 C24.74685,10 29,14.2534667 29,19.5" id="Fill-9" fill="#FFFFFF"></path>
+                                <g id="分组" stroke-width="1" fill="none" transform="translate(14.000000, 15.000000)">
+                                    <mask id="mask-13" fill="white">
+                                        <use xlink:href="#path-12"></use>
+                                    </mask>
+                                    <g id="Clip-12"></g>
+                                    <path d="M4.27275,0.181607143 L0.181607143,4.27275 C0.0559285714,4.39842857 0.0559285714,4.60157143 0.181607143,4.72725 L4.27275,8.81839286 C4.39842857,8.94407143 4.60189286,8.94407143 4.72725,8.81839286 L8.81871429,4.72725 C8.94407143,4.60157143 8.94407143,4.39842857 8.81871429,4.27275 L4.72725,0.181607143 C4.66457143,0.118928571 4.58228571,0.0874285714 4.5,0.0874285714 C4.41771429,0.0874285714 4.33542857,0.118928571 4.27275,0.181607143" id="Fill-11" fill="url(#linearGradient-14)" mask="url(#mask-13)"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
