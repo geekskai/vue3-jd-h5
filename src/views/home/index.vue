@@ -9,15 +9,15 @@
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" /> -->
-        <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
+        <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" />
+        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" /> -->
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
-          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" />
+          <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" />
+          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" /> -->
         </swiper-slide>
       </swiper>
     </div>
@@ -157,28 +157,28 @@
         background="transparent"
         v-model="active"
         animated
+        @click="handleTabClick"
       >
-        <!-- @click="handleTabClick" -->
-          <!-- v-for="(list,index) in catList" -->
+        <!-- v-for="(list,index) in tabList" -->
         <van-tab
-        v-for="(list,index) in tabList"
+          v-for="(list,index) in catList"
           :title="list.describe"
           :name="list.type"
           :key="index"
         >
           <div slot="title" class="slot-title">
             <b class="tab-title">{{list.title}}</b>
-            <!-- <span class="tab-name">{{list.describe}}</span> -->
-            <span class="tab-name">{{list.name}}</span>
+            <span class="tab-name">{{list.describe}}</span>
+            <!-- <span class="tab-name">{{list.name}}</span> -->
           </div>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
-                <li v-for="(item,index) in list.list" :key="index">
+              <li v-for="(item,index) in tabItemLists" :key="index">
+                <!-- <li v-for="(item,index) in list.list" :key="index"> -->
                 <router-link class="goods-img" tag="div" to="/classify/product">
-                  <!-- <img v-lazy="item.productMainImage" /> -->
-                  <img :src="item.img" />
+                  <img v-lazy="item.productMainImage" />
+                  <!-- <img :src="item.img" /> -->
                 </router-link>
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
@@ -186,7 +186,8 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{item.productCnyPrice}}</i>
-                      <span class="force-value">{{item.forceValue}}倍算力</span>
+                      <!-- <span class="force-value">{{item.forceValue}}倍算力</span> -->
+                      <span class="force-value">0.5倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -257,17 +258,15 @@ export default {
   },
 
   created() {
-    // this.initData();
-
-
-    this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
-      const { tabList } = res.data;
-      const { images } = res.data;
-      const { images2 } = res.data;
-      this.tabList = tabList;
-      this.images = images;
-      this.images2 = images2;
-    });
+    this.initData();
+    // this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
+    //   const { tabList } = res.data;
+    //   const { images } = res.data;
+    //   const { images2 } = res.data;
+    //   this.tabList = tabList;
+    //   this.images = images;
+    //   this.images2 = images2;
+    // });
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
