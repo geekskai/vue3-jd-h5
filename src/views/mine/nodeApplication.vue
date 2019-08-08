@@ -151,8 +151,8 @@ export default {
       }
       .coin-pay {
         width: 100%;
-        .svg-icon{
-            margin-left: auto;
+        .svg-icon {
+          margin-left: auto;
         }
       }
       .content-count {
