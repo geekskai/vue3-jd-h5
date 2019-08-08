@@ -2,7 +2,8 @@
   <div class="product-layout">
     <van-swipe :autoplay="3000" :height="350">
       <van-swipe-item v-for="(image, index) in productImages" :key="index">
-        <img class="lazy_img" v-if="image.path" v-lazy="image.path" :onerror="errorImg" />
+        <!-- <img class="lazy_img" v-if="image.path" v-lazy="image.path"/> -->
+        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/>
       </van-swipe-item>
     </van-swipe>
 
@@ -158,8 +159,6 @@ export default {
   data() {
     return {
       show: false,
-      errorImg:
-        "this.src=" + require("../../assets/image/home/demo2.png") + '"',
       showDetail: false,
       detailForm: {},
       isSpike: false, // 是否是秒杀商品 默认是false
@@ -198,12 +197,12 @@ export default {
     };
   },
   created() {
-    // this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
-    //   const { productImages } = res.data;
-    //   let i = Math.floor(Math.random() * 6);
-    //   this.productImages = productImages[i];
-    // });
-    this.initData();
+    this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
+      const { productImages } = res.data;
+      let i = Math.floor(Math.random() * 6);
+      this.productImages = productImages[i];
+    });
+    // this.initData();
   },
   // updated() {
   //   let obj = document.getElementById("htmlClass");

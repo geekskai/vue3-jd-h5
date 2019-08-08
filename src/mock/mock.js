@@ -67,36 +67,42 @@ let homeData = {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-1.png'),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$525"
         },
         {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-2.png'),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$525"
         },
         {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-3.png'),
           title: "限量套装 新品上市",
+          forceValue:1.9,
           price: "$525"
         },
         {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-4.png'),
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$525"
         },
         {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-5.png'),
           title: "限量套装 新品上市",
+          forceValue:2.3,
           price: "$525"
         },
         {
           name: "美妆护肤品",
           img: require('../assets/image/classifyNursing/美妆-6.png'),
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$525"
         },
 
@@ -104,36 +110,42 @@ let homeData = {
           name: "多功能料理机",
           img: require("../assets/image/home/test1.png"),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$125"
         },
         {
           name: "遥控制空调扇",
           img: require("../assets/image/home/test2.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$245"
         },
         {
           name: "时尚双肩包",
           img: require("../assets/image/home/test3.png"),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$21"
         },
         {
           name: "商务行李箱",
           img: require("../assets/image/home/test4.png"),
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$218"
         },
         {
           name: "无线消噪耳机",
           img: require("../assets/image/home/test5.png"),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$218"
         },
         {
           name: "无线蓝牙耳机",
           img: require("../assets/image/home/test6.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         }
       ]
@@ -145,48 +157,56 @@ let homeData = {
           name: "活力运动装",
           img: require('../assets/image/classifyNursing/运动装备-1.png'),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$125"
         },
         {
           name: "瑞士手表",
           img: require('../assets/image/classifyNursing/钟表-1.png'),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$245"
         },
         {
           name: "男鞋",
           img: require('../assets/image/classifyNursing/男鞋1.png'),
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$21"
         },
         {
           name: "商务行李箱",
           img: require("../assets/image/home/test4.png"),
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$218"
         },
         {
           name: "无线消噪耳机",
           img: require("../assets/image/home/test5.png"),
           title: "限量套装 新品上市",
+          forceValue:2.3,
           price: "$218"
         },
         {
           name: "箱包",
           img: require('../assets/image/classifyNursing/箱包1.png'),
           title: "限量套装 新品上市",
+          forceValue:2.3,
           price: "$218"
         },
         {
           name: "水杯",
           img: require('../assets/image/classifyNursing/水杯0.png'),
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$218"
         },
         {
           name: "无线蓝牙耳机",
           img: require("../assets/image/home/test6.png"),
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$218"
         }
       ],
@@ -200,48 +220,56 @@ let homeData = {
           name: "轻薄本",
           img: '//img13.360buyimg.com/focus/s140x140_jfs/t11071/195/2462134264/9117/cd0688bf/5a17ba79N18b9f3d4.png',
           title: "限量套装 新品上市",
+          forceValue:2.3,
           price: "$125"
         },
         {
           name: "游戏本",
           img: '//img30.360buyimg.com/focus/s140x140_jfs/t11155/36/2330310765/10690/eb6754c3/5a17ba96N49561fea.png',
           title: "限量套装 新品上市",
+          forceValue:0.5,
           price: "$125"
         },
         {
           name: "多功能手机",
           img: '//img10.360buyimg.com/focus/s140x140_jfs/t11503/241/2246064496/4783/cea2850e/5a169216N0701c7f1.jpg',
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$125"
         },
         {
           name: "全面屏手机",
           img: '//img30.360buyimg.com/focus/s140x140_jfs/t18955/187/1309277884/11517/fe100782/5ac48d27N3f5bb821.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$245"
         },
         {
           name: "游戏手机",
           img: '//img20.360buyimg.com/focus/s140x140_jfs/t12022/66/917351804/2257/7ddc58e5/5a169232Ndf76f53c.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$21"
         },
         {
           name: "拍照手机",
           img: '//img20.360buyimg.com/focus/s140x140_jfs/t12022/66/917351804/2257/7ddc58e5/5a169232Ndf76f53c.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.9,
           price: "$218"
         },
         {
           name: "老年机",
           img: '//img12.360buyimg.com/focus/s140x140_jfs/t11461/339/2354953633/8254/8c8c50d3/5a169217N5d1b842e.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         },
         {
           name: "女性手机",
           img: '//img12.360buyimg.com/focus/s140x140_jfs/t15790/6/2311892256/2742/5ed77924/5a9fa728Nbff29ad2.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         }
       ],
@@ -253,42 +281,49 @@ let homeData = {
           name: "休闲零食",
           img: '//img10.360buyimg.com/focus/s140x140_jfs/t19789/191/2614150696/17735/d2db9aca/5b02411eNb44a03f7.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.9,
           price: "$125"
         },
         {
           name: "牛奶",
           img: '//img13.360buyimg.com/focus/s140x140_jfs/t17479/1/2588472716/22795/d676e57a/5b024117N06151eba.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$245"
         },
         {
           name: "时尚双肩包",
           img: require("../assets/image/home/test3.png"),
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$21"
         },
         {
           name: "酒水饮料",
           img: '//img14.360buyimg.com/focus/s140x140_jfs/t19432/178/2607825443/22589/446a22a2/5b023705N12de0824.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$21"
         },
         {
           name: "商务行李箱",
           img: require("../assets/image/home/test4.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         },
         {
           name: "无线消噪耳机",
           img: require("../assets/image/home/test5.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         },
         {
           name: "无线蓝牙耳机",
           img: require("../assets/image/home/test6.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         }
       ],
@@ -302,36 +337,42 @@ let homeData = {
           name: "实木餐桌",
           img: '//img13.360buyimg.com/focus/s140x140_jfs/t12772/3/1793374412/9705/e633967a/5a28e6c9N8aaaea3f.jpg',
           title: "限量套装 新品上市",
+          forceValue:2.7,
           price: "$125"
         },
         {
           name: "椅子",
           img: '//img10.360buyimg.com/focus/s140x140_jfs/t13888/280/1737354934/3036/f94ecdf8/5a28e0d6N80f30096.jpg',
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$245"
         },
         {
           name: "杯子",
           img: require("../assets/image/classifyNursing/水杯3.png"),
           title: "限量套装 新品上市",
+          forceValue:2.3,
           price: "$21"
         },
         {
           name: "商务行李箱",
           img: require("../assets/image/home/test4.png"),
           title: "限量套装 新品上市",
+          forceValue:1.9,
           price: "$218"
         },
         {
           name: "无线消噪耳机",
           img: require("../assets/image/home/test5.png"),
           title: "限量套装 新品上市",
+          forceValue:1.3,
           price: "$218"
         },
         {
           name: "杯子",
           img: require('../assets/image/classifyNursing/水杯0.png'),
           title: "限量套装 新品上市",
+          forceValue:1.6,
           price: "$218"
         }
       ],

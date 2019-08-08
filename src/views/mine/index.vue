@@ -5,7 +5,7 @@
       <!-- <div class="login-regist">
         <router-link to="/login" class="order-item" tag="span">登录</router-link>
         <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
-      </div>-->
+      </div> -->
       <ul class="user-info">
         <li class="user-name">钻石王老五</li>
         <li class="node-info">
@@ -257,11 +257,11 @@ export default {
       }
     }
 
-    // .login-regist {
-    //   font-size: 15px;
-    //   color: #fff;
-    //   padding-top: 20px;
-    // }
+    .login-regist {
+      font-size: 15px;
+      color: #fff;
+      padding-left: 16px;
+    }
   }
   .my-info {
     font-size: 13px;

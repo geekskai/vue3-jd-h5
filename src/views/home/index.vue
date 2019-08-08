@@ -16,8 +16,8 @@
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imageUrl"/> -->
-          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl"/>
+          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
+          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" />
         </swiper-slide>
       </swiper>
     </div>
@@ -53,7 +53,6 @@
             <span class="item-title">链猫秒杀</span>
             <div class="time-text">
               <span class="eight-time">8点场</span>
-
               <van-count-down :time="timeData" class="time-count-down">
                 <template v-slot="timeData">
                   <span class="time-item" v-if="timeData.hours<10">{{ '0'+timeData.hours }}</span>
@@ -160,25 +159,25 @@
         animated
       >
         <!-- @click="handleTabClick" -->
-        <!-- v-for="(item,index) in catList" -->
+          <!-- v-for="(list,index) in catList" -->
         <van-tab
-          v-for="(list,index) in tabList"
+        v-for="(list,index) in tabList"
           :title="list.describe"
           :name="list.type"
           :key="index"
         >
           <div slot="title" class="slot-title">
             <b class="tab-title">{{list.title}}</b>
-            <!-- <span class="tab-name">{{item.describe}}</span> -->
+            <!-- <span class="tab-name">{{list.describe}}</span> -->
             <span class="tab-name">{{list.name}}</span>
           </div>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
               <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
-              <li v-for="(item,index) in list.list" :key="index">
+                <li v-for="(item,index) in list.list" :key="index">
                 <router-link class="goods-img" tag="div" to="/classify/product">
-                  <!-- <img :src="item.productMainImage" /> -->
+                  <!-- <img v-lazy="item.productMainImage" /> -->
                   <img :src="item.img" />
                 </router-link>
                 <div class="goods-layout">
@@ -187,7 +186,7 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{item.productCnyPrice}}</i>
-                      <span class="force-value">0.5倍算力</span>
+                      <span class="force-value">{{item.forceValue}}倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -259,6 +258,8 @@ export default {
 
   created() {
     // this.initData();
+
+
     this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { tabList } = res.data;
       const { images } = res.data;
@@ -276,7 +277,7 @@ export default {
   methods: {
     initData() {
       this.$http.get(`api/index`).then(response => {
-        console.log("=====res==>", response.data.content);
+        // console.log("=====res==>", response.data.content);
         this.images = response.data.content.bannerList;
         this.images2 = response.data.content.adList;
         this.catList = response.data.content.catList;

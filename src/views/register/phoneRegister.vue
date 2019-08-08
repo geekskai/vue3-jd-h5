@@ -16,32 +16,35 @@
         <van-field
           v-model="phoneRegisterForm.mobile"
           type="tel"
-          required
           clearable
+          @blur="handlePhoneBlur"
           placeholder="请输入手机号"
         />
+        <!-- error-message="手机号格式错误" -->
         <van-field
           v-model="phoneRegisterForm.verifyCode"
           label-width="150"
           clearable
           placeholder="验证码"
         >
-          <van-button slot="button" size="small" type="default">获取验证码</van-button>
+          <van-button slot="button" size="small" @click="handleGetVerifyCode" type="default">获取验证码</van-button>
         </van-field>
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <router-link class="login-btn" to="/register/phoneRegisterTwo" tag="span">下一步</router-link>
+      <span class="login-btn" @click="goToNextStep">
+        下一步
+        <!-- <router-link
+      
+        
+        to="/register/phoneRegisterTwo"
+     
+        tag="span"
+        >-->
+        <!-- </router-link> -->
+      </span>
     </div>
-    <van-popup v-model="showPicker" position="bottom">
-      <van-picker
-        show-toolbar
-        :columns="columns"
-        @cancel="showPicker = false"
-        @confirm="onConfirm"
-      />
-    </van-popup>
   </div>
 </template>
 
@@ -50,16 +53,59 @@ export default {
   name: "phoneRegister",
   data() {
     return {
-      phoneRegisterForm: {},
+      phoneRegisterForm: {
+        areaCode: "86"
+      },
       sms: "",
       value: "",
-      showPicker: false,
       columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"]
     };
   },
   created() {},
   methods: {
-    onConfirm() {}
+    goToNextStep() {
+      if (
+        !this.phoneRegisterForm.mobile ||
+        !this.phoneRegisterForm.verifyCode
+      ) {
+        this.$toast({
+          mask: false,
+          message: "请输入手机号或者验证码！"
+        });
+      } else {
+        this.$router.push({
+          path: "/register/phoneRegisterTwo",
+          query: this.phoneRegisterForm
+        });
+      }
+    },
+    handlePhoneBlur() {},
+    handleGetVerifyCode() {
+      if (!this.phoneRegisterForm.mobile) {
+        this.$toast({
+          mask: false,
+          message: "手机号不能为空！"
+        });
+        return;
+      }
+      this.$http
+        .post(`/api/user/getVerifyCode`, this.phoneRegisterForm)
+        .then(response => {
+          console.log("=====response.data==>", response.data);
+          if (response.data.code === 0) {
+            this.$toast({
+              mask: false,
+              message: "发送成功！"
+            });
+            console.log("=====response.data==>", response.data);
+          } else {
+            this.$toast({
+              mask: false,
+              message: response.data.msg
+            });
+          }
+        });
+    }
   }
 };
 </script>
