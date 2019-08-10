@@ -315,7 +315,8 @@ export default {
         // 商品标题
         title: "测试商品",
         // 默认商品 sku 缩略图
-        picture: "https://img.yzcdn.cn/1.jpg"
+        picture:
+          "https://topimg-test.oss-cn-shenzhen.aliyuncs.com/goods/1564465639525.jpg"
       },
       goodsId: "",
       customStepperConfig: {}
@@ -359,12 +360,13 @@ export default {
         Array.from(new Set(allSpecesArray)).map(it => {
           specesArray.push(JSON.parse(it));
         });
-        console.log("=====specesArray==>", specesArray);
+        console.log("=====specesArray=7=>", specesArray);
         for (let i = 0; i < skuSpecesTree.length; i++) {
           for (let j = 0; j < specesArray.length; j++) {
             if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
               specesArray[j].name = specesArray[j].specsValue;
               specesArray[j].id = specesArray[j].specsValueId;
+              // specesArray[j].imgUrl = skuSpecesTree[j].mainImage;
               skuSpecesTree[i].v.push(specesArray[j]);
             }
           }
@@ -375,6 +377,7 @@ export default {
         templeArray = responseDataList.map((it, i) => {
           let listObj = {};
           listObj.stock_num = it.stock;
+          listObj.price = it.price;
           for (let j = 0; j < responseDataList[i].speces.length; j++) {
             responseDataList[i].speces[j];
             listObj[responseDataList[i].speces[j].specsId] =
