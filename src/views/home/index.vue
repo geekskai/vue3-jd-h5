@@ -23,6 +23,15 @@
     </div>
     <section class="home-tags">
       <ul class="tags-content">
+        <li v-for="(item,index) in iconList" class="tags-item" :key="index">
+          <img class="tags-icon" v-lazy="item.iconUrl" />
+          <span class="item-text" v-text="item.title"></span>
+        </li>
+        <!-- <router-link tag="li" class="tags-item">
+          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
+          <span class="item-text">链猫精品</span>
+        </router-link>-->
+        <!--         
         <router-link tag="li" class="tags-item" to="./search">
           <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
           <span class="item-text">链猫精品</span>
@@ -42,7 +51,7 @@
         <router-link tag="li" class="tags-item" to="./search">
           <svg-icon class="tags-icon" icon-class="chain-cat-member"></svg-icon>
           <span class="item-text">链猫会员</span>
-        </router-link>
+        </router-link>-->
       </ul>
     </section>
 
@@ -176,10 +185,13 @@
             <ul class="goods-content">
               <li v-for="(item,index) in tabItemLists" :key="index">
                 <!-- <li v-for="(item,index) in list.list" :key="index"> -->
-                <router-link class="goods-img" tag="div" to="/classify/product">
+
+                <!-- <router-link class="goods-img" tag="div" to="/classify/product"> -->
+                <div @click="handleToProductDetail(item.productId)">
                   <img v-lazy="item.productMainImage" />
-                  <!-- <img :src="item.img" /> -->
-                </router-link>
+                </div>
+                <!-- <img :src="item.img" /> -->
+                <!-- </router-link> -->
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
                   <span class="goods-div">{{item.title}}</span>
@@ -220,6 +232,7 @@ export default {
   name: "home",
   data() {
     return {
+      iconList: [],
       active: "",
       timeData: 36000000,
       catList: [],
@@ -274,12 +287,19 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    handleToProductDetail(productId) {
+      this.$router.push({
+        path: "/classify/product",
+        query: { productId: productId }
+      });
+    },
     initData() {
       this.$http.get(`api/index`).then(response => {
         // console.log("=====res==>", response.data.content);
         this.images = response.data.content.bannerList;
         this.images2 = response.data.content.adList;
         this.catList = response.data.content.catList;
+        this.iconList = response.data.content.iconList;
       });
       this.handleTabClick(0);
     },

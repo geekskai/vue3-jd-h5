@@ -2,7 +2,7 @@
   <div class="product-layout">
     <van-swipe :autoplay="3000" :height="350">
       <van-swipe-item v-for="(image, index) in productImages" :key="index">
-        <img class="lazy_img" v-if="image.path" v-lazy="image.path"/>
+        <img class="lazy_img" v-if="image" v-lazy="image" />
         <!-- <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/> -->
       </van-swipe-item>
     </van-swipe>
@@ -36,7 +36,7 @@
       <li class="product-title">
         <div class="text-left">
           <span class="force-value">0.5倍算力</span>
-          <span class="item-desc">{{detailForm.name}}</span>
+          <span class="item-desc">{{detailForm.productName}}</span>
         </div>
         <div>
           <span class="heart-full" @click="isLike=!isLike">
@@ -50,12 +50,12 @@
       </li>
 
       <li class="product-info">
-        <i>快递包邮</i>
-        <i>月销:888</i>
+        <i>邮费：{{detailForm.logisticsDefaultPrice}}</i>
+        <i>月销：{{detailForm.monthlySalesQuantity}}</i>
       </li>
 
       <li class="item-info">
-        <van-field label="发货地" disabled :placeholder="detailForm.productArea">
+        <van-field label="发货地" disabled :placeholder="detailForm.shipAddress">
           <span slot="left-icon" class="anchor-point">
             <svg-icon icon-class="anchor-point"></svg-icon>
           </span>
@@ -64,14 +64,15 @@
       <li class="item-info">
         <van-field label="品牌" disabled :placeholder="detailForm.brandName" />
       </li>
-      <li class="item-info" @click="show = true">
-        <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
+      <li class="item-info" @click="handleShowSpecs">
+        <van-field label="选择" disabled :placeholder="handleProductSpeces()"></van-field>
         <van-icon name="arrow" />
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <img src="../../assets/image/product/store-header.png" class="store-header" />
-          <span class="store-name">店铺名称</span>
+          <!-- <img src="../../assets/image/product/store-header.png" class="store-header" /> -->
+          <img v-lazy="detailForm.shopLogo" class="store-header" />
+          <span class="store-name">{{detailForm.shopName}}</span>
         </div>
         <div class="store-btn">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -81,9 +82,28 @@
     </ul>
     <div class="item-details">
       <span @click="handleViewDetail">宝贝详情</span>
-      <div v-html="detailForm.appintroduce" v-show="showDetail" class="html-class"></div>
+      <div v-html="detailForm.productDetail" v-show="showDetail" class="html-class"></div>
     </div>
-    <van-popup
+    <!-- <van-sku
+      v-model="show"
+      :goods="goods"
+      :goods-id="goodsId"
+      :custom-stepper-config="customStepperConfig"
+      :sku="sku"
+      @buy-clicked="onBuyClicked"
+      @add-cart="onAddCartClicked"
+    />-->
+    <van-sku
+      v-model="show"
+      :sku="sku"
+      :goods="goods"
+      :goods-id="goodsId"
+      @buy-clicked="onBuyClicked"
+      @add-cart="onAddCartClicked"
+    />
+    <!-- :hide-stock="sku.hide_stock" -->
+
+    <!-- <van-popup
       class="select-popup"
       v-model="show"
       round
@@ -95,26 +115,27 @@
           <svg-icon icon-class="close-popup"></svg-icon>
         </span>
         <ul class="popup-top">
-          <img :src="imgSrc" />
+          <img v-lazy="detailForm.productMainImage" />
           <li class="item-specification">
-            <span class="item-price">￥568</span>
-            <span class="item-count">库存2279件</span>
-            <span class="item-colors">选择颜色；尺码</span>
+            <span class="item-price">￥{{detailForm.productCnyPrice }}</span>
+            <span class="item-count">库存：{{detailForm.skuCount}}</span>
+            <span class="item-colors">选择{{handleProductSpeces()}}</span>
           </li>
         </ul>
+
         <ul class="popup-center">
-          <li class="popup-color">
-            <span class="color-text">颜色</span>
+          <li class="popup-color" v-for="(productSpece,idx) in detailForm.productSpeces" :key="idx">
+            <span class="color-text">{{productSpece}}</span>
             <div class="color-list">
               <span
                 class="color-tag"
                 :class="{active:item.selected}"
-                v-for="(item,index) in listData"
+                v-for="(item,index) in specpsLists"
                 :key="index"
                 @click="handleSelected(item)"
               >
                 <img :src="item.imgSrc" />
-                <span>{{item.colorName}}</span>
+                <span>{{item.specsValue}}</span>
               </span>
             </div>
           </li>
@@ -143,7 +164,8 @@
           <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
         </van-goods-action>
       </div>
-    </van-popup>
+    </van-popup>-->
+
     <div class="product-footer">
       <van-goods-action>
         <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
@@ -192,8 +214,111 @@ export default {
           selected: false
         }
       ],
-      imgSrc: require("../../assets/image/home/test2.png"),
-      productImages: []
+      productImages: [],
+      sku: {
+        // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
+        // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
+        tree: [
+          {
+            k: "颜色",
+            k_id: "1",
+            v: [
+              {
+                id: "30349",
+                name: "天蓝色",
+                imgUrl:
+                  "https://img.yzcdn.cn/upload_files/2017/02/21/FjKTOxjVgnUuPmHJRdunvYky9OHP.jpg!100x100.jpg"
+              },
+              {
+                id: "1215",
+                name: "白色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg"
+              }
+            ],
+            k_s: "s1",
+            count: 2
+          },
+          {
+            k: "尺寸",
+            k_id: "2",
+            v: [
+              {
+                id: "1193",
+                name: "1"
+              },
+              {
+                id: "1194",
+                name: "2"
+              }
+            ],
+            k_s: "s2",
+            count: 2
+          }
+        ],
+        // 所有 sku 的组合列表，如下是：白色1、白色2、天蓝色1、天蓝色2
+        list: [
+          {
+            id: 2259,
+            price: 120, //价格
+            discount: 122,
+            s1: "1215",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 20, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2260,
+            price: 110,
+            discount: 112,
+            s1: "1215",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 2, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2257,
+            price: 130,
+            discount: 132,
+            s1: "30349",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 40, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2258,
+            price: 100,
+            discount: 100,
+            s1: "30349",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 50, //库存
+            goods_id: 946755
+          }
+        ],
+        price: "5.00",
+        stock_num: 10, // 商品总库存
+        none_sku: false, // 是否无规格商品
+        hide_stock: false // 是否隐藏剩余库存
+      },
+      goods: {
+        // 商品标题
+        title: "测试商品",
+        // 默认商品 sku 缩略图
+        picture: "https://img.yzcdn.cn/1.jpg"
+      },
+      goodsId: "",
+      customStepperConfig: {}
     };
   },
   created() {
@@ -204,22 +329,74 @@ export default {
     // });
     this.initData();
   },
-  // updated() {
-  //   let obj = document.getElementById("htmlClass");
-  //   let imgs = obj.getElementsByTagName("img");
-  //   for (let index = 0; index < imgs.length; index++) {
-  //     imgs[i].style.width = "100%";
-  //     imgs[i].style.height = "100%";
-  //   }
-  // },
+
   methods: {
+    onBuyClicked() {},
+    onAddCartClicked() {},
+    handleShowSpecs() {
+      this.show = true;
+      this.$http.get(`/api/product/chooseSku?productId=159`).then(response => {
+        let responseDataList = response.data.content;
+        let skuSpecesTree = [];
+        console.log("=====responseDataList==>", responseDataList);
+        // 先获取所有的规格类型的key
+        skuSpecesTree = responseDataList[0].speces.map(it => {
+          return {
+            k: it.specsName,
+            k_id: it.specsId,
+            v: [],
+            k_s: it.specsId
+          };
+        });
+        // 筛选value
+        let allSpecesArray = [];
+        for (let i = 0; i < responseDataList.length; i++) {
+          for (let j = 0; j < responseDataList[i].speces.length; j++) {
+            allSpecesArray.push(JSON.stringify(responseDataList[i].speces[j]));
+          }
+        }
+        let specesArray = [];
+        Array.from(new Set(allSpecesArray)).map(it => {
+          specesArray.push(JSON.parse(it));
+        });
+        console.log("=====specesArray==>", specesArray);
+        for (let i = 0; i < skuSpecesTree.length; i++) {
+          for (let j = 0; j < specesArray.length; j++) {
+            if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
+              specesArray[j].name = specesArray[j].specsValue;
+              specesArray[j].id = specesArray[j].specsValueId;
+              skuSpecesTree[i].v.push(specesArray[j]);
+            }
+          }
+        }
+        console.log("===22222==skuSpecesTree==>", skuSpecesTree);
+        // 开始筛选list 所有sku的组合列表
+        let templeArray = [];
+        templeArray = responseDataList.map((it, i) => {
+          let listObj = {};
+          listObj.stock_num = it.stock;
+          for (let j = 0; j < responseDataList[i].speces.length; j++) {
+            responseDataList[i].speces[j];
+            listObj[responseDataList[i].speces[j].specsId] =
+              responseDataList[i].speces[j].specsValueId;
+          }
+          return listObj;
+        });
+        this.sku.tree = skuSpecesTree;
+        this.sku.list = templeArray;
+      });
+    },
+    handleProductSpeces() {
+      if (this.detailForm.productSpeces) {
+        return this.detailForm.productSpeces.join(",");
+      }
+    },
     initData() {
       this.$http
-        .get(`/api/goods/detail?sku=${this.$route.query.sku}`)
+        .get(`/api/product/info?productId=${this.$route.query.productId}`)
         .then(response => {
-          this.productImages = response.data.images;
-          this.detailForm = response.data.detail;
-          console.log("=====content==>", response.data);
+          this.productImages = response.data.content.productImages;
+          this.detailForm = response.data.content;
         });
     },
     handleViewDetail() {
@@ -245,7 +422,10 @@ export default {
       this.$router.push("/storeDetail");
     },
     handleConnectStore() {
-      this.$router.push("/storeDetail");
+      this.$router.push({
+        path: "/storeDetail",
+        query: { merchantInfoId: this.detailForm.merchantShopId }
+      });
     }
   }
 };

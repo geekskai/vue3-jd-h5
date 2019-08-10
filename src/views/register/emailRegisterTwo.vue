@@ -14,14 +14,14 @@
       <p class="number-tips">6-20位数字、字母或字符</p>
       <van-cell-group class="info-list">
         <van-field
-          v-model="password"
+          v-model="emailRegisterTwo.password"
           type="password"
           right-icon="eye-o"
           clearable
           placeholder="密码"
         />
         <van-field
-          v-model="password"
+          v-model="emailRegisterTwo.password"
           type="password"
           right-icon="closed-eye"
           clearable
@@ -31,16 +31,8 @@
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <span class="login-btn">确定</span>
+      <span class="login-btn" @click="handleConfirmRegister">确定</span>
     </div>
-    <van-popup v-model="showPicker" position="bottom">
-      <van-picker
-        show-toolbar
-        :columns="columns"
-        @cancel="showPicker = false"
-        @confirm="onConfirm"
-      />
-    </van-popup>
   </div>
 </template>
 
@@ -49,15 +41,37 @@ export default {
   name: "emailRegisterTwo",
   data() {
     return {
-      sms: "",
-      value: "",
-      showPicker: false,
-      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"]
+      emailRegisterTwo: {
+        password: ""
+      }
     };
   },
   created() {},
   methods: {
-    onConfirm() {}
+    handleConfirmRegister() {
+      this.$http
+        .post(
+          `/api/user/register`,
+          Object.assign(this.emailRegisterTwo, this.$route.query)
+        )
+        .then(response => {
+
+          if (response.data.code === 0) {
+            localStorage.setItem("token", response.data.content.token);
+            this.$toast({
+              mask: false,
+              message: "注册成功！"
+            });
+            this.$router.push("/index");
+          } else {
+            this.$toast({
+              mask: false,
+              message: response.data.msg
+            });
+          }
+          
+        });
+    }
   }
 };
 </script>
@@ -98,8 +112,8 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
-    /deep/ .van-hairline--top-bottom::after{
-        display: none;
+    /deep/ .van-hairline--top-bottom::after {
+      display: none;
     }
     /deep/ .temp-empty {
       display: none;

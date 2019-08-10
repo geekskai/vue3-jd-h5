@@ -31,16 +31,8 @@
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <span class="login-btn">确定</span>
+      <span class="login-btn" @click="handleConfirmRegister">确定</span>
     </div>
-    <van-popup v-model="showPicker" position="bottom">
-      <van-picker
-        show-toolbar
-        :columns="columns"
-        @cancel="showPicker = false"
-        @confirm="onConfirm"
-      />
-    </van-popup>
   </div>
 </template>
 
@@ -52,15 +44,33 @@ export default {
       phoneRegisterTwoForm: {
         password: ""
       },
-      sms: "",
-      value: "",
-      showPicker: false,
-      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"]
+      
     };
   },
   created() {},
   methods: {
-    onConfirm() {}
+    handleConfirmRegister() {
+      this.$http
+        .post(
+          `/api/user/register`,
+          Object.assign(this.phoneRegisterTwoForm, this.$route.query)
+        )
+        .then(response => {
+          if (response.data.code === 0) {
+            localStorage.setItem("token", response.data.content.token);
+            this.$toast({
+              mask: false,
+              message: "注册成功！"
+            });
+            this.$router.push("/index");
+          } else {
+            this.$toast({
+              mask: false,
+              message: response.data.msg
+            });
+          }
+        });
+    }
   }
 };
 </script>

@@ -35,14 +35,6 @@
     <div class="login-register-btns">
       <span class="login-btn" @click="goToNextStep">
         下一步
-        <!-- <router-link
-      
-        
-        to="/register/phoneRegisterTwo"
-     
-        tag="span"
-        >-->
-        <!-- </router-link> -->
       </span>
     </div>
   </div>
@@ -56,13 +48,11 @@ export default {
       phoneRegisterForm: {
         areaCode: "86"
       },
-      sms: "",
-      value: "",
-      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"]
     };
   },
   created() {},
   methods: {
+    
     goToNextStep() {
       if (
         !this.phoneRegisterForm.mobile ||
@@ -80,6 +70,7 @@ export default {
       }
     },
     handlePhoneBlur() {},
+
     handleGetVerifyCode() {
       if (!this.phoneRegisterForm.mobile) {
         this.$toast({
@@ -91,13 +82,11 @@ export default {
       this.$http
         .post(`/api/user/getVerifyCode`, this.phoneRegisterForm)
         .then(response => {
-          console.log("=====response.data==>", response.data);
           if (response.data.code === 0) {
             this.$toast({
               mask: false,
               message: "发送成功！"
             });
-            console.log("=====response.data==>", response.data);
           } else {
             this.$toast({
               mask: false,

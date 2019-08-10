@@ -11,7 +11,7 @@
     <section class="login-info">
       <van-cell-group class="info-list">
         <van-field
-          v-model="loginForm.emailPhone"
+          v-model="loginForm.user"
           clearable
           placeholder="手机/邮箱"
           @click-right-icon="$toast('question')"
@@ -28,11 +28,11 @@
       <li class="top-login">
         <span>或使用TOP金服登录</span>
       </li>
-      <img src="../../assets/image/top-logo.png" alt />
+      <img src="../../assets/image/top-logo.png" />
     </ul>
     <div class="login-register-btns">
       <span class="login-btn" @click="handleUserLogin">登录</span>
-      <span class="register-btn" @click="handleUserRegister">注册</span>
+      <router-link class="register-btn" tag="span" to="/register/phoneRegister">注册</router-link>
     </div>
   </div>
 </template>
@@ -43,15 +43,21 @@ export default {
   data() {
     return {
       loginForm: {
-        emailPhone: "",
+        user: "",
         password: ""
       }
     };
   },
   created() {},
   methods: {
-    handleUserLogin() {},
-    handleUserRegister() {}
+    handleUserLogin() {
+      this.$http.post(`/api/user/login`, this.loginForm).then(response => {
+        if (response.data.code === 0) {
+          localStorage.setItem("token", response.data.content.token);
+          this.$router.push("/index");
+        }
+      });
+    }
   }
 };
 </script>

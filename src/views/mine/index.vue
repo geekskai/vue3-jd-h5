@@ -2,17 +2,18 @@
   <div class="mine-layout">
     <section class="mine-header">
       <img src="../../assets/image/product/store-new.png" class="header-img" />
-      <div class="login-regist">
-        <router-link to="/login" class="order-item" tag="span">登录</router-link>
-        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
-      </div>
-      <!-- <ul class="user-info">
+      <ul v-if="token" class="user-info">
         <li class="user-name">钻石王老五</li>
         <li class="node-info">
           <span class="sharing-node" @click="toShow">分享节点</span>
           <span class="business-node">商家节点</span>
         </li>
-      </ul> -->
+      </ul>
+      <div v-else class="login-regist">
+      <!-- <div class="login-regist"> -->
+        <router-link to="/login" class="order-item" tag="span">登录</router-link>
+        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
+      </div>
     </section>
     <section class="my-info">
       <ul class="info-list">
@@ -178,6 +179,7 @@ export default {
   data() {
     return {
       show: false,
+      token: localStorage.token,
       columns: 1
     };
   },

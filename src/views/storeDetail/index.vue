@@ -11,24 +11,23 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img src="../../assets/image/product/store-headerM.png" class="store-header" />
-        <li class="store-name">店铺名称</li>
+        <!-- <img src="../../assets/image/product/store-headerM.png" class="store-header" /> -->
+        <img v-lazy='storeDetail.idCardNo' class="store-header" />
+        <li class="store-name">{{storeDetail.shopName}}</li>
         <li class="store-introd">
           <div>
-            店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺
-            介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺
-            介绍店铺介绍店铺介绍店铺介绍店铺介绍
+            {{storeDetail.detail}}
           </div>
         </li>
       </ul>
       <ul class="store-center">
         <li class="store-tel">
           <label>电话:</label>
-          <span>13567890000</span>
+          <span>{{storeDetail.phone}}</span>
         </li>
         <li>
           <label>地址:</label>
-          <span>广东省深圳市宝安区科研路9号腾讯大厦10001</span>
+          <span>{{storeDetail.address}}</span>
         </li>
         <li class="store-btn">
           <van-button size="small" type="danger">联系店家</van-button>
@@ -113,6 +112,7 @@ export default {
     return {
       orderBy: "default",
       seclectActive: false,
+      storeDetail: {},
       likeList: [
         {
           id: 0,
@@ -153,7 +153,20 @@ export default {
       ]
     };
   },
+  created() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      this.$http
+        .get(
+          `/api/merchant/merchantShopInfo?merchantInfoId=${this.$route.query.merchantInfoId}`
+        )
+        .then(response => {
+          console.log("===== response.data.content==>", response.data.content);
+           this.storeDetail =  response.data.content
+        });
+    },
     handleSearch() {
       this.$router.push("/search");
     },
@@ -180,7 +193,7 @@ export default {
     }
   },
   computed: {},
-  created() {},
+
   mounted() {
     window.addEventListener("scroll", this.pageScroll);
   },

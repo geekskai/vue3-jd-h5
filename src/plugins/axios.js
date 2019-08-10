@@ -10,12 +10,12 @@ import { Toast } from 'vant';
  * 提示函数 
  * 禁止点击蒙层、显示一秒后关闭
  */
-const tip = msg => {    
-    Toast({        
-        message: msg,        
-        duration: 1000,        
-        forbidClick: true    
-    });
+const tip = msg => {
+  Toast({
+    message: msg,
+    duration: 1000,
+    forbidClick: true
+  });
 }
 
 /** 
@@ -42,8 +42,8 @@ const errorHandle = (status, other) => {
     case 401:
       toLogin();
       break;
-      // 403 token过期
-      // 清除token并跳转登录页
+    // 403 token过期
+    // 清除token并跳转登录页
     case 403:
       tip('登录过期，请重新登录');
       localStorage.removeItem('token');
@@ -52,9 +52,9 @@ const errorHandle = (status, other) => {
         toLogin();
       }, 1000);
       break;
-      // 404请求不存在
+    // 404请求不存在
     case 404:
-      tip('请求的资源不存在'); 
+      tip('请求的资源不存在');
       break;
     default:
       console.log(other);
