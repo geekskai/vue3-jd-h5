@@ -1,7 +1,9 @@
 <template>
   <div class="mine-layout">
     <section class="mine-header">
-      <img src="../../assets/image/product/store-new.png" class="header-img" />
+      <router-link to="/mine/personInfo">
+        <img src="../../assets/image/product/store-new.png" class="header-img" />
+      </router-link>
       <ul v-if="token" class="user-info">
         <li class="user-name">钻石王老五</li>
         <li class="node-info">
@@ -10,7 +12,7 @@
         </li>
       </ul>
       <div v-else class="login-regist">
-      <!-- <div class="login-regist"> -->
+        <!-- <div class="login-regist"> -->
         <router-link to="/login" class="order-item" tag="span">登录</router-link>
         <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
       </div>

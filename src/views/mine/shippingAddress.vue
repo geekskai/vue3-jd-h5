@@ -7,7 +7,7 @@
       <div class="header-content">收货地址</div>
     </header>
 
-    <section class="address-card">
+    <section class="address-card" v-for="(address, index) in addressArray" :key="index">
       <ul class="card-content">
         <div class="card-triangle active"></div>
         <li class="addres-svg">
@@ -15,18 +15,19 @@
         </li>
         <li class="card-info">
           <div class="info-name">
-            <span>我是谁</span>
-            <i>家</i>
+            <span>{{address.receiverName}}</span>
+            <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
+            <span>{{address.fullAddress}}</span>
             <van-icon name="arrow" color="#D8182D" />
           </div>
-          <span>136778769907</span>
+          <span>{{address.receiverPhone}}</span>
         </li>
       </ul>
     </section>
-    <section class="address-card">
+
+    <!-- <section class="address-card">
       <ul class="card-content">
         <div class="card-triangle"></div>
         <li class="addres-svg">
@@ -63,7 +64,7 @@
           <span>136778769907</span>
         </li>
       </ul>
-    </section>
+    </section> -->
 
     <div class="address-btn">
       <router-link to="/mine/addAddress">
@@ -77,10 +78,20 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      addressArray: []
+    };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.getUserList();
+  },
+  methods: {
+    getUserList() {// 获取用户列表
+      this.$http.get(`/api/address/getUserAddrList`).then(response => {
+        this.addressArray = response.data.content;
+      });
+    }
+  }
 };
 </script>
 
@@ -113,7 +124,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #D8182D;
+        background-color: #d8182d;
       }
       .card-triangle {
         position: absolute;
@@ -175,7 +186,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #D8182D;
+      color: #d8182d;
     }
   }
 }

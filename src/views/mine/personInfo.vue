@@ -9,7 +9,7 @@
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item">
-          <van-field label="头像" disabled/>
+          <van-field label="头像" disabled />
           <img src="../../assets/image/product/store-headerM.png" class="header-img" />
         </li>
         <li @click="handlePhone" class="setting-item">
@@ -59,11 +59,19 @@ export default {
   data() {
     return {
       show: false,
+      userInfo: {},
       name: ""
     };
   },
-  created() {},
+  created() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      this.$http.get(`/api/user/getUserInfo`).then(response => {
+        this.userInfo = response.data.content;
+      });
+    },
     handlePhone() {
       this.show = true;
     }
@@ -154,7 +162,7 @@ export default {
       border: 0 solid #ebedf0;
       border-left-width: 1px;
       span {
-        color: #D8182D;
+        color: #d8182d;
         font-size: 15px;
       }
     }

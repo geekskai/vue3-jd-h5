@@ -304,7 +304,6 @@ export default {
       this.handleTabClick(0);
     },
     handleTabClick(type) {
-      console.log("=====type==>", type);
       this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
         this.tabItemLists = response.data.content;
       });

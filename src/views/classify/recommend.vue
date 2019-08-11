@@ -88,7 +88,9 @@ export default {
     },
     initData() {
       this.$http
-        .get(`/api/goods/list?page=${this.page}&size=15`)
+        .get(
+          `/api/product/list?categoryId=${this.$route.query.categoryId}&&page=${this.page}&size=15`
+        )
         .then(response => {
           this.likeList.push(...response.data);
           // console.log("=====this.likeList==>", this.likeList);

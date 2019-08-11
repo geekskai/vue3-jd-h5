@@ -20,78 +20,53 @@
       </ul>
     </section>
     <div v-else>
-      <section class="order-card">
-        <van-checkbox v-model="checked" checked-color="#91C95B">
+      <section class="order-card" v-for="(shopCart,index) in shopCartArray" :key="index">
+        <van-checkbox
+          v-model="shopCart.merchantChecked"
+          @click="handleSelectAllGoods(shopCart,true)"
+          checked-color="#91C95B"
+        >
           <li class="checkbox-all">
             <div class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <span>店铺名称</span>
+              <img v-lazy="shopCart.merchantLogo" class="header-img" />
+              <span>{{shopCart.merchantName}}</span>
             </div>
           </li>
         </van-checkbox>
-        <van-checkbox-group class="order-list" v-model="result">
-          <ul v-for="(item, index) in list" :key="index">
+
+        <van-checkbox-group
+          class="order-list"
+          @change="handleMerchantCheckboxGroup(shopCart)"
+          v-model="shopCart.merchantCheckboxGroup"
+        >
+          <ul v-for="(item, i) in shopCart.merchantItemList" :key="i">
             <div class="order-info">
               <li class="check-item">
-                <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
+                <van-checkbox :key="i" checked-color="#91C95B" :name="item"></van-checkbox>
               </li>
-              <img src="../../assets/image/shopCart/购物车-1.png" />
+              <img v-lazy="item.productImg" />
               <li class="order-detail">
                 <ul>
                   <li class="info-one">
-                    <span>三彩预售新款短裙淑女裙淑女裙淑女裙淑女</span>
+                    <span>{{item.productName}}</span>
                   </li>
                   <li class="info-two">
-                    <span>型号;规格;颜色;</span>
+                    <span>{{item.fullName}}</span>
                   </li>
                 </ul>
                 <div class="info-count">
-                  <span>￥200</span>
-                  <van-stepper v-model="stepperValue"  />
+                  <span>￥：{{item.productPrice}}</span>
+                  <van-stepper
+                    v-model="item.quantity"
+                    integer
+                    @change="handleGoodsCountChange(item)"
+                  />
                 </div>
               </li>
             </div>
             <div class="order-total">
               <label>合计：</label>
-              <span>123000</span>
-            </div>
-          </ul>
-        </van-checkbox-group>
-      </section>
-      <section class="order-card">
-        <van-checkbox v-model="checked" checked-color="#91C95B">
-          <li class="checkbox-all">
-            <div class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <span>店铺名称</span>
-            </div>
-          </li>
-        </van-checkbox>
-        <van-checkbox-group class="order-list" v-model="result">
-          <ul v-for="(item, index) in lists" :key="index">
-            <div class="order-info">
-              <li class="check-item">
-                <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
-              </li>
-              <img :src="item.imgSrc" />
-              <li class="order-detail">
-                <ul>
-                  <li class="info-one">
-                    <span>{{item.desc}}</span>
-                  </li>
-                  <li class="info-two">
-                    <span>{{item.info}}</span>
-                  </li>
-                </ul>
-                <div class="info-count">
-                  <span>{{item.price}}</span>
-                  <van-stepper v-model="stepperValue"  />
-                </div>
-              </li>
-            </div>
-            <div class="order-total">
-              <label>合计：</label>
-              <span>{{item.total}}</span>
+              <span>{{item.productTotalPrice}}</span>
             </div>
           </ul>
         </van-checkbox-group>
@@ -99,13 +74,13 @@
     </div>
     <div v-if="clearCart === false">
       <section v-if="cartMode" class="options-edit">
-        <van-submit-bar :price="20000" button-text="结算" @submit="submitSettlement">
-          <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
+        <van-submit-bar :price="productTotalPrice" button-text="结算" @submit="submitSettlement">
+          <van-checkbox v-model="allChecked" @change="handleSelectedAll" checked-color="#91C95B">全选</van-checkbox>
         </van-submit-bar>
       </section>
       <section v-else class="options-delete">
-        <van-submit-bar button-text="删除" @submit="submitDelete">
-          <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
+        <van-submit-bar button-text="删除" @submit="submitDeleteCartGoods">
+          <van-checkbox v-model="allChecked" @change="handleSelectedAll" checked-color="#91C95B">全选</van-checkbox>
         </van-submit-bar>
       </section>
     </div>
@@ -127,7 +102,12 @@ export default {
   name: "shopCart",
   data() {
     return {
+      merchantChecked: false,
+      allChecked: false,
+      idList: [],
       clearCart: false,
+      productTotalPrice: 0,
+      shopCartArray: [],
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
@@ -202,18 +182,111 @@ export default {
           desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
         }
       ],
-      checked: false,
       stepperValue: "",
       result: ["a", "b"]
     };
   },
   created() {
-    console.log("======cart=>");
+    this.initData();
   },
+  watch: {},
   mounted() {
     this.$eventBus.$emit("changeTag", 2);
   },
   methods: {
+    submitDeleteCartGoods() {
+      // type: 1 全部清空，可以不传idList ， 默认type 0
+      this.shopCartArray.forEach(it => {
+        console.log("=====it==>", it);
+        if (!it.merchantChecked) {
+          it.merchantCheckboxGroup.forEach(item => {
+            this.idList.push(item.id);
+          });
+        }
+      });
+      console.log("=====idList==>", this.idList);
+      this.$http
+        .post(`/api/cart/remove`, { idList: this.idList, type: 0 })
+        .then(response => {
+          if (response.data.code === 0) {
+            this.initData();
+          }
+        });
+    },
+    handleSelectedAll(allChecked) {
+      if (allChecked) {
+        let tempTotalPrice = 0;
+        this.shopCartArray.forEach(item => {
+          item.merchantItemList.forEach(it => {
+            tempTotalPrice += it.productTotalPrice;
+          });
+        });
+        this.productTotalPrice = tempTotalPrice * 100;
+
+        this.shopCartArray.forEach(it => {
+          this.$set(it, "merchantChecked", true);
+          this.$set(it, "merchantCheckboxGroup", it.merchantItemList);
+        });
+      } else {
+        this.shopCartArray.forEach(it => {
+          this.$set(it, "merchantChecked", false);
+          this.$set(it, "merchantCheckboxGroup", []);
+        });
+        this.productTotalPrice = 0;
+      }
+    },
+    handleSelectAllGoods(shopCart, flag) {
+      if (!shopCart.merchantChecked && flag) {
+        this.$set(shopCart, "merchantCheckboxGroup", shopCart.merchantItemList);
+      } else if (shopCart.merchantChecked && flag) {
+        this.$set(shopCart, "merchantCheckboxGroup", []);
+      }
+      if (!flag) {
+        this.$set(shopCart, "merchantChecked", false);
+      }
+    },
+    handleMerchantCheckboxGroup(shopCart) {
+      if (shopCart.merchantCheckboxGroup.length === 1) {
+        this.productTotalPrice =
+          shopCart.merchantCheckboxGroup[0].productTotalPrice * 100;
+      } else {
+        let tempProductTotalPrice = 0;
+        shopCart.merchantCheckboxGroup.forEach(it => {
+          tempProductTotalPrice += it.productTotalPrice;
+        });
+        this.productTotalPrice = tempProductTotalPrice * 100;
+      }
+      if (
+        shopCart.merchantCheckboxGroup.length ===
+        shopCart.merchantItemList.length
+      ) {
+        this.$set(shopCart, "merchantChecked", true);
+      } else {
+        this.handleSelectAllGoods(shopCart, false);
+      }
+    },
+    handleGoodsCountChange(item) {
+      this.$http
+        .post(`/api/cart/update`, {
+          quantity: item.quantity,
+          skuId: item.skuId
+        })
+        .then(response => {
+          if (response.data.code === 0) {
+            this.initData();
+          }
+        });
+    },
+
+    initData() {
+      this.$http.get(`/api/cart/list`).then(response => {
+        this.shopCartArray = response.data.content;
+        this.shopCartArray.forEach(element => {
+          this.$set(element, "merchantChecked", false);
+          this.$set(element, "merchantCheckboxGroup", []);
+        });
+      });
+    },
     close() {
       this.show = false;
     },
@@ -408,7 +481,6 @@ export default {
           width: 100px;
           height: 100px;
           display: inline-block;
-          background-color: #d8182d;
           border-radius: 4px;
         }
         .order-detail {

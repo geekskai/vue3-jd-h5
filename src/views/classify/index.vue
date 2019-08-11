@@ -10,10 +10,11 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <span>{{handleSplit(item.label).slice(0,2)}}</span>
-            <span>{{handleSplit(item.label).slice(2)}}</span>
-            <!-- <span>{{item.label.slice(0,2)}}</span>
-            <span>{{item.label.slice(2)}}</span>-->
+            <!-- <span>{{item.label}}</span>
+             <span>{{handleSplit(item.label).slice(0,2)}}</span>
+            <span>{{handleSplit(item.label).slice(2)}}</span>-->
+            <span>{{item.label.slice(0,2)}}</span>
+            <span>{{item.label.slice(2)}}</span>
           </li>
         </ul>
       </list-scroll>
@@ -25,7 +26,7 @@
                 <img
                   @click="selectProduct(category.value)"
                   class="category-main-img"
-                  :src="category.imageUrl"
+                  v-lazy="category.imageUrl"
                   v-if="category.imageUrl"
                 />
                 <div v-for="(products,index) in category.children" :key="index">
@@ -37,7 +38,7 @@
                       v-for="(product,index) in products.children"
                       :key="index"
                     >
-                      <img class="item-img" :src="product.imageUrl" />
+                      <img class="item-img" v-lazy="product.imageUrl" />
                       <p class="product-title">{{product.label}}</p>
                     </div>
                   </div>
@@ -77,18 +78,18 @@ export default {
     this.getGoodsList();
   },
   methods: {
-    handleSplit(name) {
-      if (~name.indexOf("、")) {
-        let temName = name;
-        return temName.slice(0, 2) + name.slice(3);
-      } else {
-        return name;
-      }
-    },
+    // handleSplit(name) {
+    //   if (~name.indexOf("、")) {
+    //     let temName = name;
+    //     return temName.slice(0, 2) + name.slice(3);
+    //   } else {
+    //     return name;
+    //   }
+    // },
     // 获取分类
     getGoodsList() {
       // this.$http.get(`/api/product/category`).then(response => {
-      this.$http.get(`/api/goods/category`).then(response => {
+      this.$http.get(`/api/product/category`).then(response => {
         const categoryData = response.data.content;
         this.categoryData = categoryData;
       });
@@ -99,15 +100,18 @@ export default {
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
-      this.getGoodsList();
+      // this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
-    selectProduct(sku) {
-      this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
+    selectProduct(categoryId) {
+      this.$router.push({
+        path: "/classify/recommend",
+        query: { categoryId: categoryId }
+      });
     }
   },
   mounted() {

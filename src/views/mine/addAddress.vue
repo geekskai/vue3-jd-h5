@@ -12,23 +12,33 @@
         <li class="address-item">
           <van-cell title="联系人" />
           <div class="address-name">
-            <van-field v-model="value" placeholder="请输入姓名" />
+            <van-field v-model="addressInfo.receiverName" placeholder="请输入姓名" />
             <div class="gender-tags">
-              <van-tag color="#E96258" plain>女士</van-tag>
-              <van-tag color="#3A3A3A" plain>男士</van-tag>
+              <van-tag
+                color="#3A3A3A"
+                :class="{'isActive':addressInfo.reveiverGender === 0}"
+                @click="handleChooseGender(0)"
+                plain
+              >女士</van-tag>
+              <van-tag
+                color="#3A3A3A"
+                :class="{'isActive':addressInfo.reveiverGender === 1}"
+                @click="handleChooseGender(1)"
+                plain
+              >男士</van-tag>
             </div>
           </div>
         </li>
         <li class="address-item">
           <van-cell title="电话" />
           <div class="address-name">
-            <van-field v-model="value" placeholder="手机号码" />
+            <van-field v-model="addressInfo.receiverPhone" placeholder="手机号码" />
           </div>
         </li>
         <li class="address-item">
           <van-cell title="所在地区" />
           <div class="address-name" @click="show = true">
-            <van-field v-model="value" disabled placeholder="请选择省市区" />
+            <van-field v-model="addressInfo.fullAddress" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -37,7 +47,7 @@
         <li class="address-item">
           <van-cell title="地址" />
           <div class="address-name">
-            <van-field v-model="value" placeholder="如：道路、门牌号、小区、楼栋号、单元室等" />
+            <van-field v-model="addressInfo.fullAddress" placeholder="如：道路、门牌号、小区、楼栋号、单元室等" />
           </div>
         </li>
         <li class="address-item">
@@ -48,12 +58,16 @@
             <van-tag color="#E96258" plain>公司</van-tag>
           </div>
         </li>
+         <li class="address-default">
+          <span class="address-defaultAddrFlag">设为默认地址</span>
+          <van-switch v-model="addressInfo.defaultAddrFlag" active-color="#D8182D" size="20px" />
+        </li>
       </ul>
     </section>
 
     <div class="address-btn">
       <router-link to="/mine/addAddress">
-        <van-button type="danger" size="large">保存</van-button>
+        <van-button type="danger" size="large" @click="handleSeveAddresInfo">保存</van-button>
       </router-link>
     </div>
     <van-popup v-model="show" position="bottom" :style="{ height: '40%' }">
@@ -73,9 +87,12 @@ export default {
   name: "addAddress",
   data() {
     return {
-      value: "",
       show: false,
       parentAreaId: 0,
+      addressInfo: {
+        reveiverGender: 0,
+        defaultAddrFlag: 0,
+      },
       areaList: areaList
       // areaList: []
     };
@@ -86,10 +103,20 @@ export default {
   methods: {
     // 分层获取中国地址信息
     getAreas() {
-      this.$http.get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`).then(response =>{
-        console.log('=====response.data==>',response.data.content);  
-        // this.areaList = response.data.content
-      });
+      this.$http
+        .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
+        .then(response => {
+          console.log("=====response.data==>", response.data.content);
+          // this.areaList = response.data.content
+        });
+    },
+    handleChooseGender(gender) {
+      this.addressInfo.reveiverGender = gender;
+    },
+    handleSeveAddresInfo() {
+      this.$http
+        .post(`/api/address/updateUserAddr`, this.addressInfo)
+        .then(response => {});
     },
     handleCancel() {
       this.show = false;
@@ -163,6 +190,9 @@ export default {
             flex: 1;
             justify-content: center;
             align-items: center;
+            .isActive {
+              color: #e96258 !important;
+            }
             /deep/ .van-tag::after {
               border-radius: 8px;
             }
@@ -180,6 +210,17 @@ export default {
             width: 40px;
             text-align: center;
           }
+        }
+      }
+      .address-default{
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .address-defaultAddrFlag{
+          padding-right: 10px;
+          font-size: 13px;
+          color: #3a3a3a;
         }
       }
     }
