@@ -10,14 +10,12 @@
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" />
-        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" /> -->
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" />
-          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" /> -->
         </swiper-slide>
       </swiper>
     </div>
@@ -27,31 +25,6 @@
           <img class="tags-icon" v-lazy="item.iconUrl" />
           <span class="item-text" v-text="item.title"></span>
         </li>
-        <!-- <router-link tag="li" class="tags-item">
-          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
-          <span class="item-text">链猫精品</span>
-        </router-link>-->
-        <!--         
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
-          <span class="item-text">链猫精品</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="cm-area"></svg-icon>
-          <span class="item-text">CM专区</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="collar-cm"></svg-icon>
-          <span class="item-text">领CM币</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="coupon-svg"></svg-icon>
-          <span class="item-text">领券</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="chain-cat-member"></svg-icon>
-          <span class="item-text">链猫会员</span>
-        </router-link>-->
       </ul>
     </section>
 
@@ -168,7 +141,6 @@
         animated
         @click="handleTabClick"
       >
-        <!-- v-for="(list,index) in tabList" -->
         <van-tab
           v-for="(list,index) in catList"
           :title="list.describe"
@@ -178,27 +150,20 @@
           <div slot="title" class="slot-title">
             <b class="tab-title">{{list.title}}</b>
             <span class="tab-name">{{list.describe}}</span>
-            <!-- <span class="tab-name">{{list.name}}</span> -->
           </div>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
               <li v-for="(item,index) in tabItemLists" :key="index">
-                <!-- <li v-for="(item,index) in list.list" :key="index"> -->
-
-                <!-- <router-link class="goods-img" tag="div" to="/classify/product"> -->
                 <div @click="handleToProductDetail(item.productId)">
                   <img v-lazy="item.productMainImage" />
                 </div>
-                <!-- <img :src="item.img" /> -->
-                <!-- </router-link> -->
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
                   <span class="goods-div">{{item.title}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{item.productCnyPrice}}</i>
-                      <!-- <span class="force-value">{{item.forceValue}}倍算力</span> -->
                       <span class="force-value">0.5倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
@@ -212,7 +177,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <div class="ballWrap">
+    <!-- <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
         <div class="ball" v-if="ball.show">
           <li class="inner">
@@ -222,7 +187,7 @@
           </li>
         </div>
       </transition>
-    </div>
+    </div>-->
     <tabbar></tabbar>
   </div>
 </template>
@@ -272,14 +237,6 @@ export default {
 
   created() {
     this.initData();
-    // this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
-    //   const { tabList } = res.data;
-    //   const { images } = res.data;
-    //   const { images2 } = res.data;
-    //   this.tabList = tabList;
-    //   this.images = images;
-    //   this.images2 = images2;
-    // });
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
@@ -295,7 +252,6 @@ export default {
     },
     initData() {
       this.$http.get(`api/index`).then(response => {
-        // console.log("=====res==>", response.data.content);
         this.images = response.data.content.bannerList;
         this.images2 = response.data.content.adList;
         this.catList = response.data.content.catList;
@@ -310,30 +266,35 @@ export default {
     },
     addToCart(event, tag) {
       this.$store.commit("cart/addToCart", tag);
-      this.ball.show = true;
-      this.ball.el = event.target;
+      this.$toast({
+        mask: false,
+        duration: 700,
+        message: "添加成功~"
+      });
+      // this.ball.show = true;
+      // this.ball.el = event.target;
     },
-    beforeEnter(el) {
-      const dom = this.ball.el;
-      const rect = dom.getBoundingClientRect();
-      const x = rect.left - window.innerWidth * 0.6;
-      const y = -(window.innerHeight - rect.top);
-      el.style.display = "block";
-      el.style.transform = `translate3d(0,${y}px,0)`;
-      const inner = el.querySelector(".inner");
-      inner.style.transform = `translate3d(${x}px,0,0)`;
-    },
-    enter(el, done) {
-      document.body.offsetHeight;
-      el.style.transform = `translate3d(0,0,0)`;
-      const inner = el.querySelector(".inner");
-      inner.style.transform = `translate3d(0,0,0)`;
-      el.addEventListener("transitionend", done);
-    },
-    afterEnter(el) {
-      this.ball.show = false;
-      el.style.display = "none";
-    },
+    // beforeEnter(el) {
+    //   const dom = this.ball.el;
+    //   const rect = dom.getBoundingClientRect();
+    //   const x = rect.left - window.innerWidth * 0.6;
+    //   const y = -(window.innerHeight - rect.top);
+    //   el.style.display = "block";
+    //   el.style.transform = `translate3d(0,${y}px,0)`;
+    //   const inner = el.querySelector(".inner");
+    //   inner.style.transform = `translate3d(${x}px,0,0)`;
+    // },
+    // enter(el, done) {
+    //   document.body.offsetHeight;
+    //   el.style.transform = `translate3d(0,0,0)`;
+    //   const inner = el.querySelector(".inner");
+    //   inner.style.transform = `translate3d(0,0,0)`;
+    //   el.addEventListener("transitionend", done);
+    // },
+    // afterEnter(el) {
+    //   this.ball.show = false;
+    //   el.style.display = "none";
+    // },
 
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
@@ -742,20 +703,20 @@ export default {
     }
   }
 
-  .ballWrap {
-    .ball {
-      position: fixed;
-      left: 60%;
-      bottom: 10px;
-      z-index: 1003;
-      color: red;
-      transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
-      .inner {
-        width: 16px;
-        height: 16px;
-        transition: all 0.5s linear;
-      }
-    }
-  }
+  // .ballWrap {
+  //   .ball {
+  //     position: fixed;
+  //     left: 60%;
+  //     bottom: 10px;
+  //     z-index: 1003;
+  //     color: red;
+  //     transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+  //     .inner {
+  //       width: 16px;
+  //       height: 16px;
+  //       transition: all 0.5s linear;
+  //     }
+  //   }
+  // }
 }
 </style>

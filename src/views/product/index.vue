@@ -412,11 +412,25 @@ export default {
       });
     },
     handleAddToCart() {
-      this.$toast.success({
-        message: "添加成功~",
-        duration: 1500,
-        icon: "like-o"
-      });
+      this.$http
+        .post(`/api/cart/add`, {
+          quantity: 1,
+          skuId: this.$route.query.productId
+        })
+        .then(response => {
+          if (response.data.code === 0) {
+            this.$toast.success({
+              message: "添加成功~",
+              duration: 1500,
+              icon: "like-o"
+            });
+          } else {
+            this.$toast.fail({
+              message: response.data.msg,
+              duration: 1500
+            });
+          }
+        });
     },
     handleToBuy() {
       this.$router.push("/order/orderDetail");

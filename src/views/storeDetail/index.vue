@@ -1,8 +1,6 @@
 <template>
   <div class="store-detail">
-    <!-- <span class="btn-left" @click="$router.go(-1)">
-      <svg-icon icon-class="gray-btn"></svg-icon>
-    </span>-->
+    
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
@@ -11,7 +9,6 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <!-- <img src="../../assets/image/product/store-headerM.png" class="store-header" /> -->
         <img v-lazy='storeDetail.idCardNo' class="store-header" />
         <li class="store-name">{{storeDetail.shopName}}</li>
         <li class="store-introd">
@@ -34,6 +31,9 @@
         </li>
       </ul>
     </section>
+
+
+    
     <div class="goods-all">
       <section class="select-menu" :class="{'isFixed' : seclectActive}">
         <div
