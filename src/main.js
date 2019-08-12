@@ -13,7 +13,6 @@ import './mock/mock'
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
 Vue.use(EventBus)
-
 import Vconsole from 'vconsole'
 if (process.env.NODE_ENV !== 'production') {
   // const vConsole = new Vconsole()

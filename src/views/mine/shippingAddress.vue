@@ -7,11 +7,18 @@
       <div class="header-content">收货地址</div>
     </header>
 
-    <section class="address-card" v-for="(address, index) in addressArray" :key="index">
+    <section
+      class="address-card"
+      v-for="(address, index) in addressArray"
+      :key="index"
+      @click="handleGoToEditAddrss(address.userAddrId)"
+    >
       <ul class="card-content">
         <div class="card-triangle active"></div>
         <li class="addres-svg">
-          <svg-icon icon-class="address-home"></svg-icon>
+          <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
+          <svg-icon icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
+          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon>
         </li>
         <li class="card-info">
           <div class="info-name">
@@ -26,46 +33,6 @@
         </li>
       </ul>
     </section>
-
-    <!-- <section class="address-card">
-      <ul class="card-content">
-        <div class="card-triangle"></div>
-        <li class="addres-svg">
-          <svg-icon icon-class="address-company"></svg-icon>
-        </li>
-        <li class="card-info">
-          <div class="info-name">
-            <span>我是谁</span>
-            <i>公司</i>
-          </div>
-          <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" />
-          </div>
-          <span>136778769907</span>
-        </li>
-      </ul>
-    </section>
-    <section class="address-card">
-      <ul class="card-content">
-        <div class="card-triangle"></div>
-        <li class="addres-svg">
-          <svg-icon icon-class="address-school"></svg-icon>
-        </li>
-        <li class="card-info">
-          <div class="info-name">
-            <span>我是谁</span>
-            <i>学校</i>
-          </div>
-          <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" />
-          </div>
-          <span>136778769907</span>
-        </li>
-      </ul>
-    </section> -->
-
     <div class="address-btn">
       <router-link to="/mine/addAddress">
         <van-button plain type="danger" icon="plus" size="large">新增地址</van-button>
@@ -86,7 +53,14 @@ export default {
     this.getUserList();
   },
   methods: {
-    getUserList() {// 获取用户列表
+    handleGoToEditAddrss(userAddrId) {
+      this.$router.push({
+        path: "/mine/addAddress",
+        query: { userAddrId: userAddrId }
+      });
+    },
+    getUserList() {
+      // 获取用户列表
       this.$http.get(`/api/address/getUserAddrList`).then(response => {
         this.addressArray = response.data.content;
       });
