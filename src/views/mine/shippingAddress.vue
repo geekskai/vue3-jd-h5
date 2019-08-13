@@ -1,13 +1,22 @@
 <template>
   <div class="shipping-address">
     <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+      <router-link class="btn-left" tag="span" to="/mine">
+        <!-- <span  @click="$router.go(-1)"> -->
         <svg-icon icon-class="white-btn"></svg-icon>
-      </span>
+        <!-- </span> -->
+      </router-link>
       <div class="header-content">收货地址</div>
     </header>
-
+    <ul v-if="addressArray.length === 0" class="address-no">
+      <img src="../../assets/image/mime/no-address.png" />
+      <li class="address-text">
+        没有您的收货地址
+        <br />赶紧添加地址吧
+      </li>
+    </ul>
     <section
+      v-else
       class="address-card"
       v-for="(address, index) in addressArray"
       :key="index"
@@ -26,7 +35,7 @@
             <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>{{address.fullAddress}}</span>
+            <span>{{address.fullAddress.slice(0,address.fullAddress.length-9)+address.address}}</span>
             <van-icon name="arrow" color="#D8182D" />
           </div>
           <span>{{address.receiverPhone}}</span>
@@ -55,7 +64,7 @@ export default {
   methods: {
     handleGoToEditAddrss(userAddrId) {
       this.$router.push({
-        path: "/mine/addAddress",
+        path: "/mine/editAddress",
         query: { userAddrId: userAddrId }
       });
     },
@@ -84,6 +93,18 @@ export default {
       font-weight: 600;
       color: #3a3a3a;
       flex: 1;
+    }
+  }
+  .address-no {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 17px;
+    color: #949497;
+    padding-top: 105px;
+    .address-text {
+      padding-top: 20px;
     }
   }
   .address-card {

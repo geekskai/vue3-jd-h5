@@ -84,92 +84,29 @@
       <span @click="handleViewDetail">宝贝详情</span>
       <div v-html="detailForm.productDetail" v-show="showDetail" class="html-class"></div>
     </div>
-    <!-- <van-sku
-      v-model="show"
-      :goods="goods"
-      :goods-id="goodsId"
-      :custom-stepper-config="customStepperConfig"
-      :sku="sku"
-      @buy-clicked="onBuyClicked"
-      @add-cart="onAddCartClicked"
-    />-->
+
     <van-sku
       v-model="show"
+      class="product-sku"
       :sku="sku"
+      close-on-click-overlay
       :goods="goods"
       :goods-id="goodsId"
-      @buy-clicked="onBuyClicked"
-      @add-cart="onAddCartClicked"
-    />
-    <!-- :hide-stock="sku.hide_stock" -->
-
-    <!-- <van-popup
-      class="select-popup"
-      v-model="show"
-      round
-      position="bottom"
-      :style="{ height: '75%' }"
+      @buy-clicked="handleToBuy"
+      @add-cart="handleAddToCart"
     >
-      <section class="popup-content">
-        <span class="close-icon" @click="show = false">
-          <svg-icon icon-class="close-popup"></svg-icon>
-        </span>
-        <ul class="popup-top">
-          <img v-lazy="detailForm.productMainImage" />
-          <li class="item-specification">
-            <span class="item-price">￥{{detailForm.productCnyPrice }}</span>
-            <span class="item-count">库存：{{detailForm.skuCount}}</span>
-            <span class="item-colors">选择{{handleProductSpeces()}}</span>
-          </li>
-        </ul>
-
-        <ul class="popup-center">
-          <li class="popup-color" v-for="(productSpece,idx) in detailForm.productSpeces" :key="idx">
-            <span class="color-text">{{productSpece}}</span>
-            <div class="color-list">
-              <span
-                class="color-tag"
-                :class="{active:item.selected}"
-                v-for="(item,index) in specpsLists"
-                :key="index"
-                @click="handleSelected(item)"
-              >
-                <img :src="item.imgSrc" />
-                <span>{{item.specsValue}}</span>
-              </span>
-            </div>
-          </li>
-          <li class="popup-size">
-            <span class="size-text">尺码</span>
-            <div class="size-list">
-              <span class="size-item">S</span>
-              <span class="size-item">M</span>
-              <span class="size-item">L</span>
-              <span class="size-item">XL</span>
-              <span class="size-item">4XL</span>
-              <span class="size-item">5XL</span>
-              <span class="size-item">6XL</span>
-              <span class="size-item">7XL</span>
-            </div>
-          </li>
-          <li class="popup-quantity">
-            <span class="quantity-text">购买数量</span>
-            <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
-          </li>
-        </ul>
-      </section>
-      <div class="product-footer">
-        <van-goods-action>
-          <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
-          <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
-        </van-goods-action>
-      </div>
-    </van-popup>-->
+      <template slot="sku-header-price" slot-scope="props">
+        <div class="van-sku__goods-price">
+          <span class="van-sku__price-symbol">￥</span>
+          <span class="van-sku__price-num">{{ props.price*100 }}</span>
+        </div>
+      </template>
+    </van-sku>
 
     <div class="product-footer">
       <van-goods-action>
-        <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
-        <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
+        <van-goods-action-button @click="handleShowSpecs" type="warning" text="加入购物车" />
+        <van-goods-action-button type="danger" @click="handleShowSpecs" text="立即购买" />
       </van-goods-action>
     </div>
   </div>
@@ -323,71 +260,70 @@ export default {
     };
   },
   created() {
-    // this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
-    //   const { productImages } = res.data;
-    //   let i = Math.floor(Math.random() * 6);
-    //   this.productImages = productImages[i];
-    // });
     this.initData();
   },
 
   methods: {
     onBuyClicked() {},
-    onAddCartClicked() {},
     handleShowSpecs() {
       this.show = true;
-      this.$http.get(`/api/product/chooseSku?productId=159`).then(response => {
-        let responseDataList = response.data.content;
-        let skuSpecesTree = [];
-        console.log("=====responseDataList==>", responseDataList);
-        // 先获取所有的规格类型的key
-        skuSpecesTree = responseDataList[0].speces.map(it => {
-          return {
-            k: it.specsName,
-            k_id: it.specsId,
-            v: [],
-            k_s: it.specsId
-          };
-        });
-        // 筛选value
-        let allSpecesArray = [];
-        for (let i = 0; i < responseDataList.length; i++) {
-          for (let j = 0; j < responseDataList[i].speces.length; j++) {
-            allSpecesArray.push(JSON.stringify(responseDataList[i].speces[j]));
-          }
-        }
-        let specesArray = [];
-        Array.from(new Set(allSpecesArray)).map(it => {
-          specesArray.push(JSON.parse(it));
-        });
-        console.log("=====specesArray=7=>", specesArray);
-        for (let i = 0; i < skuSpecesTree.length; i++) {
-          for (let j = 0; j < specesArray.length; j++) {
-            if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
-              specesArray[j].name = specesArray[j].specsValue;
-              specesArray[j].id = specesArray[j].specsValueId;
-              // specesArray[j].imgUrl = skuSpecesTree[j].mainImage;
-              skuSpecesTree[i].v.push(specesArray[j]);
+      this.$http
+        .get(`/api/product/chooseSku?productId=${this.$route.query.productId}`)
+        .then(response => {
+          let responseDataList = response.data.content;
+          let skuSpecesTree = [];
+          console.log("=====responseDataList==>", responseDataList);
+          // 先获取所有的规格类型的key
+          skuSpecesTree = responseDataList[0].speces.map(it => {
+            return {
+              k: it.specsName,
+              k_id: it.specsId,
+              v: [],
+              k_s: it.specsId
+            };
+          });
+          // 筛选value
+          let allSpecesArray = [];
+          for (let i = 0; i < responseDataList.length; i++) {
+            for (let j = 0; j < responseDataList[i].speces.length; j++) {
+              allSpecesArray.push(
+                JSON.stringify(responseDataList[i].speces[j])
+              );
             }
           }
-        }
-        console.log("===22222==skuSpecesTree==>", skuSpecesTree);
-        // 开始筛选list 所有sku的组合列表
-        let templeArray = [];
-        templeArray = responseDataList.map((it, i) => {
-          let listObj = {};
-          listObj.stock_num = it.stock;
-          listObj.price = it.price;
-          for (let j = 0; j < responseDataList[i].speces.length; j++) {
-            responseDataList[i].speces[j];
-            listObj[responseDataList[i].speces[j].specsId] =
-              responseDataList[i].speces[j].specsValueId;
+          let specesArray = [];
+          Array.from(new Set(allSpecesArray)).map(it => {
+            specesArray.push(JSON.parse(it));
+          });
+          console.log("=====specesArray=7=>", specesArray);
+          for (let i = 0; i < skuSpecesTree.length; i++) {
+            for (let j = 0; j < specesArray.length; j++) {
+              if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
+                specesArray[j].name = specesArray[j].specsValue;
+                specesArray[j].id = specesArray[j].specsValueId;
+                // specesArray[j].imgUrl = skuSpecesTree[j].mainImage;
+                skuSpecesTree[i].v.push(specesArray[j]);
+              }
+            }
           }
-          return listObj;
+          console.log("===22222==skuSpecesTree==>", skuSpecesTree);
+          // 开始筛选list 所有sku的组合列表
+          let templeArray = [];
+          templeArray = responseDataList.map((it, i) => {
+            let listObj = {};
+            listObj.stock_num = it.stock;
+            listObj.id = it.id;
+            listObj.price = it.price;
+            for (let j = 0; j < responseDataList[i].speces.length; j++) {
+              // responseDataList[i].speces[j];
+              listObj[responseDataList[i].speces[j].specsId] =
+                responseDataList[i].speces[j].specsValueId;
+            }
+            return listObj;
+          });
+          this.sku.tree = skuSpecesTree;
+          this.sku.list = templeArray;
         });
-        this.sku.tree = skuSpecesTree;
-        this.sku.list = templeArray;
-      });
     },
     handleProductSpeces() {
       if (this.detailForm.productSpeces) {
@@ -399,6 +335,7 @@ export default {
         .get(`/api/product/info?productId=${this.$route.query.productId}`)
         .then(response => {
           this.productImages = response.data.content.productImages;
+          this.goods.picture = response.data.content.productImages[0];
           this.detailForm = response.data.content;
         });
     },
@@ -411,11 +348,11 @@ export default {
         it == item ? (it.selected = true) : (it.selected = false);
       });
     },
-    handleAddToCart() {
+    handleAddToCart(skuObj) {
       this.$http
         .post(`/api/cart/add`, {
           quantity: 1,
-          skuId: this.$route.query.productId
+          skuId: skuObj.selectedSkuComb.id
         })
         .then(response => {
           if (response.data.code === 0) {
@@ -433,7 +370,7 @@ export default {
         });
     },
     handleToBuy() {
-      this.$router.push("/order/orderDetail");
+      this.$router.push("/order/confirmOrder");
     },
     handleStoreName() {
       this.$router.push("/storeDetail");
@@ -664,6 +601,22 @@ export default {
       }
       /deep/ div {
         background-size: 50% 100%;
+      }
+    }
+  }
+  .product-sku {
+    /deep/ .van-sku-actions {
+      /deep/ .van-button--warning {
+        background-color: #f3ca43;
+        border: 1px solid #f3ca43;
+        height: 44px;
+        line-height: 44px;
+      }
+      /deep/ .van-button--danger {
+        height: 44px;
+        line-height: 44px;
+        background-color: #d8182d;
+        border: 1px solid #d8182d;
       }
     }
   }

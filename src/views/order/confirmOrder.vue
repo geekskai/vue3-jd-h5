@@ -5,7 +5,7 @@
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">订单详情</div>
+      <div class="header-content">确认订单</div>
     </header>
     <section class="order-info">
       <ul class="info-list">
@@ -93,7 +93,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "ConfirmOrder",
   data() {
     return {
       columns: 1,
@@ -310,8 +310,6 @@ export default {
     left: 0;
     right: 0;
     padding: 0 16px;
-    // padding-top: 50px;
-    // padding-bottom: 30px;
     .pay-count {
       display: flex;
       justify-content: space-between;

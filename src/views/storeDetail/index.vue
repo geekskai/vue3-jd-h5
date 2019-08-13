@@ -91,7 +91,7 @@
                   <span class="goods-price">
                     <i>{{item.itemPrice}}</i>
                   </span>
-                  <svg-icon class="add-icon" icon-class="add"></svg-icon>
+                  <!-- <svg-icon class="add-icon" icon-class="add"></svg-icon> -->
                 </div>
               </div>
             </router-link>

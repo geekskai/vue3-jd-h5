@@ -14,8 +14,9 @@
     </van-swipe>
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" />
+        <swiper-slide v-for="(img ,index) in adList" :key="index">
+          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
+          <img class="slide_img" @click="handleClick" v-lazy="img.imageUrl" />
         </swiper-slide>
       </swiper>
     </div>
@@ -154,20 +155,18 @@
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <li v-for="(item,index) in tabItemLists" :key="index">
+              <li class="goods-item" v-for="(item,index) in tabItemLists" :key="index">
                 <div @click="handleToProductDetail(item.productId)">
-                  <img v-lazy="item.productMainImage" />
+                  <img class="lazy-img" v-lazy="item.productMainImage" />
                 </div>
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
-                  <span class="goods-div">{{item.title}}</span>
+                  <!-- <span class="goods-div" v-if="item.labels">{{item.labels.replace(/,/g,'-')}}</span> -->
+                  <span class="goods-div">{{item.labels}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
-                      <i>{{item.productCnyPrice}}</i>
+                      <i>￥{{item.productCnyPrice}}</i>
                       <span class="force-value">0.5倍算力</span>
-                    </span>
-                    <span class="add-icon" @click="addToCart($event,item)">
-                      <svg-icon icon-class="add"></svg-icon>
                     </span>
                   </div>
                 </div>
@@ -177,17 +176,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <!-- <div class="ballWrap">
-      <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
-        <div class="ball" v-if="ball.show">
-          <li class="inner">
-            <span class="cubeic-add" @click="addToCart($event,item)">
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </span>
-          </li>
-        </div>
-      </transition>
-    </div>-->
+
     <tabbar></tabbar>
   </div>
 </template>
@@ -210,7 +199,7 @@ export default {
       isLogin: false,
       headerActive: false,
       images: [],
-      images2: [],
+      adList: [],
       swiperOption: {
         loop: true,
         autoplay: false,
@@ -253,7 +242,7 @@ export default {
     initData() {
       this.$http.get(`api/index`).then(response => {
         this.images = response.data.content.bannerList;
-        this.images2 = response.data.content.adList;
+        this.adList = response.data.content.adList;
         this.catList = response.data.content.catList;
         this.iconList = response.data.content.iconList;
       });
@@ -264,38 +253,6 @@ export default {
         this.tabItemLists = response.data.content;
       });
     },
-    addToCart(event, tag) {
-      this.$store.commit("cart/addToCart", tag);
-      this.$toast({
-        mask: false,
-        duration: 700,
-        message: "添加成功~"
-      });
-      // this.ball.show = true;
-      // this.ball.el = event.target;
-    },
-    // beforeEnter(el) {
-    //   const dom = this.ball.el;
-    //   const rect = dom.getBoundingClientRect();
-    //   const x = rect.left - window.innerWidth * 0.6;
-    //   const y = -(window.innerHeight - rect.top);
-    //   el.style.display = "block";
-    //   el.style.transform = `translate3d(0,${y}px,0)`;
-    //   const inner = el.querySelector(".inner");
-    //   inner.style.transform = `translate3d(${x}px,0,0)`;
-    // },
-    // enter(el, done) {
-    //   document.body.offsetHeight;
-    //   el.style.transform = `translate3d(0,0,0)`;
-    //   const inner = el.querySelector(".inner");
-    //   inner.style.transform = `translate3d(0,0,0)`;
-    //   el.addEventListener("transitionend", done);
-    // },
-    // afterEnter(el) {
-    //   this.ball.show = false;
-    //   el.style.display = "none";
-    // },
-
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
     },
@@ -630,34 +587,35 @@ export default {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        li {
-          display: inline-block;
+        .goods-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           width: 165px;
           margin-top: 10px;
           border-radius: 8px;
           background-color: white;
           box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-          img {
+          .lazy-img {
             width: 100%;
+            border-radius: 8px 8px 0 0;
+            min-height: 196px;
+            min-width: 165px;
           }
         }
         li:nth-of-type(even) {
           padding-right: 0;
         }
-        .goods-img {
-          img {
-            width: 165px;
-            height: 196px;
-            border-radius: 8px 8px 0 0;
-          }
-        }
         .goods-layout {
           width: 165px;
-          padding: 0 10px;
+          padding: 0 5px;
           display: flex;
           justify-content: flex-start;
           flex-direction: column;
           .goods-title {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             color: #3a3a3a;
             font-size: 14px;
             font-weight: 600;
@@ -665,6 +623,7 @@ export default {
           .goods-div {
             color: #949497;
             font-size: 11px;
+            padding-top: 3px;
           }
           .goods-desc {
             background-color: #fff;

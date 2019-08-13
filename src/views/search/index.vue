@@ -87,12 +87,13 @@
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
-                <span class="goods-div">限量套装 新品上市</span>
+                <!-- <span class="goods-div">限量套装 新品上市</span> -->
+                <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>$:{{item.productCnyPrice}}</i>
                   </span>
-                  <svg-icon class="add-icon" icon-class="add"></svg-icon>
+                  <!-- <svg-icon class="add-icon" icon-class="add"></svg-icon> -->
                 </div>
                 <div class="goods-count-sale">
                   <span class="goods-shopName">

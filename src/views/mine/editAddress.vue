@@ -1,11 +1,11 @@
 <template>
-  <div class="add-address">
+  <div class="edit-address">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">新增所在地区</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
+      <div class="header-content">修改所在地区</div>
+      <span class="delete-addrss" @click="handleDeleteAddress">删除</span>
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -39,7 +39,12 @@
           <van-cell title="所在地区" />
           <!-- <div class="address-name" @click="show = true"> -->
           <div class="address-name" @click="showPicker">
-            <van-field v-model="addressInfo.area" disabled placeholder="请选择省市区" />
+            <!-- <van-field v-model="addressInfo.area||addressInfo.fullAddress" disabled placeholder="请选择省市区" /> -->
+            <van-field
+              :value="addressInfo.area||addressInfo.fullAddress"
+              disabled
+              placeholder="请选择省市区"
+            />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -155,7 +160,7 @@
 <script>
 // import areaList from "../../mock/area";
 export default {
-  name: "addAddress",
+  name: "editAddress",
   data() {
     return {
       show: false,
@@ -243,8 +248,36 @@ export default {
     };
     // 第一条数据为直辖市 so '-' 符号表示为第三列
     this.list3 = [{ name: "-" }];
+    this.initEditAddrss();
   },
   methods: {
+    handleDeleteAddress() {
+      this.$http
+        .post(`/api/address/delUserAddr`, this.addressInfo)
+        .then(response => {
+          if (response.data.code === 0) {
+            this.$toast({
+              mask: false,
+              message: "删除成功！"
+            });
+            this.$router.push(`/mine/shippingAddress`);
+          } else {
+            this.$toast({
+              mask: false,
+              message: "删除失败！"
+            });
+          }
+        });
+    },
+    initEditAddrss() {
+      this.$http
+        .get(
+          `/api/address/getUserAddrDetail?addrId=${this.$route.query.userAddrId}`
+        )
+        .then(response => {
+          this.addressInfo = response.data.content;
+        });
+    },
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },
@@ -499,7 +532,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.add-address {
+.edit-address {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
@@ -524,7 +557,7 @@ export default {
       color: #3a3a3a;
       flex: 1;
     }
-    .appeal-record {
+    .delete-addrss {
       color: #d8182d;
       font-size: 13px;
     }
