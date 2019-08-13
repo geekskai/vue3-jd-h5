@@ -2,7 +2,7 @@
   <div class="recommend">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="../../assets/icons/left-green-white.png"/>
       </span>
       <div class="header-content">推荐</div>
     </header>
@@ -24,19 +24,17 @@
       >
         <div>
           <ul class="like-list" v-for="(item,index) in likeList" :key="index">
-            <li class="like-item" @click="handleToDetail(item.sku)">
-              <img class="item-picture" v-lazy="item.imagePath" />
+            <li class="like-item" @click="handleToDetail(item.productId)">
+              <img class="item-picture" v-lazy="item.productMainImage" />
               <div class="item-detail">
                 <p class="store-info">
-                  <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" /> -->
-                  <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
-                  <!-- <label>{{item.storeName}}</label> -->
-                  <label>京东商城</label>
+                  <img v-lazy="item.logoUrl" class="header-img" />
+                  <label>{{item.shopName}}</label>
                 </p>
-                <p class="item-title">{{item.name}}</p>
+                <p class="item-title">{{item.productName}}</p>
                 <p class="item-count">
-                  <i>￥：{{item.price}}</i>
-                  <span>{{item.itemCount}}</span>
+                  <i>￥：{{item.productCnyPrice}}</i>
+                  <span>月销量：{{item.monthlySalesQuantity}}</span>
                 </p>
               </div>
             </li>
@@ -80,10 +78,10 @@ export default {
     handlePullDown() {
       console.log("=====handlePullDown==>");
     },
-    handleToDetail(sku) {
+    handleToDetail(productId) {
       this.$router.push({
-        path: "/classify/product",
-        query: { sku: sku }
+        path: "/classify/index",
+        query: { productId: productId }
       });
     },
     initData() {
@@ -92,8 +90,8 @@ export default {
           `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15`
         )
         .then(response => {
-          this.likeList.push(...response.data);
-          // console.log("=====this.likeList==>", this.likeList);
+          this.likeList = response.data.content;
+          console.log("=====this.likeList==>", response.data.content);
         });
     },
     handleSearch() {
@@ -229,6 +227,7 @@ export default {
           }
           .item-count {
             padding-top: 4px;
+            padding-right: 5px;
             display: flex;
             justify-content: space-between;
             width: 100%;

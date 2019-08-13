@@ -235,7 +235,7 @@ export default {
   methods: {
     handleToProductDetail(productId) {
       this.$router.push({
-        path: "/classify/product",
+        path: "/classify/index",
         query: { productId: productId }
       });
     },
@@ -257,7 +257,7 @@ export default {
       this.$toast("当前 Swipe 索引：" + index);
     },
     handleClick(linkUrl) {
-      this.$router.push("/classify/product");
+      this.$router.push("/classify/index");
     },
 
     pageScroll() {

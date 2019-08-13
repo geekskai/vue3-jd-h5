@@ -1,5 +1,5 @@
 export default [{
-  path: '/classify/product',
+  path: '/classify/index',
   name: 'product',
   meta: {
     index: 25

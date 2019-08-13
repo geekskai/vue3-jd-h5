@@ -120,6 +120,7 @@ export default {
       show: false,
       showDetail: false,
       detailForm: {},
+      skuObj: {},
       isSpike: false, // 是否是秒杀商品 默认是false
       isLike: false, // 是否点赞喜欢
       current: 0,
@@ -336,6 +337,7 @@ export default {
         .then(response => {
           this.productImages = response.data.content.productImages;
           this.goods.picture = response.data.content.productImages[0];
+          this.goods.title = response.data.content.productName;
           this.detailForm = response.data.content;
         });
     },
@@ -349,9 +351,12 @@ export default {
       });
     },
     handleAddToCart(skuObj) {
+      // selectedNum
+      this.skuObj = skuObj;
+      console.log("=====skuObj==>", skuObj);
       this.$http
-        .post(`/api/cart/add`, {
-          quantity: 1,
+        .post(`/api/cart/update`, {
+          quantity: this.skuObj.selectedNum,
           skuId: skuObj.selectedSkuComb.id
         })
         .then(response => {
@@ -369,8 +374,15 @@ export default {
           }
         });
     },
-    handleToBuy() {
-      this.$router.push("/order/confirmOrder");
+    handleToBuy(skuObj) {
+      this.skuObj = skuObj;
+      this.$router.push({
+        path: "/order/confirmOrder",
+        query: {
+          quantity: this.skuObj.selectedNum,
+          skuId: this.skuObj.selectedSkuComb.id
+        }
+      });
     },
     handleStoreName() {
       this.$router.push("/storeDetail");

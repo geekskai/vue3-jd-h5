@@ -91,14 +91,7 @@
       position="bottom"
       :style="{ height: '40%' }"
       @click-overlay="show = false"
-    >
-      <!-- <van-area
-        :area-list="areaList"
-        @cancel="handleCancel"
-        @confirm="handleConfirm"
-        value="110101"
-      />-->
-
+      >
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -162,11 +155,11 @@ export default {
       parentAreaId: 0,
       addressInfo: {
         tag: "家",
-        // receiverGender
         receiverGender: 0,
         defaultAddrFlag: 0
       },
-      // areaList: areaList,
+
+      
       list: [],
       list2: [],
       list3: [],
@@ -248,6 +241,19 @@ export default {
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },
+ handleChooseGender(gender) {
+      this.addressInfo.receiverGender = gender;
+    },
+    handleSeveAddresInfo() {
+      this.$http
+        .post(`/api/address/updateUserAddr`, this.addressInfo)
+        .then(response => {
+          if (response.data.code === 0) {
+            this.$router.push("/mine/shippingAddress");
+          }
+        });
+    },
+
     showPicker() {
       this.show = true;
     },
@@ -270,21 +276,7 @@ export default {
           this.val.cityVal = this.list2[0];
         });
     },
-    handleChooseGender(gender) {
-      this.addressInfo.receiverGender = gender;
-    },
-    handleSeveAddresInfo() {
-      // if (this.addressInfo.defaultAddrFlag) {
-      //   this.addressInfo.defaultAddrFlag = '1'
-      // }
-      this.$http
-        .post(`/api/address/updateUserAddr`, this.addressInfo)
-        .then(response => {
-          if (response.data.code === 0) {
-            this.$router.push("/mine/shippingAddress");
-          }
-        });
-    },
+   
     complete() {
       if (!this.val.areaVal.areaId) {
         this.val.areaVal = {
@@ -298,7 +290,6 @@ export default {
           areaId: ""
         };
       }
-      // this.$emit("complete", this.val);
       this.show = false;
       this.addressInfo.province = this.val.provinceVal.areaId;
       this.addressInfo.city = this.val.cityVal.areaId;
@@ -313,7 +304,6 @@ export default {
     },
     cancel() {
       this.show = false;
-      // this.$emit("cancel", false);
     },
 
     // 滑动开始
@@ -487,13 +477,8 @@ export default {
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
       console.log("=====滑动数据传输=处理完毕·····=>");
-    },
-    handleCancel() {
-      this.show = false;
-    },
-    handleConfirm() {
-      this.show = false;
     }
+   
   }
 };
 </script>
@@ -615,6 +600,8 @@ export default {
       color: #fff;
     }
   }
+
+
   .address .addressbox {
     height: 100%;
     position: absolute;
@@ -698,5 +685,6 @@ export default {
   .selectAni {
     transition: 0.8s;
   }
+
 }
 </style>
