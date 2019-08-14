@@ -98,7 +98,7 @@
       <template slot="sku-header-price" slot-scope="props">
         <div class="van-sku__goods-price">
           <span class="van-sku__price-symbol">￥</span>
-          <span class="van-sku__price-num">{{ props.price*100 }}</span>
+          <span class="van-sku__price-num">{{ parseFloat((props.price*100).toPrecision(12)) }}</span>
         </div>
       </template>
     </van-sku>
@@ -125,33 +125,6 @@ export default {
       isLike: false, // 是否点赞喜欢
       current: 0,
       stepperValue: "",
-      listData: [
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        }
-      ],
       productImages: [],
       sku: {
         // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
@@ -244,7 +217,7 @@ export default {
             goods_id: 946755
           }
         ],
-        price: "5.00",
+        price: "0.00",
         stock_num: 10, // 商品总库存
         none_sku: false, // 是否无规格商品
         hide_stock: false // 是否隐藏剩余库存
@@ -273,7 +246,6 @@ export default {
         .then(response => {
           let responseDataList = response.data.content;
           let skuSpecesTree = [];
-          console.log("=====responseDataList==>", responseDataList);
           // 先获取所有的规格类型的key
           skuSpecesTree = responseDataList[0].speces.map(it => {
             return {
@@ -296,18 +268,15 @@ export default {
           Array.from(new Set(allSpecesArray)).map(it => {
             specesArray.push(JSON.parse(it));
           });
-          console.log("=====specesArray=7=>", specesArray);
           for (let i = 0; i < skuSpecesTree.length; i++) {
             for (let j = 0; j < specesArray.length; j++) {
               if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
                 specesArray[j].name = specesArray[j].specsValue;
                 specesArray[j].id = specesArray[j].specsValueId;
-                // specesArray[j].imgUrl = skuSpecesTree[j].mainImage;
                 skuSpecesTree[i].v.push(specesArray[j]);
               }
             }
           }
-          console.log("===22222==skuSpecesTree==>", skuSpecesTree);
           // 开始筛选list 所有sku的组合列表
           let templeArray = [];
           templeArray = responseDataList.map((it, i) => {
@@ -316,7 +285,6 @@ export default {
             listObj.id = it.id;
             listObj.price = it.price;
             for (let j = 0; j < responseDataList[i].speces.length; j++) {
-              // responseDataList[i].speces[j];
               listObj[responseDataList[i].speces[j].specsId] =
                 responseDataList[i].speces[j].specsValueId;
             }
@@ -344,12 +312,7 @@ export default {
     handleViewDetail() {
       this.showDetail = true;
     },
-    handleSelected(item) {
-      item.selected = true;
-      this.listData.map(it => {
-        it == item ? (it.selected = true) : (it.selected = false);
-      });
-    },
+
     handleAddToCart(skuObj) {
       // selectedNum
       this.skuObj = skuObj;

@@ -20,7 +20,7 @@
       class="address-card"
       v-for="(address, index) in addressArray"
       :key="index"
-      @click="handleGoToEditAddrss(address.userAddrId)"
+      @click="handleGoToEditAddrss(address)"
     >
       <ul class="card-content">
         <div class="card-triangle active"></div>
@@ -62,10 +62,10 @@ export default {
     this.getUserList();
   },
   methods: {
-    handleGoToEditAddrss(userAddrId) {
+    handleGoToEditAddrss(address) {
       this.$router.push({
         path: "/mine/editAddress",
-        query: { userAddrId: userAddrId }
+        query: { address: address }
       });
     },
     getUserList() {

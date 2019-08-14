@@ -165,13 +165,12 @@ export default {
     return {
       show: false,
       parentAreaId: 0,
-      addressInfo: {
-        tag: "家",
-        // receiverGender
-        receiverGender: 0,
-        defaultAddrFlag: 0
-      },
-      // areaList: areaList,
+      addressInfo: this.$route.query.address,
+      // addressInfo: {
+      //   tag: "家",
+      //   receiverGender: 0,
+      //   defaultAddrFlag: 0
+      // },
       list: [],
       list2: [],
       list3: [],
@@ -248,7 +247,7 @@ export default {
     };
     // 第一条数据为直辖市 so '-' 符号表示为第三列
     this.list3 = [{ name: "-" }];
-    this.initEditAddrss();
+    // this.initEditAddrss();
   },
   methods: {
     handleDeleteAddress() {
@@ -269,15 +268,15 @@ export default {
           }
         });
     },
-    initEditAddrss() {
-      this.$http
-        .get(
-          `/api/address/getUserAddrDetail?addrId=${this.$route.query.userAddrId}`
-        )
-        .then(response => {
-          this.addressInfo = response.data.content;
-        });
-    },
+    // initEditAddrss() {
+    //   this.$http
+    //     .get(
+    //       `/api/address/getUserAddrDetail?addrId=${this.$route.query.address}`
+    //     )
+    //     .then(response => {
+    //       this.addressInfo = response.data.content;
+    //     });
+    // },
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },

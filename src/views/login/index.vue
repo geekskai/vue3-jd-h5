@@ -55,6 +55,12 @@ export default {
         if (response.data.code === 0) {
           localStorage.setItem("token", response.data.content.token);
           this.$router.push("/index");
+        } else {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: response.data.msg
+          });
         }
       });
     }

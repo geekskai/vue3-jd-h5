@@ -5,13 +5,13 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath:'./',
+  publicPath: './',
   //输出文件目录
-  outputDir:'dist',
+  outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
-	assetsDir: 'static',
+  assetsDir: 'static',
   chainWebpack: config => {
     config.module.rules.delete("svg"); //重点:删除默认配置中处理svg,
     config.module

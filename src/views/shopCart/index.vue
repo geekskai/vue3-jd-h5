@@ -2,10 +2,12 @@
   <div class="shop-cart">
     <header class="page-header">
       <div class="header-content">购物车</div>
-      <span v-if="cartMode ===false" class="appeal-record" @click="cartMode = true">完成</span>
-      <span v-if="cartMode ===true" class="appeal-record" @click="cartMode = false">编辑</span>
+      <div v-if="!clearCart">
+        <span v-if="cartMode ===false" class="appeal-record" @click="cartMode = true">完成</span>
+        <span v-if="cartMode ===true" class="appeal-record" @click="cartMode = false">编辑</span>
+      </div>
     </header>
-    <section class="cart-empty" v-if="clearCart === true">
+    <section class="cart-empty" v-if="clearCart">
       <ul class="empty-content">
         <li class="img-cart">
           <svg-icon icon-class="shopping-cart"></svg-icon>
@@ -281,6 +283,9 @@ export default {
     initData() {
       this.$http.get(`/api/cart/list`).then(response => {
         this.shopCartArray = response.data.content;
+        if (this.shopCartArray.length === 0) {
+          this.clearCart = true;
+        }
         this.shopCartArray.forEach(element => {
           this.$set(element, "merchantChecked", false);
           this.$set(element, "merchantCheckboxGroup", []);

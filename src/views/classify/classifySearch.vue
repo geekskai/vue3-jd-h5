@@ -10,34 +10,8 @@
       </div>
       <span @click="getSearch">搜索</span>
     </div>
-    <div v-if="serarchResult.length<=0" class="search-content">
-      <div class="hot-list">
-        <span class="hot-words">热搜词</span>
-        <div>
-          <span
-            class="hot-detail hot"
-            v-for="(item,index) in hotSerach"
-            @click="selectTag(item.productCategoryId)"
-            :key="index"
-          >
-            {{item.productCategoryName}}
-            <svg-icon icon-class="hot"></svg-icon>
-          </span>
-        </div>
-      </div>
-      <div class="search-list history-list">
-        <div class="history-search">
-          <span>历史搜索</span>
-          <span @click="deleteHistory(0)">
-            <svg-icon icon-class="icon-delete"></svg-icon>
-          </span>
-        </div>
-        <div class="histort-search">
-          <span v-for="(item,index) in historySearch" @click="selectTag(item)" :key="index">{{item}}</span>
-        </div>
-      </div>
-    </div>
-    <div v-else class="goods-all">
+    <section v-if="serarchResult.length === 0"></section>
+    <div class="goods-all" v-else>
       <section class="select-menu" :class="{'isFixed' : seclectActive}">
         <div
           class="select-item default-sort"
@@ -83,17 +57,15 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" to="/classify/index">
+            <li :key="index" class="goods-item" @click="handleGoToProduct(item)">
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
-                <!-- <span class="goods-div">限量套装 新品上市</span> -->
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>$:{{item.productCnyPrice}}</i>
                   </span>
-                  <!-- <svg-icon class="add-icon" icon-class="add"></svg-icon> -->
                 </div>
                 <div class="goods-count-sale">
                   <span class="goods-shopName">
@@ -102,7 +74,7 @@
                   <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity}}</span>
                 </div>
               </div>
-            </router-link>
+            </li>
           </template>
         </ul>
       </section>
@@ -113,13 +85,13 @@
 <script>
 import ListScroll from "../../components/scroll/ListScroll";
 export default {
-  name: "search",
+  name: "classifySearch",
   components: {
     ListScroll
   },
   data() {
     return {
-      searchText: "",
+      searchText: this.$route.query.product.label,
       orderBy: "default",
       seclectActive: false,
       hotSerach: [],
@@ -129,10 +101,28 @@ export default {
     };
   },
   created() {
-    // this.initData();
+    this.initData();
   },
   computed: {},
   methods: {
+    handleGoToProduct(item) {
+      console.log("=====item==>", item.productId);
+      this.$router.push({
+        path: `/classify/index`,
+        query: { productId: item.productId }
+      });
+    },
+    initData() {
+      this.$http
+        .get(
+          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
+        )
+        .then(response => {
+          //   this.likeList = response.data.content;
+          this.serarchResult = response.data.content;
+          console.log("====init=this.serarchResult==>", response.data.content);
+        });
+    },
     // 当滑块滑动到低不低的时候。
     handleScrollToEnd() {
       console.log("=====滑动到底了==>");
@@ -148,7 +138,6 @@ export default {
         query: { sku: sku }
       });
     },
-
     //动态设置searc-wrap的高
     setWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
@@ -167,11 +156,10 @@ export default {
       this.selectTag(keyword);
     },
     selectTag(keyword) {
-     
       this.$http
         .get(
-          // `/api/product/list?productName=${keyword}&page=${this.page}&size=15`
-          `/api/product/list?categoryId=${223}&page=${this.page}&size=15`
+          `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&page=${this.page}&size=20`
+          // `/api/product/list?categoryId=${223}&page=${this.page}&size=15`
         )
         .then(response => {
           if (response.data.code === 0) {
@@ -199,7 +187,6 @@ export default {
             });
         });
     },
-
     goBack() {
       this.$router.go(-1);
     }
@@ -423,6 +410,9 @@ export default {
             color: #3a3a3a;
             font-size: 14px;
             font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .goods-div {
             color: #949497;
@@ -452,6 +442,7 @@ export default {
             padding-bottom: 12px;
             color: #949497;
             font-size: 11px;
+
             .goods-monthlySalesQuantity {
               font-size: 11px;
             }

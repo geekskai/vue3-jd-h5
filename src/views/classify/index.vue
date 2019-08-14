@@ -10,9 +10,6 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <!-- <span>{{item.label}}</span>
-             <span>{{handleSplit(item.label).slice(0,2)}}</span>
-            <span>{{handleSplit(item.label).slice(2)}}</span>-->
             <span>{{item.label.slice(0,2)}}</span>
             <span>{{item.label.slice(2)}}</span>
           </li>
@@ -24,7 +21,7 @@
             <template v-for="(category,index) in categoryData">
               <div class="swiper-slide" :key="index" v-if="currentIndex === index">
                 <img
-                  @click="selectProduct(category.value)"
+                  @click="selectProduct(category)"
                   class="category-main-img"
                   v-lazy="category.imageUrl"
                   v-if="category.imageUrl"
@@ -34,7 +31,7 @@
                   <div class="category-list">
                     <div
                       class="product-item"
-                      @click="selectProduct(product.value)"
+                      @click="selectProduct(product)"
                       v-for="(product,index) in products.children"
                       :key="index"
                     >
@@ -69,23 +66,9 @@ export default {
     };
   },
   created() {
-    // this.$http
-    //   .get("http://test.happymmall.com/category/categoryData")
-    //   .then(res => {
-    //     const { categoryData } = res.data;
-    //     this.templateCategoryData = categoryData;
-    //   });
     this.getGoodsList();
   },
   methods: {
-    // handleSplit(name) {
-    //   if (~name.indexOf("、")) {
-    //     let temName = name;
-    //     return temName.slice(0, 2) + name.slice(3);
-    //   } else {
-    //     return name;
-    //   }
-    // },
     // 获取分类
     getGoodsList() {
       // this.$http.get(`/api/product/category`).then(response => {
@@ -107,10 +90,11 @@ export default {
       let $screenHeight = document.documentElement.clientHeight;
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
-    selectProduct(categoryId) {
+    selectProduct(product) {
+      console.log('=====product==>',product);
       this.$router.push({
-        path: "/classify/recommend",
-        query: { categoryId: categoryId }
+        path: "/classify/classifySearch",
+        query: { categoryId: product.value, product: product }
       });
     }
   },

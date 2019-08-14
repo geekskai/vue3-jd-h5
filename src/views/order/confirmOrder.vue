@@ -91,10 +91,21 @@ export default {
         })
         .then(response => {
           this.orderForm = response.data.content;
-          console.log("=====content==>", response.data.content);
+          let fullAddress = this.orderForm.fullAddress;
+          if (~fullAddress.indexOf("undefined")) {
+            this.orderForm.fullAddress = fullAddress.slice(
+              0,
+              this.orderForm.fullAddress.length - 9
+            );
+          }
         });
     },
-    handleToChooseAddress() {},
+    handleToChooseAddress() {
+      this.$router.push({
+        path: `/mine/chooseAddress`,
+        query: {}
+      });
+    },
     handleSubmitOrder() {
       this.$http.post(`/api/order/submit`, {
         oderShopSkuInfoVos: [],
