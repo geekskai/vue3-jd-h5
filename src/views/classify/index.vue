@@ -10,10 +10,8 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <span>{{handleSplit(item.label).slice(0,2)}}</span>
-            <span>{{handleSplit(item.label).slice(2)}}</span>
-            <!-- <span>{{item.label.slice(0,2)}}</span>
-            <span>{{item.label.slice(2)}}</span>-->
+            <span>{{item.name.slice(0,2)}}</span>
+            <span>{{item.name.slice(2)}}</span>
           </li>
         </ul>
       </list-scroll>
@@ -25,20 +23,20 @@
                 <img
                   @click="selectProduct(category.value)"
                   class="category-main-img"
-                  :src="category.imageUrl"
-                  v-if="category.imageUrl"
+                  :src="category.imgUrl"
+                  v-if="category.imgUrl"
                 />
-                <div v-for="(products,index) in category.children" :key="index">
-                  <p class="goods-title">{{products.label}}</p>
+                <div v-for="(products,index) in category.list" :key="index">
+                  <p class="goods-title">{{products.title}}</p>
                   <div class="category-list">
                     <div
                       class="product-item"
                       @click="selectProduct(product.value)"
-                      v-for="(product,index) in products.children"
+                      v-for="(product,index) in products.productList"
                       :key="index"
                     >
-                      <img class="item-img" :src="product.imageUrl" />
-                      <p class="product-title">{{product.label}}</p>
+                      <img class="item-img" :src="product.imgUrl" />
+                      <p class="product-title">{{product.title}}</p>
                     </div>
                   </div>
                 </div>
@@ -68,13 +66,15 @@ export default {
     };
   },
   created() {
-    // this.$http
-    //   .get("http://test.happymmall.com/category/categoryData")
-    //   .then(res => {
-    //     const { categoryData } = res.data;
-    //     this.templateCategoryData = categoryData;
-    //   });
-    this.getGoodsList();
+    this.$http
+      .get("http://test.happymmall.com/category/categoryData")
+      .then(res => {
+        const { categoryData } = res.data;
+        this.categoryData = categoryData;
+        // console.log("=====categoryData==>", this.categoryData);
+        // this.templateCategoryData = categoryData;
+      });
+    // this.getGoodsList();
   },
   methods: {
     handleSplit(name) {
@@ -99,7 +99,7 @@ export default {
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
-      this.getGoodsList();
+      // this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {

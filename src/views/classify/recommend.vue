@@ -64,11 +64,12 @@ export default {
     this.setWrapHeight();
   },
   created() {
-    // this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
-    //   const { data } = res.data;
-    //   this.likeList = data;
-    // });
-    this.initData();
+    this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
+      const { data } = res.data;
+      this.likeList = data;
+      console.log('=====likeList==>',this.likeList);
+    });
+    // this.initData();
   },
   methods: {
     // 当滑块滑动到低不低的时候。

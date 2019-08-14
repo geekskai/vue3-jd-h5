@@ -1,9 +1,9 @@
 export default [{
-    path: '/mine/nodeApplication',
+    path: '/node/nodeApplication',
     name: 'nodeApplication',
     meta: {
       index: 15
     },
-    component: () => import('@/views/mine/nodeApplication.vue')
+    component: () => import('@/views/node/nodeApplication.vue')
   }]
   

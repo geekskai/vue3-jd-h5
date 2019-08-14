@@ -60,7 +60,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/mine/nodeApplication" class="option-item" tag="li">
+        <router-link to="/node/nodeApplication" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="node-application"></svg-icon>
             <span>节点申请</span>
