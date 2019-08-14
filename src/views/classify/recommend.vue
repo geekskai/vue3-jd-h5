@@ -28,9 +28,7 @@
               <img class="item-picture" v-lazy="item.imagePath" />
               <div class="item-detail">
                 <p class="store-info">
-                  <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" /> -->
                   <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
-                  <!-- <label>{{item.storeName}}</label> -->
                   <label>京东商城</label>
                 </p>
                 <p class="item-title">{{item.name}}</p>
