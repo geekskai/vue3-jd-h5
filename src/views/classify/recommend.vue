@@ -2,7 +2,7 @@
   <div class="recommend">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="../../assets/icons/left-green-white.png"/>
       </span>
       <div class="header-content">推荐</div>
     </header>
