@@ -9,13 +9,15 @@
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
+        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" /> -->
         <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <img class="slide_img" @click="handleClick" :src="img.imgUrl" alt />
+          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
+          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" />
         </swiper-slide>
       </swiper>
     </div>
@@ -47,30 +49,41 @@
     <section class="spike-area">
       <ul class="spike-top">
         <router-link class="top-left" to="/chainCatSpike" tag="li">
-            <div class="item-top">
-              <span class="item-title">链猫秒杀</span>
-              <div class="time-text">
-                <span class="eight-time">8点场</span>
-                <span class="spike-time">00 : 17 : 55</span>
-              </div>
+          <div class="item-top">
+            <span class="item-title">链猫秒杀</span>
+            <div class="time-text">
+              <span class="eight-time">8点场</span>
+              <van-count-down :time="timeData" class="time-count-down">
+                <template v-slot="timeData">
+                  <span class="time-item" v-if="timeData.hours<10">{{ '0'+timeData.hours }}</span>
+                  <span class="time-item" v-else>{{ timeData.hours }}</span>
+                  <i class="tow-point">:</i>
+                  <span class="time-item" v-if="timeData.minutes<10">{{'0'+ timeData.minutes }}</span>
+                  <span class="time-item" v-else>{{ timeData.minutes }}</span>
+                  <i class="tow-point">:</i>
+                  <span class="time-item" v-if="timeData.seconds<10">{{ '0'+timeData.seconds }}</span>
+                  <span class="time-item" v-else>{{ timeData.seconds }}</span>
+                </template>
+              </van-count-down>
             </div>
-            <div class="item-info">
-              <div class="item-content">
-                <img src="../../assets/image/home/demo1.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
-              <div class="item-content">
-                <img src="../../assets/image/home/demo2.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
-              <div class="item-content">
-                <img src="../../assets/image/home/demo3.png" />
-                <span class="new-price">¥298</span>
-                <span class="old-price">¥399</span>
-              </div>
+          </div>
+          <div class="item-info">
+            <div class="item-content">
+              <img src="../../assets/image/home/demo1.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
             </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo2.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+            <div class="item-content">
+              <img src="../../assets/image/home/demo3.png" />
+              <span class="new-price">¥298</span>
+              <span class="old-price">¥399</span>
+            </div>
+          </div>
         </router-link>
         <router-link class="top-right" to="/foundGoodGoods" tag="li">
           <div class="right-header">
@@ -123,7 +136,6 @@
           </div>
         </li>
         <router-link class="bottom-left" to="/loveShop" tag="li">
-          <!-- <li class="bottom-left"> -->
           <div class="bottom-left-header">
             <span class="big-buy">爱逛好店</span>
             <span class="goods-name addColor">懂你所要</span>
@@ -134,11 +146,10 @@
             <img src="../../assets/image/home/demo13.png" />
           </div>
         </router-link>
-        <!-- </li> -->
       </ul>
     </section>
 
-    <div class="page-tabs">
+    <div class="content-tabs">
       <van-tabs
         :swipe-threshold="5"
         title-inactive-color="#3a3a3a"
@@ -147,23 +158,35 @@
         v-model="active"
         animated
       >
-        <van-tab v-for="(item,index) in tabList" :title="item.name" :key="index">
+        <!-- @click="handleTabClick" -->
+          <!-- v-for="(list,index) in catList" -->
+        <van-tab
+        v-for="(list,index) in tabList"
+          :title="list.describe"
+          :name="list.type"
+          :key="index"
+        >
           <div slot="title" class="slot-title">
-            <h3>{{item.title}}</h3>
-            <span>{{item.name}}</span>
+            <b class="tab-title">{{list.title}}</b>
+            <!-- <span class="tab-name">{{list.describe}}</span> -->
+            <span class="tab-name">{{list.name}}</span>
           </div>
+
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <li v-for="(item,index) in list" :key="index">
-                <router-link tag="div" to="/classify/product">
+              <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
+                <li v-for="(item,index) in list.list" :key="index">
+                <router-link class="goods-img" tag="div" to="/classify/product">
+                  <!-- <img v-lazy="item.productMainImage" /> -->
                   <img :src="item.img" />
                 </router-link>
                 <div class="goods-layout">
-                  <div class="goods-title">{{item.name}}</div>
+                  <div class="goods-title">{{item.productName}}</div>
                   <span class="goods-div">{{item.title}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
-                      <i>{{item.price}}</i>
+                      <i>{{item.productCnyPrice}}</i>
+                      <span class="force-value">{{item.forceValue}}倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event,item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -176,69 +199,6 @@
         </van-tab>
       </van-tabs>
     </div>
-
-    <!-- <section class="goods-box search-wrap">
-      <span class="good-things">链猫自营</span>
-      <ul class="goods-content">
-        <li v-for="(item,index) in list" :key="index">
-          <router-link tag="div" to="/classify/product">
-            <img :src="item.img" />
-          </router-link>
-          <div class="goods-layout">
-            <div class="goods-title">{{item.name}}</div>
-            <span class="goods-div">{{item.title}}</span>
-            <div class="goods-desc">
-              <span class="goods-price">
-                <i>{{item.price}}</i>
-              </span>
-              <span class="add-icon" @click="addToCart($event,item)">
-                <svg-icon icon-class="add"></svg-icon>
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>-->
-    <!-- <section class="recommended-shop">
-      <span class="shop-things">推荐店铺</span>
-      <ul class="shop-content">
-        <li class="shop-item">
-          <div class="item-header">
-            <img class="store-logo" src="../../assets/image/home/store-logo.png" />
-            <div class="item-text">
-              <p>品炫旗舰店</p>
-              <i>正品大牌 产家直营</i>
-            </div>
-            <router-link to="/storeDetail">
-              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
-            </router-link>
-          </div>
-          <div class="item-iamgs">
-            <img src="../../assets/image/home/store1.png" />
-            <img src="../../assets/image/home/store2.png" />
-            <img src="../../assets/image/home/store3.png" />
-          </div>
-        </li>
-        <li class="shop-item">
-          <div class="item-header">
-            <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
-            <div class="item-text">
-              <p>北欧家居旗舰店</p>
-              <i>正品大牌 产家直营</i>
-            </div>
-            <router-link to="/storeDetail">
-              <svg-icon class="into-store" icon-class="into-store"></svg-icon>
-            </router-link>
-          </div>
-          <div class="item-iamgs">
-            <img src="../../assets/image/home/store4.png" />
-            <img src="../../assets/image/home/store5.png" />
-            <img src="../../assets/image/home/store6.png" />
-          </div>
-        </li>
-      </ul>
-    </section>-->
-
     <div class="ballWrap">
       <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
         <div class="ball" v-if="ball.show">
@@ -260,107 +220,18 @@ export default {
   data() {
     return {
       active: "",
-      // tabList: ["猜你喜欢", "潮流百搭", "3C数码", "百货生鲜", "居家日用"],
-      tabList: [
-        {
-          title: "精选",
-          name: "猜你喜欢"
-        },
-        {
-          title: "时尚",
-          name: "潮流百搭"
-        },
-        {
-          title: "数码",
-          name: "3C数码"
-        },
-        {
-          title: "超市",
-          name: "百货生鲜"
-        },
-        {
-          title: "生活",
-          name: "居家日用"
-        }
-      ],
-      list: [
-        {
-          name: "多功能料理机",
-          img: require("../../assets/image/home/test1.png"),
-          title: "限量套装 新品上市",
-          price: "$125"
-        },
-        {
-          name: "遥控制空调扇",
-          img: require("../../assets/image/home/test2.png"),
-          title: "限量套装 新品上市",
-          price: "$245"
-        },
-        {
-          name: "时尚双肩包",
-          img: require("../../assets/image/home/test3.png"),
-          title: "限量套装 新品上市",
-          price: "$21"
-        },
-        {
-          name: "商务行李箱",
-          img: require("../../assets/image/home/test4.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        },
-        {
-          name: "无线消噪耳机",
-          img: require("../../assets/image/home/test5.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        },
-        {
-          name: "无线蓝牙耳机",
-          img: require("../../assets/image/home/test6.png"),
-          title: "限量套装 新品上市",
-          price: "$218"
-        }
-      ],
+      timeData: 36000000,
+      catList: [],
+      tabItemLists: [],
+      tabList: [],
       ball: {
         show: false,
         el: ""
       },
       isLogin: false,
       headerActive: false,
-      images: [
-        {
-          imgUrl: require("../../assets/image/home/banner5.jpg"),
-          categoryId: 100018
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner6.jpg"),
-          categoryId: 100008
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner7.jpg"),
-          categoryId: 100016
-        },
-        {
-          imgUrl: require("../../assets/image/home/banner8.jpg"),
-          categoryId: 100035
-        }
-      ],
-      images2: [
-        {
-          imgUrl:
-            "//m.360buyimg.com/mobilecms/jfs/t1/3926/29/4138/254748/5b9b646dE45cbeb7f/f80c8f7c24273bc1.jpg!cr_1125x549_0_72",
-          categoryId: 100035
-        },
-
-        {
-          imgUrl: require("../../assets/image/home/test11.png"),
-          categoryId: 100020
-        },
-        {
-          imgUrl: require("../../assets/image/home/test10.png"),
-          categoryId: 100019
-        }
-      ],
+      images: [],
+      images2: [],
       swiperOption: {
         loop: true,
         autoplay: false,
@@ -386,8 +257,16 @@ export default {
   },
 
   created() {
-    this.$http.get("http://test.happymmall.com/home/data").then(res => {
-      const { data } = res.data;
+    // this.initData();
+
+
+    this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
+      const { tabList } = res.data;
+      const { images } = res.data;
+      const { images2 } = res.data;
+      this.tabList = tabList;
+      this.images = images;
+      this.images2 = images2;
     });
   },
   mounted() {
@@ -396,9 +275,21 @@ export default {
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
-    // handleToProduct() {
-    //   this.$router.push("/classify/product");
-    // },
+    initData() {
+      this.$http.get(`api/index`).then(response => {
+        // console.log("=====res==>", response.data.content);
+        this.images = response.data.content.bannerList;
+        this.images2 = response.data.content.adList;
+        this.catList = response.data.content.catList;
+      });
+      this.handleTabClick(0);
+    },
+    handleTabClick(type) {
+      console.log("=====type==>", type);
+      this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
+        this.tabItemLists = response.data.content;
+      });
+    },
     addToCart(event, tag) {
       this.$store.commit("cart/addToCart", tag);
       this.ball.show = true;
@@ -425,12 +316,14 @@ export default {
       this.ball.show = false;
       el.style.display = "none";
     },
+
     onChange(index) {
       this.$toast("当前 Swipe 索引：" + index);
     },
-    handleClick() {
+    handleClick(linkUrl) {
       this.$router.push("/classify/product");
     },
+
     pageScroll() {
       let scrollTop =
         window.pageYOffset ||
@@ -575,7 +468,7 @@ export default {
             height: 18px;
             line-height: 18px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             .eight-time {
               font-size: 11px;
@@ -584,11 +477,13 @@ export default {
               width: 42px;
               background-color: #d8182d;
             }
-            .spike-time {
-              padding-left: 2px;
+            .time-count-down {
+              flex: 1;
               font-size: 9px;
               color: #dd3749;
-              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
           }
         }
@@ -723,25 +618,30 @@ export default {
       }
     }
   }
-  .page-tabs {
-    /deep/ .van-tabs--line {
-      padding-top: 35px;
-    }
-
+  .content-tabs {
+    padding-top: 10px;
     .slot-title {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 20px;
-      span,
-      h3 {
+      .tab-title {
+        font-size: 14px;
+        font-weight: 600;
+        font-size: 17px;
+        height: 24px;
         display: inline-block;
-        height: 20px;
+        width: 40px;
+        line-height: 22px;
+      }
+      .tab-name {
+        line-height: 16px;
+        font-size: 10px;
+        display: inline-block;
       }
     }
     .goods-box {
-      padding: 16px;
+      padding: 10px 16px;
       .good-things {
         font-size: 18px;
         color: #d8182d;
@@ -758,14 +658,19 @@ export default {
           border-radius: 8px;
           background-color: white;
           box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-          // background: url('../../assets/image/back-show.png') no-repeat center center;
-          // background-size:100% 100%;
           img {
             width: 100%;
           }
         }
         li:nth-of-type(even) {
           padding-right: 0;
+        }
+        .goods-img {
+          img {
+            width: 165px;
+            height: 196px;
+            border-radius: 8px 8px 0 0;
+          }
         }
         .goods-layout {
           width: 165px;
@@ -789,8 +694,24 @@ export default {
             align-items: center;
             padding-bottom: 10px;
             .goods-price {
+              padding-top: 5px;
               font-size: 14px;
               color: #d8182d;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #d8182d;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 42px;
+                height: 17px;
+              }
             }
             .add-icon {
               display: flex;
@@ -802,134 +723,6 @@ export default {
       }
     }
   }
-
-  // .goods-box {
-  //   padding: 16px;
-  //   .good-things {
-  //     font-size: 18px;
-  //     color: #d8182d;
-  //     font-weight: 600;
-  //   }
-  //   .goods-content {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     flex-wrap: wrap;
-  //     li {
-  //       display: inline-block;
-  //       width: 165px;
-  //       margin-top: 10px;
-  //       border-radius: 8px;
-  //       background-color: white;
-  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-  //       // background: url('../../assets/image/back-show.png') no-repeat center center;
-  //       // background-size:100% 100%;
-  //       img {
-  //         width: 100%;
-  //       }
-  //     }
-  //     li:nth-of-type(even) {
-  //       padding-right: 0;
-  //     }
-  //     .goods-layout {
-  //       width: 165px;
-  //       padding: 0 10px;
-  //       display: flex;
-  //       justify-content: flex-start;
-  //       flex-direction: column;
-  //       .goods-title {
-  //         color: #3a3a3a;
-  //         font-size: 14px;
-  //         font-weight: 600;
-  //       }
-  //       .goods-div {
-  //         color: #949497;
-  //         font-size: 11px;
-  //       }
-  //       .goods-desc {
-  //         background-color: #fff;
-  //         display: flex;
-  //         justify-content: space-between;
-  //         align-items: center;
-  //         padding-bottom: 10px;
-  //         .goods-price {
-  //           font-size: 14px;
-  //           color: #d8182d;
-  //         }
-  //         .add-icon {
-  //           display: flex;
-  //           justify-content: center;
-  //           align-items: center;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // .recommended-shop {
-  //   padding: 16px;
-  //   .shop-things {
-  //     font-size: 18px;
-  //     color: #d8182d;
-  //     font-weight: 600;
-  //   }
-  //   .shop-content {
-  //     padding-top: 10px;
-  //     .shop-item {
-  //       background-color: #fff;
-  //       box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-  //       border-radius: 8px;
-  //       padding: 11px;
-  //       margin-bottom: 10px;
-  //       .item-iamgs {
-  //         display: flex;
-  //         justify-content: space-around;
-  //         align-items: center;
-  //         padding-bottom: 5px;
-  //         padding-left: 5px;
-  //         img {
-  //           display: inline-block;
-  //           width: 100px;
-  //           height: 100px;
-  //           border-radius: 10px;
-  //           margin-right: 7px;
-  //         }
-  //       }
-  //       .item-header {
-  //         display: flex;
-  //         justify-content: space-between;
-  //         align-items: center;
-  //         margin-bottom: 10px;
-  //         .into-store {
-  //           width: 41px;
-  //           height: 16px;
-  //           margin-right: 12px;
-  //         }
-  //         .item-text {
-  //           flex: 1;
-  //           height: 37px;
-  //           padding-left: 5px;
-  //           display: flex;
-  //           justify-content: space-between;
-  //           align-items: flex-start;
-  //           flex-direction: column;
-  //           p {
-  //             font-size: 14px;
-  //             color: #3a3a3a;
-  //             font-weight: 600;
-  //           }
-  //           i {
-  //             font-size: 11px;
-  //             color: #949497;
-  //           }
-  //         }
-  //         .store-logo {
-  //           width: 37px;
-  //           height: 37px;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   .ballWrap {
     .ball {

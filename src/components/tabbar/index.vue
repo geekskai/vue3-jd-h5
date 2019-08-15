@@ -98,7 +98,6 @@ export default {
 .tabbar {
   ul {
     height: 50px;
-      
   }
 }
 </style>

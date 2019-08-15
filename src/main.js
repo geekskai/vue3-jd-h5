@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 import {
+  DropdownMenu, DropdownItem,
   Swipe,
   Toast,
   SwipeItem,
@@ -29,7 +30,9 @@ import {
   RadioGroup,
   Radio,
   Tabbar,
-  Tab, Tabs ,
+  Tab,
+  Tabs,
+  CountDown,
   Loading,
   Switch,
   TabbarItem,
@@ -60,12 +63,13 @@ import {
   Stepper,
   Collapse,
   CollapseItem,
+  Divider,
   Icon
 } from 'vant';
 Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
   .use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog).use(Checkbox).use(CheckboxGroup)
   .use(Switch).use(Step).use(Steps).use(Card).use(Stepper).use(SubmitBar).use(Tag).use(Toast).use(Area).use(IndexBar).use(IndexAnchor).use(Loading)
-  .use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Tab).use(Tabs);
+  .use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Tab).use(Tabs).use(Divider).use(CountDown).use(DropdownMenu).use(DropdownItem);
 
 
 Vue.config.productionTip = false

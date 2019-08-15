@@ -2,7 +2,7 @@
   <div class="recommend">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="white-btn"></svg-icon>
+        <img src="../../assets/icons/left-green-white.png"/>
       </span>
       <div class="header-content">推荐</div>
     </header>
@@ -13,68 +13,93 @@
       </div>
     </div>
 
-    <section class="recommend-classify">
-      <ul class="like-list" v-for="(item,index) in likeList" :key="index">
-        <router-link tag="li" class="like-item" to="/classify/product">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>{{item.storeName}}</label>
-            </p>
-            <p class="item-title">{{item.itemTitle}}</p>
-            <p class="item-count">
-              <i>{{item.itemPrice}}</i>
-              <span>{{item.itemCount}}</span>
-            </p>
-          </div>
-        </router-link>
-      </ul>
+    <section class="recommend-classify" ref="wrapper">
+      <list-scroll
+        :scroll-data="likeList"
+        class="likeList"
+        :pullup="true"
+        @scrollToEnd="handleScrollToEnd"
+        :pulldown="true"
+        @pulldown="handlePullDown"
+      >
+        <div>
+          <ul class="like-list" v-for="(item,index) in likeList" :key="index">
+            <li class="like-item" @click="handleToDetail(item.sku)">
+              <img class="item-picture" v-lazy="item.imagePath" />
+              <div class="item-detail">
+                <p class="store-info">
+                  <img src="../../assets/image/product/jd_logo.jpg" class="header-img" />
+                  <label>京东商城</label>
+                </p>
+                <p class="item-title">{{item.name}}</p>
+                <p class="item-count">
+                  <i>￥：{{item.price}}</i>
+                  <span>{{item.itemCount}}</span>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </list-scroll>
     </section>
   </div>
 </template>
 
 <script>
+import ListScroll from "../../components/scroll/ListScroll";
 export default {
   name: "recommend",
+  components: {
+    ListScroll
+  },
   data() {
     return {
-      likeList: [
-        {
-          id: 0,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 1,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 2,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        },
-        {
-          id: 3,
-          storeName: "店铺名称",
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248",
-          itemCount: "月销:888"
-        }
-      ]
+      likeList: [],
+      page: 1
     };
   },
-  created() {},
+  mounted() {
+    this.setWrapHeight();
+  },
+  created() {
+    this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
+      const { data } = res.data;
+      this.likeList = data;
+      console.log('=====likeList==>',this.likeList);
+    });
+    // this.initData();
+  },
   methods: {
+    // 当滑块滑动到低不低的时候。
+    handleScrollToEnd() {
+      console.log("=====滑动到底了==>");
+      this.page++;
+      this.initData();
+    },
+    handlePullDown() {
+      console.log("=====handlePullDown==>");
+    },
+    handleToDetail(sku) {
+      this.$router.push({
+        path: "/classify/product",
+        query: { sku: sku }
+      });
+    },
+    initData() {
+      this.$http
+        .get(`/api/goods/list?page=${this.page}&size=15`)
+        .then(response => {
+          this.likeList.push(...response.data);
+          // console.log("=====this.likeList==>", this.likeList);
+        });
+    },
     handleSearch() {
       this.$router.push("/search");
+    },
+    //动态设置searc-wrap的高
+    setWrapHeight() {
+      let $screenHeight = document.documentElement.clientHeight;
+      this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
     }
   }
 };
@@ -88,7 +113,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    padding-bottom: 29px;
+    padding-bottom: 20px;
     position: relative;
     .btn-left {
       position: fixed;
@@ -167,7 +192,6 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #d8182d;
           border-radius: 4px;
         }
         .item-detail {
@@ -195,6 +219,10 @@ export default {
             color: #3a3a3a;
             font-size: 14px;
             padding-top: 10px;
+            width: 223px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
           }
           .item-count {
             padding-top: 4px;

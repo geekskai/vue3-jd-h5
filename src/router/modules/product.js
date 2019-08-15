@@ -1,6 +1,6 @@
 export default [{
   path: '/classify/product',
-  name: 'home',
+  name: 'product',
   meta: {
     index: 25
   },

@@ -1,14 +1,6 @@
 <template>
   <div class="classify">
-    <header class="home-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="left-btn"></svg-icon>
-      </span>
-      <div class="header-search" @click="handleSearch">
-        <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
-      </div>
-    </header>
+    <header class="home-header">商品分类</header>
     <section class="search-wrap" ref="searchWrap">
       <list-scroll :scroll-data="categoryData" class="nav-side-wrapper">
         <ul class="nav-side">
@@ -23,35 +15,36 @@
           </li>
         </ul>
       </list-scroll>
-      <div class="search-content">
-        <list-scroll :scroll-data="categoryData">
-          <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <template v-for="(category,index) in categoryData">
-                <div class="swiper-slide" :key="index" v-if="currentIndex === index">
-                  <img
-                    @click="selectProduct"
-                    class="category-main-img"
-                    :src="category.mainImgUrl"
-                    v-if="category.mainImgUrl"
-                  />
-                  <div class="category-list" v-for="(products,index) in category.list" :key="index">
+      <list-scroll class="search-content" :scroll-data="categoryData">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <template v-for="(category,index) in categoryData">
+              <div class="swiper-slide" :key="index" v-if="currentIndex === index">
+                <img
+                  @click="selectProduct(category.value)"
+                  class="category-main-img"
+                  :src="category.imgUrl"
+                  v-if="category.imgUrl"
+                />
+                <div v-for="(products,index) in category.list" :key="index">
+                  <p class="goods-title">{{products.title}}</p>
+                  <div class="category-list">
                     <div
                       class="product-item"
+                      @click="selectProduct(product.value)"
                       v-for="(product,index) in products.productList"
                       :key="index"
-                      @click="selectProduct(product.title)"
                     >
-                      <img :src="product.imgUrl" />
-                      <p v-text="product.title" class="product-title"></p>
+                      <img class="item-img" :src="product.imgUrl" />
+                      <p class="product-title">{{product.title}}</p>
                     </div>
                   </div>
                 </div>
-              </template>
-            </div>
+              </div>
+            </template>
           </div>
-        </list-scroll>
-      </div>
+        </div>
+      </list-scroll>
     </section>
     <tabbar></tabbar>
   </div>
@@ -69,96 +62,52 @@ export default {
       tags: [],
       currentIndex: 0,
       categoryData: [],
-      tabslabel: [
-        {
-          label: "热门推荐",
-          active: true
-        },
-        {
-          label: "手机数码",
-          active: false
-        },
-        {
-          label: "电脑办公",
-          active: false
-        },
-        {
-          label: "计生情趣",
-          active: false
-        },
-        {
-          label: "美妆护肤",
-          active: false
-        },
-
-        {
-          label: "个人清洁",
-          active: false
-        },
-        {
-          label: "汽车生活",
-          active: false
-        },
-        {
-          label: "男装",
-          active: false
-        },
-        {
-          label: "女装",
-          active: false
-        },
-        {
-          label: "超市",
-          active: false
-        },
-        {
-          label: "户外运动",
-          active: false
-        },
-        {
-          label: "男装",
-          active: false
-        },
-        {
-          label: "女装",
-          active: false
-        },
-        {
-          label: "超市",
-          active: false
-        },
-        {
-          label: "户外运动",
-          active: false
-        },
-        {
-          label: "其他",
-          active: false
-        }
-      ]
+      templateCategoryData: []
     };
   },
   created() {
-    this.$http.get("http://test.happymmall.com/category/data").then(res => {
-      const { data } = res.data;
-      this.categoryData = data;
-    });
+    this.$http
+      .get("http://test.happymmall.com/category/categoryData")
+      .then(res => {
+        const { categoryData } = res.data;
+        this.categoryData = categoryData;
+        // console.log("=====categoryData==>", this.categoryData);
+        // this.templateCategoryData = categoryData;
+      });
+    // this.getGoodsList();
   },
   methods: {
+    handleSplit(name) {
+      if (~name.indexOf("、")) {
+        let temName = name;
+        return temName.slice(0, 2) + name.slice(3);
+      } else {
+        return name;
+      }
+    },
+    // 获取分类
+    getGoodsList() {
+      // this.$http.get(`/api/product/category`).then(response => {
+      this.$http.get(`/api/goods/category`).then(response => {
+        const categoryData = response.data.content;
+        this.categoryData = categoryData;
+      });
+    },
     handleSearch() {
       this.$router.push("/search");
     },
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
+      // this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
-    selectProduct(title) {
-      this.$router.push("/classify/recommend");
+    selectProduct(sku) {
+      this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
     }
   },
   mounted() {
@@ -173,60 +122,17 @@ export default {
 .classify {
   height: 100%;
   .home-header {
-    position: fixed;
-    left: 0;
-    top: 10px;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 16px;
-    display: flex;
-    justify-content: flex-start;
-    @include boxSizing;
-    font-size: 30px;
-    color: #fdc;
-    z-index: 10000;
-    .btn-left {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .header-search {
-      border-radius: 3px;
-      margin-left: 16px;
-      display: flex;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      color: #232326;
-      background: #fff;
-      .search-icon {
-        line-height: 40px;
-        padding: 8px 10px;
-      }
-      .app-name {
-        padding: 0 20px;
-        color: $red;
-        font-size: 40px;
-        font-weight: bold;
-      }
-      .icon-search {
-        padding: 0 20px;
-        font-size: 34px;
-      }
-      .search-title {
-        font-size: 16px;
-        color: #dbdbdb;
-        width: 100%;
-        padding-left: 60px;
-      }
-    }
+    font-size: 18px;
+    color: #3a3a3a;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    background-color: #fff;
   }
   .search-wrap {
     @include fj;
     width: 100%;
-    margin-top: 70px;
-    background: #f8f8f8;
+    background: #fff;
     .nav-side-wrapper {
       width: 88px;
       height: 100%;
@@ -256,9 +162,9 @@ export default {
       }
     }
     .search-content {
-      width: 100%;
+      width: 80%;
       height: 100%;
-      padding: 0 20px;
+      padding: 0 16px;
       background: #fff;
       padding-bottom: 30px;
       @include boxSizing;
@@ -267,6 +173,12 @@ export default {
         .swiper-slide {
           width: 100%;
           padding-top: 20px;
+          .goods-title {
+            font-size: 14px;
+            color: #d8182d;
+            font-weight: 600;
+            padding-bottom: 10px;
+          }
           .category-main-img {
             width: 100%;
           }
@@ -282,15 +194,20 @@ export default {
               padding: 40px 0;
             }
             .product-item {
-              width: 49%;
+              width: 33%;
               margin-bottom: 20px;
               text-align: center;
               font-size: 30px;
-
+              .item-img {
+                width: 65px;
+                height: 80px;
+              }
               .product-title {
                 color: #3a3a3a;
                 font-size: 11px;
                 font-weight: 600;
+                // width: 50%;
+                white-space: nowrap;
               }
             }
           }

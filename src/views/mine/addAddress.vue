@@ -75,11 +75,22 @@ export default {
     return {
       value: "",
       show: false,
+      parentAreaId: 0,
       areaList: areaList
+      // areaList: []
     };
   },
-  created() {},
+  created() {
+    this.getAreas();
+  },
   methods: {
+    // 分层获取中国地址信息
+    getAreas() {
+      this.$http.get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`).then(response =>{
+        console.log('=====response.data==>',response.data.content);  
+        // this.areaList = response.data.content
+      });
+    },
     handleCancel() {
       this.show = false;
     },
@@ -117,7 +128,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #d8182d;
       font-size: 13px;
     }
   }
@@ -184,7 +195,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #D8182D;
+      background-color: #d8182d;
     }
     /deep/ .van-button__text {
       color: #fff;

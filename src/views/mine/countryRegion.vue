@@ -7,7 +7,7 @@
       </div>
     </header>
     <section class="index-box">
-      <van-index-bar :index-list="indexList" highlight-color='#3C96FF'>
+      <van-index-bar :index-list="indexList" highlight-color="#2B8BFF">
         <van-index-anchor class="letter-idnex" index="Z">Z</van-index-anchor>
         <van-cell title="中国+86" />
         <van-cell title="中国香港+852" />
@@ -37,7 +37,29 @@ export default {
   name: "countryRegion",
   data() {
     return {
-      indexList: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K','Z']
+      indexList: [
+        "G",
+        "H",
+        "W",
+        "J",
+        "X",
+        "K",
+        "Y",
+        "Z",
+        "M",
+        "N",
+        "A",
+        "B",
+        "P",
+        "X",
+        "Q",
+        "D",
+        "R",
+        "S",
+        "F",
+        "T",
+        "E"
+      ]
     };
   },
   created() {},
@@ -50,7 +72,7 @@ export default {
   height: 100%;
   padding-bottom: 45px;
   .header-box {
-    background-color: #c9c9cd;
+    // background-color: #c9c9cd;
     padding: 16px;
     .header-search {
       background-color: #fff;
@@ -60,7 +82,7 @@ export default {
       display: flex;
       height: 40px;
       line-height: 40px;
-      color: #232326;
+      color: #2b8bff;
       .search-icon {
         line-height: 30px;
         padding: 8px;
@@ -73,11 +95,17 @@ export default {
     }
   }
   .index-box {
-    // padding-left: 10px;
-    /deep/ .letter-idnex{
-        padding-left: 10px;
-        font-size: 20px;
-        font-weight: 600;
+    padding: 0 16px;
+    /deep/ .van-index-bar {
+      border-radius: 8px;
+    }
+    /deep/ .van-index-bar__sidebar {
+      color: #2b8bff;
+    }
+    /deep/ .letter-idnex {
+      color: #2a2a2a;
+      font-size: 20px;
+      font-weight: 700;
     }
   }
 }

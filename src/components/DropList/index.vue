@@ -1,19 +1,19 @@
 <template>
-  <div class="wrap" v-show="isShow">
-    <div
-      class="wrap-content"
-      :style="'width:'+width+';top:'+top+';right:'+right+';bottom:'+bottom+';left:'+left"
-    >
+  <div>
+    <div class="wrap" v-show="isShow">
       <div
-        class="item"
-        v-for="(item,index) in list"
-        v-text="item.text"
-        :key="index"
-        @click="Action(item.action)"
-      ></div>
+        class="wrap-content"
+        :style="'width:'+width+';top:'+top+';right:'+right+';bottom:'+bottom+';left:'+left"
+       >
+        <div class="item" v-for="(item,index) in list" :key="index" @click="Action(item)">
+          <svg-icon :icon-class="item.icon"></svg-icon>
+          <span>{{item.text}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -38,8 +38,8 @@ export default {
     hidden() {
       this.isShow = false;
     },
-    Action(callback) {
-      callback();
+    Action(item) {
+      item.action(item);
       this.hidden();
     }
   },
@@ -55,26 +55,36 @@ export default {
   position: absolute;
   opacity: 1;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 6px;
   z-index: 999999;
+  .item {
+    opacity: 0.8;
+    padding: 8px 0px;
+    margin: 0 15px;
+    font-size: 14px;
+    color: #3a3a3a;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #f2f2f2;
+    span {
+      flex: 1;
+      text-align: center;
+    }
+    .svg-icon {
+      width: 19px;
+      height: 19px;
+    }
+  }
 }
 
 .wrap-content:before {
   content: "";
   position: absolute;
   right: 10px;
-  top: -25px;
-  border: 10px solid transparent;
-  border-bottom: 20px solid #fff;
-}
-
-.wrap-content .item {
-  padding: 8px 0px;
-  margin: 0 5px;
-  font-size: 11px;
-  text-align: center;
-  color: #000;
-  border-bottom: 1px solid #f2f2f2;
+  top: -14px;
+  border: 6px solid transparent;
+  border-bottom: 10px solid #fff;
 }
 
 .wrap-content .item:last-child {

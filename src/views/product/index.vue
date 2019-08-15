@@ -1,10 +1,12 @@
 <template>
   <div class="product-layout">
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img class="lazy_img" v-lazy="image.imgUrl" />
+    <van-swipe :autoplay="3000" :height="350">
+      <van-swipe-item v-for="(image, index) in productImages" :key="index">
+        <!-- <img class="lazy_img" v-if="image.path" v-lazy="image.path"/> -->
+        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/>
       </van-swipe-item>
     </van-swipe>
+
     <span class="btn-left" @click="$router.go(-1)">
       <svg-icon icon-class="green-btn"></svg-icon>
     </span>
@@ -33,8 +35,8 @@
     <ul class="product-content">
       <li class="product-title">
         <div class="text-left">
-          <span class="force-value">205算力值</span>
-          <span class="item-desc">遥控制空调扇</span>
+          <span class="force-value">0.5倍算力</span>
+          <span class="item-desc">{{detailForm.name}}</span>
         </div>
         <div>
           <span class="heart-full" @click="isLike=!isLike">
@@ -53,14 +55,14 @@
       </li>
 
       <li class="item-info">
-        <van-field label="发货地" disabled placeholder="福建泉州 ">
+        <van-field label="发货地" disabled :placeholder="detailForm.productArea">
           <span slot="left-icon" class="anchor-point">
             <svg-icon icon-class="anchor-point"></svg-icon>
           </span>
         </van-field>
       </li>
       <li class="item-info">
-        <van-field label="品牌" disabled placeholder="CHANEL" />
+        <van-field label="品牌" disabled :placeholder="detailForm.brandName" />
       </li>
       <li class="item-info" @click="show = true">
         <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
@@ -78,7 +80,8 @@
       </li>
     </ul>
     <div class="item-details">
-      <span>宝贝详情</span>
+      <span @click="handleViewDetail">宝贝详情</span>
+      <div v-html="detailForm.appintroduce" v-show="showDetail" class="html-class"></div>
     </div>
     <van-popup
       class="select-popup"
@@ -156,6 +159,8 @@ export default {
   data() {
     return {
       show: false,
+      showDetail: false,
+      detailForm: {},
       isSpike: false, // 是否是秒杀商品 默认是false
       isLike: false, // 是否点赞喜欢
       current: 0,
@@ -188,28 +193,38 @@ export default {
         }
       ],
       imgSrc: require("../../assets/image/home/test2.png"),
-      images: [
-        {
-          imgUrl: require("../../assets/image/home/test1.png"),
-          categoryId: 100008
-        },
-        {
-          imgUrl: require("../../assets/image/home/test2.png"),
-          categoryId: 100016
-        },
-        {
-          imgUrl: require("../../assets/image/home/test3.png"),
-          categoryId: 100035
-        },
-        {
-          imgUrl: require("../../assets/image/home/test4.png"),
-          categoryId: 100016
-        }
-      ]
+      productImages: []
     };
   },
-  created() {},
+  created() {
+    this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
+      const { productImages } = res.data;
+      let i = Math.floor(Math.random() * 6);
+      this.productImages = productImages[i];
+    });
+    // this.initData();
+  },
+  // updated() {
+  //   let obj = document.getElementById("htmlClass");
+  //   let imgs = obj.getElementsByTagName("img");
+  //   for (let index = 0; index < imgs.length; index++) {
+  //     imgs[i].style.width = "100%";
+  //     imgs[i].style.height = "100%";
+  //   }
+  // },
   methods: {
+    initData() {
+      this.$http
+        .get(`/api/goods/detail?sku=${this.$route.query.sku}`)
+        .then(response => {
+          this.productImages = response.data.images;
+          this.detailForm = response.data.detail;
+          console.log("=====content==>", response.data);
+        });
+    },
+    handleViewDetail() {
+      this.showDetail = true;
+    },
     handleSelected(item) {
       item.selected = true;
       this.listData.map(it => {
@@ -236,7 +251,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .product-layout {
   background-color: white;
   min-height: 100vh;
@@ -444,6 +459,15 @@ export default {
     padding-top: 50px;
     span {
       box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
+    }
+    .html-class {
+      margin-top: 20px;
+      /deep/ img {
+        width: 375px;
+      }
+      /deep/ div {
+        background-size: 50% 100%;
+      }
     }
   }
   .select-popup {

@@ -4,20 +4,19 @@
  */
 import axios from 'axios';
 import router from '../router/index';
-import store from '../store/index';
-// import { Toast } from 'vant';
+import { Toast } from 'vant';
 
 /** 
  * 提示函数 
  * 禁止点击蒙层、显示一秒后关闭
  */
-// const tip = msg => {    
-//     Toast({        
-//         message: msg,        
-//         duration: 1000,        
-//         forbidClick: true    
-//     });
-// }
+const tip = msg => {    
+    Toast({        
+        message: msg,        
+        duration: 1000,        
+        forbidClick: true    
+    });
+}
 
 /** 
  * 跳转登录页
@@ -46,7 +45,7 @@ const errorHandle = (status, other) => {
       // 403 token过期
       // 清除token并跳转登录页
     case 403:
-      // tip('登录过期，请重新登录');
+      tip('登录过期，请重新登录');
       localStorage.removeItem('token');
       //   store.commit('loginSuccess', null);
       setTimeout(() => {
@@ -55,7 +54,7 @@ const errorHandle = (status, other) => {
       break;
       // 404请求不存在
     case 404:
-      // tip('请求的资源不存在'); 
+      tip('请求的资源不存在'); 
       break;
     default:
       console.log(other);
@@ -80,8 +79,8 @@ instance.interceptors.request.use(
     // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token        
     // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码        
     // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。        
-    const token = store.state.token;
-    token && (config.headers.Authorization = token);
+    const token = localStorage.token;
+    token && (config.headers.token = token);
     return config;
   },
   error => Promise.error(error))
@@ -89,7 +88,9 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   // 请求成功
-  response => response.status === 200 ? Promise.resolve(response) : Promise.reject(responseres),
+  response => {
+    return response.status === 200 ? Promise.resolve(response) : Promise.reject(responsere);
+  },
   // 请求失败
   error => {
     const {
