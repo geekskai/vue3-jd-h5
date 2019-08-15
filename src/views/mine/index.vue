@@ -51,6 +51,7 @@
         </router-link>
       </ul>
     </section>
+
     <section class="mine-content">
       <ul class="options-list">
         <router-link to="/mine/myWallet" class="option-item" tag="li">
@@ -83,6 +84,7 @@
         </router-link>
       </ul>
     </section>
+    
     <section class="mine-content">
       <ul class="options-list">
         <router-link to="/mine/shippingAddress" class="option-item" tag="li">

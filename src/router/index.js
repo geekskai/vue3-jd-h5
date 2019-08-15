@@ -65,10 +65,8 @@ let router = new Router({
   routes: routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      console.log('=====savedPosition==>',savedPosition);
       return savedPosition
     } else {
-      console.log('=====nosavedPosition==>',savedPosition);
       return {
         x: 0,
         y: 0

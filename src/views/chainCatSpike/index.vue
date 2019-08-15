@@ -14,8 +14,6 @@
         </span>
       </div>
     </header>
-
-
     <drop-list :config="configData" ref="droplist"></drop-list>
     <ul class="page-tabs">
       <van-tabs
@@ -125,7 +123,6 @@ export default {
       show: false,
       configData: {
         position: {
-          // 设置显示位置，position
           top: "60px",
           right: "8px",
           bottom: "",

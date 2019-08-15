@@ -4,8 +4,8 @@
       <div
         class="wrap-content"
         :style="'width:'+width+';top:'+top+';right:'+right+';bottom:'+bottom+';left:'+left"
-      >
-        <div class="item" v-for="(item,index) in list" :key="index" @click="Action(item.action)">
+       >
+        <div class="item" v-for="(item,index) in list" :key="index" @click="Action(item)">
           <svg-icon :icon-class="item.icon"></svg-icon>
           <span>{{item.text}}</span>
         </div>
@@ -38,8 +38,8 @@ export default {
     hidden() {
       this.isShow = false;
     },
-    Action(callback) {
-      callback();
+    Action(item) {
+      item.action(item);
       this.hidden();
     }
   },
