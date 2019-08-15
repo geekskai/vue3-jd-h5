@@ -16,7 +16,7 @@
             <span class="pool-count">996789009.9</span>
           </div>
         </li>
-        <li class="wallet-item advertisement-pool">
+        <li class="wallet-item advertisement-pool" @click="handleToAdvertisementPool">
           <svg-icon class="main-icon" icon-class="advertisement-pool"></svg-icon>
           <b class="pool-text">广告矿池</b>
           <div class="advertisement-info">
@@ -70,6 +70,10 @@ export default {
   },
   created() {},
   methods: {
+    handleToAdvertisementPool(){
+      this.$router.push(`/pool/advertisementPool`);
+
+    },
     handleToConsumptionPool() {
       this.$router.push(`/pool/consumptionPool`);
     },
