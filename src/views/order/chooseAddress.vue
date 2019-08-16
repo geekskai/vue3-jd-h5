@@ -55,7 +55,8 @@ export default {
   name: "ChooseAddress",
   data() {
     return {
-      addressArray: []
+      addressArray: [],
+      orderForm: this.$route.query
     };
   },
   created() {
@@ -63,11 +64,32 @@ export default {
   },
   methods: {
     handleChooseAddress(userAddrId) {
-        console.log('=====选中地址==>',);
-    //   this.$router.push({
-    //     path: "/mine/editAddress",
-    //     query: { userAddrId: userAddrId }
-    //   });
+      console.log("=====选中地址==>", userAddrId);
+      console.log("=====orderForm==>", this.orderForm);
+
+      this.$http
+        .post(`/api/order/checkout`, {
+          skuInfoForm: {
+            quantity: this.$route.query.quantity,
+            skuId: this.$route.query.skuId
+          },
+          userAddrId: userAddrId
+        })
+        .then(response => {
+          this.$router.push({
+            path: `/order/confirmOrder`,
+            query: {
+              quantity: this.$route.query.quantity,
+              skuId: this.$route.query.skuId,
+              userAddrId: userAddrId
+            }
+          });
+          console.log("=====response==>", response.data);
+        });
+      //   this.$router.push({
+      //     path: "/mine/editAddress",
+      //     query: { userAddrId: userAddrId }
+      //   });
     },
     getUserList() {
       // 获取用户列表

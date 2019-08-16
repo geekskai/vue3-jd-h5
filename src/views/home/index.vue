@@ -233,7 +233,7 @@ export default {
   methods: {
     handleToProductDetail(productId) {
       this.$router.push({
-        path: "/classify/index",
+        path: "/product/index",
         query: { productId: productId }
       });
     },
@@ -252,7 +252,7 @@ export default {
       });
     },
     handleClick(linkUrl) {
-      this.$router.push("/classify/index");
+      this.$router.push("/product/index");
     },
 
     pageScroll() {

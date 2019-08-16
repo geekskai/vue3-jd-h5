@@ -1,5 +1,5 @@
 <template>
-  <!-- 确认支付 -->
+  <!-- 确认订单 -->
   <div class="order-detail-page">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
@@ -24,7 +24,7 @@
       class="order-card"
       v-for="(oderShopSkuInfo,index) in orderForm.oderShopSkuInfoVos"
       :key="index"
-    >
+     >
       <ul class="order-list">
         <li class="list-item">
           <div class="store-info">
@@ -82,39 +82,63 @@ export default {
 
   methods: {
     initData() {
-      this.$http
-        .post(`/api/order/checkout`, {
-          skuInfoForm: {
-            quantity: this.$route.query.quantity,
-            skuId: this.$route.query.skuId
-          }
-        })
-        .then(response => {
-          this.orderForm = response.data.content;
-          let fullAddress = this.orderForm.fullAddress;
-          if (~fullAddress.indexOf("undefined")) {
-            this.orderForm.fullAddress = fullAddress.slice(
-              0,
-              this.orderForm.fullAddress.length - 9
-            );
-          }
-        });
+      if (this.$route.query.userAddrId) {
+        this.$http
+          .post(`/api/order/checkout`, {
+            skuInfoForm: {
+              quantity: this.$route.query.quantity,
+              skuId: this.$route.query.skuId
+            },
+            userAddrId: this.$route.query.userAddrId
+          })
+          .then(response => {
+            this.orderForm = response.data.content;
+            let fullAddress = this.orderForm.fullAddress;
+            if (fullAddress && ~fullAddress.indexOf("undefined")) {
+              this.orderForm.fullAddress = fullAddress.slice(
+                0,
+                this.orderForm.fullAddress.length - 9
+              );
+            }
+          });
+      } else {
+        this.$http
+          .post(`/api/order/checkout`, {
+            skuInfoForm: {
+              quantity: this.$route.query.quantity,
+              skuId: this.$route.query.skuId
+            }
+          })
+          .then(response => {
+            this.orderForm = response.data.content;
+            let fullAddress = this.orderForm.fullAddress;
+            if (fullAddress && ~fullAddress.indexOf("undefined")) {
+              this.orderForm.fullAddress = fullAddress.slice(
+                0,
+                this.orderForm.fullAddress.length - 9
+              );
+            }
+          });
+      }
     },
     handleToChooseAddress() {
       this.$router.push({
-        path: `/mine/chooseAddress`,
-        query: {}
+        path: `/order/chooseAddress`,
+        query: {
+          quantity: this.$route.query.quantity,
+          skuId: this.$route.query.skuId
+        }
       });
     },
     handleSubmitOrder() {
-      this.$http.post(`/api/order/submit`, {
-        oderShopSkuInfoVos: [],
-        sourceType: 1,
-        userAddrId: ""
-      });
-      this.$router.push({
-        path: "/mine/chooseAddress",
-        query: {}
+      this.orderForm.sourceType = 1;
+      console.log("=====this.orderForm==>", this.orderForm);
+      this.$http.post(`/api/order/submit`, this.orderForm).then(response => {
+        console.log("=====response==>", response.data.content.orderNo);
+        this.$router.push({
+          path: `/order/orderDetail`,
+          query: { orderNo: response.data.content.orderNo }
+        });
       });
     }
   }

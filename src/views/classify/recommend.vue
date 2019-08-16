@@ -80,7 +80,7 @@ export default {
     },
     handleToDetail(productId) {
       this.$router.push({
-        path: "/classify/index",
+        path: "/product/index",
         query: { productId: productId }
       });
     },

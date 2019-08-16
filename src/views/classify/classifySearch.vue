@@ -114,7 +114,7 @@ export default {
     handleGoToProduct(item) {
       console.log("=====item==>", item.productId);
       this.$router.push({
-        path: `/classify/index`,
+        path: `/product/index`,
         query: { productId: item.productId }
       });
     },
@@ -152,7 +152,7 @@ export default {
     },
     handleToDetail(sku) {
       this.$router.push({
-        path: "/classify/index",
+        path: "/product/index",
         query: { sku: sku }
       });
     },

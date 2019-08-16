@@ -88,7 +88,7 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" to="/classify/index">
+            <router-link :key="index" class="goods-item" tag="li" to="/product/index">
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>

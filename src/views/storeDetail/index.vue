@@ -88,7 +88,7 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in likeList">
-            <router-link :key="index" tag="li" class="goods-item" to="/classify/index">
+            <router-link :key="index" tag="li" class="goods-item" to="/product/index">
               <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>

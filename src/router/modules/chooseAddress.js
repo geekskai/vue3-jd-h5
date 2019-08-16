@@ -1,9 +1,9 @@
 export default [{
-    path: '/mine/chooseAddress',
+    path: '/order/chooseAddress',
     name: 'chooseAddress',
     meta: {
       index: 3
     },
-    component: () => import('@/views/mine/chooseAddress.vue')
+    component: () => import('@/views/order/chooseAddress.vue')
   }]
   
