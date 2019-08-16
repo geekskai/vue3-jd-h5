@@ -11,7 +11,6 @@
       </li>
     </header>
 
-    
     <div class="card-box">
       <section class="consumption-card">
         <ul class="card-content">
