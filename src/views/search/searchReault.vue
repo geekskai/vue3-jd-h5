@@ -1,34 +1,14 @@
 <template>
-  <div class="store-detail">
-    <header class="page-header">
+  <div class="search-reault">
+    <div class="search-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="green-btn"></svg-icon>
+        <svg-icon icon-class="left-btn"></svg-icon>
       </span>
-      <div class="header-content">店铺详情</div>
-    </header>
-    <section class="store-info">
-      <ul class="store-top">
-        <img v-lazy="storeDetail.idCardNo" class="store-header" />
-        <li class="store-name">{{storeDetail.shopName}}</li>
-        <li class="store-introd">
-          <div>{{storeDetail.detail}}</div>
-        </li>
-      </ul>
-      <ul class="store-center">
-        <li class="store-tel">
-          <label>电话:</label>
-          <span>{{storeDetail.phone}}</span>
-        </li>
-        <li>
-          <label>地址:</label>
-          <span>{{storeDetail.address}}</span>
-        </li>
-        <li class="store-btn">
-          <van-button size="small" type="danger">联系店家</van-button>
-        </li>
-      </ul>
-    </section>
-
+      <div class="search-con">
+        <input v-focus placeholder="搜索、关键词" v-model="searchText" />
+      </div>
+      <span @click="getSearch">搜索</span>
+    </div>
     <div v-if="serarchResult.length === 0" class="empty-box">
       <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
       <span class="empty-text">
@@ -38,21 +18,20 @@
     </div>
 
     <div v-else class="goods-all">
-      <section class="select-menu" :class="{'isFixed' : seclectActive}">
+      <section class="select-menu">
         <div
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initSortData"
+          @click="initData"
         >默认排序</div>
-
         <div class="select-item">
           按价格
           <span class="select-arrows">
             <i
               class="sort-caret ascending"
-              :class="{'active' : activeOrderBy === 'price_asc'}"
               data-order-by="price"
+              :class="{'active' : activeOrderBy === 'price_asc'}"
               @click="selectOrder($event,'asc')"
             ></i>
             <i
@@ -63,7 +42,6 @@
             ></i>
           </span>
         </div>
-
         <div class="select-item">
           按销量
           <span class="select-arrows">
@@ -81,22 +59,25 @@
             ></i>
           </span>
         </div>
-        <div class="search-icon select-item" @click="handleSearch">
-          <svg-icon icon-class="search"></svg-icon>
-        </div>
       </section>
       <section class="goods-box">
         <ul class="goods-content">
-          <template v-for="(item,index) in likeList">
-            <router-link :key="index" tag="li" class="goods-item" to="/classify/index">
-              <img class="goods-productMainImage" v-lazy="item.productMainImage" />
+          <template v-for="(item,index) in serarchResult">
+            <router-link :key="index" class="goods-item" tag="li" to="/classify/index">
+              <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>￥：{{item.productCnyPrice}}</i>
+                    <i>$:{{item.productCnyPrice}}</i>
                   </span>
+                </div>
+                <div class="goods-count-sale">
+                  <span class="goods-shopName">
+                    <i>{{item.shopName}}</i>
+                  </span>
+                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity}}</span>
                 </div>
               </div>
             </router-link>
@@ -109,17 +90,13 @@
 
 <script>
 export default {
-  name: "storeDetail",
-
-  components: {},
-  props: {},
+  name: "searchReault",
   data() {
     return {
-      activeOrderBy: "update_time",
+      serarchResult: [],
       page: 1,
-      seclectActive: false,
-      storeDetail: {},
-      likeList: []
+      searchText: this.$route.query.searchWord,
+      activeOrderBy: "update_time"
     };
   },
   created() {
@@ -127,30 +104,54 @@ export default {
   },
   methods: {
     initData() {
-      this.$http
-        .get(
-          `/api/merchant/merchantShopInfo?merchantInfoId=${this.$route.query.merchantInfoId}`
-        )
-        .then(response => {
-          this.storeDetail = response.data.content;
-        });
-      this.initSortData();
+      if (this.$route.query.categoryId) {
+        this.$http
+          .get(
+            `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      } else {
+        this.$http
+          .get(
+            `/api/product/list?productName=${this.$route.query.searchWord}&page=${this.page}&size=15`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      }
     },
-    initSortData() {
-      this.activeOrderBy = "update_time";
-      this.$http
-        .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&page=${this.page}&size=20`
-        )
-        .then(response => {
-          this.likeList = response.data.content;
+    getSearch() {
+      let keyword = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+      if (!keyword) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入搜索内容"
         });
+        return;
+      }
+      this.handleSearch(keyword);
     },
-    handleSearch() {
-      this.$router.push({
-        path: "/search",
-        query: { merchantShopId: this.$route.query.merchantInfoId }
-      });
+    handleSearch(keyword) {
+      if (this.$route.query.categoryId) {
+        this.$http
+          .get(
+            `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&page=${this.page}&size=15`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      } else {
+        this.$http
+          .get(
+            `/api/product/list?productName=${keyword}&page=${this.page}&size=15`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      }
     },
     selectOrder(e, sortType) {
       let orderBy = e.currentTarget.getAttribute("data-order-by");
@@ -158,100 +159,87 @@ export default {
         return;
       }
       this.activeOrderBy = orderBy + "_" + sortType;
-      this.$http
-        .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
-        )
-        .then(response => {
-          this.likeList = response.data.content;
-        });
-    },
-    pageScroll() {
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      scrollTop > 100
-        ? (this.seclectActive = true)
-        : (this.seclectActive = false);
+      if (this.$route.query.categoryId) {
+        this.$http
+          .get(
+            `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      } else {
+        this.$http
+          .get(
+            `/api/product/list?productName=${this.searchText}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
+          )
+          .then(response => {
+            this.serarchResult = response.data.content;
+          });
+      }
     }
   },
-  computed: {},
-
-  mounted() {
-    window.addEventListener("scroll", this.pageScroll);
-  },
-  watch: {}
+  directives: {
+    focus: {
+      // 指令的定义
+      inserted: function(el) {
+        el.focus();
+      }
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.store-detail {
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    position: relative;
-    background-color: white;
+@import "../../styles/mixin.scss";
+.search-reault {
+  .search-header {
+    @include fj;
+    width: 100%;
+    height: 44px;
+    // padding: 5px 0;
+    padding-top: 5px;
+    box-sizing: border-box;
     .btn-left {
-      position: fixed;
-      left: 16px;
-      background-color: #efeff4;
-      width: 24px;
-      height: 24px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 12px;
+      padding-left: 16px;
     }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      flex: 1;
-      font-weight: 700;
+    .icon-left {
+      width: 10%;
+      font-size: 16px;
+      color: #252525;
+      font-weight: bold;
     }
-  }
-  .store-info {
-    background-color: #fff;
-    min-height: 300px;
-    margin-bottom: 10px;
-    .store-top {
+    .search-con {
+      width: 70%;
+      height: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      .store-header {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        padding-top: 14px;
-        padding-bottom: 10px;
+      padding-left: 10px;
+      font-size: 16px;
+      background: #f7f7f7;
+      border-radius: 4px;
+      @include boxSizing;
+      .iconfont {
+        font-size: 16px;
       }
-      .store-name {
-        color: #3a3a3a;
-        font-size: 18px;
-      }
-      .store-introd {
-        padding: 16px;
-        color: #3a3a3a;
-        font-size: 11px;
+      input {
+        font-size: 16px;
+        background: #f7f7f7;
+        padding-left: 50px;
+        width: 100%;
       }
     }
-    .store-center {
-      color: #3a3a3a;
-      font-size: 11px;
-      padding: 16px;
-      .store-tel {
-        padding-bottom: 10px;
-      }
-      .store-btn {
-        text-align: center;
-        padding-top: 20px;
-        /deep/ .van-button--danger {
-          background-color: #d8182d;
-        }
-      }
+    span {
+      padding-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      color: #d8182d;
+      font-size: 16px;
     }
   }
   .empty-box {
@@ -279,10 +267,11 @@ export default {
       background-color: #fff;
       line-height: 44px;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       color: #949497;
       font-size: 11px;
+
       .select-item.active {
         color: #d8182d;
       }
@@ -297,7 +286,6 @@ export default {
       .search-icon {
         padding-right: 16px;
       }
-
       .select-arrows {
         display: inline-flex;
         flex-direction: column;
@@ -315,7 +303,6 @@ export default {
           position: absolute;
           left: 7px;
         }
-
         .sort-caret.ascending {
           border-bottom-color: #c0c4cc;
           top: 5px;
@@ -324,7 +311,6 @@ export default {
           border-top-color: #c0c4cc;
           bottom: 7px;
         }
-
         .sort-caret.ascending.active {
           border-bottom-color: #d8182d;
           top: 5px;
@@ -346,16 +332,17 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .goods-item {
-          display: inline-block;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
           width: 165px;
           border-radius: 8px;
           margin-top: 10px;
-          padding-right: 10px;
           background-color: white;
-          .goods-productMainImage {
+          .product-image {
             width: 165px;
-            height: 195px;
-            border-radius: 8px 8px 0 0;
+            height: 196px;
           }
         }
         li:nth-of-type(even) {
@@ -363,14 +350,17 @@ export default {
         }
         .goods-layout {
           width: 165px;
-          padding: 0 5px;
+          padding: 0 10px;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
           .goods-title {
             color: #3a3a3a;
             font-size: 14px;
             text-overflow: ellipsis;
             overflow: hidden;
-            padding: 5px 0;
             white-space: nowrap;
+            padding: 5px 0;
             font-weight: 700;
           }
           .goods-div {
@@ -383,9 +373,26 @@ export default {
             justify-content: space-between;
             align-items: center;
             padding-bottom: 12px;
+            padding-top: 12px;
             .goods-price {
               font-size: 14px;
               color: #d8182d;
+            }
+            .add-icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+          .goods-count-sale {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            color: #949497;
+            font-size: 11px;
+            .goods-monthlySalesQuantity {
+              font-size: 11px;
             }
           }
         }

@@ -10,49 +10,55 @@
       </div>
       <span @click="getSearch">搜索</span>
     </div>
-    <section v-if="serarchResult.length === 0"></section>
+  <div v-if="serarchResult.length === 0" class="empty-box">
+      <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
+      <span class="empty-text">
+        <i>没有搜索结果</i>
+        <i>抱歉没有找到相关的商品~</i>
+      </span>
+    </div>
     <div class="goods-all" v-else>
       <section class="select-menu" :class="{'isFixed' : seclectActive}">
         <div
           class="select-item default-sort"
-          :class="{'active' : orderBy === 'default'}"
-          data-order-by="default"
-          @click="selectOrder($event)"
-        >全部</div>
-        <div class="select-item" :class="{'active' : orderBy === 'price_asc'}">
+          :class="{'active' : activeOrderBy === 'update_time'}"
+          data-order-by="update_time"
+          @click="initData"
+        >默认排序</div>
+        <div class="select-item">
           按价格
-          <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
-          <span class="select-arrows">
-            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
-            <i
-              class="sort-caret descending"
-              data-order-by="price_desc"
-              @click="selectOrder($event)"
-            ></i>
-          </span>
-        </div>
-        <div
-          class="select-item"
-          :class="{'active' : orderBy === 'price_desc'}"
-          data-order-by="price_desc"
-          @click="selectOrder($event)"
-        >
-          按销量
-          <!-- <i class="iconfont icon-down1" :class="{'active' : orderBy === 'price_desc'}"></i> -->
           <span class="select-arrows">
             <i
               class="sort-caret ascending"
-              data-order-by="saleCount_asc"
-              @click="selectOrder($event)"
+              data-order-by="price"
+              :class="{'active' : activeOrderBy === 'price_asc'}"
+              @click="selectOrder($event,'asc')"
             ></i>
             <i
               class="sort-caret descending"
-              data-order-by="saleCount_desc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_desc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'desc')"
             ></i>
           </span>
         </div>
-        <!-- <div class="search-icon select-item"></div> -->
+        <div class="select-item">
+          按销量
+          <span class="select-arrows">
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_asc'}"
+              class="sort-caret ascending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'asc')"
+            ></i>
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_desc'}"
+              class="sort-caret descending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'desc')"
+            ></i>
+          </span>
+        </div>
       </section>
       <section class="goods-box">
         <ul class="goods-content">
@@ -92,7 +98,7 @@ export default {
   data() {
     return {
       searchText: this.$route.query.product.label,
-      orderBy: "default",
+      activeOrderBy: "update_time",
       seclectActive: false,
       hotSerach: [],
       serarchResult: [],
@@ -113,6 +119,21 @@ export default {
       });
     },
     initData() {
+      this.activeOrderBy = "update_time";
+      this.$http
+        .get(
+          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
+        )
+        .then(response => {
+          this.serarchResult = response.data.content;
+        });
+    },
+    selectOrder(e, sortType) {
+      let orderBy = e.currentTarget.getAttribute("data-order-by");
+      if (orderBy === this.activeOrderBy) {
+        return;
+      }
+      this.activeOrderBy = orderBy + "_" + sortType;
       this.$http
         .get(
           `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
@@ -312,6 +333,25 @@ export default {
       }
     }
   }
+  .empty-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 90px;
+    .search-empty {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 17px;
+      color: #949497;
+    }
+  }
   .goods-all {
     padding-top: 10px;
     .select-menu {
@@ -322,11 +362,7 @@ export default {
       align-items: center;
       color: #949497;
       font-size: 11px;
-      //  &.isFixed {
-      //   position: fixed;
-      //   left: 0;
-      //   top: 0;
-      // }
+     
       .select-item.active {
         color: #d8182d;
       }
@@ -364,6 +400,14 @@ export default {
         }
         .sort-caret.descending {
           border-top-color: #c0c4cc;
+          bottom: 7px;
+        }
+        .sort-caret.ascending.active {
+          border-bottom-color: #d8182d;
+          top: 5px;
+        }
+        .sort-caret.descending.active {
+          border-top-color: #d8182d;
           bottom: 7px;
         }
       }

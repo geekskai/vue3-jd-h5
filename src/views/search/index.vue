@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
     <div class="search-header">
-      <span class="btn-left" @click="goBack">
+      <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="left-btn"></svg-icon>
       </span>
       <div class="search-con">
@@ -17,7 +17,7 @@
           <span
             class="hot-detail hot"
             v-for="(item,index) in hotSerach"
-            @click="selectTag(item.productCategoryId)"
+            @click="handleHotSerach(item.productCategoryId)"
             :key="index"
           >
             {{item.productCategoryName}}
@@ -33,7 +33,7 @@
           </span>
         </div>
         <div class="histort-search">
-          <span v-for="(item,index) in historySearch" @click="selectTag(item)" :key="index">{{item}}</span>
+          <span v-for="(item,index) in historySearch" :key="index">{{item}}</span>
         </div>
       </div>
     </div>
@@ -41,44 +41,49 @@
       <section class="select-menu" :class="{'isFixed' : seclectActive}">
         <div
           class="select-item default-sort"
-          :class="{'active' : orderBy === 'default'}"
-          data-order-by="default"
-          @click="selectOrder($event)"
-        >全部</div>
-        <div class="select-item" :class="{'active' : orderBy === 'price_asc'}">
+          :class="{'active' : activeOrderBy === 'update_time'}"
+          data-order-by="update_time"
+          @click="initData"
+        >默认排序</div>
+        <div class="select-item">
           按价格
-          <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
           <span class="select-arrows">
-            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
+            <i
+              class="sort-caret ascending"
+              data-order-by="price"
+              :class="{'active' : activeOrderBy === 'price_asc'}"
+              @click="selectOrder($event,'asc')"
+            ></i>
             <i
               class="sort-caret descending"
-              data-order-by="price_desc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_desc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'desc')"
             ></i>
           </span>
         </div>
         <div
           class="select-item"
-          :class="{'active' : orderBy === 'price_desc'}"
+          :class="{'active' : activeOrderBy === 'price_desc'}"
           data-order-by="price_desc"
           @click="selectOrder($event)"
         >
           按销量
-          <!-- <i class="iconfont icon-down1" :class="{'active' : orderBy === 'price_desc'}"></i> -->
           <span class="select-arrows">
             <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_asc'}"
               class="sort-caret ascending"
-              data-order-by="saleCount_asc"
-              @click="selectOrder($event)"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'asc')"
             ></i>
             <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_desc'}"
               class="sort-caret descending"
-              data-order-by="saleCount_desc"
-              @click="selectOrder($event)"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'desc')"
             ></i>
           </span>
         </div>
-        <!-- <div class="search-icon select-item"></div> -->
       </section>
       <section class="goods-box">
         <ul class="goods-content">
@@ -87,13 +92,11 @@
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
-                <!-- <span class="goods-div">限量套装 新品上市</span> -->
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>$:{{item.productCnyPrice}}</i>
                   </span>
-                  <!-- <svg-icon class="add-icon" icon-class="add"></svg-icon> -->
                 </div>
                 <div class="goods-count-sale">
                   <span class="goods-shopName">
@@ -120,7 +123,7 @@ export default {
   data() {
     return {
       searchText: "",
-      orderBy: "default",
+
       seclectActive: false,
       hotSerach: [],
       serarchResult: [],
@@ -129,30 +132,21 @@ export default {
     };
   },
   created() {
-    // this.initData();
+    this.initData();
   },
   computed: {},
   methods: {
-    // 当滑块滑动到低不低的时候。
-    handleScrollToEnd() {
-      console.log("=====滑动到底了==>");
-      this.page++;
-      this.initData();
-    },
-    handlePullDown() {
-      console.log("=====handlePullDown==>");
-    },
-    handleToDetail(sku) {
-      this.$router.push({
-        path: "/classify/index",
-        query: { sku: sku }
+    initData() {
+      this.$http.get(`/api/product/hotAndHistorySearch`).then(response => {
+        this.historySearch = response.data.content.historySearch;
+        this.hotSerach = response.data.content.hotSerach;
       });
     },
-
-    //动态设置searc-wrap的高
-    setWrapHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
+    handleHotSerach(categoryId) {
+      this.$router.push({
+        path: `/search/searchReault`,
+        query: { categoryId: categoryId }
+      });
     },
     getSearch() {
       let keyword = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
@@ -164,21 +158,12 @@ export default {
         });
         return;
       }
-      this.selectTag(keyword);
+      this.$router.push({
+        path: `/search/searchReault`,
+        query: { searchWord: keyword }
+      });
     },
-    selectTag(keyword) {
-     
-      this.$http
-        .get(
-          // `/api/product/list?productName=${keyword}&page=${this.page}&size=15`
-          `/api/product/list?categoryId=${223}&page=${this.page}&size=15`
-        )
-        .then(response => {
-          if (response.data.code === 0) {
-            this.serarchResult = response.data.content;
-          }
-        });
-    },
+
     deleteHistory() {
       this.$dialog
         .confirm({
@@ -189,19 +174,13 @@ export default {
           this.$http
             .post(`/api/product/delHistorySearch`, { type: 0 })
             .then(response => {
-              if (response.data.code === 0) {
-                this.$toast({
-                  mask: false,
-                  duration: 1000,
-                  message: response.data.msg
-                });
-              }
+              this.$toast({
+                mask: false,
+                duration: 1000,
+                message: response.data.msg
+              });
             });
         });
-    },
-
-    goBack() {
-      this.$router.go(-1);
     }
   },
   directives: {
@@ -286,7 +265,7 @@ export default {
         color: #686868;
         border: 1px solid #979797;
         padding: 2px 10px;
-        margin-right: 16px;
+        margin-right: 10px;
         border-radius: 3px;
         display: inline-block;
       }
@@ -338,11 +317,7 @@ export default {
       align-items: center;
       color: #949497;
       font-size: 11px;
-      //  &.isFixed {
-      //   position: fixed;
-      //   left: 0;
-      //   top: 0;
-      // }
+
       .select-item.active {
         color: #d8182d;
       }
@@ -382,6 +357,14 @@ export default {
           border-top-color: #c0c4cc;
           bottom: 7px;
         }
+        .sort-caret.ascending.active {
+          border-bottom-color: #d8182d;
+          top: 5px;
+        }
+        .sort-caret.descending.active {
+          border-top-color: #d8182d;
+          bottom: 7px;
+        }
       }
     }
     .goods-box {
@@ -395,7 +378,6 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .goods-item {
-          // display: inline-block;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;

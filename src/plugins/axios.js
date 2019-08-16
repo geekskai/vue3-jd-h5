@@ -33,11 +33,11 @@ const toLogin = () => {
 
 /** 
  * 请求失败后的错误统一处理 
- * @param {Number} status 请求失败的状态码
+ * @param {Number} code 请求失败的状态码
  */
-const errorHandle = (status, other) => {
+const errorHandle = (code, other) => {
   // 状态码判断
-  switch (status) {
+  switch (code) {
     // 401: 未登录状态，跳转登录页
     case 401:
       toLogin();
@@ -47,7 +47,6 @@ const errorHandle = (status, other) => {
     case 403:
       tip('登录过期，请重新登录');
       localStorage.removeItem('token');
-      //   store.commit('loginSuccess', null);
       setTimeout(() => {
         toLogin();
       }, 1000);
@@ -57,7 +56,7 @@ const errorHandle = (status, other) => {
       tip('请求的资源不存在');
       break;
     default:
-      console.log(other);
+      tip(other);
   }
 }
 
@@ -89,7 +88,12 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // 请求成功
   response => {
-    return response.status === 200 ? Promise.resolve(response) : Promise.reject(responsere);
+    if (response.data.code === 0) {
+      return Promise.resolve(response)
+    } else {
+      errorHandle(response.data.code, response.data.msg);
+      return Promise.reject(response)
+    }
   },
   // 请求失败
   error => {
