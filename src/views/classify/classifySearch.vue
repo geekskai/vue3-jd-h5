@@ -118,14 +118,11 @@ export default {
           `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
         )
         .then(response => {
-          //   this.likeList = response.data.content;
           this.serarchResult = response.data.content;
-          console.log("====init=this.serarchResult==>", response.data.content);
         });
     },
     // 当滑块滑动到低不低的时候。
     handleScrollToEnd() {
-      console.log("=====滑动到底了==>");
       this.page++;
       this.initData();
     },

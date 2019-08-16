@@ -1,6 +1,5 @@
 <template>
   <div class="store-detail">
-    
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
@@ -9,12 +8,10 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img v-lazy='storeDetail.idCardNo' class="store-header" />
+        <img v-lazy="storeDetail.idCardNo" class="store-header" />
         <li class="store-name">{{storeDetail.shopName}}</li>
         <li class="store-introd">
-          <div>
-            {{storeDetail.detail}}
-          </div>
+          <div>{{storeDetail.detail}}</div>
         </li>
       </ul>
       <ul class="store-center">
@@ -31,47 +28,47 @@
         </li>
       </ul>
     </section>
-
-
-    
     <div class="goods-all">
       <section class="select-menu" :class="{'isFixed' : seclectActive}">
         <div
           class="select-item default-sort"
-          :class="{'active' : orderBy === 'default'}"
-          data-order-by="default"
-          @click="selectOrder($event)"
+          :class="{'active' : activeOrderBy === 'update_time'}"
+          data-order-by="update_time"
+          @click="initSortData"
         >默认排序</div>
-        <div class="select-item" :class="{'active' : orderBy === 'price_asc'}">
+
+        <div class="select-item">
           按价格
-          <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
-          <span class="select-arrows">
-            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
-            <i
-              class="sort-caret descending"
-              data-order-by="price_desc"
-              @click="selectOrder($event)"
-            ></i>
-          </span>
-        </div>
-        <div
-          class="select-item"
-          :class="{'active' : orderBy === 'price_desc'}"
-          data-order-by="price_desc"
-          @click="selectOrder($event)"
-        >
-          按销量
-          <!-- <i class="iconfont icon-down1" :class="{'active' : orderBy === 'price_desc'}"></i> -->
           <span class="select-arrows">
             <i
               class="sort-caret ascending"
-              data-order-by="saleCount_asc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_asc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'asc')"
             ></i>
             <i
               class="sort-caret descending"
-              data-order-by="saleCount_desc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_desc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'desc')"
+            ></i>
+          </span>
+        </div>
+
+        <div class="select-item">
+          按销量
+          <span class="select-arrows">
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_asc'}"
+              class="sort-caret ascending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'asc')"
+            ></i>
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_desc'}"
+              class="sort-caret descending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'desc')"
             ></i>
           </span>
         </div>
@@ -82,16 +79,15 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in likeList">
-            <router-link :key="index" tag="li" to="/classify/index">
-              <img :src="item.imgSrc" />
+            <router-link :key="index" tag="li" class="goods-item" to="/classify/index">
+              <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
-                <div class="goods-title">{{item.itemTitle}}</div>
-                <span class="goods-div">限量套装 新品上市</span>
+                <div class="goods-title">{{item.productName}}</div>
+                <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>{{item.itemPrice}}</i>
+                    <i>￥：{{item.productCnyPrice}}</i>
                   </span>
-                  <!-- <svg-icon class="add-icon" icon-class="add"></svg-icon> -->
                 </div>
               </div>
             </router-link>
@@ -110,47 +106,11 @@ export default {
   props: {},
   data() {
     return {
-      orderBy: "default",
+      activeOrderBy: "update_time",
+      page: 1,
       seclectActive: false,
       storeDetail: {},
-      likeList: [
-        {
-          id: 0,
-          imgSrc: require("../../assets/image/home/test8.png"),
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248"
-        },
-        {
-          id: 1,
-          imgSrc: require("../../assets/image/home/test9.png"),
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248"
-        },
-        {
-          id: 2,
-          imgSrc: require("../../assets/image/home/test3.png"),
-          itemTitle: "时尚双肩包",
-          itemPrice: "$248"
-        },
-        {
-          id: 3,
-          imgSrc: require("../../assets/image/home/test4.png"),
-          itemTitle: "商务行李箱",
-          itemPrice: "$248"
-        },
-        {
-          id: 4,
-          imgSrc: require("../../assets/image/home/test5.png"),
-          itemTitle: "无线消噪耳机",
-          itemPrice: "$248"
-        },
-        {
-          id: 4,
-          imgSrc: require("../../assets/image/home/test6.png"),
-          itemTitle: "无线蓝牙耳机",
-          itemPrice: "$248"
-        }
-      ]
+      likeList: []
     };
   },
   created() {
@@ -163,24 +123,36 @@ export default {
           `/api/merchant/merchantShopInfo?merchantInfoId=${this.$route.query.merchantInfoId}`
         )
         .then(response => {
-          console.log("===== response.data.content==>", response.data.content);
-           this.storeDetail =  response.data.content
+          this.storeDetail = response.data.content;
+        });
+      this.initSortData();
+    },
+    initSortData() {
+      this.activeOrderBy = "update_time";
+      this.$http
+        .get(
+          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&page=${this.page}&size=20`
+        )
+        .then(response => {
+          this.likeList = response.data.content;
         });
     },
     handleSearch() {
       this.$router.push("/search");
     },
-    selectOrder(e) {
+    selectOrder(e, sortType) {
       let orderBy = e.currentTarget.getAttribute("data-order-by");
       if (orderBy === this.orderBy) {
         return;
       }
-      // this.productList = []    //重置list
-      this.orderBy = orderBy;
-      // this.params.orderBy = orderBy
-      // this.params.pageNum = 1
-      // this.isLoading = true
-      // this.getProductList(this.params)
+      this.activeOrderBy = orderBy + "_" + sortType;
+      this.$http
+        .get(
+          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
+        )
+        .then(response => {
+          this.likeList = response.data.content;
+        });
     },
     pageScroll() {
       let scrollTop =
@@ -280,11 +252,6 @@ export default {
       align-items: center;
       color: #949497;
       font-size: 11px;
-      //  &.isFixed {
-      //   position: fixed;
-      //   left: 0;
-      //   top: 0;
-      // }
       .select-item.active {
         color: #d8182d;
       }
@@ -299,6 +266,7 @@ export default {
       .search-icon {
         padding-right: 16px;
       }
+
       .select-arrows {
         display: inline-flex;
         flex-direction: column;
@@ -316,12 +284,21 @@ export default {
           position: absolute;
           left: 7px;
         }
+
         .sort-caret.ascending {
           border-bottom-color: #c0c4cc;
           top: 5px;
         }
         .sort-caret.descending {
           border-top-color: #c0c4cc;
+          bottom: 7px;
+        }
+        .sort-caret.ascending.active {
+          border-bottom-color: #d8182d;
+          top: 5px;
+        }
+        .sort-caret.descending.active {
+          border-top-color: #d8182d;
           bottom: 7px;
         }
       }
@@ -336,13 +313,18 @@ export default {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        li {
+        .goods-item {
           display: inline-block;
           width: 165px;
           border-radius: 8px;
           margin-top: 10px;
           padding-right: 10px;
           background-color: white;
+          .goods-productMainImage {
+            width: 165px;
+            height: 195px;
+            border-radius: 8px 8px 0 0;
+          }
         }
         li:nth-of-type(even) {
           padding-right: 0;
@@ -353,6 +335,9 @@ export default {
           .goods-title {
             color: #3a3a3a;
             font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             font-weight: 700;
           }
           .goods-div {

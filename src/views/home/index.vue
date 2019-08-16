@@ -15,7 +15,6 @@
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(img ,index) in adList" :key="index">
-          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
           <img class="slide_img" @click="handleClick" v-lazy="img.imageUrl" />
         </swiper-slide>
       </swiper>
@@ -161,7 +160,6 @@
                 </div>
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
-                  <!-- <span class="goods-div" v-if="item.labels">{{item.labels.replace(/,/g,'-')}}</span> -->
                   <span class="goods-div">{{item.labels}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
@@ -252,9 +250,6 @@ export default {
       this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
         this.tabItemLists = response.data.content;
       });
-    },
-    onChange(index) {
-      this.$toast("当前 Swipe 索引：" + index);
     },
     handleClick(linkUrl) {
       this.$router.push("/classify/index");

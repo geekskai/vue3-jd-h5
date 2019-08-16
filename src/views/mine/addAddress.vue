@@ -193,7 +193,6 @@ export default {
   watch: {
     // 监听省滑动
     provinceVal(value) {
-      console.log("=====监听省滑动==>", value);
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
         .then(res => {
@@ -205,7 +204,6 @@ export default {
             if (res.data.content.length < 1) {
               this.list3 = [{ areaName: "-" }];
             }
-            console.log("=====this.list2[0]==>", this.list2[0]);
             this.cityVal = this.list2[0].areaId;
           }
         });
@@ -262,7 +260,6 @@ export default {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
         .then(response => {
-          console.log("=====getProvinces.data==>", response.data);
           this.list = response.data.content;
           this.val.provinceVal = this.list[0];
         });
@@ -271,7 +268,6 @@ export default {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=84`)
         .then(response => {
-          console.log("=====getCitys.data==>", response.data);
           this.list2 = response.data.content;
           this.val.cityVal = this.list2[0];
         });
@@ -308,7 +304,6 @@ export default {
 
     // 滑动开始
     touchStart(e, val) {
-      console.log("=====滑动开始==>");
       e.preventDefault();
       this.addSelect = false;
       this.addHeight = e.currentTarget.children[0].offsetHeight;
@@ -345,7 +340,6 @@ export default {
     },
     // 滑动进行中
     touchMove(e, val) {
-      console.log("=====滑动进行中==>");
       e.preventDefault();
       switch (val) {
         case "province":
@@ -458,14 +452,12 @@ export default {
         default:
           break;
       }
-      console.log("=====滑动结束开始处理数据==>");
       // 滑动结束后 处理数据
       this.dataProcessing();
     },
     // 数据处理
     dataProcessing() {
       // 滑动数据传输 数据处理
-      // debugger
       this.val.provinceVal = this.list[this.provinceIndex];
       this.provinceVal = this.list[this.provinceIndex].areaId;
       this.val.cityVal = this.list2[this.cityIndex];
@@ -476,7 +468,6 @@ export default {
       // this.val.areaVal = this.addressData[this.provinceIndex].city[this.cityIndex].area[this.districtIndex]
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
-      console.log("=====滑动数据传输=处理完毕·····=>");
     }
    
   }
