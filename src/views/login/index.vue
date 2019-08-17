@@ -10,18 +10,13 @@
     </div>
     <section class="login-info">
       <van-cell-group class="info-list">
-        <van-field
-          v-model="loginForm.user"
-          clearable
-          placeholder="手机/邮箱"
-          @click-right-icon="$toast('question')"
-        />
+        <van-field v-model="loginForm.user" clearable placeholder="手机/邮箱" />
         <van-field v-model="loginForm.password" type="password" clearable placeholder="请输入密码" />
         <van-field class="temp-empty" />
-        <span class="forget-pwd">
+        <router-link class="forget-pwd" to="/mine/forgetPassword" tag="span">
           <svg-icon icon-class="question-mark"></svg-icon>
           <i>忘记密码？</i>
-        </span>
+        </router-link>
       </van-cell-group>
     </section>
     <ul class="other-login">
@@ -50,6 +45,12 @@ export default {
   },
   created() {},
   methods: {
+    // handleForgenPwd() {
+    //   this.$router.push({
+    //     path: ``,
+    //     query: this.loginForm
+    //   });
+    // },
     handleUserLogin() {
       this.$http.post(`/api/user/login`, this.loginForm).then(response => {
         if (response.data.code === 0) {

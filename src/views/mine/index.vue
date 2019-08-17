@@ -2,17 +2,16 @@
   <div class="mine-layout">
     <section class="mine-header">
       <router-link to="/mine/personInfo">
-        <img src="../../assets/image/product/store-new.png" class="header-img" />
+        <img v-lazy="userInfo.headImageUrl" class="header-image" />
       </router-link>
       <ul v-if="token" class="user-info">
-        <li class="user-name">钻石王老五</li>
+        <li class="user-name">{{userInfo.nickName}}</li>
         <li class="node-info">
           <span class="sharing-node" @click="toShow">分享节点</span>
           <span class="business-node">商家节点</span>
         </li>
       </ul>
       <div v-else class="login-regist">
-        <!-- <div class="login-regist"> -->
         <router-link to="/login" class="order-item" tag="span">登录</router-link>
         <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
       </div>
@@ -181,16 +180,24 @@ export default {
   data() {
     return {
       show: false,
+      userInfo: {},
       token: localStorage.token,
       columns: 1
     };
   },
-  created() {},
+  created() {
+    this.initUserInfo();
+  },
   computed: {},
   mounted() {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
+    initUserInfo() {
+      this.$http.get(`/api/user/getUserInfo`).then(response => {
+        this.userInfo = response.data.content;
+      });
+    },
     handleClose() {
       this.show = false;
     },
@@ -207,7 +214,7 @@ export default {
   min-height: 812px;
   padding-bottom: 50px;
 
-  background: linear-gradient(#fe4f70, #ff9351);
+  background: linear-gradient(#ec3924, #ff7428);
   .mine-header {
     display: flex;
     padding-left: 24px;
@@ -215,9 +222,10 @@ export default {
     align-items: center;
     flex-direction: row;
     padding-bottom: 20px;
-    .header-img {
+    .header-image {
       width: 70px;
       height: 70px;
+      border-radius: 50%;
     }
     .user-info {
       padding-left: 16px;

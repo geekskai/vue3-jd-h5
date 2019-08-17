@@ -8,26 +8,32 @@
     </header>
     <section class="setting-content">
       <ul class="setting-list">
-        <li class="setting-item">
-          <van-field label="头像" disabled />
-          <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+        <li class="setting-item set-header-img">
+          <van-field label="头像" disabled>
+            <van-uploader slot="input" :after-read="afterRead">
+              <img v-lazy="userInfo.headImageUrl" class="header-image" />
+            </van-uploader>
+          </van-field>
         </li>
         <li @click="handlePhone" class="setting-item">
-          <van-field label="昵称" disabled placeholder="昵称显示" />
+          <van-field label="昵称" disabled :placeholder="userInfo.nickName" />
           <van-icon class="icon" name="arrow" />
         </li>
-        <router-link class="setting-item" to="/mine/phoneNumberSetting" tag="li">
-          <van-field label="手机号" disabled placeholder="13547008799" />
+        <li class="setting-item" @click="handleEditPhoneNumber">
+          <van-field label="手机号" disabled :placeholder="userInfo.mobile" />
           <van-icon class="icon" name="arrow" />
-        </router-link>
-        <router-link class="setting-item" to="/mine/settingMail" tag="li">
-          <van-field label="邮箱号" disabled placeholder="未设置" />
+        </li>
+        <li @click="handleEditEmail" class="setting-item">
+          <van-field label="邮箱号" disabled v-if="userInfo.email" :placeholder="userInfo.email" />
+          <van-field label="邮箱号" disabled placeholder="未设置" v-else />
           <van-icon class="icon" name="arrow" />
-        </router-link>
-        <router-link class="setting-item" to="/mine/changePassword" tag="li">
+        </li>
+        <li class="setting-item" @click="handleEditPassword">
+          <!-- <router-link  to="/mine/changePassword" tag="li"> -->
           <van-field label="修改密码" disabled placeholder />
           <van-icon class="icon" name="arrow" />
-        </router-link>
+          <!-- </router-link> -->
+        </li>
       </ul>
     </section>
 
@@ -37,7 +43,7 @@
           <span>填写昵称</span>
         </div>
         <van-cell-group>
-          <van-field clearable v-model="name" placeholder="请输入" />
+          <van-field clearable v-model="userInfo.nickName" placeholder="请输入" />
         </van-cell-group>
       </div>
 
@@ -45,7 +51,7 @@
         <button @click="show = false" class="popup-btn">
           <span>取消</span>
         </button>
-        <button @click="show = false" class="popup-btn right-btn">
+        <button @click="handleConfirmNickName" class="popup-btn right-btn">
           <span>确认</span>
         </button>
       </div>
@@ -59,7 +65,9 @@ export default {
   data() {
     return {
       show: false,
-      userInfo: {},
+      userInfo: {
+        areaCode: "86"
+      },
       name: ""
     };
   },
@@ -67,10 +75,49 @@ export default {
     this.initData();
   },
   methods: {
+    afterRead(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/user/upload/image`, formData).then(response => {
+        this.userInfo.headImageUrl = response.data.content.imageUrl;
+      });
+    },
+    handleEditPassword() {
+      this.$router.push({
+        path: `/mine/changePassword`,
+        query: this.userInfo
+      });
+    },
+    handleEditEmail() {
+      this.$router.push({
+        path: `/mine/settingMail`,
+        query: this.userInfo
+      });
+    },
+    handleEditPhoneNumber() {
+      this.$router.push({
+        path: `/mine/phoneNumberSetting`,
+        query: this.userInfo
+      });
+    },
     initData() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
       });
+    },
+    handleConfirmNickName() {
+      this.$http
+        .post(`/api/user/updateUserNickname`, {
+          nickname: this.userInfo.nickName
+        })
+        .then(response => {
+          this.show = false;
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: response.data.msg
+          });
+        });
     },
     handlePhone() {
       this.show = true;
@@ -108,13 +155,20 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding-bottom: 20px;
+        /deep/ .van-field__control {
+          text-align: right;
+        }
         /deep/ .van-cell {
           padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         /deep/ .van-cell::after {
           border: none;
         }
-        .header-img {
+        .header-image {
+          border-radius: 50%;
           width: 40px;
           height: 40px;
         }
@@ -127,6 +181,9 @@ export default {
           color: #3a3a3a;
           font-size: 15px;
         }
+      }
+      .set-header-img {
+        padding-bottom: 5px;
       }
     }
   }

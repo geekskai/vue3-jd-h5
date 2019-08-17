@@ -8,6 +8,20 @@
       <div class="header-content">订单详情</div>
     </header>
 
+    <section class="order-address">
+      <ul class="info-list">
+        <li class="receiver-addres">
+          <svg-icon icon-class="shipping-address"></svg-icon>
+          <div class="address-content">
+            <label>收货人：张三</label>
+            <span>江西省</span>
+            <!-- <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
+            <span>{{orderForm.fullAddress}}</span>-->
+          </div>
+        </li>
+      </ul>
+    </section>
+
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
@@ -75,10 +89,27 @@
 export default {
   name: "toBeDelivered",
   data() {
-    return {};
+    return {
+      type: 2
+    };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .post(`/api/order/list`, {
+          pageNum: 1,
+          pageSize: 10,
+          type: this.type
+        })
+        .then(response => {
+          this.orderLists = response.data.content;
+          console.log("=====response==>", this.orderLists);
+        });
+    }
+  }
 };
 </script>
 
@@ -99,6 +130,33 @@ export default {
       flex: 1;
     }
   }
+  .order-address {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 20px;
+    .receiver-addres {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      .address-content {
+        padding-left: 7px;
+        color: #3a3a3a;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        label {
+          font-size: 13px;
+          font-weight: 600;
+        }
+        span {
+          padding-top: 4px;
+          font-size: 11px;
+        }
+      }
+    }
+  }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -109,7 +167,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #D8182D;
+          color: #d8182d;
           font-size: 11px;
         }
         .store-info {
@@ -136,7 +194,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #d8182d;
           border-radius: 4px;
         }
         .order-detail {
@@ -173,7 +231,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #D8182D;
+          color: #d8182d;
           padding-left: 5px;
           font-weight: 700;
         }

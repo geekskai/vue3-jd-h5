@@ -24,7 +24,7 @@
       class="order-card"
       v-for="(oderShopSkuInfo,index) in orderForm.oderShopSkuInfoVos"
       :key="index"
-     >
+    >
       <ul class="order-list">
         <li class="list-item">
           <div class="store-info">

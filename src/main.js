@@ -4,7 +4,7 @@ import router from './router/index'
 import store from './store/index'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */ )
+Vue.use(VueAwesomeSwiper)
 import './components'
 import 'amfe-flexible'
 import axios from './plugins/axios'
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 import {
   Swipe,
   Toast,
-  Sku ,
+  Sku,
   SwipeItem,
   Button,
   RadioGroup,

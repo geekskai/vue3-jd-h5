@@ -12,21 +12,43 @@
     <section class="register-info">
       <span class="phone-number">设置密码</span>
       <p class="number-tips">6-20位数字、字母或字符</p>
+
       <van-cell-group class="info-list">
         <van-field
+          v-if="pwdEyes1"
           v-model="emailRegisterTwo.password"
-          type="password"
           right-icon="eye-o"
           clearable
+          @click-right-icon="pwdEyes1=!pwdEyes1"
           placeholder="密码"
         />
         <van-field
-          v-model="emailRegisterTwo.password"
+          v-else
           type="password"
+          v-model="emailRegisterTwo.password"
           right-icon="closed-eye"
           clearable
-          placeholder="再次确认密码"
+          @click-right-icon="pwdEyes1=!pwdEyes1"
+          placeholder="密码"
         />
+        <van-field
+          v-if="pwdEyes2"
+          v-model="emailRegisterTwo.password1"
+          right-icon="eye-o"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
+          placeholder="密码"
+        />
+        <van-field
+          v-else
+          type="password"
+          v-model="emailRegisterTwo.password1"
+          right-icon="closed-eye"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
+          placeholder="密码"
+        />
+
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
@@ -41,6 +63,8 @@ export default {
   name: "emailRegisterTwo",
   data() {
     return {
+      pwdEyes1: false,
+      pwdEyes2: false,
       emailRegisterTwo: {
         password: ""
       }
@@ -55,7 +79,6 @@ export default {
           Object.assign(this.emailRegisterTwo, this.$route.query)
         )
         .then(response => {
-
           if (response.data.code === 0) {
             localStorage.setItem("token", response.data.content.token);
             this.$toast({
@@ -69,7 +92,6 @@ export default {
               message: response.data.msg
             });
           }
-          
         });
     }
   }

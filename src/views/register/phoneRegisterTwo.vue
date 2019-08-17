@@ -12,21 +12,45 @@
     <section class="register-info">
       <span class="phone-number">设置密码</span>
       <p class="number-tips">6-20位数字、字母或字符</p>
+
+
       <van-cell-group class="info-list">
         <van-field
+          v-if="pwdEyes1"
           v-model="phoneRegisterTwoForm.password"
-          type="password"
           right-icon="eye-o"
           clearable
+          @click-right-icon="pwdEyes1=!pwdEyes1"
           placeholder="密码"
         />
         <van-field
-          v-model="phoneRegisterTwoForm.password"
+          v-else
           type="password"
+          v-model="phoneRegisterTwoForm.password"
           right-icon="closed-eye"
           clearable
-          placeholder="再次确认密码"
+          @click-right-icon="pwdEyes1=!pwdEyes1"
+          placeholder="密码"
         />
+        <van-field
+          v-if="pwdEyes2"
+          v-model="phoneRegisterTwoForm.password1"
+          right-icon="eye-o"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
+          placeholder="密码"
+        />
+        <van-field
+          v-else
+          type="password"
+          v-model="phoneRegisterTwoForm.password1"
+          right-icon="closed-eye"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
+          placeholder="密码"
+        />
+
+        
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
@@ -41,15 +65,17 @@ export default {
   name: "phoneRegisterTwo",
   data() {
     return {
+      pwdEyes1: false,
+      pwdEyes2: false,
       phoneRegisterTwoForm: {
         password: ""
-      },
-      
+      }
     };
   },
   created() {},
   methods: {
     handleConfirmRegister() {
+
       this.$http
         .post(
           `/api/user/register`,
@@ -70,6 +96,8 @@ export default {
             });
           }
         });
+
+
     }
   }
 };
