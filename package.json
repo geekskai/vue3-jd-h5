@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
+    "log": "type text.log",
+    "start": "concurrently \"vue-cli-service serve\" \"npm run log\"",
     "build": "vue-cli-service build --mode production",
     "test": "vue-cli-service serve --mode test",
     "lint": "vue-cli-service lint"
@@ -33,6 +35,7 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-import": "^1.12.0",
     "commitizen": "^4.0.3",
+    "concurrently": "^4.1.2",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
