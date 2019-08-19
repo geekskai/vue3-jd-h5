@@ -3,16 +3,14 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-
-
-let indexRouter = {
+const indexRouter = {
   // 默认页面
   path: '/',
-  component: () => import( /* webpackChunkName: "index" */ '@/views/index'),
+  component: () => import(/* webpackChunkName: "index" */ '@/views/index'),
   redirect: '/index',
   children: []
 }
-let routes = [
+const routes = [
   // 登录页面
   // {
   //   path: '/login',
@@ -38,7 +36,7 @@ let routes = [
     meta: {
       index: 1
     },
-    component: () => import( /* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
+    component: () => import(/* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
   },
   {
     path: '*',
@@ -46,7 +44,7 @@ let routes = [
     meta: {
       index: 1
     },
-    component: () => import( /* webpackChunkName: "404" */ '@/views/error/404')
+    component: () => import(/* webpackChunkName: "404" */ '@/views/error/404')
   },
   indexRouter
 ]
@@ -59,11 +57,11 @@ routerContext.keys().forEach(route => {
   indexRouter.children = [...indexRouter.children, ...(routerModule.default || routerModule)]
 })
 
-let router = new Router({
+const router = new Router({
   // mode: 'history',
   base: process.env.BASE_URL,
   routes: routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {

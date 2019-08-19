@@ -1,7 +1,7 @@
 const state = {
   items: [],
   name: 'test',
-  count:0,
+  count: 0,
   // cartArray: JSON.parse(localStorage.getItem('cartArray')) || [],
   checkoutStatus: null
 }
@@ -38,7 +38,7 @@ const getters = {
 
 // actions
 const actions = {
-  checkout({
+  checkout ({
     commit,
     state
   }, products) {
@@ -49,7 +49,7 @@ const actions = {
     })
   },
 
-  addProductToCart({
+  addProductToCart ({
     state,
     commit
   }, product) {
@@ -75,11 +75,11 @@ const actions = {
 
 // mutations
 const mutations = {
-  addToCart(state) {
+  addToCart (state) {
     state.count++
-    console.log('=====res==>',state.count);
+    console.log('=====res==>', state.count)
   },
-  pushProductToCart(state, {
+  pushProductToCart (state, {
     id
   }) {
     state.items.push({
@@ -88,20 +88,20 @@ const mutations = {
     })
   },
 
-  incrementItemQuantity(state, {
+  incrementItemQuantity (state, {
     id
   }) {
     const cartItem = state.items.find(item => item.id === id)
     cartItem.quantity++
   },
 
-  setCartItems(state, {
+  setCartItems (state, {
     items
   }) {
     state.items = items
   },
 
-  setCheckoutStatus(state, status) {
+  setCheckoutStatus (state, status) {
     state.checkoutStatus = status
   }
 }

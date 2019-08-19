@@ -8,7 +8,12 @@
     "start": "concurrently \"vue-cli-service serve\" \"npm run log\"",
     "build": "vue-cli-service build --mode production",
     "test": "vue-cli-service serve --mode test",
+    "standard": "standard \"jsbundles/**/*.js\" \"lib/**/*.js\" \"components/**/*.js\"",
+    "standfix": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\" --fix",
     "lint": "vue-cli-service lint"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "config": {
     "commitizen": {

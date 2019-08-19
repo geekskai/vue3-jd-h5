@@ -59,6 +59,17 @@ src -- 源码目录
     └── error -- 错误页面
 ```
 
+`$ npm install standard --global` 可以在VSCODE的插件库中直接搜索standard，将相关的插件安装上 
+
+  "standard": "standard \"jsbundles/**/*.js\" \"lib/**/*.js\" \"components/**/*.js\"",
+
+  "standfix": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\" --fix",
+
+"standard.autoFixOnSave": true
+
+**standardJS解决箭头函数不识别问题： 全局安装babel-eslint并在package.json中加入
+"standard": { "parser": "babel-eslint" }**
+
 ## 搭建步骤
 - 下载node并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
 - 该项目为前后端分离项目，访问本地访问接口需搭建后台环境，搭建请参考后端项目[传送门](https://github.com/macrozheng/mall);
