@@ -182,7 +182,7 @@ export default {
           color: #fff;
           width: 140px;
           border-radius: 4px;
-          background-color: #d8182d;
+          background-color: #EC3924;
           margin: 30px 0;
         }
       }

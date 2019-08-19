@@ -96,7 +96,7 @@ export default {
         position: absolute;
         bottom: -30px;
         left: 15px;
-        color: #d8182d;
+        color: #EC3924;
         font-size: 11px;
         display: flex;
         justify-content: center;
@@ -149,9 +149,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #d8182d;
+      border: 1px solid #EC3924;
       border-radius: 4px;
-      background-color: #d8182d;
+      background-color: #EC3924;
     }
     .register-btn {
       line-height: 44px;

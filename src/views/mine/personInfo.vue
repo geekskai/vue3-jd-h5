@@ -219,7 +219,7 @@ export default {
       border: 0 solid #ebedf0;
       border-left-width: 1px;
       span {
-        color: #d8182d;
+        color: #EC3924;
         font-size: 15px;
       }
     }

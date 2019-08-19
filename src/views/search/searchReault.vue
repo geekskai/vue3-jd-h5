@@ -204,7 +204,7 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-      color: #d8182d;
+      color: #EC3924;
       font-size: 16px;
     }
   }
@@ -239,7 +239,7 @@ export default {
       font-size: 11px;
 
       .select-item.active {
-        color: #d8182d;
+        color: #EC3924;
       }
       .select-item {
         .search-icon {
@@ -278,11 +278,11 @@ export default {
           bottom: 7px;
         }
         .sort-caret.ascending.active {
-          border-bottom-color: #d8182d;
+          border-bottom-color: #EC3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #d8182d;
+          border-top-color: #EC3924;
           bottom: 7px;
         }
       }
@@ -291,7 +291,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #d8182d;
+        color: #EC3924;
       }
       .goods-content {
         display: flex;
@@ -342,7 +342,7 @@ export default {
             padding-top: 12px;
             .goods-price {
               font-size: 14px;
-              color: #d8182d;
+              color: #EC3924;
             }
             .add-icon {
               width: 20px;

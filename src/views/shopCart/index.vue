@@ -275,8 +275,8 @@ export default {
       this.$dialog
         .confirm({
           message: "确认删除这些商品？",
-          confirmButtonColor: "#D8182D",
-          cancelButtonColor: "#D8182D"
+          confirmButtonColor: "#EC3924",
+          cancelButtonColor: "#EC3924"
         })
         .then(() => {
           this.clearCart = true;
@@ -305,7 +305,7 @@ export default {
       color: #3a3a3a;
     }
     .appeal-record {
-      color: #d8182d;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -334,8 +334,8 @@ export default {
           width: 150px;
           height: 44px;
           font-size: 17px;
-          color: #d8182d;
-          border: 1px solid #d8182d;
+          color: #EC3924;
+          border: 1px solid #EC3924;
           padding: 10px 32px;
           border-radius: 4px;
         }
@@ -362,7 +362,7 @@ export default {
       }
     }
     /deep/ .van-submit-bar__price {
-      color: #d8182d;
+      color: #EC3924;
       font-size: 17px;
       font-weight: 600;
       padding-left: 5px;
@@ -392,7 +392,7 @@ export default {
     }
   }
   /deep/ .van-button--danger {
-    background-color: #d8182d;
+    background-color: #EC3924;
     height: 44px;
     line-height: 44px;
     .van-button__text {
@@ -472,7 +472,7 @@ export default {
             color: #949497;
           }
           .info-count {
-            color: #d8182d;
+            color: #EC3924;
             font-size: 14px;
             font-weight: 600;
             display: flex;

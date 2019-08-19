@@ -287,7 +287,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(#d8182d, #efeff4);
+    background: linear-gradient(#EC3924, #efeff4);
     height: 250px;
     display: flex;
     justify-content: flex-start;
@@ -392,7 +392,7 @@ export default {
             }
             .card-small {
               font-size: 11px;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
           .item-bottom {
@@ -418,7 +418,7 @@ export default {
               padding-top: 2px;
               .item-price {
                 font-size: 17px;
-                color: #d8182d;
+                color: #EC3924;
               }
               .remind-me-btn {
                 background-color: #91c95b;
@@ -440,11 +440,11 @@ export default {
                 width: 70px;
                 height: 10px;
                 border-radius: 5px;
-                color: #d8182d;
+                color: #EC3924;
                 display: inline-block;
               }
               .my-btn {
-                background-color: #d8182d;
+                background-color: #EC3924;
                 border-radius: 2px;
                 width: 74px;
                 height: 24px;

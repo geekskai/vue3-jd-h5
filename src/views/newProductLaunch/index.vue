@@ -23,7 +23,7 @@
       <van-tabs
         :swipe-threshold="4"
         title-inactive-color="#3a3a3a"
-        title-active-color="#D8182D"
+        title-active-color="#EC3924"
         background="#FFFFFF"
         v-model="active"
         animated
@@ -303,7 +303,7 @@ export default {
       display: flex;
       justify-content: center;
       .tab-title {
-        border: 1px solid #d8182d;
+        border: 1px solid #EC3924;
         border-radius: 10px 10px;
       }
     }
@@ -359,7 +359,7 @@ export default {
             }
             .card-small {
               font-size: 11px;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
           .item-desc {
@@ -370,10 +370,10 @@ export default {
             padding-right: 16px;
             .item-price {
               font-size: 17px;
-              color: #d8182d;
+              color: #EC3924;
             }
             .my-btn {
-              background-color: #d8182d;
+              background-color: #EC3924;
               border-radius: 2px;
               width: 74px;
               height: 24px;

@@ -141,9 +141,9 @@ export default {
           color: #949497;
           flex-direction: column;
           &.active {
-            color: #d8182d;
+            color: #EC3924;
             border-left: 3px solid transparent;
-            border-color: #d8182d;
+            border-color: #EC3924;
             background: #fff;
           }
         }
@@ -163,7 +163,7 @@ export default {
           padding-top: 20px;
           .goods-title {
             font-size: 14px;
-            color: #d8182d;
+            color: #EC3924;
             font-weight: 600;
             padding-bottom: 10px;
           }

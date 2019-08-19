@@ -144,9 +144,9 @@ export default {
         line-height: 44px;
         color: white;
         font-size: 17px;
-        border: 1px solid #d8182d;
+        border: 1px solid #EC3924;
         border-radius: 4px;
-        background-color: #d8182d;
+        background-color: #EC3924;
         margin-left: 15px;
       }
       .register-btn {

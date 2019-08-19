@@ -36,7 +36,7 @@
           </div>
           <div class="info-address">
             <span>{{address.fullAddress.slice(0,address.fullAddress.length-9)+address.address}}</span>
-            <van-icon name="arrow" color="#D8182D" />
+            <van-icon name="arrow" color="#EC3924" />
           </div>
           <span>{{address.receiverPhone}}</span>
         </li>
@@ -142,7 +142,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #d8182d;
+        background-color: #EC3924;
       }
       .card-triangle {
         position: absolute;
@@ -204,7 +204,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #d8182d;
+      color: #EC3924;
     }
   }
 }

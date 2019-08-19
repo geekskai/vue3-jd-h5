@@ -111,7 +111,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #EC3924;
       font-size: 13px;
     }
   }

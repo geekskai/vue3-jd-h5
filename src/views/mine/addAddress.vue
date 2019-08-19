@@ -76,7 +76,7 @@
         </li>
         <li class="address-default">
           <span class="address-defaultAddrFlag">设为默认地址</span>
-          <van-switch v-model="addressInfo.defaultAddrFlag" active-color="#D8182D" size="20px" />
+          <van-switch v-model="addressInfo.defaultAddrFlag" active-color="#EC3924" size="20px" />
         </li>
       </ul>
     </section>
@@ -96,7 +96,7 @@
         <div class="addressbox">
           <p class="text_btn">
             <span style="float:left;color:#3A3A3A" @click="cancel">取消</span>
-            <span style="float:right;color:#D8182D;" @click="complete">完成</span>
+            <span style="float:right;color:#EC3924;" @click="complete">完成</span>
           </p>
           <div class="addressSelect">
             <div class="selectbox"></div>
@@ -501,7 +501,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #d8182d;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -585,7 +585,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #d8182d;
+      background-color: #EC3924;
     }
     /deep/ .van-button__text {
       color: #fff;

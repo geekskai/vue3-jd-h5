@@ -112,7 +112,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #d8182d;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -178,7 +178,7 @@ export default {
       padding-bottom: 10px;
     }
     /deep/ .van-button--danger {
-      background-color: #d8182d;
+      background-color: #EC3924;
       line-height: 44px;
       font-size: 18px;
     }

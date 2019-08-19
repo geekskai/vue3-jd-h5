@@ -173,7 +173,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(#d8182d, #efeff4);
+    background: linear-gradient(#EC3924, #efeff4);
     height: 250px;
     display: flex;
     justify-content: flex-start;

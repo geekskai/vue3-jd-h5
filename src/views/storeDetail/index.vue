@@ -245,7 +245,7 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #d8182d;
+          background-color: #EC3924;
         }
       }
     }
@@ -280,7 +280,7 @@ export default {
       color: #949497;
       font-size: 11px;
       .select-item.active {
-        color: #d8182d;
+        color: #EC3924;
       }
       .select-item {
         .search-icon {
@@ -322,11 +322,11 @@ export default {
         }
 
         .sort-caret.ascending.active {
-          border-bottom-color: #d8182d;
+          border-bottom-color: #EC3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #d8182d;
+          border-top-color: #EC3924;
           bottom: 7px;
         }
       }
@@ -335,7 +335,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #d8182d;
+        color: #EC3924;
       }
       .goods-content {
         display: flex;
@@ -381,7 +381,7 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
         }

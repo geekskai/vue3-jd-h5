@@ -115,10 +115,10 @@ export default {
   },
   created() {
     this.$http
-      .post(`/api/order/list`, {
+      .post(`/api/order/canComplainList`, {
         pageNum: 1,
         pageSize: 10,
-        type: 1
+        type: 0
       })
       .then(response => {
         this.orderLists = response.data.content;
@@ -156,7 +156,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #d8182d;
+          color: #EC3924;
           font-size: 11px;
         }
         .store-info {
@@ -183,7 +183,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #d8182d;
+          background-color: #EC3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -209,7 +209,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         i {
-          color: #d8182d;
+          color: #EC3924;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -245,7 +245,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #d8182d;
+          color: #EC3924;
           font-size: 11px;
         }
         .store-info {
@@ -272,7 +272,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #d8182d;
+          background-color: #EC3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -298,7 +298,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         i {
-          color: #d8182d;
+          color: #EC3924;
           font-size: 14px;
           padding-left: 5px;
         }

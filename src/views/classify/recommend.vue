@@ -177,7 +177,7 @@ export default {
     padding: 16px;
     .like-list {
       .like-title {
-        color: #d8182d;
+        color: #EC3924;
         font-size: 18px;
       }
       .like-item {
@@ -232,7 +232,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #d8182d;
+              color: #EC3924;
               font-size: 14px;
             }
             span {

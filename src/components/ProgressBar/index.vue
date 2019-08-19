@@ -36,10 +36,10 @@ export default {
       display: inline-block;
       position: relative;
       .clip {
-        background: linear-gradient(to right, #d8182d,#d8182d );
+        background: linear-gradient(to right, #EC3924,#EC3924 );
         width: 34px;
         margin: 0px;
-        box-shadow: 0px 0px 2px #d8182d33;
+        box-shadow: 0px 0px 2px #EC392433;
         height: 10px;
         border-radius: 20px;
       }

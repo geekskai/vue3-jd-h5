@@ -136,7 +136,7 @@
       <van-tabs
         :swipe-threshold="5"
         title-inactive-color="#3a3a3a"
-        title-active-color="#D8182D"
+        title-active-color="#EC3924"
         background="transparent"
         v-model="active"
         animated
@@ -394,7 +394,7 @@ export default {
               color: white;
               text-align: center;
               width: 42px;
-              background-color: #d8182d;
+              background-color: #EC3924;
             }
             .time-count-down {
               flex: 1;
@@ -417,7 +417,7 @@ export default {
             padding-top: 4px;
             .new-price {
               font-size: 11px;
-              color: #d8182d;
+              color: #EC3924;
               font-weight: 600;
             }
             .old-price {
@@ -441,12 +441,12 @@ export default {
             font-weight: 600;
           }
           .tag-text {
-            border: 1px solid #d8182d;
+            border: 1px solid #EC3924;
             display: inline-block;
             text-align: center;
             margin-left: 7px;
             border-radius: 2px;
-            color: #d8182d;
+            color: #EC3924;
             width: 64px;
           }
         }
@@ -512,7 +512,7 @@ export default {
             border-radius: 2px;
             margin-left: 8px;
             text-align: center;
-            border: 1px solid #d8182d;
+            border: 1px solid #EC3924;
             font-size: 11px;
             color: #dd3749;
             .svg-icon {
@@ -563,7 +563,7 @@ export default {
       padding: 10px 16px;
       .good-things {
         font-size: 18px;
-        color: #d8182d;
+        color: #EC3924;
         font-weight: 600;
       }
       .goods-content {
@@ -617,7 +617,7 @@ export default {
             .goods-price {
               padding-top: 5px;
               font-size: 14px;
-              color: #d8182d;
+              color: #EC3924;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -625,7 +625,7 @@ export default {
                 margin-left: 7px;
                 color: white;
                 border-radius: 20px 20px;
-                background-color: #d8182d;
+                background-color: #EC3924;
                 display: inline-block;
                 font-size: 7px;
                 line-height: 17px;

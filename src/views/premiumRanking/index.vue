@@ -234,7 +234,7 @@ export default {
             }
             .item-desc {
               font-size: 11px;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
           .item-price {
@@ -244,12 +244,12 @@ export default {
             padding-bottom: 2px;
           }
           .item-hot {
-            border: 1px solid #d8182d;
+            border: 1px solid #EC3924;
             border-radius: 2px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to right, #d8182d 64%, #fff 36%);
+            background: linear-gradient(to right, #EC3924 64%, #fff 36%);
             .hot-text {
               display: inline-block;
               line-height: 15px;
@@ -266,7 +266,7 @@ export default {
               font-size: 11px;
               text-align: center;
               display: inline-block;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
         }

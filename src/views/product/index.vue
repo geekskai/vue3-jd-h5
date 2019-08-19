@@ -426,7 +426,7 @@ export default {
           width: 70px;
           height: 10px;
           border-radius: 5px;
-          color: #d8182d;
+          color: #EC3924;
           display: inline-block;
         }
       }
@@ -480,7 +480,7 @@ export default {
         height: 20px;
         color: #fff;
         font-size: 9px;
-        background-color: #d8182d;
+        background-color: #EC3924;
         border-radius: 10px 10px;
       }
       .heart-full {
@@ -514,8 +514,8 @@ export default {
       margin-top: 10px;
       margin-bottom: 10px;
       /deep/ .van-button--danger {
-        background-color: #d8182d;
-        border: 1px solid #d8182d;
+        background-color: #EC3924;
+        border: 1px solid #EC3924;
       }
       .store-detail {
         padding-left: 16px;
@@ -558,7 +558,7 @@ export default {
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #d8182d;
+      color: #EC3924;
     }
   }
   .item-details {
@@ -590,8 +590,8 @@ export default {
       /deep/ .van-button--danger {
         height: 44px;
         line-height: 44px;
-        background-color: #d8182d;
-        border: 1px solid #d8182d;
+        background-color: #EC3924;
+        border: 1px solid #EC3924;
       }
     }
   }
@@ -624,7 +624,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #d8182d;
+            color: #EC3924;
             font-size: 17px;
             font-weight: 600;
           }
@@ -670,9 +670,9 @@ export default {
               }
             }
             .color-tag.active {
-              border: 1px solid #d8182d;
+              border: 1px solid #EC3924;
               background-color: white;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
         }
@@ -752,8 +752,8 @@ export default {
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #d8182d;
-      border: 1px solid #d8182d;
+      background-color: #EC3924;
+      border: 1px solid #EC3924;
     }
   }
 }
