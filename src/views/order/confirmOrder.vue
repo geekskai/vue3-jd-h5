@@ -163,6 +163,9 @@ export default {
     },
     confirmFn() {
       this.show = false;
+      this.$http.post(`/api/order/submit`,this.orderForm).then(response=>{
+        console.log('=====response.data==>',response.data);
+      })
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast

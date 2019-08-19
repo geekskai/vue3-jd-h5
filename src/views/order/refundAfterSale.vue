@@ -20,22 +20,18 @@
           <ul class="order-list">
             <li class="order-item">
               <div class="store-info">
-                <img v-lazy="orderList.logoUrl" class="header-img" />
-                <span>{{orderList.shopName}}</span>
+                <img :src="orderList.logoUrl" class="header-img" />
+                <span class="store-shopName">{{orderList.shopName}}</span>
+                <span class="store-orderNo">订单号：{{orderList.orderNo}}</span>
               </div>
-              <span>{{orderStatus[orderList.status]}}</span>
+              <span class="store-status">{{orderStatus[orderList.status]}}</span>
             </li>
-              <!-- @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)" -->
-            <li
-              class="order-info"
-              v-for="(item,i) in orderList.appOrderProductVos"
-              :key="i"
-            >
+            <li class="order-info" v-for="(item,i) in orderList.appOrderProductVos" :key="i">
               <img v-lazy="item.productMainUrl" />
               <div class="order-detail">
                 <p class="info-one">
                   <span>{{item.productName}}</span>
-                  <span>￥：{{item.productAmount}}</span>
+                  <b>￥：{{item.productAmount}}</b>
                 </p>
                 <p class="info-two">
                   <span>{{item.fullName}}</span>
@@ -46,18 +42,21 @@
 
             <li class="order-count">
               <span>共{{orderList.quantity}}件商品,小计:</span>
-              <i>$：{{orderList.amount}}</i>
+              <b>$：{{orderList.amount}}</b>
             </li>
-            <li class="order-btn">
-              <router-link tag="span" to="/order/appeal">商品申诉</router-link>
-              <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
-              <!-- <span>商品申诉</span> -->
+            <li class="order-btn" @click="handleToAppeal(orderList)">
+              <span>商品申诉</span>
+              <!-- <router-link tag="span" to="/order/appeal"></router-link> -->
             </li>
           </ul>
         </section>
       </van-tab>
       <van-tab title="申请记录">
-        <section class="order-card-record" v-for="(orderList,index)  in orderLists" :key="index">
+        <section
+          class="order-card-record"
+          v-for="(orderList,index)  in orderRecordLists"
+          :key="index"
+        >
           <ul class="order-list">
             <li class="order-item">
               <div class="store-info">
@@ -76,7 +75,7 @@
               <div class="order-detail">
                 <p class="info-one">
                   <span>{{item.productName}}</span>
-                  <span>￥：{{item.productAmount}}</span>
+                  <b>￥：{{item.productAmount}}</b>
                 </p>
                 <p class="info-two">
                   <span>{{item.fullName}}</span>
@@ -87,13 +86,13 @@
 
             <li class="order-count">
               <span>共{{orderList.quantity}}件商品,小计:</span>
-              <i>$：{{orderList.amount}}</i>
+              <b>$：{{orderList.amount}}</b>
             </li>
             <li class="order-btn">
               <!-- <router-link tag="span" to="/order/cancelOrder">取消订单</router-link> -->
               <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
               <!-- <span @click="show = true">去支付</span> -->
-              <label class="appeal-time">申诉时间：2019-06-01 16:45:34</label>
+              <label class="appeal-time">申诉时间：{{orderList.createTime}}</label>
               <!-- <span class="appeal-text">商品申诉</span> -->
             </li>
           </ul>
@@ -110,7 +109,8 @@ export default {
     return {
       active: 2,
       orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
-      orderLists: []
+      orderLists: [],
+      orderRecordLists: [] //申请记录
     };
   },
   created() {
@@ -123,8 +123,24 @@ export default {
       .then(response => {
         this.orderLists = response.data.content;
       });
+    // 申请记录
+    this.$http
+      .post(`/api/order/complainList`, {
+        pageNum: 1,
+        pageSize: 10
+      })
+      .then(response => {
+        this.orderRecordLists = response.data.content;
+      });
   },
-  methods: {}
+  methods: {
+    handleToAppeal(orderList) {
+      this.$router.push({
+        name: `appeal`,
+        params:orderList
+      });
+    }
+  }
 };
 </script>
 
@@ -155,9 +171,10 @@ export default {
       .order-item {
         display: flex;
         justify-content: space-between;
-        & > span {
-          color: #EC3924;
-          font-size: 11px;
+        .store-status {
+          color: #ec3924;
+          font-size: 13px;
+          font-weight: 600;
         }
         .store-info {
           display: flex;
@@ -168,7 +185,12 @@ export default {
             width: 24px;
             height: 24px;
           }
-          span {
+          .store-shopName {
+            font-weight: 600;
+            padding-right: 10px;
+          }
+          .store-orderNo,
+          .store-shopName {
             color: #3a3a3a;
             padding-left: 3px;
             font-size: 11px;
@@ -183,7 +205,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -208,8 +230,8 @@ export default {
       .order-count {
         display: flex;
         justify-content: flex-end;
-        i {
-          color: #EC3924;
+        b {
+          color: #ec3924;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -245,7 +267,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -272,7 +294,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -297,8 +319,8 @@ export default {
       .order-count {
         display: flex;
         justify-content: flex-end;
-        i {
-          color: #EC3924;
+        b {
+          color: #ec3924;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -309,7 +331,7 @@ export default {
       }
       .order-btn {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         padding-top: 14px;
         .appeal-time {
           font-size: 10px;

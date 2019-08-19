@@ -28,7 +28,7 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img v-lazy="orderList.logoUrl" class="header-img" />
+            <img :src="orderList.logoUrl" class="header-img" />
             <span>{{orderList.shopName}}</span>
           </div>
           <span>{{orderStatus[orderList.status]}}</span>
@@ -58,9 +58,20 @@
           <i>$：{{orderList.amount}}</i>
         </li>
         <li class="order-btn">
-          <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
-          <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
-          <span @click="show = true">去支付</span>
+          <!-- 待付款, -->
+          <div v-if="orderList.status == 0">
+            <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
+            <span @click="show = true">去支付</span>
+          </div>
+          <!-- 待发货 -->
+          <div v-if="orderList.status == 1">
+            <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          </div>
+          <!-- 待收货 -->
+          <div v-if="orderList.status == 2">
+             <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          </div>
+          <!-- 3-已完成,4-已取消 -->
         </li>
       </ul>
     </section>
@@ -245,7 +256,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -272,7 +283,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -298,7 +309,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         i {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -347,7 +358,7 @@ export default {
     padding-bottom: 20px;
     .like-list {
       .like-title {
-        color: #EC3924;
+        color: #ec3924;
         font-size: 18px;
       }
       .like-item {
@@ -362,7 +373,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .item-detail {
@@ -397,7 +408,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #EC3924;
+              color: #ec3924;
               font-size: 14px;
             }
             span {

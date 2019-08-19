@@ -38,7 +38,7 @@
           right-icon="eye-o"
           clearable
           @click-right-icon="pwdEyes2=!pwdEyes2"
-          placeholder="密码"
+          placeholder="再次确认密码"
         />
         <van-field
           v-else
@@ -47,7 +47,12 @@
           right-icon="closed-eye"
           clearable
           @click-right-icon="pwdEyes2=!pwdEyes2"
-          placeholder="密码"
+          placeholder="再次确认密码"
+        />
+        <van-field
+          v-model="phoneRegisterTwoForm.recommendCode"
+          clearable
+          placeholder="请输入邀请码（必填）"
         />
 
         

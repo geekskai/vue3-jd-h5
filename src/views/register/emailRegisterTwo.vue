@@ -37,7 +37,7 @@
           right-icon="eye-o"
           clearable
           @click-right-icon="pwdEyes2=!pwdEyes2"
-          placeholder="密码"
+          placeholder="再次确认密码"
         />
         <van-field
           v-else
@@ -46,9 +46,9 @@
           right-icon="closed-eye"
           clearable
           @click-right-icon="pwdEyes2=!pwdEyes2"
-          placeholder="密码"
+          placeholder="再次确认密码"
         />
-
+        <van-field v-model="emailRegisterTwo.recommendCode" clearable placeholder="请输入邀请码（必填）" />
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
@@ -111,7 +111,7 @@ export default {
     align-items: center;
     line-height: 44px;
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -159,9 +159,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #EC3924;
+      border: 1px solid #ec3924;
       border-radius: 4px;
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
   }
 }

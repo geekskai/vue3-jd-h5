@@ -12,7 +12,7 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img v-lazy="orderForm.logoUrl" class="header-img" />
+            <img :src="orderForm.logoUrl" class="header-img" />
             <span>{{orderForm.shopName }}</span>
           </div>
           <span>待收货</span>
@@ -22,7 +22,7 @@
           v-for="(appOrderProduct,index) in orderForm.appOrderProductVos"
           :key="index"
         >
-          <img v-lazy="appOrderProduct.productMainUrl" />
+          <img :src="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
               <span>{{appOrderProduct.productName}}</span>
