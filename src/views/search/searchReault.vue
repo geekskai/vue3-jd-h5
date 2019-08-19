@@ -95,8 +95,10 @@ export default {
     return {
       serarchResult: [],
       page: 1,
-      searchText: this.$route.query.searchWord,
-      activeOrderBy: "update_time"
+      searchText: this.$route.query.searchWord || "",
+      activeOrderBy: "update_time",
+      sortType: "desc",
+      orderBy: "update_time"
     };
   },
   created() {
@@ -104,27 +106,25 @@ export default {
   },
   methods: {
     initData() {
-      if (this.$route.query.categoryId) {
-        this.$http
-          .get(
-            `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      } else {
-        this.$http
-          .get(
-            `/api/product/list?productName=${this.$route.query.searchWord}&page=${this.page}&size=15`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      }
+      this.$http
+        .get(
+          `/api/product/list?categoryId=${
+            this.$route.query.categoryId ? this.$route.query.categoryId : ""
+          }&merchantShopId=${
+            this.$route.query.merchantShopId
+              ? this.$route.query.merchantShopId
+              : ""
+          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
+            this.sortType
+          }&page=${this.page}&size=15`
+        )
+        .then(response => {
+          this.serarchResult = response.data.content;
+        });
     },
     getSearch() {
-      let keyword = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
-      if (!keyword) {
+      this.searchText = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+      if (!this.searchText) {
         this.$toast({
           mask: false,
           duration: 1000,
@@ -132,50 +132,16 @@ export default {
         });
         return;
       }
-      this.handleSearch(keyword);
-    },
-    handleSearch(keyword) {
-      if (this.$route.query.categoryId) {
-        this.$http
-          .get(
-            `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&page=${this.page}&size=15`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      } else {
-        this.$http
-          .get(
-            `/api/product/list?productName=${keyword}&page=${this.page}&size=15`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      }
+      this.initData();
     },
     selectOrder(e, sortType) {
-      let orderBy = e.currentTarget.getAttribute("data-order-by");
-      if (orderBy === this.activeOrderBy) {
+      this.sortType = sortType;
+      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+      if (this.orderBy === this.activeOrderBy) {
         return;
       }
-      this.activeOrderBy = orderBy + "_" + sortType;
-      if (this.$route.query.categoryId) {
-        this.$http
-          .get(
-            `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      } else {
-        this.$http
-          .get(
-            `/api/product/list?productName=${this.searchText}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
-          )
-          .then(response => {
-            this.serarchResult = response.data.content;
-          });
-      }
+      this.activeOrderBy = this.orderBy + "_" + sortType;
+      this.initData();
     }
   },
   directives: {

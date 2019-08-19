@@ -10,7 +10,7 @@
       </div>
       <span @click="getSearch">搜索</span>
     </div>
-  <div v-if="serarchResult.length === 0" class="empty-box">
+    <div v-if="serarchResult.length === 0" class="empty-box">
       <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
       <span class="empty-text">
         <i>没有搜索结果</i>
@@ -18,7 +18,7 @@
       </span>
     </div>
     <div class="goods-all" v-else>
-      <section class="select-menu" :class="{'isFixed' : seclectActive}">
+      <section class="select-menu">
         <div
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
@@ -97,9 +97,10 @@ export default {
   },
   data() {
     return {
-      searchText: this.$route.query.product.label,
+      searchText: this.$route.query.product.label || "",
       activeOrderBy: "update_time",
-      seclectActive: false,
+      sortType: "desc",
+      orderBy: "update_time",
       hotSerach: [],
       serarchResult: [],
       page: 1,
@@ -112,35 +113,36 @@ export default {
   computed: {},
   methods: {
     handleGoToProduct(item) {
-      console.log("=====item==>", item.productId);
       this.$router.push({
         path: `/product/index`,
         query: { productId: item.productId }
       });
     },
     initData() {
-      this.activeOrderBy = "update_time";
-      this.$http
+       this.$http
         .get(
-          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
+          `/api/product/list?categoryId=${
+            this.$route.query.categoryId ? this.$route.query.categoryId : ""
+          }&merchantShopId=${
+            this.$route.query.merchantShopId
+              ? this.$route.query.merchantShopId
+              : ""
+          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
+            this.sortType
+          }&page=${this.page}&size=15`
         )
         .then(response => {
           this.serarchResult = response.data.content;
         });
     },
     selectOrder(e, sortType) {
-      let orderBy = e.currentTarget.getAttribute("data-order-by");
-      if (orderBy === this.activeOrderBy) {
+      this.sortType = sortType;
+      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+      if (this.orderBy === this.activeOrderBy) {
         return;
       }
-      this.activeOrderBy = orderBy + "_" + sortType;
-      this.$http
-        .get(
-          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=20`
-        )
-        .then(response => {
-          this.serarchResult = response.data.content;
-        });
+      this.activeOrderBy = this.orderBy + "_" + sortType;
+      this.initData();
     },
     // 当滑块滑动到低不低的时候。
     handleScrollToEnd() {
@@ -162,8 +164,8 @@ export default {
       this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
     },
     getSearch() {
-      let keyword = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
-      if (!keyword) {
+      this.searchText = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+      if (!this.searchText) {
         this.$toast({
           mask: false,
           duration: 1000,
@@ -171,20 +173,9 @@ export default {
         });
         return;
       }
-      this.selectTag(keyword);
+      this.initData();
     },
-    selectTag(keyword) {
-      this.$http
-        .get(
-          `/api/product/list?categoryId=${this.$route.query.categoryId}&productName=${keyword}&page=${this.page}&size=20`
-          // `/api/product/list?categoryId=${223}&page=${this.page}&size=15`
-        )
-        .then(response => {
-          if (response.data.code === 0) {
-            this.serarchResult = response.data.content;
-          }
-        });
-    },
+
     deleteHistory() {
       this.$dialog
         .confirm({
@@ -362,7 +353,7 @@ export default {
       align-items: center;
       color: #949497;
       font-size: 11px;
-     
+
       .select-item.active {
         color: #d8182d;
       }

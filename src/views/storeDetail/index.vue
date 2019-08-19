@@ -38,7 +38,7 @@
     </div>
 
     <div v-else class="goods-all">
-      <section class="select-menu" :class="{'isFixed' : seclectActive}">
+      <section class="select-menu">
         <div
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
@@ -87,7 +87,7 @@
       </section>
       <section class="goods-box">
         <ul class="goods-content">
-          <template v-for="(item,index) in likeList">
+          <template v-for="(item,index) in serarchResult">
             <router-link :key="index" tag="li" class="goods-item" to="/product/index">
               <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
@@ -116,10 +116,12 @@ export default {
   data() {
     return {
       activeOrderBy: "update_time",
+      sortType: "desc",
+      orderBy: "update_time",
       page: 1,
       seclectActive: false,
       storeDetail: {},
-      likeList: []
+      serarchResult: []
     };
   },
   created() {
@@ -137,13 +139,12 @@ export default {
       this.initSortData();
     },
     initSortData() {
-      this.activeOrderBy = "update_time";
       this.$http
         .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&page=${this.page}&size=20`
+          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20`
         )
         .then(response => {
-          this.likeList = response.data.content;
+          this.serarchResult = response.data.content;
         });
     },
     handleSearch() {
@@ -153,18 +154,13 @@ export default {
       });
     },
     selectOrder(e, sortType) {
-      let orderBy = e.currentTarget.getAttribute("data-order-by");
-      if (orderBy === this.activeOrderBy) {
+      this.sortType = sortType;
+      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+      if (this.orderBy === this.activeOrderBy) {
         return;
       }
-      this.activeOrderBy = orderBy + "_" + sortType;
-      this.$http
-        .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${orderBy}&sortType=${sortType}&page=${this.page}&size=20`
-        )
-        .then(response => {
-          this.likeList = response.data.content;
-        });
+      this.activeOrderBy = this.orderBy + "_" + sortType;
+      this.initSortData();
     },
     pageScroll() {
       let scrollTop =

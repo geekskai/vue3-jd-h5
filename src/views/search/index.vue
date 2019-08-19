@@ -123,7 +123,6 @@ export default {
   data() {
     return {
       searchText: "",
-
       seclectActive: false,
       hotSerach: [],
       serarchResult: [],
@@ -137,15 +136,26 @@ export default {
   computed: {},
   methods: {
     initData() {
-      this.$http.get(`/api/product/hotAndHistorySearch`).then(response => {
-        this.historySearch = response.data.content.historySearch;
-        this.hotSerach = response.data.content.hotSerach;
-      });
+      this.$http
+        .get(
+          `/api/product/hotAndHistorySearch?merchantShopId=${
+            this.$route.query.merchantShopId
+              ? this.$route.query.merchantShopId
+              : ""
+          }`
+        )
+        .then(response => {
+          this.historySearch = response.data.content.historySearch;
+          this.hotSerach = response.data.content.hotSerach;
+        });
     },
     handleHotSerach(categoryId) {
       this.$router.push({
         path: `/search/searchReault`,
-        query: { categoryId: categoryId }
+        query: {
+          categoryId: categoryId,
+          merchantShopId: this.$route.query.merchantShopId || ""
+        }
       });
     },
     getSearch() {
@@ -160,7 +170,10 @@ export default {
       }
       this.$router.push({
         path: `/search/searchReault`,
-        query: { searchWord: keyword }
+        query: {
+          searchWord: keyword,
+          merchantShopId: this.$route.query.merchantShopId
+        }
       });
     },
 
