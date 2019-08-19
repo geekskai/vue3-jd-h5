@@ -1,5 +1,5 @@
 <template>
-  <!-- 待支付 -->
+  <!-- 订单详情 -->
   <div class="order-detail-page">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
@@ -99,7 +99,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "orderDetail",
   data() {
     return {
       columns: 1,

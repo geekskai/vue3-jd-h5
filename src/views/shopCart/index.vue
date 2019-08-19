@@ -140,50 +140,6 @@ export default {
       },
       show: false,
       list: ["a"],
-      lists: [
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-2.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        },
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-3.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        },
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-4.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        },
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-5.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        },
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-6.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        },
-        {
-          imgSrc: require("../../assets/image/shopCart/购物车-7.png"),
-          info: "型号;规格;颜色;",
-          price: "￥200",
-          total: "123000",
-          desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
-        }
-      ],
       stepperValue: "",
       result: ["a", "b"]
     };

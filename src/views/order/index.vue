@@ -8,12 +8,12 @@
     </header>
     <list-scroll :scroll-data="tabData" :scrollX="true">
       <section class="order-tag" ref="searchWrap">
-        <span :class="{'active' : type===0}" @click="selectTag(0)">全部</span>
-        <span :class="{'active' : type===1}" @click="selectTag(1)">待付款</span>
-        <span :class="{'active' : type===2}" @click="selectTag(2)">待发货</span>
-        <span :class="{'active' : type===3}" @click="selectTag(3)">待收货</span>
-        <span :class="{'active' : type===4}" @click="selectTag(4)">已完成</span>
-        <span :class="{'active' : type===5}" @click="selectTag(5)">已取消</span>
+        <span :class="{'active' : type==0}" @click="selectTag(0)">全部</span>
+        <span :class="{'active' : type==1}" @click="selectTag(1)">待付款</span>
+        <span :class="{'active' : type==2}" @click="selectTag(2)">待发货</span>
+        <span :class="{'active' : type==3}" @click="selectTag(3)">待收货</span>
+        <span :class="{'active' : type==4}" @click="selectTag(4)">已完成</span>
+        <span :class="{'active' : type==5}" @click="selectTag(5)">已取消</span>
       </section>
     </list-scroll>
     <div v-if="!orderLists.length" class="empty-box">
@@ -33,7 +33,12 @@
           <span>{{orderStatus[orderList.status]}}</span>
         </li>
 
-        <li class="order-info" v-for="(item,i) in orderList.appOrderProductVos" :key="i">
+        <li
+          @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
+          class="order-info"
+          v-for="(item,i) in orderList.appOrderProductVos"
+          :key="i"
+        >
           <img v-lazy="item.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
@@ -53,10 +58,20 @@
         </li>
         <li class="order-btn">
           <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
-          <router-link tag="span" to="/order/orderDetail">去支付</router-link>
+          <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
+          <span @click="show = true">去支付</span>
         </li>
       </ul>
     </section>
+
+    <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"
+    ></vue-pickers>
   </div>
 </template>
 
@@ -69,10 +84,39 @@ export default {
   },
   data() {
     return {
-      type: 0,
+      type: this.$route.query.type || 0,
       tabData: [],
-      orderStatus: ["全部", "待付款", "待发货", "待收货", "已完成", "已取消"],
-      orderLists: []
+      orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
+      orderLists: [],
+      columns: 1,
+      cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
+      defaultData: [
+        {
+          text: "Top-Pay",
+          value: "Top-Pay"
+        }
+      ],
+      pickData: {
+        data1: [
+          {
+            text: "Top-Pay",
+            value: "Top-Pay"
+          },
+          {
+            text: "支付宝",
+            value: "支付宝"
+          },
+          {
+            text: "微信",
+            value: "微信"
+          },
+          {
+            text: "银行卡",
+            value: "银行卡"
+          }
+        ]
+      },
+      show: false
     };
   },
   created() {
@@ -92,8 +136,32 @@ export default {
         })
         .then(response => {
           this.orderLists = response.data.content;
-          console.log("=====response==>", this.orderLists);
         });
+    },
+    handleGoToOrderDetail(status, orderNo) {
+      // this.orderStatus[status]
+      // /order/pendingPayment   待付款  0
+      switch (status) {
+        case 0:
+          this.$router.push(`/order/pendingPayment?orderNo=${orderNo}`);
+          break;
+        case 1:
+          this.$router.push(`/order/toBeDelivered?orderNo=${orderNo}`);
+          break;
+        case 2:
+          this.$router.push(`/order/pendingReceipt?orderNo=${orderNo}`);
+          break;
+        case 3:
+          this.$router.push(`/order/completedOrder?orderNo=${orderNo}`);
+          break;
+        case 4:
+          this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);
+          break;
+
+        default:
+          break;
+      }
+      console.log("=====status==>", status);
     },
     setSearchWrapWidth() {
       let $screenWidth = document.documentElement.clientWidth;
@@ -102,10 +170,26 @@ export default {
     selectTag(type) {
       this.type = type;
       this.initData();
-      // this.$router.replace('./order-list?type='+$type)
-      // this.orderList = []
-      // this.emptyMsg = ''
-      // this.getOrderList()
+    },
+    close() {
+      this.show = false;
+    },
+    confirmFn() {
+      this.show = false;
+      this.$toast.loading({
+        mask: true,
+        duration: 1000, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "支付中..."
+      });
+      setTimeout(() => {
+        // this.$toast({
+        //   mask: false,
+        //   message: "支付成功~"
+        // });
+        this.$router.push("/order/transactionDetails");
+      }, 1300);
     }
   }
 };

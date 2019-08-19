@@ -1,6 +1,6 @@
 <template>
-  <!--  待发货 -->
-  <div class="to-be-delivered">
+  <!--  已完成 -->
+  <div class="completed-order">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
@@ -8,55 +8,39 @@
       <div class="header-content">订单详情</div>
     </header>
 
-    <section class="order-address">
-      <ul class="info-list">
-        <li class="receiver-addres">
-          <svg-icon icon-class="shipping-address"></svg-icon>
-          <div class="address-content">
-            <!-- <label>收货人：张三</label>
-            <span>江西省</span>-->
-            <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
-            <span>{{orderForm.fullAddress}}</span>
-          </div>
-        </li>
-      </ul>
-    </section>
-
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>-->
-            <img v-lazy="orderForm.logoUrl" class="header-img" />
-            <span>{{orderForm.shopName }}</span>
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>
           </div>
-          <span>待发货</span>
+          <span>已完成</span>
         </li>
-        <li
-          class="order-desc"
-          v-for="(appOrderProduct,index) in orderForm.appOrderProductVos"
-          :key="index"
-        >
-          <img v-lazy="appOrderProduct.productMainUrl" />
+        <li class="order-desc">
+          <img />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <span>娜扎新装LOOK</span>
+              <i>￥222</i>
             </p>
             <p class="info-two">
-              <span>{{appOrderProduct.fullName}}</span>
-              <span>×{{appOrderProduct.quantity}}</span>
+              <span>型号;规格;颜色;</span>
+              <span>×2</span>
             </p>
           </div>
         </li>
         <li class="order-total">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>$444</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥444</i>
+        </li>
+        <li class="order-btn">
+          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          <router-link to="/order/viewLogistics" tag="span">商品申诉</router-link>
         </li>
       </ul>
     </section>
@@ -76,11 +60,23 @@
         </li>
         <li class="info-item">
           <label>创建时间：</label>
-          <span>{{orderForm.createDate}}</span>
+         <span>{{orderForm.createDate}}</span>
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-          <span>{{orderForm.finishDate}}</span>
+           <span>{{orderForm.finishDate}}</span>
+        </li>
+        <li class="info-item">
+          <label>发货时间：</label>
+          <span>{{orderForm.deliveryDate}}</span>
+        </li>
+        <li class="info-item">
+          <label>收货时间：</label>
+            <span>{{orderForm.finishDate}}</span>
+        </li>
+        <li class="info-item">
+          <label>成交时间：</label>
+            <span>{{orderForm.finishDate}}</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -93,10 +89,10 @@
 
 <script>
 export default {
-  name: "toBeDelivered",
+  name: "completedOrder",
   data() {
     return {
-      orderForm:{}
+      orderForm: {}
     };
   },
   created() {
@@ -119,7 +115,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.to-be-delivered {
+.completed-order {
   height: 100%;
   padding: 0 16px;
   .page-header {
@@ -133,33 +129,6 @@ export default {
       font-weight: 600;
       color: #3a3a3a;
       flex: 1;
-    }
-  }
-  .order-address {
-    background-color: #fff;
-    border-radius: 5px;
-    margin-top: 20px;
-    padding: 20px;
-    .receiver-addres {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      .address-content {
-        padding-left: 7px;
-        color: #3a3a3a;
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-direction: column;
-        label {
-          font-size: 13px;
-          font-weight: 600;
-        }
-        span {
-          padding-top: 4px;
-          font-size: 11px;
-        }
-      }
     }
   }
   .order-card {
@@ -242,6 +211,21 @@ export default {
         }
         span {
           color: #3a3a3a;
+        }
+      }
+      .order-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 14px;
+        span {
+          height: 26px;
+          line-height: 20px;
+          border: 1px solid #949497;
+          color: #949497;
+          font-size: 11px;
+          padding: 2px 15px;
+          border-radius: 2px;
+          margin-left: 10px;
         }
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="transaction-details">
     <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+      <span class="btn-left" @click="$router.push(`/classify`)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">交易详情</div>

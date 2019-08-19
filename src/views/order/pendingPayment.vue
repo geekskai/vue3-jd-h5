@@ -1,70 +1,80 @@
 <template>
-  <!-- 确认订单 -->
+  <!-- 待付款 -->
   <div class="order-detail-page">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">确认订单</div>
+      <div class="header-content">订单详情</div>
     </header>
-    <section class="order-info" @click="handleToChooseAddress">
+    <section class="order-info">
       <ul class="info-list">
         <li class="receiver-addres">
+          <svg-icon icon-class="shipping-address"></svg-icon>
           <div class="address-content">
-            <svg-icon icon-class="shipping-address"></svg-icon>
-            <span class="address-fullAddress" v-if="orderForm.fullAddress">{{orderForm.fullAddress}}</span>
-            <span class="address-fullAddress" v-else>请选择收货人地址</span>
+            <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
+            <span>{{orderForm.fullAddress}}</span>
           </div>
-          <svg-icon class="arrow-icon-right" icon-class="arrow-icon-right"></svg-icon>
         </li>
       </ul>
     </section>
 
-    <section
-      class="order-card"
-      v-for="(oderShopSkuInfo,index) in orderForm.oderShopSkuInfoVos"
-      :key="index"
-    >
+    <section class="order-card">
       <ul class="order-list">
         <li class="list-item">
           <div class="store-info">
-            <img v-lazy="oderShopSkuInfo.logoUrl" class="header-img" />
-            <span>{{oderShopSkuInfo.shopName}}</span>
+            <img v-lazy="orderForm.logoUrl" class="header-img" />
+            <span>{{orderForm.shopName }}</span>
           </div>
           <span>待支付</span>
         </li>
-        <li class="item-info" v-for="(orderSkuInfo,i) in oderShopSkuInfo.orderSkuInfoVos" :key="i">
-          <img v-lazy="orderSkuInfo.productMainUrl" />
+
+        <li
+          class="item-info"
+          v-for="(appOrderProduct,index) in orderForm.appOrderProductVos"
+          :key="index"
+        >
+          <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{orderSkuInfo.productName}}</span>
-              <i>￥{{orderSkuInfo.productAmount}}</i>
+              <span>{{appOrderProduct.productName}}</span>
+              <i>￥：{{appOrderProduct.productAmount}}</i>
             </p>
             <p class="info-two">
-              <span>{{orderSkuInfo.fullName}}</span>
-              <span>×{{orderSkuInfo.quantity }}</span>
+              <span>{{appOrderProduct.fullName}}</span>
+              <span>×{{appOrderProduct.quantity}}</span>
             </p>
           </div>
         </li>
+
         <li class="order-count">
-          <span>快递：</span>
-          <i>￥{{oderShopSkuInfo.freightAmount}}</i>
+          <span>订单总价：</span>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
         <li class="real-pay">
           <span>实付款：</span>
-          <i>￥{{oderShopSkuInfo.shopAllAmount}}</i>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
-    <div class="pay-btn">
-      <div class="pay-count">
-        <span>
-          共{{orderForm.skuCount}}件商品，小计：
-          <i>￥{{ orderForm.allAmount}}</i>
-        </span>
-      </div>
-      <van-button type="danger" @click="show = true" size="large">提交订单</van-button>
-    </div>
+
+    <section class="order-info">
+      <ul class="info-list">
+        <li class="info-title">
+          <svg-icon icon-class="order-info"></svg-icon>
+          <span>订单信息</span>
+        </li>
+        <li class="info-item">
+          <label>订单编号：</label>
+          <span>{{orderForm.orderNo}}</span>
+        </li>
+        <li class="info-item">
+          <label>创建时间：</label>
+          <span>{{orderForm.createDate}}</span>
+        </li>
+      </ul>
+    </section>
+
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -73,17 +83,57 @@
       @cancel="close"
       @confirm="confirmFn"
     ></vue-pickers>
+
+    <div class="pay-btn">
+      <div class="pay-count">
+        <span>
+          共{{orderForm.quantity}}件商品，小计：
+          <i>￥{{orderForm.amount}}</i>
+        </span>
+        <span>59：59后取消订单</span>
+      </div>
+      <van-button type="danger" @click="handlePay" size="large">立即支付</van-button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ConfirmOrder",
+  name: "pendingPayment",
   data() {
     return {
-      orderForm: {},
       columns: 1,
-      cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
+      orderForm: {
+        amount: 0,
+        appOrderProductVos: [
+          {
+            appealFlag: 0,
+            appealNo: "string",
+            fullName: "string",
+            id: 0,
+            productAmount: 0,
+            productMainUrl: "string",
+            productName: "string",
+            quantity: 0,
+            skuId: 0
+          }
+        ],
+        createDate: "2019-08-16T07:49:33.452Z",
+        deliveryDate: "2019-08-16T07:49:33.452Z",
+        finishDate: "2019-08-16T07:49:33.452Z",
+        freightAmount: 0,
+        fullAddress: "string",
+        logoUrl: "string",
+        orderNo: "string",
+        outPayAmount: 0,
+        outerOrderNo: "string",
+        payDate: "2019-08-16T07:49:33.452Z",
+        quantity: 0,
+        shopName: "string",
+        status: 0,
+        toName: "string",
+        toPhone: "string"
+      },
       defaultData: [
         {
           text: "Top-Pay",
@@ -116,47 +166,17 @@ export default {
   created() {
     this.initData();
   },
-
   methods: {
     initData() {
-      if (this.$route.query.userAddrId) {
-        this.$http
-          .post(`/api/order/checkout`, {
-            skuInfoForm: {
-              quantity: this.$route.query.quantity,
-              skuId: this.$route.query.skuId
-            },
-            userAddrId: this.$route.query.userAddrId
-          })
-          .then(response => {
-            this.orderForm = response.data.content;
-            let fullAddress = this.orderForm.fullAddress;
-            if (fullAddress && ~fullAddress.indexOf("undefined")) {
-              this.orderForm.fullAddress = fullAddress.slice(
-                0,
-                this.orderForm.fullAddress.length - 9
-              );
-            }
-          });
-      } else {
-        this.$http
-          .post(`/api/order/checkout`, {
-            skuInfoForm: {
-              quantity: this.$route.query.quantity,
-              skuId: this.$route.query.skuId
-            }
-          })
-          .then(response => {
-            this.orderForm = response.data.content;
-            let fullAddress = this.orderForm.fullAddress;
-            if (fullAddress && ~fullAddress.indexOf("undefined")) {
-              this.orderForm.fullAddress = fullAddress.slice(
-                0,
-                this.orderForm.fullAddress.length - 9
-              );
-            }
-          });
-      }
+      this.$http
+        .post(`/api/order/detail`, {
+          pageNum: 1,
+          pageSize: 10,
+          orderNo: this.$route.query.orderNo
+        })
+        .then(response => {
+          this.orderForm = response.data.content;
+        });
     },
     close() {
       this.show = false;
@@ -170,7 +190,6 @@ export default {
         loadingType: "spinner",
         message: "支付中..."
       });
-
       setTimeout(() => {
         // this.$toast({
         //   mask: false,
@@ -179,14 +198,8 @@ export default {
         this.$router.push("/order/transactionDetails");
       }, 1300);
     },
-    handleToChooseAddress() {
-      this.$router.push({
-        path: `/order/chooseAddress`,
-        query: {
-          quantity: this.$route.query.quantity,
-          skuId: this.$route.query.skuId
-        }
-      });
+    handlePay() {
+      this.show = true;
     }
   }
 };
@@ -320,21 +333,22 @@ export default {
       .receiver-addres {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         .address-content {
+          padding-left: 7px;
           color: #3a3a3a;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .address-fullAddress {
+          justify-content: flex-start;
+          align-items: flex-start;
+          flex-direction: column;
+          label {
             font-size: 13px;
-            font-weight: 700;
-            padding-left: 10px;
+            font-weight: 600;
           }
-        }
-        .arrow-icon-right {
-          width: 20px;
-          height: 20px;
+          span {
+            padding-top: 4px;
+            font-size: 11px;
+          }
         }
       }
     }
@@ -346,6 +360,8 @@ export default {
     left: 0;
     right: 0;
     padding: 0 16px;
+    // padding-top: 50px;
+    // padding-bottom: 30px;
     .pay-count {
       display: flex;
       justify-content: space-between;
