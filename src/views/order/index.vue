@@ -16,6 +16,7 @@
         <span :class="{'active' : type==5}" @click="selectTag(5)">已取消</span>
       </section>
     </list-scroll>
+
     <div v-if="!orderLists.length" class="empty-box">
       <svg-icon icon-class="order-empty" class="order-empty"></svg-icon>
       <span class="empty-text">
@@ -139,8 +140,6 @@ export default {
         });
     },
     handleGoToOrderDetail(status, orderNo) {
-      // this.orderStatus[status]
-      // /order/pendingPayment   待付款  0
       switch (status) {
         case 0:
           this.$router.push(`/order/pendingPayment?orderNo=${orderNo}`);

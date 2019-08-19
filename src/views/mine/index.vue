@@ -2,7 +2,7 @@
   <div class="mine-layout">
     <section class="mine-header">
       <router-link to="/mine/personInfo">
-        <img v-lazy="userInfo.headImageUrl" class="header-image" />
+        <img :src="userInfo.headImageUrl" class="header-image" />
       </router-link>
       <ul v-if="token" class="user-info">
         <li class="user-name">{{userInfo.nickName}}</li>
@@ -49,7 +49,7 @@
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>
-        <router-link to="/order" class="order-item" tag="li">
+        <router-link to="/order/refundAfterSale" class="order-item" tag="li">
           <svg-icon icon-class="all-orders"></svg-icon>
           <span>退换/售后</span>
         </router-link>

@@ -22,12 +22,14 @@
       </ul>
     </section>
     <div v-else>
+
+      
       <section class="order-card" v-for="(shopCart,index) in shopCartArray" :key="index">
         <van-checkbox
           v-model="shopCart.merchantChecked"
           @click="handleSelectAllGoods(shopCart,true)"
           checked-color="#91C95B"
-        >
+         >
           <li class="checkbox-all">
             <div class="store-info">
               <img v-lazy="shopCart.merchantLogo" class="header-img" />
@@ -40,7 +42,7 @@
           class="order-list"
           @change="handleMerchantCheckboxGroup(shopCart)"
           v-model="shopCart.merchantCheckboxGroup"
-        >
+         >
           <ul v-for="(item, i) in shopCart.merchantItemList" :key="i">
             <div class="order-info">
               <li class="check-item">

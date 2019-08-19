@@ -40,7 +40,7 @@
         </li>
         <li class="order-btn">
           <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
-          <router-link to="/order/viewLogistics" tag="span">商品申诉</router-link>
+          <router-link to="/order/appeal" tag="span">商品申诉</router-link>
         </li>
       </ul>
     </section>
@@ -64,7 +64,7 @@
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-           <span>{{orderForm.finishDate}}</span>
+           <span>{{orderForm.payDate}}</span>
         </li>
         <li class="info-item">
           <label>发货时间：</label>

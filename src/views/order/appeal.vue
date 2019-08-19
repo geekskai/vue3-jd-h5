@@ -7,32 +7,44 @@
       <div class="header-content">商品申诉</div>
       <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
-    <section class="order-card">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+    <section class="order-card" v-for="(shopCart,index) in shopCartArray" :key="index">
+      <!-- <van-checkbox
+        v-model="shopCart.merchantChecked"
+        @click="handleSelectAllGoods(shopCart,true)"
+        checked-color="#91C95B"
+      >-->
+      <li class="checkbox-all">
+        <div class="store-info">
+          <img v-lazy="shopCart.merchantLogo" class="header-img" />
+          <span>{{shopCart.merchantName}}</span>
+        </div>
+      </li>
+      <!-- </van-checkbox> -->
+      <van-checkbox-group class="order-list" v-model="shopCart.merchantCheckboxGroup">
+        <ul v-for="(item, i) in shopCart.merchantItemList" :key="i">
+          <div class="order-info">
+            <li class="check-item">
+              <van-checkbox :key="i" checked-color="#91C95B" :name="item"></van-checkbox>
+            </li>
+            <img v-lazy="item.productImg" />
+            <div class="order-detail">
+              <p class="info-one">
+                <span>娜扎新装LOOK</span>
+                <i>￥222</i>
+              </p>
+              <p class="info-two">
+                <span>型号;规格;颜色;</span>
+                <span>×2</span>
+              </p>
+            </div>
           </div>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>￥444</i>
-        </li>
-      </ul>
+        </ul>
+        <div class="order-total">
+          <label>共2件商品，小计：</label>
+          <span>￥444</span>
+          <!-- <span>{{item.productTotalPrice}}</span> -->
+        </div>
+      </van-checkbox-group>
     </section>
     <section class="info-form">
       <van-cell-group>
@@ -63,10 +75,22 @@ export default {
       username: "",
       phone: "",
       content: "",
-      fileList: []
+      fileList: [],
+      shopCartArray: []
     };
   },
-  created() {},
+  created() {
+    this.$http.get(`/api/cart/list`).then(response => {
+      this.shopCartArray = response.data.content;
+      if (this.shopCartArray.length === 0) {
+        this.clearCart = true;
+      }
+      this.shopCartArray.forEach(element => {
+        this.$set(element, "merchantChecked", false);
+        this.$set(element, "merchantCheckboxGroup", []);
+      });
+    });
+  },
   methods: {}
 };
 </script>
@@ -88,83 +112,124 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #d8182d;
       font-size: 13px;
     }
   }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px 20px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px;
     margin-top: 20px;
-    .order-list {
-      .order-item {
+    /deep/ .van-checkbox {
+      padding-left: 0;
+      .van-checkbox__label {
+        font-size: 13px;
+        color: #949497;
+      }
+    }
+    .checkbox-all {
+      .store-info {
         display: flex;
-        justify-content: space-between;
-        & > span {
-          color: #D8182D;
-          font-size: 11px;
+        // justify-content: center;
+        padding-left: 30px;
+        justify-content: flex-start;
+        align-items: center;
+        .header-img {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
         }
-        .store-info {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 10px;
-          .header-img {
-            width: 24px;
-            height: 24px;
-          }
-          span {
-            color: #3a3a3a;
-            padding-left: 3px;
-            font-size: 11px;
-          }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
+          padding-left: 4px;
         }
       }
+    }
+    .order-list {
       .order-info {
+        width: 100%;
         padding-top: 10px;
+        padding-bottom: 16px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        .check-item {
+          display: flex;
+          align-items: center;
+        }
         img {
-          width: 80px;
-          height: 80px;
+          margin-left: 5px;
+          width: 100px;
+          height: 100px;
           display: inline-block;
-          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
-          flex: 1;
-          padding-left: 16px;
-          padding-bottom: 4px;
+          width: 55%;
+          padding-left: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
           .info-one,
           .info-two {
             display: flex;
+            padding-top: 4px;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 13px;
           }
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            span {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
             color: #949497;
           }
+          .info-count {
+            color: #d8182d;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /deep/ .van-stepper__input {
+              width: 31px;
+              height: 22px;
+              padding: 0;
+              color: #949497;
+              font-weight: normal;
+              background-color: transparent;
+              border: 1px solid #dbdbdb;
+            }
+            /deep/ .van-stepper__plus {
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+              border-radius: 0;
+            }
+            /deep/ .van-stepper__minus {
+              border-radius: 0;
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+            }
+          }
         }
       }
-      .order-count {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 13px;
-        i {
-          color: #D8182D;
-          padding-left: 5px;
-          font-weight: 700;
-        }
+      .order-total {
+        color: #949497;
+        font-size: 14px;
+        text-align: right;
         span {
-          color: #3a3a3a;
+          font-weight: 600;
         }
       }
     }
@@ -188,7 +253,7 @@ export default {
     padding-top: 50px;
     padding-bottom: 10px;
     /deep/ .van-button--danger {
-      background-color: #D8182D;
+      background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;
     }

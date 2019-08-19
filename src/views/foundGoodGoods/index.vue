@@ -2,7 +2,7 @@
   <div class="found-good-goods" id="found-good-goods">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">发现好货</div>
       <div class="option-btns">

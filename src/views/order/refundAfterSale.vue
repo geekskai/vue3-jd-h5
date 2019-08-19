@@ -1,0 +1,351 @@
+<template>
+  <div class="refund-after-sale">
+    <header class="page-header">
+      <span class="btn-left" @click="$router.go(-1)">
+        <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
+        <img src="../../assets/icons/left-green-white.png" />
+      </span>
+      <div class="header-content">退款/售后</div>
+    </header>
+    <div v-if="!orderLists.length" class="empty-box">
+      <svg-icon icon-class="order-empty" class="order-empty"></svg-icon>
+      <span class="empty-text">
+        <i>您还没有相关的订单</i>
+        <i>可以多去看看，或许能找到您想要的</i>
+      </span>
+    </div>
+    <van-tabs v-else v-model="active" background="#EFEFF4">
+      <van-tab title="售后申请">
+        <section class="order-card" v-for="(orderList,index)  in orderLists" :key="index">
+          <ul class="order-list">
+            <li class="order-item">
+              <div class="store-info">
+                <img v-lazy="orderList.logoUrl" class="header-img" />
+                <span>{{orderList.shopName}}</span>
+              </div>
+              <span>{{orderStatus[orderList.status]}}</span>
+            </li>
+              <!-- @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)" -->
+            <li
+              class="order-info"
+              v-for="(item,i) in orderList.appOrderProductVos"
+              :key="i"
+            >
+              <img v-lazy="item.productMainUrl" />
+              <div class="order-detail">
+                <p class="info-one">
+                  <span>{{item.productName}}</span>
+                  <span>￥：{{item.productAmount}}</span>
+                </p>
+                <p class="info-two">
+                  <span>{{item.fullName}}</span>
+                  <span>×{{item.quantity}}</span>
+                </p>
+              </div>
+            </li>
+
+            <li class="order-count">
+              <span>共{{orderList.quantity}}件商品,小计:</span>
+              <i>$：{{orderList.amount}}</i>
+            </li>
+            <li class="order-btn">
+              <router-link tag="span" to="/order/appeal">商品申诉</router-link>
+              <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
+              <!-- <span>商品申诉</span> -->
+            </li>
+          </ul>
+        </section>
+      </van-tab>
+      <van-tab title="申请记录">
+        <section class="order-card-record" v-for="(orderList,index)  in orderLists" :key="index">
+          <ul class="order-list">
+            <li class="order-item">
+              <div class="store-info">
+                <img v-lazy="orderList.logoUrl" class="header-img" />
+                <span>{{orderList.shopName}}</span>
+              </div>
+              <span>{{orderStatus[orderList.status]}}</span>
+            </li>
+            <li
+              @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
+              class="order-info"
+              v-for="(item,i) in orderList.appOrderProductVos"
+              :key="i"
+            >
+              <img v-lazy="item.productMainUrl" />
+              <div class="order-detail">
+                <p class="info-one">
+                  <span>{{item.productName}}</span>
+                  <span>￥：{{item.productAmount}}</span>
+                </p>
+                <p class="info-two">
+                  <span>{{item.fullName}}</span>
+                  <span>×{{item.quantity}}</span>
+                </p>
+              </div>
+            </li>
+
+            <li class="order-count">
+              <span>共{{orderList.quantity}}件商品,小计:</span>
+              <i>$：{{orderList.amount}}</i>
+            </li>
+            <li class="order-btn">
+              <!-- <router-link tag="span" to="/order/cancelOrder">取消订单</router-link> -->
+              <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
+              <!-- <span @click="show = true">去支付</span> -->
+              <label class="appeal-time">申诉时间：2019-06-01 16:45:34</label>
+              <!-- <span class="appeal-text">商品申诉</span> -->
+            </li>
+          </ul>
+        </section>
+      </van-tab>
+    </van-tabs>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "refundAfterSale",
+  data() {
+    return {
+      active: 2,
+      orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
+      orderLists: []
+    };
+  },
+  created() {
+    this.$http
+      .post(`/api/order/list`, {
+        pageNum: 1,
+        pageSize: 10,
+        type: 1
+      })
+      .then(response => {
+        this.orderLists = response.data.content;
+      });
+  },
+  methods: {}
+};
+</script>
+
+<style scoped lang="scss">
+.refund-after-sale {
+  // padding: 0 16px;
+  height: 100%;
+  .page-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+
+    .header-content {
+      text-align: center;
+      font-size: 18px;
+      color: #3a3a3a;
+      font-weight: 600;
+      flex: 1;
+    }
+  }
+  .order-card {
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px 16px;
+    .order-list {
+      padding: 10px 20px;
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        & > span {
+          color: #d8182d;
+          font-size: 11px;
+        }
+        .store-info {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: 10px;
+          .header-img {
+            width: 24px;
+            height: 24px;
+          }
+          span {
+            color: #3a3a3a;
+            padding-left: 3px;
+            font-size: 11px;
+          }
+        }
+      }
+      .order-info {
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        img {
+          width: 80px;
+          height: 80px;
+          display: inline-block;
+          background-color: #d8182d;
+          border-radius: 4px;
+        }
+        .order-detail {
+          flex: 1;
+          padding-left: 16px;
+          padding-bottom: 4px;
+          .info-one,
+          .info-two {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+          }
+          .info-one {
+            color: #3a3a3a;
+            padding-bottom: 5px;
+          }
+          .info-two {
+            color: #949497;
+          }
+        }
+      }
+      .order-count {
+        display: flex;
+        justify-content: flex-end;
+        i {
+          color: #d8182d;
+          font-size: 14px;
+          padding-left: 5px;
+        }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
+        }
+      }
+      .order-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 14px;
+        span {
+          height: 26px;
+          line-height: 20px;
+          border: 1px solid #949497;
+          color: #949497;
+          font-size: 11px;
+          padding: 2px 15px;
+          border-radius: 2px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .order-card-record {
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px 16px;
+    .order-list {
+      padding: 10px 20px;
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        & > span {
+          color: #d8182d;
+          font-size: 11px;
+        }
+        .store-info {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: 10px;
+          .header-img {
+            width: 24px;
+            height: 24px;
+          }
+          span {
+            color: #3a3a3a;
+            padding-left: 3px;
+            font-size: 11px;
+          }
+        }
+      }
+      .order-info {
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        img {
+          width: 80px;
+          height: 80px;
+          display: inline-block;
+          background-color: #d8182d;
+          border-radius: 4px;
+        }
+        .order-detail {
+          flex: 1;
+          padding-left: 16px;
+          padding-bottom: 4px;
+          .info-one,
+          .info-two {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+          }
+          .info-one {
+            color: #3a3a3a;
+            padding-bottom: 5px;
+          }
+          .info-two {
+            color: #949497;
+          }
+        }
+      }
+      .order-count {
+        display: flex;
+        justify-content: flex-end;
+        i {
+          color: #d8182d;
+          font-size: 14px;
+          padding-left: 5px;
+        }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
+        }
+      }
+      .order-btn {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 14px;
+        .appeal-time {
+          font-size: 10px;
+          color: #949497;
+        }
+        .appeal-text {
+          height: 26px;
+          line-height: 20px;
+          border: 1px solid #949497;
+          color: #949497;
+          font-size: 11px;
+          padding: 2px 15px;
+          border-radius: 2px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .empty-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 90px;
+    .order-empty {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 17px;
+      color: #949497;
+    }
+  }
+}
+</style>

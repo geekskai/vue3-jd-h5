@@ -11,7 +11,7 @@
         <li class="setting-item set-header-img">
           <van-field label="头像" disabled>
             <van-uploader slot="input" :after-read="afterRead">
-              <img v-lazy="userInfo.headImageUrl" class="header-image" />
+              <img :src="userInfo.headImageUrl" class="header-image" />
             </van-uploader>
           </van-field>
         </li>
