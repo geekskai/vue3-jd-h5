@@ -11,7 +11,7 @@
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
-      <p class="number-tips">6-20位数字、字母或字符</p>
+      <p class="number-tips">6-8位数字、字母的字符</p>
 
       <van-cell-group class="info-list">
         <van-field
