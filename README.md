@@ -67,8 +67,9 @@ src -- 源码目录
 
 "standard.autoFixOnSave": true
 
-**standardJS解决箭头函数不识别问题： 全局安装babel-eslint并在package.json中加入
-"standard": { "parser": "babel-eslint" }**
+**standardJS解决箭头函数不识别问题： 先安装`npm i babel-eslint -D`并在package.json中加入
+
+`"standard": { "parser": "babel-eslint" }` **
 
 ## 搭建步骤
 - 下载node并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
