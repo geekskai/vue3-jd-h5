@@ -10,7 +10,9 @@
     "standfix": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\" --fix",
     "lint": "vue-cli-service lint"
   },
-  "standard": { "parser": "babel-eslint" },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
