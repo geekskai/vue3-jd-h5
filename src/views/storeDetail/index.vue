@@ -1,8 +1,5 @@
 <template>
   <div class="store-detail">
-    <!-- <span class="btn-left" @click="$router.go(-1)">
-      <svg-icon icon-class="gray-btn"></svg-icon>
-    </span>-->
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
@@ -11,68 +8,76 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img src="../../assets/image/product/store-headerM.png" class="store-header" />
-        <li class="store-name">店铺名称</li>
+        <img v-lazy="storeDetail.idCardNo" class="store-header" />
+        <li class="store-name">{{storeDetail.shopName}}</li>
         <li class="store-introd">
-          <div>
-            店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺
-            介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺
-            介绍店铺介绍店铺介绍店铺介绍店铺介绍
-          </div>
+          <div>{{storeDetail.detail}}</div>
         </li>
       </ul>
       <ul class="store-center">
         <li class="store-tel">
           <label>电话:</label>
-          <span>13567890000</span>
+          <span>{{storeDetail.phone}}</span>
         </li>
         <li>
           <label>地址:</label>
-          <span>广东省深圳市宝安区科研路9号腾讯大厦10001</span>
+          <span>{{storeDetail.address}}</span>
         </li>
         <li class="store-btn">
           <van-button size="small" type="danger">联系店家</van-button>
         </li>
       </ul>
     </section>
-    <div class="goods-all">
-      <section class="select-menu" :class="{'isFixed' : seclectActive}">
+
+    <div v-if="serarchResult.length === 0" class="empty-box">
+      <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
+      <span class="empty-text">
+        <i>没有搜索结果</i>
+        <i>抱歉没有找到相关的商品~</i>
+      </span>
+    </div>
+
+    <div v-else class="goods-all">
+      <section class="select-menu">
         <div
           class="select-item default-sort"
-          :class="{'active' : orderBy === 'default'}"
-          data-order-by="default"
-          @click="selectOrder($event)"
+          :class="{'active' : activeOrderBy === 'update_time'}"
+          data-order-by="update_time"
+          @click="initSortData"
         >默认排序</div>
-        <div class="select-item" :class="{'active' : orderBy === 'price_asc'}">
+
+        <div class="select-item">
           按价格
-          <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
-          <span class="select-arrows">
-            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
-            <i
-              class="sort-caret descending"
-              data-order-by="price_desc"
-              @click="selectOrder($event)"
-            ></i>
-          </span>
-        </div>
-        <div
-          class="select-item"
-          :class="{'active' : orderBy === 'price_desc'}"
-          data-order-by="price_desc"
-          @click="selectOrder($event)"
-        >
-          按销量
-          <!-- <i class="iconfont icon-down1" :class="{'active' : orderBy === 'price_desc'}"></i> -->
           <span class="select-arrows">
             <i
               class="sort-caret ascending"
-              data-order-by="saleCount_asc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_asc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'asc')"
             ></i>
             <i
               class="sort-caret descending"
-              data-order-by="saleCount_desc"
-              @click="selectOrder($event)"
+              :class="{'active' : activeOrderBy === 'price_desc'}"
+              data-order-by="price"
+              @click="selectOrder($event,'desc')"
+            ></i>
+          </span>
+        </div>
+
+        <div class="select-item">
+          按销量
+          <span class="select-arrows">
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_asc'}"
+              class="sort-caret ascending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'asc')"
+            ></i>
+            <i
+              :class="{'active' : activeOrderBy === 'sales_quantity_desc'}"
+              class="sort-caret descending"
+              data-order-by="sales_quantity"
+              @click="selectOrder($event,'desc')"
             ></i>
           </span>
         </div>
@@ -82,17 +87,16 @@
       </section>
       <section class="goods-box">
         <ul class="goods-content">
-          <template v-for="(item,index) in likeList">
-            <router-link :key="index" tag="li" to="/classify/product">
-              <img :src="item.imgSrc" />
+          <template v-for="(item,index) in serarchResult">
+            <router-link :key="index" tag="li" class="goods-item" to="/product/index">
+              <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
-                <div class="goods-title">{{item.itemTitle}}</div>
-                <span class="goods-div">限量套装 新品上市</span>
+                <div class="goods-title">{{item.productName}}</div>
+                <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>{{item.itemPrice}}</i>
+                    <i>￥：{{item.productCnyPrice}}</i>
                   </span>
-                  <svg-icon class="add-icon" icon-class="add"></svg-icon>
                 </div>
               </div>
             </router-link>
@@ -111,63 +115,52 @@ export default {
   props: {},
   data() {
     return {
-      orderBy: "default",
+      activeOrderBy: "update_time",
+      sortType: "desc",
+      orderBy: "update_time",
+      page: 1,
       seclectActive: false,
-      likeList: [
-        {
-          id: 0,
-          imgSrc: require("../../assets/image/home/test8.png"),
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248"
-        },
-        {
-          id: 1,
-          imgSrc: require("../../assets/image/home/test9.png"),
-          itemTitle: "娜扎新装LOOK",
-          itemPrice: "$248"
-        },
-        {
-          id: 2,
-          imgSrc: require("../../assets/image/home/test3.png"),
-          itemTitle: "时尚双肩包",
-          itemPrice: "$248"
-        },
-        {
-          id: 3,
-          imgSrc: require("../../assets/image/home/test4.png"),
-          itemTitle: "商务行李箱",
-          itemPrice: "$248"
-        },
-        {
-          id: 4,
-          imgSrc: require("../../assets/image/home/test5.png"),
-          itemTitle: "无线消噪耳机",
-          itemPrice: "$248"
-        },
-        {
-          id: 4,
-          imgSrc: require("../../assets/image/home/test6.png"),
-          itemTitle: "无线蓝牙耳机",
-          itemPrice: "$248"
-        }
-      ]
+      storeDetail: {},
+      serarchResult: []
     };
   },
+  created() {
+    this.initData();
+  },
   methods: {
-    handleSearch() {
-      this.$router.push("/search");
+    initData() {
+      this.$http
+        .get(
+          `/api/merchant/merchantShopInfo?merchantInfoId=${this.$route.query.merchantInfoId}`
+        )
+        .then(response => {
+          this.storeDetail = response.data.content;
+        });
+      this.initSortData();
     },
-    selectOrder(e) {
-      let orderBy = e.currentTarget.getAttribute("data-order-by");
-      if (orderBy === this.orderBy) {
+    initSortData() {
+      this.$http
+        .get(
+          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20`
+        )
+        .then(response => {
+          this.serarchResult = response.data.content;
+        });
+    },
+    handleSearch() {
+      this.$router.push({
+        path: "/search",
+        query: { merchantShopId: this.$route.query.merchantInfoId }
+      });
+    },
+    selectOrder(e, sortType) {
+      this.sortType = sortType;
+      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+      if (this.orderBy === this.activeOrderBy) {
         return;
       }
-      // this.productList = []    //重置list
-      this.orderBy = orderBy;
-      // this.params.orderBy = orderBy
-      // this.params.pageNum = 1
-      // this.isLoading = true
-      // this.getProductList(this.params)
+      this.activeOrderBy = this.orderBy + "_" + sortType;
+      this.initSortData();
     },
     pageScroll() {
       let scrollTop =
@@ -180,7 +173,7 @@ export default {
     }
   },
   computed: {},
-  created() {},
+
   mounted() {
     window.addEventListener("scroll", this.pageScroll);
   },
@@ -252,9 +245,28 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #d8182d;
+          background-color: #EC3924;
         }
       }
+    }
+  }
+  .empty-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 90px;
+    .search-empty {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 17px;
+      color: #949497;
     }
   }
   .goods-all {
@@ -267,13 +279,8 @@ export default {
       align-items: center;
       color: #949497;
       font-size: 11px;
-      //  &.isFixed {
-      //   position: fixed;
-      //   left: 0;
-      //   top: 0;
-      // }
       .select-item.active {
-        color: #d8182d;
+        color: #EC3924;
       }
       .select-item {
         .search-icon {
@@ -286,6 +293,7 @@ export default {
       .search-icon {
         padding-right: 16px;
       }
+
       .select-arrows {
         display: inline-flex;
         flex-direction: column;
@@ -303,6 +311,7 @@ export default {
           position: absolute;
           left: 7px;
         }
+
         .sort-caret.ascending {
           border-bottom-color: #c0c4cc;
           top: 5px;
@@ -311,35 +320,53 @@ export default {
           border-top-color: #c0c4cc;
           bottom: 7px;
         }
+
+        .sort-caret.ascending.active {
+          border-bottom-color: #EC3924;
+          top: 5px;
+        }
+        .sort-caret.descending.active {
+          border-top-color: #EC3924;
+          bottom: 7px;
+        }
       }
     }
     .goods-box {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #d8182d;
+        color: #EC3924;
       }
       .goods-content {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        li {
+        .goods-item {
           display: inline-block;
           width: 165px;
           border-radius: 8px;
           margin-top: 10px;
           padding-right: 10px;
           background-color: white;
+          .goods-productMainImage {
+            width: 165px;
+            height: 195px;
+            border-radius: 8px 8px 0 0;
+          }
         }
         li:nth-of-type(even) {
           padding-right: 0;
         }
         .goods-layout {
           width: 165px;
-          padding: 0 10px;
+          padding: 0 5px;
           .goods-title {
             color: #3a3a3a;
             font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            padding: 5px 0;
+            white-space: nowrap;
             font-weight: 700;
           }
           .goods-div {
@@ -354,7 +381,7 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
         }

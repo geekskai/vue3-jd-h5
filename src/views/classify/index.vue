@@ -10,8 +10,8 @@
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
           >
-            <span>{{item.name.slice(0,2)}}</span>
-            <span>{{item.name.slice(2)}}</span>
+            <span>{{item.label.slice(0,2)}}</span>
+            <span>{{item.label.slice(2)}}</span>
           </li>
         </ul>
       </list-scroll>
@@ -21,22 +21,22 @@
             <template v-for="(category,index) in categoryData">
               <div class="swiper-slide" :key="index" v-if="currentIndex === index">
                 <img
-                  @click="selectProduct(category.value)"
+                  @click="selectProduct(category)"
                   class="category-main-img"
-                  :src="category.imgUrl"
-                  v-if="category.imgUrl"
+                  v-lazy="category.imageUrl"
+                  v-if="category.imageUrl"
                 />
-                <div v-for="(products,index) in category.list" :key="index">
-                  <p class="goods-title">{{products.title}}</p>
+                <div v-for="(products,index) in category.children" :key="index">
+                  <p class="goods-title">{{products.label}}</p>
                   <div class="category-list">
                     <div
                       class="product-item"
-                      @click="selectProduct(product.value)"
-                      v-for="(product,index) in products.productList"
+                      @click="selectProduct(product)"
+                      v-for="(product,index) in products.children"
                       :key="index"
                     >
-                      <img class="item-img" :src="product.imgUrl" />
-                      <p class="product-title">{{product.title}}</p>
+                      <img class="item-img" v-lazy="product.imageUrl" />
+                      <p class="product-title">{{product.label}}</p>
                     </div>
                   </div>
                 </div>
@@ -66,29 +66,12 @@ export default {
     };
   },
   created() {
-    this.$http
-      .get("http://test.happymmall.com/category/categoryData")
-      .then(res => {
-        const { categoryData } = res.data;
-        this.categoryData = categoryData;
-        // console.log("=====categoryData==>", this.categoryData);
-        // this.templateCategoryData = categoryData;
-      });
-    // this.getGoodsList();
+    this.getGoodsList();
   },
   methods: {
-    handleSplit(name) {
-      if (~name.indexOf("、")) {
-        let temName = name;
-        return temName.slice(0, 2) + name.slice(3);
-      } else {
-        return name;
-      }
-    },
     // 获取分类
     getGoodsList() {
-      // this.$http.get(`/api/product/category`).then(response => {
-      this.$http.get(`/api/goods/category`).then(response => {
+      this.$http.get(`/api/product/category`).then(response => {
         const categoryData = response.data.content;
         this.categoryData = categoryData;
       });
@@ -99,15 +82,17 @@ export default {
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
-      // this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
-    selectProduct(sku) {
-      this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
+    selectProduct(product) {
+      this.$router.push({
+        path: "/classify/classifySearch",
+        query: { categoryId: product.value, product: product }
+      });
     }
   },
   mounted() {
@@ -153,9 +138,9 @@ export default {
           color: #949497;
           flex-direction: column;
           &.active {
-            color: #d8182d;
+            color: #ec3924;
             border-left: 3px solid transparent;
-            border-color: #d8182d;
+            border-color: #ec3924;
             background: #fff;
           }
         }
@@ -175,7 +160,7 @@ export default {
           padding-top: 20px;
           .goods-title {
             font-size: 14px;
-            color: #d8182d;
+            color: #ec3924;
             font-weight: 600;
             padding-bottom: 10px;
           }

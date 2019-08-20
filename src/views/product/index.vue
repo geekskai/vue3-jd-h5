@@ -2,8 +2,8 @@
   <div class="product-layout">
     <van-swipe :autoplay="3000" :height="350">
       <van-swipe-item v-for="(image, index) in productImages" :key="index">
-        <!-- <img class="lazy_img" v-if="image.path" v-lazy="image.path"/> -->
-        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/>
+        <img class="lazy_img" v-if="image" v-lazy="image" />
+        <!-- <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/> -->
       </van-swipe-item>
     </van-swipe>
 
@@ -36,7 +36,7 @@
       <li class="product-title">
         <div class="text-left">
           <span class="force-value">0.5倍算力</span>
-          <span class="item-desc">{{detailForm.name}}</span>
+          <span class="item-desc">{{detailForm.productName}}</span>
         </div>
         <div>
           <span class="heart-full" @click="isLike=!isLike">
@@ -50,12 +50,12 @@
       </li>
 
       <li class="product-info">
-        <i>快递包邮</i>
-        <i>月销:888</i>
+        <i>邮费：{{detailForm.logisticsDefaultPrice}}</i>
+        <i>月销：{{detailForm.monthlySalesQuantity}}</i>
       </li>
 
       <li class="item-info">
-        <van-field label="发货地" disabled :placeholder="detailForm.productArea">
+        <van-field label="发货地" disabled :placeholder="detailForm.shipAddress">
           <span slot="left-icon" class="anchor-point">
             <svg-icon icon-class="anchor-point"></svg-icon>
           </span>
@@ -64,14 +64,15 @@
       <li class="item-info">
         <van-field label="品牌" disabled :placeholder="detailForm.brandName" />
       </li>
-      <li class="item-info" @click="show = true">
-        <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
+      <li class="item-info" @click="handleShowSpecs">
+        <van-field label="选择" disabled :placeholder="handleProductSpeces()"></van-field>
         <van-icon name="arrow" />
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <img src="../../assets/image/product/store-header.png" class="store-header" />
-          <span class="store-name">店铺名称</span>
+          <!-- <img src="../../assets/image/product/store-header.png" class="store-header" /> -->
+          <img v-lazy="detailForm.shopLogo" class="store-header" />
+          <span class="store-name">{{detailForm.shopName}}</span>
         </div>
         <div class="store-btn">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -81,73 +82,31 @@
     </ul>
     <div class="item-details">
       <span @click="handleViewDetail">宝贝详情</span>
-      <div v-html="detailForm.appintroduce" v-show="showDetail" class="html-class"></div>
+      <div v-html="detailForm.productDetail" v-show="showDetail" class="html-class"></div>
     </div>
-    <van-popup
-      class="select-popup"
+
+    <van-sku
       v-model="show"
-      round
-      position="bottom"
-      :style="{ height: '75%' }"
+      class="product-sku"
+      :sku="sku"
+      close-on-click-overlay
+      :goods="goods"
+      :goods-id="goodsId"
+      @buy-clicked="handleToBuy"
+      @add-cart="handleAddToCart"
     >
-      <section class="popup-content">
-        <span class="close-icon" @click="show = false">
-          <svg-icon icon-class="close-popup"></svg-icon>
-        </span>
-        <ul class="popup-top">
-          <img :src="imgSrc" />
-          <li class="item-specification">
-            <span class="item-price">￥568</span>
-            <span class="item-count">库存2279件</span>
-            <span class="item-colors">选择颜色；尺码</span>
-          </li>
-        </ul>
-        <ul class="popup-center">
-          <li class="popup-color">
-            <span class="color-text">颜色</span>
-            <div class="color-list">
-              <span
-                class="color-tag"
-                :class="{active:item.selected}"
-                v-for="(item,index) in listData"
-                :key="index"
-                @click="handleSelected(item)"
-              >
-                <img :src="item.imgSrc" />
-                <span>{{item.colorName}}</span>
-              </span>
-            </div>
-          </li>
-          <li class="popup-size">
-            <span class="size-text">尺码</span>
-            <div class="size-list">
-              <span class="size-item">S</span>
-              <span class="size-item">M</span>
-              <span class="size-item">L</span>
-              <span class="size-item">XL</span>
-              <span class="size-item">4XL</span>
-              <span class="size-item">5XL</span>
-              <span class="size-item">6XL</span>
-              <span class="size-item">7XL</span>
-            </div>
-          </li>
-          <li class="popup-quantity">
-            <span class="quantity-text">购买数量</span>
-            <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
-          </li>
-        </ul>
-      </section>
-      <div class="product-footer">
-        <van-goods-action>
-          <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
-          <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
-        </van-goods-action>
-      </div>
-    </van-popup>
+      <template slot="sku-header-price" slot-scope="props">
+        <div class="van-sku__goods-price">
+          <span class="van-sku__price-symbol">￥</span>
+          <span class="van-sku__price-num">{{ parseFloat((props.price*100).toPrecision(12)) }}</span>
+        </div>
+      </template>
+    </van-sku>
+
     <div class="product-footer">
       <van-goods-action>
-        <van-goods-action-button @click="handleAddToCart" type="warning" text="加入购物车" />
-        <van-goods-action-button type="danger" @click="handleToBuy" text="立即购买" />
+        <van-goods-action-button @click="handleShowSpecs" type="warning" text="加入购物车" />
+        <van-goods-action-button type="danger" @click="handleShowSpecs" text="立即购买" />
       </van-goods-action>
     </div>
   </div>
@@ -161,91 +120,241 @@ export default {
       show: false,
       showDetail: false,
       detailForm: {},
+      skuObj: {},
       isSpike: false, // 是否是秒杀商品 默认是false
       isLike: false, // 是否点赞喜欢
       current: 0,
       stepperValue: "",
-      listData: [
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        },
-        {
-          imgSrc: require("../../assets/image/home/store3.png"),
-          colorName: "黑色",
-          selected: false
-        }
-      ],
-      imgSrc: require("../../assets/image/home/test2.png"),
-      productImages: []
+      productImages: [],
+      sku: {
+        // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
+        // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
+        tree: [
+          {
+            k: "颜色",
+            k_id: "1",
+            v: [
+              {
+                id: "30349",
+                name: "天蓝色",
+                imgUrl:
+                  "https://img.yzcdn.cn/upload_files/2017/02/21/FjKTOxjVgnUuPmHJRdunvYky9OHP.jpg!100x100.jpg"
+              },
+              {
+                id: "1215",
+                name: "白色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg"
+              }
+            ],
+            k_s: "s1",
+            count: 2
+          },
+          {
+            k: "尺寸",
+            k_id: "2",
+            v: [
+              {
+                id: "1193",
+                name: "1"
+              },
+              {
+                id: "1194",
+                name: "2"
+              }
+            ],
+            k_s: "s2",
+            count: 2
+          }
+        ],
+        // 所有 sku 的组合列表，如下是：白色1、白色2、天蓝色1、天蓝色2
+        list: [
+          {
+            id: 2259,
+            price: 120, //价格
+            discount: 122,
+            s1: "1215",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 20, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2260,
+            price: 110,
+            discount: 112,
+            s1: "1215",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 2, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2257,
+            price: 130,
+            discount: 132,
+            s1: "30349",
+            s2: "1193",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 40, //库存
+            goods_id: 946755
+          },
+          {
+            id: 2258,
+            price: 100,
+            discount: 100,
+            s1: "30349",
+            s2: "1194",
+            s3: "0",
+            s4: "0",
+            s5: "0",
+            stock_num: 50, //库存
+            goods_id: 946755
+          }
+        ],
+        price: "0.00",
+        stock_num: 10, // 商品总库存
+        none_sku: false, // 是否无规格商品
+        hide_stock: false // 是否隐藏剩余库存
+      },
+      goods: {
+        // 商品标题
+        title: "测试商品",
+        // 默认商品 sku 缩略图
+        picture:
+          "https://topimg-test.oss-cn-shenzhen.aliyuncs.com/goods/1564465639525.jpg"
+      },
+      goodsId: "",
+      customStepperConfig: {}
     };
   },
   created() {
-    this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
-      const { productImages } = res.data;
-      let i = Math.floor(Math.random() * 6);
-      this.productImages = productImages[i];
-    });
-    // this.initData();
+    this.initData();
   },
-  // updated() {
-  //   let obj = document.getElementById("htmlClass");
-  //   let imgs = obj.getElementsByTagName("img");
-  //   for (let index = 0; index < imgs.length; index++) {
-  //     imgs[i].style.width = "100%";
-  //     imgs[i].style.height = "100%";
-  //   }
-  // },
+
   methods: {
+    onBuyClicked() {},
+    handleShowSpecs() {
+      this.show = true;
+      this.$http
+        .get(`/api/product/chooseSku?productId=${this.$route.query.productId}`)
+        .then(response => {
+          let responseDataList = response.data.content;
+          let skuSpecesTree = [];
+          // 先获取所有的规格类型的key
+          skuSpecesTree = responseDataList[0].speces.map(it => {
+            return {
+              k: it.specsName,
+              k_id: it.specsId,
+              v: [],
+              k_s: it.specsId
+            };
+          });
+          // 筛选value
+          let allSpecesArray = [];
+          for (let i = 0; i < responseDataList.length; i++) {
+            for (let j = 0; j < responseDataList[i].speces.length; j++) {
+              allSpecesArray.push(
+                JSON.stringify(responseDataList[i].speces[j])
+              );
+            }
+          }
+          let specesArray = [];
+          Array.from(new Set(allSpecesArray)).map(it => {
+            specesArray.push(JSON.parse(it));
+          });
+          for (let i = 0; i < skuSpecesTree.length; i++) {
+            for (let j = 0; j < specesArray.length; j++) {
+              if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
+                specesArray[j].name = specesArray[j].specsValue;
+                specesArray[j].id = specesArray[j].specsValueId;
+                skuSpecesTree[i].v.push(specesArray[j]);
+              }
+            }
+          }
+          // 开始筛选list 所有sku的组合列表
+          let templeArray = [];
+          templeArray = responseDataList.map((it, i) => {
+            let listObj = {};
+            listObj.stock_num = it.stock;
+            listObj.id = it.id;
+            listObj.price = it.price;
+            for (let j = 0; j < responseDataList[i].speces.length; j++) {
+              listObj[responseDataList[i].speces[j].specsId] =
+                responseDataList[i].speces[j].specsValueId;
+            }
+            return listObj;
+          });
+          this.sku.tree = skuSpecesTree;
+          this.sku.list = templeArray;
+        });
+    },
+    handleProductSpeces() {
+      if (this.detailForm.productSpeces) {
+        return this.detailForm.productSpeces.join(",");
+      }
+    },
     initData() {
       this.$http
-        .get(`/api/goods/detail?sku=${this.$route.query.sku}`)
+        .get(`/api/product/info?productId=${this.$route.query.productId}`)
         .then(response => {
-          this.productImages = response.data.images;
-          this.detailForm = response.data.detail;
-          console.log("=====content==>", response.data);
+          this.productImages = response.data.content.productImages;
+          this.goods.picture = response.data.content.productImages[0];
+          this.goods.title = response.data.content.productName;
+          this.detailForm = response.data.content;
         });
     },
     handleViewDetail() {
       this.showDetail = true;
     },
-    handleSelected(item) {
-      item.selected = true;
-      this.listData.map(it => {
-        it == item ? (it.selected = true) : (it.selected = false);
-      });
+
+    handleAddToCart(skuObj) {
+      // selectedNum
+      this.skuObj = skuObj;
+      console.log("=====skuObj==>", skuObj);
+      this.$http
+        .post(`/api/cart/update`, {
+          quantity: this.skuObj.selectedNum,
+          skuId: skuObj.selectedSkuComb.id
+        })
+        .then(response => {
+          if (response.data.code === 0) {
+            this.$toast.success({
+              message: "添加成功~",
+              duration: 1500,
+              icon: "like-o"
+            });
+          } else {
+            this.$toast.fail({
+              message: response.data.msg,
+              duration: 1500
+            });
+          }
+        });
     },
-    handleAddToCart() {
-      this.$toast.success({
-        message: "添加成功~",
-        duration: 1500,
-        icon: "like-o"
+    handleToBuy(skuObj) {
+      this.skuObj = skuObj;
+      this.$router.push({
+        path: "/order/confirmOrder",
+        query: {
+          quantity: this.skuObj.selectedNum,
+          skuId: this.skuObj.selectedSkuComb.id
+        }
       });
-    },
-    handleToBuy() {
-      this.$router.push("/order/orderDetail");
     },
     handleStoreName() {
       this.$router.push("/storeDetail");
     },
     handleConnectStore() {
-      this.$router.push("/storeDetail");
+      this.$router.push({
+        path: "/storeDetail",
+        query: { merchantInfoId: this.detailForm.merchantShopId }
+      });
     }
   }
 };
@@ -317,7 +426,7 @@ export default {
           width: 70px;
           height: 10px;
           border-radius: 5px;
-          color: #d8182d;
+          color: #EC3924;
           display: inline-block;
         }
       }
@@ -371,7 +480,7 @@ export default {
         height: 20px;
         color: #fff;
         font-size: 9px;
-        background-color: #d8182d;
+        background-color: #EC3924;
         border-radius: 10px 10px;
       }
       .heart-full {
@@ -405,8 +514,8 @@ export default {
       margin-top: 10px;
       margin-bottom: 10px;
       /deep/ .van-button--danger {
-        background-color: #d8182d;
-        border: 1px solid #d8182d;
+        background-color: #EC3924;
+        border: 1px solid #EC3924;
       }
       .store-detail {
         padding-left: 16px;
@@ -449,7 +558,7 @@ export default {
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #d8182d;
+      color: #EC3924;
     }
   }
   .item-details {
@@ -467,6 +576,22 @@ export default {
       }
       /deep/ div {
         background-size: 50% 100%;
+      }
+    }
+  }
+  .product-sku {
+    /deep/ .van-sku-actions {
+      /deep/ .van-button--warning {
+        background-color: #f3ca43;
+        border: 1px solid #f3ca43;
+        height: 44px;
+        line-height: 44px;
+      }
+      /deep/ .van-button--danger {
+        height: 44px;
+        line-height: 44px;
+        background-color: #EC3924;
+        border: 1px solid #EC3924;
       }
     }
   }
@@ -499,7 +624,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #d8182d;
+            color: #EC3924;
             font-size: 17px;
             font-weight: 600;
           }
@@ -545,9 +670,9 @@ export default {
               }
             }
             .color-tag.active {
-              border: 1px solid #d8182d;
+              border: 1px solid #EC3924;
               background-color: white;
-              color: #d8182d;
+              color: #EC3924;
             }
           }
         }
@@ -627,8 +752,8 @@ export default {
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #d8182d;
-      border: 1px solid #d8182d;
+      background-color: #EC3924;
+      border: 1px solid #EC3924;
     }
   }
 }

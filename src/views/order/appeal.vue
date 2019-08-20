@@ -5,41 +5,46 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">商品申诉</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
     <section class="order-card">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+      <li class="radio-all">
+        <div class="store-info">
+          <img v-lazy="appealObject.logoUrl" class="header-img" />
+          <span>{{appealObject.shopName}}</span>
+        </div>
+      </li>
+      <van-radio-group class="order-list" v-model="radios">
+        <ul v-for="(item, i) in appealObject.appOrderProductVos" :key="i">
+          <div class="order-info">
+            <li class="check-item">
+              <van-radio :key="i" checked-color="#91C95B" :name="appealObject"></van-radio>
+            </li>
+            <img v-lazy="item.productMainUrl" />
+            <div class="order-detail">
+              <p class="info-one">
+                <span>{{item.productName}}</span>
+                <i>￥{{item.amounts}}</i>
+              </p>
+              <p class="info-two">
+                <span>{{item.fullName}}</span>
+                <span>×{{item.quantity}}</span>
+              </p>
+            </div>
           </div>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>￥444</i>
-        </li>
-      </ul>
+        </ul>
+        <div class="order-total">
+          <label>共{{appealObject.quantity}}件商品，小计：</label>
+          <i>￥{{appealObject.amount}}</i>
+          <!-- <span>{{item.productTotalPrice}}</span> -->
+        </div>
+      </van-radio-group>
     </section>
     <section class="info-form">
       <van-cell-group>
-        <van-field v-model="username" clearable label="用户名" placeholder="请输入姓名" />
-        <van-field v-model="phone" label="手机号" placeholder="请输入手机号" />
+        <van-field v-model="appealForms.name" clearable label="用户名" placeholder="请输入姓名" />
+        <van-field v-model="appealForms.phone" label="手机号" placeholder="请输入手机号" />
         <van-field
-          v-model="content"
+          v-model="appealForms.context"
           :autosize="{ minHeight: 150 }"
           type="textarea"
           label="申诉内容"
@@ -47,10 +52,10 @@
         />
         <van-field label-width="200px" disabled label="图片上传（最多可上传5张）" />
       </van-cell-group>
-      <van-uploader v-model="fileList" multiple :max-count="5" />
+      <van-uploader multiple :after-read="afterRead" v-model="fileList" :max-count="5" />
     </section>
     <div class="pay-btn">
-      <van-button type="danger" size="large">提交</van-button>
+      <van-button type="danger" @click="handleSubmitAppeal" size="large">提交</van-button>
     </div>
   </div>
 </template>
@@ -62,12 +67,55 @@ export default {
     return {
       username: "",
       phone: "",
-      content: "",
-      fileList: []
+      radios: {},
+      appealForms: {
+        context: "",
+        imagUrls: []
+      },
+      fileList: [],
+      appealObject: {}
     };
   },
-  created() {},
-  methods: {}
+  created() {
+    // this.appealObject = this.$route.query;
+    this.appealObject = this.$route.params;
+  },
+  methods: {
+    afterRead(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/order/upload/image`, formData).then(response => {
+        if (response.data.code === 0) {
+          this.appealForms.imagUrls.push(...response.data.content.imageUrls);
+        }
+      });
+    },
+    handleSubmitAppeal() {
+      console.log("=====radios==>", this.radios.orderNo);
+      this.appealForms.orderNo = this.radios.orderNo;
+      if (!this.radios.orderNo) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选中你要申诉的商品！"
+        });
+        return;
+      }
+      this.appealForms.id = this.radios.appOrderProductVos[0].id;
+      console.log("=====appealForms==>", this.appealForms);
+      this.$http
+        .post(`/api/order/complainOrder`, this.appealForms)
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "商品申诉成功！"
+          });
+          this.$router.go(-1)
+          console.log("=====response.data==>", response.data);
+        });
+    }
+  }
 };
 </script>
 
@@ -87,84 +135,125 @@ export default {
       font-weight: 600;
       flex: 1;
     }
-    .appeal-record {
-      color: #D8182D;
-      font-size: 13px;
-    }
+    // .appeal-record {
+    //   color: #ec3924;
+    //   font-size: 13px;
+    // }
   }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px 20px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px;
     margin-top: 20px;
-    .order-list {
-      .order-item {
+    /deep/ .van-radio {
+      padding-left: 0;
+      .van-radio__label {
+        font-size: 13px;
+        color: #949497;
+      }
+    }
+    .radio-all {
+      .store-info {
         display: flex;
-        justify-content: space-between;
-        & > span {
-          color: #D8182D;
-          font-size: 11px;
+        // justify-content: center;
+        padding-left: 30px;
+        justify-content: flex-start;
+        align-items: center;
+        .header-img {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
         }
-        .store-info {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 10px;
-          .header-img {
-            width: 24px;
-            height: 24px;
-          }
-          span {
-            color: #3a3a3a;
-            padding-left: 3px;
-            font-size: 11px;
-          }
+        span {
+          color: #3a3a3a;
+          font-size: 11px;
+          padding-left: 4px;
         }
       }
+    }
+    .order-list {
       .order-info {
+        width: 100%;
         padding-top: 10px;
+        padding-bottom: 16px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        .check-item {
+          display: flex;
+          align-items: center;
+        }
         img {
-          width: 80px;
-          height: 80px;
+          margin-left: 5px;
+          width: 100px;
+          height: 100px;
           display: inline-block;
-          background-color: #D8182D;
           border-radius: 4px;
         }
         .order-detail {
-          flex: 1;
-          padding-left: 16px;
-          padding-bottom: 4px;
+          width: 55%;
+          padding-left: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
           .info-one,
           .info-two {
             display: flex;
+            padding-top: 4px;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 13px;
           }
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            span {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
             color: #949497;
           }
+          .info-count {
+            color: #ec3924;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /deep/ .van-stepper__input {
+              width: 31px;
+              height: 22px;
+              padding: 0;
+              color: #949497;
+              font-weight: normal;
+              background-color: transparent;
+              border: 1px solid #dbdbdb;
+            }
+            /deep/ .van-stepper__plus {
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+              border-radius: 0;
+            }
+            /deep/ .van-stepper__minus {
+              border-radius: 0;
+              border: 1px solid #dbdbdb;
+              background-color: transparent;
+              width: 16px;
+              height: 22px;
+            }
+          }
         }
       }
-      .order-count {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 13px;
-        i {
-          color: #D8182D;
-          padding-left: 5px;
-          font-weight: 700;
-        }
+      .order-total {
+        color: #949497;
+        font-size: 14px;
+        text-align: right;
         span {
-          color: #3a3a3a;
+          font-weight: 600;
         }
       }
     }
@@ -188,7 +277,7 @@ export default {
     padding-top: 50px;
     padding-bottom: 10px;
     /deep/ .van-button--danger {
-      background-color: #D8182D;
+      background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
     }

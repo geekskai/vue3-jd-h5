@@ -6,244 +6,84 @@
       </span>
       <div class="header-content">我的订单</div>
     </header>
-    <list-scroll :scroll-data="categoryData" :scrollX="true">
+    <list-scroll :scroll-data="tabData" :scrollX="true">
       <section class="order-tag" ref="searchWrap">
-        <span :class="{'active' : orderType===1}" data-type="1" @click="selectTag">全部(5)</span>
-        <span :class="{'active' : orderType===2}" data-type="2" @click="selectTag">已取消(1)</span>
-        <span :class="{'active' : orderType===3}" data-type="3" @click="selectTag">待支付(1)</span>
-        <span :class="{'active' : orderType===4}" data-type="4" @click="selectTag">待发货(1)</span>
-        <span :class="{'active' : orderType===5}" data-type="5" @click="selectTag">已支付(1)</span>
-        <span :class="{'active' : orderType===6}" data-type="6" @click="selectTag">已完成(1)</span>
-        <span :class="{'active' : orderType===7}" data-type="7" @click="selectTag">待收货(1)</span>
+        <span :class="{'active' : type==0}" @click="selectTag(0)">全部</span>
+        <span :class="{'active' : type==1}" @click="selectTag(1)">待付款</span>
+        <span :class="{'active' : type==2}" @click="selectTag(2)">待发货</span>
+        <span :class="{'active' : type==3}" @click="selectTag(3)">待收货</span>
+        <span :class="{'active' : type==4}" @click="selectTag(4)">已完成</span>
+        <span :class="{'active' : type==5}" @click="selectTag(5)">已取消</span>
       </section>
     </list-scroll>
-    <section class="order-card" v-show="orderType==1||orderType ==3">
+
+    <div v-if="!orderLists.length" class="empty-box">
+      <svg-icon icon-class="order-empty" class="order-empty"></svg-icon>
+      <span class="empty-text">
+        <i>您还没有相关的订单</i>
+        <i>可以多去看看，或许能找到您想要的</i>
+      </span>
+    </div>
+    <section v-else class="order-card" v-for="(orderList,index)  in orderLists" :key="index">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+            <img :src="orderList.logoUrl" class="header-img" />
+            <span>{{orderList.shopName}}</span>
           </div>
-          <span>待支付</span>
+          <span>{{orderStatus[orderList.status]}}</span>
         </li>
-        <li class="order-info">
-          <img src alt />
+
+        <li
+          @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
+          class="order-info"
+          v-for="(item,i) in orderList.appOrderProductVos"
+          :key="i"
+        >
+          <img v-lazy="item.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
+              <span>{{item.productName}}</span>
+              <span>￥：{{item.productAmount}}</span>
             </p>
             <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
+              <span>{{item.fullName}}</span>
+              <span>×{{item.quantity}}</span>
             </p>
           </div>
         </li>
+
         <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
+          <span>共{{orderList.quantity}}件商品,小计:</span>
+          <i>$：{{orderList.amount}}</i>
         </li>
         <li class="order-btn">
-          <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
-          <router-link tag="span" to="/order/orderDetail">去支付</router-link>
+          <!-- 待付款, -->
+          <div v-if="orderList.status == 0">
+            <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
+            <span @click="show = true">去支付</span>
+          </div>
+          <!-- 待发货 -->
+          <div v-if="orderList.status == 1">
+            <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          </div>
+          <!-- 待收货 -->
+          <div v-if="orderList.status == 2">
+             <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          </div>
+          <!-- 3-已完成,4-已取消 -->
         </li>
       </ul>
     </section>
-    <section class="order-card" v-show="orderType==1||orderType ==5">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
-            <span>订单号:201905211540350025</span>
-          </div>
-          <span>已支付</span>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
-        </li>
-        <li class="order-btn">
-          <router-link to="/order/appeal" tag="span">申诉</router-link>
-        </li>
-      </ul>
-    </section>
-    <section class="order-card" v-show="orderType==1||orderType ==2">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
-            <span>订单号:201905211540350025</span>
-          </div>
-          <span>已取消</span>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
-        </li>
-        <li class="order-btn">
-          <router-link to="/order/appeal" tag="span">申诉</router-link>
-        </li>
-      </ul>
-    </section>
-    <section class="order-card" v-show="orderType==1||orderType ==4">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
-            <span>订单号:201905211540350025</span>
-          </div>
-          <span>待发货</span>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
-        </li>
-        <li class="order-btn">
-          <router-link to="/order/appeal" tag="span">申诉</router-link>
-        </li>
-      </ul>
-    </section>
-    <section class="order-card" v-show="orderType==1||orderType ==6">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
-            <span>订单号:201905211540350025</span>
-          </div>
-          <span>已完成</span>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
-        </li>
-        <li class="order-btn">
-          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
-          <router-link to="/order/appeal" tag="span">商品申诉</router-link>
-        </li>
-      </ul>
-    </section>
-    <section class="order-card" v-show="orderType==1||orderType ==7">
-      <ul class="order-list">
-        <li class="order-item">
-          <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
-            <span>订单号:201905211540350025</span>
-          </div>
-          <span>待收货</span>
-        </li>
-        <li class="order-info">
-          <img src alt />
-          <div class="order-detail">
-            <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <span>$248</span>
-            </p>
-            <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
-            </p>
-          </div>
-        </li>
-        <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>$496</i>
-        </li>
-        <li class="order-btn">
-          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
-          <router-link to="/order/appeal" tag="span">商品申诉</router-link>
-        </li>
-      </ul>
-    </section>
-    <section class="may-like">
-      <ul class="like-list">
-        <span class="like-title">猜你喜欢</span>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-        <li class="like-item">
-          <img class="item-picture" />
-          <div class="item-detail">
-            <p class="store-info">
-              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-              <label>店铺名称</label>
-            </p>
-            <p class="item-title">娜扎新装LOOK</p>
-            <p class="item-count">
-              <i>$248</i>
-              <span>月销:888</span>
-            </p>
-          </div>
-        </li>
-      </ul>
-    </section>
+
+    <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"
+    ></vue-pickers>
   </div>
 </template>
 
@@ -256,28 +96,110 @@ export default {
   },
   data() {
     return {
-      orderType: 1,
-      categoryData: []
+      type: this.$route.query.type || 0,
+      tabData: [],
+      orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
+      orderLists: [],
+      columns: 1,
+      cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
+      defaultData: [
+        {
+          text: "Top-Pay",
+          value: "Top-Pay"
+        }
+      ],
+      pickData: {
+        data1: [
+          {
+            text: "Top-Pay",
+            value: "Top-Pay"
+          },
+          {
+            text: "支付宝",
+            value: "支付宝"
+          },
+          {
+            text: "微信",
+            value: "微信"
+          },
+          {
+            text: "银行卡",
+            value: "银行卡"
+          }
+        ]
+      },
+      show: false
     };
   },
-  created() {},
+  created() {
+    this.initData();
+  },
   mounted() {
     this.setSearchWrapWidth();
     this.$eventBus.$emit("changeTag", 1);
   },
   methods: {
+    initData() {
+      this.$http
+        .post(`/api/order/list`, {
+          pageNum: 1,
+          pageSize: 10,
+          type: this.type
+        })
+        .then(response => {
+          this.orderLists = response.data.content;
+        });
+    },
+    handleGoToOrderDetail(status, orderNo) {
+      switch (status) {
+        case 0:
+          this.$router.push(`/order/pendingPayment?orderNo=${orderNo}`);
+          break;
+        case 1:
+          this.$router.push(`/order/toBeDelivered?orderNo=${orderNo}`);
+          break;
+        case 2:
+          this.$router.push(`/order/pendingReceipt?orderNo=${orderNo}`);
+          break;
+        case 3:
+          this.$router.push(`/order/completedOrder?orderNo=${orderNo}`);
+          break;
+        case 4:
+          this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);
+          break;
+
+        default:
+          break;
+      }
+      console.log("=====status==>", status);
+    },
     setSearchWrapWidth() {
       let $screenWidth = document.documentElement.clientWidth;
       this.$refs.searchWrap.style.width = $screenWidth + 100 + "px";
-      console.log("=====res==>", this.$refs.searchWrap.style.width);
     },
-    selectTag(e) {
-      let $type = parseInt(e.currentTarget.getAttribute("data-type"));
-      this.orderType = $type;
-      // this.$router.replace('./order-list?orderType='+$type)
-      // this.orderList = []
-      // this.emptyMsg = ''
-      // this.getOrderList()
+    selectTag(type) {
+      this.type = type;
+      this.initData();
+    },
+    close() {
+      this.show = false;
+    },
+    confirmFn() {
+      this.show = false;
+      this.$toast.loading({
+        mask: true,
+        duration: 1000, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "支付中..."
+      });
+      setTimeout(() => {
+        // this.$toast({
+        //   mask: false,
+        //   message: "支付成功~"
+        // });
+        this.$router.push("/order/transactionDetails");
+      }, 1300);
     }
   }
 };
@@ -295,7 +217,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    
+
     .header-content {
       text-align: center;
       font-size: 18px;
@@ -334,7 +256,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #D8182D;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -361,7 +283,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -387,7 +309,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         i {
-          color: #D8182D;
+          color: #ec3924;
           font-size: 14px;
           padding-left: 5px;
         }
@@ -413,11 +335,30 @@ export default {
       }
     }
   }
+  .empty-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 90px;
+    .order-empty {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-size: 17px;
+      color: #949497;
+    }
+  }
   .may-like {
     padding-bottom: 20px;
     .like-list {
       .like-title {
-        color: #D8182D;
+        color: #ec3924;
         font-size: 18px;
       }
       .like-item {
@@ -432,7 +373,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .item-detail {
@@ -467,7 +408,7 @@ export default {
             justify-content: space-between;
             width: 100%;
             i {
-              color: #D8182D;
+              color: #ec3924;
               font-size: 14px;
             }
             span {

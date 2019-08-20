@@ -5,31 +5,33 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">修改密码</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <van-field v-model="value" placeholder="135227899006" />
+          <van-field v-model="userInfo.mobile" placeholder="135227899006" />
         </li>
         <li class="address-item">
           <div class="address-name">
-            <van-field v-model="value" placeholder="输入当前登录密码" />
+            <van-field
+              type="password"
+              clearable
+              v-model="userInfo.oldPassword"
+              placeholder="输入当前登录密码"
+            />
           </div>
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="设置登录密码" />
+          <van-field type="password" clearable v-model="userInfo.password" placeholder="设置登录密码" />
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="重复登录密码" />
+          <van-field type="password" clearable v-model="userInfo.password1" placeholder="重复登录密码" />
         </li>
       </ul>
     </section>
 
     <div class="address-btn">
-      <router-link to="/mine/addAddress">
-        <van-button type="danger" size="large">保存</van-button>
-      </router-link>
+      <van-button type="danger" @click="handleSaveChangePassword" size="large">保存</van-button>
     </div>
   </div>
 </template>
@@ -39,11 +41,32 @@ export default {
   name: "changePassword",
   data() {
     return {
-      value: ""
+      userInfo: this.$route.query
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleSaveChangePassword() {
+      if (this.userInfo.password === this.userInfo.password1) {
+        this.$http
+          .post(`/api/user/updatePassword`, this.userInfo)
+          .then(response => {
+            this.$toast({
+              mask: false,
+              duration: 1000,
+              message: response.data.msg
+            });
+            this.$router.go(-1);
+          });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "两次输入的密码不一致！"
+        });
+      }
+    }
+  }
 };
 </script>
 
@@ -74,7 +97,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -90,7 +113,7 @@ export default {
         justify-content: space-between;
         align-items: flex-start;
         flex-direction: column;
-         padding: 10px 0;
+        padding: 10px 0;
         /deep/ .van-cell {
           padding-left: 0;
         }
@@ -120,7 +143,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #D8182D;
+      background-color: #EC3924;
     }
     /deep/ .van-button__text {
       color: #fff;

@@ -9,7 +9,7 @@
       <ul class="setting-list">
         <li class="setting-item">
           <span class="setting-msg">消息提醒</span>
-          <van-switch v-model="checked" active-color="#D8182D" size="20px" />
+          <van-switch v-model="checked" active-color="#EC3924" size="20px" />
         </li>
         <li class="setting-item">
           <span class="setting-msg">清除缓存</span>
@@ -21,7 +21,7 @@
         </router-link>
       </ul>
     </section>
-    <van-button plain size="large" type="danger">退出登录</van-button>
+    <van-button plain size="large" type="danger" @click="handleLogout">退出登录</van-button>
   </div>
 </template>
 
@@ -33,10 +33,32 @@ export default {
   props: {},
   data() {
     return {
-      checked: false
+      checked: false,
+      token: localStorage.token
     };
   },
-  methods: {},
+  methods: {
+    handleLogout() {
+      this.$http
+        .post(`/api/user/logout`, { token: this.token })
+        .then(response => {
+          if (response.data.code === 0) {
+            localStorage.setItem("token", "");
+            this.$toast({
+              mask: false,
+              duration: 1000,
+              message: "退出成功！"
+            });
+            this.$router.push("/index");
+          } else {
+            this.$toast({
+              mask: false,
+              message: response.data.msg
+            });
+          }
+        });
+    }
+  },
   computed: {},
   created() {},
   mounted() {},

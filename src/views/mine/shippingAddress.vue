@@ -1,70 +1,47 @@
 <template>
   <div class="shipping-address">
     <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+      <router-link class="btn-left" tag="span" to="/mine">
+        <!-- <span  @click="$router.go(-1)"> -->
         <svg-icon icon-class="white-btn"></svg-icon>
-      </span>
+        <!-- </span> -->
+      </router-link>
       <div class="header-content">收货地址</div>
     </header>
-
-    <section class="address-card">
+    <ul v-if="addressArray.length === 0" class="address-no">
+      <img src="../../assets/image/mime/no-address.png" />
+      <li class="address-text">
+        没有您的收货地址
+        <br />赶紧添加地址吧
+      </li>
+    </ul>
+    <section
+      v-else
+      class="address-card"
+      v-for="(address, index) in addressArray"
+      :key="index"
+      @click="handleGoToEditAddrss(address)"
+    >
       <ul class="card-content">
         <div class="card-triangle active"></div>
         <li class="addres-svg">
-          <svg-icon icon-class="address-home"></svg-icon>
+          <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
+          <svg-icon icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
+          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon>
         </li>
         <li class="card-info">
           <div class="info-name">
-            <span>我是谁</span>
-            <i>家</i>
+            <span>{{address.receiverName}}</span>
+            <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" color="#D8182D" />
+            <span>{{address.fullAddress.slice(0,address.fullAddress.length-9)+address.address}}</span>
+            <van-icon name="arrow" color="#EC3924" />
           </div>
-          <span>136778769907</span>
+          <span>{{address.receiverPhone}}</span>
         </li>
       </ul>
     </section>
-    <section class="address-card">
-      <ul class="card-content">
-        <div class="card-triangle"></div>
-        <li class="addres-svg">
-          <svg-icon icon-class="address-company"></svg-icon>
-        </li>
-        <li class="card-info">
-          <div class="info-name">
-            <span>我是谁</span>
-            <i>公司</i>
-          </div>
-          <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" />
-          </div>
-          <span>136778769907</span>
-        </li>
-      </ul>
-    </section>
-    <section class="address-card">
-      <ul class="card-content">
-        <div class="card-triangle"></div>
-        <li class="addres-svg">
-          <svg-icon icon-class="address-school"></svg-icon>
-        </li>
-        <li class="card-info">
-          <div class="info-name">
-            <span>我是谁</span>
-            <i>学校</i>
-          </div>
-          <div class="info-address">
-            <span>广东省深圳市宝安区福永地铁站C出口</span>
-            <van-icon name="arrow" />
-          </div>
-          <span>136778769907</span>
-        </li>
-      </ul>
-    </section>
-
     <div class="address-btn">
       <router-link to="/mine/addAddress">
         <van-button plain type="danger" icon="plus" size="large">新增地址</van-button>
@@ -75,12 +52,33 @@
 
 <script>
 export default {
-  name: "",
+  name: "ShippingAddress",
   data() {
-    return {};
+    return {
+      addressArray: []
+    };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.getUserList();
+  },
+  methods: {
+    handleGoToEditAddrss(address) {
+      address.fullAddress = address.fullAddress.slice(
+        0,
+        address.fullAddress.length - 9
+      );
+      this.$router.push({
+        path: "/mine/editAddress",
+        query: { address: address }
+      });
+    },
+    getUserList() {
+      // 获取用户列表
+      this.$http.get(`/api/address/getUserAddrList`).then(response => {
+        this.addressArray = response.data.content;
+      });
+    }
+  }
 };
 </script>
 
@@ -101,6 +99,18 @@ export default {
       flex: 1;
     }
   }
+  .address-no {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 17px;
+    color: #949497;
+    padding-top: 105px;
+    .address-text {
+      padding-top: 20px;
+    }
+  }
   .address-card {
     margin-top: 10px;
     .card-content {
@@ -113,7 +123,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #D8182D;
+        background-color: #ec3924;
       }
       .card-triangle {
         position: absolute;
@@ -175,7 +185,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #D8182D;
+      color: #ec3924;
     }
   }
 }

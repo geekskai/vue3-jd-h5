@@ -1,6 +1,6 @@
 export default [{
   path: '/order/orderDetail',
-  name: 'home',
+  name: 'orderDetail',
   meta: {
     index: 3
   },

@@ -1,5 +1,5 @@
 export default [
-    {
+  {
     path: '/register/phoneRegister',
     name: 'phoneRegister',
     meta: {
@@ -7,5 +7,4 @@ export default [
     },
     component: () => import('@/views/register/phoneRegister')
   }
-  ]
-  
+]

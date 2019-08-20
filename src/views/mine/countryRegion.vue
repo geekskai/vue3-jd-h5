@@ -72,7 +72,6 @@ export default {
   height: 100%;
   padding-bottom: 45px;
   .header-box {
-    // background-color: #c9c9cd;
     padding: 16px;
     .header-search {
       background-color: #fff;

@@ -5,42 +5,31 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">邮箱设置</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
-          <div class="address-name">
-            <van-field v-model="value" placeholder="国家/地区" />
-            <div>
-              <svg-icon icon-class="arrow"></svg-icon>
-            </div>
-          </div>
+          <van-field v-model="userInfo.email" clearable placeholder="请输入邮箱" />
         </li>
         <li class="address-item">
           <div class="address-name">
-            <van-field v-model="value" placeholder="邮箱验证码" />
+            <van-field v-model="userInfo.verifyCode" placeholder="请输入验证码" />
             <div class="verification-code">
-              <van-tag color="#3C96FF" plain>获取验证码</van-tag>
+              <van-tag @click="handleGetVerifyCode" color="#3C96FF" plain>获取验证码</van-tag>
             </div>
           </div>
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="验证码" />
+          <van-field type="password" clearable v-model="userInfo.password" placeholder="密码" />
         </li>
         <li class="address-item">
-          <van-field v-model="value" placeholder="密码" />
-        </li>
-        <li class="address-item">
-          <van-field v-model="value" placeholder="再次确认" />
+          <van-field type="password" clearable v-model="userInfo.password1" placeholder="再次确认" />
         </li>
       </ul>
     </section>
 
     <div class="address-btn">
-      <router-link to="/mine/addAddress">
-        <van-button type="danger" size="large">设置</van-button>
-      </router-link>
+      <van-button type="danger" @click="handleSetEmail" size="large">设置</van-button>
     </div>
   </div>
 </template>
@@ -50,11 +39,51 @@ export default {
   name: "phoneNumberSetting",
   data() {
     return {
-      value: ""
+      userInfo: this.$route.query
     };
   },
   created() {},
-  methods: {}
+  methods: {
+    handleGetVerifyCode() {
+      if (this.userInfo.email) {
+        this.$http
+          .post(`/api/user/getVerifyCode`, { email: this.userInfo.email })
+          .then(response => {
+            this.$toast({
+              mask: false,
+              duration: 1000,
+              message: "验证码获取成功！"
+            });
+          });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入邮箱号"
+        });
+      }
+    },
+    handleSetEmail() {
+      if (this.userInfo.password === this.userInfo.password1) {
+        this.$http
+          .post(`/api/user/updateUserInfo`, this.userInfo)
+          .then(response => {
+            this.$toast({
+              mask: false,
+              duration: 1000,
+              message: response.data.msg
+            });
+            this.$router.go(-1);
+          });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "两次输入的密码不一致！"
+        });
+      }
+    }
+  }
 };
 </script>
 
@@ -85,7 +114,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #D8182D;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -146,7 +175,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #D8182D;
+      background-color: #EC3924;
     }
     /deep/ .van-button__text {
       color: #fff;

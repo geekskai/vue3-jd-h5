@@ -1,18 +1,20 @@
 <template>
   <div class="mine-layout">
     <section class="mine-header">
-      <img src="../../assets/image/product/store-new.png" class="header-img" />
-      <!-- <div class="login-regist">
-        <router-link to="/login" class="order-item" tag="span">登录</router-link>
-        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
-      </div> -->
-      <ul class="user-info">
-        <li class="user-name">钻石王老五</li>
+      <router-link to="/mine/personInfo">
+        <img :src="userInfo.headImageUrl" class="header-image" />
+      </router-link>
+      <ul v-if="token" class="user-info">
+        <li class="user-name">{{userInfo.nickName}}</li>
         <li class="node-info">
           <span class="sharing-node" @click="toShow">分享节点</span>
           <span class="business-node">商家节点</span>
         </li>
       </ul>
+      <div v-else class="login-regist">
+        <router-link to="/login" class="order-item" tag="span">登录</router-link>
+        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
+      </div>
     </section>
     <section class="my-info">
       <ul class="info-list">
@@ -33,19 +35,21 @@
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
-        <router-link to="/order/orderDetail" class="order-item" tag="li">
+        <router-link :to="`/order?type=1`" class="order-item" tag="li">
           <svg-icon icon-class="pending-pay"></svg-icon>
           <span>待付款</span>
         </router-link>
-        <router-link to="/order/toBeDelivered" class="order-item" tag="li">
+        <router-link :to="`/order?type=2`" class="order-item" tag="li">
+        <!-- <router-link to="/order/toBeDelivered" class="order-item" tag="li"> -->
           <svg-icon icon-class="be-delivered"></svg-icon>
           <span>待发货</span>
         </router-link>
-        <router-link to="/order/pendingReceipt" class="order-item" tag="li">
+        <router-link :to="`/order?type=3`" class="order-item" tag="li">
+        <!-- <router-link to="/order/pendingReceipt" class="order-item" tag="li"> -->
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>
-        <router-link to="/order" class="order-item" tag="li">
+        <router-link to="/order/refundAfterSale" class="order-item" tag="li">
           <svg-icon icon-class="all-orders"></svg-icon>
           <span>退换/售后</span>
         </router-link>
@@ -180,15 +184,24 @@ export default {
   data() {
     return {
       show: false,
+      userInfo: {},
+      token: localStorage.token,
       columns: 1
     };
   },
-  created() {},
+  created() {
+    this.initUserInfo();
+  },
   computed: {},
   mounted() {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
+    initUserInfo() {
+      this.$http.get(`/api/user/getUserInfo`).then(response => {
+        this.userInfo = response.data.content;
+      });
+    },
     handleClose() {
       this.show = false;
     },
@@ -205,7 +218,7 @@ export default {
   min-height: 812px;
   padding-bottom: 50px;
 
-  background: linear-gradient(#fe4f70, #ff9351);
+  background: linear-gradient(#ec3924, #ff7428);
   .mine-header {
     display: flex;
     padding-left: 24px;
@@ -213,9 +226,10 @@ export default {
     align-items: center;
     flex-direction: row;
     padding-bottom: 20px;
-    .header-img {
+    .header-image {
       width: 70px;
       height: 70px;
+      border-radius: 50%;
     }
     .user-info {
       padding-left: 16px;
