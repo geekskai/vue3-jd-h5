@@ -40,12 +40,12 @@
           <span>待付款</span>
         </router-link>
         <router-link :to="`/order?type=2`" class="order-item" tag="li">
-        <!-- <router-link to="/order/toBeDelivered" class="order-item" tag="li"> -->
+          <!-- <router-link to="/order/toBeDelivered" class="order-item" tag="li"> -->
           <svg-icon icon-class="be-delivered"></svg-icon>
           <span>待发货</span>
         </router-link>
         <router-link :to="`/order?type=3`" class="order-item" tag="li">
-        <!-- <router-link to="/order/pendingReceipt" class="order-item" tag="li"> -->
+          <!-- <router-link to="/order/pendingReceipt" class="order-item" tag="li"> -->
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>
@@ -77,6 +77,11 @@
             <svg-icon class="incon" icon-class="businessmen-stationed"></svg-icon>
             <span>商家入驻</span>
           </div>
+
+          <span class="merchants-status" v-if="merchantsSettledStatus == 0">待审核</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 1">通过</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 2">不通过</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus === null">未入驻</span>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
         <router-link to="/wallet/myWallet" class="option-item" tag="li">
@@ -88,7 +93,7 @@
         </router-link>
       </ul>
     </section>
-    
+
     <section class="mine-content">
       <ul class="options-list">
         <router-link to="/mine/shippingAddress" class="option-item" tag="li">
@@ -185,18 +190,26 @@ export default {
     return {
       show: false,
       userInfo: {},
+      merchantsSettledStatus: null, // 商家入驻消息
       token: localStorage.token,
       columns: 1
     };
   },
   created() {
     this.initUserInfo();
+    this.getMerchantShopMessage(); // 获取商家入驻消息
   },
   computed: {},
   mounted() {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
+    //
+    getMerchantShopMessage() {
+      this.$http.post(`/api/message/merchantShopMessage`).then(response => {
+        this.merchantsSettledStatus = response.data.content.status;
+      });
+    },
     initUserInfo() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
@@ -358,6 +371,12 @@ export default {
             height: 50px;
             padding-right: 16px;
           }
+        }
+        .merchants-status {
+          font-size: 13px;
+          color: #dbdbdb;
+          margin-left: auto;
+          padding-right: 10px;
         }
       }
     }

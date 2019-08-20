@@ -7,21 +7,32 @@
       <div class="header-content">消息中心</div>
     </header>
     <section class="message-mall">
-      <router-link tag="ul" class="message-list" to="/message/mallMessage">
+      <router-link
+        tag="ul"
+        class="message-list"
+        :to="`/message/mallMessage?type=${mallMessage.type}`"
+      >
         <svg-icon class="mall-message-class" icon-class="mall-message-icon"></svg-icon>
         <li class="message-item">
           <label class="message-title">商城消息</label>
-          <span class="mesage-count">存在5条消息</span>
+          <span v-if="mallMessage.count" class="mesage-count">存在{{mallMessage.count}}条消息</span>
+          <span v-else class="mesage-count">暂无消息</span>
         </li>
         <van-icon size="13px" name="arrow" color="#DBDBDB" />
       </router-link>
     </section>
+
     <section class="message-mall">
-      <router-link tag="ul" class="message-list" to="/message/systemMessage">
+      <router-link
+        tag="ul"
+        class="message-list"
+        :to="`/message/systemMessage?type=${systemMessage.type}`"
+      >
         <svg-icon class="mall-message-class" icon-class="system-message-icon"></svg-icon>
         <li class="message-item">
           <label class="message-title">系统消息</label>
-          <span class="mesage-count">暂无消息</span>
+          <span v-if="systemMessage.count" class="mesage-count">存在{{systemMessage.count}}条消息</span>
+          <span v-else class="mesage-count">暂无消息</span>
         </li>
         <van-icon size="13px" name="arrow" color="#DBDBDB" />
       </router-link>
@@ -33,9 +44,18 @@
 export default {
   name: "messageCenter",
   data() {
-    return {};
+    return {
+      systemMessage: {},
+      mallMessage: {}
+    };
   },
-  created() {},
+  created() {
+    this.$http.get(`/api/message/messageTypeCount`).then(response => {
+      response.data.content.forEach(it => {
+        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
+      });
+    });
+  },
   methods: {}
 };
 </script>

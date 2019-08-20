@@ -6,34 +6,17 @@
       </span>
       <div class="header-content">商城消息</div>
     </header>
-    <div class="swipe-message">
-      <van-swipe-cell :right-width="60" :on-close="onClose">
+    <div class="swipe-message" v-for="(message,index) in messageArrays" :key="index">
+      <van-swipe-cell :right-width="60" :on-close="onClose" :name="message.id">
         <section class="message-card">
           <ul class="message-list">
             <li class="message-item">
               <div class="item-title">
-                <van-tag color="#FFBF43">问题反馈</van-tag>
-                <span>2019-05-17 16:30:10</span>
+                <van-tag color="#91C95B" v-if="message.title === '订单通知'">{{message.title}}</van-tag>
+                <van-tag color="#FFBF43" v-else>{{message.title}}</van-tag>
+                <span>{{message.createTime}}</span>
               </div>
-              <div class="message-content">您的反馈我们已经收到，我们会及时跟踪改进，感谢一路有你</div>
-            </li>
-          </ul>
-        </section>
-        <template slot="right">
-          <van-button square type="danger" text="删除" />
-        </template>
-      </van-swipe-cell>
-    </div>
-    <div class="swipe-message">
-      <van-swipe-cell :right-width="60" :on-close="onClose">
-        <section class="message-card">
-          <ul class="message-list">
-            <li class="message-item">
-              <div class="item-title">
-                <van-tag color="#91C95B">订单通知</van-tag>
-                <span>2019-05-17 16:30:10</span>
-              </div>
-              <div class="message-content">您的反馈我们已经收到，我们会及时跟踪改进，感谢一路有你</div>
+              <div class="message-content">{{message.content}}</div>
             </li>
           </ul>
         </section>
@@ -49,12 +32,34 @@
 export default {
   name: "mallMessage",
   data() {
-    return {};
+    return {
+      messageArrays: []
+    };
   },
-  created() {},
+  created() {
+    this.inintData();
+  },
   methods: {
-    onClose(clickPosition, instance) {
+    inintData() {
+      this.$http
+        .post(`/api/message/messageList`, { type: this.$route.query.type })
+        .then(response => {
+          this.messageArrays = response.data.content;
+        });
+    },
+    onClose(clickPosition, instance, detail) {
+      console.log("==detail==", detail);
+      this.$http
+        .post(`/api/message/updateMessage`, { ids: [detail.name], type: 1 })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "删除成功！"
+          });
+        });
       instance.close();
+      this.inintData();
     }
   }
 };
