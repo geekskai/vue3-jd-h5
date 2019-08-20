@@ -62,6 +62,7 @@ src -- 源码目录
 `$ npm install standard --global` 可以在VSCODE的插件库中直接搜索standard，将相关的插件安装上,在script标签中加入如下代码：
 
  ` "standard": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\"",`
+ 
  `"standfix": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\" --fix",`
 
 "standard.autoFixOnSave": true
