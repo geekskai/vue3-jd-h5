@@ -98,7 +98,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/mine/messageCenter" class="option-item" tag="li">
+        <router-link to="/message/index" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="message-center"></svg-icon>
             <span>消息中心</span>
