@@ -1,5 +1,5 @@
 export default [
-    {
+  {
     path: '/login',
     name: 'login',
     meta: {
@@ -7,5 +7,4 @@ export default [
     },
     component: () => import('@/views/login/index')
   }
-  ]
-  
+]

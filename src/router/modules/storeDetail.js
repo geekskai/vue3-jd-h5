@@ -1,7 +1,7 @@
 export default [
   {
-    path:'/storeDetail',
-    name:'storeDetail',
+    path: '/storeDetail',
+    name: 'storeDetail',
     meta: {
       index: 21
     },

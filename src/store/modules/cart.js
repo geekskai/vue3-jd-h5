@@ -12,10 +12,10 @@ const actions = {
 
 // mutations
 const mutations = {
-  addToCart(state) {
+  addToCart (state) {
     state.count++
-    console.log('=====count==>', state.count);
-  },
+    console.log('=====count==>', state.count)
+  }
 }
 
 export default {
