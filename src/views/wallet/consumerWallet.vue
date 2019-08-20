@@ -1,7 +1,5 @@
 <template>
   <div class="consumer-wallet">
-
-
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <img src="../../assets/icons/left-green-white.png" />
@@ -12,47 +10,47 @@
         <label class="wallet-total">钱包总额:85578909CM</label>
         <span class="wallet-value">≈65468.77CNY</span>
       </li>
-    </header>
-    <section class="wallet-card">
-      <ul class="wallet-content">
-        <span class="wallet-title">收益占比</span>
-        <div class="profit-charts">
-          <div class="profit-img">
-            <img src="../../assets/icons/rown.png" />
+      <section class="wallet-card">
+        <ul class="wallet-content">
+          <span class="wallet-title">收益占比</span>
+          <div class="profit-charts">
+            <div class="profit-img">
+              <img src="../../assets/icons/rown.png" />
+            </div>
+            <ul class="profit-lists">
+              <li class="profit-item">
+                <div class="circular-yestaday"></div>
+                <div class="profit-date">
+                  <label>昨日矿池收益</label>
+                  <span>500CM</span>
+                </div>
+              </li>
+              <li class="profit-item">
+                <div class="circular-week"></div>
+                <div class="profit-date">
+                  <label>本周矿池收益</label>
+                  <span>800CM</span>
+                </div>
+              </li>
+              <li class="profit-item">
+                <div class="circular-month"></div>
+                <div class="profit-date">
+                  <label>本月矿池收益</label>
+                  <span>1200CM</span>
+                </div>
+              </li>
+              <li class="profit-item">
+                <div class="circular-history"></div>
+                <div class="profit-date">
+                  <label>历史矿池收益</label>
+                  <span>674599000CM</span>
+                </div>
+              </li>
+            </ul>
           </div>
-          <ul class="profit-lists">
-            <li class="profit-item">
-              <div class="circular-yestaday"></div>
-              <div class="profit-date">
-                <label>昨日矿池收益</label>
-                <span>500CM</span>
-              </div>
-            </li>
-            <li class="profit-item">
-              <div class="circular-week"></div>
-              <div class="profit-date">
-                <label>本周矿池收益</label>
-                <span>800CM</span>
-              </div>
-            </li>
-            <li class="profit-item">
-              <div class="circular-month"></div>
-              <div class="profit-date">
-                <label>本月矿池收益</label>
-                <span>1200CM</span>
-              </div>
-            </li>
-            <li class="profit-item">
-              <div class="circular-history"></div>
-              <div class="profit-date">
-                <label>历史矿池收益</label>
-                <span>674599000CM</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </ul>
-    </section>
+        </ul>
+      </section>
+    </header>
     <ul class="order-header">
       <li class="options-header">
         <div class="header-item">
@@ -161,8 +159,6 @@
         </li>
       </ul>
     </section>
-
-
   </div>
 </template>
 
@@ -180,8 +176,7 @@ export default {
 <style scoped lang="scss">
 .consumer-wallet {
   .page-header {
-    border-radius: 0pt 0pt 0pt 103pt;
-    height: 321px;
+    height: 334px;
     background: linear-gradient(to right, #fe735d, #fc9863);
     width: 100%;
     padding: 10px 20px;
@@ -200,7 +195,7 @@ export default {
       flex: 1;
     }
     .notice-message {
-      padding-top: 30px;
+      padding-top: 25px;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -218,74 +213,70 @@ export default {
         height: 20px;
       }
     }
-  }
-  .wallet-card {
-    position: absolute;
-    top: 100px;
-    right: 16px;
-    left: 16px;
-    padding: 16px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    .wallet-content {
-      width: 343px;
-      height: 230px;
-      .wallet-title {
-        display: block;
-        font-size: 14px;
-        color: #333333;
-        margin-bottom: 20px;
-      }
-      .profit-charts {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        .profit-img {
-          padding: 16px;
+    .wallet-card {
+      margin-top: 16px;
+      padding: 0 16px  16px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      .wallet-content {
+        width: 343px;
+        height: 200px;
+        .wallet-title {
+          font-size: 14px;
+          color: #333333;
+          box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
         }
-        .profit-lists {
+        .profit-charts {
           display: flex;
-          justify-content: space-around;
-          align-items: flex-start;
-          flex-direction: column;
-          .profit-item {
-            margin-top: 10px;
-            padding-left: 30px;
+          justify-content: flex-start;
+          align-items: center;
+          .profit-img {
+            padding: 16px;
+          }
+          .profit-lists {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            .circular-yestaday {
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background-color: #ff6383;
-            }
-            .circular-week {
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background-color: #ff9f40;
-            }
-            .circular-month {
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background-color: #c95ff2;
-            }
-            .circular-history {
-              width: 10px;
-              height: 10px;
-              border-radius: 50%;
-              background-color: #5c89ff;
-            }
-            .profit-date {
-              padding-left: 10px;
-              font-size: 10px;
-              color: #3a3a3a;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-direction: column;
+            .profit-item {
+              margin-top: 10px;
+              padding-left: 30px;
               display: flex;
               justify-content: flex-start;
-              align-items: flex-start;
-              flex-direction: column;
+              align-items: center;
+              .circular-yestaday {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #ff6383;
+              }
+              .circular-week {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #ff9f40;
+              }
+              .circular-month {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #c95ff2;
+              }
+              .circular-history {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #5c89ff;
+              }
+              .profit-date {
+                padding-left: 10px;
+                font-size: 10px;
+                color: #3a3a3a;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+              }
             }
           }
         }
@@ -294,14 +285,13 @@ export default {
   }
   .order-header {
     color: #3a3a3a;
-    margin-top: 60px;
+    margin-top: 10px;
     .options-header {
       display: flex;
       justify-content: center;
       align-items: center;
       .header-item {
         font-size: 13px;
-
         .option-type {
           padding-left: 10px;
         }
