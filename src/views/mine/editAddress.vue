@@ -37,9 +37,7 @@
         </li>
         <li class="address-item">
           <van-cell title="所在地区" />
-          <!-- <div class="address-name" @click="show = true"> -->
           <div class="address-name" @click="showPicker">
-            <!-- <van-field v-model="addressInfo.area||addressInfo.fullAddress" disabled placeholder="请选择省市区" /> -->
             <van-field
               :value="addressInfo.area||addressInfo.fullAddress"
               disabled
@@ -97,13 +95,6 @@
       :style="{ height: '40%' }"
       @click-overlay="show = false"
     >
-      <!-- <van-area
-        :area-list="areaList"
-        @cancel="handleCancel"
-        @confirm="handleConfirm"
-        value="110101"
-      />-->
-
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -166,11 +157,6 @@ export default {
       show: false,
       parentAreaId: 0,
       addressInfo: this.$route.query.address,
-      // addressInfo: {
-      //   tag: "家",
-      //   receiverGender: 0,
-      //   defaultAddrFlag: 0
-      // },
       list: [],
       list2: [],
       list3: [],
@@ -247,7 +233,7 @@ export default {
     };
     // 第一条数据为直辖市 so '-' 符号表示为第三列
     this.list3 = [{ name: "-" }];
-    // this.initEditAddrss();
+    console.log('====this.$route.query.address===>',this.$route.query.address)
   },
   methods: {
     handleDeleteAddress() {
@@ -268,15 +254,6 @@ export default {
           }
         });
     },
-    // initEditAddrss() {
-    //   this.$http
-    //     .get(
-    //       `/api/address/getUserAddrDetail?addrId=${this.$route.query.address}`
-    //     )
-    //     .then(response => {
-    //       this.addressInfo = response.data.content;
-    //     });
-    // },
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },
@@ -288,7 +265,6 @@ export default {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
         .then(response => {
-          console.log("=====getProvinces.data==>", response.data);
           this.list = response.data.content;
           this.val.provinceVal = this.list[0];
         });
@@ -297,7 +273,6 @@ export default {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=84`)
         .then(response => {
-          console.log("=====getCitys.data==>", response.data);
           this.list2 = response.data.content;
           this.val.cityVal = this.list2[0];
         });
@@ -306,9 +281,6 @@ export default {
       this.addressInfo.receiverGender = gender;
     },
     handleSeveAddresInfo() {
-      // if (this.addressInfo.defaultAddrFlag) {
-      //   this.addressInfo.defaultAddrFlag = '1'
-      // }
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {
@@ -350,7 +322,6 @@ export default {
 
     // 滑动开始
     touchStart(e, val) {
-      console.log("=====滑动开始==>");
       e.preventDefault();
       this.addSelect = false;
       this.addHeight = e.currentTarget.children[0].offsetHeight;
@@ -387,7 +358,6 @@ export default {
     },
     // 滑动进行中
     touchMove(e, val) {
-      console.log("=====滑动进行中==>");
       e.preventDefault();
       switch (val) {
         case "province":
@@ -500,7 +470,6 @@ export default {
         default:
           break;
       }
-      console.log("=====滑动结束开始处理数据==>");
       // 滑动结束后 处理数据
       this.dataProcessing();
     },
@@ -518,7 +487,6 @@ export default {
       // this.val.areaVal = this.addressData[this.provinceIndex].city[this.cityIndex].area[this.districtIndex]
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
-      console.log("=====滑动数据传输=处理完毕·····=>");
     },
     handleCancel() {
       this.show = false;
@@ -557,7 +525,7 @@ export default {
       flex: 1;
     }
     .delete-addrss {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -641,7 +609,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     /deep/ .van-button__text {
       color: #fff;

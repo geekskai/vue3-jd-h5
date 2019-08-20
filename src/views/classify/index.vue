@@ -71,7 +71,6 @@ export default {
   methods: {
     // 获取分类
     getGoodsList() {
-      // this.$http.get(`/api/product/category`).then(response => {
       this.$http.get(`/api/product/category`).then(response => {
         const categoryData = response.data.content;
         this.categoryData = categoryData;
@@ -83,7 +82,6 @@ export default {
     //左侧菜单和右侧区域联动
     selectMenu($index) {
       this.currentIndex = $index;
-      // this.getGoodsList();
     },
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
@@ -91,7 +89,6 @@ export default {
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(product) {
-      console.log('=====product==>',product);
       this.$router.push({
         path: "/classify/classifySearch",
         query: { categoryId: product.value, product: product }

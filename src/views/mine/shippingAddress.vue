@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "ShippingAddress",
   data() {
     return {
       addressArray: []
@@ -63,6 +63,10 @@ export default {
   },
   methods: {
     handleGoToEditAddrss(address) {
+      address.fullAddress = address.fullAddress.slice(
+        0,
+        address.fullAddress.length - 9
+      );
       this.$router.push({
         path: "/mine/editAddress",
         query: { address: address }
@@ -119,7 +123,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #EC3924;
+        background-color: #ec3924;
       }
       .card-triangle {
         position: absolute;
@@ -181,7 +185,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #EC3924;
+      color: #ec3924;
     }
   }
 }

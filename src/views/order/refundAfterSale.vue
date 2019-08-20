@@ -8,10 +8,10 @@
       <div class="header-content">退款/售后</div>
     </header>
     <div v-if="!orderLists.length" class="empty-box">
-      <svg-icon icon-class="order-empty" class="order-empty"></svg-icon>
+      <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>
       <span class="empty-text">
-        <i>您还没有相关的订单</i>
-        <i>可以多去看看，或许能找到您想要的</i>
+        <i>未发现退款/售后的订单</i>
+        <!-- <i>可以多去看看，或许能找到您想要的</i> -->
       </span>
     </div>
     <van-tabs v-else v-model="active" background="#EFEFF4">
@@ -367,6 +367,7 @@ export default {
       flex-direction: column;
       font-size: 17px;
       color: #949497;
+      padding-top: 10px;
     }
   }
 }
