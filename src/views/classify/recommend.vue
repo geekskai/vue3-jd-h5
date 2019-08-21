@@ -88,7 +88,7 @@ export default {
     initData() {
       this.$http
         .get(
-          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15`
+          `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15&clientType=0`
         )
         .then(response => {
           this.likeList = response.data.content;

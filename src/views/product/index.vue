@@ -35,17 +35,15 @@
     <ul class="product-content">
       <li class="product-title">
         <div class="text-left">
-          <span class="force-value">0.5倍算力</span>
+          <span v-if="detailForm.calculate" class="force-value">{{detailForm.calculate}}算力值</span>
           <span class="item-desc">{{detailForm.productName}}</span>
         </div>
-        <div>
-          <span class="heart-full" @click="isLike=!isLike">
-            <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
-            <svg-icon v-else icon-class="heart-null"></svg-icon>
-          </span>
-        </div>
+        <span class="heart-full" @click="isLike=!isLike">
+          <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+          <svg-icon v-else icon-class="heart-null"></svg-icon>
+        </span>
       </li>
-      <li class="product-price">
+      <li class="product-price" v-if="detailForm.calculate">
         <span>购买该商品可获得算力值，算力值可兑换CM币</span>
       </li>
 
@@ -242,7 +240,9 @@ export default {
     handleShowSpecs() {
       this.show = true;
       this.$http
-        .get(`/api/product/chooseSku?productId=${this.$route.query.productId}`)
+        .get(
+          `/api/product/chooseSku?productId=${this.$route.query.productId}&clientType=0`
+        )
         .then(response => {
           let responseDataList = response.data.content;
           let skuSpecesTree = [];
@@ -284,6 +284,7 @@ export default {
             listObj.stock_num = it.stock;
             listObj.id = it.id;
             listObj.price = it.price;
+            listObj.calculate = it.calculate;
             for (let j = 0; j < responseDataList[i].speces.length; j++) {
               listObj[responseDataList[i].speces[j].specsId] =
                 responseDataList[i].speces[j].specsValueId;
@@ -301,7 +302,9 @@ export default {
     },
     initData() {
       this.$http
-        .get(`/api/product/info?productId=${this.$route.query.productId}`)
+        .get(
+          `/api/product/info?productId=${this.$route.query.productId}&clientType=0`
+        )
         .then(response => {
           this.productImages = response.data.content.productImages;
           this.goods.picture = response.data.content.productImages[0];
@@ -426,7 +429,7 @@ export default {
           width: 70px;
           height: 10px;
           border-radius: 5px;
-          color: #EC3924;
+          color: #ec3924;
           display: inline-block;
         }
       }
@@ -473,14 +476,15 @@ export default {
         align-items: center;
       }
       .force-value {
-        display: inline-block;
-        width: 54px;
+        display: flex;
+        justify-content: center;
+        min-width: 54px;
         text-align: center;
         line-height: 20px;
         height: 20px;
         color: #fff;
         font-size: 9px;
-        background-color: #EC3924;
+        background-color: #ec3924;
         border-radius: 10px 10px;
       }
       .heart-full {
@@ -514,8 +518,8 @@ export default {
       margin-top: 10px;
       margin-bottom: 10px;
       /deep/ .van-button--danger {
-        background-color: #EC3924;
-        border: 1px solid #EC3924;
+        background-color: #ec3924;
+        border: 1px solid #ec3924;
       }
       .store-detail {
         padding-left: 16px;
@@ -558,7 +562,7 @@ export default {
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #EC3924;
+      color: #ec3924;
     }
   }
   .item-details {
@@ -590,8 +594,8 @@ export default {
       /deep/ .van-button--danger {
         height: 44px;
         line-height: 44px;
-        background-color: #EC3924;
-        border: 1px solid #EC3924;
+        background-color: #ec3924;
+        border: 1px solid #ec3924;
       }
     }
   }
@@ -624,7 +628,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #EC3924;
+            color: #ec3924;
             font-size: 17px;
             font-weight: 600;
           }
@@ -670,9 +674,9 @@ export default {
               }
             }
             .color-tag.active {
-              border: 1px solid #EC3924;
+              border: 1px solid #ec3924;
               background-color: white;
-              color: #EC3924;
+              color: #ec3924;
             }
           }
         }
@@ -752,8 +756,8 @@ export default {
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #EC3924;
-      border: 1px solid #EC3924;
+      background-color: #ec3924;
+      border: 1px solid #ec3924;
     }
   }
 }

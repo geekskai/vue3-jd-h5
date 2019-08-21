@@ -22,14 +22,12 @@
       </ul>
     </section>
     <div v-else>
-
-      
       <section class="order-card" v-for="(shopCart,index) in shopCartArray" :key="index">
         <van-checkbox
           v-model="shopCart.merchantChecked"
           @click="handleSelectAllGoods(shopCart,true)"
           checked-color="#91C95B"
-         >
+        >
           <li class="checkbox-all">
             <div class="store-info">
               <img v-lazy="shopCart.merchantLogo" class="header-img" />
@@ -42,7 +40,7 @@
           class="order-list"
           @change="handleMerchantCheckboxGroup(shopCart)"
           v-model="shopCart.merchantCheckboxGroup"
-         >
+        >
           <ul v-for="(item, i) in shopCart.merchantItemList" :key="i">
             <div class="order-info">
               <li class="check-item">
@@ -156,15 +154,24 @@ export default {
   methods: {
     submitDeleteCartGoods() {
       // type: 1 全部清空，可以不传idList ， 默认type 0
+      console.log("=====this.shopCartArray==>", this.shopCartArray);
+
       this.shopCartArray.forEach(it => {
         console.log("=====it==>", it);
-        if (!it.merchantChecked) {
+        // if (it.merchantChecked) {
           it.merchantCheckboxGroup.forEach(item => {
             this.idList.push(item.id);
           });
-        }
+        // }
       });
       console.log("=====idList==>", this.idList);
+      if (this.idList.length == 0) {
+        this.$toast({
+          mask: false,
+          message: "请选择你要删除的商品！"
+        });
+        return;
+      }
       this.$http
         .post(`/api/cart/remove`, { idList: this.idList, type: 0 })
         .then(response => {
@@ -283,7 +290,14 @@ export default {
         });
     },
     submitSettlement() {
-      this.show = true;
+      if (this.productTotalPrice) {
+        this.show = true;
+      } else {
+        this.$toast({
+          mask: false,
+          message: "请选择你要结算的商品！"
+        });
+      }
     }
   }
 };
@@ -305,7 +319,7 @@ export default {
       color: #3a3a3a;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -334,8 +348,8 @@ export default {
           width: 150px;
           height: 44px;
           font-size: 17px;
-          color: #EC3924;
-          border: 1px solid #EC3924;
+          color: #ec3924;
+          border: 1px solid #ec3924;
           padding: 10px 32px;
           border-radius: 4px;
         }
@@ -362,7 +376,7 @@ export default {
       }
     }
     /deep/ .van-submit-bar__price {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 17px;
       font-weight: 600;
       padding-left: 5px;
@@ -392,7 +406,7 @@ export default {
     }
   }
   /deep/ .van-button--danger {
-    background-color: #EC3924;
+    background-color: #ec3924;
     height: 44px;
     line-height: 44px;
     .van-button__text {
@@ -472,7 +486,7 @@ export default {
             color: #949497;
           }
           .info-count {
-            color: #EC3924;
+            color: #ec3924;
             font-size: 14px;
             font-weight: 600;
             display: flex;

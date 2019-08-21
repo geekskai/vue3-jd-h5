@@ -95,7 +95,9 @@
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>￥：{{item.productCnyPrice}}</i>
+                    <i>￥{{item.productCnyPrice}}</i>
+                    <!-- <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span> -->
+                    <span class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
               </div>
@@ -141,7 +143,7 @@ export default {
     initSortData() {
       this.$http
         .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20`
+          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;
@@ -245,7 +247,7 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #EC3924;
+          background-color: #ec3924;
         }
       }
     }
@@ -280,7 +282,7 @@ export default {
       color: #949497;
       font-size: 11px;
       .select-item.active {
-        color: #EC3924;
+        color: #ec3924;
       }
       .select-item {
         .search-icon {
@@ -322,11 +324,11 @@ export default {
         }
 
         .sort-caret.ascending.active {
-          border-bottom-color: #EC3924;
+          border-bottom-color: #ec3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #EC3924;
+          border-top-color: #ec3924;
           bottom: 7px;
         }
       }
@@ -335,7 +337,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #EC3924;
+        color: #ec3924;
       }
       .goods-content {
         display: flex;
@@ -381,7 +383,22 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #EC3924;
+              color: #ec3924;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 42px;
+                height: 17px;
+              }
             }
           }
         }

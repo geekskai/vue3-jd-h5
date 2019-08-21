@@ -10,7 +10,7 @@
       </div>
       <span @click="getSearch">搜索</span>
     </div>
-    <div v-if="serarchResult.length<=0" class="search-content">
+    <div class="search-content">
       <div class="hot-list">
         <span class="hot-words">热搜词</span>
         <div>
@@ -33,82 +33,13 @@
           </span>
         </div>
         <div class="histort-search">
-          <span v-for="(item,index) in historySearch" :key="index">{{item}}</span>
+          <span
+            v-for="(item,index) in historySearch"
+            @click="handleGoHistory(item)"
+            :key="index"
+          >{{item}}</span>
         </div>
       </div>
-    </div>
-    <div v-else class="goods-all">
-      <section class="select-menu" :class="{'isFixed' : seclectActive}">
-        <div
-          class="select-item default-sort"
-          :class="{'active' : activeOrderBy === 'update_time'}"
-          data-order-by="update_time"
-          @click="initData"
-        >默认排序</div>
-        <div class="select-item">
-          按价格
-          <span class="select-arrows">
-            <i
-              class="sort-caret ascending"
-              data-order-by="price"
-              :class="{'active' : activeOrderBy === 'price_asc'}"
-              @click="selectOrder($event,'asc')"
-            ></i>
-            <i
-              class="sort-caret descending"
-              :class="{'active' : activeOrderBy === 'price_desc'}"
-              data-order-by="price"
-              @click="selectOrder($event,'desc')"
-            ></i>
-          </span>
-        </div>
-        <div
-          class="select-item"
-          :class="{'active' : activeOrderBy === 'price_desc'}"
-          data-order-by="price_desc"
-          @click="selectOrder($event)"
-        >
-          按销量
-          <span class="select-arrows">
-            <i
-              :class="{'active' : activeOrderBy === 'sales_quantity_asc'}"
-              class="sort-caret ascending"
-              data-order-by="sales_quantity"
-              @click="selectOrder($event,'asc')"
-            ></i>
-            <i
-              :class="{'active' : activeOrderBy === 'sales_quantity_desc'}"
-              class="sort-caret descending"
-              data-order-by="sales_quantity"
-              @click="selectOrder($event,'desc')"
-            ></i>
-          </span>
-        </div>
-      </section>
-      <section class="goods-box">
-        <ul class="goods-content">
-          <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" to="/product/index">
-              <img class="product-image" v-lazy="item.productMainImage" />
-              <div class="goods-layout">
-                <div class="goods-title">{{item.productName}}</div>
-                <span class="goods-div">{{item.labels}}</span>
-                <div class="goods-desc">
-                  <span class="goods-price">
-                    <i>$:{{item.productCnyPrice}}</i>
-                  </span>
-                </div>
-                <div class="goods-count-sale">
-                  <span class="goods-shopName">
-                    <i>{{item.shopName}}</i>
-                  </span>
-                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity}}</span>
-                </div>
-              </div>
-            </router-link>
-          </template>
-        </ul>
-      </section>
     </div>
   </div>
 </template>
@@ -123,7 +54,7 @@ export default {
   data() {
     return {
       searchText: "",
-      seclectActive: false,
+      // seclectActive: false,
       hotSerach: [],
       serarchResult: [],
       page: 1,
@@ -133,8 +64,16 @@ export default {
   created() {
     this.initData();
   },
-  computed: {},
   methods: {
+    handleGoHistory(item) {
+      this.$router.push({
+        path: `/search/searchReault`,
+        query: {
+          // categoryId: categoryId,
+          searchWord: item
+        }
+      });
+    },
     initData() {
       this.$http
         .get(
@@ -259,7 +198,7 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-      color: #EC3924;
+      color: #ec3924;
       font-size: 16px;
     }
   }
@@ -270,7 +209,7 @@ export default {
     .hot-list {
       .hot-words {
         position: relative;
-        color: #EC3924;
+        color: #ec3924;
         font-size: 14px;
       }
       .hot-detail {
@@ -283,8 +222,8 @@ export default {
         display: inline-block;
       }
       .hot-detail.hot {
-        border: 1px solid #EC3924;
-        color: #EC3924;
+        border: 1px solid #ec3924;
+        color: #ec3924;
         .svg-icon {
           width: 12px;
           height: 14px;
@@ -310,147 +249,12 @@ export default {
           padding-top: 20px;
           display: flex;
           justify-content: space-between;
-          color: #EC3924;
+          color: #ec3924;
         }
         .icon-delete {
           width: 16px;
           height: 16px;
           float: right;
-        }
-      }
-    }
-  }
-  .goods-all {
-    padding-top: 10px;
-    .select-menu {
-      background-color: #fff;
-      line-height: 44px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      color: #949497;
-      font-size: 11px;
-
-      .select-item.active {
-        color: #EC3924;
-      }
-      .select-item {
-        .search-icon {
-          transform: rotate(90deg);
-        }
-      }
-      .default-sort {
-        padding-left: 16px;
-      }
-      .search-icon {
-        padding-right: 16px;
-      }
-      .select-arrows {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        height: 34px;
-        width: 20px;
-        vertical-align: middle;
-        cursor: pointer;
-        overflow: initial;
-        position: relative;
-        .sort-caret {
-          width: 0;
-          height: 0;
-          border: 5px solid transparent;
-          position: absolute;
-          left: 7px;
-        }
-        .sort-caret.ascending {
-          border-bottom-color: #c0c4cc;
-          top: 5px;
-        }
-        .sort-caret.descending {
-          border-top-color: #c0c4cc;
-          bottom: 7px;
-        }
-        .sort-caret.ascending.active {
-          border-bottom-color: #EC3924;
-          top: 5px;
-        }
-        .sort-caret.descending.active {
-          border-top-color: #EC3924;
-          bottom: 7px;
-        }
-      }
-    }
-    .goods-box {
-      padding: 16px;
-      .good-things {
-        font-size: 18px;
-        color: #EC3924;
-      }
-      .goods-content {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        .goods-item {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          align-items: center;
-          width: 165px;
-          border-radius: 8px;
-          margin-top: 10px;
-          // padding-right: 10px;
-          background-color: white;
-          .product-image {
-            width: 165px;
-            height: 196px;
-          }
-        }
-        li:nth-of-type(even) {
-          padding-right: 0;
-        }
-        .goods-layout {
-          width: 165px;
-          padding: 0 10px;
-          display: flex;
-          justify-content: flex-start;
-          flex-direction: column;
-          .goods-title {
-            color: #3a3a3a;
-            font-size: 14px;
-            font-weight: 700;
-          }
-          .goods-div {
-            color: #949497;
-            font-size: 11px;
-          }
-          .goods-desc {
-            background-color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 12px;
-            padding-top: 12px;
-            .goods-price {
-              font-size: 14px;
-              color: #EC3924;
-            }
-            .add-icon {
-              width: 20px;
-              height: 20px;
-            }
-          }
-          .goods-count-sale {
-            background-color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 12px;
-            color: #949497;
-            font-size: 11px;
-            .goods-monthlySalesQuantity {
-              font-size: 11px;
-            }
-          }
         }
       }
     }

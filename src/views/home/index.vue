@@ -165,7 +165,8 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>￥{{item.productCnyPrice}}</i>
-                      <span class="force-value">0.5倍算力</span>
+                      <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
+                      <!-- <span class="force-value">{{item.calculate}}倍算力值</span> -->
                     </span>
                   </div>
                 </div>
@@ -239,7 +240,7 @@ export default {
       this.handleTabClick(0);
     },
     handleTabClick(type) {
-      this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
+      this.$http.get(`/api/index/choiceness?type=${type}&clientType=0`).then(response => {
         this.tabItemLists = response.data.content;
       });
     },
@@ -394,7 +395,7 @@ export default {
               color: white;
               text-align: center;
               width: 42px;
-              background-color: #EC3924;
+              background-color: #ec3924;
             }
             .time-count-down {
               flex: 1;
@@ -417,7 +418,7 @@ export default {
             padding-top: 4px;
             .new-price {
               font-size: 11px;
-              color: #EC3924;
+              color: #ec3924;
               font-weight: 600;
             }
             .old-price {
@@ -441,12 +442,12 @@ export default {
             font-weight: 600;
           }
           .tag-text {
-            border: 1px solid #EC3924;
+            border: 1px solid #ec3924;
             display: inline-block;
             text-align: center;
             margin-left: 7px;
             border-radius: 2px;
-            color: #EC3924;
+            color: #ec3924;
             width: 64px;
           }
         }
@@ -512,7 +513,7 @@ export default {
             border-radius: 2px;
             margin-left: 8px;
             text-align: center;
-            border: 1px solid #EC3924;
+            border: 1px solid #ec3924;
             font-size: 11px;
             color: #dd3749;
             .svg-icon {
@@ -563,7 +564,7 @@ export default {
       padding: 10px 16px;
       .good-things {
         font-size: 18px;
-        color: #EC3924;
+        color: #ec3924;
         font-weight: 600;
       }
       .goods-content {
@@ -617,7 +618,7 @@ export default {
             .goods-price {
               padding-top: 5px;
               font-size: 14px;
-              color: #EC3924;
+              color: #ec3924;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -625,7 +626,7 @@ export default {
                 margin-left: 7px;
                 color: white;
                 border-radius: 20px 20px;
-                background-color: #EC3924;
+                background-color: #ec3924;
                 display: inline-block;
                 font-size: 7px;
                 line-height: 17px;

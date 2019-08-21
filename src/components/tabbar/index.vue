@@ -24,8 +24,8 @@
             :src="props.active ? icon_classify.active : icon_classify.normal"
           />
         </van-tabbar-item>
-        <van-tabbar-item name="shopCart" to="/shopCart" :info="count">
-          <!-- <van-tabbar-item name="shopCart" to="/shopCart"> -->
+        <!-- <van-tabbar-item name="shopCart" to="/shopCart" :info="count"> -->
+        <van-tabbar-item name="shopCart" to="/shopCart">
           <span>购物车</span>
           <img
             slot="icon"
