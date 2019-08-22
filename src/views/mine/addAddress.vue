@@ -91,7 +91,7 @@
       position="bottom"
       :style="{ height: '40%' }"
       @click-overlay="show = false"
-      >
+    >
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -158,8 +158,6 @@ export default {
         receiverGender: 0,
         defaultAddrFlag: 0
       },
-
-      
       list: [],
       list2: [],
       list3: [],
@@ -239,10 +237,23 @@ export default {
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },
- handleChooseGender(gender) {
+    handleChooseGender(gender) {
       this.addressInfo.receiverGender = gender;
     },
     handleSeveAddresInfo() {
+      if (
+        !this.addressInfo.receiverName ||
+        !this.addressInfo.receiverPhone ||
+        !this.addressInfo.address ||
+        !this.addressInfo.fullAddress
+      ) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入你的完整的地址信息！"
+        });
+        return;
+      }
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {
@@ -272,7 +283,7 @@ export default {
           this.val.cityVal = this.list2[0];
         });
     },
-   
+
     complete() {
       if (!this.val.areaVal.areaId) {
         this.val.areaVal = {
@@ -469,7 +480,6 @@ export default {
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
     }
-   
   }
 };
 </script>
@@ -501,7 +511,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -585,13 +595,12 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     /deep/ .van-button__text {
       color: #fff;
     }
   }
-
 
   .address .addressbox {
     height: 100%;
@@ -676,6 +685,5 @@ export default {
   .selectAni {
     transition: 0.8s;
   }
-
 }
 </style>

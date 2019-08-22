@@ -61,6 +61,7 @@
                   <van-stepper
                     v-model="item.quantity"
                     integer
+                    :max="item.stock"
                     @change="handleGoodsCountChange(item)"
                   />
                 </div>
@@ -107,6 +108,7 @@ export default {
       merchantChecked: false,
       allChecked: false,
       idList: [],
+      selectedGoodsId: [],
       clearCart: false,
       productTotalPrice: 0,
       shopCartArray: [],
@@ -154,15 +156,11 @@ export default {
   methods: {
     submitDeleteCartGoods() {
       // type: 1 全部清空，可以不传idList ， 默认type 0
-      console.log("=====this.shopCartArray==>", this.shopCartArray);
-
       this.shopCartArray.forEach(it => {
         console.log("=====it==>", it);
-        // if (it.merchantChecked) {
-          it.merchantCheckboxGroup.forEach(item => {
-            this.idList.push(item.id);
-          });
-        // }
+        it.merchantCheckboxGroup.forEach(item => {
+          this.idList.push(item.id);
+        });
       });
       console.log("=====idList==>", this.idList);
       if (this.idList.length == 0) {
@@ -291,7 +289,18 @@ export default {
     },
     submitSettlement() {
       if (this.productTotalPrice) {
-        this.show = true;
+        // this.show = true;
+        this.shopCartArray.forEach(it => {
+          it.merchantCheckboxGroup.forEach(item => {
+            this.selectedGoodsId.push(item.id);
+          });
+        });
+        this.$router.push({
+          path: "/order/confirmOrder",
+          query: {
+            selectedGoodsId: this.selectedGoodsId
+          }
+        });
       } else {
         this.$toast({
           mask: false,

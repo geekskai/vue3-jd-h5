@@ -15,26 +15,27 @@
     </div>
     <section class="reason-list">
       <div class="item-content">
-        <van-radio-group v-model="radio">
+        <van-radio-group v-model="cancelReason">
           <van-cell-group>
-            <van-cell title="想了想，我不想要了" clickable @click="radio = '1'">
-              <van-radio slot="right-icon" checked-color="#91C95B" name="1" />
+            <van-cell title="想了想，我不想要了" clickable @click="cancelReason = '想了想，我不想要了'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="想了想，我不想要了" />
             </van-cell>
-            <van-cell title="买多了/买错了" clickable @click="radio = '2'">
-              <van-radio slot="right-icon" checked-color="#91C95B" name="2" />
+            <van-cell title="买多了/买错了" clickable @click="cancelReason = '买多了/买错了'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="买多了/买错了" />
             </van-cell>
-            <van-cell title="支付遇到问题" clickable @click="radio = '3'">
-              <van-radio slot="right-icon" checked-color="#91C95B" name="3" />
+            <van-cell title="支付遇到问题" clickable @click="cancelReason = '支付遇到问题'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="支付遇到问题" />
             </van-cell>
-            <van-cell title="地址填写错误" clickable @click="radio = '4'">
-              <van-radio slot="right-icon" checked-color="#91C95B" name="4" />
+            <van-cell title="地址填写错误" clickable @click="cancelReason = '地址填写错误'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="地址填写错误" />
             </van-cell>
-            <van-cell title="其他原因" clickable @click="radio = '5'">
+            <van-cell title="其他原因" clickable @click="cancelReason = '其他原因'">
+              <van-radio slot="right-icon" checked-color="#91C95B" name="其他原因" />
             </van-cell>
           </van-cell-group>
         </van-radio-group>
         <van-field
-          v-model="value"
+          v-model="otherCancelReason"
           type="textarea"
           rows="4"
           @input="descInput"
@@ -47,7 +48,7 @@
     </section>
     <div class="pay-btn">
       <div class="pay-count">请选择取消订单原因，帮助我们改进，提高服务</div>
-      <van-button type="danger" size="large">提交</van-button>
+      <van-button type="danger" @click="handleSubmitOrder" size="large">提交</van-button>
     </div>
   </div>
 </template>
@@ -57,20 +58,39 @@ export default {
   name: "CancelOrder",
   data() {
     return {
-      columns: [
-        "想了想，我不想要了",
-        "买多了/买错了",
-        "支付遇到问题",
-        "地址填写错误",
-        "其他原因"
-      ],
-      value: "",
-      remnant: 0,
-      radio: "1"
+      // columns: [
+      //   "想了想，我不想要了",
+      //   "买多了/买错了",
+      //   "支付遇到问题",
+      //   "地址填写错误",
+      //   "其他原因"
+      // ],
+      cancelReason: "",
+      otherCancelReason: "",
+      remnant: 0
+      // radio: "1"
     };
   },
   created() {},
   methods: {
+    handleSubmitOrder() {
+      if (this.cancelReason === "其他原因") {
+        this.cancelReason = this.otherCancelReason;
+      }
+      this.$http
+        .post(`/api/order/cancel`, {
+          cancelReason: this.cancelReason,
+          orderNo: this.$route.query.orderNo
+        })
+        .then(response => {
+          console.log("=====content==>", response.data.content);
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "提交成功！"
+          });
+        });
+    },
     onChange(picker, value, index) {
       console.log(`当前值：${value}, 当前索引：${index}`);
     },
@@ -112,7 +132,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -156,7 +176,7 @@ export default {
         right: 0;
       }
       /deep/ .van-cell {
-        padding:10px 0;
+        padding: 10px 0;
         // padding-top: 20px;
       }
     }
@@ -178,7 +198,7 @@ export default {
       padding-bottom: 10px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
     }

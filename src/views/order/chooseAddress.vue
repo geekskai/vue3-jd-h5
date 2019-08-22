@@ -66,9 +66,18 @@ export default {
     handleChooseAddress(userAddrId) {
       console.log("=====选中地址==>", userAddrId);
       console.log("=====orderForm==>", this.orderForm);
-
+      // let skuInfoForm = {};
+      // if (this.$route.query.skuId) {
+      //   skuInfoForm = {
+      //     quantity: this.$route.query.quantity,
+      //     skuId: this.$route.query.skuId
+      //   };
+      // } else {
+      //   skuInfoForm = null;
+      // }
       this.$http
         .post(`/api/order/checkout`, {
+          // skuInfoForm: skuInfoForm,
           skuInfoForm: {
             quantity: this.$route.query.quantity,
             skuId: this.$route.query.skuId
@@ -142,7 +151,7 @@ export default {
       align-items: center;
       position: relative;
       .card-triangle.active {
-        background-color: #EC3924;
+        background-color: #ec3924;
       }
       .card-triangle {
         position: absolute;
@@ -204,7 +213,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      color: #EC3924;
+      color: #ec3924;
     }
   }
 }

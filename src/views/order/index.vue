@@ -60,7 +60,7 @@
         <li class="order-btn">
           <!-- 待付款, -->
           <div v-if="orderList.status == 0">
-            <router-link tag="span" to="/order/cancelOrder">取消订单</router-link>
+            <router-link tag="span" :to="`/order/cancelOrder?orderNo=${orderList.orderNo}`">取消订单</router-link>
             <span @click="show = true">去支付</span>
           </div>
           <!-- 待发货 -->

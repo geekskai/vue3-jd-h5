@@ -10,7 +10,7 @@
         <label class="wallet-total">钱包总额:85578909CM</label>
         <span class="wallet-value">≈65468.77CNY</span>
       </li>
-      <section class="wallet-card">
+      <!-- <section class="wallet-card">
         <ul class="wallet-content">
           <span class="wallet-title">收益占比</span>
           <div class="profit-charts">
@@ -49,9 +49,9 @@
             </ul>
           </div>
         </ul>
-      </section>
+      </section> -->
     </header>
-    <ul class="order-header">
+    <!-- <ul class="order-header">
       <li class="options-header">
         <div class="header-item">
           <span class="option-time">2019-8-15</span>
@@ -65,7 +65,7 @@
           <span class="option-total">总明细:29845678907CM</span>
         </div>
       </li>
-    </ul>
+    </ul> -->
     <section class="wallet-orders">
       <ul class="orders-lists">
         <li class="order-item">
@@ -87,14 +87,14 @@
             <span>金额：77.789654</span>
           </div>
         </li>
-        <li class="order-item">
+        <!-- <li class="order-item">
           <div class="item-time">
             <span class="status-text">转换ID：0x4o…dfghjk</span>
           </div>
           <div class="item-status">
             <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
     <section class="wallet-orders">
@@ -118,14 +118,14 @@
             <span>金额：77.789654</span>
           </div>
         </li>
-        <li class="order-item">
+        <!-- <li class="order-item">
           <div class="item-time">
             <span class="status-text">转换ID：0x4o…dfghjk</span>
           </div>
           <div class="item-status">
             <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
     <section class="wallet-orders">
@@ -149,14 +149,14 @@
             <span>金额：77.789654</span>
           </div>
         </li>
-        <li class="order-item">
+        <!-- <li class="order-item">
           <div class="item-time">
             <span class="status-text">转换ID：0x4o…dfghjk</span>
           </div>
           <div class="item-status">
             <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
   </div>
@@ -168,16 +168,25 @@ export default {
   data() {
     return {};
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData()
+  },
+  methods: {
+    initData(){
+      this.$http.get(`/api/wallet/getWalletLogs?type=2&page=1&size=10`).then( response=>{
+        console.log('=====content==>',response.data.content);
+      } )
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 .balance-wallet {
   .page-header {
-    height: 334px;
-    background: linear-gradient(to right, #fe735d, #fc9863);
+    // height: 334px;
+    // background: linear-gradient(to right, #fe735d, #fc9863);
+    background-color:#6383FC;
     width: 100%;
     padding: 10px 20px;
     .btn-left {
@@ -284,28 +293,28 @@ export default {
       }
     }
   }
-  .order-header {
-    color: #3a3a3a;
-    margin-top: 10px;
-    .options-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .header-item {
-        font-size: 13px;
-        .option-type {
-          padding-left: 10px;
-        }
-        .option-total {
-          padding-left: 10px;
-        }
-      }
-      .total-detail {
-        font-size: 11px;
-        color: #3a3a3a;
-      }
-    }
-  }
+  // .order-header {
+  //   color: #3a3a3a;
+  //   margin-top: 10px;
+  //   .options-header {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     .header-item {
+  //       font-size: 13px;
+  //       .option-type {
+  //         padding-left: 10px;
+  //       }
+  //       .option-total {
+  //         padding-left: 10px;
+  //       }
+  //     }
+  //     .total-detail {
+  //       font-size: 11px;
+  //       color: #3a3a3a;
+  //     }
+  //   }
+  // }
   .wallet-orders {
     padding: 5px 16px;
     margin: 16px;

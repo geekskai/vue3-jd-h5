@@ -65,6 +65,7 @@ export default {
     },
     handleSetEmail() {
       if (this.userInfo.password === this.userInfo.password1) {
+        this.userInfo.mobile =null
         this.$http
           .post(`/api/user/updateUserInfo`, this.userInfo)
           .then(response => {

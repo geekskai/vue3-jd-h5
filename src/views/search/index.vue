@@ -124,12 +124,12 @@ export default {
         })
         .then(() => {
           this.$http
-            .post(`/api/product/delHistorySearch`, { type: 0 })
+            .post(`/api/product/delHistorySearch?type=0`)
             .then(response => {
               this.$toast({
                 mask: false,
                 duration: 1000,
-                message: response.data.msg
+                message: "删除成功！"
               });
             });
         });

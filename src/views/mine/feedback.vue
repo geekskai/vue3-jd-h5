@@ -11,7 +11,7 @@
         <li class="item-header">
           <span>选择类型</span>
         </li>
-        <van-radio-group v-model="radio" class="radio-list">
+        <van-radio-group v-model="type" class="radio-list">
           <li class="radio-item">
             <van-radio name="1" checked-color="#91C95B">功能异常</van-radio>
           </li>
@@ -29,7 +29,7 @@
           <van-field
             rows="5"
             :autosize="{minHeight:280,maxHeight:280}"
-            v-model="value"
+            v-model="detail"
             type="textarea"
             placeholder="请填写问题描述"
             @input="descInput"
@@ -40,6 +40,9 @@
         </van-cell-group>
       </ul>
     </section>
+    <div class="pay-btn">
+      <van-button type="danger" @click="handleSubmit" size="large">提交</van-button>
+    </div>
   </div>
 </template>
 
@@ -48,22 +51,43 @@ export default {
   name: "feedback",
   data() {
     return {
-      radio: "1",
-      value: "",
+      type: "",
+      detail: "",
       isDisInput: false,
       remnant: 0
     };
   },
   created() {},
   methods: {
-    descInput(value) {
-      var txtVal = this.value.length;
+    handleSubmit() {
+      if (!this.type || !this.detail) {
+        this.$toast({
+          mask: false,
+          message: "请选择类型或者填写问题描述！"
+        });
+        return;
+      }
+      this.$http
+        .post(`/api/help/feedback`, {
+          type: this.type,
+          detail: this.detail
+        })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            message: "提交成功！"
+          });
+          this.$router.go(-1);
+        });
+    },
+    descInput(detail) {
+      var txtVal = this.detail.length;
       this.remnant = 200 - txtVal;
       if (this.remnant < 0) {
         this.remnant = 0;
       }
       if (200 - txtVal < 0) {
-        this.value = value.slice(0, 200);
+        this.detail = detail.slice(0, 200);
         this.isDisInput = true;
       } else {
         this.isDisInput = false;
@@ -100,7 +124,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -114,7 +138,7 @@ export default {
     margin-top: 18px;
     .options-list {
       padding-top: 20px;
-      padding-bottom: 120px;
+      padding-bottom: 20px;
       .item-header {
         font-size: 20px;
         margin-bottom: 16px;
@@ -148,6 +172,19 @@ export default {
           right: 0;
         }
       }
+    }
+  }
+  .pay-btn {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+    /deep/ .van-button--danger {
+      background-color: #ec3924;
+      line-height: 44px;
+      font-size: 18px;
     }
   }
 }
