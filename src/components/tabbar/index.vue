@@ -4,7 +4,7 @@
       <van-tabbar
         route
         v-model="active"
-        active-color="#FE4F70"
+        active-color="#EC3924"
         inactive-color="#949497"
         style="z-index: 100;"
       >
