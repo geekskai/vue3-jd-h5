@@ -77,7 +77,7 @@ export default {
     handleGetVerifyCode() {
       if (this.userInfo.mobile) {
         this.$http
-          .post(`/api/user/getVerifyCode`, { mobile: this.userInfo.mobile })
+          .post(`/api/user/getVerifyCode`, { mobile: this.userInfo.mobile,type:3 })
           .then(response => {
             this.$toast({
               mask: false,

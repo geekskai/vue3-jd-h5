@@ -79,6 +79,7 @@ export default {
         });
         return;
       }
+      this.phoneRegisterForm.type = 1
       this.$http
         .post(`/api/user/getVerifyCode`, this.phoneRegisterForm)
         .then(response => {

@@ -68,6 +68,7 @@ export default {
         });
         return;
       }
+      this.emailRegister.type = 1
       this.$http
         .post(`/api/user/getVerifyCode`, this.emailRegister)
         .then(response => {

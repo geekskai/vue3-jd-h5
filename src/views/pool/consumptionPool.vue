@@ -12,6 +12,31 @@
     </header>
 
     <div class="card-box">
+      <section
+        class="consumption-card"
+        v-for="(WalletUserPool,index) in walletUserPoolLogVO"
+        :key="index"
+      >
+        <ul class="card-content">
+          <!-- <div class="circular-consumption">消费</div> -->
+          <li class="consumption-time">
+            <small>{{WalletUserPool.createTime}}</small>
+            <!-- <span class="consumption-text">消费挖矿分红</span> -->
+            <span class="consumption-text">{{WalletUserPool.typeDesc}}</span>
+          </li>
+          <li class="card-bottom">+{{WalletUserPool.amount}} USDT</li>
+        </ul>
+      </section>
+      <!-- <section class="week-card">
+        <ul class="card-content">
+          <div class="circular-consumption">周</div>
+          <li class="consumption-time">
+            <small>2018-3-25</small>
+            <span class="consumption-text">消费挖矿分红</span>
+          </li>
+          <li class="card-bottom">+6900 USDT</li>
+        </ul>
+      </section>
       <section class="consumption-card">
         <ul class="card-content">
           <div class="circular-consumption">消费</div>
@@ -23,35 +48,15 @@
         </ul>
       </section>
       <section class="week-card">
-        <ul class="card-content">
+        <span class="card-content">
           <div class="circular-consumption">周</div>
           <li class="consumption-time">
             <small>2018-3-25</small>
             <span class="consumption-text">消费挖矿分红</span>
           </li>
           <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>
-      <section class="consumption-card">
-        <ul class="card-content">
-          <div class="circular-consumption">消费</div>
-          <li class="consumption-time">
-            <small>2018-3-25</small>
-            <span class="consumption-text">消费挖矿分红</span>
-          </li>
-          <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>
-      <section class="week-card">
-        <ul class="card-content">
-          <div class="circular-consumption">周</div>
-          <li class="consumption-time">
-            <small>2018-3-25</small>
-            <span class="consumption-text">消费挖矿分红</span>
-          </li>
-          <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>
+        </span>
+      </section>-->
     </div>
   </div>
 </template>
@@ -60,10 +65,24 @@
 export default {
   name: "consumptionPool",
   data() {
-    return {};
+    return {
+      walletUserPoolLogVO: []
+    };
   },
-  created() {},
-  methods: {}
+
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .get(`/api/wallet/getPoolLogs?poolType=1&page=1&size=10`)
+        .then(response => {
+          console.log("=====content==>", response.data.content);
+          this.walletUserPoolLogVO = response.data.content;
+        });
+    }
+  }
 };
 </script>
 
