@@ -44,11 +44,11 @@ export default {
     this.qrcode();
   },
   created() {
-    this.$http.get(`/api/message/messageTypeCount`).then(response => {
-      response.data.content.forEach(it => {
-        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
-      });
-    });
+    // this.$http.get(`/api/message/messageTypeCount`).then(response => {
+    //   response.data.content.forEach(it => {
+    //     it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
+    //   });
+    // });
   },
   methods: {
     qrcode() {
