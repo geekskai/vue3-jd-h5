@@ -56,7 +56,7 @@ export default {
         width: 200, // 设置宽度，单位像素
         height: 200, // 设置高度，单位像素
         // text: "http://www.cmall.world/down/" // 设置二维码内容或跳转地址
-        text: "http://app.cmall.world/#/mine/linkDownload" // 设置二维码内容或跳转地址
+        text: "http://jc.cmall.world/#/mine/linkDownload" // 设置二维码内容或跳转地址
       });
     }
   }
