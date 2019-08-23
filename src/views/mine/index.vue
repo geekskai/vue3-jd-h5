@@ -75,7 +75,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/wallet/myWallet" class="option-item" tag="li">
+        <router-link to="/mine/shareLink" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="sharing-links"></svg-icon>
             <span>分享链接</span>
