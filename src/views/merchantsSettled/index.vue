@@ -24,6 +24,18 @@
         <div class="images-license"></div>
       </li>
     </ul>
+    <van-checkbox
+      class="merchant-agreement"
+      v-model="checked"
+      icon-size="14"
+      checked-color="#D8182D"
+    >
+      阅读并同意
+      <i class="agreement-text">《CMALL商家协议》</i>
+    </van-checkbox>
+    <div class="pay-btn">
+      <van-button type="danger" @click="show = true" size="large">提交订单</van-button>
+    </div>
   </div>
 </template>
 
@@ -33,6 +45,7 @@ export default {
   data() {
     return {
       systemMessage: {},
+      checked: false,
       mallMessage: {}
     };
   },
@@ -111,6 +124,32 @@ export default {
       background: url("../../assets/image/mime/images-license.png") no-repeat
         center center;
       background-size: 100% 100%;
+    }
+  }
+  .merchant-agreement {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 10px;
+    color: #ec3924;
+    .agreement-text {
+      font-size: 10px;
+      color: #ec3924;
+    }
+  }
+  .pay-btn {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+
+    /deep/ .van-button--danger {
+      background-color: #ec3924;
+      line-height: 44px;
+      font-size: 18px;
     }
   }
 }
