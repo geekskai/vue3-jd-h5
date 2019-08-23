@@ -72,7 +72,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/wallet/myWallet" class="option-item" tag="li">
+        <router-link to="/merchantsSettled/index" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="businessmen-stationed"></svg-icon>
             <span>商家入驻</span>

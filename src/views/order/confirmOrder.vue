@@ -193,6 +193,7 @@ export default {
         path: `/order/chooseAddress`,
         query: {
           quantity: this.$route.query.quantity,
+          cartItemIds: this.$route.query.selectedGoodsId,
           skuId: this.$route.query.skuId
         }
       });
