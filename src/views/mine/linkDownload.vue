@@ -7,7 +7,7 @@
       <div class="header-content">下载链接</div>
     </header>
     <section class="down-btns">
-      <div class="down-btn">
+      <div class="down-btn" @click="handleDownIOS">
         <svg-icon icon-class="apple-icon"></svg-icon>iOS 下载
       </div>
       <a href="https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/app-release.apk">
@@ -31,7 +31,15 @@ export default {
   },
   mounted() {},
   created() {},
-  methods: {}
+  methods: {
+    handleDownIOS() {
+      this.$toast({
+        mask: true,
+        duration: 1000,
+        message: "正在努力建设中,敬请期待····"
+      });
+    }
+  }
 };
 </script>
 
