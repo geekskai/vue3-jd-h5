@@ -166,7 +166,6 @@
                     <span class="goods-price">
                       <i>￥{{item.productCnyPrice}}</i>
                       <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
-                      <!-- <span class="force-value">{{item.calculate}}倍算力值</span> -->
                     </span>
                   </div>
                 </div>
@@ -240,9 +239,11 @@ export default {
       this.handleTabClick(0);
     },
     handleTabClick(type) {
-      this.$http.get(`/api/index/choiceness?type=${type}&clientType=0`).then(response => {
-        this.tabItemLists = response.data.content;
-      });
+      this.$http
+        .get(`/api/index/choiceness?type=${type}&clientType=0`)
+        .then(response => {
+          this.tabItemLists = response.data.content;
+        });
     },
     handleClick(linkUrl) {
       this.$router.push("/product/index");
@@ -631,7 +632,7 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 42px;
+                width: 55px;
                 height: 17px;
               }
             }

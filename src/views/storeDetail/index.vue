@@ -88,7 +88,12 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" tag="li" class="goods-item" :to="`/product/index?productId=${item.productId}`">
+            <router-link
+              :key="index"
+              tag="li"
+              class="goods-item"
+              :to="`/product/index?productId=${item.productId}`"
+            >
               <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
@@ -97,7 +102,7 @@
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
                     <!-- <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span> -->
-                    <span class="force-value">{{item.calculate}}倍算力值</span>
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
               </div>
@@ -396,7 +401,7 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 42px;
+                width: 55px;
                 height: 17px;
               }
             }

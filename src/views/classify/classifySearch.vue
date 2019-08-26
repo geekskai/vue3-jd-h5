@@ -6,7 +6,8 @@
       </span>
       <div class="search-con">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <input v-focus placeholder="搜索、关键词" v-model="searchText" />
+        <!-- <input v-focus placeholder="搜索、关键词" v-model="searchText" /> -->
+        <input placeholder="搜索、关键词" v-model="searchText" />
       </div>
       <span @click="getSearch">搜索</span>
     </div>
@@ -71,7 +72,8 @@
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
-                    <i>{{item.calculate}}倍算力值</i>
+                    <!-- <i>{{item.calculate}}倍算力值</i> -->
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
                 <div class="goods-count-sale">
@@ -465,10 +467,18 @@ export default {
               display: flex;
               justify-content: space-between;
               align-items: center;
-            }
-            .add-icon {
-              width: 20px;
-              height: 20px;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 55px;
+                height: 17px;
+              }
             }
           }
           .goods-count-sale {

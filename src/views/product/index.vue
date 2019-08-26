@@ -43,9 +43,9 @@
           <svg-icon v-else icon-class="heart-null"></svg-icon>
         </span>
       </li>
-      <li class="product-price" v-if="detailForm.calculate">
+      <!-- <li class="product-price" v-if="detailForm.calculate">
         <span>购买该商品可获得算力值，算力值可兑换CM币</span>
-      </li>
+      </li>-->
 
       <li class="product-info">
         <i>邮费：{{detailForm.logisticsDefaultPrice}}</i>
@@ -84,10 +84,12 @@
     </div>
 
     <van-sku
+      @sku-selected="skuSelected"
       v-model="show"
       class="product-sku"
       :sku="sku"
       close-on-click-overlay
+      hide-stock
       :goods="goods"
       :goods-id="goodsId"
       @buy-clicked="handleToBuy"
@@ -98,9 +100,15 @@
           <span class="van-sku__price-symbol">￥</span>
           <span class="van-sku__price-num">{{ parseFloat((props.price*100).toPrecision(12)) }}</span>
         </div>
+        <span class="sku-calculate" v-if="calculate">{{calculate}}倍算力值</span>
+        <div class="van-sku-header-item" v-show="stockNum">
+          <span class="van-sku__stock" v-if="stockNum">剩余{{stockNum}}件</span>
+        </div>
+        <div class="van-sku-header-item">
+          <span class="van-sku__stock">选择：{{handleProductSpeces()}}</span>
+        </div>
       </template>
     </van-sku>
-
     <div class="product-footer">
       <van-goods-action>
         <van-goods-action-button @click="handleShowSpecs" type="warning" text="加入购物车" />
@@ -116,6 +124,9 @@ export default {
   data() {
     return {
       show: false,
+      calculate: 0,
+      stockNum: 0,
+      specsName: "",
       showDetail: false,
       detailForm: {},
       skuObj: {},
@@ -215,20 +226,19 @@ export default {
             goods_id: 946755
           }
         ],
+        messages: [],
         price: "0.00",
-        stock_num: 10, // 商品总库存
+        stock_num: 0, // 商品总库存
         none_sku: false, // 是否无规格商品
         hide_stock: false // 是否隐藏剩余库存
       },
       goods: {
         // 商品标题
-        title: "测试商品",
+        title: "",
         // 默认商品 sku 缩略图
-        picture:
-          "https://topimg-test.oss-cn-shenzhen.aliyuncs.com/goods/1564465639525.jpg"
+        picture: ""
       },
-      goodsId: "",
-      customStepperConfig: {}
+      goodsId: ""
     };
   },
   created() {
@@ -236,6 +246,17 @@ export default {
   },
 
   methods: {
+    skuSelected({ skuValue, selectedSku, selectedSkuComb }) {
+      if (selectedSkuComb) {
+        this.specsName = this.specsName + ";" + skuValue.specsName;
+        this.calculate = selectedSkuComb.calculate;
+        this.stockNum = selectedSkuComb.stock_num;
+      } else {
+        this.specsName = "";
+        this.stockNum = 0;
+        this.sku.stock_num = 0;
+      }
+    },
     onBuyClicked() {},
     handleShowSpecs() {
       this.show = true;
@@ -245,6 +266,10 @@ export default {
         )
         .then(response => {
           let responseDataList = response.data.content;
+          if (responseDataList.length === 1) {
+            this.calculate = responseDataList[0].calculate;
+            this.stockNum = responseDataList[0].stock;
+          }
           let skuSpecesTree = [];
           // 先获取所有的规格类型的key
           skuSpecesTree = responseDataList[0].speces.map(it => {
@@ -308,7 +333,7 @@ export default {
         .then(response => {
           this.productImages = response.data.content.productImages;
           this.goods.picture = response.data.content.productImages[0];
-          this.goods.title = response.data.content.productName;
+          // this.goods.title = response.data.content.productName;
           this.detailForm = response.data.content;
         });
     },
@@ -317,9 +342,7 @@ export default {
     },
 
     handleAddToCart(skuObj) {
-      // selectedNum
       this.skuObj = skuObj;
-      console.log("=====skuObj==>", skuObj);
       this.$http
         .post(`/api/cart/update`, {
           quantity: this.skuObj.selectedNum,
@@ -596,6 +619,25 @@ export default {
         line-height: 44px;
         background-color: #ec3924;
         border: 1px solid #ec3924;
+      }
+    }
+    /deep/ .van-sku-header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    /deep/ .van-sku-header__goods-info {
+      .sku-calculate {
+        margin-left: 7px;
+        color: white;
+        border-radius: 20px 20px;
+        background-color: #ec3924;
+        display: inline-block;
+        font-size: 7px;
+        line-height: 17px;
+        text-align: center;
+        width: 55px;
+        height: 17px;
       }
     }
   }

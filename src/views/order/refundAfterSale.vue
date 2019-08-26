@@ -68,7 +68,8 @@
             <li
               @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
               class="order-info"
-              v-for="(item,i) in orderList.appOrderProductVos"
+              v-for="(item,i) in orderList.appealSkuInfoVos"
+                                            
               :key="i"
             >
               <img v-lazy="item.productMainUrl" />
@@ -85,8 +86,8 @@
             </li>
 
             <li class="order-count">
-              <span>共{{orderList.quantity}}件商品,小计:</span>
-              <b>$：{{orderList.amount}}</b>
+              <span>共{{orderRecordLists[index].appealSkuInfoVos[0].quantity}}件商品,小计:</span>
+              <b>$：{{orderList.allAmount}}</b>
             </li>
             <li class="order-btn">
               <!-- <router-link tag="span" to="/order/cancelOrder">取消订单</router-link> -->
