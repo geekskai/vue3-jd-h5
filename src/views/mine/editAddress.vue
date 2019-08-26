@@ -79,7 +79,8 @@
         </li>
         <li class="address-default">
           <span class="address-defaultAddrFlag">设为默认地址</span>
-          <van-switch v-model="addressInfo.defaultAddrFlag" active-color="#EC3924" size="20px" />
+          <van-switch v-if='addressInfo.defaultFlag' v-model="addressInfo.defaultFlag" active-color="#EC3924" size="20px" />
+          <van-switch v-else v-model="addressInfo.defaultAddrFlag" active-color="#EC3924" size="20px" />
         </li>
       </ul>
     </section>
