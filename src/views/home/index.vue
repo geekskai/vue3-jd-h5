@@ -15,7 +15,6 @@
     <div class="swiper-cls">
       <swiper :options="swiperOption" ref="mySwiper" v-if="adList.length">
         <swiper-slide v-for="(img ,index) in adList" :key="index">
-          <!-- <img class="slide_img" @click="handleClick" v-if="img.imageUrl" v-lazy="img.imageUrl" /> -->
           <img class="slide_img" @click="handleClick" v-if="img.imageUrl" :src="img.imageUrl" />
         </swiper-slide>
       </swiper>
@@ -28,7 +27,6 @@
         </li>
       </ul>
     </section>
-
     <section class="spike-area">
       <ul class="spike-top">
         <router-link class="top-left" to="/chainCatSpike" tag="li">
@@ -267,11 +265,6 @@ export default {
 @import "../../styles/mixin.scss";
 .home {
   .home-header {
-    &.active {
-      display: none;
-      // top: 10px;
-      // background-color: #efeff4;
-    }
     position: fixed;
     left: 0;
     top: 10px;

@@ -10,11 +10,11 @@
       <ul class="store-top">
         <img v-lazy="storeDetail.idCardNo" class="store-header" />
         <li class="store-name">{{storeDetail.shopName}}</li>
+      </ul>
+      <ul class="store-center">
         <li class="store-introd">
           <div>{{storeDetail.detail}}</div>
         </li>
-      </ul>
-      <ul class="store-center">
         <li class="store-tel">
           <label>电话:</label>
           <span>{{storeDetail.phone}}</span>
@@ -235,16 +235,16 @@ export default {
         color: #3a3a3a;
         font-size: 18px;
       }
-      .store-introd {
-        padding: 16px;
-        color: #3a3a3a;
-        font-size: 11px;
-      }
     }
     .store-center {
       color: #3a3a3a;
       font-size: 11px;
       padding: 16px;
+      .store-introd {
+        color: #3a3a3a;
+        font-size: 11px;
+        padding-bottom: 10px;
+      }
       .store-tel {
         padding-bottom: 10px;
       }

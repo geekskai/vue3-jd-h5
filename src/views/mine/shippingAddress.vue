@@ -28,8 +28,16 @@
             icon-class="address-home"
             v-if="address.tag === '家'"
           ></svg-icon>
-          <svg-icon :class="{'active':address.defaultFlag}" icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
-          <svg-icon :class="{'active':address.defaultFlag}" icon-class="address-school" v-if="address.tag === '学校'"></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-company"
+            v-if="address.tag === '公司'"
+          ></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-school"
+            v-if="address.tag === '学校'"
+          ></svg-icon>
         </li>
         <li class="card-info">
           <div class="info-name">
@@ -66,10 +74,13 @@ export default {
   methods: {
     handleFullAddress(address) {
       if (~address.fullAddress.indexOf("undefined")) {
-        return (
-          address.fullAddress.slice(0, address.fullAddress.length - 9) +
-          address.address
+        address.fullAddress = address.fullAddress.slice(
+          0,
+          address.fullAddress.length - 9
         );
+        return address.fullAddress;
+        // address.fullAddress.slice(0, address.fullAddress.length - 9) +
+        // address.address
       }
       return address.fullAddress;
     },

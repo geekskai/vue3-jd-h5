@@ -43,13 +43,10 @@
           <svg-icon v-else icon-class="heart-null"></svg-icon>
         </span>
       </li>
-      <!-- <li class="product-price" v-if="detailForm.calculate">
-        <span>购买该商品可获得算力值，算力值可兑换CM币</span>
-      </li>-->
-
       <li class="product-info">
+        <b class="product-price">￥{{detailForm.productCnyPrice}}</b>
         <i>邮费：{{detailForm.logisticsDefaultPrice}}</i>
-        <i>月销：{{detailForm.monthlySalesQuantity}}</i>
+        <i>月销：{{detailForm.monthlySalesQuantity||0}}</i>
       </li>
 
       <li class="item-info">
@@ -509,6 +506,7 @@ export default {
         font-size: 9px;
         background-color: #ec3924;
         border-radius: 10px 10px;
+        margin-right: 7px;
       }
       .heart-full {
         padding: 0 17px;
@@ -516,24 +514,22 @@ export default {
       .item-desc {
         font-size: 14px;
         color: #3a3a3a;
-        padding-left: 7px;
       }
-    }
-    .product-price {
-      color: #949497;
-      font-size: 9px;
-      padding-top: 8px;
-      font-weight: 600;
-      padding-left: 16px;
     }
     .product-info {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      align-items: center;
       padding-left: 16px;
       padding-top: 20px;
       padding-bottom: 10px;
       font-size: 11px;
+      margin-right: 16px;
       color: #949497;
+      .product-price {
+        color: #ec3924;
+        font-size: 17px;
+      }
     }
     .store-info {
       display: flex;
@@ -573,6 +569,9 @@ export default {
       align-items: center;
       width: 95%;
       position: relative;
+      /deep/ .van-field__left-icon {
+        margin-right: 0;
+      }
       .anchor-point {
         position: absolute;
         left: 90px;
@@ -592,7 +591,7 @@ export default {
     text-align: center;
     font-size: 16px;
     color: #3a3a3a;
-    padding-top: 50px;
+    // padding-top: 50px;
     span {
       box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }

@@ -39,7 +39,7 @@
           <van-cell title="所在地区" />
           <!-- <div class="address-name" @click="show = true"> -->
           <div class="address-name" @click="showPicker">
-            <van-field v-model="addressInfo.area" disabled placeholder="请选择省市区" />
+            <van-field v-model="addressInfo.fullAddress" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -302,12 +302,12 @@ export default {
       this.addressInfo.city = this.val.cityVal.areaId;
       this.addressInfo.district = this.val.areaVal.areaId;
 
-      this.addressInfo.area =
+      this.addressInfo.fullAddress =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
-      this.addressInfo.fullAddress =
-        this.addressInfo.area + this.addressInfo.address;
+      // this.addressInfo.fullAddress = this.addressInfo.area;
+      // this.addressInfo.area + this.addressInfo.address;
     },
     cancel() {
       this.show = false;
