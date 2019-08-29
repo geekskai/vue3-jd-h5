@@ -165,15 +165,16 @@ export default {
   },
   created() {
     this.initData();
+    console.log('=====orderNo==>',this.$route.params.orderNo);
   },
   methods: {
     initData() {
       this.$http
         .post(`/api/order/detail`, {
-          orderNo: this.$route.query.orderNo
+          orderNo: this.$route.params.orderNo
         })
         .then(response => {
-          // this.orderForm = response.data.content;
+          this.orderForm = response.data.content;
         });
     },
     close() {

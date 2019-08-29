@@ -273,6 +273,7 @@ export default {
       }
       .info-title:last-child {
         padding-top: 14px;
+        text-decoration: underline;
       }
     }
   }

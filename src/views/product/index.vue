@@ -606,6 +606,16 @@ export default {
     }
   }
   .product-sku {
+    /deep/ .van-sku-row__item.van-sku-row__item--active {
+      color: #ec3924;
+      background: #fff;
+      border-color: #ec3924;
+    }
+    /deep/ .van-sku-row__item{
+      border-color: #EFEFF4;
+      background-color: #EFEFF4;
+      color: #3A3A3A;
+    }
     /deep/ .van-sku-actions {
       /deep/ .van-button--warning {
         background-color: #f3ca43;

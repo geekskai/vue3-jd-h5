@@ -61,7 +61,7 @@
           <!-- 待付款, -->
           <div v-if="orderList.status == 0">
             <router-link tag="span" :to="`/order/cancelOrder?orderNo=${orderList.orderNo}`">取消订单</router-link>
-            <span @click="handleGoToPay(orderList.orderNo)">去支付</span>
+            <span @click="handleGoToPay(orderList)">去支付</span>
           </div>
           <!-- 待发货 -->
           <div v-if="orderList.status == 1">
@@ -185,9 +185,13 @@ export default {
     close() {
       this.show = false;
     },
-    handleGoToPay(orderNo) {
-      this.show = true;
-      this.orderNo = orderNo;
+    handleGoToPay(orderList) {
+      // this.show = true;
+      // this.orderNo = orderNo;
+      this.$router.push({
+        name:'orderDetail',
+        params:orderList
+      })
     },
     confirmFn() {
       this.show = false;

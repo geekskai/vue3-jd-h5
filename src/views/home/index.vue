@@ -18,6 +18,7 @@
           <img class="slide_img" @click="handleClick" v-if="img.imageUrl" :src="img.imageUrl" />
         </swiper-slide>
       </swiper>
+      <img class="radian-img" src="../../assets/image/radian.png" />
     </div>
     <section class="home-tags">
       <ul class="tags-content">
@@ -85,7 +86,7 @@
           <span class="center-descr">10元抢购</span>
           <img src="../../assets/image/home/demo6.png" />
         </router-link>
-        <router-link class="center-item" to="/brandSpike" tag="li">
+        <router-link class="center-item center-border" to="/brandSpike" tag="li">
           <span class="center-title">品牌秒杀</span>
           <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
           <img src="../../assets/image/home/demo7.png" />
@@ -265,13 +266,17 @@ export default {
 @import "../../styles/mixin.scss";
 .home {
   .home-header {
-    position: fixed;
-    left: 0;
-    top: 10px;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 16px;
+    // position: fixed;
+    // left: 0;
+    // top: 10px;
+    // width: 100%;
+    // line-height: 40px;
+    background: url("../../assets/image/home_heda_img.png") no-repeat center
+      center;
+    background-size: 100% 100%;
+    padding: 16px 16px 32px 16px;
+    // margin-bottom: 16px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -282,6 +287,7 @@ export default {
     .header-search {
       border-radius: 3px;
       display: flex;
+      margin-top: 10px;
       width: 90%;
       height: 40px;
       line-height: 40px;
@@ -308,10 +314,16 @@ export default {
         padding-left: 80px;
       }
     }
+    .customer-service-icon {
+      margin-top: 10px;
+    }
   }
 
   .swiper-carousel {
     padding-bottom: 10px;
+    background: url("../../assets/image/home_big_rand.png") no-repeat center
+      bottom;
+    background-size: 100% 6%;
     .lazy_img {
       width: 100%;
       height: 250px;
@@ -319,17 +331,25 @@ export default {
   }
   .swiper-cls {
     background-color: #efeff4;
+    position: relative;
     .swiper-slide {
       padding-left: 16px;
       background-color: #efeff4;
       display: flex;
       justify-content: center;
       align-items: center;
+      // background: url("../../assets/image/radian.png") no-repeat center bottom;
+      // background-size: 100% 6%;
     }
     .slide_img {
       width: 222px;
       height: 90px;
       border-radius: 5px;
+    }
+    .radian-img {
+      position: absolute;
+      bottom: -9px;
+      margin-left: 40px;
     }
   }
   .home-tags {
@@ -338,6 +358,7 @@ export default {
       display: flex;
       justify-content: space-around;
       align-items: center;
+      padding: 0 10px;
       .tags-item {
         display: flex;
         flex-direction: column;
@@ -356,16 +377,27 @@ export default {
     }
   }
   .spike-area {
-    margin: 12px;
-    padding-top: 5px;
+    margin: 10px 12px;
+    // padding: 10px 0;
+    padding-top: 10px;
     border-radius: 4px;
     background-color: white;
     .spike-top {
+      padding-bottom: 15px;
+      margin-bottom: 5px;
+      background: url("../../assets/image/spike_center.png") no-repeat center
+        bottom;
+      background-size: 100% 5%;
       display: flex;
       justify-content: space-between;
       align-items: stretch;
       .top-left {
-        padding: 12px;
+        padding: 10px 8px;
+        border-style: solid;
+        border-color: transparent;
+        border-right-color: #efefef;
+        border-right-style: solid;
+        border-right-width: 1px;
         .item-top {
           display: flex;
           justify-content: space-between;
@@ -378,7 +410,7 @@ export default {
           }
           .time-text {
             border: 1px solid #ccc;
-            width: 110px;
+            width: 86px;
             height: 18px;
             line-height: 18px;
             display: flex;
@@ -461,10 +493,23 @@ export default {
       }
     }
     .spike-center {
-      padding-top: 20px;
+      // padding-top: 20px;
+      padding-bottom: 15px;
+      // margin-bottom: 5px;
+      background: url("../../assets/image/spike_center.png") no-repeat center
+        bottom;
+      background-size: 100% 5%;
       display: flex;
       justify-content: space-around;
       align-items: center;
+      .center-item.center-border {
+        border-style: solid;
+        border-color: transparent;
+        border-right-color: #efefef;
+        border-right-style: solid;
+        border-right-width: 1px;
+        padding-right: 20px;
+      }
       .center-item {
         display: flex;
         justify-content: center;
@@ -486,11 +531,21 @@ export default {
       }
     }
     .spike-bottom {
+      padding-bottom: 5px;
+      background: url("../../assets/image/spike_center.png") no-repeat center
+        bottom;
+      background-size: 100% 1%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       .bottom-left {
-        padding: 12px;
+        padding: 0 19px;
+        margin: 10px 0;
+        border-style: solid;
+        border-color: transparent;
+        border-right-color: #efefef;
+        border-right-style: solid;
+        border-right-width: 1px;
         display: flex;
         flex-direction: column;
 

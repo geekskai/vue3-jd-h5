@@ -24,7 +24,7 @@
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
           @click="initData(true)"
-        >默认排序</div>
+        >全部</div>
         <div class="select-item">
           按价格
           <span class="select-arrows">

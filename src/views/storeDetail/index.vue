@@ -8,7 +8,7 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img v-lazy="storeDetail.idCardNo" class="store-header" />
+        <img :src="storeDetail.logoUrl" class="store-header" />
         <li class="store-name">{{storeDetail.shopName}}</li>
       </ul>
       <ul class="store-center">

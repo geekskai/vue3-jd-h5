@@ -88,14 +88,14 @@
       </section>
     </div>
 
-    <vue-pickers
+    <!-- <vue-pickers
       :show="show"
       :columns="columns"
       :defaultData="defaultData"
       :selectData="pickData"
       @cancel="close"
       @confirm="confirmFn"
-    ></vue-pickers>
+    ></vue-pickers> -->
     <tabbar></tabbar>
   </div>
 </template>
