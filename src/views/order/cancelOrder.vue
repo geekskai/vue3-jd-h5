@@ -83,12 +83,12 @@ export default {
           orderNo: this.$route.query.orderNo
         })
         .then(response => {
-          console.log("=====content==>", response.data.content);
           this.$toast({
             mask: false,
             duration: 1000,
             message: "提交成功！"
           });
+          this.$router.go(-1);
         });
     },
     onChange(picker, value, index) {

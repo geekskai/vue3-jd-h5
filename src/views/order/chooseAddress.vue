@@ -2,9 +2,7 @@
   <div class="choose-address">
     <header class="page-header">
       <router-link class="btn-left" tag="span" to="/mine">
-        <!-- <span  @click="$router.go(-1)"> -->
         <svg-icon icon-class="white-btn"></svg-icon>
-        <!-- </span> -->
       </router-link>
       <div class="header-content">选择地址</div>
     </header>
@@ -23,11 +21,26 @@
       @click="handleChooseAddress(address.userAddrId)"
     >
       <ul class="card-content">
-        <div class="card-triangle active"></div>
+        <div class="card-triangle" :class="{'active':address.defaultFlag}"></div>
         <li class="addres-svg">
-          <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
+          <!-- <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
           <svg-icon icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
-          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon>
+          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon> -->
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-home"
+            v-if="address.tag === '家'"
+          ></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-company"
+            v-if="address.tag === '公司'"
+          ></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-school"
+            v-if="address.tag === '学校'"
+          ></svg-icon>
         </li>
         <li class="card-info">
           <div class="info-name">
@@ -169,6 +182,9 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        .active {
+          color: #ec3924;
+        }
       }
       .card-info {
         font-size: 11px;

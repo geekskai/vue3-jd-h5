@@ -7,7 +7,7 @@
       </span>
       <div class="header-content">退款/售后</div>
     </header>
-    <div v-if="!orderLists.length" class="empty-box">
+    <div v-if="!orderLists.length&&!orderRecordLists.length" class="empty-box">
       <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>
       <span class="empty-text">
         <i>未发现退款/售后的订单</i>
@@ -16,7 +16,14 @@
     </div>
     <van-tabs v-else v-model="active" background="#EFEFF4">
       <van-tab title="售后申请">
-        <section class="order-card" v-for="(orderList,index)  in orderLists" :key="index">
+        <div v-if="!orderLists.length" class="empty-box">
+          <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>
+          <span class="empty-text">
+            <i>未发现售后的订单</i>
+            <!-- <i>可以多去看看，或许能找到您想要的</i> -->
+          </span>
+        </div>
+        <section v-else class="order-card" v-for="(orderList,index)  in orderLists" :key="index">
           <ul class="order-list">
             <li class="order-item">
               <div class="store-info">
@@ -42,7 +49,7 @@
 
             <li class="order-count">
               <span>共{{orderList.quantity}}件商品,小计:</span>
-              <b>$：{{orderList.amount}}</b>
+              <b>￥{{orderList.amount}}</b>
             </li>
             <li class="order-btn" @click="handleToAppeal(orderList)">
               <span>商品申诉</span>
@@ -66,17 +73,16 @@
               <span>{{orderStatus[orderList.status]}}</span>
             </li>
             <li
-              @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
+              @click="handleGoToOrderDetail(orderList)"
               class="order-info"
               v-for="(item,i) in orderList.appealSkuInfoVos"
-                                            
               :key="i"
             >
               <img v-lazy="item.productMainUrl" />
               <div class="order-detail">
                 <p class="info-one">
                   <span>{{item.productName}}</span>
-                  <b>￥：{{item.productAmount}}</b>
+                  <b>￥{{item.productAmount}}</b>
                 </p>
                 <p class="info-two">
                   <span>{{item.fullName}}</span>
@@ -87,7 +93,7 @@
 
             <li class="order-count">
               <span>共{{orderRecordLists[index].appealSkuInfoVos[0].quantity}}件商品,小计:</span>
-              <b>$：{{orderList.allAmount}}</b>
+              <b>￥{{orderList.allAmount}}</b>
             </li>
             <li class="order-btn">
               <!-- <router-link tag="span" to="/order/cancelOrder">取消订单</router-link> -->
@@ -135,10 +141,17 @@ export default {
       });
   },
   methods: {
+    handleGoToOrderDetail(orderList) {
+      //  this.$router.push(`/order/appealDetail?appealNo=${appealNo}`);
+      this.$router.push({
+        name: `appealDetail`,
+        params: orderList
+      });
+    },
     handleToAppeal(orderList) {
       this.$router.push({
         name: `appeal`,
-        params:orderList
+        params: orderList
       });
     }
   }
@@ -185,6 +198,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           .store-shopName {
             font-weight: 600;
@@ -279,6 +293,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;

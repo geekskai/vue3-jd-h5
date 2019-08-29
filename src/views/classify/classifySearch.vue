@@ -24,7 +24,7 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initData"
+          @click="initData(true)"
         >默认排序</div>
         <div class="select-item">
           按价格
@@ -121,7 +121,8 @@ export default {
         query: { productId: item.productId }
       });
     },
-    initData() {
+    initData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
           `/api/product/list?categoryId=${
@@ -130,9 +131,11 @@ export default {
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
               : ""
-          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
-            this.sortType
-          }&page=${this.page}&size=15&clientType=0`
+          }&productName=${this.searchText}&sortName=${
+            flag ? "update_time" : this.orderBy
+          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            this.page
+          }&size=15&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;

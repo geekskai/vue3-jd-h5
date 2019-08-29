@@ -23,7 +23,7 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initData"
+          @click="initData(true)"
         >默认排序</div>
         <div class="select-item">
           按价格
@@ -63,7 +63,12 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" :to="`/product/index?productId=${item.productId}`">
+            <router-link
+              :key="index"
+              class="goods-item"
+              tag="li"
+              :to="`/product/index?productId=${item.productId}`"
+            >
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
@@ -105,7 +110,8 @@ export default {
     this.initData();
   },
   methods: {
-    initData() {
+    initData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
           `/api/product/list?categoryId=${
@@ -114,9 +120,11 @@ export default {
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
               : ""
-          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
-            this.sortType
-          }&page=${this.page}&size=15&clientType=0`
+          }&productName=${this.searchText}&sortName=${
+            flag ? "update_time" : this.orderBy
+          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            this.page
+          }&size=15&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;
@@ -203,7 +211,7 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-      color: #EC3924;
+      color: #ec3924;
       font-size: 16px;
     }
   }
@@ -238,7 +246,7 @@ export default {
       font-size: 11px;
 
       .select-item.active {
-        color: #EC3924;
+        color: #ec3924;
       }
       .select-item {
         .search-icon {
@@ -277,11 +285,11 @@ export default {
           bottom: 7px;
         }
         .sort-caret.ascending.active {
-          border-bottom-color: #EC3924;
+          border-bottom-color: #ec3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #EC3924;
+          border-top-color: #ec3924;
           bottom: 7px;
         }
       }
@@ -290,7 +298,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #EC3924;
+        color: #ec3924;
       }
       .goods-content {
         display: flex;
@@ -341,7 +349,7 @@ export default {
             padding-top: 12px;
             .goods-price {
               font-size: 14px;
-              color: #EC3924;
+              color: #ec3924;
             }
             .add-icon {
               width: 20px;

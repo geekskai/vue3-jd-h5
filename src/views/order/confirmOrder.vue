@@ -63,7 +63,7 @@
           <i>￥{{ orderForm.allAmount}}</i>
         </span>
       </div>
-      <van-button type="danger" @click="show = true" size="large">提交订单</van-button>
+      <van-button type="danger" @click="handleSubmitOrder" size="large">提交订单</van-button>
     </div>
     <vue-pickers
       :show="show"
@@ -83,6 +83,7 @@ export default {
     return {
       orderForm: {},
       columns: 1,
+      orderNo: "",
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
@@ -119,8 +120,6 @@ export default {
 
   methods: {
     initData() {
-      console.log("=====selectedGoodsId==>", this.$route.query.selectedGoodsId);
-      // if (this.$route.query.userAddrId) {
       let paramsObj = {
         skuInfoForm: {
           quantity: this.$route.query.quantity,
@@ -144,34 +143,31 @@ export default {
           );
         }
       });
-      // } else {
-      //   this.$http
-      //     .post(`/api/order/checkout`, {
-      //       skuInfoForm: {
-      //         quantity: this.$route.query.quantity,
-      //         skuId: this.$route.query.skuId
-      //       }
-      //     })
-      //     .then(response => {
-      //       this.orderForm = response.data.content;
-      //       let fullAddress = this.orderForm.fullAddress;
-      //       if (fullAddress && ~fullAddress.indexOf("undefined")) {
-      //         this.orderForm.fullAddress = fullAddress.slice(
-      //           0,
-      //           this.orderForm.fullAddress.length - 9
-      //         );
-      //       }
-      //     });
-      // }
+    },
+    handleSubmitOrder() {
+      this.$toast.loading({
+        mask: true,
+        duration: 0, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "订单提交中..."
+      });
+      this.$http.post(`/api/order/submit`, this.orderForm).then(response => {
+        this.orderNo = response.data.content.orderNo;
+        this.show = true;
+        this.$toast.clear();
+      });
     },
     close() {
       this.show = false;
     },
     confirmFn() {
       this.show = false;
-      this.$http.post(`/api/order/submit`, this.orderForm).then(response => {
-        console.log("=====response.data==>", response.data);
-      });
+      this.$http
+        .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
+        .then(response => {
+          console.log("=====response.data==>", response.data.content);
+        });
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -240,6 +236,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;

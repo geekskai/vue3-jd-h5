@@ -55,13 +55,13 @@
 
         <li class="order-count">
           <span>共{{orderList.quantity}}件商品,小计:</span>
-          <i>$：{{orderList.amount}}</i>
+          <i>￥{{orderList.amount}}</i>
         </li>
         <li class="order-btn">
           <!-- 待付款, -->
           <div v-if="orderList.status == 0">
             <router-link tag="span" :to="`/order/cancelOrder?orderNo=${orderList.orderNo}`">取消订单</router-link>
-            <span @click="show = true">去支付</span>
+            <span @click="handleGoToPay(orderList.orderNo)">去支付</span>
           </div>
           <!-- 待发货 -->
           <div v-if="orderList.status == 1">
@@ -69,7 +69,7 @@
           </div>
           <!-- 待收货 -->
           <div v-if="orderList.status == 2">
-             <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+            <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
           </div>
           <!-- 3-已完成,4-已取消 -->
         </li>
@@ -100,6 +100,7 @@ export default {
       tabData: [],
       orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
       orderLists: [],
+      orderNo: "",
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
@@ -165,7 +166,7 @@ export default {
           this.$router.push(`/order/completedOrder?orderNo=${orderNo}`);
           break;
         case 4:
-          this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);
+          // this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);
           break;
 
         default:
@@ -184,8 +185,17 @@ export default {
     close() {
       this.show = false;
     },
+    handleGoToPay(orderNo) {
+      this.show = true;
+      this.orderNo = orderNo;
+    },
     confirmFn() {
       this.show = false;
+      this.$http
+        .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
+        .then(response => {
+          console.log("=====response.data==>", response.data.content);
+        });
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -267,6 +277,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;

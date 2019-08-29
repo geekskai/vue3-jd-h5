@@ -43,7 +43,7 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initSortData"
+          @click="initSortData(true)"
         >默认排序</div>
 
         <div class="select-item">
@@ -145,10 +145,15 @@ export default {
         });
       this.initSortData();
     },
-    initSortData() {
+    initSortData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20&clientType=0`
+          `/api/product/list?merchantShopId=${
+            this.$route.query.merchantInfoId
+          }&sortName=${flag ? "update_time" : this.orderBy}&sortType=${
+            flag ? "desc" : this.sortType
+          }&page=${this.page}&size=20&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;

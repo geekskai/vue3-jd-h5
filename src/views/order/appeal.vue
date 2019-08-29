@@ -23,7 +23,7 @@
             <div class="order-detail">
               <p class="info-one">
                 <span>{{item.productName}}</span>
-                <i>￥{{item.amounts}}</i>
+                <i>￥{{item.productAmount}}</i>
               </p>
               <p class="info-two">
                 <span>{{item.fullName}}</span>

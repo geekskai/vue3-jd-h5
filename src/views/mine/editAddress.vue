@@ -79,8 +79,18 @@
         </li>
         <li class="address-default">
           <span class="address-defaultAddrFlag">设为默认地址</span>
-          <van-switch v-if='addressInfo.defaultFlag' v-model="addressInfo.defaultFlag" active-color="#EC3924" size="20px" />
-          <van-switch v-else v-model="addressInfo.defaultAddrFlag" active-color="#EC3924" size="20px" />
+          <van-switch
+            v-if="addressInfo.defaultFlag"
+            v-model="addressInfo.defaultFlag"
+            active-color="#EC3924"
+            size="20px"
+          />
+          <van-switch
+            v-else
+            v-model="addressInfo.defaultAddrFlag"
+            active-color="#EC3924"
+            size="20px"
+          />
         </li>
       </ul>
     </section>
@@ -115,7 +125,10 @@
                 v-for="(item,index) in list"
                 :class="[{'addSelectActive':index == provinceIndex}]"
                 :key="index"
-              >{{item.areaName}}</li>
+              >
+                <!-- {{item.areaName}} -->
+                <input v-model="item.areaName" />
+              </li>
             </ul>
             <ul
               @touchstart="touchStart($event,'city')"
@@ -128,7 +141,11 @@
                 v-for="(item,index) in list2"
                 :class="[{'addSelectActive':index == cityIndex}]"
                 :key="index"
-              >{{item.areaName}}</li>
+              >
+                <!-- {{item.areaName}} -->
+
+                <input v-model="item.areaName" />
+              </li>
             </ul>
             <ul
               @touchstart="touchStart($event,'district')"
@@ -141,7 +158,10 @@
                 v-for="(item,index) in list3"
                 :class="[{'addSelectActive':index == districtIndex}]"
                 :key="index"
-              >{{item.areaName}}</li>
+              >
+                <input v-model="item.areaName" />
+                <!-- {{item.areaName}} -->
+              </li>
             </ul>
           </div>
         </div>
@@ -200,7 +220,7 @@ export default {
               res.data.content.length > 1
                 ? res.data.content
                 : [{ areaName: "-" }];
-            if (res.data.content.length < 1) {
+            if (res.data.content.length == 1) {
               this.list3 = [{ areaName: "-" }];
             }
             console.log("=====this.list2[0]==>", this.list2[0]);
@@ -234,7 +254,7 @@ export default {
     };
     // 第一条数据为直辖市 so '-' 符号表示为第三列
     this.list3 = [{ name: "-" }];
-    console.log('====this.$route.query.address===>',this.$route.query.address)
+    console.log("====this.$route.query.address===>", this.$route.query.address);
   },
   methods: {
     handleDeleteAddress() {
@@ -272,7 +292,7 @@ export default {
     },
     getCitys() {
       this.$http
-        .get(`/api/address/getCnAreaList?parentAreaId=84`)
+        .get(`/api/address/getCnAreaList?parentAreaId=1`)
         .then(response => {
           this.list2 = response.data.content;
           this.val.cityVal = this.list2[0];
@@ -304,17 +324,23 @@ export default {
         };
       }
       // this.$emit("complete", this.val);
+      // debugger
       this.show = false;
+
       this.addressInfo.province = this.val.provinceVal.areaId;
       this.addressInfo.city = this.val.cityVal.areaId;
       this.addressInfo.district = this.val.areaVal.areaId;
-
       this.addressInfo.area =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
       this.addressInfo.fullAddress =
         this.addressInfo.area + this.addressInfo.address;
+
+      console.log(
+        "=====this.addressInfo.fullAddress==>",
+        this.addressInfo.fullAddress
+      );
     },
     cancel() {
       this.show = false;

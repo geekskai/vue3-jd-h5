@@ -67,7 +67,7 @@
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-          <span>{{orderForm.finishDate}}</span>
+          <span>{{orderForm.payDate}}</span>
         </li>
         <li class="info-item">
           <label>发货时间：</label>
@@ -147,6 +147,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
