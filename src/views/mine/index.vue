@@ -40,12 +40,10 @@
           <span>待付款</span>
         </router-link>
         <router-link :to="`/order?type=2`" class="order-item" tag="li">
-          <!-- <router-link to="/order/toBeDelivered" class="order-item" tag="li"> -->
           <svg-icon icon-class="be-delivered"></svg-icon>
           <span>待发货</span>
         </router-link>
         <router-link :to="`/order?type=3`" class="order-item" tag="li">
-          <!-- <router-link to="/order/pendingReceipt" class="order-item" tag="li"> -->
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>

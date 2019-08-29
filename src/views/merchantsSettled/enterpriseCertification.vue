@@ -1,0 +1,239 @@
+<template>
+  <div class="enterprise-certification">
+    <header class="page-header">
+      <span class="btn-left" @click="$router.go(-1)">
+        <svg-icon icon-class="green-btn"></svg-icon>
+      </span>
+      <div class="header-content">商家入驻</div>
+    </header>
+    <ul class="card-images">
+      <li>
+        <span class="iamges-text">身份证正面</span>
+        <van-uploader
+          class="images-front"
+          :after-read="afterReadA"
+          v-model="idCardNoUrlA"
+          :max-count="1"
+        >
+          <div slot="default"></div>
+        </van-uploader>
+      </li>
+      <li>
+        <span class="iamges-text">身份证反面</span>
+        <van-uploader
+          class="images-side"
+          :after-read="afterReadB"
+          v-model="idCardNoUrlB"
+          :max-count="1"
+        >
+          <div slot="default"></div>
+        </van-uploader>
+      </li>
+      <li>
+        <span class="iamges-text">手持身份证</span>
+        <van-uploader
+          class="images-handle"
+          :after-read="afterReadC"
+          v-model="idCardNoUrlC"
+          :max-count="1"
+        >
+          <div slot="default"></div>
+        </van-uploader>
+      </li>
+      <li>
+        <span class="iamges-text">营业执照</span>
+        <van-uploader
+          class="images-license"
+          :after-read="afterReadBusinessLicenseUrl"
+          v-model="businessLicenseUrl"
+          :max-count="1"
+        >
+          <div slot="default"></div>
+        </van-uploader>
+      </li>
+    </ul>
+    <van-checkbox
+      class="merchant-agreement"
+      v-model="shopForm.checked"
+      icon-size="14"
+      checked-color="#D8182D"
+    >
+      阅读并同意
+      <i class="agreement-text">《CMALL商家协议》</i>
+    </van-checkbox>
+    <div class="pay-btn">
+      <van-button type="danger" @click="handleSubmitShopInfo" size="large">提交</van-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "enterpriseCertification",
+  data() {
+    return {
+      systemMessage: {},
+      checked: false,
+      fileList: [],
+      idCardNoUrlA: [],
+      idCardNoUrlB: [],
+      idCardNoUrlC: [],
+      businessLicenseUrl: [],
+      shopForm: {},
+      mallMessage: {}
+    };
+  },
+  created() {
+    this.$http.get(`/api/message/messageTypeCount`).then(response => {
+      response.data.content.forEach(it => {
+        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
+      });
+    });
+  },
+  methods: {
+    //   /api/shop/submit
+    handleSubmitShopInfo(){
+        this.$http.post(`/api/shop/submit`)
+    },
+    afterReadA(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlA = response.data.content.imageUrl;
+      });
+    },
+    afterReadB(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlB = response.data.content.imageUrl;
+      });
+    },
+    afterReadC(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlC = response.data.content.imageUrl;
+      });
+    },
+    afterReadBusinessLicenseUrl(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.businessLicenseUrl = response.data.content.imageUrl;
+      });
+    }
+  }
+};
+</script>
+
+<style scoped lang="scss">
+.enterprise-certification {
+  height: 100%;
+  padding: 0 16px;
+  padding-bottom: 45px;
+  .page-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+    .btn-left {
+      background-color: #fff;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+    }
+    .header-content {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #3a3a3a;
+      flex: 1;
+    }
+    .appeal-record {
+      color: #ec3924;
+      font-size: 13px;
+    }
+  }
+  .card-images {
+    margin-top: 10px;
+    li {
+      display: flex;
+      flex-direction: column;
+    }
+    /deep/ .van-uploader__preview {
+      margin: 0;
+      .van-uploader__preview-image {
+        width: 343px;
+        height: 187px;
+      }
+    }
+    .iamges-text {
+      font-size: 15px;
+      color: #3a3a3a;
+      font-weight: 600;
+    }
+    /deep/ .van-uploader__input-wrapper {
+      width: 343px;
+      height: 187px;
+    }
+    .images-front {
+      margin: 8px 0;
+      background: url("../../assets/image/mime/images-front.png") no-repeat
+        center center;
+      background-size: 100% 100%;
+    }
+    .images-side {
+      margin: 8px 0;
+      height: 187px;
+      background: url("../../assets/image/mime/images-side.png") no-repeat
+        center center;
+      background-size: 100% 100%;
+    }
+    .images-handle {
+      margin: 8px 0;
+      height: 187px;
+      background: url("../../assets/image/mime/images-handle.png") no-repeat
+        center center;
+      background-size: 100% 100%;
+    }
+    .images-license {
+      margin: 8px 0;
+      height: 187px;
+      background: url("../../assets/image/mime/images-license.png") no-repeat
+        center center;
+      background-size: 100% 100%;
+    }
+  }
+  .merchant-agreement {
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 10px;
+    color: #ec3924;
+    padding-bottom: 70px;
+    .agreement-text {
+      font-size: 10px;
+      color: #ec3924;
+    }
+  }
+  .pay-btn {
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+
+    /deep/ .van-button--danger {
+      background-color: #ec3924;
+      line-height: 44px;
+      font-size: 18px;
+    }
+  }
+}
+</style>

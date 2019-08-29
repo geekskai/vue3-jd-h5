@@ -189,6 +189,11 @@ export default {
         loadingType: "spinner",
         message: "支付中..."
       });
+       this.$http
+        .get(`/api/coinPay/testPay?orderNo=${this.orderForm.orderNo}`)
+        .then(response => {
+          console.log("=====response.data==>", response.data.content);
+        });
       setTimeout(() => {
         // this.$toast({
         //   mask: false,

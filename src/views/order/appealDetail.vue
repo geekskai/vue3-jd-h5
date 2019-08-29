@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  name: "",
+  name: "appealDetail",
   data() {
     return {
       username: "",

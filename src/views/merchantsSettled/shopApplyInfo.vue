@@ -6,16 +6,16 @@
       </span>
       <div class="header-content">商家入驻</div>
     </header>
-    <svg-icon class="into-process" icon-class="intoProcess"></svg-icon>
-    <router-link class="pay-btn" tag="div" to="/merchantsSettled/shopApplyInfo">
-      <van-button type="danger" @click="show = true" size="large">申请入驻</van-button>
-    </router-link>
+
+    <div class="pay-btn">
+      <van-button type="danger" @click="handleSubmitShopInfo" size="large">下一步</van-button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "merchantsSettled",
+  name: "shopApplyInfo",
   data() {
     return {
       systemMessage: {},
@@ -37,6 +37,10 @@ export default {
     });
   },
   methods: {
+    //   /api/shop/submit
+    handleSubmitShopInfo() {
+      this.$http.post(`/api/shop/submit`);
+    },
     afterReadA(res) {
       let formData = new FormData();
       formData.append("file", res.file);
@@ -100,11 +104,7 @@ export default {
       font-size: 13px;
     }
   }
-  .into-process {
-    width: 100%;
-    height: 642px;
-    margin-bottom: 70px;
-  }
+
   .pay-btn {
     position: fixed;
     width: 100%;

@@ -81,7 +81,7 @@ export default {
     this.appealObject = this.$route.params;
   },
   methods: {
-    afterRead(res) {
+      afterRead(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/order/upload/image`, formData).then(response => {
