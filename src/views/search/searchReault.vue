@@ -76,13 +76,14 @@
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
                 <div class="goods-count-sale">
                   <span class="goods-shopName">
                     <i>{{item.shopName}}</i>
                   </span>
-                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity}}</span>
+                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity||0}}</span>
                 </div>
               </div>
             </router-link>
@@ -348,8 +349,24 @@ export default {
             padding-bottom: 12px;
             padding-top: 12px;
             .goods-price {
+              width: 100%;
               font-size: 14px;
               color: #ec3924;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 55px;
+                height: 17px;
+              }
             }
             .add-icon {
               width: 20px;
