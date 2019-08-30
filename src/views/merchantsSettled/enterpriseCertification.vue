@@ -54,7 +54,7 @@
     </ul>
     <van-checkbox
       class="merchant-agreement"
-      v-model="shopForm.checked"
+      v-model="checked"
       icon-size="14"
       checked-color="#D8182D"
     >
@@ -62,7 +62,7 @@
       <i class="agreement-text">《CMALL商家协议》</i>
     </van-checkbox>
     <div class="pay-btn">
-      <van-button type="danger" @click="handleSubmitShopInfo" size="large">提交</van-button>
+      <van-button type="danger" :disabled="!checked" @click="handleSubmitShopInfo" size="large">提交</van-button>
     </div>
   </div>
 </template>
@@ -74,53 +74,71 @@ export default {
     return {
       systemMessage: {},
       checked: false,
+      applyInfo: this.$route.query || {},
       fileList: [],
       idCardNoUrlA: [],
       idCardNoUrlB: [],
       idCardNoUrlC: [],
       businessLicenseUrl: [],
-      shopForm: {},
       mallMessage: {}
     };
   },
   created() {
-    this.$http.get(`/api/message/messageTypeCount`).then(response => {
-      response.data.content.forEach(it => {
-        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
+    if (this.$route.query.isEdit) {
+      this.idCardNoUrlA.push({ url: this.$route.query.idCardNoUrlA });
+      this.idCardNoUrlB.push({ url: this.$route.query.idCardNoUrlB });
+      this.idCardNoUrlC.push({ url: this.$route.query.idCardNoUrlC });
+      this.businessLicenseUrl.push({
+        url: this.$route.query.businessLicenseUrl
       });
-    });
+    }
+    console.log("====this.businessLicenseUrl====>", this.businessLicenseUrl);
   },
   methods: {
     //   /api/shop/submit
-    handleSubmitShopInfo(){
-        this.$http.post(`/api/shop/submit`)
+    handleSubmitShopInfo() {
+      //  需要验证
+      this.$http
+        .post(
+          `/api/shop${this.applyInfo.isEdit ? "/again" : ""}/submit`,
+          this.applyInfo
+        )
+        .then(response => {
+          console.log("=====content==>", response.data.content);
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "店铺信息提交成功"
+          });
+          this.$router.push("/merchantsSettled/payDeposit");
+        });
     },
     afterReadA(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.shopForm.idCardNoUrlA = response.data.content.imageUrl;
+        this.applyInfo.idCardNoUrlA = response.data.content.imageUrl;
       });
     },
     afterReadB(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.shopForm.idCardNoUrlB = response.data.content.imageUrl;
+        this.applyInfo.idCardNoUrlB = response.data.content.imageUrl;
       });
     },
     afterReadC(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.shopForm.idCardNoUrlC = response.data.content.imageUrl;
+        this.applyInfo.idCardNoUrlC = response.data.content.imageUrl;
       });
     },
     afterReadBusinessLicenseUrl(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.shopForm.businessLicenseUrl = response.data.content.imageUrl;
+        this.applyInfo.businessLicenseUrl = response.data.content.imageUrl;
       });
     }
   }

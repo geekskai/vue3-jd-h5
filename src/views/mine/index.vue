@@ -70,18 +70,21 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/merchantsSettled/index" class="option-item" tag="li">
+        <!-- /merchantsSettled/payDeposit -->
+        <!-- <router-link to="/merchantsSettled/index" class="option-item" tag="li"> -->
+        <li class="option-item" @click="handleMerchantsSettled">
           <div class="item-info">
             <svg-icon class="incon" icon-class="businessmen-stationed"></svg-icon>
             <span>商家入驻</span>
           </div>
-
           <span class="merchants-status" v-if="merchantsSettledStatus == 0">待审核</span>
           <span class="merchants-status" v-if="merchantsSettledStatus == 1">通过</span>
-          <span class="merchants-status" v-if="merchantsSettledStatus == 2">不通过</span>
-          <span class="merchants-status" v-if="merchantsSettledStatus === null">未入驻</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 2">未通过</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 3">未缴纳保证金</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == -1">未入驻</span>
           <van-icon name="arrow" color="#DBDBDB" />
-        </router-link>
+        </li>
+        <!-- </router-link> -->
         <router-link to="/mine/shareLink" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="sharing-links"></svg-icon>
@@ -195,22 +198,37 @@ export default {
   },
   created() {
     this.initUserInfo();
-    this.getMerchantShopMessage(); // 获取商家入驻消息
   },
   computed: {},
   mounted() {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
-    //
-    getMerchantShopMessage() {
-      this.$http.post(`/api/message/merchantShopMessage`).then(response => {
-        this.merchantsSettledStatus = response.data.content.status;
-      });
+    handleMerchantsSettled() {
+      // this.merchantsSettledStatus = -1
+      switch (this.merchantsSettledStatus) {
+        case 0: // 待审核
+          this.$router.push(`/merchantsSettled/waitingReviewResults`);
+          break;
+        case 1: // 通过
+          break;
+        case 2: // 不通过
+          this.$router.push(`/merchantsSettled/auditFailure`);
+          break;
+        case 3: // 未缴纳保证金
+          this.$router.push(`/merchantsSettled/payDeposit`);
+          break;
+        default:
+          // -1未申请入驻
+          this.$router.push(`/merchantsSettled/index`);
+          break;
+      }
     },
     initUserInfo() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
+        this.merchantsSettledStatus = response.data.content.merchantStatus;
+        this.status = response.data.content.status;
       });
     },
     handleClose() {

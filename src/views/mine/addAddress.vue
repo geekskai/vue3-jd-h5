@@ -5,7 +5,6 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">新增所在地区</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -86,12 +85,13 @@
         <van-button type="danger" size="large" @click="handleSeveAddresInfo">保存</van-button>
       </router-link>
     </div>
+
     <van-popup
       v-model="show"
       position="bottom"
       :style="{ height: '40%' }"
       @click-overlay="show = false"
-    >
+     >
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -158,6 +158,7 @@ export default {
         receiverGender: 0,
         defaultAddrFlag: 0
       },
+      
       list: [],
       list2: [],
       list3: [],
@@ -240,6 +241,8 @@ export default {
     handleChooseGender(gender) {
       this.addressInfo.receiverGender = gender;
     },
+
+
     handleSeveAddresInfo() {
       if (
         !this.addressInfo.receiverName ||
@@ -277,7 +280,7 @@ export default {
     },
     getCitys() {
       this.$http
-        .get(`/api/address/getCnAreaList?parentAreaId=84`)
+        .get(`/api/address/getCnAreaList?parentAreaId=1`)
         .then(response => {
           this.list2 = response.data.content;
           this.val.cityVal = this.list2[0];

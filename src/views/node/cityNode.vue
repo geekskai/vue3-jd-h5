@@ -9,8 +9,7 @@
     </header>
     <section class="area-content">
       <ul class="options-list">
-
-      <li class="option-item">
+        <li class="option-item">
           <router-link tag="div" class="item-info" to="/mine/countryRegion">
             <van-field
               v-model="areaNode.country"
@@ -192,15 +191,9 @@ export default {
     },
     handleCoinPay(item) {
       this.item = item;
-      console.log("=====item==>", item);
-      // this.$refs.droplist.hidden();
-      // this.isActive = false;
     },
     handleAlipay(item) {
       this.item = item;
-      console.log("=====item==>", item);
-      // this.$refs.droplist.hidden();
-      // this.isActive = false;
     },
     hidden() {
       this.isActive = false;

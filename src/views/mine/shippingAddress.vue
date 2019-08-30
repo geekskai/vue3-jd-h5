@@ -19,7 +19,7 @@
       v-for="(address, index) in addressArray"
       :key="index"
       @click="handleGoToEditAddrss(address)"
-    >
+     >
       <ul class="card-content">
         <div class="card-triangle" :class="{'active':address.defaultFlag}"></div>
         <li class="addres-svg">
@@ -104,6 +104,7 @@ export default {
 .shipping-address {
   height: 100%;
   padding: 0 16px;
+  margin-bottom: 70px;
   .page-header {
     display: flex;
     justify-content: flex-start;
