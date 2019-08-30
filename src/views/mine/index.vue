@@ -205,7 +205,7 @@ export default {
   },
   methods: {
     handleMerchantsSettled() {
-      // this.merchantsSettledStatus = -1
+      // this.merchantsSettledStatus = 2
       switch (this.merchantsSettledStatus) {
         case 0: // 待审核
           this.$router.push(`/merchantsSettled/waitingReviewResults`);
