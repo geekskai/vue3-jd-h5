@@ -19,7 +19,7 @@
       v-for="(address, index) in addressArray"
       :key="index"
       @click="handleGoToEditAddrss(address)"
-     >
+    >
       <ul class="card-content">
         <div class="card-triangle" :class="{'active':address.defaultFlag}"></div>
         <li class="addres-svg">
@@ -79,15 +79,13 @@ export default {
           address.fullAddress.length - 9
         );
         return address.fullAddress;
-        // address.fullAddress.slice(0, address.fullAddress.length - 9) +
-        // address.address
       }
       return address.fullAddress;
     },
     handleGoToEditAddrss(address) {
       this.$router.push({
         path: "/mine/editAddress",
-        query: { address: address }
+        query: Object.assign({}, address)
       });
     },
     getUserList() {

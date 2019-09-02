@@ -91,7 +91,7 @@
       position="bottom"
       :style="{ height: '40%' }"
       @click-overlay="show = false"
-     >
+    >
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -158,7 +158,7 @@ export default {
         receiverGender: 0,
         defaultAddrFlag: 0
       },
-      
+
       list: [],
       list2: [],
       list3: [],
@@ -197,14 +197,14 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             this.list2 =
-              res.data.content.length > 1
+              res.data.content.length > 0
                 ? res.data.content
                 : [{ areaName: "-" }];
             if (res.data.content.length < 1) {
               this.list3 = [{ areaName: "-" }];
             }
-            this.cityVal = this.list2[0].areaId;
           }
+          this.dataProcessing();
         });
     },
     // 监听市滑动
@@ -215,10 +215,11 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               this.list3 =
-                res.data.content.length > 1
+                res.data.content.length > 0
                   ? res.data.content
                   : [{ areaName: "-" }];
             }
+            this.dataProcessing();
           });
       }
     }
@@ -227,12 +228,9 @@ export default {
   created() {
     this.getProvinces();
     this.getCitys();
-    this.val.areaVal = {
-      name: "",
-      value: ""
-    };
+    this.getAreas();
     // 第一条数据为直辖市 so '-' 符号表示为第三列
-    this.list3 = [{ name: "-" }];
+    this.list3 = [{ areaName: "-", areaId: "" }];
   },
   methods: {
     handleChooseHome(tag) {
@@ -241,7 +239,6 @@ export default {
     handleChooseGender(gender) {
       this.addressInfo.receiverGender = gender;
     },
-
 
     handleSeveAddresInfo() {
       if (
@@ -286,6 +283,14 @@ export default {
           this.val.cityVal = this.list2[0];
         });
     },
+    getAreas() {
+      this.$http
+        .get(`/api/address/getCnAreaList?parentAreaId=72`)
+        .then(response => {
+          this.list3 = response.data.content;
+          this.val.areaVal = this.list3[0];
+        });
+    },
 
     complete() {
       if (!this.val.areaVal.areaId) {
@@ -309,8 +314,6 @@ export default {
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
-      // this.addressInfo.fullAddress = this.addressInfo.area;
-      // this.addressInfo.area + this.addressInfo.address;
     },
     cancel() {
       this.show = false;

@@ -45,16 +45,20 @@ export default {
   created() {},
   methods: {
     handleGetVerifyCode() {
+      let paramsObj = {};
+      if (~this.userInfo.mobile.indexOf("@")) {
+        paramsObj = { email: this.userInfo.mobile, type: 2 };
+      } else {
+        paramsObj = { mobile: this.userInfo.mobile, type: 2 };
+      }
       if (this.userInfo.mobile) {
-        this.$http
-          .post(`/api/user/getVerifyCode`, { mobile: this.userInfo.mobile,type:2 })
-          .then(response => {
-            this.$toast({
-              mask: false,
-              duration: 1000,
-              message: "验证码获取成功！"
-            });
+        this.$http.post(`/api/user/getVerifyCode`, paramsObj).then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "验证码获取成功！"
           });
+        });
       } else {
         this.$toast({
           mask: false,
@@ -114,7 +118,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -175,7 +179,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     /deep/ .van-button__text {
       color: #fff;
