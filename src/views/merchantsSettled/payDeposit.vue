@@ -43,8 +43,6 @@
         <li class="coin-pay">
           <div>
             <label>支付</label>
-            <!-- <svg-icon v-if="item.icon" :icon-class="item.icon"></svg-icon>
-            {{item.text}}-->
           </div>
           <div class="icons-box" @click="handleShow" v-click-outside="hidden">
             <svg-icon icon-class="arrow-down" :class="{'active-arrow-down':isActive}"></svg-icon>

@@ -327,6 +327,7 @@ export default {
       .content-tips {
         width: 100%;
         padding-top: 20px;
+        text-align: center;
       }
       .coin-pay {
         width: 100%;
