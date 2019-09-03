@@ -85,7 +85,7 @@
           <van-icon name="arrow" color="#DBDBDB" />
         </li>
         <!-- </router-link> -->
-        <router-link to="/mine/shareLink" class="option-item" tag="li">
+        <router-link :to="`/mine/shareLink?recommendCode=${userInfo.recommendCode}`" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="sharing-links"></svg-icon>
             <span>分享链接</span>

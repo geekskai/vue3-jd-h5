@@ -141,10 +141,8 @@ export default {
     return {
       show: false,
       item: {},
-      applyNum: 0,
       areaData: {},
       pickersType: "country",
-      areaNode: {},
       showDialog: false,
       isActive: false,
       columns: 1,
@@ -184,9 +182,10 @@ export default {
           // }
         ]
       },
+      applyNum: "",
       areaNode: {
-        applyNum: 0,
         limitNum: 0,
+        totalNum: 0,
         price: 0
       }
     };
@@ -236,7 +235,15 @@ export default {
       this.$refs.droplist.show();
     },
     handleApplication() {
-      this.showDialog = true;
+      if (this.areaNode.area && this.applyNum > 0) {
+        this.showDialog = true;
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入申请份数！"
+        });
+      }
     },
     handleShowCountry() {
       this.show = true;
@@ -252,50 +259,74 @@ export default {
       });
     },
     handleShowProvince() {
-      this.show = true;
-      this.pickersType = "province";
-      this.$http
-        .get(`/api/node/getSetting?parentId=${this.areaNode.countryId}`)
-        .then(response => {
-          let responseArray = response.data.content;
-          this.pickData.data1 = responseArray.map(element => {
-            return {
-              text: element.name,
-              value: element.id
-            };
+      if (this.areaNode.countryId) {
+        this.show = true;
+        this.pickersType = "province";
+        this.$http
+          .get(`/api/node/getSetting?parentId=${this.areaNode.countryId}`)
+          .then(response => {
+            let responseArray = response.data.content;
+            this.pickData.data1 = responseArray.map(element => {
+              return {
+                text: element.name,
+                value: element.id
+              };
+            });
           });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择国家！"
         });
+      }
     },
     handleShowCity() {
-      this.pickersType = "city";
-      this.show = true;
-      this.$http
-        .get(`/api/node/getSetting?parentId=${this.areaNode.provinceId}`)
-        .then(response => {
-          let responseArray = response.data.content;
-          this.pickData.data1 = responseArray.map(element => {
-            return {
-              text: element.name,
-              value: element.id
-            };
+      if (this.areaNode.provinceId) {
+        this.pickersType = "city";
+        this.show = true;
+        this.$http
+          .get(`/api/node/getSetting?parentId=${this.areaNode.provinceId}`)
+          .then(response => {
+            let responseArray = response.data.content;
+            this.pickData.data1 = responseArray.map(element => {
+              return {
+                text: element.name,
+                value: element.id
+              };
+            });
           });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择省！"
         });
+      }
     },
     handleShowArea() {
-      this.pickersType = "area";
-      this.show = true;
-      this.$http
-        .get(`/api/node/getSetting?parentId=${this.areaNode.cityId}`)
-        .then(response => {
-          let responseArray = response.data.content;
-          this.areaData = responseArray;
-          this.pickData.data1 = responseArray.map(element => {
-            return {
-              text: element.name,
-              value: element.id
-            };
+      if (this.areaNode.cityId) {
+        this.pickersType = "area";
+        this.show = true;
+        this.$http
+          .get(`/api/node/getSetting?parentId=${this.areaNode.cityId}`)
+          .then(response => {
+            let responseArray = response.data.content;
+            this.areaData = responseArray;
+            this.pickData.data1 = responseArray.map(element => {
+              return {
+                text: element.name,
+                value: element.id
+              };
+            });
           });
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择市！"
         });
+      }
     },
     confirmFn(select) {
       this.show = false;

@@ -11,6 +11,7 @@ import './mock/mock'
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
 // import Vconsole from 'vconsole'
+import VueClipboard from 'vue-clipboard2'
 
 import {
   Swipe,
@@ -61,6 +62,7 @@ import {
 Vue.use(VueAwesomeSwiper)
 Vue.use(axios)
 Vue.use(EventBus)
+Vue.use(VueClipboard)
 // if (process.env.NODE_ENV !== 'production') {
 //   const vConsole = new Vconsole()
 //   Vue.use(vConsole)
