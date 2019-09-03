@@ -1,10 +1,10 @@
 <template>
-  <div class="city-node">
+  <div class="area-node">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <img src="../../assets/icons/left-green-white.png" alt />
       </span>
-      <div class="header-content">区域节点申请</div>
+      <div class="header-content">市级节点申请</div>
     </header>
     <section class="area-content">
       <ul class="options-list">
@@ -57,10 +57,16 @@
             />
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
-        </li> -->
+        </li>-->
         <li class="option-item">
           <div class="item-info">
-            <van-field v-model="applyNum" label="份数" placeholder="请输入" />
+            <van-field
+              v-model="applyNum"
+              :disabled="!areaNode.city"
+              @click="handleCountsClick"
+              label="份数"
+              placeholder="请输入"
+            />
           </div>
           <span style="color:#3A3A3A">份</span>
         </li>
@@ -84,7 +90,7 @@
       :columns="columns"
       :defaultData="defaultData"
       :selectData="pickData"
-      @cancel="close"
+      @cancel="show = false"
       @confirm="confirmFn"
     ></vue-pickers>
     <van-dialog
@@ -99,7 +105,7 @@
     >
       <ul class="dialog-content">
         <li class="content-tips">
-          <span>确认支付{{applyNum*areaNode.price}} USDT成为区级节点？</span>
+          <span>确认支付{{applyNum*areaNode.price}} USDT成为市级节点？</span>
         </li>
         <li class="content-count">
           <span>USDT</span>
@@ -133,7 +139,7 @@
 <script>
 import ClickOutside from "vue-click-outside";
 export default {
-  name: "cityNode",
+  name: "areaNode",
   directives: {
     ClickOutside
   },
@@ -186,6 +192,7 @@ export default {
       areaNode: {
         limitNum: 0,
         totalNum: 0,
+        city: "",
         price: 0
       }
     };
@@ -204,12 +211,22 @@ export default {
   },
   created() {},
   methods: {
+    handleCountsClick() {
+      if (!this.areaNode.city) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择市级节点！"
+        });
+        this.applyNum = "";
+      }
+    },
     handleClose() {
       this.showDialog = false;
       this.$http
         .post(`/api/node/apply`, {
           applyNum: this.applyNum,
-          id: this.areaNode.areaId
+          id: this.areaNode.cityId
         })
         .then(response => {
           this.$toast({
@@ -235,7 +252,7 @@ export default {
       this.$refs.droplist.show();
     },
     handleApplication() {
-      if (this.areaNode.area && this.applyNum > 0) {
+      if (this.areaNode.province && this.applyNum > 0) {
         this.showDialog = true;
       } else {
         this.$toast({
@@ -289,6 +306,7 @@ export default {
           .get(`/api/node/getSetting?parentId=${this.areaNode.provinceId}`)
           .then(response => {
             let responseArray = response.data.content;
+            this.areaData = responseArray;
             this.pickData.data1 = responseArray.map(element => {
               return {
                 text: element.name,
@@ -304,30 +322,6 @@ export default {
         });
       }
     },
-    // handleShowArea() {
-    //   if (this.areaNode.cityId) {
-    //     this.pickersType = "area";
-    //     this.show = true;
-    //     this.$http
-    //       .get(`/api/node/getSetting?parentId=${this.areaNode.cityId}`)
-    //       .then(response => {
-    //         let responseArray = response.data.content;
-    //         this.areaData = responseArray;
-    //         this.pickData.data1 = responseArray.map(element => {
-    //           return {
-    //             text: element.name,
-    //             value: element.id
-    //           };
-    //         });
-    //       });
-    //   } else {
-    //     this.$toast({
-    //       mask: false,
-    //       duration: 1000,
-    //       message: "请选择市！"
-    //     });
-    //   }
-    // },
     confirmFn(select) {
       this.show = false;
       switch (this.pickersType) {
@@ -342,31 +336,22 @@ export default {
         case "city":
           this.areaNode.city = select.select1.text;
           this.areaNode.cityId = select.select1.value;
-          break;
-        // case "area":
-        //   this.areaNode.area = select.select1.text;
-        //   this.areaNode.areaId = select.select1.value;
-        //   this.areaData.map(it => {
-        //     if (it.id == select.select1.value) {
-        //       this.areaNode.totalNum = it.totalNum;
-        //       this.areaNode.price = it.price;
-        //       this.areaNode.limitNum = it.limitNum;
-        //     }
-        //   });
-          break;
-        default:
+          this.areaData.map(it => {
+            if (it.id == select.select1.value) {
+              this.areaNode.totalNum = it.totalNum;
+              this.areaNode.price = it.price;
+              this.areaNode.limitNum = it.limitNum;
+            }
+          });
           break;
       }
-    },
-    close() {
-      this.show = false;
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-.city-node {
+.area-node {
   .page-header {
     width: 100%;
     padding: 10px 20px;

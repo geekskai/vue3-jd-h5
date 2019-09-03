@@ -60,7 +60,13 @@
         </li>
         <li class="option-item">
           <div class="item-info">
-            <van-field v-model="applyNum" label="份数" placeholder="请输入" />
+            <van-field
+              @click="handleCountsClick"
+              :disabled="!areaNode.area"
+              v-model="applyNum"
+              label="份数"
+              placeholder="请输入"
+            />
           </div>
           <span style="color:#3A3A3A">份</span>
         </li>
@@ -84,7 +90,7 @@
       :columns="columns"
       :defaultData="defaultData"
       :selectData="pickData"
-      @cancel="close"
+      @cancel="show = false"
       @confirm="confirmFn"
     ></vue-pickers>
     <van-dialog
@@ -186,12 +192,21 @@ export default {
       areaNode: {
         limitNum: 0,
         totalNum: 0,
+        area: "",
         price: 0
       }
     };
   },
   watch: {
     applyNum(value) {
+      // if (!this.areaNode.area) {
+      // this.$toast({
+      //   mask: false,
+      //   duration: 1000,
+      //   message: "请选择区域节点！"
+      // });
+      // return (this.applyNum = "");
+      // } else {
       if (value > this.areaNode.limitNum) {
         this.applyNum = this.areaNode.limitNum;
         this.$toast({
@@ -200,10 +215,21 @@ export default {
           message: `超过购买限制，限购${this.areaNode.limitNum}份`
         });
       }
+      // }
     }
   },
   created() {},
   methods: {
+    handleCountsClick() {
+      if (!this.areaNode.area) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择市级节点！"
+        });
+        this.applyNum = "";
+      }
+    },
     handleClose() {
       this.showDialog = false;
       this.$http
@@ -357,9 +383,6 @@ export default {
         default:
           break;
       }
-    },
-    close() {
-      this.show = false;
     }
   }
 };

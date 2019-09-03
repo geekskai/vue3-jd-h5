@@ -1,4 +1,3 @@
-
 <template>
   <div class="industry-node">
     <header class="page-header">
@@ -12,30 +11,37 @@
         <li class="option-item">
           <div class="item-info">
             <van-field
-              v-model="areaNode.country"
-              @click="handleShowCountry"
+              v-model="areaNode.industry"
+              @click="handleShowIndustry"
               disabled
               label="行业"
-              placeholder="互联网"
+              placeholder="请选择"
             />
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </li>
+
         <li class="option-item">
           <div class="item-info">
-            <van-field v-model="areaNode.country" disabled label="份数" placeholder="20009" />
+            <van-field
+              v-model="applyNum"
+              :disabled="!areaNode.industry"
+              @click="handleCountsClick"
+              label="份数"
+              placeholder="请输入"
+            />
           </div>
           <span style="color:#3A3A3A">份</span>
         </li>
       </ul>
       <ul class="area-info">
         <li class="info-item">
-          <b class="text-weight">2000006</b>
+          <b class="text-weight">{{applyNum*areaNode.price}}</b>
           <small class="text-small">USDT</small>
         </li>
-        <li class="total-text">共20009份</li>
+        <li class="total-text">共{{applyNum}}份</li>
         <li class="area-count">
-          <small>*该节点共666份，现剩余节点还有65份</small>
+          <small>*该节点共{{areaNode.totalNum}}份，现剩余节点还有{{areaNode.totalNum-applyNum}}份</small>
         </li>
       </ul>
     </section>
@@ -47,7 +53,7 @@
       :columns="columns"
       :defaultData="defaultData"
       :selectData="pickData"
-      @cancel="close"
+      @cancel="show = false"
       @confirm="confirmFn"
     ></vue-pickers>
     <van-dialog
@@ -62,28 +68,29 @@
     >
       <ul class="dialog-content">
         <li class="content-tips">
-          <span>确认支付1003 USDT成为分享节点？</span>
+          <span>确认支付{{applyNum*areaNode.price}} USDT成为行业节点？</span>
         </li>
         <li class="content-count">
           <span>USDT</span>
-          <b class="text-weight">100003</b>
+          <b class="text-weight">{{applyNum*areaNode.price}}</b>
         </li>
         <li class="coin-pay">
           <div>
             <label>支付</label>
-            <svg-icon v-if="item.icon" :icon-class="item.icon"></svg-icon>
-            {{item.text}}
           </div>
-          <span
-            @click="handleShow"
-            class="arrow-down"
-            :class="{'active-arrow-down':isActive}"
-            v-click-outside="hidden"
-          >
+          <!-- <div class="icons-box" @click="handleShow" v-click-outside="hidden"> -->
+          <div class="icons-box">
             <svg-icon icon-class="arrow-down"></svg-icon>
-          </span>
+            <!-- <svg-icon icon-class="arrow-down" :class="{'active-arrow-down':isActive}"></svg-icon> -->
+            <div class="select-absolte">
+              <!-- <svg-icon v-if="item.icon" :icon-class="item.icon"></svg-icon> -->
+              <!-- <span>{{item.text}}</span> -->
+              <svg-icon icon-class="coin-pay"></svg-icon>
+              <span>CoinPay</span>
+            </div>
+          </div>
         </li>
-        <drop-list class="drop-list-play" :config="configData" ref="droplist"></drop-list>
+        <!-- <drop-list class="drop-list-play" :config="configData" ref="droplist"></drop-list> -->
         <li class="content-btn">
           <span class="know-btn" @click="handleClose">确认</span>
         </li>
@@ -103,6 +110,7 @@ export default {
     return {
       show: false,
       item: {},
+      areaData: {},
       showDialog: false,
       isActive: false,
       columns: 1,
@@ -136,45 +144,66 @@ export default {
       ],
       pickData: {
         data1: [
-          {
-            text: "中国",
-            value: "China"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
-          }
+          // {
+          //   text: "中国",
+          //   value: "China"
+          // }
         ]
       },
+      applyNum: "",
       areaNode: {
-        country: ""
+        limitNum: 0,
+        totalNum: 0,
+        city: "",
+        price: 0
       }
     };
   },
+  watch: {
+    applyNum(value) {
+      if (value > this.areaNode.limitNum) {
+        this.applyNum = this.areaNode.limitNum;
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: `超过购买限制，限购${this.areaNode.limitNum}份`
+        });
+      }
+    }
+  },
   created() {},
   methods: {
+    handleCountsClick() {
+      if (!this.areaNode.industry) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请选择行业节点！"
+        });
+        this.applyNum = "";
+      }
+    },
     handleClose() {
       this.showDialog = false;
+      this.$http
+        .post(`/api/node/apply`, {
+          applyNum: this.applyNum,
+          id: this.areaNode.industryId
+        })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "申请成功！"
+          });
+          this.$router.go(-1);
+        });
     },
     handleCoinPay(item) {
       this.item = item;
-      console.log("=====item==>", item);
-      // this.$refs.droplist.hidden();
-      // this.isActive = false;
     },
     handleAlipay(item) {
       this.item = item;
-      console.log("=====item==>", item);
-      // this.$refs.droplist.hidden();
-      // this.isActive = false;
     },
     hidden() {
       this.isActive = false;
@@ -185,16 +214,40 @@ export default {
       this.$refs.droplist.show();
     },
     handleApplication() {
-      this.showDialog = true;
+      if (this.areaNode.industry && this.applyNum > 0) {
+        this.showDialog = true;
+      } else {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入申请份数！"
+        });
+      }
     },
-    handleShowCountry() {
+    handleShowIndustry() {
       this.show = true;
+      this.$http.get(`/api/node/getSetting?type=5`).then(response => {
+        let responseArray = response.data.content;
+        this.areaData = responseArray;
+        this.pickData.data1 = responseArray.map(element => {
+          return {
+            text: element.name,
+            value: element.id
+          };
+        });
+      });
     },
-    confirmFn() {
+    confirmFn(select) {
       this.show = false;
-    },
-    close() {
-      this.show = false;
+      this.areaNode.industry = select.select1.text;
+      this.areaNode.industryId = select.select1.value;
+      this.areaData.map(it => {
+        if (it.id == select.select1.value) {
+          this.areaNode.totalNum = it.totalNum;
+          this.areaNode.price = it.price;
+          this.areaNode.limitNum = it.limitNum;
+        }
+      });
     }
   }
 };
@@ -315,8 +368,16 @@ export default {
       }
       .coin-pay {
         width: 100%;
-        .arrow-down {
-          margin-right: 70px;
+        .icons-box {
+          padding-right: 75px;
+          display: flex;
+          justify-content: flex-start;
+          position: relative;
+          .select-absolte {
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
         }
         .active-arrow-down {
           transform: rotate(180deg);
@@ -359,4 +420,3 @@ export default {
 }
 </style>
 ]
-
