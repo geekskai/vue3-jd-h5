@@ -11,8 +11,16 @@
         <span class="wallet-value">≈{{$route.query.shoppingWalletAmountCny}}CNY</span>
       </li>
     </header>
-
-    <section class="wallet-orders" v-for="(consumerWallet,index) in consumerWallets" :key="index">
+    <div class="empty-icon" v-if="!consumerWallets.length">
+      <svg-icon icon-class="pool-empty" class="pool-empty-cls"></svg-icon>
+      <p class="empty-text">暂无相关记录</p>
+    </div>
+    <section
+      v-else
+      class="wallet-orders"
+      v-for="(consumerWallet,index) in consumerWallets"
+      :key="index"
+    >
       <ul class="orders-lists">
         <li class="order-item">
           <div class="item-time">
@@ -56,6 +64,7 @@ export default {
       consumerWallets: []
     };
   },
+
   created() {
     this.initData();
   },
@@ -129,7 +138,18 @@ export default {
       }
     }
   }
-
+  .empty-icon {
+    text-align: center;
+    padding-top: 100px;
+    .pool-empty-cls {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      color: #949497;
+      font-size: 17px;
+    }
+  }
   .wallet-orders {
     padding: 5px 16px;
     margin: 16px;

@@ -6,57 +6,29 @@
         <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">节点矿池</div>
-      <li class="notice-message">
+      <!-- <li class="notice-message">
         <svg-icon class="notice-wallet-icon" icon-class="notice-wallet"></svg-icon>
         <label class="wallet-total">社区算力总额：85578909算力</label>
-      </li>
+      </li>-->
     </header>
-    <div class="card-box">
+    <div class="card-box" v-if="walletUserPoolLogVO.length">
       <section
         class="consumption-card"
         v-for="(WalletUserPool,index) in walletUserPoolLogVO"
         :key="index"
       >
         <ul class="card-content">
-          <!-- <div class="circular-consumption">消费</div> -->
           <li class="consumption-time">
             <small>{{WalletUserPool.createTime}}</small>
-            <!-- <span class="consumption-text">消费挖矿分红</span> -->
             <span class="consumption-text">{{WalletUserPool.typeDesc}}</span>
           </li>
           <li class="card-bottom">+{{WalletUserPool.amount}} USDT</li>
         </ul>
       </section>
-      <!-- <section class="week-card">
-        <ul class="card-content">
-          <div class="circular-consumption">周</div>
-          <li class="consumption-time">
-            <small>2018-3-25</small>
-            <span class="consumption-text">消费挖矿分红</span>
-          </li>
-          <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>
-      <section class="consumption-card">
-        <ul class="card-content">
-          <div class="circular-consumption">消费</div>
-          <li class="consumption-time">
-            <small>2018-3-25</small>
-            <span class="consumption-text">消费挖矿分红</span>
-          </li>
-          <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>
-      <section class="week-card">
-        <ul class="card-content">
-          <div class="circular-consumption">周</div>
-          <li class="consumption-time">
-            <small>2018-3-25</small>
-            <span class="consumption-text">消费挖矿分红</span>
-          </li>
-          <li class="card-bottom">+6900 USDT</li>
-        </ul>
-      </section>-->
+    </div>
+    <div class="empty-icon" v-else>
+      <svg-icon icon-class="pool-empty" class="pool-empty-cls"></svg-icon>
+      <p class="empty-text">暂无相关记录</p>
     </div>
   </div>
 </template>
@@ -78,7 +50,6 @@ export default {
         .get(`/api/wallet/getPoolLogs?poolType=3&page=1&size=10`)
         .then(response => {
           this.walletUserPoolLogVO = response.data.content;
-          console.log("=====content==>", response.data.content);
         });
     }
   }
@@ -104,23 +75,35 @@ export default {
       font-weight: 600;
       flex: 1;
     }
-    .notice-message {
-      padding-top: 30px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      .wallet-total {
-        font-size: 14px;
-        padding-left: 10px;
-      }
-      .wallet-value {
-        font-size: 13px;
-        padding-left: 20px;
-      }
-      .notice-wallet-icon {
-        width: 20px;
-        height: 20px;
-      }
+    // .notice-message {
+    //   padding-top: 30px;
+    //   display: flex;
+    //   justify-content: flex-start;
+    //   align-items: center;
+    //   .wallet-total {
+    //     font-size: 14px;
+    //     padding-left: 10px;
+    //   }
+    //   .wallet-value {
+    //     font-size: 13px;
+    //     padding-left: 20px;
+    //   }
+    //   .notice-wallet-icon {
+    //     width: 20px;
+    //     height: 20px;
+    //   }
+    // }
+  }
+  .empty-icon {
+    text-align: center;
+    padding-top: 100px;
+    .pool-empty-cls {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      color: #949497;
+      font-size: 17px;
     }
   }
   .card-box {

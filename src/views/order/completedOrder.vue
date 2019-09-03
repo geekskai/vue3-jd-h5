@@ -44,7 +44,6 @@
         </li>
         <li class="order-btn">
           <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
-          <!-- <router-link to="/order/appeal" tag="span" @click="handleToAppeal(orderList)">商品申诉</router-link> -->
           <span @click="handleToAppeal(orderForm)">商品申诉</span>
         </li>
       </ul>

@@ -5,7 +5,7 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">取消原因</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
+      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link> -->
     </header>
     <div class="content-box">
       <span class="icon-svg" @click="$router.go(-1)">
