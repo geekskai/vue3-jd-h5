@@ -36,7 +36,7 @@
         </li>
 
         <li
-          @click="handleGoToOrderDetail(orderList.status,orderList.orderNo)"
+          @click="handleGoToOrderDetail(orderList.status,orderList.orderNo,orderList.complain)"
           class="order-info"
           v-for="(item,i) in orderList.appOrderProductVos"
           :key="i"
@@ -103,7 +103,7 @@
             <span @click="handleToAppeal(orderList)">申诉</span>
             <router-link :to="`/order/viewLogistics?orderNo=${orderList.orderNo}`" tag="span">查看物流</router-link>
             <span @click="handleConfirmReceipt(orderList)">确定收货</span>
-          </div> -->
+          </div>-->
         </li>
       </ul>
     </section>
@@ -222,19 +222,27 @@ export default {
           this.orderLists = response.data.content;
         });
     },
-    handleGoToOrderDetail(status, orderNo) {
+    handleGoToOrderDetail(status, orderNo, complain) {
       switch (status) {
         case 0:
-          this.$router.push(`/order/pendingPayment?orderNo=${orderNo}`);
+          this.$router.push(
+            `/order/pendingPayment?orderNo=${orderNo}&complain=${complain}`
+          );
           break;
         case 1:
-          this.$router.push(`/order/toBeDelivered?orderNo=${orderNo}`);
+          this.$router.push(
+            `/order/toBeDelivered?orderNo=${orderNo}&complain=${complain}`
+          );
           break;
         case 2:
-          this.$router.push(`/order/pendingReceipt?orderNo=${orderNo}`);
+          this.$router.push(
+            `/order/pendingReceipt?orderNo=${orderNo}&complain=${complain}`
+          );
           break;
         case 3:
-          this.$router.push(`/order/completedOrder?orderNo=${orderNo}`);
+          this.$router.push(
+            `/order/completedOrder?orderNo=${orderNo}&complain=${complain}`
+          );
           break;
         case 4:
           // this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);

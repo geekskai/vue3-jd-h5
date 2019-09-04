@@ -22,7 +22,7 @@
             <img v-lazy="item.productMainUrl" />
             <div class="order-detail">
               <p class="info-one">
-                <span>{{item.productName}}</span>
+                <span class="product-name">{{item.productName}}</span>
                 <i>￥{{item.productAmount}}</i>
               </p>
               <p class="info-two">
@@ -206,9 +206,10 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            span {
-              overflow: hidden;
+            .product-name {
+              width: 150px;
               white-space: nowrap;
+              overflow: hidden;
               text-overflow: ellipsis;
             }
           }

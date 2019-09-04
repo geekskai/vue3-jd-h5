@@ -95,7 +95,7 @@
       :selectData="pickData"
       @cancel="close"
       @confirm="confirmFn"
-    ></vue-pickers> -->
+    ></vue-pickers>-->
     <tabbar></tabbar>
   </div>
 </template>

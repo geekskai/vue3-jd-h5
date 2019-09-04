@@ -38,7 +38,7 @@
           <div class="order-detail">
             <p class="info-one">
               <span>{{orderSkuInfo.productName}}</span>
-              <i>￥{{orderSkuInfo.productAmount}}</i>
+              <b>￥{{orderSkuInfo.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{orderSkuInfo.fullName}}</span>
@@ -270,8 +270,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
