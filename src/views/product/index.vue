@@ -79,7 +79,6 @@
       <span @click="handleViewDetail">宝贝详情</span>
       <div v-html="detailForm.productDetail" v-show="showDetail" class="html-class"></div>
     </div>
-
     <van-sku
       @sku-selected="skuSelected"
       v-model="show"
@@ -386,9 +385,7 @@ export default {
 <style lang="scss" scoped>
 .product-layout {
   background-color: white;
-  min-height: 100vh;
-  margin-bottom: 45px;
-  padding-bottom: 45px;
+  min-height: 812px;
   /deep/ .van-swipe-item {
     display: flex;
     justify-content: center;
@@ -591,7 +588,6 @@ export default {
     text-align: center;
     font-size: 16px;
     color: #3a3a3a;
-    // padding-top: 50px;
     span {
       box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }
@@ -611,10 +607,10 @@ export default {
       background: #fff;
       border-color: #ec3924;
     }
-    /deep/ .van-sku-row__item{
-      border-color: #EFEFF4;
-      background-color: #EFEFF4;
-      color: #3A3A3A;
+    /deep/ .van-sku-row__item {
+      border-color: #efeff4;
+      background-color: #efeff4;
+      color: #3a3a3a;
     }
     /deep/ .van-sku-actions {
       /deep/ .van-button--warning {
