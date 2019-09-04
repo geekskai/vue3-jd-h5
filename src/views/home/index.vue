@@ -13,7 +13,7 @@
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
-      <swiper :options="swiperOption" ref="mySwiper" v-if="adList.length">
+      <swiper :options="swiperOption" v-if="adList.length">
         <swiper-slide v-for="(img ,index) in adList" :key="index">
           <img class="slide_img" @click="handleClick" v-if="img.imageUrl" :src="img.imageUrl" />
         </swiper-slide>
@@ -136,45 +136,58 @@
         :swipe-threshold="5"
         title-inactive-color="#3a3a3a"
         title-active-color="#EC3924"
-        background="transparent"
+        background="#EFEFF4"
         v-model="active"
-        animated
-        @click="handleTabClick"
+        @change="handleTabChange"
+        swipeable
       >
-        <van-tab
-          v-for="(list,index) in catList"
-          :title="list.describe"
-          :name="list.type"
-          :key="index"
-        >
-          <div slot="title" class="slot-title">
-            <b class="tab-title">{{list.title}}</b>
-            <span class="tab-name">{{list.describe}}</span>
-          </div>
-
-          <section class="goods-box search-wrap">
-            <ul class="goods-content">
-              <li class="goods-item" v-for="(item,index) in tabItemLists" :key="index">
-                <div @click="handleToProductDetail(item.productId)">
-                  <img class="lazy-img" v-lazy="item.productMainImage" />
+        <!-- animated -->
+        <div ref="homeWrapper">
+          <list-scroll
+            ref="listScroll"
+            :scroll-data="tabItemLists"
+            class="likeList"
+            :pullup="true"
+            @scrollToEnd="handleScrollToEnd"
+            :pulldown="true"
+            @pulldown="handlePullDown"
+          >
+            <div>
+              <van-tab
+                v-for="(list,index) in catList"
+                :title="list.describe"
+                :name="list.type"
+                :key="index"
+              >
+                <div slot="title" class="slot-title">
+                  <b class="tab-title">{{list.title}}</b>
+                  <span class="tab-name">{{list.describe}}</span>
                 </div>
-                <div class="goods-layout">
-                  <div class="goods-title">{{item.productName}}</div>
-                  <span class="goods-div">{{item.labels}}</span>
-                  <div class="goods-desc">
-                    <span class="goods-price">
-                      <i>￥{{item.productCnyPrice}}</i>
-                      <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
-                    </span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </section>
-        </van-tab>
+                <section class="goods-box">
+                  <ul class="goods-content">
+                    <li class="goods-item" v-for="(item,index) in tabItemLists" :key="index">
+                      <div @click="handleToProductDetail(item.productId)">
+                        <img class="lazy-img" v-lazy="item.productMainImage" />
+                      </div>
+                      <div class="goods-layout">
+                        <div class="goods-title">{{item.productName}}</div>
+                        <span class="goods-div">{{item.labels}}</span>
+                        <div class="goods-desc">
+                          <span class="goods-price">
+                            <i>￥{{item.productCnyPrice}}</i>
+                            <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </section>
+              </van-tab>
+            </div>
+          </list-scroll>
+        </div>
       </van-tabs>
     </div>
-
     <tabbar></tabbar>
   </div>
 </template>
@@ -185,7 +198,8 @@ export default {
   data() {
     return {
       iconList: [],
-      active: "",
+      active: 0,
+      pageNum: 1,
       timeData: 36000000,
       catList: [],
       tabItemLists: [],
@@ -216,12 +230,36 @@ export default {
 
   created() {
     this.initData();
+    this.handleTabChange();
+  },
+  watch: {
+    active() {
+      this.tabItemLists = [];
+    }
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
-    window.addEventListener("scroll", this.pageScroll);
+    // window.addEventListener("scroll", this.pageScroll);
+    this.setHomeWrapperHeight();
   },
   methods: {
+    // 当滑块滑动到底部的时候。
+    handleScrollToEnd() {
+      this.pageNum++;
+      this.handleTabChange();
+    },
+    handlePullDown() {
+      // this.handleTabChange();
+      // this.$refs.listScroll.stop()
+      // this.$refs.homeWrapper.scrollTo(100,10)
+      // document.body.scrollTop = 400
+    },
+    //动态设置searc-wrap的高
+    setHomeWrapperHeight() {
+      let $screenHeight = document.documentElement.clientHeight;
+      this.$refs.homeWrapper.style.height = $screenHeight - 100 + "px";
+      // this.$refs.homeWrapper.style.height = $screenHeight - 170 + "px";
+    },
     handleToProductDetail(productId) {
       this.$router.push({
         path: "/product/index",
@@ -235,48 +273,57 @@ export default {
         this.catList = response.data.content.catList;
         this.iconList = response.data.content.iconList;
       });
-      this.handleTabClick(0);
     },
-    handleTabClick(type) {
+    handleTabChange() {
+      this.$toast.loading({
+        mask: true,
+        duration: 0, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "加载中..."
+      });
       this.$http
-        .get(`/api/index/choiceness?type=${type}&clientType=0`)
+        .get(
+          `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=30`
+        )
         .then(response => {
-          this.tabItemLists = response.data.content;
+          this.tabItemLists.push(...response.data.content);
+          this.$toast.clear();
         });
     },
     handleClick(linkUrl) {
       this.$router.push("/product/index");
-    },
-
-    pageScroll() {
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      scrollTop > 100
-        ? (this.headerActive = true)
-        : (this.headerActive = false);
     }
-  },
-  computed: {}
+
+    // pageScroll() {
+    //   let scrollTop =
+    //     window.pageYOffset ||
+    //     document.documentElement.scrollTop ||
+    //     document.body.scrollTop;
+    //   scrollTop > 100
+    //     ? (this.headerActive = true)
+    //     : (this.headerActive = false);
+    // }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 @import "../../styles/mixin.scss";
 .home {
+  // .home-header.active {
+  //   position: fixed;
+  //   width: 100%;
+  // }
   .home-header {
-    // position: fixed;
-    // left: 0;
-    // top: 10px;
-    // width: 100%;
-    // line-height: 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
     background: url("../../assets/image/home_heda_img.png") no-repeat center
       center;
     background-size: 100% 100%;
-    padding: 16px 16px 32px 16px;
-    // margin-bottom: 16px;
-    height: 60px;
+    padding: 16px 16px 30px 16px;
+    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -321,6 +368,7 @@ export default {
 
   .swiper-carousel {
     padding-bottom: 10px;
+    margin-top: 55px;
     background: url("../../assets/image/home_big_rand.png") no-repeat center
       bottom;
     background-size: 100% 6%;
@@ -377,22 +425,22 @@ export default {
     }
   }
   .spike-area {
-    margin: 10px 12px;
-    // padding: 10px 0;
+    padding: 10px 16px;
+    box-sizing: border-box;
     padding-top: 10px;
     border-radius: 4px;
-    background-color: white;
     .spike-top {
-      padding-bottom: 15px;
-      margin-bottom: 5px;
+      border-radius: 4px;
+      padding-bottom: 20px;
       background: url("../../assets/image/spike_center.png") no-repeat center
         bottom;
       background-size: 100% 5%;
+      background-color: #fff;
       display: flex;
       justify-content: space-between;
       align-items: stretch;
       .top-left {
-        padding: 10px 8px;
+        padding: 10px 4px 10px 10px;
         border-style: solid;
         border-color: transparent;
         border-right-color: #efefef;
@@ -400,7 +448,7 @@ export default {
         border-right-width: 1px;
         .item-top {
           display: flex;
-          justify-content: space-between;
+          justify-content: safe;
           align-items: center;
           .item-title {
             font-size: 14px;
@@ -493,12 +541,11 @@ export default {
       }
     }
     .spike-center {
-      // padding-top: 20px;
       padding-bottom: 15px;
-      // margin-bottom: 5px;
       background: url("../../assets/image/spike_center.png") no-repeat center
         bottom;
       background-size: 100% 5%;
+      background-color: #fff;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -531,15 +578,17 @@ export default {
       }
     }
     .spike-bottom {
+      border-radius: 4px;
       padding-bottom: 5px;
       background: url("../../assets/image/spike_center.png") no-repeat center
         bottom;
       background-size: 100% 1%;
+      background-color: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
       .bottom-left {
-        padding: 0 19px;
+        padding: 0 17px;
         margin: 10px 0;
         border-style: solid;
         border-color: transparent;
@@ -589,6 +638,12 @@ export default {
   }
   .content-tabs {
     padding-top: 10px;
+    /deep/ .van-tabs__line {
+      bottom: 23px;
+    }
+    /deep/ .van-tabs--line .van-tabs__wrap {
+      height: 56px;
+    }
     .slot-title {
       display: flex;
       justify-content: center;
@@ -610,7 +665,7 @@ export default {
       }
     }
     .goods-box {
-      padding: 10px 16px;
+      padding: 0 16px;
       .good-things {
         font-size: 18px;
         color: #ec3924;
@@ -694,21 +749,5 @@ export default {
       }
     }
   }
-
-  // .ballWrap {
-  //   .ball {
-  //     position: fixed;
-  //     left: 60%;
-  //     bottom: 10px;
-  //     z-index: 1003;
-  //     color: red;
-  //     transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
-  //     .inner {
-  //       width: 16px;
-  //       height: 16px;
-  //       transition: all 0.5s linear;
-  //     }
-  //   }
-  // }
 }
 </style>

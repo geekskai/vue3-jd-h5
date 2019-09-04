@@ -109,8 +109,7 @@
         }
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
-          this.scroll.on('touchend', (pos) => {
-          console.log('=====休息休息==>',pos);
+          this.scroll.on('touchEnd', (pos) => {
             // 下拉动作
             if (pos.y > 50) {
               this.$emit('pulldown')
@@ -131,6 +130,10 @@
       enable() {
         // 代理better-scroll的enable方法
         this.scroll && this.scroll.enable()
+      },
+      stop() {
+        // 代理better-scroll的stop方法
+        this.scroll && this.scroll.stop()
       },
       refresh() {
         // 代理better-scroll的refresh方法

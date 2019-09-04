@@ -88,13 +88,13 @@
           </div>
           <!-- 待收货 -->
           <div v-if="orderList.status == 2">
-            <span @click="handleToAppeal(orderList)">申诉</span>
+            <span v-if="orderList.complain == 0" @click="handleToAppeal(orderList)">申诉</span>
             <router-link :to="`/order/viewLogistics?orderNo=${orderList.orderNo}`" tag="span">查看物流</router-link>
             <span @click="handleConfirmReceipt(orderList)">确定收货</span>
           </div>
           <!-- 3-已完成 -->
           <div v-if="orderList.status == 3">
-            <span @click="handleToAppeal(orderList)">申诉</span>
+            <span v-if="orderList.complain == 0" @click="handleToAppeal(orderList)">申诉</span>
             <router-link :to="`/order/viewLogistics?orderNo=${orderList.orderNo}`" tag="span">查看物流</router-link>
             <!-- <span @click="handleConfirmReceipt(orderList)">确定收货</span> -->
           </div>

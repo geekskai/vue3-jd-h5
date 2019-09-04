@@ -7,10 +7,14 @@
       <div class="header-content">下载链接</div>
     </header>
     <section class="down-btns">
-      <div class="down-btn">
-        <svg-icon icon-class="apple-icon"></svg-icon>iOS 下载
-      </div>
-      <a href="https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/app-release.apk">
+      <a
+        href="itms-services://?action=download-manifest&url=https://chain-mall.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
+      >
+        <div class="down-btn">
+          <svg-icon icon-class="apple-icon"></svg-icon>iOS 下载
+        </div>
+      </a>
+      <a href="https://chain-mall.oss-cn-shenzhen.aliyuncs.com/download/cmall-release.apk">
         <div class="down-btn">
           <svg-icon icon-class="android-icon"></svg-icon>Android 下载
         </div>

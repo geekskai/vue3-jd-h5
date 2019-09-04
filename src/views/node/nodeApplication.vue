@@ -10,7 +10,7 @@
       <ul class="main-lists">
         <li class="list-item" @click="handleShareNode">
           <img src="../../assets/image/product/share-apply.png" />
-          <span class="node-text">分享节点</span>
+          <span class="node-text">链猫掌柜</span>
         </li>
         <router-link tag="li" to="/node/areaNode" class="list-item">
           <!-- <li class="list-item"> -->
@@ -57,7 +57,7 @@
     >
       <ul class="dialog-content">
         <li class="content-tips">
-          <span>确认支付{{shareNode.price}} USDT成为分享节点？</span>
+          <span>确认支付{{shareNode.price}} USDT成为链猫掌柜？</span>
         </li>
         <li class="content-count">
           <span>USDT</span>

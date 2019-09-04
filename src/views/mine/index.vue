@@ -7,7 +7,7 @@
       <ul v-if="token" class="user-info">
         <li class="user-name">{{userInfo.nickName}}</li>
         <li class="node-info">
-          <span class="sharing-node" @click="toShow">分享节点</span>
+          <span class="sharing-node" @click="toShow">链猫掌柜</span>
           <span class="business-node">商家节点</span>
         </li>
       </ul>
@@ -148,7 +148,7 @@
         <ul class="my-node-data">
           <li class="data-item">
             <img src="../../assets/image/product/share-node-img.png" alt />
-            <span class="node-text">分享节点</span>
+            <span class="node-text">链猫掌柜</span>
           </li>
           <li class="data-item">
             <img src="../../assets/image/product/area-node-img.png" alt />

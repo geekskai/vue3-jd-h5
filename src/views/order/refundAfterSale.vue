@@ -38,7 +38,7 @@
               <div class="order-detail">
                 <p class="info-one">
                   <span>{{item.productName}}</span>
-                  <b>￥：{{item.productAmount}}</b>
+                  <b>￥{{item.productAmount}}</b>
                 </p>
                 <p class="info-two">
                   <span>{{item.fullName}}</span>

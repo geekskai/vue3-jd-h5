@@ -86,6 +86,7 @@ export default {
     //动态设置searc-wrap的高
     setSearchWrapHeight() {
       let $screenHeight = document.documentElement.clientHeight;
+       console.log("===searchWrap===", this.$refs.searchWrap);
       this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
     },
     selectProduct(product) {

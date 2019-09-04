@@ -42,7 +42,7 @@
           <div class="order-detail">
             <p class="info-one">
               <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <i>￥{{appOrderProduct.productAmount}}</i>
             </p>
             <p class="info-two">
               <span>{{appOrderProduct.fullName}}</span>
@@ -52,11 +52,11 @@
         </li>
         <li class="order-total">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>

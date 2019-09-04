@@ -33,7 +33,7 @@
                 </p>
                 <p class="item-title">{{item.productName}}</p>
                 <p class="item-count">
-                  <i>￥：{{item.productCnyPrice}}</i>
+                  <i>￥{{item.productCnyPrice}}</i>
                   <span>月销量：{{item.monthlySalesQuantity}}</span>
                 </p>
               </div>
@@ -70,7 +70,7 @@ export default {
     // this.initData();
   },
   methods: {
-    // 当滑块滑动到低不低的时候。
+    // 当滑块滑动到底部的时候。
     handleScrollToEnd() {
       console.log("=====滑动到底了==>");
       this.page++;

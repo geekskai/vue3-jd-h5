@@ -57,7 +57,7 @@
                   </li>
                 </ul>
                 <div class="info-count">
-                  <span>￥：{{item.productPrice}}</span>
+                  <span>￥{{item.productPrice}}</span>
                   <van-stepper
                     v-model="item.quantity"
                     integer

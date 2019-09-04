@@ -12,7 +12,7 @@
     </header>
 
     <div class="my-swiper">
-      <swiper :options="swiperOption" ref="mySwiper">
+      <swiper :options="swiperOption">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide-img" :src="img.imgUrl" alt />
         </swiper-slide>
