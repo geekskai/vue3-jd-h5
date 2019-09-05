@@ -74,10 +74,12 @@ export default {
   flex-direction: column;
   padding-bottom: 45px;
   background-color: #f66747;
-  //   background: url("../../assets/image/mime/share-link.png") no-repeat center
-  //     center;
-  //   background-size: 100% 100%;
+  background: url("../../assets/image/mime/share-link.png") no-repeat center
+    center;
+  background-size: 100% 100%;
   .page-header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -105,14 +107,14 @@ export default {
   }
   .content-box {
     height: 100%;
-    background: url("../../assets/image/mime/share-link.png") no-repeat center
-      center;
-    background-size: 100% 100%;
+    // background: url("../../assets/image/mime/share-link.png") no-repeat center
+    //   center;
+    // background-size: 100% 100%;
 
     .share-content {
       width: 268px;
       height: 402px;
-      margin: 150px auto;
+      margin: 130px auto;
       background: url("../../assets/image/mime/share-center.png") no-repeat
         center center;
       background-size: 100% 100%;

@@ -21,11 +21,33 @@
       <img class="radian-img" src="../../assets/image/radian.png" />
     </div>
     <section class="home-tags">
-      <ul class="tags-content">
+      <!-- <ul class="tags-content">
         <li v-for="(item,index) in iconList" class="tags-item" :key="index">
           <img class="tags-icon" v-lazy="item.iconUrl" />
           <span class="item-text" v-text="item.title"></span>
         </li>
+      </ul>-->
+      <ul class="tags-content">
+        <router-link tag="li" class="tags-item" to="./index">
+          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
+          <span class="item-text">链猫精品</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./index">
+          <svg-icon class="tags-icon" icon-class="cm-area"></svg-icon>
+          <span class="item-text">CM专区</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./index">
+          <svg-icon class="tags-icon" icon-class="collar-cm"></svg-icon>
+          <span class="item-text">领CM币</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./index">
+          <svg-icon class="tags-icon" icon-class="coupon-svg"></svg-icon>
+          <span class="item-text">领券</span>
+        </router-link>
+        <router-link tag="li" class="tags-item" to="./index">
+          <svg-icon class="tags-icon" icon-class="chain-cat-member"></svg-icon>
+          <span class="item-text">链猫会员</span>
+        </router-link>
       </ul>
     </section>
     <section class="spike-area">

@@ -19,12 +19,7 @@
         </router-link>
       </van-cell-group>
     </section>
-    <!-- <ul class="other-login">
-      <li class="top-login">
-        <span>或使用TOP金服登录</span>
-      </li>
-      <img src="../../assets/image/top-logo.png" />
-    </ul>-->
+
     <div class="login-register-btns">
       <span class="login-btn" @click="handleUserLogin">登录</span>
       <router-link class="register-btn" tag="span" to="/register/phoneRegister">注册</router-link>
@@ -45,12 +40,6 @@ export default {
   },
   created() {},
   methods: {
-    // handleForgenPwd() {
-    //   this.$router.push({
-    //     path: ``,
-    //     query: this.loginForm
-    //   });
-    // },
     handleUserLogin() {
       this.$http.post(`/api/user/login`, this.loginForm).then(response => {
         if (response.data.code === 0) {
