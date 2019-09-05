@@ -7,7 +7,6 @@ import 'swiper/dist/css/swiper.css'
 import './components'
 import 'amfe-flexible'
 import axios from './plugins/axios'
-import './mock/mock'
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
 import Vconsole from 'vconsole'

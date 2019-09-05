@@ -146,7 +146,6 @@
   </div>
 </template>
 <script>
-// import areaList from "../../mock/area";
 export default {
   name: "addAddress",
   data() {
