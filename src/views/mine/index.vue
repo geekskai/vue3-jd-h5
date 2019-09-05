@@ -16,7 +16,7 @@
         <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
       </div>
     </section>
-    <section class="my-info">
+    <!-- <section class="my-info">
       <ul class="info-list">
         <li class="info-item">
           <b>09</b>
@@ -31,7 +31,7 @@
           <span>我的足迹</span>
         </li>
       </ul>
-    </section>
+    </section> -->
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
