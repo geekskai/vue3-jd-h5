@@ -19,12 +19,12 @@
         </router-link>
       </van-cell-group>
     </section>
-    <ul class="other-login">
+    <!-- <ul class="other-login">
       <li class="top-login">
         <span>或使用TOP金服登录</span>
       </li>
       <img src="../../assets/image/top-logo.png" />
-    </ul>
+    </ul>-->
     <div class="login-register-btns">
       <span class="login-btn" @click="handleUserLogin">登录</span>
       <router-link class="register-btn" tag="span" to="/register/phoneRegister">注册</router-link>
@@ -96,7 +96,7 @@ export default {
         position: absolute;
         bottom: -30px;
         left: 15px;
-        color: #EC3924;
+        color: #ec3924;
         font-size: 11px;
         display: flex;
         justify-content: center;
@@ -149,9 +149,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #EC3924;
+      border: 1px solid #ec3924;
       border-radius: 4px;
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     .register-btn {
       line-height: 44px;
