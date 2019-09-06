@@ -41,6 +41,7 @@
     "babel-plugin-import": "^1.12.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "commitizen": "^4.0.3",
+    "compression-webpack-plugin": "^3.0.0",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
