@@ -146,7 +146,7 @@
           </div>
         </li>
         <router-link class="bottom-left" to="/loveShop" tag="li">
-        <!-- <router-link class="bottom-left" to="/index" tag="li"> -->
+          <!-- <router-link class="bottom-left" to="/index" tag="li"> -->
           <div class="bottom-left-header">
             <span class="big-buy">爱逛好店</span>
             <span class="goods-name addColor">懂你所要</span>

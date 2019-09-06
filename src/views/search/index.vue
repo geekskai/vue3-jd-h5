@@ -131,6 +131,7 @@ export default {
                 duration: 1000,
                 message: "删除成功！"
               });
+              this.initData();
             });
         });
     }
