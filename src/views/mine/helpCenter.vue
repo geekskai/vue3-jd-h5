@@ -36,7 +36,7 @@
             </van-collapse-item>
           </van-collapse>
         </li>
-        <router-link to="/mine/messageCenter" class="option-item" tag="li">
+        <router-link to="/mine/helpCenter" class="option-item" tag="li">
           <div class="item-info">
             <span>支持方式</span>
           </div>

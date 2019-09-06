@@ -37,8 +37,8 @@
           <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <span class="product-name">{{appOrderProduct.productName}}</span>
+              <b>￥{{appOrderProduct.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{appOrderProduct.fullName}}</span>
@@ -49,11 +49,11 @@
 
         <li class="order-count">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="real-pay">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
@@ -165,15 +165,16 @@ export default {
   },
   created() {
     this.initData();
+    console.log('=====orderNo==>',this.$route.params.orderNo);
   },
   methods: {
     initData() {
       this.$http
         .post(`/api/order/detail`, {
-          orderNo: this.$route.query.orderNo
+          orderNo: this.$route.params.orderNo
         })
         .then(response => {
-          // this.orderForm = response.data.content;
+          this.orderForm = response.data.content;
         });
     },
     close() {
@@ -188,6 +189,11 @@ export default {
         loadingType: "spinner",
         message: "支付中..."
       });
+       this.$http
+        .get(`/api/coinPay/testPay?orderNo=${this.orderForm.orderNo}`)
+        .then(response => {
+          console.log("=====response.data==>", response.data.content);
+        });
       setTimeout(() => {
         // this.$toast({
         //   mask: false,
@@ -241,6 +247,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
@@ -274,8 +281,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {

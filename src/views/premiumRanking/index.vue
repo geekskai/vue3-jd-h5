@@ -107,7 +107,7 @@ export default {
       show: false,
       listItems: [
         {
-          img: require("../../assets/image/premiumRanking/demo0.png"),
+          img: require("assets/image/premiumRanking/demo0.png"),
           title:
             "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
           desc: "正品大牌 产家直营",
@@ -115,7 +115,7 @@ export default {
           hotIndex: "99"
         },
         {
-          img: require("../../assets/image/premiumRanking/demo0.png"),
+          img: require("assets/image/premiumRanking/demo0.png"),
           title:
             "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
           desc: "正品大牌 产家直营",
@@ -123,7 +123,7 @@ export default {
           hotIndex: "99"
         },
         {
-          img: require("../../assets/image/premiumRanking/demo0.png"),
+          img: require("assets/image/premiumRanking/demo0.png"),
           title:
             "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
           desc: "正品大牌 产家直营",
@@ -131,7 +131,7 @@ export default {
           hotIndex: "99"
         },
         {
-          img: require("../../assets/image/premiumRanking/demo0.png"),
+          img: require("assets/image/premiumRanking/demo0.png"),
           title:
             "高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳",
           desc: "正品大牌 产家直营",

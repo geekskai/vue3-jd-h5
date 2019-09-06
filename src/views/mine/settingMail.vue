@@ -47,7 +47,7 @@ export default {
     handleGetVerifyCode() {
       if (this.userInfo.email) {
         this.$http
-          .post(`/api/user/getVerifyCode`, { email: this.userInfo.email })
+          .post(`/api/user/getVerifyCode`, { email: this.userInfo.email,type:3 })
           .then(response => {
             this.$toast({
               mask: false,
@@ -65,6 +65,7 @@ export default {
     },
     handleSetEmail() {
       if (this.userInfo.password === this.userInfo.password1) {
+        this.userInfo.mobile =null
         this.$http
           .post(`/api/user/updateUserInfo`, this.userInfo)
           .then(response => {

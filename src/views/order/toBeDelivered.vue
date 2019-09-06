@@ -26,7 +26,7 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <!-- <img src="assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>-->
             <img v-lazy="orderForm.logoUrl" class="header-img" />
             <span>{{orderForm.shopName }}</span>
@@ -41,8 +41,8 @@
           <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <span class="product-name">{{appOrderProduct.productName}}</span>
+              <b>￥{{appOrderProduct.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{appOrderProduct.fullName}}</span>
@@ -52,11 +52,11 @@
         </li>
         <li class="order-total">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
@@ -80,7 +80,7 @@
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-          <span>{{orderForm.finishDate}}</span>
+          <span>{{orderForm.payDate}}</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -183,6 +183,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
@@ -215,8 +216,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {

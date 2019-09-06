@@ -5,7 +5,6 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">新增所在地区</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -39,7 +38,7 @@
           <van-cell title="所在地区" />
           <!-- <div class="address-name" @click="show = true"> -->
           <div class="address-name" @click="showPicker">
-            <van-field v-model="addressInfo.area" disabled placeholder="请选择省市区" />
+            <van-field v-model="addressInfo.fullAddress" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -86,12 +85,13 @@
         <van-button type="danger" size="large" @click="handleSeveAddresInfo">保存</van-button>
       </router-link>
     </div>
+
     <van-popup
       v-model="show"
       position="bottom"
       :style="{ height: '40%' }"
       @click-overlay="show = false"
-      >
+    >
       <div class="address">
         <div class="addressbox">
           <p class="text_btn">
@@ -146,7 +146,6 @@
   </div>
 </template>
 <script>
-// import areaList from "../../mock/area";
 export default {
   name: "addAddress",
   data() {
@@ -159,7 +158,6 @@ export default {
         defaultAddrFlag: 0
       },
 
-      
       list: [],
       list2: [],
       list3: [],
@@ -198,14 +196,14 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             this.list2 =
-              res.data.content.length > 1
+              res.data.content.length > 0
                 ? res.data.content
                 : [{ areaName: "-" }];
             if (res.data.content.length < 1) {
               this.list3 = [{ areaName: "-" }];
             }
-            this.cityVal = this.list2[0].areaId;
           }
+          this.dataProcessing();
         });
     },
     // 监听市滑动
@@ -216,10 +214,11 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               this.list3 =
-                res.data.content.length > 1
+                res.data.content.length > 0
                   ? res.data.content
                   : [{ areaName: "-" }];
             }
+            this.dataProcessing();
           });
       }
     }
@@ -228,21 +227,32 @@ export default {
   created() {
     this.getProvinces();
     this.getCitys();
-    this.val.areaVal = {
-      name: "",
-      value: ""
-    };
+    this.getAreas();
     // 第一条数据为直辖市 so '-' 符号表示为第三列
-    this.list3 = [{ name: "-" }];
+    this.list3 = [{ areaName: "-", areaId: "" }];
   },
   methods: {
     handleChooseHome(tag) {
       this.addressInfo.tag = tag;
     },
- handleChooseGender(gender) {
+    handleChooseGender(gender) {
       this.addressInfo.receiverGender = gender;
     },
+
     handleSeveAddresInfo() {
+      if (
+        !this.addressInfo.receiverName ||
+        !this.addressInfo.receiverPhone ||
+        !this.addressInfo.address ||
+        !this.addressInfo.fullAddress
+      ) {
+        this.$toast({
+          mask: false,
+          duration: 1000,
+          message: "请输入你的完整的地址信息！"
+        });
+        return;
+      }
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {
@@ -266,13 +276,21 @@ export default {
     },
     getCitys() {
       this.$http
-        .get(`/api/address/getCnAreaList?parentAreaId=84`)
+        .get(`/api/address/getCnAreaList?parentAreaId=1`)
         .then(response => {
           this.list2 = response.data.content;
           this.val.cityVal = this.list2[0];
         });
     },
-   
+    getAreas() {
+      this.$http
+        .get(`/api/address/getCnAreaList?parentAreaId=72`)
+        .then(response => {
+          this.list3 = response.data.content;
+          this.val.areaVal = this.list3[0];
+        });
+    },
+
     complete() {
       if (!this.val.areaVal.areaId) {
         this.val.areaVal = {
@@ -291,12 +309,10 @@ export default {
       this.addressInfo.city = this.val.cityVal.areaId;
       this.addressInfo.district = this.val.areaVal.areaId;
 
-      this.addressInfo.area =
+      this.addressInfo.fullAddress =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
-      this.addressInfo.fullAddress =
-        this.addressInfo.area + this.addressInfo.address;
     },
     cancel() {
       this.show = false;
@@ -469,7 +485,6 @@ export default {
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
     }
-   
   }
 };
 </script>
@@ -501,7 +516,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -585,13 +600,12 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     /deep/ .van-button__text {
       color: #fff;
     }
   }
-
 
   .address .addressbox {
     height: 100%;
@@ -676,6 +690,5 @@ export default {
   .selectAni {
     transition: 0.8s;
   }
-
 }
 </style>

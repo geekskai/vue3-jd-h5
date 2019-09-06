@@ -2,7 +2,7 @@
   <div class="my-focus">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">我的关注</div>
     </header>
@@ -10,7 +10,7 @@
     <ul class="list-item">
       <li class="card-item">
         <div class="card-img">
-          <img src="../../assets/image/premiumRanking/demo1.png" />
+          <img src="assets/image/premiumRanking/demo1.png" />
         </div>
         <ul class="card-info">
           <li class="info-top">
@@ -28,7 +28,7 @@
       </li>
       <li class="card-item">
         <div class="card-img">
-          <img src="../../assets/image/premiumRanking/demo1.png" />
+          <img src="assets/image/premiumRanking/demo1.png" />
         </div>
         <ul class="card-info">
           <li class="info-top">

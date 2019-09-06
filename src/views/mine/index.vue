@@ -7,7 +7,7 @@
       <ul v-if="token" class="user-info">
         <li class="user-name">{{userInfo.nickName}}</li>
         <li class="node-info">
-          <span class="sharing-node" @click="toShow">分享节点</span>
+          <span class="sharing-node" @click="toShow">链猫掌柜</span>
           <span class="business-node">商家节点</span>
         </li>
       </ul>
@@ -16,7 +16,7 @@
         <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
       </div>
     </section>
-    <section class="my-info">
+    <!-- <section class="my-info">
       <ul class="info-list">
         <li class="info-item">
           <b>09</b>
@@ -31,7 +31,7 @@
           <span>我的足迹</span>
         </li>
       </ul>
-    </section>
+    </section> -->
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
@@ -40,12 +40,10 @@
           <span>待付款</span>
         </router-link>
         <router-link :to="`/order?type=2`" class="order-item" tag="li">
-        <!-- <router-link to="/order/toBeDelivered" class="order-item" tag="li"> -->
           <svg-icon icon-class="be-delivered"></svg-icon>
           <span>待发货</span>
         </router-link>
         <router-link :to="`/order?type=3`" class="order-item" tag="li">
-        <!-- <router-link to="/order/pendingReceipt" class="order-item" tag="li"> -->
           <svg-icon icon-class="pending-receipt"></svg-icon>
           <span>待收货</span>
         </router-link>
@@ -72,11 +70,18 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/wallet/myWallet" class="option-item" tag="li">
+        <!-- /merchantsSettled/payDeposit -->
+        <!-- <router-link to="/merchantsSettled/index" class="option-item" tag="li"> -->
+        <li class="option-item" @click="handleMerchantsSettled">
           <div class="item-info">
             <svg-icon class="incon" icon-class="businessmen-stationed"></svg-icon>
             <span>商家入驻</span>
           </div>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 0">待审核</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 1">通过</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 2">未通过</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 3">未缴纳保证金</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == -1">未入驻</span>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
         <router-link to="/mine/shareLink" class="option-item" tag="li">
@@ -88,7 +93,7 @@
         </router-link>
       </ul>
     </section>
-    
+
     <section class="mine-content">
       <ul class="options-list">
         <router-link to="/mine/shippingAddress" class="option-item" tag="li">
@@ -98,7 +103,7 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <router-link to="/mine/messageCenter" class="option-item" tag="li">
+        <router-link to="/message/index" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="message-center"></svg-icon>
             <span>消息中心</span>
@@ -134,34 +139,34 @@
     >
       <article>
         <header class="dialog-header">
-          <img src="../../assets/image/product/header-good.png" />
+          <img src="assets/image/product/header-good.png" />
         </header>
         <van-divider
           :style="{ color: '#3A3A3A', borderColor: '#FFE31F',fontWeight:'600' ,fontSize:'14px', padding: '0 15px' }"
         >我的节点数据</van-divider>
         <ul class="my-node-data">
           <li class="data-item">
-            <img src="../../assets/image/product/share-node-img.png" alt />
-            <span class="node-text">分享节点</span>
+            <img src="assets/image/product/share-node-img.png" alt />
+            <span class="node-text">链猫掌柜</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/area-node-img.png" alt />
+            <img src="assets/image/product/area-node-img.png" alt />
             <span class="node-text">区级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/municipal-node-img.png" alt />
+            <img src="assets/image/product/municipal-node-img.png" alt />
             <span class="node-text">市级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/state-node-img.png" alt />
+            <img src="assets/image/product/state-node-img.png" alt />
             <span class="node-text">州级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/industry-node-img.png" alt />
+            <img src="assets/image/product/industry-node-img.png" alt />
             <span class="node-text">行业节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/super-node-img.png" alt />
+            <img src="assets/image/product/super-node-img.png" alt />
             <span class="node-text">超级节点</span>
           </li>
         </ul>
@@ -170,7 +175,7 @@
         />
         <div class="node-bottom">
           <span class="know-btn" @click="handleClose">我知道啦</span>
-          <img class="gray-img" src="../../assets/image/product/gray-node-img.png" />
+          <img class="gray-img" src="assets/image/product/gray-node-img.png" />
         </div>
       </article>
     </van-dialog>
@@ -185,6 +190,7 @@ export default {
     return {
       show: false,
       userInfo: {},
+      merchantsSettledStatus: null, // 商家入驻消息
       token: localStorage.token,
       columns: 1
     };
@@ -197,9 +203,31 @@ export default {
     this.$eventBus.$emit("changeTag", 3);
   },
   methods: {
+    handleMerchantsSettled() {
+      // this.merchantsSettledStatus = 2
+      switch (this.merchantsSettledStatus) {
+        case 0: // 待审核
+          this.$router.push(`/merchantsSettled/waitingReviewResults`);
+          break;
+        case 1: // 通过
+          break;
+        case 2: // 不通过
+          this.$router.push(`/merchantsSettled/auditFailure`);
+          break;
+        case 3: // 未缴纳保证金
+          this.$router.push(`/merchantsSettled/payDeposit`);
+          break;
+        default:
+          // -1未申请入驻
+          this.$router.push(`/merchantsSettled/index`);
+          break;
+      }
+    },
     initUserInfo() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
+        this.merchantsSettledStatus = response.data.content.merchantStatus;
+        this.status = response.data.content.status;
       });
     },
     handleClose() {
@@ -358,6 +386,12 @@ export default {
             height: 50px;
             padding-right: 16px;
           }
+        }
+        .merchants-status {
+          font-size: 13px;
+          color: #dbdbdb;
+          margin-left: auto;
+          padding-right: 10px;
         }
       }
     }

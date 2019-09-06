@@ -6,18 +6,39 @@
       </span>
       <div class="header-content">查看物流</div>
     </header>
-    <section class="order-card">
+    <section class="order-card" v-if="logisticsInfo.jdFlag==0">
+      <ul class="order-list">
+        <li class="order-info">
+          <svg-icon icon-class="logistics-jd"></svg-icon>
+          <div class="order-detail">
+            <!-- 0代表是京东物流 -->
+            <div class="info-content">
+              <p class="info-two">
+                <span>
+                  <label>目的地：</label>
+                </span>
+                <span>
+                  <i>{{logisticsInfo.address}}</i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section v-else class="order-card">
       <ul class="order-list">
         <li class="order-info">
           <svg-icon icon-class="logistics-logo"></svg-icon>
           <div class="order-detail">
+            <!-- 0代表是京东物流 -->
             <p class="info-one">
-              <span>【3350980779986900】</span>
+              <span>【{{logisticsInfo.logisticsId}}】</span>
             </p>
             <div class="info-content">
               <p class="info-two">
                 <span>
-                  <label>出发点：</label>
+                  <label>目的地：</label>
                   <i>深圳南山区</i>
                 </span>
                 <span>
@@ -26,10 +47,6 @@
                 </span>
               </p>
               <p class="info-two">
-                <span>
-                  <label>目的地：</label>
-                  <i>深圳南山区</i>
-                </span>
                 <span>
                   <label>状态：</label>
                   <i>正在派送</i>
@@ -42,20 +59,23 @@
     </section>
     <section class="logistics-status">
       <van-steps direction="vertical" active-color="#EC3924" :active="0">
-        <van-step>
+        <van-step v-for="(trace,index) in logisticsInfo.traces" :key="index">
           <i slot="active-icon">
             <span class="logistics-time">
-              05/22
-              <br />08:28
+              <!-- {{trace.acceptTime}} -->
+              {{formatDate(trace.acceptTime).split('-')[0]}}
+              <br />
+              {{formatDate(trace.acceptTime).split('-')[1]}}
             </span>
             <svg-icon icon-class="correct"></svg-icon>
           </i>
           <div class="active-text">
-            <h3>正在派送</h3>
-            <p>包裹正在等待揽收</p>
+            <h3>{{trace.remark}}</h3>
+            <p>{{trace.acceptStation}}</p>
           </div>
         </van-step>
-        <van-step>
+
+        <!-- <van-step>
           <i slot="inactive-icon">
             <span class="logistics-time">
               05/22
@@ -75,7 +95,6 @@
           </i>
           <div class="normaol-text">
             <h3>【江苏市】快件到达连云港市</h3>
-            <!-- <p>2016-07-11 10:00</p> -->
           </div>
         </van-step>
         <van-step>
@@ -121,9 +140,9 @@
           </i>
           <div class="normaol-text">
             <h3>快件已发货</h3>
-            <!-- <p>2016-07-10 09:30</p> -->
           </div>
         </van-step>
+        -->
       </van-steps>
     </section>
   </div>
@@ -133,10 +152,35 @@
 export default {
   name: "ViewLogistics",
   data() {
-    return {};
+    return {
+      logisticsInfo: {}
+    };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .post(`/api/order/expressInquiry?orderNd=${this.$route.query.orderNo}`)
+        .then(response => {
+          this.logisticsInfo = response.data.content;
+        });
+    },
+    formatDate(inputTime) {
+      inputTime = inputTime.replace(/\-/g, "/");
+      var date = new Date(inputTime);
+      var m = date.getMonth() + 1;
+      m = m < 10 ? "0" + m : m;
+      var d = date.getDate();
+      d = d < 10 ? "0" + d : d;
+      var h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      var minute = date.getMinutes();
+      minute = minute < 10 ? "0" + minute : minute;
+      return m + "/" + d + "-" + h + ":" + minute;
+    }
+  }
 };
 </script>
 
@@ -157,7 +201,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -177,7 +221,7 @@ export default {
           width: 60px;
           height: 60px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 50%;
         }
         .order-detail {
@@ -187,7 +231,7 @@ export default {
           .info-one,
           .info-two {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             flex-direction: column;
             font-size: 13px;
           }
@@ -219,7 +263,7 @@ export default {
   }
   .logistics-status {
     margin-top: 20px;
-    padding: 8px;
+    padding: 8px 8px 8px 0;
     border-radius: 5px;
     width: 100%;
     background-color: #fff;
@@ -230,11 +274,13 @@ export default {
     }
     .logistics-time {
       position: absolute;
-      left: -30px;
+      left: -25px;
       font-size: 8px;
       color: #dbdbdb;
       display: flex;
       flex-direction: column;
+      flex-wrap: wrap;
+      width: 30px;
     }
     /deep/ .van-steps__items {
       padding-left: 30px;
@@ -242,7 +288,7 @@ export default {
     /deep/ .van-step__title {
       padding-left: 12px;
       .active-text {
-        color: #EC3924;
+        color: #ec3924;
       }
       h3 {
         font-size: 13px;

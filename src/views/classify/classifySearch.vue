@@ -6,7 +6,8 @@
       </span>
       <div class="search-con">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <input v-focus placeholder="搜索、关键词" v-model="searchText" />
+        <!-- <input v-focus placeholder="搜索、关键词" v-model="searchText" /> -->
+        <input placeholder="搜索、关键词" v-model="searchText" />
       </div>
       <span @click="getSearch">搜索</span>
     </div>
@@ -23,7 +24,7 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initData"
+          @click="initData(true)"
         >默认排序</div>
         <div class="select-item">
           按价格

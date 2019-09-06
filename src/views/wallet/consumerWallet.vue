@@ -2,159 +2,53 @@
   <div class="consumer-wallet">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" />
+        <img src="assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">消费钱包</div>
       <li class="notice-message">
         <svg-icon class="notice-wallet-icon" icon-class="notice-wallet"></svg-icon>
-        <label class="wallet-total">钱包总额:85578909CM</label>
-        <span class="wallet-value">≈65468.77CNY</span>
+        <label class="wallet-total">钱包总额:{{$route.query.shoppingWalletAmount}}CM</label>
+        <span class="wallet-value">≈{{$route.query.shoppingWalletAmountCny}}CNY</span>
       </li>
-      <section class="wallet-card">
-        <ul class="wallet-content">
-          <span class="wallet-title">收益占比</span>
-          <div class="profit-charts">
-            <div class="profit-img">
-              <img src="../../assets/icons/rown.png" />
-            </div>
-            <ul class="profit-lists">
-              <li class="profit-item">
-                <div class="circular-yestaday"></div>
-                <div class="profit-date">
-                  <label>昨日矿池收益</label>
-                  <span>500CM</span>
-                </div>
-              </li>
-              <li class="profit-item">
-                <div class="circular-week"></div>
-                <div class="profit-date">
-                  <label>本周矿池收益</label>
-                  <span>800CM</span>
-                </div>
-              </li>
-              <li class="profit-item">
-                <div class="circular-month"></div>
-                <div class="profit-date">
-                  <label>本月矿池收益</label>
-                  <span>1200CM</span>
-                </div>
-              </li>
-              <li class="profit-item">
-                <div class="circular-history"></div>
-                <div class="profit-date">
-                  <label>历史矿池收益</label>
-                  <span>674599000CM</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </ul>
-      </section>
     </header>
-    <ul class="order-header">
-      <li class="options-header">
-        <div class="header-item">
-          <span class="option-time">2019-8-15</span>
-          <svg-icon icon-class="arrow-down"></svg-icon>
-        </div>
-        <div class="header-item">
-          <span class="option-type">全部类型</span>
-          <svg-icon icon-class="arrow-down"></svg-icon>
-        </div>
-        <div class="header-item">
-          <span class="option-total">总明细:29845678907CM</span>
-        </div>
-      </li>
-    </ul>
-    <section class="wallet-orders">
+    <div class="empty-icon" v-if="!consumerWallets.length">
+      <svg-icon icon-class="pool-empty" class="pool-empty-cls"></svg-icon>
+      <p class="empty-text">暂无相关记录</p>
+    </div>
+    <section
+      v-else
+      class="wallet-orders"
+      v-for="(consumerWallet,index) in consumerWallets"
+      :key="index"
+    >
       <ul class="orders-lists">
         <li class="order-item">
           <div class="item-time">
             <svg-icon class="calendar-wallet-order" icon-class="calendar-wallet-order"></svg-icon>
-            <span class="time-text">3/25 21:22:45</span>
+            <span class="time-text">{{formatDate(consumerWallet.createTime)}}</span>
           </div>
           <div class="item-status">
-            <span class="status-text">已完成</span>
-            <div class="status-color">充币</div>
+            <div
+              class="status-color-consumer"
+              v-if="consumerWallet.logType==101||consumerWallet.logType==201"
+            >{{consumerWallet.logTypeDesc}}</div>
+            <div
+              class="status-color-node"
+              v-if="consumerWallet.logType==102||consumerWallet.logType==202"
+            >{{consumerWallet.logTypeDesc}}</div>
+            <div
+              class="status-color-adve"
+              v-if="consumerWallet.logType==103||consumerWallet.logType==203"
+            >{{consumerWallet.logTypeDesc}}</div>
           </div>
         </li>
         <li class="order-number">
           <div class="item-time">
             <span>单号：</span>
-            <span class="time-text">6588745</span>
+            <span class="time-text">{{consumerWallet.id}}</span>
           </div>
           <div class="item-status">
-            <span>金额：77.789654</span>
-          </div>
-        </li>
-        <li class="order-item">
-          <div class="item-time">
-            <span class="status-text">转换ID：0x4o…dfghjk</span>
-          </div>
-          <div class="item-status">
-            <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
-          </div>
-        </li>
-      </ul>
-    </section>
-    <section class="wallet-orders">
-      <ul class="orders-lists">
-        <li class="order-item">
-          <div class="item-time">
-            <svg-icon class="calendar-wallet-order" icon-class="calendar-wallet-order"></svg-icon>
-            <span class="time-text">3/25 21:22:45</span>
-          </div>
-          <div class="item-status">
-            <span class="status-text">已完成</span>
-            <div class="status-color">充币</div>
-          </div>
-        </li>
-        <li class="order-number">
-          <div class="item-time">
-            <span>单号：</span>
-            <span class="time-text">6588745</span>
-          </div>
-          <div class="item-status">
-            <span>金额：77.789654</span>
-          </div>
-        </li>
-        <li class="order-item">
-          <div class="item-time">
-            <span class="status-text">转换ID：0x4o…dfghjk</span>
-          </div>
-          <div class="item-status">
-            <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
-          </div>
-        </li>
-      </ul>
-    </section>
-    <section class="wallet-orders">
-      <ul class="orders-lists">
-        <li class="order-item">
-          <div class="item-time">
-            <svg-icon class="calendar-wallet-order" icon-class="calendar-wallet-order"></svg-icon>
-            <span class="time-text">3/25 21:22:45</span>
-          </div>
-          <div class="item-status">
-            <span class="status-text">已完成</span>
-            <div class="status-color">充币</div>
-          </div>
-        </li>
-        <li class="order-number">
-          <div class="item-time">
-            <span>单号：</span>
-            <span class="time-text">6588745</span>
-          </div>
-          <div class="item-status">
-            <span>金额：77.789654</span>
-          </div>
-        </li>
-        <li class="order-item">
-          <div class="item-time">
-            <span class="status-text">转换ID：0x4o…dfghjk</span>
-          </div>
-          <div class="item-status">
-            <svg-icon class="wallet-order-message" icon-class="wallet-order-message"></svg-icon>
+            <span>金额：+{{consumerWallet.amount}}</span>
           </div>
         </li>
       </ul>
@@ -166,18 +60,48 @@
 export default {
   name: "consumerWallet",
   data() {
-    return {};
+    return {
+      consumerWallets: []
+    };
   },
-  created() {},
-  methods: {}
+
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .get(`/api/wallet/getWalletLogs?type=1&page=1&size=10`)
+        .then(response => {
+          this.consumerWallets = response.data.content;
+        });
+    },
+    formatDate(inputTime) {
+      var date = new Date(inputTime);
+      var y = date.getFullYear();
+      var m = date.getMonth() + 1;
+      m = m < 10 ? "0" + m : m;
+      var d = date.getDate();
+      d = d < 10 ? "0" + d : d;
+      var h = date.getHours();
+      h = h < 10 ? "0" + h : h;
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+      minute = minute < 10 ? "0" + minute : minute;
+      second = second < 10 ? "0" + second : second;
+      // return y + "/" + m + "/" + d + " " + h + ":" + minute + ":" + second;
+      return m + "/" + d + " " + h + ":" + minute + ":" + second;
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 .consumer-wallet {
   .page-header {
-    height: 334px;
-    background: linear-gradient(to right, #fe735d, #fc9863);
+    // height: 334px;
+    // background: linear-gradient(to right, #fe735d, #fc9863);
+    background-color: #fe785d;
     width: 100%;
     padding: 10px 20px;
     .btn-left {
@@ -213,96 +137,17 @@ export default {
         height: 20px;
       }
     }
-    .wallet-card {
-      margin-top: 16px;
-      padding: 0 16px  16px;
-      background-color: #ffffff;
-      border-radius: 8px;
-      .wallet-content {
-        width: 343px;
-        height: 200px;
-        .wallet-title {
-          font-size: 14px;
-          color: #333333;
-          box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
-        }
-        .profit-charts {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .profit-img {
-            padding: 16px;
-          }
-          .profit-lists {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            flex-direction: column;
-            .profit-item {
-              margin-top: 10px;
-              padding-left: 30px;
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              .circular-yestaday {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: #ff6383;
-              }
-              .circular-week {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: #ff9f40;
-              }
-              .circular-month {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: #c95ff2;
-              }
-              .circular-history {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: #5c89ff;
-              }
-              .profit-date {
-                padding-left: 10px;
-                font-size: 10px;
-                color: #3a3a3a;
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start;
-                flex-direction: column;
-              }
-            }
-          }
-        }
-      }
-    }
   }
-  .order-header {
-    color: #3a3a3a;
-    margin-top: 10px;
-    .options-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .header-item {
-        font-size: 13px;
-        .option-type {
-          padding-left: 10px;
-        }
-        .option-total {
-          padding-left: 10px;
-        }
-      }
-      .total-detail {
-        font-size: 11px;
-        color: #3a3a3a;
-      }
+  .empty-icon {
+    text-align: center;
+    padding-top: 100px;
+    .pool-empty-cls {
+      width: 155px;
+      height: 155px;
+    }
+    .empty-text {
+      color: #949497;
+      font-size: 17px;
     }
   }
   .wallet-orders {
@@ -332,18 +177,37 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
+
           .status-text {
             padding-right: 5px;
             font-size: 10px;
             color: #949497;
           }
-          .status-color {
+          .status-color-consumer {
             font-size: 10px;
             text-align: center;
             color: #ffffff;
             background-color: #ffbf44;
             border-radius: 0pt 33px 33px 48px;
-            width: 48px;
+            width: 80px;
+            height: 20px;
+          }
+          .status-color-node {
+            font-size: 10px;
+            text-align: center;
+            color: #ffffff;
+            background-color: #5685ed;
+            border-radius: 0pt 33px 33px 48px;
+            width: 80px;
+            height: 20px;
+          }
+          .status-color-adve {
+            font-size: 10px;
+            text-align: center;
+            color: #ffffff;
+            background-color: #727cf1;
+            border-radius: 0pt 33px 33px 48px;
+            width: 80px;
             height: 20px;
           }
         }

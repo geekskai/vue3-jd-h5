@@ -38,7 +38,7 @@
           <div class="order-detail">
             <p class="info-one">
               <span>{{orderSkuInfo.productName}}</span>
-              <i>￥{{orderSkuInfo.productAmount}}</i>
+              <b>￥{{orderSkuInfo.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{orderSkuInfo.fullName}}</span>
@@ -63,7 +63,7 @@
           <i>￥{{ orderForm.allAmount}}</i>
         </span>
       </div>
-      <van-button type="danger" @click="show = true" size="large">提交订单</van-button>
+      <van-button type="danger" @click="handleSubmitOrder" size="large">提交订单</van-button>
     </div>
     <vue-pickers
       :show="show"
@@ -83,6 +83,7 @@ export default {
     return {
       orderForm: {},
       columns: 1,
+      orderNo: "",
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
@@ -240,6 +241,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
@@ -273,8 +275,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {

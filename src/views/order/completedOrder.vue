@@ -12,35 +12,39 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+            <img :src="orderForm.logoUrl" class="header-img" />
+            <span class="store-shopName">{{orderForm.shopName}}</span>
           </div>
-          <span>已完成</span>
+          <span>交易完成</span>
         </li>
-        <li class="order-desc">
-          <img />
+        <li
+          class="order-desc"
+          v-for="(appOrder,index) in orderForm.appOrderProductVos"
+          :key="index"
+        >
+          <img :src="appOrder.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
+              <span class="product-name">{{appOrder.productName}}</span>
+              <b>￥{{appOrder.productAmount}}</b>
             </p>
             <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
+              <span>{{appOrder.fullName}}</span>
+              <span>×{{appOrder.quantity }}</span>
             </p>
           </div>
         </li>
         <li class="order-total">
-          <span>订单总价：</span>
-          <i>$444</i>
+          <span>快递：</span>
+          <i>￥{{orderForm.freightAmount}}</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥444</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-btn">
           <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
-          <router-link to="/order/appeal" tag="span">商品申诉</router-link>
+          <span @click="handleToAppeal(orderForm)">商品申诉</span>
         </li>
       </ul>
     </section>
@@ -60,11 +64,11 @@
         </li>
         <li class="info-item">
           <label>创建时间：</label>
-         <span>{{orderForm.createDate}}</span>
+          <span>{{orderForm.createDate}}</span>
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-           <span>{{orderForm.payDate}}</span>
+          <span>{{orderForm.payDate}}</span>
         </li>
         <li class="info-item">
           <label>发货时间：</label>
@@ -72,11 +76,11 @@
         </li>
         <li class="info-item">
           <label>收货时间：</label>
-            <span>{{orderForm.finishDate}}</span>
+          <span>{{orderForm.finishDate}}</span>
         </li>
         <li class="info-item">
           <label>成交时间：</label>
-            <span>{{orderForm.finishDate}}</span>
+          <span>{{orderForm.finishDate}}</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -109,6 +113,12 @@ export default {
         .then(response => {
           this.orderForm = response.data.content;
         });
+    },
+    handleToAppeal(orderList) {
+      this.$router.push({
+        name: `appeal`,
+        params: orderList
+      });
     }
   }
 };
@@ -141,8 +151,9 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
-          font-size: 11px;
+          color: #ec3924;
+          font-size: 13px;
+          font-weight: 600;
         }
         .store-info {
           display: flex;
@@ -152,6 +163,13 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
+          }
+          .store-shopName {
+            font-size: 13px;
+            color: #3a3a3a;
+            text-decoration: underline;
+            font-weight: 600;
           }
           span {
             color: #3a3a3a;
@@ -168,7 +186,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -184,8 +202,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
@@ -205,7 +226,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #EC3924;
+          color: #ec3924;
           padding-left: 5px;
           font-weight: 700;
         }
@@ -254,6 +275,7 @@ export default {
       }
       .info-title:last-child {
         padding-top: 14px;
+        text-decoration: underline;
       }
     }
   }

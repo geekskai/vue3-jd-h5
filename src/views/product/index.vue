@@ -35,23 +35,18 @@
     <ul class="product-content">
       <li class="product-title">
         <div class="text-left">
-          <span class="force-value">0.5倍算力</span>
+          <span v-if="detailForm.calculate" class="force-value">{{detailForm.calculate}}算力值</span>
           <span class="item-desc">{{detailForm.productName}}</span>
         </div>
-        <div>
-          <span class="heart-full" @click="isLike=!isLike">
-            <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
-            <svg-icon v-else icon-class="heart-null"></svg-icon>
-          </span>
-        </div>
+        <span class="heart-full" @click="isLike=!isLike">
+          <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+          <svg-icon v-else icon-class="heart-null"></svg-icon>
+        </span>
       </li>
-      <li class="product-price">
-        <span>购买该商品可获得算力值，算力值可兑换CM币</span>
-      </li>
-
       <li class="product-info">
+        <b class="product-price">￥{{detailForm.productCnyPrice}}</b>
         <i>邮费：{{detailForm.logisticsDefaultPrice}}</i>
-        <i>月销：{{detailForm.monthlySalesQuantity}}</i>
+        <i>月销：{{detailForm.monthlySalesQuantity||0}}</i>
       </li>
 
       <li class="item-info">
@@ -70,7 +65,7 @@
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <!-- <img src="../../assets/image/product/store-header.png" class="store-header" /> -->
+          <!-- <img src="assets/image/product/store-header.png" class="store-header" /> -->
           <img v-lazy="detailForm.shopLogo" class="store-header" />
           <span class="store-name">{{detailForm.shopName}}</span>
         </div>
@@ -84,12 +79,13 @@
       <span @click="handleViewDetail">宝贝详情</span>
       <div v-html="detailForm.productDetail" v-show="showDetail" class="html-class"></div>
     </div>
-
     <van-sku
+      @sku-selected="skuSelected"
       v-model="show"
       class="product-sku"
       :sku="sku"
       close-on-click-overlay
+      hide-stock
       :goods="goods"
       :goods-id="goodsId"
       @buy-clicked="handleToBuy"
@@ -100,9 +96,15 @@
           <span class="van-sku__price-symbol">￥</span>
           <span class="van-sku__price-num">{{ parseFloat((props.price*100).toPrecision(12)) }}</span>
         </div>
+        <span class="sku-calculate" v-if="calculate">{{calculate}}倍算力值</span>
+        <div class="van-sku-header-item" v-show="stockNum">
+          <span class="van-sku__stock" v-if="stockNum">剩余{{stockNum}}件</span>
+        </div>
+        <div class="van-sku-header-item">
+          <span class="van-sku__stock">选择：{{handleProductSpeces()}}</span>
+        </div>
       </template>
     </van-sku>
-
     <div class="product-footer">
       <van-goods-action>
         <van-goods-action-button @click="handleShowSpecs" type="warning" text="加入购物车" />
@@ -118,6 +120,9 @@ export default {
   data() {
     return {
       show: false,
+      calculate: 0,
+      stockNum: 0,
+      specsName: "",
       showDetail: false,
       detailForm: {},
       skuObj: {},
@@ -217,20 +222,19 @@ export default {
             goods_id: 946755
           }
         ],
+        messages: [],
         price: "0.00",
-        stock_num: 10, // 商品总库存
+        stock_num: 0, // 商品总库存
         none_sku: false, // 是否无规格商品
         hide_stock: false // 是否隐藏剩余库存
       },
       goods: {
         // 商品标题
-        title: "测试商品",
+        title: "",
         // 默认商品 sku 缩略图
-        picture:
-          "https://topimg-test.oss-cn-shenzhen.aliyuncs.com/goods/1564465639525.jpg"
+        picture: ""
       },
-      goodsId: "",
-      customStepperConfig: {}
+      goodsId: ""
     };
   },
   created() {
@@ -238,13 +242,30 @@ export default {
   },
 
   methods: {
+    skuSelected({ skuValue, selectedSku, selectedSkuComb }) {
+      if (selectedSkuComb) {
+        this.specsName = this.specsName + ";" + skuValue.specsName;
+        this.calculate = selectedSkuComb.calculate;
+        this.stockNum = selectedSkuComb.stock_num;
+      } else {
+        this.specsName = "";
+        this.stockNum = 0;
+        this.sku.stock_num = 0;
+      }
+    },
     onBuyClicked() {},
     handleShowSpecs() {
       this.show = true;
       this.$http
-        .get(`/api/product/chooseSku?productId=${this.$route.query.productId}`)
+        .get(
+          `/api/product/chooseSku?productId=${this.$route.query.productId}&clientType=0`
+        )
         .then(response => {
           let responseDataList = response.data.content;
+          if (responseDataList.length === 1) {
+            this.calculate = responseDataList[0].calculate;
+            this.stockNum = responseDataList[0].stock;
+          }
           let skuSpecesTree = [];
           // 先获取所有的规格类型的key
           skuSpecesTree = responseDataList[0].speces.map(it => {
@@ -284,6 +305,7 @@ export default {
             listObj.stock_num = it.stock;
             listObj.id = it.id;
             listObj.price = it.price;
+            listObj.calculate = it.calculate;
             for (let j = 0; j < responseDataList[i].speces.length; j++) {
               listObj[responseDataList[i].speces[j].specsId] =
                 responseDataList[i].speces[j].specsValueId;
@@ -301,11 +323,13 @@ export default {
     },
     initData() {
       this.$http
-        .get(`/api/product/info?productId=${this.$route.query.productId}`)
+        .get(
+          `/api/product/info?productId=${this.$route.query.productId}&clientType=0`
+        )
         .then(response => {
           this.productImages = response.data.content.productImages;
           this.goods.picture = response.data.content.productImages[0];
-          this.goods.title = response.data.content.productName;
+          // this.goods.title = response.data.content.productName;
           this.detailForm = response.data.content;
         });
     },
@@ -314,9 +338,7 @@ export default {
     },
 
     handleAddToCart(skuObj) {
-      // selectedNum
       this.skuObj = skuObj;
-      console.log("=====skuObj==>", skuObj);
       this.$http
         .post(`/api/cart/update`, {
           quantity: this.skuObj.selectedNum,
@@ -363,9 +385,7 @@ export default {
 <style lang="scss" scoped>
 .product-layout {
   background-color: white;
-  min-height: 100vh;
-  margin-bottom: 45px;
-  padding-bottom: 45px;
+  min-height: 812px;
   /deep/ .van-swipe-item {
     display: flex;
     justify-content: center;
@@ -426,7 +446,7 @@ export default {
           width: 70px;
           height: 10px;
           border-radius: 5px;
-          color: #EC3924;
+          color: #ec3924;
           display: inline-block;
         }
       }
@@ -473,15 +493,17 @@ export default {
         align-items: center;
       }
       .force-value {
-        display: inline-block;
-        width: 54px;
+        display: flex;
+        justify-content: center;
+        min-width: 54px;
         text-align: center;
         line-height: 20px;
         height: 20px;
         color: #fff;
         font-size: 9px;
-        background-color: #EC3924;
+        background-color: #ec3924;
         border-radius: 10px 10px;
+        margin-right: 7px;
       }
       .heart-full {
         padding: 0 17px;
@@ -489,24 +511,22 @@ export default {
       .item-desc {
         font-size: 14px;
         color: #3a3a3a;
-        padding-left: 7px;
       }
-    }
-    .product-price {
-      color: #949497;
-      font-size: 9px;
-      padding-top: 8px;
-      font-weight: 600;
-      padding-left: 16px;
     }
     .product-info {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      align-items: center;
       padding-left: 16px;
       padding-top: 20px;
       padding-bottom: 10px;
       font-size: 11px;
+      margin-right: 16px;
       color: #949497;
+      .product-price {
+        color: #ec3924;
+        font-size: 17px;
+      }
     }
     .store-info {
       display: flex;
@@ -514,8 +534,8 @@ export default {
       margin-top: 10px;
       margin-bottom: 10px;
       /deep/ .van-button--danger {
-        background-color: #EC3924;
-        border: 1px solid #EC3924;
+        background-color: #ec3924;
+        border: 1px solid #ec3924;
       }
       .store-detail {
         padding-left: 16px;
@@ -546,6 +566,9 @@ export default {
       align-items: center;
       width: 95%;
       position: relative;
+      /deep/ .van-field__left-icon {
+        margin-right: 0;
+      }
       .anchor-point {
         position: absolute;
         left: 90px;
@@ -558,14 +581,13 @@ export default {
     .product-detail {
       padding-left: 16px;
       padding-top: 20px;
-      color: #EC3924;
+      color: #ec3924;
     }
   }
   .item-details {
     text-align: center;
     font-size: 16px;
     color: #3a3a3a;
-    padding-top: 50px;
     span {
       box-shadow: 1px -10px 1px -4px rgba(254, 77, 109, 0.5) inset;
     }
@@ -580,6 +602,16 @@ export default {
     }
   }
   .product-sku {
+    /deep/ .van-sku-row__item.van-sku-row__item--active {
+      color: #ec3924;
+      background: #fff;
+      border-color: #ec3924;
+    }
+    /deep/ .van-sku-row__item {
+      border-color: #efeff4;
+      background-color: #efeff4;
+      color: #3a3a3a;
+    }
     /deep/ .van-sku-actions {
       /deep/ .van-button--warning {
         background-color: #f3ca43;
@@ -590,8 +622,27 @@ export default {
       /deep/ .van-button--danger {
         height: 44px;
         line-height: 44px;
-        background-color: #EC3924;
-        border: 1px solid #EC3924;
+        background-color: #ec3924;
+        border: 1px solid #ec3924;
+      }
+    }
+    /deep/ .van-sku-header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    /deep/ .van-sku-header__goods-info {
+      .sku-calculate {
+        margin-left: 7px;
+        color: white;
+        border-radius: 20px 20px;
+        background-color: #ec3924;
+        display: inline-block;
+        font-size: 7px;
+        line-height: 17px;
+        text-align: center;
+        width: 55px;
+        height: 17px;
       }
     }
   }
@@ -624,7 +675,7 @@ export default {
           }
           .item-price {
             padding: 3px 0;
-            color: #EC3924;
+            color: #ec3924;
             font-size: 17px;
             font-weight: 600;
           }
@@ -670,9 +721,9 @@ export default {
               }
             }
             .color-tag.active {
-              border: 1px solid #EC3924;
+              border: 1px solid #ec3924;
               background-color: white;
-              color: #EC3924;
+              color: #ec3924;
             }
           }
         }
@@ -752,8 +803,8 @@ export default {
     /deep/ .van-button--danger {
       height: 44px;
       line-height: 44px;
-      background-color: #EC3924;
-      border: 1px solid #EC3924;
+      background-color: #ec3924;
+      border: 1px solid #ec3924;
     }
   }
 }

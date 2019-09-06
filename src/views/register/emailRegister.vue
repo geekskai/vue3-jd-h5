@@ -7,7 +7,7 @@
       <router-link class="appeal-record" to="/register/phoneRegister" tag="span">手机注册</router-link>
     </header>
     <div class="mall-logo">
-      <img src="../../assets/image/setting/logo.png" />
+      <img src="assets/image/setting/logo.png" />
     </div>
     <section class="register-info">
       <span class="phone-number">请输入邮箱号</span>
@@ -68,6 +68,7 @@ export default {
         });
         return;
       }
+      this.emailRegister.type = 1
       this.$http
         .post(`/api/user/getVerifyCode`, this.emailRegister)
         .then(response => {

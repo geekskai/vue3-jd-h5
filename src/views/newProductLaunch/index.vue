@@ -3,7 +3,7 @@
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">新品首发</div>
       <span class="share-btn" @click="show = true">
@@ -12,7 +12,7 @@
     </header>
 
     <div class="my-swiper">
-      <swiper :options="swiperOption" ref="mySwiper">
+      <swiper :options="swiperOption">
         <swiper-slide v-for="(img ,index) in images2" :key="index">
           <img class="slide-img" :src="img.imgUrl" alt />
         </swiper-slide>
@@ -39,7 +39,7 @@
           <main class="main-box">
             <ul class="card-box" v-for="(item,index) in cardList" :key="index">
               <aside>
-                <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
+                <img class="card-img" src="assets/image/premiumRanking/demo1.png" />
               </aside>
               <ul class="card-right">
                 <li class="item-title">
@@ -161,56 +161,56 @@ export default {
       list: [
         {
           name: "多功能料理机",
-          img: require("../../assets/image/home/test1.png"),
+          img: require("assets/image/home/test1.png"),
           title: "限量套装 新品上市",
           price: "$125"
         },
         {
           name: "遥控制空调扇",
-          img: require("../../assets/image/home/test2.png"),
+          img: require("assets/image/home/test2.png"),
           title: "限量套装 新品上市",
           price: "$245"
         },
         {
           name: "时尚双肩包",
-          img: require("../../assets/image/home/test3.png"),
+          img: require("assets/image/home/test3.png"),
           title: "限量套装 新品上市",
           price: "$21"
         },
         {
           name: "商务行李箱",
-          img: require("../../assets/image/home/test4.png"),
+          img: require("assets/image/home/test4.png"),
           title: "限量套装 新品上市",
           price: "$218"
         },
         {
           name: "无线消噪耳机",
-          img: require("../../assets/image/home/test5.png"),
+          img: require("assets/image/home/test5.png"),
           title: "限量套装 新品上市",
           price: "$218"
         },
         {
           name: "无线蓝牙耳机",
-          img: require("../../assets/image/home/test6.png"),
+          img: require("assets/image/home/test6.png"),
           title: "限量套装 新品上市",
           price: "$218"
         }
       ],
       images2: [
         {
-          imgUrl: require("../../assets/image/home/banner5.jpg"),
+          imgUrl: require("assets/image/home/banner5.jpg"),
           categoryId: 100018
         },
         {
-          imgUrl: require("../../assets/image/home/banner6.jpg"),
+          imgUrl: require("assets/image/home/banner6.jpg"),
           categoryId: 100008
         },
         {
-          imgUrl: require("../../assets/image/home/banner7.jpg"),
+          imgUrl: require("assets/image/home/banner7.jpg"),
           categoryId: 100016
         },
         {
-          imgUrl: require("../../assets/image/home/banner8.jpg"),
+          imgUrl: require("assets/image/home/banner8.jpg"),
           categoryId: 100035
         }
       ],

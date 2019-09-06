@@ -23,8 +23,8 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initData"
-        >默认排序</div>
+          @click="initData(true)"
+        >全部</div>
         <div class="select-item">
           按价格
           <span class="select-arrows">
@@ -77,7 +77,7 @@
                   <span class="goods-shopName">
                     <i>{{item.shopName}}</i>
                   </span>
-                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity}}</span>
+                  <span class="goods-monthlySalesQuantity">月销量：{{item.monthlySalesQuantity||0}}</span>
                 </div>
               </div>
             </router-link>
@@ -105,7 +105,8 @@ export default {
     this.initData();
   },
   methods: {
-    initData() {
+    initData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
           `/api/product/list?categoryId=${
@@ -203,7 +204,7 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-      color: #EC3924;
+      color: #ec3924;
       font-size: 16px;
     }
   }
@@ -238,7 +239,7 @@ export default {
       font-size: 11px;
 
       .select-item.active {
-        color: #EC3924;
+        color: #ec3924;
       }
       .select-item {
         .search-icon {
@@ -277,11 +278,11 @@ export default {
           bottom: 7px;
         }
         .sort-caret.ascending.active {
-          border-bottom-color: #EC3924;
+          border-bottom-color: #ec3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #EC3924;
+          border-top-color: #ec3924;
           bottom: 7px;
         }
       }
@@ -290,7 +291,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #EC3924;
+        color: #ec3924;
       }
       .goods-content {
         display: flex;
@@ -340,8 +341,24 @@ export default {
             padding-bottom: 12px;
             padding-top: 12px;
             .goods-price {
+              width: 100%;
               font-size: 14px;
-              color: #EC3924;
+              color: #ec3924;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 55px;
+                height: 17px;
+              }
             }
             .add-icon {
               width: 20px;

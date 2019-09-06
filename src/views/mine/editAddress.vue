@@ -38,11 +38,7 @@
         <li class="address-item">
           <van-cell title="所在地区" />
           <div class="address-name" @click="showPicker">
-            <van-field
-              :value="addressInfo.area||addressInfo.fullAddress"
-              disabled
-              placeholder="请选择省市区"
-            />
+            <van-field v-model="addressInfo.fullAddress" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -79,7 +75,18 @@
         </li>
         <li class="address-default">
           <span class="address-defaultAddrFlag">设为默认地址</span>
-          <van-switch v-model="addressInfo.defaultAddrFlag" active-color="#EC3924" size="20px" />
+          <van-switch
+            v-if="addressInfo.defaultFlag"
+            v-model="addressInfo.defaultFlag"
+            active-color="#EC3924"
+            size="20px"
+          />
+          <van-switch
+            v-else
+            v-model="addressInfo.defaultAddrFlag"
+            active-color="#EC3924"
+            size="20px"
+          />
         </li>
       </ul>
     </section>
@@ -149,14 +156,13 @@
   </div>
 </template>
 <script>
-// import areaList from "../../mock/area";
 export default {
   name: "editAddress",
   data() {
     return {
       show: false,
       parentAreaId: 0,
-      addressInfo: this.$route.query.address,
+      addressInfo: this.$route.query,
       list: [],
       list2: [],
       list3: [],
@@ -196,29 +202,27 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             this.list2 =
-              res.data.content.length > 1
+              res.data.content.length > 0
                 ? res.data.content
                 : [{ areaName: "-" }];
-            if (res.data.content.length < 1) {
-              this.list3 = [{ areaName: "-" }];
-            }
-            console.log("=====this.list2[0]==>", this.list2[0]);
-            this.cityVal = this.list2[0].areaId;
           }
+          this.dataProcessing();
         });
     },
     // 监听市滑动
     cityVal(value) {
+      console.log("=====监听市滑动==>", value);
       if (value) {
         this.$http
           .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
           .then(res => {
             if (res.data.code === 0) {
               this.list3 =
-                res.data.content.length > 1
+                res.data.content.length > 0
                   ? res.data.content
                   : [{ areaName: "-" }];
             }
+            this.dataProcessing();
           });
       }
     }
@@ -227,13 +231,14 @@ export default {
   created() {
     this.getProvinces();
     this.getCitys();
-    this.val.areaVal = {
-      name: "",
-      value: ""
-    };
-    // 第一条数据为直辖市 so '-' 符号表示为第三列
-    this.list3 = [{ name: "-" }];
-    console.log('====this.$route.query.address===>',this.$route.query.address)
+    this.getAreas();
+    console.log("=====addressInfo==>", this.addressInfo);
+    // this.val.areaVal = {
+    //   name: "",
+    //   value: ""
+    // };
+    // // 第一条数据为直辖市 so '-' 符号表示为第三列
+    // this.list3 = [{ name: "-" }];
   },
   methods: {
     handleDeleteAddress() {
@@ -258,7 +263,35 @@ export default {
       this.addressInfo.tag = tag;
     },
     showPicker() {
+      console.log("=====this.addressInfo==>", this.addressInfo);
       this.show = true;
+      this.list.map((it, index) => {
+        if (it.areaId == this.addressInfo.province) {
+          this.val.provinceVal = it.areaName;
+          this.provinceVal = it.areaId;
+          this.provinceStyle.WebkitTransform = `translate3d(0px,${index *
+            -25}px,0px`;
+          this.provinceIndex = index;
+        }
+      });
+      this.list2.map((it, index) => {
+        if (it.areaId == this.addressInfo.city) {
+          this.val.cityVal = it.areaName;
+          this.cityStyle.WebkitTransform = `translate3d(0px,${index *
+            -25}px,0px`;
+          this.cityVal = it.areaId;
+          this.cityIndex = index;
+        }
+      });
+      this.list3.map((it, index) => {
+        if (it.areaId == this.addressInfo.district) {
+          this.val.areaVal = it.areaName;
+          this.districtStyle.WebkitTransform = `translate3d(0px,${index *
+            -25}px,0px`;
+          this.areaVal = it.areaId;
+          this.districtIndex = index;
+        }
+      });
     },
     // 分层获取中国地址信息
     getProvinces() {
@@ -266,15 +299,22 @@ export default {
         .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
         .then(response => {
           this.list = response.data.content;
-          this.val.provinceVal = this.list[0];
         });
     },
     getCitys() {
       this.$http
-        .get(`/api/address/getCnAreaList?parentAreaId=84`)
+        .get(
+          `/api/address/getCnAreaList?parentAreaId=${this.addressInfo.province}`
+        )
         .then(response => {
           this.list2 = response.data.content;
-          this.val.cityVal = this.list2[0];
+        });
+    },
+    getAreas() {
+      this.$http
+        .get(`/api/address/getCnAreaList?parentAreaId=${this.addressInfo.city}`)
+        .then(response => {
+          this.list3 = response.data.content;
         });
     },
     handleChooseGender(gender) {
@@ -302,24 +342,19 @@ export default {
           areaId: ""
         };
       }
-      // this.$emit("complete", this.val);
       this.show = false;
       this.addressInfo.province = this.val.provinceVal.areaId;
       this.addressInfo.city = this.val.cityVal.areaId;
       this.addressInfo.district = this.val.areaVal.areaId;
 
-      this.addressInfo.area =
+      this.addressInfo.fullAddress =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
-      this.addressInfo.fullAddress =
-        this.addressInfo.area + this.addressInfo.address;
     },
     cancel() {
       this.show = false;
-      // this.$emit("cancel", false);
     },
-
     // 滑动开始
     touchStart(e, val) {
       e.preventDefault();
@@ -476,23 +511,12 @@ export default {
     // 数据处理
     dataProcessing() {
       // 滑动数据传输 数据处理
-      // debugger
       this.val.provinceVal = this.list[this.provinceIndex];
       this.provinceVal = this.list[this.provinceIndex].areaId;
       this.val.cityVal = this.list2[this.cityIndex];
       this.cityVal = this.list2[this.cityIndex].areaId;
       this.val.areaVal = this.list3[this.districtIndex];
       this.areaVal = this.list3[this.districtIndex].areaId;
-      // this.val.cityVal = this.addressData[this.provinceIndex].city[this.cityIndex].name
-      // this.val.areaVal = this.addressData[this.provinceIndex].city[this.cityIndex].area[this.districtIndex]
-      // this.$emit('getAddress', this.val)
-      // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
-    },
-    handleCancel() {
-      this.show = false;
-    },
-    handleConfirm() {
-      this.show = false;
     }
   }
 };

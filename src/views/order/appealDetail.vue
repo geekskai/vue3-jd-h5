@@ -5,79 +5,88 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">申诉详情</div>
-       <router-link class="appeal-record" to='/order/appealRecord' tag="span">申诉记录</router-link>
+      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link> -->
     </header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+            <img :src="appealDetailForm.logoUrl" class="header-img" />
+            <b>{{appealDetailForm.shopName}}</b>
           </div>
         </li>
-        <li class="order-info">
-          <img src alt />
+        <li class="order-info" v-for="(item,i) in appealDetailForm.appealSkuInfoVos" :key="i">
+          <img :src="item.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
+              <span class="product-name">{{item.productName}}</span>
+              <b>￥{{item.productAmount}}</b>
             </p>
             <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
+              <span>{{item.fullName}}</span>
+              <span>×{{item.quantity}}</span>
             </p>
           </div>
         </li>
         <li class="order-count">
-          <span>共2件商品,小计:</span>
-          <i>￥444</i>
+          <span>共{{appealDetailForm.appealSkuInfoVos[0].quantity}}件商品,小计:</span>
+          <b>￥{{appealDetailForm.allAmount}}</b>
         </li>
       </ul>
     </section>
     <section class="info-form">
       <van-cell-group>
-        <van-field v-model="username" disabled label="用户名" />
-        <van-field v-model="phone" disabled label="手机号"  />
-        <van-field v-model="time" disabled label="申诉时间"  />
-        <van-field
-          v-model="content"
-          :autosize="{ minHeight: 150 }"
-          type="textarea"
-          label="申诉内容"
-          disabled
-        />
+        <van-field v-model="appealContent.name" disabled label="用户名" />
+        <van-field v-model="appealContent.phone" disabled label="手机号" />
+        <div v-for="(appealDetail,index) in appealContent.appealDetailContentVos" :key="index">
+          <van-field v-model="appealDetail.createDate" disabled label="申诉时间" />
+          <van-field
+            v-model="appealDetail.content"
+            :autosize="{ minHeight: 100 }"
+            type="textarea"
+            label="申诉内容"
+            disabled
+          />
+        </div>
       </van-cell-group>
-      <ul class="imgs-list">
-          <li class="img-item">
-            <img src='../../assets/image/home/test1.png' class="header-img" />
-          </li>
-          <li class="img-item">
-            <img src='../../assets/image/home/test1.png' class="header-img" />
-          </li>
-          <li class="img-item">
-            <img src='../../assets/image/home/test1.png' class="header-img" />
-          </li>
+      <ul
+        class="imgs-list"
+        v-for="(appealDetail,index) in appealContent.appealDetailContentVos"
+        :key="index"
+      >
+        <li class="img-item" v-for="(image,index) in appealDetail.imageUrls" :key="index">
+          <img :src="image.imageUrl" class="header-img" />
+        </li>
       </ul>
     </section>
-    <div class="pay-btn">
-      <van-button type="danger" @click="handlePay" size="large">补充申诉信息</van-button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "",
+  name: "appealDetail",
   data() {
     return {
-      username: "某某人",
-      phone: "13548669666",
-      time: "2019-06-06 16:24:30",
-      content: `今天下午，放了学，哥哥今天没上班，我们一起去逛鞋店，我喜欢上了一个帆布鞋，黑色的，89元，哥哥非常疼我，给我买下了这双鞋子。哥哥也要买鞋，他买了一个白鞋，74元，比我的便宜。因为爸爸妈妈今天加班，所以我们只能吃泡面，不过泡面也很好吃。`,
+      username: "",
+      phone: "",
+      appealContent: {},
+      appealDetailForm: this.$route.params || {}
     };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .get(
+          `/api/order/complainDetail?appealNo=${this.appealDetailForm.appealNo}`
+        )
+        .then(response => {
+          this.appealContent = response.data.content;
+        });
+    }
+  }
 };
 </script>
 
@@ -97,7 +106,7 @@ export default {
       flex: 1;
     }
     .appeal-record {
-      color: #EC3924;
+      color: #ec3924;
       font-size: 13px;
     }
   }
@@ -111,7 +120,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -122,8 +131,9 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
-          span {
+          b {
             color: #3a3a3a;
             padding-left: 3px;
             font-size: 11px;
@@ -138,7 +148,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -154,8 +164,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+            .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
@@ -167,8 +180,8 @@ export default {
         display: flex;
         justify-content: flex-end;
         font-size: 13px;
-        i {
-          color: #EC3924;
+        b {
+          color: #ec3924;
           padding-left: 5px;
           font-weight: 700;
         }
@@ -180,14 +193,14 @@ export default {
   }
   .info-form {
     padding: 20px;
-    margin-top: 20px;
+    margin: 20px 0;
     border-radius: 5px;
     background-color: #fff;
     /deep/ .van-cell {
       padding-left: 0;
       padding-right: 0;
     }
-    /deep/ .van-field__control:disabled{
+    /deep/ .van-field__control:disabled {
       color: #3a3a3a;
       font-size: 13px;
     }
@@ -195,28 +208,18 @@ export default {
       border-radius: 8px;
     }
   }
-  .pay-btn {
-    width: 100%;
-    padding: 0 16px;
-    padding-top: 50px;
-    padding-bottom: 10px;
-    /deep/ .van-button--danger {
-      background-color: #EC3924;
-      line-height: 44px;
-      font-size: 18px;
-    }
-  }
-  .imgs-list{
-      display: flex;
-      .img-item{
-          img{
-              display: inline-block;
-              width: 94px;
-              height: 94px;
-              border-radius: 5px;
-              padding-right: 10px;
-          }
+  .imgs-list {
+    display: flex;
+    flex-wrap: wrap;
+    .img-item {
+      img {
+        display: inline-block;
+        width: 94px;
+        height: 94px;
+        border-radius: 5px;
+        padding-right: 5px;
       }
+    }
   }
 }
 </style>

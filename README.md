@@ -1,4 +1,4 @@
-# jd-mall-h5
+# whale-mall-h5
 
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E9%B2%B8%E5%88%9B%E7%A7%91%E6%8A%80-%E5%95%86%E5%AE%B6%E5%95%86%E5%9F%8E-green.svg" alt="后台项目"></a>

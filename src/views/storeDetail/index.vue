@@ -8,13 +8,13 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img v-lazy="storeDetail.idCardNo" class="store-header" />
+        <img :src="storeDetail.logoUrl" class="store-header" />
         <li class="store-name">{{storeDetail.shopName}}</li>
+      </ul>
+      <ul class="store-center">
         <li class="store-introd">
           <div>{{storeDetail.detail}}</div>
         </li>
-      </ul>
-      <ul class="store-center">
         <li class="store-tel">
           <label>电话:</label>
           <span>{{storeDetail.phone}}</span>
@@ -43,7 +43,7 @@
           class="select-item default-sort"
           :class="{'active' : activeOrderBy === 'update_time'}"
           data-order-by="update_time"
-          @click="initSortData"
+          @click="initSortData(true)"
         >默认排序</div>
 
         <div class="select-item">
@@ -88,14 +88,21 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" tag="li" class="goods-item" to="/product/index">
+            <router-link
+              :key="index"
+              tag="li"
+              class="goods-item"
+              :to="`/product/index?productId=${item.productId}`"
+            >
               <img class="goods-productMainImage" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>￥：{{item.productCnyPrice}}</i>
+                    <i>￥{{item.productCnyPrice}}</i>
+                    <!-- <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span> -->
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
               </div>
@@ -138,10 +145,15 @@ export default {
         });
       this.initSortData();
     },
-    initSortData() {
+    initSortData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
-          `/api/product/list?merchantShopId=${this.$route.query.merchantInfoId}&sortName=${this.orderBy}&sortType=${this.sortType}&page=${this.page}&size=20`
+          `/api/product/list?merchantShopId=${
+            this.$route.query.merchantInfoId
+          }&sortName=${flag ? "update_time" : this.orderBy}&sortType=${
+            flag ? "desc" : this.sortType
+          }&page=${this.page}&size=20&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;
@@ -228,16 +240,16 @@ export default {
         color: #3a3a3a;
         font-size: 18px;
       }
-      .store-introd {
-        padding: 16px;
-        color: #3a3a3a;
-        font-size: 11px;
-      }
     }
     .store-center {
       color: #3a3a3a;
       font-size: 11px;
       padding: 16px;
+      .store-introd {
+        color: #3a3a3a;
+        font-size: 11px;
+        padding-bottom: 10px;
+      }
       .store-tel {
         padding-bottom: 10px;
       }
@@ -245,7 +257,7 @@ export default {
         text-align: center;
         padding-top: 20px;
         /deep/ .van-button--danger {
-          background-color: #EC3924;
+          background-color: #ec3924;
         }
       }
     }
@@ -280,7 +292,7 @@ export default {
       color: #949497;
       font-size: 11px;
       .select-item.active {
-        color: #EC3924;
+        color: #ec3924;
       }
       .select-item {
         .search-icon {
@@ -322,11 +334,11 @@ export default {
         }
 
         .sort-caret.ascending.active {
-          border-bottom-color: #EC3924;
+          border-bottom-color: #ec3924;
           top: 5px;
         }
         .sort-caret.descending.active {
-          border-top-color: #EC3924;
+          border-top-color: #ec3924;
           bottom: 7px;
         }
       }
@@ -335,7 +347,7 @@ export default {
       padding: 16px;
       .good-things {
         font-size: 18px;
-        color: #EC3924;
+        color: #ec3924;
       }
       .goods-content {
         display: flex;
@@ -381,7 +393,22 @@ export default {
             padding-bottom: 12px;
             .goods-price {
               font-size: 14px;
-              color: #EC3924;
+              color: #ec3924;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 55px;
+                height: 17px;
+              }
             }
           }
         }

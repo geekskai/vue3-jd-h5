@@ -2,14 +2,12 @@
   <div class="shipping-address">
     <header class="page-header">
       <router-link class="btn-left" tag="span" to="/mine">
-        <!-- <span  @click="$router.go(-1)"> -->
         <svg-icon icon-class="white-btn"></svg-icon>
-        <!-- </span> -->
       </router-link>
       <div class="header-content">收货地址</div>
     </header>
     <ul v-if="addressArray.length === 0" class="address-no">
-      <img src="../../assets/image/mime/no-address.png" />
+      <img src="assets/image/mime/no-address.png" />
       <li class="address-text">
         没有您的收货地址
         <br />赶紧添加地址吧
@@ -23,11 +21,23 @@
       @click="handleGoToEditAddrss(address)"
     >
       <ul class="card-content">
-        <div class="card-triangle active"></div>
+        <div class="card-triangle" :class="{'active':address.defaultFlag}"></div>
         <li class="addres-svg">
-          <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
-          <svg-icon icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
-          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-home"
+            v-if="address.tag === '家'"
+          ></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-company"
+            v-if="address.tag === '公司'"
+          ></svg-icon>
+          <svg-icon
+            :class="{'active':address.defaultFlag}"
+            icon-class="address-school"
+            v-if="address.tag === '学校'"
+          ></svg-icon>
         </li>
         <li class="card-info">
           <div class="info-name">
@@ -35,7 +45,7 @@
             <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>{{address.fullAddress.slice(0,address.fullAddress.length-9)+address.address}}</span>
+            <span>{{handleFullAddress(address)}}</span>
             <van-icon name="arrow" color="#EC3924" />
           </div>
           <span>{{address.receiverPhone}}</span>
@@ -62,14 +72,20 @@ export default {
     this.getUserList();
   },
   methods: {
+    handleFullAddress(address) {
+      if (~address.fullAddress.indexOf("undefined")) {
+        address.fullAddress = address.fullAddress.slice(
+          0,
+          address.fullAddress.length - 9
+        );
+        return address.fullAddress;
+      }
+      return address.fullAddress;
+    },
     handleGoToEditAddrss(address) {
-      address.fullAddress = address.fullAddress.slice(
-        0,
-        address.fullAddress.length - 9
-      );
       this.$router.push({
         path: "/mine/editAddress",
-        query: { address: address }
+        query: Object.assign({}, address)
       });
     },
     getUserList() {
@@ -86,6 +102,7 @@ export default {
 .shipping-address {
   height: 100%;
   padding: 0 16px;
+  margin-bottom: 70px;
   .page-header {
     display: flex;
     justify-content: flex-start;
@@ -143,6 +160,9 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        .active {
+          color: #ec3924;
+        }
       }
       .card-info {
         font-size: 11px;

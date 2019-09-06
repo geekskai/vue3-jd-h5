@@ -37,8 +37,8 @@
           <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <span class="product-name">{{appOrderProduct.productName}}</span>
+              <b>￥{{appOrderProduct.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{appOrderProduct.fullName}}</span>
@@ -49,11 +49,11 @@
 
         <li class="order-count">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="real-pay">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
@@ -243,6 +243,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
@@ -276,8 +277,11 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+             .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {

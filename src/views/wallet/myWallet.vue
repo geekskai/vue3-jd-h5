@@ -8,56 +8,64 @@
     </header>
     <section class="wallet-box">
       <ul class="wallet-header">
-        <li class="wallet-item consumption-pool" @click="handleToConsumptionPool">
+        <router-link tag="li" to="/pool/consumptionPool" class="wallet-item consumption-pool">
           <svg-icon class="main-icon" icon-class="consumption-pool"></svg-icon>
           <b class="pool-text">消费矿池</b>
           <div class="consumption-info">
             <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
-            <span class="pool-count">996789009.9</span>
+            <span class="pool-count">{{walletForm.shoppingPool}}</span>
           </div>
-        </li>
-        <li class="wallet-item advertisement-pool" @click="handleToAdvertisementPool">
+        </router-link>
+        <router-link tag="li" to="/pool/advertisementPool" class="wallet-item advertisement-pool">
           <svg-icon class="main-icon" icon-class="advertisement-pool"></svg-icon>
           <b class="pool-text">广告矿池</b>
           <div class="advertisement-info">
             <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
-            <span class="pool-count">996789009.9</span>
+            <span class="pool-count">{{walletForm.adPool}}</span>
           </div>
-        </li>
-        <li class="wallet-item node-pool" @click="handleToNodePool">
+        </router-link>
+        <router-link tag="li" to="/pool/nodePool" class="wallet-item node-pool">
           <svg-icon class="main-icon" icon-class="node-pool"></svg-icon>
           <b class="pool-text">节点矿池</b>
           <div class="node-info">
             <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
-            <span class="pool-count">996789009.9</span>
+            <span class="pool-count">{{walletForm.nodePool}}</span>
           </div>
-        </li>
+        </router-link>
       </ul>
     </section>
-    <section @click="handleToWalletConsumption" class="wallet-consumption">
-      <ul class="wallet-consumption-list">
+    <section class="wallet-consumption">
+      <router-link
+        class="wallet-consumption-list"
+        :to="`/wallet/consumerWallet?shoppingWalletAmount=${walletForm.shoppingWalletAmount}&shoppingWalletAmountCny=${walletForm.shoppingWalletAmountCny}`"
+        tag="ul"
+      >
         <svg-icon class="wallet-consumption" icon-class="wallet-consumption"></svg-icon>
         <li class="wallet-consumption-item">
           <b class="wallet-name">消费钱包</b>
-          <span class="wallet-cm">9999.6990CM</span>
-          <span class="wallet-cny">≈999.9CNY</span>
+          <span class="wallet-cm">{{walletForm.shoppingWalletAmount}}CM</span>
+          <span class="wallet-cny">≈{{walletForm.shoppingWalletAmountCny}}CNY</span>
         </li>
         <svg-icon class="wallet-consumption-icon" icon-class="wallet-consumption-icon"></svg-icon>
         <van-icon name="arrow" color="#DBDBDB" />
-      </ul>
+      </router-link>
     </section>
 
-    <section class="wallet-balance" @click="handleToWalletBalanceWallet">
-      <ul class="wallet-balance-list">
+    <section class="wallet-balance">
+      <router-link
+        class="wallet-balance-list"
+        :to="`/wallet/balanceWallet?lockWalletAmount=${walletForm.lockWalletAmount}&lockWalletAmountCny=${walletForm.lockWalletAmountCny}`"
+        tag="ul"
+      >
         <svg-icon class="wallet-balance" icon-class="wallet-balance"></svg-icon>
         <li class="wallet-balance-item">
           <b class="wallet-name">余额钱包</b>
-          <span class="wallet-cm">9999.6990CM</span>
-          <span class="wallet-cny">≈999.9CNY</span>
+          <span class="wallet-cm">{{walletForm.lockWalletAmount}}CM</span>
+          <span class="wallet-cny">≈{{walletForm.lockWalletAmountCny}}CNY</span>
         </li>
         <svg-icon class="wallet-balance-icon" icon-class="wallet-balance-icon"></svg-icon>
         <van-icon name="arrow" color="#DBDBDB" />
-      </ul>
+      </router-link>
     </section>
   </div>
 </template>
@@ -66,24 +74,18 @@
 export default {
   name: "MyWallet",
   data() {
-    return {};
+    return {
+      walletForm: {}
+    };
   },
-  created() {},
+  created() {
+    this.initData();
+  },
   methods: {
-    handleToAdvertisementPool() {
-      this.$router.push(`/pool/advertisementPool`);
-    },
-    handleToConsumptionPool() {
-      this.$router.push(`/pool/consumptionPool`);
-    },
-    handleToNodePool() {
-      this.$router.push(`/pool/nodePool`);
-    },
-    handleToWalletConsumption() {
-      this.$router.push(`/wallet/consumerWallet`);
-    },
-    handleToWalletBalanceWallet() {
-      this.$router.push(`/wallet/balanceWallet`);
+    initData() {
+      this.$http.get(`/api/wallet/info`).then(response => {
+        this.walletForm = response.data.content;
+      });
     }
   }
 };

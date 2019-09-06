@@ -25,22 +25,31 @@
           <img :src="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>{{appOrderProduct.productName}}</span>
-              <i>￥：{{appOrderProduct.productAmount}}</i>
+              <span class="product-name">{{appOrderProduct.productName}}</span>
+              <b>￥{{appOrderProduct.productAmount}}</b>
             </p>
             <p class="info-two">
               <span>{{appOrderProduct.fullName}}</span>
               <span>×{{appOrderProduct.quantity}}</span>
             </p>
+            <p class="info-three">
+              <span
+                v-if="appOrderProduct.appealStatus"
+                class="force-value"
+              >{{appOrderProduct.appealStatus}}倍算力值</span>
+              <i v-if="appOrderProduct.appealStatus == 0" class="appeal-status">该商品申诉中</i>
+              <i v-if="appOrderProduct.appealStatus == 1" class="appeal-status">申请成功/已退款</i>
+              <i v-if="appOrderProduct.appealStatus == 2" class="appeal-status">该商品申诉失败</i>
+            </p>
           </div>
         </li>
         <li class="order-total">
           <span>订单总价：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥：{{orderForm.amount}}</i>
+          <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-btn">
           <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
@@ -67,7 +76,7 @@
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-          <span>{{orderForm.finishDate}}</span>
+          <span>{{orderForm.payDate}}</span>
         </li>
         <li class="info-item">
           <label>发货时间：</label>
@@ -136,7 +145,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -147,6 +156,7 @@ export default {
           .header-img {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
           }
           span {
             color: #3a3a3a;
@@ -163,7 +173,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -179,12 +189,37 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-            i {
-              font-weight: 700;
+           .product-name {
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
           .info-two {
             color: #949497;
+          }
+          .info-three {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .force-value {
+              margin-left: 7px;
+              margin-right: auto;
+              color: white;
+              border-radius: 20px 20px;
+              background-color: #ec3924;
+              display: inline-block;
+              font-size: 7px;
+              line-height: 17px;
+              text-align: center;
+              width: 55px;
+              height: 17px;
+            }
+            .appeal-status {
+              color: #ec3924;
+              font-size: 10px;
+            }
           }
         }
       }
@@ -200,7 +235,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #EC3924;
+          color: #ec3924;
           padding-left: 5px;
           font-weight: 700;
         }
