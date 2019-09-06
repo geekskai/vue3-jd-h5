@@ -15,10 +15,14 @@
             <img src="../../assets/image/mime/center-right.png" />
           </li>
           <li class="invitation-code">
-            <span>GHKMFJ</span>
+            <span>{{$route.query.recommendCode}}</span>
           </li>
           <li class="invitation-btn">
-            <span class="copy-btn">复制</span>
+            <span
+              class="copy-btn"
+              v-clipboard:copy="$route.query.recommendCode"
+              v-clipboard:success="copySuccess"
+            >复制</span>
           </li>
           <li class="qrcode-class">
             <div id="qrcode" ref="qrcode"></div>
@@ -43,20 +47,20 @@ export default {
   mounted() {
     this.qrcode();
   },
-  created() {
-    // this.$http.get(`/api/message/messageTypeCount`).then(response => {
-    //   response.data.content.forEach(it => {
-    //     it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
-    //   });
-    // });
-  },
+  created() {},
   methods: {
     qrcode() {
       let qrcode = new QRCode("qrcode", {
         width: 200, // 设置宽度，单位像素
         height: 200, // 设置高度，单位像素
-        // text: "http://www.cmall.world/down/" // 设置二维码内容或跳转地址
         text: "http://jc.cmall.world/#/mine/linkDownload" // 设置二维码内容或跳转地址
+      });
+    },
+    copySuccess() {
+      this.$toast({
+        mask: false,
+        duration: 1000,
+        message: "复制成功！"
       });
     }
   }
@@ -70,10 +74,12 @@ export default {
   flex-direction: column;
   padding-bottom: 45px;
   background-color: #f66747;
-  //   background: url("../../assets/image/mime/share-link.png") no-repeat center
-  //     center;
-  //   background-size: 100% 100%;
+  background: url("../../assets/image/mime/share-link.png") no-repeat center
+    center;
+  background-size: 100% 100%;
   .page-header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -101,14 +107,14 @@ export default {
   }
   .content-box {
     height: 100%;
-    background: url("../../assets/image/mime/share-link.png") no-repeat center
-      center;
-    background-size: 100% 100%;
+    // background: url("../../assets/image/mime/share-link.png") no-repeat center
+    //   center;
+    // background-size: 100% 100%;
 
     .share-content {
       width: 268px;
       height: 402px;
-      margin: 150px auto;
+      margin: 130px auto;
       background: url("../../assets/image/mime/share-center.png") no-repeat
         center center;
       background-size: 100% 100%;

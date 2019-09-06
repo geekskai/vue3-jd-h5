@@ -6,36 +6,10 @@
       </span>
       <div class="header-content">商家入驻</div>
     </header>
-    <ul class="card-images">
-      <li>
-        <span class="iamges-text">身份证正面</span>
-        <div class="images-front"></div>
-      </li>
-      <li>
-        <span class="iamges-text">身份证反面</span>
-        <div class="images-side"></div>
-      </li>
-      <li>
-        <span class="iamges-text">手持身份证</span>
-        <div class="images-handle"></div>
-      </li>
-      <li>
-        <span class="iamges-text">营业执照</span>
-        <div class="images-license"></div>
-      </li>
-    </ul>
-    <van-checkbox
-      class="merchant-agreement"
-      v-model="checked"
-      icon-size="14"
-      checked-color="#D8182D"
-    >
-      阅读并同意
-      <i class="agreement-text">《CMALL商家协议》</i>
-    </van-checkbox>
-    <div class="pay-btn">
-      <van-button type="danger" @click="show = true" size="large">提交订单</van-button>
-    </div>
+    <svg-icon class="into-process" icon-class="intoProcess"></svg-icon>
+    <router-link class="pay-btn" tag="div" to="/merchantsSettled/shopApplyInfo">
+      <van-button type="danger" @click="show = true" size="large">申请入驻</van-button>
+    </router-link>
   </div>
 </template>
 
@@ -46,17 +20,52 @@ export default {
     return {
       systemMessage: {},
       checked: false,
+      fileList: [],
+      idCardNoUrlA: [],
+      idCardNoUrlB: [],
+      idCardNoUrlC: [],
+      businessLicenseUrl: [],
+      shopForm: {},
       mallMessage: {}
     };
   },
   created() {
-    // this.$http.get(`/api/message/messageTypeCount`).then(response => {
-    //   response.data.content.forEach(it => {
-    //     it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
-    //   });
-    // });
+    this.$http.get(`/api/message/messageTypeCount`).then(response => {
+      response.data.content.forEach(it => {
+        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
+      });
+    });
   },
-  methods: {}
+  methods: {
+    afterReadA(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlA = response.data.content.imageUrl;
+      });
+    },
+    afterReadB(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlB = response.data.content.imageUrl;
+      });
+    },
+    afterReadC(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.idCardNoUrlC = response.data.content.imageUrl;
+      });
+    },
+    afterReadBusinessLicenseUrl(res) {
+      let formData = new FormData();
+      formData.append("file", res.file);
+      this.$http.post(`/api/shop/upload/image`, formData).then(response => {
+        this.shopForm.businessLicenseUrl = response.data.content.imageUrl;
+      });
+    }
+  }
 };
 </script>
 
@@ -69,7 +78,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 10px;
+    padding: 10px 0;
     .btn-left {
       background-color: #fff;
       width: 24px;
@@ -91,52 +100,10 @@ export default {
       font-size: 13px;
     }
   }
-  .card-images {
-    .iamges-text {
-      font-size: 15px;
-      color: #3a3a3a;
-      font-weight: 600;
-    }
-    .images-front {
-      margin-top: 8px;
-      height: 187px;
-      background: url("../../assets/image/mime/images-front.png") no-repeat
-        center center;
-      background-size: 100% 100%;
-    }
-    .images-side {
-      margin-top: 8px;
-      height: 187px;
-      background: url("../../assets/image/mime/images-side.png") no-repeat
-        center center;
-      background-size: 100% 100%;
-    }
-    .images-handle {
-      margin-top: 8px;
-      height: 187px;
-      background: url("../../assets/image/mime/images-handle.png") no-repeat
-        center center;
-      background-size: 100% 100%;
-    }
-    .images-license {
-      margin-top: 8px;
-      height: 187px;
-      background: url("../../assets/image/mime/images-license.png") no-repeat
-        center center;
-      background-size: 100% 100%;
-    }
-  }
-  .merchant-agreement {
-    padding-top: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 10px;
-    color: #ec3924;
-    .agreement-text {
-      font-size: 10px;
-      color: #ec3924;
-    }
+  .into-process {
+    width: 100%;
+    height: 642px;
+    margin-bottom: 70px;
   }
   .pay-btn {
     position: fixed;

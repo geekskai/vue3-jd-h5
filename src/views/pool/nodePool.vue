@@ -3,7 +3,7 @@
   <div class="node-pool">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="assets/icons/left-green-white.png" />
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">节点矿池</div>
       <!-- <li class="notice-message">

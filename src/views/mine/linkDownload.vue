@@ -4,15 +4,17 @@
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <!-- <div class="header-content">下载链接</div> -->
+      <div class="header-content">下载链接</div>
     </header>
     <section class="down-btns">
-      <a href="#" @click="handleDownIOS">
+      <a
+        href="itms-services://?action=download-manifest&url=https://chain-mall.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
+      >
         <div class="down-btn">
           <svg-icon icon-class="apple-icon"></svg-icon>iOS 下载
         </div>
       </a>
-      <a href="https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/app-release.apk">
+      <a href="https://chain-mall.oss-cn-shenzhen.aliyuncs.com/download/cmall-release.apk">
         <div class="down-btn">
           <svg-icon icon-class="android-icon"></svg-icon>Android 下载
         </div>
@@ -33,15 +35,7 @@ export default {
   },
   mounted() {},
   created() {},
-  methods: {
-    handleDownIOS() {
-      this.$toast({
-        mask: true,
-        duration: 1000,
-        message: "正在努力建设中,敬请期待····"
-      });
-    }
-  }
+  methods: {}
 };
 </script>
 

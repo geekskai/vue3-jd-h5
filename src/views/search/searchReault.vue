@@ -63,7 +63,12 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" :to="`/product/index?productId=${item.productId}`">
+            <router-link
+              :key="index"
+              class="goods-item"
+              tag="li"
+              :to="`/product/index?productId=${item.productId}`"
+            >
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
@@ -71,6 +76,7 @@
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
                 <div class="goods-count-sale">
@@ -115,9 +121,11 @@ export default {
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
               : ""
-          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
-            this.sortType
-          }&page=${this.page}&size=15&clientType=0`
+          }&productName=${this.searchText}&sortName=${
+            flag ? "update_time" : this.orderBy
+          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            this.page
+          }&size=15&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;

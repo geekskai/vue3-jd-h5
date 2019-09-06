@@ -8,8 +8,7 @@ const productionGzip = true
 const productionGzipExtensions = ['js', 'css']
 
 function resolve (dir) {
-  // return path.join(__dirname, dir)
-  return path.resolve(__dirname, dir)
+  return path.join(__dirname, '.', dir)
 }
 
 module.exports = {

@@ -7,7 +7,7 @@
       <div class="header-content">关于我们</div>
     </header>
     <div class="logo-version">
-      <img src="assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
       <h6>Chain Mall</h6>
       <span class="version">版本1.0.1</span>
     </div>

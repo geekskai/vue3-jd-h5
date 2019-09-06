@@ -72,7 +72,8 @@
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
-                    <i>{{item.calculate}}倍算力值</i>
+                    <!-- <i>{{item.calculate}}倍算力值</i> -->
+                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
                 <div class="goods-count-sale">
@@ -120,7 +121,8 @@ export default {
         query: { productId: item.productId }
       });
     },
-    initData() {
+    initData(flag) {
+      flag && (this.activeOrderBy = "update_time");
       this.$http
         .get(
           `/api/product/list?categoryId=${
@@ -129,9 +131,11 @@ export default {
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
               : ""
-          }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
-            this.sortType
-          }&page=${this.page}&size=15&clientType=0`
+          }&productName=${this.searchText}&sortName=${
+            flag ? "update_time" : this.orderBy
+          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            this.page
+          }&size=15&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;
@@ -466,10 +470,18 @@ export default {
               display: flex;
               justify-content: space-between;
               align-items: center;
-            }
-            .add-icon {
-              width: 20px;
-              height: 20px;
+              .force-value {
+                margin-left: 7px;
+                color: white;
+                border-radius: 20px 20px;
+                background-color: #ec3924;
+                display: inline-block;
+                font-size: 7px;
+                line-height: 17px;
+                text-align: center;
+                width: 55px;
+                height: 17px;
+              }
             }
           }
           .goods-count-sale {

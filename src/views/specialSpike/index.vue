@@ -48,7 +48,7 @@
 
             <ul class="card-content">
               <li class="item-content">
-                <img class="item-img" src="assets/image/premiumRanking/demo0.png" />
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -56,7 +56,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img class="item-img" src="assets/image/premiumRanking/demo0.png" />
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -64,7 +64,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img class="item-img" src="assets/image/premiumRanking/demo0.png" />
+                <img class="item-img" src="../../assets/image/premiumRanking/demo0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -77,7 +77,7 @@
           <ul class="list-item">
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo0.png" />
+                <img src="../../assets/image/premiumRanking/demo0.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -97,7 +97,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -117,7 +117,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -137,7 +137,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -157,7 +157,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -177,7 +177,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">

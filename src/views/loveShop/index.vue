@@ -27,7 +27,7 @@
             <ul class="shop-content">
               <li class="shop-item">
                 <div class="item-header">
-                  <img class="store-logo" src="assets/image/home/store-logo.png" />
+                  <img class="store-logo" src="../../assets/image/home/store-logo.png" />
                   <div class="item-text">
                     <p>品炫旗舰店</p>
                     <i>正品大牌 产家直营</i>
@@ -38,17 +38,17 @@
                 </div>
                 <div class="item-iamgs">
                   <div class="left-imags">
-                    <img src="assets/image/premiumRanking/demo2.png" />
+                    <img src="../../assets/image/premiumRanking/demo2.png" />
                   </div>
                   <div class="right-imags">
-                    <img src="assets/image/home/store2.png" />
-                    <img src="assets/image/home/store3.png" />
+                    <img src="../../assets/image/home/store2.png" />
+                    <img src="../../assets/image/home/store3.png" />
                   </div>
                 </div>
               </li>
               <li class="shop-item">
                 <div class="item-header">
-                  <img class="store-logo" src="assets/image/home/store-logo2.png" />
+                  <img class="store-logo" src="../../assets/image/home/store-logo2.png" />
                   <div class="item-text">
                     <p>北欧家居旗舰店</p>
                     <i>正品大牌 产家直营</i>
@@ -59,11 +59,11 @@
                 </div>
                 <div class="item-iamgs">
                   <div class="left-imags">
-                    <img src="assets/image/premiumRanking/demo3.png" />
+                    <img src="../../assets/image/premiumRanking/demo3.png" />
                   </div>
                   <div class="right-imags">
-                    <img src="assets/image/home/store5.png" />
-                    <img src="assets/image/home/store6.png" />
+                    <img src="../../assets/image/home/store5.png" />
+                    <img src="../../assets/image/home/store6.png" />
                   </div>
                 </div>
               </li>
@@ -73,7 +73,7 @@
           <!-- <ul class="list-item">
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo0.png" />
+                <img src="../../assets/image/premiumRanking/demo0.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -93,7 +93,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -113,7 +113,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -133,7 +133,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -153,7 +153,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -173,7 +173,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">

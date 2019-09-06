@@ -7,7 +7,7 @@
       <div class="header-content">收货地址</div>
     </header>
     <ul v-if="addressArray.length === 0" class="address-no">
-      <img src="assets/image/mime/no-address.png" />
+      <img src="../../assets/image/mime/no-address.png" />
       <li class="address-text">
         没有您的收货地址
         <br />赶紧添加地址吧

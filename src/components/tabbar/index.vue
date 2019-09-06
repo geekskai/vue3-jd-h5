@@ -53,20 +53,20 @@ export default {
   data() {
     return {
       icon_home: {
-        normal: require("assets/icons/tabbar/home.png"),
-        active: require("assets/icons/tabbar/home_active.png")
+        normal: require("@/assets/icons/tabbar/home.png"),
+        active: require("@/assets/icons/tabbar/home_active.png")
       },
       icon_classify: {
-        normal: require("assets/icons/tabbar/classify.png"),
-        active: require("assets/icons/tabbar/classify_active.png")
+        normal: require("@/assets/icons/tabbar/classify.png"),
+        active: require("@/assets/icons/tabbar/classify_active.png")
       },
       icon_cart: {
-        normal: require("assets/icons/tabbar/cart.png"),
-        active: require("assets/icons/tabbar/cart_active.png")
+        normal: require("@/assets/icons/tabbar/cart.png"),
+        active: require("@/assets/icons/tabbar/cart_active.png")
       },
       icon_mine: {
-        normal: require("assets/icons/tabbar/mine.png"),
-        active: require("assets/icons/tabbar/mine_active.png")
+        normal: require("@/assets/icons/tabbar/mine.png"),
+        active: require("@/assets/icons/tabbar/mine_active.png")
       },
       active: 0
     };

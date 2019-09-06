@@ -83,8 +83,9 @@
           <span class="merchants-status" v-if="merchantsSettledStatus == 3">未缴纳保证金</span>
           <span class="merchants-status" v-if="merchantsSettledStatus == -1">未入驻</span>
           <van-icon name="arrow" color="#DBDBDB" />
-        </router-link>
-        <router-link to="/mine/shareLink" class="option-item" tag="li">
+        </li>
+        <!-- </router-link> -->
+        <router-link :to="`/mine/shareLink?recommendCode=${userInfo.recommendCode}`" class="option-item" tag="li">
           <div class="item-info">
             <svg-icon class="incon" icon-class="sharing-links"></svg-icon>
             <span>分享链接</span>
@@ -139,34 +140,34 @@
     >
       <article>
         <header class="dialog-header">
-          <img src="assets/image/product/header-good.png" />
+          <img src="../../assets/image/product/header-good.png" />
         </header>
         <van-divider
           :style="{ color: '#3A3A3A', borderColor: '#FFE31F',fontWeight:'600' ,fontSize:'14px', padding: '0 15px' }"
         >我的节点数据</van-divider>
         <ul class="my-node-data">
           <li class="data-item">
-            <img src="assets/image/product/share-node-img.png" alt />
+            <img src="../../assets/image/product/share-node-img.png" alt />
             <span class="node-text">链猫掌柜</span>
           </li>
           <li class="data-item">
-            <img src="assets/image/product/area-node-img.png" alt />
+            <img src="../../assets/image/product/area-node-img.png" alt />
             <span class="node-text">区级节点</span>
           </li>
           <li class="data-item">
-            <img src="assets/image/product/municipal-node-img.png" alt />
+            <img src="../../assets/image/product/municipal-node-img.png" alt />
             <span class="node-text">市级节点</span>
           </li>
           <li class="data-item">
-            <img src="assets/image/product/state-node-img.png" alt />
+            <img src="../../assets/image/product/state-node-img.png" alt />
             <span class="node-text">州级节点</span>
           </li>
           <li class="data-item">
-            <img src="assets/image/product/industry-node-img.png" alt />
+            <img src="../../assets/image/product/industry-node-img.png" alt />
             <span class="node-text">行业节点</span>
           </li>
           <li class="data-item">
-            <img src="assets/image/product/super-node-img.png" alt />
+            <img src="../../assets/image/product/super-node-img.png" alt />
             <span class="node-text">超级节点</span>
           </li>
         </ul>
@@ -175,7 +176,7 @@
         />
         <div class="node-bottom">
           <span class="know-btn" @click="handleClose">我知道啦</span>
-          <img class="gray-img" src="assets/image/product/gray-node-img.png" />
+          <img class="gray-img" src="../../assets/image/product/gray-node-img.png" />
         </div>
       </article>
     </van-dialog>
