@@ -26,7 +26,7 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <!-- <img src="assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>-->
             <img v-lazy="orderForm.logoUrl" class="header-img" />
             <span>{{orderForm.shopName }}</span>

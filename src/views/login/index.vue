@@ -6,7 +6,7 @@
       </span>
     </header>
     <div class="mall-logo">
-      <img src="../../assets/image/setting/logo.png" />
+      <img src="assets/image/setting/logo.png" />
     </div>
     <section class="login-info">
       <van-cell-group class="info-list">
