@@ -119,53 +119,59 @@ export default {
 
   methods: {
     initData() {
-      if (this.$route.query.userAddrId) {
-        this.$http
-          .post(`/api/order/checkout`, {
-            skuInfoForm: {
-              quantity: this.$route.query.quantity,
-              skuId: this.$route.query.skuId
-            },
-            userAddrId: this.$route.query.userAddrId
-          })
-          .then(response => {
-            this.orderForm = response.data.content;
-            let fullAddress = this.orderForm.fullAddress;
-            if (fullAddress && ~fullAddress.indexOf("undefined")) {
-              this.orderForm.fullAddress = fullAddress.slice(
-                0,
-                this.orderForm.fullAddress.length - 9
-              );
-            }
-          });
-      } else {
-        this.$http
-          .post(`/api/order/checkout`, {
-            skuInfoForm: {
-              quantity: this.$route.query.quantity,
-              skuId: this.$route.query.skuId
-            }
-          })
-          .then(response => {
-            this.orderForm = response.data.content;
-            let fullAddress = this.orderForm.fullAddress;
-            if (fullAddress && ~fullAddress.indexOf("undefined")) {
-              this.orderForm.fullAddress = fullAddress.slice(
-                0,
-                this.orderForm.fullAddress.length - 9
-              );
-            }
-          });
+      console.log("=====selectedGoodsId==>", this.$route.query.selectedGoodsId);
+      // if (this.$route.query.userAddrId) {
+      let paramsObj = {
+        skuInfoForm: {
+          quantity: this.$route.query.quantity,
+          skuId: this.$route.query.skuId
+        },
+        cartItemIds: this.$route.query.selectedGoodsId,
+        userAddrId: this.$route.query.userAddrId
+          ? this.$route.query.userAddrId
+          : ""
+      };
+      if (this.$route.query.selectedGoodsId) {
+        paramsObj.skuInfoForm = null;
       }
+      this.$http.post(`/api/order/checkout`, paramsObj).then(response => {
+        this.orderForm = response.data.content;
+        let fullAddress = this.orderForm.fullAddress;
+        if (fullAddress && ~fullAddress.indexOf("undefined")) {
+          this.orderForm.fullAddress = fullAddress.slice(
+            0,
+            this.orderForm.fullAddress.length - 9
+          );
+        }
+      });
+      // } else {
+      //   this.$http
+      //     .post(`/api/order/checkout`, {
+      //       skuInfoForm: {
+      //         quantity: this.$route.query.quantity,
+      //         skuId: this.$route.query.skuId
+      //       }
+      //     })
+      //     .then(response => {
+      //       this.orderForm = response.data.content;
+      //       let fullAddress = this.orderForm.fullAddress;
+      //       if (fullAddress && ~fullAddress.indexOf("undefined")) {
+      //         this.orderForm.fullAddress = fullAddress.slice(
+      //           0,
+      //           this.orderForm.fullAddress.length - 9
+      //         );
+      //       }
+      //     });
+      // }
     },
     close() {
       this.show = false;
     },
     confirmFn() {
       this.show = false;
-      this.$http.post(`/api/order/submit`,this.orderForm).then(response=>{
-        console.log('=====response.data==>',response.data);
-      })
+      this.$http.post(`/api/order/submit`, this.orderForm).then(response => {
+        console.log("=====response.data==>", response.data);
+      });
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -187,6 +193,7 @@ export default {
         path: `/order/chooseAddress`,
         query: {
           quantity: this.$route.query.quantity,
+          cartItemIds: this.$route.query.selectedGoodsId,
           skuId: this.$route.query.skuId
         }
       });
@@ -222,7 +229,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -250,7 +257,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -288,7 +295,7 @@ export default {
         font-weight: 600;
         padding-top: 4px;
         i {
-          color: #EC3924;
+          color: #ec3924;
           padding-left: 5px;
         }
         span {
@@ -356,12 +363,12 @@ export default {
       font-size: 11px;
       padding-bottom: 12px;
       i {
-        color: #EC3924;
+        color: #ec3924;
         font-weight: 700;
       }
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
     }

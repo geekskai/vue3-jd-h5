@@ -63,14 +63,14 @@
       <section class="goods-box">
         <ul class="goods-content">
           <template v-for="(item,index) in serarchResult">
-            <router-link :key="index" class="goods-item" tag="li" to="/product/index">
+            <router-link :key="index" class="goods-item" tag="li" :to="`/product/index?productId=${item.productId}`">
               <img class="product-image" v-lazy="item.productMainImage" />
               <div class="goods-layout">
                 <div class="goods-title">{{item.productName}}</div>
                 <span class="goods-div">{{item.labels}}</span>
                 <div class="goods-desc">
                   <span class="goods-price">
-                    <i>$:{{item.productCnyPrice}}</i>
+                    <i>￥{{item.productCnyPrice}}</i>
                   </span>
                 </div>
                 <div class="goods-count-sale">
@@ -116,7 +116,7 @@ export default {
               : ""
           }&productName=${this.searchText}&sortName=${this.orderBy}&sortType=${
             this.sortType
-          }&page=${this.page}&size=15`
+          }&page=${this.page}&size=15&clientType=0`
         )
         .then(response => {
           this.serarchResult = response.data.content;
@@ -162,7 +162,6 @@ export default {
     @include fj;
     width: 100%;
     height: 44px;
-    // padding: 5px 0;
     padding-top: 5px;
     box-sizing: border-box;
     .btn-left {
