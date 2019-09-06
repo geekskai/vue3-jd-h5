@@ -70,9 +70,8 @@ export default {
   },
   created() {},
   methods: {
-    handleToAdvertisementPool(){
+    handleToAdvertisementPool() {
       this.$router.push(`/pool/advertisementPool`);
-
     },
     handleToConsumptionPool() {
       this.$router.push(`/pool/consumptionPool`);
@@ -138,6 +137,7 @@ export default {
         }
         .pool-count {
           font-size: 13px;
+          padding-left: 5px;
           color: #949497;
         }
         .count-svg {
@@ -176,11 +176,11 @@ export default {
   }
   .wallet-consumption {
     margin: 16px;
-    padding: 10px 0;
     background-color: #ffffff;
+    // box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     .wallet-consumption-list {
-      padding: 10px 0;
+      padding: 20px 0;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -213,11 +213,10 @@ export default {
   }
   .wallet-balance {
     margin: 16px;
-    padding: 10px 0;
     border-radius: 4px;
     background-color: #ffffff;
     .wallet-balance-list {
-      padding: 10px 0;
+      padding: 20px 0;
       display: flex;
       justify-content: space-around;
       align-items: center;

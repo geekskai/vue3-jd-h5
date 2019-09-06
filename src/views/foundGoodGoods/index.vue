@@ -2,7 +2,7 @@
   <div class="found-good-goods" id="found-good-goods">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">发现好货</div>
       <div class="option-btns">
@@ -173,7 +173,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(#d8182d, #efeff4);
+    background: linear-gradient(#EC3924, #efeff4);
     height: 250px;
     display: flex;
     justify-content: flex-start;

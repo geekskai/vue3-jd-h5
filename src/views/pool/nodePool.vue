@@ -70,11 +70,9 @@ export default {
 <style scoped lang="scss">
 .node-pool {
   .page-header {
-    border-radius: 0pt 0pt 0pt 103pt;
-    height: 321px;
-    background: linear-gradient(to right, #5685ed, #5685ed);
     width: 100%;
     padding: 10px 20px;
+    color: #3a3a3a;
     .btn-left {
       position: absolute;
       display: flex;
@@ -85,7 +83,6 @@ export default {
       text-align: center;
       font-size: 18px;
       z-index: 11;
-      color: #ffffff;
       font-weight: 600;
       flex: 1;
     }
@@ -94,10 +91,9 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      color: #ffffff;
       .wallet-total {
         font-size: 14px;
-        padding-left: 5px;
+        padding-left: 10px;
       }
       .wallet-value {
         font-size: 13px;
@@ -110,12 +106,9 @@ export default {
     }
   }
   .card-box {
-    position: absolute;
-    top: 90px;
-    right: 0;
-    left: 0;
     .consumption-card {
       .card-content {
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
         padding: 20px 16px;
         border-radius: 8px;
@@ -156,6 +149,7 @@ export default {
     }
     .week-card {
       .card-content {
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
         padding: 20px 16px;
         border-radius: 8px;

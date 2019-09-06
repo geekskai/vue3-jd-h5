@@ -11,36 +11,57 @@
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
-      <p class="number-tips">6-20位数字、字母或字符</p>
+      <p class="number-tips">6-8位数字、字母的字符</p>
+
+
       <van-cell-group class="info-list">
         <van-field
+          v-if="pwdEyes1"
           v-model="phoneRegisterTwoForm.password"
-          type="password"
           right-icon="eye-o"
           clearable
+          @click-right-icon="pwdEyes1=!pwdEyes1"
           placeholder="密码"
         />
         <van-field
-          v-model="phoneRegisterTwoForm.password"
+          v-else
           type="password"
+          v-model="phoneRegisterTwoForm.password"
           right-icon="closed-eye"
           clearable
+          @click-right-icon="pwdEyes1=!pwdEyes1"
+          placeholder="密码"
+        />
+        <van-field
+          v-if="pwdEyes2"
+          v-model="phoneRegisterTwoForm.password1"
+          right-icon="eye-o"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
           placeholder="再次确认密码"
         />
+        <van-field
+          v-else
+          type="password"
+          v-model="phoneRegisterTwoForm.password1"
+          right-icon="closed-eye"
+          clearable
+          @click-right-icon="pwdEyes2=!pwdEyes2"
+          placeholder="再次确认密码"
+        />
+        <van-field
+          v-model="phoneRegisterTwoForm.recommendCode"
+          clearable
+          placeholder="请输入邀请码（必填）"
+        />
+
+        
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <span class="login-btn">确定</span>
+      <span class="login-btn" @click="handleConfirmRegister">确定</span>
     </div>
-    <van-popup v-model="showPicker" position="bottom">
-      <van-picker
-        show-toolbar
-        :columns="columns"
-        @cancel="showPicker = false"
-        @confirm="onConfirm"
-      />
-    </van-popup>
   </div>
 </template>
 
@@ -49,18 +70,40 @@ export default {
   name: "phoneRegisterTwo",
   data() {
     return {
+      pwdEyes1: false,
+      pwdEyes2: false,
       phoneRegisterTwoForm: {
         password: ""
-      },
-      sms: "",
-      value: "",
-      showPicker: false,
-      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"]
+      }
     };
   },
   created() {},
   methods: {
-    onConfirm() {}
+    handleConfirmRegister() {
+
+      this.$http
+        .post(
+          `/api/user/register`,
+          Object.assign(this.phoneRegisterTwoForm, this.$route.query)
+        )
+        .then(response => {
+          if (response.data.code === 0) {
+            localStorage.setItem("token", response.data.content.token);
+            this.$toast({
+              mask: false,
+              message: "注册成功！"
+            });
+            this.$router.push("/index");
+          } else {
+            this.$toast({
+              mask: false,
+              message: response.data.msg
+            });
+          }
+        });
+
+
+    }
   }
 };
 </script>
@@ -78,7 +121,7 @@ export default {
     align-items: center;
     line-height: 44px;
     .appeal-record {
-      color: #d8182d;
+      color: #EC3924;
       font-size: 13px;
     }
   }
@@ -126,9 +169,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #d8182d;
+      border: 1px solid #EC3924;
       border-radius: 4px;
-      background-color: #d8182d;
+      background-color: #EC3924;
     }
   }
 }

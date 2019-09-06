@@ -10,29 +10,24 @@
     </div>
     <section class="login-info">
       <van-cell-group class="info-list">
-        <van-field
-          v-model="loginForm.emailPhone"
-          clearable
-          placeholder="手机/邮箱"
-          @click-right-icon="$toast('question')"
-        />
+        <van-field v-model="loginForm.user" clearable placeholder="手机/邮箱" />
         <van-field v-model="loginForm.password" type="password" clearable placeholder="请输入密码" />
         <van-field class="temp-empty" />
-        <span class="forget-pwd">
+        <router-link class="forget-pwd" to="/mine/forgetPassword" tag="span">
           <svg-icon icon-class="question-mark"></svg-icon>
           <i>忘记密码？</i>
-        </span>
+        </router-link>
       </van-cell-group>
     </section>
     <ul class="other-login">
       <li class="top-login">
         <span>或使用TOP金服登录</span>
       </li>
-      <img src="../../assets/image/top-logo.png" alt />
+      <img src="../../assets/image/top-logo.png" />
     </ul>
     <div class="login-register-btns">
       <span class="login-btn" @click="handleUserLogin">登录</span>
-      <span class="register-btn" @click="handleUserRegister">注册</span>
+      <router-link class="register-btn" tag="span" to="/register/phoneRegister">注册</router-link>
     </div>
   </div>
 </template>
@@ -43,15 +38,33 @@ export default {
   data() {
     return {
       loginForm: {
-        emailPhone: "",
+        user: "",
         password: ""
       }
     };
   },
   created() {},
   methods: {
-    handleUserLogin() {},
-    handleUserRegister() {}
+    // handleForgenPwd() {
+    //   this.$router.push({
+    //     path: ``,
+    //     query: this.loginForm
+    //   });
+    // },
+    handleUserLogin() {
+      this.$http.post(`/api/user/login`, this.loginForm).then(response => {
+        if (response.data.code === 0) {
+          localStorage.setItem("token", response.data.content.token);
+          this.$router.push("/index");
+        } else {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: response.data.msg
+          });
+        }
+      });
+    }
   }
 };
 </script>
@@ -83,7 +96,7 @@ export default {
         position: absolute;
         bottom: -30px;
         left: 15px;
-        color: #d8182d;
+        color: #EC3924;
         font-size: 11px;
         display: flex;
         justify-content: center;
@@ -136,9 +149,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #d8182d;
+      border: 1px solid #EC3924;
       border-radius: 4px;
-      background-color: #d8182d;
+      background-color: #EC3924;
     }
     .register-btn {
       line-height: 44px;

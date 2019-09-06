@@ -8,35 +8,55 @@
       <div class="header-content">订单详情</div>
     </header>
 
+    <section class="order-address">
+      <ul class="info-list">
+        <li class="receiver-addres">
+          <svg-icon icon-class="shipping-address"></svg-icon>
+          <div class="address-content">
+            <!-- <label>收货人：张三</label>
+            <span>江西省</span>-->
+            <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
+            <span>{{orderForm.fullAddress}}</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+            <!-- <img src="../../assets/image/product/store-headerM.png" class="header-img" />
+            <span>店铺名称</span>-->
+            <img v-lazy="orderForm.logoUrl" class="header-img" />
+            <span>{{orderForm.shopName }}</span>
           </div>
           <span>待发货</span>
         </li>
-        <li class="order-desc">
-          <img />
+        <li
+          class="order-desc"
+          v-for="(appOrderProduct,index) in orderForm.appOrderProductVos"
+          :key="index"
+        >
+          <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
+              <span>{{appOrderProduct.productName}}</span>
+              <i>￥：{{appOrderProduct.productAmount}}</i>
             </p>
             <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
+              <span>{{appOrderProduct.fullName}}</span>
+              <span>×{{appOrderProduct.quantity}}</span>
             </p>
           </div>
         </li>
         <li class="order-total">
           <span>订单总价：</span>
-          <i>$444</i>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
         <li class="order-count">
           <span>实付款：</span>
-          <i>￥444</i>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
@@ -48,19 +68,19 @@
         </li>
         <li class="info-item">
           <label>订单编号：</label>
-          <span>201905211540350025</span>
+          <span>{{orderForm.orderNo}}</span>
         </li>
         <li class="info-item">
           <label>支付单号：</label>
-          <span>201905211540350025</span>
+          <span>{{orderForm.outerOrderNo}}</span>
         </li>
         <li class="info-item">
           <label>创建时间：</label>
-          <span>2019/05/01 13:40:40</span>
+          <span>{{orderForm.createDate}}</span>
         </li>
         <li class="info-item">
           <label>付款时间：</label>
-          <span>2019/05/01 13:40:40</span>
+          <span>{{orderForm.finishDate}}</span>
         </li>
         <li class="info-title">
           <svg-icon icon-class="message-round"></svg-icon>
@@ -75,10 +95,26 @@
 export default {
   name: "toBeDelivered",
   data() {
-    return {};
+    return {
+      orderForm:{}
+    };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$http
+        .post(`/api/order/detail`, {
+          pageNum: 1,
+          pageSize: 10,
+          orderNo: this.$route.query.orderNo
+        })
+        .then(response => {
+          this.orderForm = response.data.content;
+        });
+    }
+  }
 };
 </script>
 
@@ -99,6 +135,33 @@ export default {
       flex: 1;
     }
   }
+  .order-address {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 20px;
+    .receiver-addres {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      .address-content {
+        padding-left: 7px;
+        color: #3a3a3a;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        label {
+          font-size: 13px;
+          font-weight: 600;
+        }
+        span {
+          padding-top: 4px;
+          font-size: 11px;
+        }
+      }
+    }
+  }
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -109,7 +172,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #D8182D;
+          color: #EC3924;
           font-size: 11px;
         }
         .store-info {
@@ -136,7 +199,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #D8182D;
+          background-color: #EC3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -173,7 +236,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #D8182D;
+          color: #EC3924;
           padding-left: 5px;
           font-weight: 700;
         }

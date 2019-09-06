@@ -9,40 +9,23 @@
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
-        <!-- <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" /> -->
-        <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
+        <img class="lazy_img" @click="handleClick" v-lazy="image.imageUrl" />
       </van-swipe-item>
     </van-swipe>
     <div class="swiper-cls">
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in images2" :key="index">
-          <!-- <img class="slide_img" @click="handleClick(img.linkUrl)" v-lazy="img.imageUrl" /> -->
-          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" />
+      <swiper :options="swiperOption" ref="mySwiper" v-if="adList.length">
+        <swiper-slide v-for="(img ,index) in adList" :key="index">
+          <!-- <img class="slide_img" @click="handleClick" v-if="img.imageUrl" v-lazy="img.imageUrl" /> -->
+          <img class="slide_img" @click="handleClick" v-if="img.imageUrl" :src="img.imageUrl" />
         </swiper-slide>
       </swiper>
     </div>
     <section class="home-tags">
       <ul class="tags-content">
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
-          <span class="item-text">链猫精品</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="cm-area"></svg-icon>
-          <span class="item-text">CM专区</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="collar-cm"></svg-icon>
-          <span class="item-text">领CM币</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="coupon-svg"></svg-icon>
-          <span class="item-text">领券</span>
-        </router-link>
-        <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="chain-cat-member"></svg-icon>
-          <span class="item-text">链猫会员</span>
-        </router-link>
+        <li v-for="(item,index) in iconList" class="tags-item" :key="index">
+          <img class="tags-icon" v-lazy="item.iconUrl" />
+          <span class="item-text" v-text="item.title"></span>
+        </li>
       </ul>
     </section>
 
@@ -153,43 +136,36 @@
       <van-tabs
         :swipe-threshold="5"
         title-inactive-color="#3a3a3a"
-        title-active-color="#D8182D"
+        title-active-color="#EC3924"
         background="transparent"
         v-model="active"
         animated
+        @click="handleTabClick"
       >
-        <!-- @click="handleTabClick" -->
-          <!-- v-for="(list,index) in catList" -->
         <van-tab
-        v-for="(list,index) in tabList"
+          v-for="(list,index) in catList"
           :title="list.describe"
           :name="list.type"
           :key="index"
         >
           <div slot="title" class="slot-title">
             <b class="tab-title">{{list.title}}</b>
-            <!-- <span class="tab-name">{{list.describe}}</span> -->
-            <span class="tab-name">{{list.name}}</span>
+            <span class="tab-name">{{list.describe}}</span>
           </div>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
-                <li v-for="(item,index) in list.list" :key="index">
-                <router-link class="goods-img" tag="div" to="/classify/product">
-                  <!-- <img v-lazy="item.productMainImage" /> -->
-                  <img :src="item.img" />
-                </router-link>
+              <li class="goods-item" v-for="(item,index) in tabItemLists" :key="index">
+                <div @click="handleToProductDetail(item.productId)">
+                  <img class="lazy-img" v-lazy="item.productMainImage" />
+                </div>
                 <div class="goods-layout">
                   <div class="goods-title">{{item.productName}}</div>
-                  <span class="goods-div">{{item.title}}</span>
+                  <span class="goods-div">{{item.labels}}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
-                      <i>{{item.productCnyPrice}}</i>
-                      <span class="force-value">{{item.forceValue}}倍算力</span>
-                    </span>
-                    <span class="add-icon" @click="addToCart($event,item)">
-                      <svg-icon icon-class="add"></svg-icon>
+                      <i>￥{{item.productCnyPrice}}</i>
+                      <span class="force-value">0.5倍算力</span>
                     </span>
                   </div>
                 </div>
@@ -199,17 +175,7 @@
         </van-tab>
       </van-tabs>
     </div>
-    <div class="ballWrap">
-      <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
-        <div class="ball" v-if="ball.show">
-          <li class="inner">
-            <span class="cubeic-add" @click="addToCart($event,item)">
-              <svg-icon class="add-icon" icon-class="add"></svg-icon>
-            </span>
-          </li>
-        </div>
-      </transition>
-    </div>
+
     <tabbar></tabbar>
   </div>
 </template>
@@ -219,6 +185,7 @@ export default {
   name: "home",
   data() {
     return {
+      iconList: [],
       active: "",
       timeData: 36000000,
       catList: [],
@@ -231,97 +198,53 @@ export default {
       isLogin: false,
       headerActive: false,
       images: [],
-      images2: [],
+      adList: [],
       swiperOption: {
         loop: true,
         autoplay: false,
         width: 480,
-        loadOnTransitionStart: true,
-        notNextTick: true, //notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-        direction: "horizontal", //水平方向移动
-        grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状
-        setWrapperSize: true, //Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
-        autoHeight: true, //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化
-        mousewheel: false, //开启鼠标滚轮控制Swiper切换。可设置鼠标选项，默认值false
-        mousewheelControl: false, //同上
-        height: window.innerHeight, // 高度设置，占满设备高度
-        resistanceRatio: 0, //抵抗率。边缘抵抗力的大小比例。值越小抵抗越大越难将slide拖离边缘，0时完全无法拖离。本业务需要
-        observeParents: true, //将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
+        notNextTick: true,
         observer: true, //修改swiper自己或子元素时，自动初始化swiper
-        touchRatio: 1, // 默认为1，按照1:1的触摸比例滑动。设置为0时，完全无法滑动
-        // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-        debugger: true,
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
+        direction: "horizontal", //水平方向移动
+        setWrapperSize: true, //Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
+        height: window.innerHeight, // 高度设置，占满设备高度
+        observeParents: true, //将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
         slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
       }
     };
   },
 
   created() {
-    // this.initData();
-
-
-    this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
-      const { tabList } = res.data;
-      const { images } = res.data;
-      const { images2 } = res.data;
-      this.tabList = tabList;
-      this.images = images;
-      this.images2 = images2;
-    });
+    this.initData();
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
-    this.swiper.slideTo(3, 1000, false);
     window.addEventListener("scroll", this.pageScroll);
   },
   methods: {
+    handleToProductDetail(productId) {
+      this.$router.push({
+        path: "/product/index",
+        query: { productId: productId }
+      });
+    },
     initData() {
       this.$http.get(`api/index`).then(response => {
-        // console.log("=====res==>", response.data.content);
         this.images = response.data.content.bannerList;
-        this.images2 = response.data.content.adList;
+        this.adList = response.data.content.adList;
         this.catList = response.data.content.catList;
+        this.iconList = response.data.content.iconList;
       });
       this.handleTabClick(0);
     },
     handleTabClick(type) {
-      console.log("=====type==>", type);
       this.$http.get(`/api/index/choiceness?type=${type}`).then(response => {
         this.tabItemLists = response.data.content;
       });
     },
-    addToCart(event, tag) {
-      this.$store.commit("cart/addToCart", tag);
-      this.ball.show = true;
-      this.ball.el = event.target;
-    },
-    beforeEnter(el) {
-      const dom = this.ball.el;
-      const rect = dom.getBoundingClientRect();
-      const x = rect.left - window.innerWidth * 0.6;
-      const y = -(window.innerHeight - rect.top);
-      el.style.display = "block";
-      el.style.transform = `translate3d(0,${y}px,0)`;
-      const inner = el.querySelector(".inner");
-      inner.style.transform = `translate3d(${x}px,0,0)`;
-    },
-    enter(el, done) {
-      document.body.offsetHeight;
-      el.style.transform = `translate3d(0,0,0)`;
-      const inner = el.querySelector(".inner");
-      inner.style.transform = `translate3d(0,0,0)`;
-      el.addEventListener("transitionend", done);
-    },
-    afterEnter(el) {
-      this.ball.show = false;
-      el.style.display = "none";
-    },
-
-    onChange(index) {
-      this.$toast("当前 Swipe 索引：" + index);
-    },
     handleClick(linkUrl) {
-      this.$router.push("/classify/product");
+      this.$router.push("/product/index");
     },
 
     pageScroll() {
@@ -334,11 +257,7 @@ export default {
         : (this.headerActive = false);
     }
   },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  }
+  computed: {}
 };
 </script>
 
@@ -475,7 +394,7 @@ export default {
               color: white;
               text-align: center;
               width: 42px;
-              background-color: #d8182d;
+              background-color: #EC3924;
             }
             .time-count-down {
               flex: 1;
@@ -498,7 +417,7 @@ export default {
             padding-top: 4px;
             .new-price {
               font-size: 11px;
-              color: #d8182d;
+              color: #EC3924;
               font-weight: 600;
             }
             .old-price {
@@ -522,12 +441,12 @@ export default {
             font-weight: 600;
           }
           .tag-text {
-            border: 1px solid #d8182d;
+            border: 1px solid #EC3924;
             display: inline-block;
             text-align: center;
             margin-left: 7px;
             border-radius: 2px;
-            color: #d8182d;
+            color: #EC3924;
             width: 64px;
           }
         }
@@ -593,7 +512,7 @@ export default {
             border-radius: 2px;
             margin-left: 8px;
             text-align: center;
-            border: 1px solid #d8182d;
+            border: 1px solid #EC3924;
             font-size: 11px;
             color: #dd3749;
             .svg-icon {
@@ -644,41 +563,42 @@ export default {
       padding: 10px 16px;
       .good-things {
         font-size: 18px;
-        color: #d8182d;
+        color: #EC3924;
         font-weight: 600;
       }
       .goods-content {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        li {
-          display: inline-block;
+        .goods-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           width: 165px;
           margin-top: 10px;
           border-radius: 8px;
           background-color: white;
           box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-          img {
+          .lazy-img {
             width: 100%;
+            border-radius: 8px 8px 0 0;
+            min-height: 196px;
+            min-width: 165px;
           }
         }
         li:nth-of-type(even) {
           padding-right: 0;
         }
-        .goods-img {
-          img {
-            width: 165px;
-            height: 196px;
-            border-radius: 8px 8px 0 0;
-          }
-        }
         .goods-layout {
           width: 165px;
-          padding: 0 10px;
+          padding: 0 5px;
           display: flex;
           justify-content: flex-start;
           flex-direction: column;
           .goods-title {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             color: #3a3a3a;
             font-size: 14px;
             font-weight: 600;
@@ -686,6 +606,7 @@ export default {
           .goods-div {
             color: #949497;
             font-size: 11px;
+            padding-top: 3px;
           }
           .goods-desc {
             background-color: #fff;
@@ -696,7 +617,7 @@ export default {
             .goods-price {
               padding-top: 5px;
               font-size: 14px;
-              color: #d8182d;
+              color: #EC3924;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -704,7 +625,7 @@ export default {
                 margin-left: 7px;
                 color: white;
                 border-radius: 20px 20px;
-                background-color: #d8182d;
+                background-color: #EC3924;
                 display: inline-block;
                 font-size: 7px;
                 line-height: 17px;
@@ -724,20 +645,20 @@ export default {
     }
   }
 
-  .ballWrap {
-    .ball {
-      position: fixed;
-      left: 60%;
-      bottom: 10px;
-      z-index: 1003;
-      color: red;
-      transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
-      .inner {
-        width: 16px;
-        height: 16px;
-        transition: all 0.5s linear;
-      }
-    }
-  }
+  // .ballWrap {
+  //   .ball {
+  //     position: fixed;
+  //     left: 60%;
+  //     bottom: 10px;
+  //     z-index: 1003;
+  //     color: red;
+  //     transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+  //     .inner {
+  //       width: 16px;
+  //       height: 16px;
+  //       transition: all 0.5s linear;
+  //     }
+  //   }
+  // }
 }
 </style>

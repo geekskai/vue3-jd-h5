@@ -4,7 +4,6 @@
       <van-tabbar
         route
         v-model="active"
-        @change="tabChange(active)"
         active-color="#FE4F70"
         inactive-color="#949497"
         style="z-index: 100;"
@@ -86,11 +85,7 @@ export default {
       count: state => state.cart.count
     })
   },
-  methods: {
-    tabChange(active) {
-      console.log("==active=====>", active);
-    }
-  }
+  methods: {}
 };
 </script>
 

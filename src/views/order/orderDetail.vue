@@ -1,5 +1,5 @@
 <template>
-  <!-- 待支付 -->
+  <!-- 订单详情 -->
   <div class="order-detail-page">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
@@ -7,39 +7,57 @@
       </span>
       <div class="header-content">订单详情</div>
     </header>
+    <section class="order-info">
+      <ul class="info-list">
+        <li class="receiver-addres">
+          <svg-icon icon-class="shipping-address"></svg-icon>
+          <div class="address-content">
+            <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
+            <span>{{orderForm.fullAddress}}</span>
+          </div>
+        </li>
+      </ul>
+    </section>
 
     <section class="order-card">
       <ul class="order-list">
         <li class="list-item">
           <div class="store-info">
-            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>
+            <img v-lazy="orderForm.logoUrl" class="header-img" />
+            <span>{{orderForm.shopName }}</span>
           </div>
           <span>待支付</span>
         </li>
-        <li class="item-info">
-          <img />
+
+        <li
+          class="item-info"
+          v-for="(appOrderProduct,index) in orderForm.appOrderProductVos"
+          :key="index"
+        >
+          <img v-lazy="appOrderProduct.productMainUrl" />
           <div class="order-detail">
             <p class="info-one">
-              <span>娜扎新装LOOK</span>
-              <i>￥222</i>
+              <span>{{appOrderProduct.productName}}</span>
+              <i>￥：{{appOrderProduct.productAmount}}</i>
             </p>
             <p class="info-two">
-              <span>型号;规格;颜色;</span>
-              <span>×2</span>
+              <span>{{appOrderProduct.fullName}}</span>
+              <span>×{{appOrderProduct.quantity}}</span>
             </p>
           </div>
         </li>
+
         <li class="order-count">
           <span>订单总价：</span>
-          <i>$444</i>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
         <li class="real-pay">
           <span>实付款：</span>
-          <i>￥444</i>
+          <i>￥：{{orderForm.amount}}</i>
         </li>
       </ul>
     </section>
+
     <section class="order-info">
       <ul class="info-list">
         <li class="info-title">
@@ -48,21 +66,15 @@
         </li>
         <li class="info-item">
           <label>订单编号：</label>
-          <span>201905211540350025</span>
+          <span>{{orderForm.orderNo}}</span>
         </li>
         <li class="info-item">
           <label>创建时间：</label>
-          <span>2019/05/01 13:40:40</span>
-        </li>
-        <li class="receiver-addres">
-          <svg-icon icon-class="shipping-address"></svg-icon>
-          <div class="address-content">
-            <label>收货人：咋地 13545900066</label>
-            <span>广东省深圳市南山区科研路1001号比科大厦</span>
-          </div>
+          <span>{{orderForm.createDate}}</span>
         </li>
       </ul>
     </section>
+
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -75,8 +87,8 @@
     <div class="pay-btn">
       <div class="pay-count">
         <span>
-          共2件商品，小计：
-          <i>￥222</i>
+          共{{orderForm.quantity}}件商品，小计：
+          <i>￥{{orderForm.amount}}</i>
         </span>
         <span>59：59后取消订单</span>
       </div>
@@ -87,10 +99,41 @@
 
 <script>
 export default {
-  name: "",
+  name: "orderDetail",
   data() {
     return {
       columns: 1,
+      orderForm: {
+        amount: 0,
+        appOrderProductVos: [
+          {
+            appealFlag: 0,
+            appealNo: "string",
+            fullName: "string",
+            id: 0,
+            productAmount: 0,
+            productMainUrl: "string",
+            productName: "string",
+            quantity: 0,
+            skuId: 0
+          }
+        ],
+        createDate: "2019-08-16T07:49:33.452Z",
+        deliveryDate: "2019-08-16T07:49:33.452Z",
+        finishDate: "2019-08-16T07:49:33.452Z",
+        freightAmount: 0,
+        fullAddress: "string",
+        logoUrl: "string",
+        orderNo: "string",
+        outPayAmount: 0,
+        outerOrderNo: "string",
+        payDate: "2019-08-16T07:49:33.452Z",
+        quantity: 0,
+        shopName: "string",
+        status: 0,
+        toName: "string",
+        toPhone: "string"
+      },
       defaultData: [
         {
           text: "Top-Pay",
@@ -120,8 +163,19 @@ export default {
       show: false
     };
   },
-  created() {},
+  created() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      this.$http
+        .post(`/api/order/detail`, {
+          orderNo: this.$route.query.orderNo
+        })
+        .then(response => {
+          // this.orderForm = response.data.content;
+        });
+    },
     close() {
       this.show = false;
     },
@@ -176,7 +230,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #d8182d;
+          color: #EC3924;
           font-size: 11px;
         }
         .store-info {
@@ -204,7 +258,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #d8182d;
+          background-color: #EC3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -242,7 +296,7 @@ export default {
         font-weight: 600;
         padding-top: 4px;
         i {
-          color: #d8182d;
+          color: #EC3924;
           padding-left: 5px;
         }
         span {
@@ -278,7 +332,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin-top: 20px;
         .address-content {
           padding-left: 7px;
           color: #3a3a3a;
@@ -314,12 +367,12 @@ export default {
       font-size: 11px;
       padding-bottom: 12px;
       i {
-        color: #d8182d;
+        color: #EC3924;
         font-weight: 700;
       }
     }
     /deep/ .van-button--danger {
-      background-color: #d8182d;
+      background-color: #EC3924;
       line-height: 44px;
       font-size: 18px;
     }
