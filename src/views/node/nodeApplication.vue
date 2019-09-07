@@ -2,43 +2,43 @@
   <div class="node-application">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" />
+        <img src="@/assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">节点申请</div>
     </header>
     <main class="apply-main">
       <ul class="main-lists">
         <li class="list-item" @click="handleShareNode">
-          <img src="../../assets/image/product/share-apply.png" />
+          <img src="@/assets/image/product/share-apply.png" />
           <span class="node-text">链猫掌柜</span>
         </li>
         <router-link tag="li" to="/node/areaNode" class="list-item">
           <!-- <li class="list-item"> -->
-          <img src="../../assets/image/product/area-node.png" />
+          <img src="@/assets/image/product/area-node.png" />
           <span class="node-text">区域节点</span>
           <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/cityNode" class="list-item">
           <!-- <li class="list-item" @click="toShow"> -->
-          <img src="../../assets/image/product/municipal-node.png" />
+          <img src="@/assets/image/product/municipal-node.png" />
           <span class="node-text">城市节点</span>
           <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/stateNode" class="list-item">
           <!-- <li class="list-item" @click="toShow"> -->
-          <img src="../../assets/image/product/state-node.png" />
+          <img src="@/assets/image/product/state-node.png" />
           <span class="node-text">州级节点</span>
           <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/industryNode" class="list-item">
           <!-- <li class="list-item" @click="toShow"> -->
-          <img src="../../assets/image/product/industry-node.png" />
+          <img src="@/assets/image/product/industry-node.png" />
           <span class="node-text">行业节点</span>
           <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/superNode" class="list-item">
           <!-- <li class="list-item" @click="toShow"> -->
-          <img src="../../assets/image/product/super-node.png" />
+          <img src="@/assets/image/product/super-node.png" />
           <span class="node-text">超级节点</span>
           <!-- </li> -->
         </router-link>

@@ -2,7 +2,7 @@
   <ul class="chain-cat-spike" id="chain-cat-spike">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="@/assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">链猫秒杀</div>
       <div class="option-btns">
@@ -35,7 +35,7 @@
           <main class="main-box">
             <ul class="card-box" v-for="(item,index) in cardList" :key="index">
               <aside>
-                <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
+                <img class="card-img" src="@/assets/image/premiumRanking/demo1.png" />
               </aside>
               <ul class="card-right">
                 <li class="item-title">

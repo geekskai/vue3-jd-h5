@@ -10,9 +10,9 @@
       <div class="share-content">
         <ul class="share-list">
           <li class="invitation-text">
-            <img src="../../assets/image/mime/share-left.png" />
+            <img src="@/assets/image/mime/share-left.png" />
             <span class="code-text">邀请码</span>
-            <img src="../../assets/image/mime/center-right.png" />
+            <img src="@/assets/image/mime/center-right.png" />
           </li>
           <li class="invitation-code">
             <span>{{$route.query.recommendCode}}</span>

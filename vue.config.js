@@ -33,15 +33,15 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-    config.resolve.alias
-      .set('@', resolve('src'))
-      .set('assets', resolve('src/assets'))
-      .set('components', resolve('src/components'))
-      .set('router', resolve('src/router'))
-      .set('utils', resolve('src/utils'))
-      .set('static', resolve('src/static'))
-      .set('store', resolve('src/store'))
-      .set('~', resolve('src/views'))
+    // config.resolve.alias
+    //   .set('@', resolve('src'))
+    //   .set('assets', resolve('src/assets'))
+    //   .set('components', resolve('src/components'))
+    //   .set('router', resolve('src/router'))
+    //   .set('utils', resolve('src/utils'))
+    //   .set('static', resolve('src/static'))
+    //   .set('store', resolve('src/store'))
+    //   .set('~', resolve('src/views'))
     // 压缩代码
     config.optimization.minimize(true)
     // 分割代码

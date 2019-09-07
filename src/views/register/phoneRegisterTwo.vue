@@ -7,7 +7,7 @@
       <router-link class="appeal-record" to="/register/emailRegister" tag="span">邮箱注册</router-link>
     </header>
     <div class="mall-logo">
-      <img src="../../assets/image/setting/logo.png" />
+      <img src="@/assets/image/setting/logo.png" />
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
