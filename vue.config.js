@@ -1,7 +1,7 @@
 const path = require('path')
 // https://webpack.docschina.org/plugins/compression-webpack-plugin/
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
+// vue inspect > output.js
 // 是否使用gzip
 const productionGzip = true
 // 需要gzip压缩的文件后缀
