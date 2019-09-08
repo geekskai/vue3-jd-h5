@@ -3,7 +3,7 @@
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
-        <img src="../../assets/icons/left-green-white.png" />
+        <img src="@/assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">退款/售后</div>
     </header>

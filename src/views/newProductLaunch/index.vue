@@ -3,7 +3,7 @@
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
         <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
-        <img src="../../assets/icons/left-green-white.png" alt />
+        <img src="@/assets/icons/left-green-white.png" alt />
       </span>
       <div class="header-content">新品首发</div>
       <span class="share-btn" @click="show = true">
@@ -39,7 +39,7 @@
           <main class="main-box">
             <ul class="card-box" v-for="(item,index) in cardList" :key="index">
               <aside>
-                <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
+                <img class="card-img" src="@/assets/image/premiumRanking/demo1.png" />
               </aside>
               <ul class="card-right">
                 <li class="item-title">
