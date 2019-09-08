@@ -74,7 +74,8 @@
           </div>
           <div class="item-info">
             <div class="item-content">
-              <img src="@/assets/image/home/demo1.png" />
+              <!-- <img src="@/assets/image/home/demo1.png" /> -->
+              <img src="assets/image/home/demo1.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>

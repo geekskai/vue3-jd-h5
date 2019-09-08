@@ -7,10 +7,6 @@ const productionGzip = true
 // 需要gzip压缩的文件后缀
 const productionGzipExtensions = ['js', 'css']
 
-function resolve (dir) {
-  return path.join(__dirname, '.', dir)
-}
-
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -26,22 +22,13 @@ module.exports = {
       .rule('svg-sprite-loader')
       .test(/\.svg$/)
       .include
-      .add(resolve('src/icons')) // 处理svg目录
+      .add(path.resolve(__dirname, 'src/icons')) // 处理svg目录
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
         symbolId: 'icon-[name]'
       })
-    // config.resolve.alias
-    //   .set('@', resolve('src'))
-    //   .set('assets', resolve('src/assets'))
-    //   .set('components', resolve('src/components'))
-    //   .set('router', resolve('src/router'))
-    //   .set('utils', resolve('src/utils'))
-    //   .set('static', resolve('src/static'))
-    //   .set('store', resolve('src/store'))
-    //   .set('~', resolve('src/views'))
     // 压缩代码
     config.optimization.minimize(true)
     // 分割代码
