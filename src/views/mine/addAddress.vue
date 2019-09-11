@@ -1,11 +1,11 @@
 <template>
   <div class="add-address">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">新增所在地区</div>
-    </header>
+      <i>新增所在地区</i>
+    </cm-header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
@@ -494,32 +494,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: white;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .address-content {
     margin-top: 20px;
     padding: 20px;

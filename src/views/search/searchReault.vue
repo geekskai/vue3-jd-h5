@@ -364,8 +364,9 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 55px;
+                min-width: 55px;
                 height: 17px;
+                padding: 0 3px;
               }
             }
             .add-icon {

@@ -2,7 +2,7 @@
   <div class="consumer-wallet">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" />
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">消费钱包</div>
       <li class="notice-message">
@@ -89,7 +89,6 @@ export default {
       var second = date.getSeconds();
       minute = minute < 10 ? "0" + minute : minute;
       second = second < 10 ? "0" + second : second;
-      // return y + "/" + m + "/" + d + " " + h + ":" + minute + ":" + second;
       return m + "/" + d + " " + h + ":" + minute + ":" + second;
     }
   }
@@ -99,8 +98,6 @@ export default {
 <style scoped lang="scss">
 .consumer-wallet {
   .page-header {
-    // height: 334px;
-    // background: linear-gradient(to right, #fe735d, #fc9863);
     background-color: #fe785d;
     width: 100%;
     padding: 10px 20px;

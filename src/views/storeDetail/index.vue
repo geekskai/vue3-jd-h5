@@ -1,11 +1,12 @@
 <template>
   <div class="store-detail">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">店铺详情</div>
-    </header>
+      <i>店铺详情</i>
+    </cm-header>
+
     <section class="store-info">
       <ul class="store-top">
         <img :src="storeDetail.logoUrl" class="store-header" />
@@ -101,7 +102,6 @@
                 <div class="goods-desc">
                   <span class="goods-price">
                     <i>￥{{item.productCnyPrice}}</i>
-                    <!-- <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span> -->
                     <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                   </span>
                 </div>
@@ -126,7 +126,6 @@ export default {
       sortType: "desc",
       orderBy: "update_time",
       page: 1,
-      seclectActive: false,
       storeDetail: {},
       serarchResult: []
     };
@@ -174,53 +173,12 @@ export default {
       this.activeOrderBy = this.orderBy + "_" + sortType;
       this.initSortData();
     },
-    pageScroll() {
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      scrollTop > 100
-        ? (this.seclectActive = true)
-        : (this.seclectActive = false);
-    }
   },
-  computed: {},
-
-  mounted() {
-    window.addEventListener("scroll", this.pageScroll);
-  },
-  watch: {}
 };
 </script>
 
 <style scoped lang="scss">
 .store-detail {
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    position: relative;
-    background-color: white;
-    .btn-left {
-      position: fixed;
-      left: 16px;
-      background-color: #efeff4;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      flex: 1;
-      font-weight: 700;
-    }
-  }
   .store-info {
     background-color: #fff;
     min-height: 300px;
@@ -406,8 +364,9 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 55px;
+                min-width: 55px;
                 height: 17px;
+                padding: 0 3px;
               }
             }
           }

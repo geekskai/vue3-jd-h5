@@ -1,17 +1,23 @@
 <template>
   <div class="login">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="close-popup"></svg-icon>
       </span>
-    </header>
+    </cm-header>
     <div class="mall-logo">
-      <img src="@/assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
     </div>
     <section class="login-info">
       <van-cell-group class="info-list">
         <van-field v-model="loginForm.user" clearable placeholder="手机/邮箱" />
-        <van-field v-model="loginForm.password" type="password" clearable placeholder="请输入密码" />
+        <van-field
+          v-model="loginForm.password"
+          @keyup.enter.native="handleUserLogin"
+          type="password"
+          clearable
+          placeholder="请输入密码"
+        />
         <van-field class="temp-empty" />
         <router-link class="forget-pwd" to="/mine/forgetPassword" tag="span">
           <svg-icon icon-class="question-mark"></svg-icon>
@@ -65,12 +71,7 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 44px;
-  }
+
   .mall-logo {
     display: flex;
     justify-content: center;

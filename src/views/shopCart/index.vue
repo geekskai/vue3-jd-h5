@@ -157,12 +157,10 @@ export default {
     submitDeleteCartGoods() {
       // type: 1 全部清空，可以不传idList ， 默认type 0
       this.shopCartArray.forEach(it => {
-        console.log("=====it==>", it);
         it.merchantCheckboxGroup.forEach(item => {
           this.idList.push(item.id);
         });
       });
-      console.log("=====idList==>", this.idList);
       if (this.idList.length == 0) {
         this.$toast({
           mask: false,

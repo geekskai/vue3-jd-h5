@@ -1,11 +1,11 @@
 <template>
   <div class="link-download">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">下载链接</div>
-    </header>
+      <i>下载链接</i>
+    </cm-header>
     <section class="down-btns">
       <a
         href="itms-services://?action=download-manifest&url=https://chain-mall.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
@@ -49,32 +49,6 @@ export default {
   background: url("../../assets/image/mime/link-download.png") no-repeat center
     center;
   background-size: 100% 100%;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: #fff;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .down-btns {
     margin-top: 350px;
     display: flex;

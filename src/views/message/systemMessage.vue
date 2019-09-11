@@ -1,11 +1,11 @@
 <template>
   <div class="mall-message">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">系统消息</div>
-    </header>
+      <i>商家入驻</i>
+    </cm-header>
     <div class="swipe-message" v-for="(message,index) in messageArrays" :key="index">
       <van-swipe-cell :disabled='true' :right-width="60" :on-close="onClose" :name="message.id">
         <section class="message-card">
@@ -48,7 +48,6 @@ export default {
         });
     },
     onClose(clickPosition, instance, detail) {
-      console.log("==detail==", detail);
       this.$http
         .post(`/api/message/updateMessage`, { ids: [detail.name], type: 1 })
         .then(response => {
@@ -70,33 +69,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      position: absolute;
-      background-color: white;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .swipe-message {
     margin-top: 10px;
     .message-card {

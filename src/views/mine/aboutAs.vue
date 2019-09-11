@@ -1,13 +1,13 @@
 <template>
   <div class="about-as">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <div class="header-content">关于我们</div>
-    </header>
+      <i>关于我们</i>
+    </cm-header>
     <div class="logo-version">
-      <img src="@/assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
       <h6>Chain Mall</h6>
       <span class="version">版本1.0.1</span>
     </div>
@@ -41,27 +41,6 @@ export default {
 .about-as {
   min-height: 100vh;
   background-color: #fff;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      position: fixed;
-      left: 20px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #EC3924;
-      font-size: 13px;
-    }
-  }
   .logo-version {
     padding-top: 92px;
     display: flex;

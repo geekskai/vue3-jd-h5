@@ -1,12 +1,12 @@
 <template>
   <!-- 确认订单 -->
   <div class="order-detail-page">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">确认订单</div>
-    </header>
+      <i>确认订单</i>
+    </cm-header>
     <section class="order-info" @click="handleToChooseAddress">
       <ul class="info-list">
         <li class="receiver-addres">
@@ -165,9 +165,7 @@ export default {
       this.show = false;
       this.$http
         .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
-        .then(response => {
-          console.log("=====response.data==>", response.data.content);
-        });
+        .then(response => {});
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -202,19 +200,7 @@ export default {
 .order-detail-page {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+ 
   .order-card {
     background-color: #fff;
     border-radius: 5px;

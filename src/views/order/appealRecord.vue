@@ -1,16 +1,16 @@
 <template>
   <div class="appeal-record">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="white-btn"></svg-icon>
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">申诉记录</div>
-    </header>
+      <i>申诉记录</i>
+    </cm-header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="@/assets/image/product/store-headerM.png" class="header-img" />
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
         </li>
@@ -41,7 +41,7 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img src="@/assets/image/product/store-headerM.png" class="header-img" />
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
         </li>
@@ -86,23 +86,7 @@ export default {
 .appeal-record {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #EC3924;
-      font-size: 13px;
-    }
-  }
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;

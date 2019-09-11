@@ -1,11 +1,11 @@
 <template>
   <div class="enterprise-certification">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">商家入驻</div>
-    </header>
+      <i>商家入驻</i>
+    </cm-header>
     <ul class="card-images">
       <li>
         <span class="iamges-text">身份证正面</span>
@@ -92,7 +92,6 @@ export default {
         url: this.$route.query.businessLicenseUrl
       });
     }
-    console.log("====this.businessLicenseUrl====>", this.businessLicenseUrl);
   },
   methods: {
     //   /api/shop/submit
@@ -104,7 +103,6 @@ export default {
           this.applyInfo
         )
         .then(response => {
-          console.log("=====content==>", response.data.content);
           this.$toast({
             mask: false,
             duration: 1000,
@@ -150,32 +148,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 0;
-    .btn-left {
-      background-color: #fff;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .card-images {
     margin-top: 10px;
     li {

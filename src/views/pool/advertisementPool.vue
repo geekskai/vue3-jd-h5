@@ -1,16 +1,13 @@
 
 <template>
   <div class="advertisement-pool">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" />
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
-      <div class="header-content">广告矿池</div>
-      <!-- <li class="notice-message">
-        <svg-icon class="notice-wallet-icon" icon-class="notice-wallet"></svg-icon>
-        <label class="wallet-total">社区算力总额：85578909算力</label>
-      </li>-->
-    </header>
+      <i>广告矿池</i>
+    </cm-header>
+
     <div class="card-box" v-if="walletUserPoolLogVO.length">
       <section
         class="consumption-card"
@@ -51,7 +48,6 @@ export default {
         .get(`/api/wallet/getPoolLogs?poolType=2&page=1&size=10`)
         .then(response => {
           this.walletUserPoolLogVO = response.data.content;
-          console.log("=====content==>", response.data.content);
         });
     }
   }
@@ -60,42 +56,6 @@ export default {
 
 <style scoped lang="scss">
 .advertisement-pool {
-  .page-header {
-    color: #3a3a3a;
-    width: 100%;
-    padding: 10px 20px;
-    .btn-left {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      z-index: 11;
-      font-weight: 600;
-      flex: 1;
-    }
-    // .notice-message {
-    //   padding-top: 30px;
-    //   display: flex;
-    //   justify-content: flex-start;
-    //   align-items: center;
-    //   .wallet-total {
-    //     font-size: 14px;
-    //     padding-left: 10px;
-    //   }
-    //   .wallet-value {
-    //     font-size: 13px;
-    //     padding-left: 20px;
-    //   }
-    //   .notice-wallet-icon {
-    //     width: 20px;
-    //     height: 20px;
-    //   }
-    // }
-  }
   .empty-icon {
     text-align: center;
     padding-top: 100px;

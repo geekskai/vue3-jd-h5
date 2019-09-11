@@ -7,6 +7,17 @@
 </template>
 
 <script>
+// 禁止在iOS端将页面手动放大缩小的事件
+window.onload = function() {
+  document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+      event.preventDefault()
+    }
+  })
+  document.addEventListener('gesturestart', function(event) {
+    event.preventDefault()
+  })
+}
 export default {
   name: "App",
   data() {

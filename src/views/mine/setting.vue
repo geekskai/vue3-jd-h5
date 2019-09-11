@@ -1,10 +1,11 @@
 <template>
   <div class="setting-page">
-    <header class="page-header">
-      <van-icon name="arrow-left" @click="$router.go(-1)" />
-      <div class="header-content">设置</div>
-    </header>
-
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" />
+      </span>
+      <i>设置</i>
+    </cm-header>
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item">
@@ -59,10 +60,6 @@ export default {
         });
     }
   },
-  computed: {},
-  created() {},
-  mounted() {},
-  watch: {}
 };
 </script>
 
@@ -70,18 +67,6 @@ export default {
 .setting-page {
   padding: 0 16px;
   height: 100vh;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
   .setting-content {
     padding: 20px 20px 0 20px;
     margin-bottom: 20px;

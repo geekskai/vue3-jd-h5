@@ -1,17 +1,15 @@
 <template>
   <div class="refund-after-sale">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <!-- <svg-icon icon-class="white-btn"></svg-icon> -->
-        <img src="@/assets/icons/left-green-white.png" />
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
-      <div class="header-content">退款/售后</div>
-    </header>
+      <i>退款/售后</i>
+    </cm-header>
     <div v-if="!orderLists.length&&!orderRecordLists.length" class="empty-box">
       <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>
       <span class="empty-text">
         <i>未发现退款/售后的订单</i>
-        <!-- <i>可以多去看看，或许能找到您想要的</i> -->
       </span>
     </div>
     <van-tabs v-else v-model="active" background="#EFEFF4">
@@ -20,7 +18,6 @@
           <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>
           <span class="empty-text">
             <i>未发现售后的订单</i>
-            <!-- <i>可以多去看看，或许能找到您想要的</i> -->
           </span>
         </div>
         <section v-else class="order-card" v-for="(orderList,index)  in orderLists" :key="index">
@@ -53,7 +50,6 @@
             </li>
             <li class="order-btn" @click="handleToAppeal(orderList)">
               <span>商品申诉</span>
-              <!-- <router-link tag="span" to="/order/appeal"></router-link> -->
             </li>
           </ul>
         </section>
@@ -96,11 +92,7 @@
               <b>￥{{orderList.allAmount}}</b>
             </li>
             <li class="order-btn">
-              <!-- <router-link tag="span" to="/order/cancelOrder">取消订单</router-link> -->
-              <!-- <router-link tag="span" to="/order/orderDetail">去支付</router-link> -->
-              <!-- <span @click="show = true">去支付</span> -->
               <label class="appeal-time">申诉时间：{{orderList.createTime}}</label>
-              <!-- <span class="appeal-text">商品申诉</span> -->
             </li>
           </ul>
         </section>
@@ -160,22 +152,8 @@ export default {
 
 <style scoped lang="scss">
 .refund-after-sale {
-  // padding: 0 16px;
   height: 100%;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
 
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
   .order-card {
     background-color: #fff;
     border-radius: 5px;

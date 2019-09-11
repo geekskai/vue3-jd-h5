@@ -56,7 +56,7 @@ export default {
   components: {
     ListScroll
   },
-  name: "",
+  name: "Classify",
   data() {
     return {
       tags: [],
@@ -96,7 +96,9 @@ export default {
     }
   },
   mounted() {
-    this.setSearchWrapHeight();
+    if (!this.loading) {
+      this.setSearchWrapHeight();
+    }
     this.$eventBus.$emit("changeTag", 1);
   }
 };
@@ -169,6 +171,11 @@ export default {
             border-radius: 8px;
             height: 107px;
           }
+          .category-main-img[lazy="loading"] {
+            background: #949497 url("../../assets/icons/pre-view.png") no-repeat
+              center center;
+            background-size: 100% 100%;
+          }
           .category-list {
             display: flex;
             flex-wrap: wrap;
@@ -188,6 +195,11 @@ export default {
               .item-img {
                 width: 65px;
                 height: 80px;
+              }
+              .item-img[lazy="loading"] {
+                background: #949497 url("../../assets/icons/pre-view.png")
+                  no-repeat center center;
+                background-size: 100% 100%;
               }
               .product-title {
                 color: #3a3a3a;

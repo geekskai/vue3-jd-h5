@@ -1,13 +1,14 @@
 <template>
   <div class="emailRegister">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <router-link class="appeal-record" to="/register/phoneRegister" tag="span">手机注册</router-link>
-    </header>
+      <span slot="right" @click="$router.push('/register/phoneRegister')">手机注册</span>
+    </cm-header>
+
     <div class="mall-logo">
-      <img src="@/assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
     </div>
     <section class="register-info">
       <span class="phone-number">请输入邮箱号</span>
@@ -26,9 +27,7 @@
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-       <span class="login-btn" @click="goToNextStep">
-        下一步
-      </span>
+      <span class="login-btn" @click="goToNextStep">下一步</span>
       <!-- <router-link class="login-btn" to="/register/emailRegisterTwo" tag="span">下一步</router-link> -->
     </div>
   </div>
@@ -44,11 +43,8 @@ export default {
   },
   created() {},
   methods: {
-     goToNextStep() {
-      if (
-        !this.emailRegister.email ||
-        !this.emailRegister.verifyCode
-      ) {
+    goToNextStep() {
+      if (!this.emailRegister.email || !this.emailRegister.verifyCode) {
         this.$toast({
           mask: false,
           message: "请输入手机号或者验证码！"
@@ -68,7 +64,7 @@ export default {
         });
         return;
       }
-      this.emailRegister.type = 1
+      this.emailRegister.type = 1;
       this.$http
         .post(`/api/user/getVerifyCode`, this.emailRegister)
         .then(response => {
@@ -96,16 +92,6 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 44px;
-    .appeal-record {
-      color: #EC3924;
-      font-size: 13px;
-    }
-  }
   .mall-logo {
     display: flex;
     justify-content: center;
@@ -150,9 +136,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #EC3924;
+      border: 1px solid #ec3924;
       border-radius: 4px;
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
   }
 }

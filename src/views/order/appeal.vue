@@ -1,11 +1,11 @@
 <template>
   <div class="appeal-page">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">商品申诉</div>
-    </header>
+      <i>商品申诉</i>
+    </cm-header>
     <section class="order-card">
       <li class="radio-all">
         <div class="store-info">
@@ -13,17 +13,17 @@
           <span>{{appealObject.shopName}}</span>
         </div>
       </li>
-      <van-radio-group class="order-list" v-model="radios">
+      <van-radio-group class="order-list" v-model="radios" @change="change">
         <ul v-for="(item, i) in appealObject.appOrderProductVos" :key="i">
           <div class="order-info">
             <li class="check-item">
-              <van-radio :key="i" checked-color="#91C95B" :name="appealObject"></van-radio>
+              <van-radio :key="i" checked-color="#91C95B" :name="item.id"></van-radio>
             </li>
             <img v-lazy="item.productMainUrl" />
             <div class="order-detail">
               <p class="info-one">
                 <span class="product-name">{{item.productName}}</span>
-                <i>￥{{item.productAmount}}</i>
+                <b>￥{{item.productAmount}}</b>
               </p>
               <p class="info-two">
                 <span>{{item.fullName}}</span>
@@ -34,8 +34,7 @@
         </ul>
         <div class="order-total">
           <label>共{{appealObject.quantity}}件商品，小计：</label>
-          <i>￥{{appealObject.amount}}</i>
-          <!-- <span>{{item.productTotalPrice}}</span> -->
+          <b style="color:#EC3924">￥{{appealObject.amount}}</b>
         </div>
       </van-radio-group>
     </section>
@@ -77,11 +76,16 @@ export default {
     };
   },
   created() {
-    // this.appealObject = this.$route.query;
     this.appealObject = this.$route.params;
+    this.appealObject.appOrderProductVos = this.appealObject.appOrderProductVos.filter(
+      it => it.appealFlag === 0
+    );
   },
   methods: {
-      afterRead(res) {
+    change(id) {
+      this.appealForms.id = id;
+    },
+    afterRead(res) {
       let formData = new FormData();
       formData.append("file", res.file);
       this.$http.post(`/api/order/upload/image`, formData).then(response => {
@@ -91,9 +95,8 @@ export default {
       });
     },
     handleSubmitAppeal() {
-      console.log("=====radios==>", this.radios.orderNo);
-      this.appealForms.orderNo = this.radios.orderNo;
-      if (!this.radios.orderNo) {
+      this.appealForms.orderNo = this.appealObject.orderNo;
+      if (!this.appealForms.id) {
         this.$toast({
           mask: false,
           duration: 1000,
@@ -101,8 +104,7 @@ export default {
         });
         return;
       }
-      this.appealForms.id = this.radios.appOrderProductVos[0].id;
-      console.log("=====appealForms==>", this.appealForms);
+
       this.$http
         .post(`/api/order/complainOrder`, this.appealForms)
         .then(response => {
@@ -111,8 +113,7 @@ export default {
             duration: 1000,
             message: "商品申诉成功！"
           });
-          this.$router.go(-1)
-          console.log("=====response.data==>", response.data);
+          this.$router.go(-1);
         });
     }
   }
@@ -123,29 +124,13 @@ export default {
 .appeal-page {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-    // .appeal-record {
-    //   color: #ec3924;
-    //   font-size: 13px;
-    // }
-  }
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     padding: 10px;
-    margin-top: 20px;
+    // margin-top: 20px;
     /deep/ .van-radio {
       padding-left: 0;
       .van-radio__label {

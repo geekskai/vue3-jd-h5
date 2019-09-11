@@ -1,11 +1,11 @@
 <template>
   <div class="message-center">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">消息中心</div>
-    </header>
+      <i>消息中心</i>
+    </cm-header>
     <section class="message-mall">
       <router-link
         tag="ul"
@@ -65,32 +65,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: #fff;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .message-mall {
     margin-top: 10px;
     background: url("../../assets/image/back-show.png") no-repeat center center;

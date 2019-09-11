@@ -1,11 +1,11 @@
 <template>
   <div class="my-wallet">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <div class="header-content">我的钱包</div>
-    </header>
+      <i>我的钱包</i>
+    </cm-header>
     <section class="wallet-box">
       <ul class="wallet-header">
         <router-link tag="li" to="/pool/consumptionPool" class="wallet-item consumption-pool">
@@ -93,24 +93,6 @@ export default {
 
 <style scoped lang="scss">
 .my-wallet {
-  .page-header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      z-index: 11;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
   .wallet-box {
     background-color: #ffffff;
     padding-top: 50px;

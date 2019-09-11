@@ -1,11 +1,12 @@
 <template>
   <div class="transaction-details">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.push(`/classify`)">
-        <svg-icon icon-class="green-btn"></svg-icon>
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">交易详情</div>
-    </header>
+      <i>交易详情</i>
+    </cm-header>
+
     <section class="card-box">
       <ul class="card-content">
         <li class="success-icon">
@@ -37,8 +38,9 @@
         </li>
       </ul>
       <div class="login-register-btns">
-        <router-link class="register-btn" to="/classify" tag="span">完成</router-link>
-        <router-link class="login-btn" to="/storeDetail" tag="span">返回商家</router-link>
+        <!-- <router-link class="register-btn" to="/order" tag="span">完成</router-link> -->
+        <router-link class="login-btn" to="/order" tag="span">完成</router-link>
+        <!-- <router-link class="login-btn" to="/storeDetail" tag="span">返回商家</router-link> -->
       </div>
     </section>
   </div>
@@ -59,28 +61,7 @@ export default {
 .transaction-details {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: white;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+
   .card-box {
     padding: 0 16px;
     margin-top: 10px;
@@ -144,9 +125,9 @@ export default {
         line-height: 44px;
         color: white;
         font-size: 17px;
-        border: 1px solid #EC3924;
+        border: 1px solid #ec3924;
         border-radius: 4px;
-        background-color: #EC3924;
+        background-color: #ec3924;
         margin-left: 15px;
       }
       .register-btn {

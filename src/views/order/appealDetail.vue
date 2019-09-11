@@ -1,12 +1,11 @@
 <template>
   <div class="appeal-detail">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">申诉详情</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link> -->
-    </header>
+      <i>申诉详情</i>
+    </cm-header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
@@ -93,23 +92,7 @@ export default {
 <style scoped lang="scss">
 .appeal-detail {
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
+ 
   .order-card {
     background-color: #fff;
     border-radius: 5px;

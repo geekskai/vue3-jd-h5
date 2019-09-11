@@ -6,7 +6,6 @@
       </span>
       <div class="search-con">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <!-- <input v-focus placeholder="搜索、关键词" v-model="searchText" /> -->
         <input placeholder="搜索、关键词" v-model="searchText" />
       </div>
       <span @click="getSearch">搜索</span>
@@ -156,7 +155,6 @@ export default {
       this.initData();
     },
     handlePullDown() {
-      console.log("=====handlePullDown==>");
     },
     handleToDetail(sku) {
       this.$router.push({
@@ -224,7 +222,7 @@ export default {
   height: 100vh;
   background-color: rgba(239, 239, 244, 1);
   font-size: 30px;
-  padding-top: 45px;
+  padding-top: 10px;
   .search-header {
     @include fj;
     width: 100%;
@@ -479,8 +477,9 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 55px;
+                min-width: 55px;
                 height: 17px;
+                padding: 0 3px;
               }
             }
           }

@@ -1,20 +1,18 @@
 <template>
   <!--  待发货 -->
   <div class="to-be-delivered">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">订单详情</div>
-    </header>
+      <i>订单详情</i>
+    </cm-header>
 
     <section class="order-address">
       <ul class="info-list">
         <li class="receiver-addres">
           <svg-icon icon-class="shipping-address"></svg-icon>
           <div class="address-content">
-            <!-- <label>收货人：张三</label>
-            <span>江西省</span>-->
             <label>收货人：{{orderForm.toName}} {{orderForm.toPhone}}</label>
             <span>{{orderForm.fullAddress}}</span>
           </div>
@@ -26,8 +24,6 @@
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <!-- <img src="@/assets/image/product/store-headerM.png" class="header-img" />
-            <span>店铺名称</span>-->
             <img v-lazy="orderForm.logoUrl" class="header-img" />
             <span>{{orderForm.shopName }}</span>
           </div>
@@ -96,7 +92,7 @@ export default {
   name: "toBeDelivered",
   data() {
     return {
-      orderForm:{}
+      orderForm: {}
     };
   },
   created() {
@@ -122,19 +118,7 @@ export default {
 .to-be-delivered {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+
   .order-address {
     background-color: #fff;
     border-radius: 5px;
@@ -172,7 +156,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -200,7 +184,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -240,7 +224,7 @@ export default {
         justify-content: flex-end;
         font-size: 13px;
         i {
-          color: #EC3924;
+          color: #ec3924;
           padding-left: 5px;
           font-weight: 700;
         }

@@ -18,7 +18,7 @@
           <img class="slide_img" @click="handleClick" v-if="img.imageUrl" :src="img.imageUrl" />
         </swiper-slide>
       </swiper>
-      <img class="radian-img" src="@/assets/image/radian.png" />
+      <img class="radian-img" src="../../assets/image/radian.png" />
     </div>
     <section class="home-tags">
       <!-- <ul class="tags-content">
@@ -74,18 +74,17 @@
           </div>
           <div class="item-info">
             <div class="item-content">
-              <!-- <img src="@/assets/image/home/demo1.png" /> -->
-              <img src="assets/image/home/demo1.png" />
+              <img src="../../assets/image/home/demo1.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>
             <div class="item-content">
-              <img src="@/assets/image/home/demo2.png" />
+              <img src="../../assets/image/home/demo2.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>
             <div class="item-content">
-              <img src="@/assets/image/home/demo3.png" />
+              <img src="../../assets/image/home/demo3.png" />
               <span class="new-price">¥298</span>
               <span class="old-price">¥399</span>
             </div>
@@ -99,8 +98,8 @@
           </div>
           <span class="good-item">好物不贵</span>
           <div class="item-imgs">
-            <img src="@/assets/image/home/demo4.png" />
-            <img src="@/assets/image/home/demo5.png" />
+            <img src="../../assets/image/home/demo4.png" />
+            <img src="../../assets/image/home/demo5.png" />
           </div>
         </router-link>
       </ul>
@@ -110,25 +109,25 @@
         <router-link class="center-item" to="/index" tag="li">
           <span class="center-title">特价秒杀</span>
           <span class="center-descr">10元抢购</span>
-          <img src="@/assets/image/home/demo6.png" />
+          <img src="../../assets/image/home/demo6.png" />
         </router-link>
         <!-- <router-link class="center-item center-border" to="/brandSpike" tag="li"> -->
         <router-link class="center-item center-border" to="/index" tag="li">
           <span class="center-title">品牌秒杀</span>
           <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
-          <img src="@/assets/image/home/demo7.png" />
+          <img src="../../assets/image/home/demo7.png" />
         </router-link>
         <!-- <router-link class="center-item" to="/newProductLaunch" tag="li"> -->
         <router-link class="center-item" to="/index" tag="li">
           <span class="center-title">新品首发</span>
           <span class="center-descr" style="#FC6380">小黑盒新品</span>
-          <img src="@/assets/image/home/demo8.png" />
+          <img src="../../assets/image/home/demo8.png" />
         </router-link>
         <!-- <router-link class="center-item" to="/premiumRanking" tag="li"> -->
         <router-link class="center-item" to="/index" tag="li">
           <span class="center-title">优品排行</span>
           <span class="center-descr" style="color:#91C95B">榜上好物购</span>
-          <img src="@/assets/image/home/demo9.png" />
+          <img src="../../assets/image/home/demo9.png" />
         </router-link>
       </ul>
       <ul class="spike-bottom">
@@ -142,8 +141,8 @@
           </div>
           <span class="belive-big">信赖大品牌</span>
           <div class="bottom-images">
-            <img src="@/assets/image/home/demo10.png" />
-            <img src="@/assets/image/home/demo11.png" />
+            <img src="../../assets/image/home/demo10.png" />
+            <img src="../../assets/image/home/demo11.png" />
           </div>
         </li>
         <router-link class="bottom-left" to="/loveShop" tag="li">
@@ -154,8 +153,8 @@
           </div>
           <span class="belive-big">来逛个够</span>
           <div class="bottom-images">
-            <img src="@/assets/image/home/demo12.png" />
-            <img src="@/assets/image/home/demo13.png" />
+            <img src="../../assets/image/home/demo12.png" />
+            <img src="../../assets/image/home/demo13.png" />
           </div>
         </router-link>
       </ul>
@@ -176,7 +175,6 @@
           <list-scroll
             ref="listScroll"
             :scroll-data="tabItemLists"
-            class="likeList"
             :pullup="true"
             @scrollToEnd="handleScrollToEnd"
             :pulldown="true"
@@ -305,20 +303,20 @@ export default {
       });
     },
     handleTabChange() {
-      this.$toast.loading({
-        mask: true,
-        duration: 0, // 持续展示 toast
-        forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "加载中..."
-      });
+      // this.$toast.loading({
+      //   mask: true,
+      //   duration: 0, // 持续展示 toast
+      //   forbidClick: true, // 禁用背景点击
+      //   loadingType: "spinner",
+      //   message: "加载中..."
+      // });
       this.$http
         .get(
           `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=30`
         )
         .then(response => {
           this.tabItemLists.push(...response.data.content);
-          this.$toast.clear();
+          // this.$toast.clear();
         });
     },
     handleClick(linkUrl) {
@@ -720,6 +718,22 @@ export default {
             min-height: 196px;
             min-width: 165px;
           }
+          .lazy-img[lazy="loading"] {
+            background: #949497 url("../../assets/icons/pre-view.png") no-repeat
+              center center;
+            background-size: 100% 100%;
+          }
+
+          // img[lazy="error"] {
+          //   background: #949497 url("../../assets/icons/pre-view.png") no-repeat center
+          //     center;
+          //   background-size: 100% 100%;
+          // }
+          // img[lazy="loading"] {
+          //   background: #949497 url("../../assets/icons/pre-view.png") no-repeat center
+          //     center;
+          //   background-size: 100% 100%;
+          // }
         }
         li:nth-of-type(even) {
           padding-right: 0;
@@ -765,8 +779,9 @@ export default {
                 font-size: 7px;
                 line-height: 17px;
                 text-align: center;
-                width: 55px;
+                min-width: 55px;
                 height: 17px;
+                padding: 0 3px;
               }
             }
             .add-icon {

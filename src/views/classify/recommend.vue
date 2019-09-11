@@ -2,7 +2,7 @@
   <div class="recommend">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png"/>
+        <img src="../../assets/icons/left-green-white.png"/>
       </span>
       <div class="header-content">推荐</div>
     </header>
@@ -65,19 +65,15 @@ export default {
     this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
       const { data } = res.data;
       this.likeList = data;
-      console.log('=====likeList==>',this.likeList);
     });
-    // this.initData();
   },
   methods: {
     // 当滑块滑动到底部的时候。
     handleScrollToEnd() {
-      console.log("=====滑动到底了==>");
       this.page++;
       this.initData();
     },
     handlePullDown() {
-      console.log("=====handlePullDown==>");
     },
     handleToDetail(productId) {
       this.$router.push({
@@ -92,7 +88,6 @@ export default {
         )
         .then(response => {
           this.likeList = response.data.content;
-          console.log("=====this.likeList==>", response.data.content);
         });
     },
     handleSearch() {

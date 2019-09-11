@@ -1,16 +1,12 @@
 <template>
   <div class="consumption-pool">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" />
+  
+ <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
-      <div class="header-content">消费矿池</div>
-      <!-- <li class="notice-message">
-        <svg-icon class="notice-wallet-icon" icon-class="notice-wallet"></svg-icon>
-        <label class="wallet-total">社区算力总额：85578909算力</label>
-      </li>-->
-    </header>
-
+      <i>消费矿池</i>
+    </cm-header>
     <div v-if="walletUserPoolLogVO.length" class="card-box">
       <section
         class="consumption-card"
@@ -59,42 +55,6 @@ export default {
 
 <style scoped lang="scss">
 .consumption-pool {
-  .page-header {
-    width: 100%;
-    padding: 10px 20px;
-    color: #3a3a3a;
-    .btn-left {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      z-index: 11;
-      font-weight: 600;
-      flex: 1;
-    }
-    // .notice-message {
-    //   padding-top: 30px;
-    //   display: flex;
-    //   justify-content: flex-start;
-    //   align-items: center;
-    //   .wallet-total {
-    //     font-size: 14px;
-    //     padding-left: 10px;
-    //   }
-    //   .wallet-value {
-    //     font-size: 13px;
-    //     padding-left: 20px;
-    //   }
-    //   .notice-wallet-icon {
-    //     width: 20px;
-    //     height: 20px;
-    //   }
-    // }
-  }
   .empty-icon {
     text-align: center;
     padding-top: 100px;
