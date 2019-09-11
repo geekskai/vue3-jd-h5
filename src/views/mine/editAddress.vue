@@ -1,12 +1,12 @@
 <template>
   <div class="edit-address">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">修改所在地区</div>
-      <span class="delete-addrss" @click="handleDeleteAddress">删除</span>
-    </header>
+      <i>修改所在地区</i>
+      <span slot="right" class="delete-addrss" @click="handleDeleteAddress">删除</span>
+    </cm-header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
@@ -196,7 +196,6 @@ export default {
   watch: {
     // 监听省滑动
     provinceVal(value) {
-      console.log("=====监听省滑动==>", value);
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
         .then(res => {
@@ -211,7 +210,6 @@ export default {
     },
     // 监听市滑动
     cityVal(value) {
-      console.log("=====监听市滑动==>", value);
       if (value) {
         this.$http
           .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
@@ -232,13 +230,6 @@ export default {
     this.getProvinces();
     this.getCitys();
     this.getAreas();
-    console.log("=====addressInfo==>", this.addressInfo);
-    // this.val.areaVal = {
-    //   name: "",
-    //   value: ""
-    // };
-    // // 第一条数据为直辖市 so '-' 符号表示为第三列
-    // this.list3 = [{ name: "-" }];
   },
   methods: {
     handleDeleteAddress() {
@@ -263,7 +254,6 @@ export default {
       this.addressInfo.tag = tag;
     },
     showPicker() {
-      console.log("=====this.addressInfo==>", this.addressInfo);
       this.show = true;
       this.list.map((it, index) => {
         if (it.areaId == this.addressInfo.province) {
@@ -527,32 +517,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 45px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: white;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .delete-addrss {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .address-content {
     margin-top: 20px;
     padding: 20px;

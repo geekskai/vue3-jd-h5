@@ -1,13 +1,13 @@
 <template>
   <div class="shipping-address">
-    <header class="page-header">
-      <router-link class="btn-left" tag="span" to="/mine">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
-      </router-link>
-      <div class="header-content">收货地址</div>
-    </header>
+      </span>
+      <i>收货地址</i>
+    </cm-header>
     <ul v-if="addressArray.length === 0" class="address-no">
-      <img src="@/assets/image/mime/no-address.png" />
+      <img src="../../assets/image/mime/no-address.png" />
       <li class="address-text">
         没有您的收货地址
         <br />赶紧添加地址吧
@@ -103,19 +103,6 @@ export default {
   height: 100%;
   padding: 0 16px;
   margin-bottom: 70px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
   .address-no {
     display: flex;
     justify-content: center;

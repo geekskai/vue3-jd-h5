@@ -1,13 +1,12 @@
 <template>
   <!--  已完成 -->
   <div class="completed-order">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">订单详情</div>
-    </header>
-
+      <i>订单详情</i>
+    </cm-header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
@@ -128,24 +127,12 @@ export default {
 .completed-order {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+  
   .order-card {
     background-color: #fff;
     border-radius: 5px;
     padding: 10px 20px;
-    margin-top: 20px;
+    // margin-top: 20px;
     .order-list {
       .order-item {
         display: flex;

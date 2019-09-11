@@ -1,12 +1,11 @@
 <template>
   <div class="page-order">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">我的订单</div>
-    </header>
-    <!-- <list-scroll :scroll-data="tabData" :scrollX="true"> -->
+      <i>我的订单</i>
+    </cm-header>
     <list-scroll :scrollX="true">
       <section class="order-tag" ref="searchWrap">
         <span :class="{'active' : type==0}" @click="selectTag(0)">全部</span>
@@ -251,7 +250,6 @@ export default {
         default:
           break;
       }
-      console.log("=====status==>", status);
     },
     setSearchWrapWidth() {
       let $screenWidth = document.documentElement.clientWidth;
@@ -276,9 +274,7 @@ export default {
       this.show = false;
       this.$http
         .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
-        .then(response => {
-          console.log("=====response.data==>", response.data.content);
-        });
+        .then(response => {});
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -305,20 +301,7 @@ export default {
   .scroll-wrapper {
     height: 40px;
   }
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
+ 
   .order-tag {
     display: flex;
     justify-content: space-between;
@@ -343,7 +326,7 @@ export default {
     background-color: #fff;
     border-radius: 5px;
     padding: 10px 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     .order-list {
       .order-item {
         display: flex;
@@ -419,8 +402,9 @@ export default {
               font-size: 7px;
               line-height: 17px;
               text-align: center;
-              width: 55px;
+              min-width: 55px;
               height: 17px;
+              padding: 0 3px;
             }
             .appeal-status {
               color: #ec3924;

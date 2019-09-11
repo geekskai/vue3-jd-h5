@@ -1,18 +1,18 @@
 <template>
   <div class="share-link">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+     <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">分享链接</div>
-    </header>
+      <i>分享链接</i>
+    </cm-header>
     <div class="content-box">
       <div class="share-content">
         <ul class="share-list">
           <li class="invitation-text">
-            <img src="@/assets/image/mime/share-left.png" />
+            <img src="../../assets/image/mime/share-left.png" />
             <span class="code-text">邀请码</span>
-            <img src="@/assets/image/mime/center-right.png" />
+            <img src="../../assets/image/mime/center-right.png" />
           </li>
           <li class="invitation-code">
             <span>{{$route.query.recommendCode}}</span>
@@ -77,40 +77,8 @@ export default {
   background: url("../../assets/image/mime/share-link.png") no-repeat center
     center;
   background-size: 100% 100%;
-  .page-header {
-    position: fixed;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .btn-left {
-      background-color: #fff;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .content-box {
     height: 100%;
-    // background: url("../../assets/image/mime/share-link.png") no-repeat center
-    //   center;
-    // background-size: 100% 100%;
-
     .share-content {
       width: 268px;
       height: 402px;

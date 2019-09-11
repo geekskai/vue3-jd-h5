@@ -1,11 +1,11 @@
 <template>
   <div class="state-node">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" alt />
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" alt />
       </span>
-      <div class="header-content">州级节点申请</div>
-    </header>
+      <i>州级节点申请</i>
+    </cm-header>
     <section class="area-content">
       <ul class="options-list">
         <li class="option-item">
@@ -300,28 +300,7 @@ export default {
 
 <style scoped lang="scss">
 .state-node {
-  .page-header {
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #efeff4;
-    .btn-left {
-      position: absolute;
-      left: 16px;
-      top: 10px;
-      z-index: 999;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      z-index: 11;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
+ 
   .area-content {
     margin: auto 16px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);

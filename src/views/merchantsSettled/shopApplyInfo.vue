@@ -1,11 +1,11 @@
 <template>
   <div class="merchants-settled">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">商家入驻</div>
-    </header>
+      <i>商家入驻</i>
+    </cm-header>
     <section class="apply-content">
       <ul class="address-list">
         <li class="address-item">
@@ -32,25 +32,25 @@
         <li class="address-item">
           <van-cell title="法人姓名" />
           <div class="address-name">
-            <van-field v-model="applyInfo.name" placeholder="王某某" />
+            <van-field v-model="applyInfo.name" placeholder="请输入" />
           </div>
         </li>
         <li class="address-item">
           <van-cell title="法人身份证号码" />
           <div class="address-name">
-            <van-field v-model="applyInfo.idCardNo" placeholder="520********1007" />
+            <van-field v-model="applyInfo.idCardNo" placeholder="请输入" />
           </div>
         </li>
         <li class="address-item">
           <van-cell title="营业执照注册名称" />
           <div class="address-name">
-            <van-field v-model="applyInfo.businessLicenseName" placeholder="****网络科技有限公司" />
+            <van-field v-model="applyInfo.businessLicenseName" placeholder="请输入" />
           </div>
         </li>
         <li class="address-item">
           <van-cell title="营业执照号码" />
           <div class="address-name">
-            <van-field v-model="applyInfo.businessLicenseNo" placeholder="QGJ*******jkhhh" />
+            <van-field v-model="applyInfo.businessLicenseNo" placeholder="请输入" />
           </div>
         </li>
       </ul>
@@ -500,36 +500,8 @@ export default {
   height: 100%;
   padding: 0 16px;
   padding-bottom: 80px;
-  // padding-bottom: 70px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 0;
-    .btn-left {
-      background-color: #fff;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
   .apply-content {
     .address-list {
-      margin-top: 20px;
       padding: 0 20px;
       height: 100%;
       background-color: #fff;
@@ -568,12 +540,13 @@ export default {
     }
   }
   .pay-btn {
-    position: fixed;
-    width: 100%;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    padding: 0 16px;
+    // position: fixed;
+    padding: 30px 0;
+    // width: 100%;
+    // bottom: 10px;
+    // left: 0;
+    // right: 0;
+    // padding: 0 16px;
     /deep/ .van-button--danger {
       background-color: #ec3924;
       line-height: 44px;

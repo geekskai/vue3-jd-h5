@@ -2,7 +2,7 @@
   <div class="found-good-goods" id="found-good-goods">
     <header class="page-header">
       <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" />
+        <img src="../../assets/icons/left-green-white.png" />
       </span>
       <div class="header-content">发现好货</div>
       <div class="option-btns">
@@ -31,7 +31,7 @@
           <ul class="list-item">
             <li class="card-item">
               <div class="card-img">
-                <img src="@/assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -49,7 +49,7 @@
             </li>
             <li class="card-item">
               <div class="card-img">
-                <img src="@/assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/premiumRanking/demo1.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">

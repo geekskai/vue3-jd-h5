@@ -1,13 +1,13 @@
 <template>
   <div class="emailRegisterTwo">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <router-link class="appeal-record" to="/register/phoneRegister" tag="span">手机注册</router-link>
-    </header>
+      <span slot="right" @click="$router.push('/register/phoneRegister')">手机注册</span>
+    </cm-header>
     <div class="mall-logo">
-      <img src="@/assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
@@ -105,16 +105,7 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 44px;
-    .appeal-record {
-      color: #ec3924;
-      font-size: 13px;
-    }
-  }
+
   .mall-logo {
     display: flex;
     justify-content: center;

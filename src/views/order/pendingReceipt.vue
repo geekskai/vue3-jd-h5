@@ -1,12 +1,12 @@
 <template>
   <!--  待收货 -->
   <div class="pending-receipt">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">订单详情</div>
-    </header>
+      <i>订单详情</i>
+    </cm-header>
 
     <section class="order-card">
       <ul class="order-list">
@@ -52,7 +52,7 @@
           <i>￥{{orderForm.amount}}</i>
         </li>
         <li class="order-btn">
-          <router-link to="/order/viewLogistics" tag="span">查看物流</router-link>
+          <router-link :to="`/order/viewLogistics?orderNo=${orderForm.orderNo}`" tag="span">查看物流</router-link>
         </li>
       </ul>
     </section>
@@ -122,24 +122,12 @@ export default {
 .pending-receipt {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+  
   .order-card {
     background-color: #fff;
     border-radius: 5px;
     padding: 10px 20px;
-    margin-top: 20px;
+    // margin-top: 20px;
     .order-list {
       .order-item {
         display: flex;
@@ -189,7 +177,7 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-           .product-name {
+            .product-name {
               width: 150px;
               white-space: nowrap;
               overflow: hidden;
@@ -213,8 +201,9 @@ export default {
               font-size: 7px;
               line-height: 17px;
               text-align: center;
-              width: 55px;
+              min-width: 55px;
               height: 17px;
+              padding: 0 3px;
             }
             .appeal-status {
               color: #ec3924;

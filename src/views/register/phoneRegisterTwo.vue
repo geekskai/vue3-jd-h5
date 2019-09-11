@@ -1,18 +1,17 @@
 <template>
   <div class="phoneRegisterTwo">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <router-link class="appeal-record" to="/register/emailRegister" tag="span">邮箱注册</router-link>
-    </header>
+      <span slot="right" @click="$router.push('/register/emailRegister')">邮箱注册</span>
+    </cm-header>
     <div class="mall-logo">
-      <img src="@/assets/image/setting/logo.png" />
+      <img src="../../assets/image/setting/logo.png" />
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
       <p class="number-tips">6-8位数字、字母的字符</p>
-
 
       <van-cell-group class="info-list">
         <van-field
@@ -49,13 +48,8 @@
           @click-right-icon="pwdEyes2=!pwdEyes2"
           placeholder="再次确认密码"
         />
-        <van-field
-          v-model="phoneRegisterTwoForm.recommendCode"
-          clearable
-          placeholder="请输入邀请码（必填）"
-        />
+        <van-field v-model="phoneRegisterTwoForm.recommendCode" clearable placeholder="请输入邀请码（必填）" />
 
-        
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
@@ -80,7 +74,6 @@ export default {
   created() {},
   methods: {
     handleConfirmRegister() {
-
       this.$http
         .post(
           `/api/user/register`,
@@ -101,8 +94,6 @@ export default {
             });
           }
         });
-
-
     }
   }
 };
@@ -115,16 +106,7 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 44px;
-    .appeal-record {
-      color: #EC3924;
-      font-size: 13px;
-    }
-  }
+ 
   .mall-logo {
     display: flex;
     justify-content: center;
@@ -169,9 +151,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #EC3924;
+      border: 1px solid #ec3924;
       border-radius: 4px;
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
   }
 }

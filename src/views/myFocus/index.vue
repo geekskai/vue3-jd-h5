@@ -1,16 +1,19 @@
 <template>
   <div class="my-focus">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <img src="@/assets/icons/left-green-white.png" alt />
+    
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <img src="../../assets/icons/left-green-white.png" alt />
+        <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
       </span>
-      <div class="header-content">我的关注</div>
-    </header>
+      <i>商品</i>
+      <i>店铺</i>
+    </cm-header>
 
     <ul class="list-item">
       <li class="card-item">
         <div class="card-img">
-          <img src="@/assets/image/premiumRanking/demo1.png" />
+          <img src="../../assets/image/premiumRanking/demo1.png" />
         </div>
         <ul class="card-info">
           <li class="info-top">
@@ -28,7 +31,7 @@
       </li>
       <li class="card-item">
         <div class="card-img">
-          <img src="@/assets/image/premiumRanking/demo1.png" />
+          <img src="../../assets/image/premiumRanking/demo1.png" />
         </div>
         <ul class="card-info">
           <li class="info-top">
@@ -67,29 +70,6 @@ export default {
   background-color: #efefef;
   min-height: 812px;
   padding: 0 16px;
-  .page-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 250px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
-    .btn-left {
-      position: fixed;
-      left: 16px;
-      top: 15px;
-    }
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      color: #3a3a3a;
-      font-weight: 600;
-      flex: 1;
-    }
-  }
   .list-item {
     margin-top: 70px;
     .card-item {

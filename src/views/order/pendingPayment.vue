@@ -1,12 +1,12 @@
 <template>
   <!-- 待付款 -->
   <div class="order-detail-page">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
-      <div class="header-content">订单详情</div>
-    </header>
+      <i>订单详情</i>
+    </cm-header>
     <section class="order-info">
       <ul class="info-list">
         <li class="receiver-addres">
@@ -209,19 +209,7 @@ export default {
 .order-detail-page {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+  
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -232,7 +220,7 @@ export default {
         display: flex;
         justify-content: space-between;
         & > span {
-          color: #EC3924;
+          color: #ec3924;
           font-size: 11px;
         }
         .store-info {
@@ -261,7 +249,7 @@ export default {
           width: 80px;
           height: 80px;
           display: inline-block;
-          background-color: #EC3924;
+          background-color: #ec3924;
           border-radius: 4px;
         }
         .order-detail {
@@ -277,7 +265,7 @@ export default {
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
-             .product-name {
+            .product-name {
               width: 150px;
               white-space: nowrap;
               overflow: hidden;
@@ -302,7 +290,7 @@ export default {
         font-weight: 600;
         padding-top: 4px;
         i {
-          color: #EC3924;
+          color: #ec3924;
           padding-left: 5px;
         }
         span {
@@ -373,12 +361,12 @@ export default {
       font-size: 11px;
       padding-bottom: 12px;
       i {
-        color: #EC3924;
+        color: #ec3924;
         font-weight: 700;
       }
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
     }

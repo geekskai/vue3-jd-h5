@@ -1,11 +1,11 @@
 <template>
   <div class="person-info" id="person-info">
-    <header class="page-header">
-      <span class="btn-left" @click="$router.go(-1)">
-        <svg-icon icon-class="white-btn"></svg-icon>
+    <cm-header>
+      <span slot="left" @click="$router.go(-1)">
+        <svg-icon icon-class="green-btn"></svg-icon>
       </span>
-      <div class="header-content">个人资料</div>
-    </header>
+      <i>个人资料</i>
+    </cm-header>
     <section class="setting-content">
       <ul class="setting-list">
         <li class="setting-item set-header-img">
@@ -130,19 +130,6 @@ export default {
 .person-info {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
   .setting-content {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     padding: 20px 20px 0 20px;
@@ -219,7 +206,7 @@ export default {
       border: 0 solid #ebedf0;
       border-left-width: 1px;
       span {
-        color: #EC3924;
+        color: #ec3924;
         font-size: 15px;
       }
     }

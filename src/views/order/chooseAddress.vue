@@ -1,13 +1,14 @@
 <template>
   <div class="choose-address">
-    <header class="page-header">
-      <router-link class="btn-left" tag="span" to="/mine">
-        <svg-icon icon-class="white-btn"></svg-icon>
-      </router-link>
-      <div class="header-content">选择地址</div>
-    </header>
+    <cm-header>
+      <span slot="left" @click="$router.push('/mine')">
+        <svg-icon icon-class="green-btn"></svg-icon>
+      </span>
+      <i>选择地址</i>
+    </cm-header>
+
     <ul v-if="addressArray.length === 0" class="address-no">
-      <img src="@/assets/image/mime/no-address.png" />
+      <img src="../../assets/image/mime/no-address.png" />
       <li class="address-text">
         没有您的收货地址
         <br />赶紧添加地址吧
@@ -23,9 +24,6 @@
       <ul class="card-content">
         <div class="card-triangle" :class="{'active':address.defaultFlag}"></div>
         <li class="addres-svg">
-          <!-- <svg-icon icon-class="address-home" v-if="address.tag === '家'"></svg-icon>
-          <svg-icon icon-class="address-company" v-if="address.tag === '公司'"></svg-icon>
-          <svg-icon icon-class="address-school" v-if="address.tag === '学校'"></svg-icon> -->
           <svg-icon
             :class="{'active':address.defaultFlag}"
             icon-class="address-home"
@@ -77,8 +75,6 @@ export default {
   },
   methods: {
     handleChooseAddress(userAddrId) {
-      console.log("=====选中地址==>", userAddrId);
-      console.log("=====orderForm==>", this.orderForm);
       let skuInfoForm = {};
       if (this.$route.query.skuId) {
         skuInfoForm = {
@@ -108,7 +104,6 @@ export default {
               userAddrId: userAddrId
             }
           });
-          console.log("=====response==>", response.data);
         });
     },
     getUserList() {
@@ -125,19 +120,7 @@ export default {
 .choose-address {
   height: 100%;
   padding: 0 16px;
-  .page-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    .header-content {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: #3a3a3a;
-      flex: 1;
-    }
-  }
+  
   .address-no {
     display: flex;
     justify-content: center;

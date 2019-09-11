@@ -36,7 +36,8 @@
       <li class="product-title">
         <div class="text-left">
           <span v-if="detailForm.calculate" class="force-value">{{detailForm.calculate}}算力值</span>
-          <span class="item-desc">{{detailForm.productName}}</span>
+          {{detailForm.productName}}
+          <!-- <span class="item-desc">{{detailForm.productName}}</span> -->
         </div>
         <span class="heart-full" @click="isLike=!isLike">
           <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
@@ -65,7 +66,7 @@
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <!-- <img src="@/assets/image/product/store-header.png" class="store-header" /> -->
+          <!-- <img src="../../assets/image/product/store-header.png" class="store-header" /> -->
           <img v-lazy="detailForm.shopLogo" class="store-header" />
           <span class="store-name">{{detailForm.shopName}}</span>
         </div>
@@ -131,97 +132,17 @@ export default {
       current: 0,
       stepperValue: "",
       productImages: [],
+      // sku:{},
       sku: {
         // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
         // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
         tree: [
           {
-            k: "颜色",
-            k_id: "1",
-            v: [
-              {
-                id: "30349",
-                name: "天蓝色",
-                imgUrl:
-                  "https://img.yzcdn.cn/upload_files/2017/02/21/FjKTOxjVgnUuPmHJRdunvYky9OHP.jpg!100x100.jpg"
-              },
-              {
-                id: "1215",
-                name: "白色",
-                imgUrl: "https://img.yzcdn.cn/2.jpg"
-              }
-            ],
-            k_s: "s1",
-            count: 2
-          },
-          {
-            k: "尺寸",
-            k_id: "2",
-            v: [
-              {
-                id: "1193",
-                name: "1"
-              },
-              {
-                id: "1194",
-                name: "2"
-              }
-            ],
-            k_s: "s2",
-            count: 2
+            v: [{}]
           }
         ],
         // 所有 sku 的组合列表，如下是：白色1、白色2、天蓝色1、天蓝色2
-        list: [
-          {
-            id: 2259,
-            price: 120, //价格
-            discount: 122,
-            s1: "1215",
-            s2: "1193",
-            s3: "0",
-            s4: "0",
-            s5: "0",
-            stock_num: 20, //库存
-            goods_id: 946755
-          },
-          {
-            id: 2260,
-            price: 110,
-            discount: 112,
-            s1: "1215",
-            s2: "1194",
-            s3: "0",
-            s4: "0",
-            s5: "0",
-            stock_num: 2, //库存
-            goods_id: 946755
-          },
-          {
-            id: 2257,
-            price: 130,
-            discount: 132,
-            s1: "30349",
-            s2: "1193",
-            s3: "0",
-            s4: "0",
-            s5: "0",
-            stock_num: 40, //库存
-            goods_id: 946755
-          },
-          {
-            id: 2258,
-            price: 100,
-            discount: 100,
-            s1: "30349",
-            s2: "1194",
-            s3: "0",
-            s4: "0",
-            s5: "0",
-            stock_num: 50, //库存
-            goods_id: 946755
-          }
-        ],
+        list: [{}],
         messages: [],
         price: "0.00",
         stock_num: 0, // 商品总库存
@@ -488,22 +409,24 @@ export default {
       justify-content: space-between;
       align-items: center;
       .text-left {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       .force-value {
-        display: flex;
-        justify-content: center;
+        display: inline-block;
+        vertical-align: middle;
         min-width: 54px;
         text-align: center;
         line-height: 20px;
         height: 20px;
         color: #fff;
         font-size: 9px;
+        padding: 0 5px;
         background-color: #ec3924;
         border-radius: 10px 10px;
-        margin-right: 7px;
       }
       .heart-full {
         padding: 0 17px;
@@ -511,6 +434,7 @@ export default {
       .item-desc {
         font-size: 14px;
         color: #3a3a3a;
+        line-height: 20px;
       }
     }
     .product-info {
