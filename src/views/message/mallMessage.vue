@@ -1,6 +1,6 @@
 <template>
   <div class="mall-message">
-     <cm-header>
+    <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>

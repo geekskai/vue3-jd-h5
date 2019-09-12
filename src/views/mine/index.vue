@@ -31,7 +31,7 @@
           <span>我的足迹</span>
         </li>
       </ul>
-    </section> -->
+    </section>-->
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
@@ -70,28 +70,38 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <!-- /merchantsSettled/payDeposit -->
-        <!-- <router-link to="/merchantsSettled/index" class="option-item" tag="li"> -->
         <li class="option-item" @click="handleMerchantsSettled">
           <div class="item-info">
             <svg-icon class="incon" icon-class="businessmen-stationed"></svg-icon>
             <span>商家入驻</span>
           </div>
-          <span class="merchants-status" v-if="merchantsSettledStatus == 0">待审核</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == 0">等待审核</span>
           <span class="merchants-status" v-if="merchantsSettledStatus == 1">通过</span>
           <span class="merchants-status" v-if="merchantsSettledStatus == 2">未通过</span>
           <span class="merchants-status" v-if="merchantsSettledStatus == 3">未缴纳保证金</span>
-          <span class="merchants-status" v-if="merchantsSettledStatus == -1">未入驻</span>
+          <span class="merchants-status" v-if="merchantsSettledStatus == -1">等待入驻</span>
           <van-icon name="arrow" color="#DBDBDB" />
         </li>
-        <!-- </router-link> -->
-        <router-link :to="`/mine/shareLink?recommendCode=${userInfo.recommendCode}`" class="option-item" tag="li">
+        <router-link
+          :to="`/mine/shareLink?recommendCode=${userInfo.recommendCode}`"
+          class="option-item"
+          tag="li"
+        >
           <div class="item-info">
             <svg-icon class="incon" icon-class="sharing-links"></svg-icon>
             <span>分享链接</span>
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
+        <!-- <router-link :to="`/mine/linkFan`" class="option-item" tag="li"> -->
+        <li class="option-item">
+          <div class="item-info">
+            <svg-icon class="incon" icon-class="link-fan"></svg-icon>
+            <span>链接粉丝</span>
+          </div>
+          <van-icon name="arrow" color="#DBDBDB" />
+        </li>
+        <!-- </router-link> -->
       </ul>
     </section>
 

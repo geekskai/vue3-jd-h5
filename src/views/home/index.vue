@@ -5,7 +5,7 @@
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
         <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
       </div>
-      <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
+      <!-- <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon> -->
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -178,7 +178,6 @@
             :pullup="true"
             @scrollToEnd="handleScrollToEnd"
             :pulldown="true"
-            @pulldown="handlePullDown"
           >
             <div>
               <van-tab
@@ -202,7 +201,7 @@
                         <span class="goods-div">{{item.labels}}</span>
                         <div class="goods-desc">
                           <span class="goods-price">
-                            <i>￥{{item.productCnyPrice}}</i>
+                            <b>￥{{item.productCnyPrice}}</b>
                             <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
                           </span>
                         </div>
@@ -276,12 +275,7 @@ export default {
       this.pageNum++;
       this.handleTabChange();
     },
-    handlePullDown() {
-      // this.handleTabChange();
-      // this.$refs.listScroll.stop()
-      // this.$refs.homeWrapper.scrollTo(100,10)
-      // document.body.scrollTop = 400
-    },
+ 
     //动态设置searc-wrap的高
     setHomeWrapperHeight() {
       let $screenHeight = document.documentElement.clientHeight;
@@ -303,35 +297,17 @@ export default {
       });
     },
     handleTabChange() {
-      // this.$toast.loading({
-      //   mask: true,
-      //   duration: 0, // 持续展示 toast
-      //   forbidClick: true, // 禁用背景点击
-      //   loadingType: "spinner",
-      //   message: "加载中..."
-      // });
       this.$http
         .get(
           `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=30`
         )
         .then(response => {
           this.tabItemLists.push(...response.data.content);
-          // this.$toast.clear();
         });
     },
     handleClick(linkUrl) {
       this.$router.push("/product/index");
     }
-
-    // pageScroll() {
-    //   let scrollTop =
-    //     window.pageYOffset ||
-    //     document.documentElement.scrollTop ||
-    //     document.body.scrollTop;
-    //   scrollTop > 100
-    //     ? (this.headerActive = true)
-    //     : (this.headerActive = false);
-    // }
   }
 };
 </script>
@@ -339,10 +315,6 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/mixin.scss";
 .home {
-  // .home-header.active {
-  //   position: fixed;
-  //   width: 100%;
-  // }
   .home-header {
     position: fixed;
     width: 100%;
@@ -363,7 +335,8 @@ export default {
       border-radius: 3px;
       display: flex;
       margin-top: 10px;
-      width: 90%;
+      // width: 90%;
+      width: 100%;
       height: 40px;
       line-height: 40px;
       color: #232326;
@@ -414,8 +387,6 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      // background: url("../../assets/image/radian.png") no-repeat center bottom;
-      // background-size: 100% 6%;
     }
     .slide_img {
       width: 222px;
@@ -694,11 +665,6 @@ export default {
     }
     .goods-box {
       padding: 0 16px;
-      .good-things {
-        font-size: 18px;
-        color: #ec3924;
-        font-weight: 600;
-      }
       .goods-content {
         display: flex;
         justify-content: space-between;
@@ -723,17 +689,6 @@ export default {
               center center;
             background-size: 100% 100%;
           }
-
-          // img[lazy="error"] {
-          //   background: #949497 url("../../assets/icons/pre-view.png") no-repeat center
-          //     center;
-          //   background-size: 100% 100%;
-          // }
-          // img[lazy="loading"] {
-          //   background: #949497 url("../../assets/icons/pre-view.png") no-repeat center
-          //     center;
-          //   background-size: 100% 100%;
-          // }
         }
         li:nth-of-type(even) {
           padding-right: 0;

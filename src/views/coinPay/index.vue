@@ -10,7 +10,7 @@
     </div>
     <section class="down-btns">
       <a
-        href="https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/app-release.ipa"
+        href="itms-services://?action=download-manifest&url=https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
       >
         <div class="down-btn">
           <svg-icon icon-class="apple-icon-coin-pay"></svg-icon>&nbsp;&nbsp;&nbsp;

@@ -353,8 +353,6 @@ export default {
     left: 0;
     right: 0;
     padding: 0 16px;
-    // padding-top: 50px;
-    // padding-bottom: 30px;
     .pay-count {
       display: flex;
       justify-content: space-between;
@@ -370,6 +368,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
+         border-radius: 4px;
     }
   }
 }

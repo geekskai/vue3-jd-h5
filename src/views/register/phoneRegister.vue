@@ -1,8 +1,6 @@
 <template>
   <div class="phoneRegister">
-
-
-     <cm-header>
+    <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
@@ -13,31 +11,41 @@
     </div>
     <section class="register-info">
       <span class="phone-number">请输入手机号</span>
-      <p class="number-tips">请输入6位数验证码</p>
+      <p class="number-tips">请输入4位数验证码</p>
       <van-cell-group class="info-list">
-        <van-field
-          v-model="phoneRegisterForm.mobile"
-          type="tel"
-          clearable
-          @blur="handlePhoneBlur"
-          placeholder="请输入手机号"
-        />
-        <!-- error-message="手机号格式错误" -->
-        <van-field
-          v-model="phoneRegisterForm.verifyCode"
-          label-width="150"
-          clearable
-          placeholder="验证码"
-        >
-          <van-button slot="button" size="small" @click="handleGetVerifyCode" type="default">获取验证码</van-button>
-        </van-field>
-        <van-field class="temp-empty" />
+        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+          <ValidationProvider v-slot="{ errors }" :rules="{regex:/^1[3456789]\d{9}$/,required:true}">
+            <van-field
+              v-model="phoneRegisterForm.mobile"
+              :error-message="errors[0]"
+              type="tel"
+              clearable
+              @blur="handlePhoneBlur"
+              placeholder="请输入手机号"
+            />
+          </ValidationProvider>
+          <ValidationProvider v-slot="{ errors }" :rules="{regex:/^\d{4}$/,required:true}">
+            <van-field
+              v-model="phoneRegisterForm.verifyCode"
+              :error-message="errors[0]"
+              label-width="150"
+              clearable
+              placeholder="验证码"
+            >
+              <van-button
+                slot="button"
+                size="small"
+                @click="handleGetVerifyCode"
+                type="default"
+              >获取验证码</van-button>
+            </van-field>
+            <van-field class="temp-empty" />
+          </ValidationProvider>
+        </ValidationObserver>
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <span class="login-btn" @click="goToNextStep">
-        下一步
-      </span>
+      <span class="login-btn" @click="goToNextStep">下一步</span>
     </div>
   </div>
 </template>
@@ -49,27 +57,33 @@ export default {
     return {
       phoneRegisterForm: {
         areaCode: "86"
-      },
+      }
     };
   },
   created() {},
   methods: {
-    
-    goToNextStep() {
-      if (
-        !this.phoneRegisterForm.mobile ||
-        !this.phoneRegisterForm.verifyCode
-      ) {
-        this.$toast({
-          mask: false,
-          message: "请输入手机号或者验证码！"
-        });
-      } else {
+    async goToNextStep() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
         this.$router.push({
           path: "/register/phoneRegisterTwo",
           query: this.phoneRegisterForm
         });
       }
+      // if (
+      //   !this.phoneRegisterForm.mobile ||
+      //   !this.phoneRegisterForm.verifyCode
+      // ) {
+      //   this.$toast({
+      //     mask: false,
+      //     message: "请输入手机号或者验证码！"
+      //   });
+      // } else {
+      //   this.$router.push({
+      //     path: "/register/phoneRegisterTwo",
+      //     query: this.phoneRegisterForm
+      //   });
+      // }
     },
     handlePhoneBlur() {},
 
@@ -81,7 +95,7 @@ export default {
         });
         return;
       }
-      this.phoneRegisterForm.type = 1
+      this.phoneRegisterForm.type = 1;
       this.$http
         .post(`/api/user/getVerifyCode`, this.phoneRegisterForm)
         .then(response => {
@@ -109,7 +123,7 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
- 
+
   .mall-logo {
     display: flex;
     justify-content: center;
@@ -154,9 +168,9 @@ export default {
       line-height: 44px;
       color: white;
       font-size: 17px;
-      border: 1px solid #EC3924;
+      border: 1px solid #ec3924;
       border-radius: 4px;
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
   }
 }

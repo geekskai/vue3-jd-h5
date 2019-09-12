@@ -1,8 +1,9 @@
 <template>
   <div class="index">
     <keep-alive>
-      <router-view class="router-view" />
+      <router-view v-if="$route.meta.keepAlive" class="router-view" />
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" class="router-view"></router-view>
   </div>
 </template>
 

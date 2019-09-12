@@ -1,6 +1,6 @@
 <template>
   <div class="my-wallet">
-    <cm-header>
+    <cm-header class="layout-header">
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
@@ -93,9 +93,11 @@ export default {
 
 <style scoped lang="scss">
 .my-wallet {
+  .layout-header{
+    background-color: #ffffff;
+  }
   .wallet-box {
     background-color: #ffffff;
-    padding-top: 50px;
     .wallet-header {
       display: flex;
       height: 170px;
@@ -130,7 +132,7 @@ export default {
         }
       }
       .consumption-pool {
-        background-color: rgba(#f77925, 0.5);
+        background-color: rgba(#f77925, 0.1);
         border-radius: 4px;
         .consumption-info {
           display: flex;
@@ -139,7 +141,7 @@ export default {
         }
       }
       .advertisement-pool {
-        background-color: rgba(#cba6fd, 0.5);
+        background-color: rgba(#cba6fd, 0.1);
         border-radius: 4px;
         .advertisement-info {
           display: flex;
@@ -148,7 +150,7 @@ export default {
         }
       }
       .node-pool {
-        background-color: rgba(#5685ed, 0.5);
+        background-color: rgba(#5685ed, 0.1);
         border-radius: 4px;
         .node-info {
           display: flex;

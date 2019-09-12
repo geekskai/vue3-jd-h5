@@ -11,10 +11,76 @@
     </div>
     <section class="register-info">
       <span class="phone-number">设置密码</span>
-      <p class="number-tips">6-8位数字、字母的字符</p>
+      <p class="number-tips">6-8位数字和字母的组成的字符</p>
 
       <van-cell-group class="info-list">
-        <van-field
+        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+          <ValidationProvider
+            v-if="pwdEyes1"
+            v-slot="{ errors }"
+            :rules="{regex:/^[a-zA-Z0-9]{6,8}$/,required:true}"
+          >
+            <van-field
+              v-model="phoneRegisterTwoForm.password"
+              :error-message="errors[0]"
+              right-icon="eye-o"
+              clearable
+              @click-right-icon="pwdEyes1=!pwdEyes1"
+              placeholder="密码"
+            />
+          </ValidationProvider>
+          <ValidationProvider
+            v-else
+            v-slot="{ errors }"
+            :rules="{regex:/^[a-zA-Z0-9]{6,8}$/,required:true}"
+          >
+            <van-field
+              type="password"
+              v-model="phoneRegisterTwoForm.password"
+              :error-message="errors[0]"
+              right-icon="closed-eye"
+              clearable
+              @click-right-icon="pwdEyes1=!pwdEyes1"
+              placeholder="密码"
+            />
+          </ValidationProvider>
+          <ValidationProvider
+            v-if="pwdEyes2"
+            v-slot="{ errors }"
+            :rules="{regex:/^[a-zA-Z0-9]{6,8}$/,required:true}"
+          >
+            <van-field
+              v-model="phoneRegisterTwoForm.password1"
+              :error-message="errors[0]"
+              right-icon="eye-o"
+              clearable
+              @click-right-icon="pwdEyes2=!pwdEyes2"
+              placeholder="再次确认密码"
+            />
+          </ValidationProvider>
+          <ValidationProvider
+            v-else
+            v-slot="{ errors }"
+            :rules="{regex:/^[a-zA-Z0-9]{6,8}$/,required:true}"
+          >
+            <van-field
+              type="password"
+              v-model="phoneRegisterTwoForm.password1"
+              :error-message="errors[0]"
+              right-icon="closed-eye"
+              clearable
+              @click-right-icon="pwdEyes2=!pwdEyes2"
+              placeholder="再次确认密码"
+            />
+          </ValidationProvider>
+          <van-field
+            v-model="phoneRegisterTwoForm.recommendCode"
+            clearable
+            placeholder="请输入邀请码（必填）"
+          />
+          <van-field class="temp-empty" />
+        </ValidationObserver>
+        <!-- <van-field
           v-if="pwdEyes1"
           v-model="phoneRegisterTwoForm.password"
           right-icon="eye-o"
@@ -51,6 +117,7 @@
         <van-field v-model="phoneRegisterTwoForm.recommendCode" clearable placeholder="请输入邀请码（必填）" />
 
         <van-field class="temp-empty" />
+        -->
       </van-cell-group>
     </section>
     <div class="login-register-btns">
@@ -73,27 +140,39 @@ export default {
   },
   created() {},
   methods: {
-    handleConfirmRegister() {
-      this.$http
-        .post(
-          `/api/user/register`,
-          Object.assign(this.phoneRegisterTwoForm, this.$route.query)
-        )
-        .then(response => {
-          if (response.data.code === 0) {
-            localStorage.setItem("token", response.data.content.token);
-            this.$toast({
-              mask: false,
-              message: "注册成功！"
-            });
-            this.$router.push("/index");
-          } else {
-            this.$toast({
-              mask: false,
-              message: response.data.msg
-            });
-          }
+    async handleConfirmRegister() {
+      const isValid = await this.$refs.observer.validate();
+      if (
+        this.phoneRegisterTwoForm.password ===
+          this.phoneRegisterTwoForm.password1 &&
+        isValid
+      ) {
+        this.$http
+          .post(
+            `/api/user/register`,
+            Object.assign(this.phoneRegisterTwoForm, this.$route.query)
+          )
+          .then(response => {
+            if (response.data.code === 0) {
+              localStorage.setItem("token", response.data.content.token);
+              this.$toast({
+                mask: false,
+                message: "注册成功！"
+              });
+              this.$router.push("/index");
+            } else {
+              this.$toast({
+                mask: false,
+                message: response.data.msg
+              });
+            }
+          });
+      } else {
+        this.$toast({
+          mask: false,
+          message: "两次密码不一致！"
         });
+      }
     }
   }
 };
@@ -106,7 +185,7 @@ export default {
   min-height: 667px;
   max-height: 812px;
   background: linear-gradient(#fdfdfd, #ffecf0);
- 
+
   .mall-logo {
     display: flex;
     justify-content: center;

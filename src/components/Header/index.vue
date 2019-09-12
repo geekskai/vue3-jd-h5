@@ -34,11 +34,17 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 16px 0;
+  padding: 10px 0;
   .header-left {
     position: fixed;
+    top: 10px;
     left: 16px;
     z-index: 100;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .header-content {
     text-align: center;

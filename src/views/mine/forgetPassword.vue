@@ -68,6 +68,10 @@ export default {
       }
     },
     handleSaveForgetPwd() {
+      if (~this.userInfo.mobile.indexOf("@")) {
+        this.userInfo.email = this.userInfo.mobile;
+        this.userInfo.mobile = null;
+      }
       if (this.userInfo.password === this.userInfo.password1) {
         this.$http
           .post(`/api/user/findPassword`, this.userInfo)

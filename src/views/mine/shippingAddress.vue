@@ -45,7 +45,7 @@
             <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>{{handleFullAddress(address)}}</span>
+            <span>{{address.fullAddress}}</span>
             <van-icon name="arrow" color="#EC3924" />
           </div>
           <span>{{address.receiverPhone}}</span>
@@ -72,16 +72,6 @@ export default {
     this.getUserList();
   },
   methods: {
-    handleFullAddress(address) {
-      if (~address.fullAddress.indexOf("undefined")) {
-        address.fullAddress = address.fullAddress.slice(
-          0,
-          address.fullAddress.length - 9
-        );
-        return address.fullAddress;
-      }
-      return address.fullAddress;
-    },
     handleGoToEditAddrss(address) {
       this.$router.push({
         path: "/mine/editAddress",

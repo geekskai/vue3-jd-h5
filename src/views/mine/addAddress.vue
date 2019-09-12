@@ -36,7 +36,6 @@
         </li>
         <li class="address-item">
           <van-cell title="所在地区" />
-          <!-- <div class="address-name" @click="show = true"> -->
           <div class="address-name" @click="showPicker">
             <van-field v-model="addressInfo.fullAddress" disabled placeholder="请选择省市区" />
             <div>
@@ -253,6 +252,7 @@ export default {
         });
         return;
       }
+      this.addressInfo.fullAddress = this.addressInfo.fullAddress + this.addressInfo.address
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {

@@ -12,22 +12,43 @@
     </div>
     <section class="register-info">
       <span class="phone-number">请输入邮箱号</span>
-      <p class="number-tips">请输入6位数验证码</p>
+      <p class="number-tips">请输入4位数验证码</p>
       <van-cell-group class="info-list">
-        <van-field v-model="emailRegister.email" type="textarea" clearable placeholder="请输入邮箱" />
-        <van-field
-          v-model="emailRegister.verifyCode"
-          label-width="150"
-          clearable
-          placeholder="邮箱验证码"
-        >
-          <van-button slot="button" size="small" type="default" @click="handleGetVerifyCode">获取验证码</van-button>
-        </van-field>
-        <van-field class="temp-empty" />
+        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+          <ValidationProvider name="email" v-slot="{ errors }" rules="required|email">
+            <van-field
+              v-model="emailRegister.email"
+              :error-message="errors[0]"
+              type="text"
+              clearable
+              placeholder="请输入邮箱"
+            />
+          </ValidationProvider>
+          <ValidationProvider v-slot="{ errors }" :rules="{regex:/^\d{4}$/,required:true}">
+            <van-field
+              v-model="emailRegister.verifyCode"
+              :error-message="errors[0]"
+              label-width="150"
+              clearable
+              placeholder="邮箱验证码"
+            >
+              <van-button
+                slot="button"
+                size="small"
+                type="default"
+                @click="handleGetVerifyCode"
+              >获取验证码</van-button>
+            </van-field>
+          </ValidationProvider>
+          <van-field class="temp-empty" />
+        </ValidationObserver>
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <span class="login-btn" @click="goToNextStep">下一步</span>
+      <!-- <button :disabled="!invalid"> -->
+      <button>
+        <span class="login-btn" @click="goToNextStep">下一步</span>
+      </button>
       <!-- <router-link class="login-btn" to="/register/emailRegisterTwo" tag="span">下一步</router-link> -->
     </div>
   </div>
@@ -43,18 +64,26 @@ export default {
   },
   created() {},
   methods: {
-    goToNextStep() {
-      if (!this.emailRegister.email || !this.emailRegister.verifyCode) {
-        this.$toast({
-          mask: false,
-          message: "请输入手机号或者验证码！"
-        });
-      } else {
+    async goToNextStep() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
         this.$router.push({
           path: "/register/emailRegisterTwo",
           query: this.emailRegister
         });
       }
+      // if (!this.emailRegister.email || !this.emailRegister.verifyCode) {
+      // if (!isValid) {
+      //   this.$toast({
+      //     mask: false,
+      //     message: "请输入手机号或者验证码！"
+      //   });
+      // } else {
+      //   this.$router.push({
+      //     path: "/register/emailRegisterTwo",
+      //     query: this.emailRegister
+      //   });
+      // }
     },
     handleGetVerifyCode() {
       if (!this.emailRegister.email) {

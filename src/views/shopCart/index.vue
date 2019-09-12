@@ -88,14 +88,6 @@
       </section>
     </div>
 
-    <!-- <vue-pickers
-      :show="show"
-      :columns="columns"
-      :defaultData="defaultData"
-      :selectData="pickData"
-      @cancel="close"
-      @confirm="confirmFn"
-    ></vue-pickers>-->
     <tabbar></tabbar>
   </div>
 </template>
@@ -114,32 +106,6 @@ export default {
       shopCartArray: [],
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
-      defaultData: [
-        {
-          text: "Top-Pay",
-          value: "Top-Pay"
-        }
-      ],
-      pickData: {
-        data1: [
-          {
-            text: "Top-Pay",
-            value: "Top-Pay"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
-          }
-        ]
-      },
       show: false,
       list: ["a"],
       stepperValue: "",
@@ -255,24 +221,6 @@ export default {
     },
     close() {
       this.show = false;
-    },
-    confirmFn() {
-      this.show = false;
-      this.$toast.loading({
-        mask: true,
-        duration: 1000, // 持续展示 toast
-        forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "支付中..."
-      });
-
-      setTimeout(() => {
-        // this.$toast({
-        //   mask: false,
-        //   message: "支付成功~"
-        // });
-        this.$router.push("/order/transactionDetails");
-      }, 1300);
     },
     submitDelete() {
       this.$dialog

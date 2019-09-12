@@ -311,6 +311,8 @@ export default {
       this.addressInfo.receiverGender = gender;
     },
     handleSeveAddresInfo() {
+      this.addressInfo.fullAddress =
+        this.addressInfo.fullAddress + this.addressInfo.address;
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {

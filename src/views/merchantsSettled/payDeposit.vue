@@ -187,6 +187,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
+         border-radius: 4px;
     }
   }
   .node-dialog {

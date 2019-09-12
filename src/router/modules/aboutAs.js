@@ -3,7 +3,8 @@ export default [
     path: '/setting/aboutAs',
     name: 'aboutAs',
     meta: {
-      index: 13
+      title: '关于我们',
+      keepAlive: true
     },
     component: () => import('@/views/mine/aboutAs.vue')
   }

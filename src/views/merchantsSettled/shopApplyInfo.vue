@@ -8,51 +8,106 @@
     </cm-header>
     <section class="apply-content">
       <ul class="address-list">
-        <li class="address-item">
-          <van-cell title="店铺名称" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.shopName" placeholder="请输入店铺名称" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="店铺所在地区" />
-          <div class="address-name" @click="showPicker">
-            <van-field v-model="applyInfo.provinceCityDisStr" disabled placeholder="请选择省市区" />
-            <div>
-              <svg-icon icon-class="arrow"></svg-icon>
+        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+          <li class="address-item">
+            <van-cell title="店铺名称" />
+            <div class="address-name">
+              <ValidationProvider v-slot="{ errors }" :rules="{required:true}">
+                <van-field
+                  v-model="applyInfo.shopName"
+                  :error-message="errors[0]"
+                  clearable
+                  placeholder="请输入店铺名称"
+                />
+              </ValidationProvider>
             </div>
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="详细地址" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.address" placeholder="如：道路、门牌号、小区、楼栋号、单元室等" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="法人姓名" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.name" placeholder="请输入" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="法人身份证号码" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.idCardNo" placeholder="请输入" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="营业执照注册名称" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.businessLicenseName" placeholder="请输入" />
-          </div>
-        </li>
-        <li class="address-item">
-          <van-cell title="营业执照号码" />
-          <div class="address-name">
-            <van-field v-model="applyInfo.businessLicenseNo" placeholder="请输入" />
-          </div>
-        </li>
+          </li>
+          <li class="address-item">
+            <van-cell title="店铺所在地区" />
+            <div class="address-name" @click="showPicker">
+              <ValidationProvider v-slot="{ errors }" :rules="{required:true}">
+                <!-- <van-field v-model="applyInfo.provinceCityDisStr" disabled placeholder="请选择省市区" /> -->
+                <van-field
+                  v-model="provinceCityDisStr"
+                  :error-message="errors[0]"
+                  disabled
+                  placeholder="请选择省市区"
+                />
+              </ValidationProvider>
+              <div>
+                <svg-icon icon-class="arrow"></svg-icon>
+              </div>
+            </div>
+          </li>
+          <li class="address-item">
+            <van-cell title="详细地址" />
+            <div class="address-name">
+              <ValidationProvider v-slot="{ errors }" :rules="{required:true}">
+                <van-field
+                  v-model="applyInfo.address"
+                  :error-message="errors[0]"
+                  clearable
+                  placeholder="如：道路、门牌号、小区、楼栋号、单元室等"
+                />
+              </ValidationProvider>
+            </div>
+          </li>
+          <li class="address-item">
+            <van-cell title="法人姓名" />
+            <div class="address-name">
+              <ValidationProvider name="regex" v-slot="{ errors }" :rules="{required:true}">
+                <van-field
+                  v-model="applyInfo.name"
+                  clearable
+                  :error-message="errors[0]"
+                  placeholder="请输入"
+                />
+              </ValidationProvider>
+            </div>
+          </li>
+          <li class="address-item">
+            <van-cell title="法人身份证号码" />
+            <div class="address-name">
+              <ValidationProvider
+                v-slot="{ errors }"
+                :rules="{regex:/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/,required:true}"
+              >
+                <van-field
+                  clearable
+                  v-model="applyInfo.idCardNo"
+                  :error-message="errors[0]"
+                  placeholder="请输入"
+                />
+              </ValidationProvider>
+            </div>
+          </li>
+          <li class="address-item">
+            <van-cell title="营业执照注册名称" />
+            <div class="address-name">
+              <ValidationProvider name="email" v-slot="{ errors }" rules="required">
+                <van-field
+                  v-model="applyInfo.businessLicenseName"
+                  :error-message="errors[0]"
+                  placeholder="请输入"
+                  clearable
+                />
+              </ValidationProvider>
+            </div>
+          </li>
+          <li class="address-item">
+            <van-cell title="营业执照号码" />
+            <div class="address-name">
+              <ValidationProvider name="required" v-slot="{ errors }" rules="required">
+                <van-field
+                  v-model="applyInfo.businessLicenseNo"
+                  :error-message="errors[0]"
+                  clearable
+                  placeholder="请输入"
+                />
+              </ValidationProvider>
+            </div>
+          </li>
+        </ValidationObserver>
       </ul>
     </section>
     <div class="pay-btn">
@@ -126,6 +181,7 @@ export default {
       isEdit: this.$route.query.isEdit || false,
       systemMessage: {},
       checked: false,
+      provinceCityDisStr: "",
       fileList: [],
       idCardNoUrlA: [],
       idCardNoUrlB: [],
@@ -170,6 +226,7 @@ export default {
     if (this.isEdit) {
       this.$http.post(`/api/shop/again/display`).then(response => {
         this.applyInfo = response.data.content;
+        this.provinceCityDisStr = response.data.content.provinceCityDisStr;
       });
     }
     this.getProvinces();
@@ -182,12 +239,15 @@ export default {
     this.list3 = [{ name: "-" }];
   },
   methods: {
-    handleSubmitShopInfo() {
-      this.applyInfo.isEdit = this.isEdit;
-      this.$router.push({
-        path: `/merchantsSettled/enterpriseCertification`,
-        query: this.applyInfo
-      });
+    async handleSubmitShopInfo() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
+        this.applyInfo.isEdit = this.isEdit;
+        this.$router.push({
+          path: `/merchantsSettled/enterpriseCertification`,
+          query: this.applyInfo
+        });
+      }
     },
     afterReadA(res) {
       let formData = new FormData();
@@ -278,13 +338,10 @@ export default {
       this.applyInfo.province = this.val.provinceVal.areaId;
       this.applyInfo.city = this.val.cityVal.areaId;
       this.applyInfo.district = this.val.areaVal.areaId;
-
-      this.applyInfo.provinceCityDisStr =
+      this.applyInfo.provinceCityDisStr = this.provinceCityDisStr =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
         this.val.areaVal.areaName;
-      // this.applyInfo.provinceCityDisStr = this.applyInfo.area;
-      // this.applyInfo.area + this.applyInfo.address;
     },
     cancel() {
       this.show = false;
@@ -466,13 +523,14 @@ export default {
         .then(res => {
           if (res.data.code === 0) {
             this.list2 =
-              res.data.content.length > 1
+              res.data.content.length > 0
                 ? res.data.content
                 : [{ areaName: "-" }];
             if (res.data.content.length < 1) {
               this.list3 = [{ areaName: "-" }];
             }
-            this.cityVal = this.list2[0].areaId;
+            // this.cityVal = this.list2[0].areaId;
+            this.dataProcessing();
           }
         });
     },
@@ -484,10 +542,11 @@ export default {
           .then(res => {
             if (res.data.code === 0) {
               this.list3 =
-                res.data.content.length > 1
+                res.data.content.length > 0
                   ? res.data.content
                   : [{ areaName: "-" }];
             }
+            this.dataProcessing();
           });
       }
     }
@@ -540,17 +599,12 @@ export default {
     }
   }
   .pay-btn {
-    // position: fixed;
     padding: 30px 0;
-    // width: 100%;
-    // bottom: 10px;
-    // left: 0;
-    // right: 0;
-    // padding: 0 16px;
     /deep/ .van-button--danger {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
+      border-radius: 4px;
     }
   }
   .address .addressbox {

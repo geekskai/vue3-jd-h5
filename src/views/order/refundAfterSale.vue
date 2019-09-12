@@ -12,7 +12,7 @@
         <i>未发现退款/售后的订单</i>
       </span>
     </div>
-    <van-tabs v-else v-model="active" background="#EFEFF4">
+    <van-tabs v-else v-model="active" swipeable background="#EFEFF4">
       <van-tab title="售后申请">
         <div v-if="!orderLists.length" class="empty-box">
           <svg-icon icon-class="refund-after-sale" class="order-empty"></svg-icon>

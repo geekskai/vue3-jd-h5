@@ -1,6 +1,6 @@
 <template>
   <div class="feedback">
-     <cm-header>
+    <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
@@ -157,6 +157,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
+      border-radius: 4px;
     }
   }
 }

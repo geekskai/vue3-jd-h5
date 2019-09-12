@@ -88,9 +88,18 @@
       <div class="pay-count">
         <span>
           共{{orderForm.quantity}}件商品，小计：
-          <i>￥{{orderForm.amount}}</i>
+          <b class="pay-amount">￥{{orderForm.amount}}</b>
         </span>
-        <span>59：59后取消订单</span>
+        <div
+          class="cancel-time"
+          v-show="(new Date(orderForm.endPayDate).getTime() - new Date().getTime())>0"
+        >
+          <van-count-down
+            :time="new Date(orderForm.endPayDate).getTime() - new Date().getTime()"
+            class="time-count-down"
+            format="mm:ss"
+          ></van-count-down>&nbsp;&nbsp;后取消订单
+        </div>
       </div>
       <van-button type="danger" @click="handlePay" size="large">立即支付</van-button>
     </div>
@@ -209,7 +218,7 @@ export default {
 .order-detail-page {
   height: 100%;
   padding: 0 16px;
-  
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -352,17 +361,24 @@ export default {
     left: 0;
     right: 0;
     padding: 0 16px;
-    // padding-top: 50px;
-    // padding-bottom: 30px;
     .pay-count {
       display: flex;
       justify-content: space-between;
       color: #949497;
+      background-color: #efeff4;
       font-size: 11px;
       padding-bottom: 12px;
-      i {
+      .pay-amount {
         color: #ec3924;
-        font-weight: 700;
+      }
+      .cancel-time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .time-count-down {
+          color: #949497;
+          font-size: 11px;
+        }
       }
     }
     /deep/ .van-button--danger {

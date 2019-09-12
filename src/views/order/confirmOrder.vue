@@ -135,16 +135,17 @@ export default {
       }
       this.$http.post(`/api/order/checkout`, paramsObj).then(response => {
         this.orderForm = response.data.content;
-        let fullAddress = this.orderForm.fullAddress;
-        if (fullAddress && ~fullAddress.indexOf("undefined")) {
-          this.orderForm.fullAddress = fullAddress.slice(
-            0,
-            this.orderForm.fullAddress.length - 9
-          );
-        }
       });
     },
     handleSubmitOrder() {
+      if (!this.orderForm.fullAddress) {
+        this.$toast({
+          mask: false,
+          duration: 2000,
+          message: "请选择收货地址！"
+        });
+        return;
+      }
       this.$toast.loading({
         mask: true,
         duration: 0, // 持续展示 toast
@@ -200,7 +201,7 @@ export default {
 .order-detail-page {
   height: 100%;
   padding: 0 16px;
- 
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -357,6 +358,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
+         border-radius: 4px;
     }
   }
 }

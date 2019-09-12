@@ -46,7 +46,7 @@
             <i>{{address.tag}}</i>
           </div>
           <div class="info-address">
-            <span>{{address.fullAddress.slice(0,address.fullAddress.length-9)+address.address}}</span>
+            <span>{{address.fullAddress}}</span>
             <van-icon name="arrow" color="#EC3924" />
           </div>
           <span>{{address.receiverPhone}}</span>
