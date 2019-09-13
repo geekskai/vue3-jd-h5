@@ -2,7 +2,7 @@ export default [{
   path: '/coinPay/index',
   name: 'coinPay',
   meta: {
-    index: 14
+    title: 'coinPay'
   },
   component: () => import('@/views/coinPay/index.vue')
 }]

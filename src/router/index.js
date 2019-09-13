@@ -73,7 +73,10 @@ const router = new Router({
   }
 })
 
-// router.beforeEach((to, from, next) => {
-
-// })
+router.beforeEach((to, from, next) => {
+  if (to.meta.title === 'coinPay') {
+    document.title = '币付宝'
+  }
+  next()
+})
 export default router
