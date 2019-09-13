@@ -5,6 +5,6 @@ export default [
     meta: {
       index: 13
     },
-    component: () => import('@/views/mine/addAddress.vue')
+    component: () => import(/* webpackChunkName: 'addAddress' */ '@/views/mine/addAddress.vue')
   }
 ]

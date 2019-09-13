@@ -30,8 +30,8 @@
     "vue": "^2.6.10",
     "vue-awesome-swiper": "^3.1.3",
     "vue-clipboard2": "^0.3.1",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
@@ -46,7 +46,7 @@
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "mockjs": "^1.0.1-beta3",
+    "image-webpack-loader": "^6.0.0",
     "node-sass": "^4.9.0",
     "postcss-px2rem": "^0.3.0",
     "postcss-pxtorem": "^4.0.1",

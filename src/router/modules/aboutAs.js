@@ -6,6 +6,6 @@ export default [
       title: '关于我们',
       keepAlive: true
     },
-    component: () => import('@/views/mine/aboutAs.vue')
+    component: () => import(/* webpackChunkName: 'aboutAs' */ '@/views/mine/aboutAs.vue')
   }
 ]

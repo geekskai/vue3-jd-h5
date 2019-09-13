@@ -2,12 +2,10 @@
 const path = require('path')
 // https://webpack.docschina.org/plugins/compression-webpack-plugin/
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
 // 是否使用gzip
 const productionGzip = true
 // 需要gzip压缩的文件后缀
 const productionGzipExtensions = ['js', 'css']
-
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -36,6 +34,35 @@ module.exports = {
     config.optimization.splitChunks({
       chunks: 'all'
     })
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap(options => Object.assign(options, { limit: 1024 }))
+    var externals = {
+      vue: 'Vue',
+      axios: 'axios',
+      'vue-router': 'VueRouter',
+      vuex: 'Vuex'
+    }
+    config.externals(externals)
+    const cdn = {
+      js: [
+        // vue
+        'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
+        // vue-router
+        'https://unpkg.com/vue-router@3.1.3/dist/vue-router.min.js',
+        // vuex
+        'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
+        // axios
+        'https://unpkg.com/axios@0.19.0/dist/axios.min.js'
+      ]
+    }
+    config.plugin('html')
+      .tap(args => {
+        args[0].cdn = cdn
+        return args
+      })
   },
   configureWebpack: config => {
     const configs = {}
@@ -47,8 +74,7 @@ module.exports = {
       productionGzip && configs.plugins.push(
         new CompressionWebpackPlugin({
           test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-          threshold: 8192, // 超过8192KB的数据进行压缩
-          deleteOriginalAssets: true, // 打包完成之后是否删除原文件 默认false
+          threshold: 0, // 超过8192KB的数据进行压缩
           minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理 默认0.8
         })
       )
