@@ -6,7 +6,7 @@
       </span>
       <i>商家入驻</i>
     </cm-header>
-    <svg-icon class="into-process" icon-class="intoProcess"></svg-icon>
+    <!-- <svg-icon class="into-process" icon-class="into-process"></svg-icon> -->
     <router-link class="pay-btn" tag="div" to="/merchantsSettled/shopApplyInfo">
       <van-button type="danger" @click="show = true" size="large">申请入驻</van-button>
     </router-link>

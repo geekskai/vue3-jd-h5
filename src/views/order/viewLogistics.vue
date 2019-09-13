@@ -30,7 +30,7 @@
     <section v-else class="order-card">
       <ul class="order-list">
         <li class="order-info">
-          <svg-icon icon-class="logistics-logo"></svg-icon>
+          <!-- <svg-icon icon-class="logistics-logo"></svg-icon> -->
           <div class="order-detail">
             <!-- 0代表是京东物流 -->
             <p class="info-one">

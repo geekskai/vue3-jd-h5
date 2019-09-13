@@ -1,5 +1,7 @@
 // vue inspect > output.js
 const path = require('path')
+// npm i webpack - bundle - analyzer - D
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 // https://webpack.docschina.org/plugins/compression-webpack-plugin/
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // 是否使用gzip
@@ -28,6 +30,12 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
+    // 修改images loader 添加svg处理
+    const imagesRule = config.module.rule('images')
+    imagesRule.exclude.add(path.resolve(__dirname, 'src/icons'))
+    config.module
+      .rule('images')
+      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
     // 压缩代码
     config.optimization.minimize(true)
     // 分割代码
@@ -38,7 +46,18 @@ module.exports = {
       .rule('images')
       .use('url-loader')
       .loader('url-loader')
-      .tap(options => Object.assign(options, { limit: 1024 }))
+      .tap(options => Object.assign(
+        options,
+        {
+          mozjpeg: { progressive: true, quality: 65 },
+          optipng: { enabled: false },
+          pngquant: { quality: '65-90', speed: 4 },
+          gifsicle: { interlaced: false },
+          webp: { quality: 75 },
+          limit: 10
+        }
+      ))
+    // { limit: 1024 }
     var externals = {
       vue: 'Vue',
       axios: 'axios',
@@ -47,6 +66,9 @@ module.exports = {
     }
     config.externals(externals)
     const cdn = {
+      css: [
+        'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'
+      ],
       js: [
         // vue
         'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
@@ -55,7 +77,9 @@ module.exports = {
         // vuex
         'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
         // axios
-        'https://unpkg.com/axios@0.19.0/dist/axios.min.js'
+        'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
+        // vue-awesome-swiper
+        'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
       ]
     }
     config.plugin('html')
@@ -69,7 +93,9 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       // 1. 生产环境npm包转CDN
       //  configs.externals = externals
-      configs.plugins = []
+      configs.plugins = [
+        new BundleAnalyzerPlugin()
+      ]
       // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
       productionGzip && configs.plugins.push(
         new CompressionWebpackPlugin({

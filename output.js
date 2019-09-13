@@ -2,6 +2,12 @@
   mode: 'development',
   context: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5',
   devtool: 'cheap-module-eval-source-map',
+  externals: {
+    vue: 'Vue',
+    axios: 'axios',
+    'vue-router': 'VueRouter',
+    vuex: 'Vuex'
+  },
   node: {
     setImmediate: false,
     dgram: 'empty',
@@ -19,8 +25,7 @@
   resolve: {
     alias: {
       '@': 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\src',
-      vue$: 'vue/dist/vue.runtime.esm.js',
-      assets: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\src\\assets'
+      vue$: 'vue/dist/vue.runtime.esm.js'
     },
     extensions: [
       '.mjs',
@@ -55,7 +60,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '2107b9c9'
+              cacheIdentifier: '532994c8'
             }
           },
           {
@@ -65,24 +70,44 @@
                 preserveWhitespace: false
               },
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '2107b9c9'
+              cacheIdentifier: '532994c8'
             }
           }
         ]
       },
       /* config.module.rule('images') */
       {
-        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        exclude: [
+          'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\src\\icons'
+        ],
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 4096,
+              limit: 10,
               fallback: {
                 loader: 'file-loader',
                 options: {
                   name: 'static/img/[name].[hash:8].[ext]'
                 }
+              },
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              webp: {
+                quality: 75
               }
             }
           }
@@ -943,7 +968,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\babel-loader',
-              cacheIdentifier: '18c0283e'
+              cacheIdentifier: '6a9fdca9'
             }
           },
           {
@@ -1008,7 +1033,19 @@
     new HtmlWebpackPlugin(
       {
         templateParameters: function () { /* omitted long function */ },
-        template: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\public\\index.html'
+        template: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\public\\index.html',
+        cdn: {
+          css: [
+            'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'
+          ],
+          js: [
+            'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
+            'https://unpkg.com/vue-router@3.1.3/dist/vue-router.min.js',
+            'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
+            'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
+            'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
+          ]
+        }
       }
     ),
     /* config.plugin('preload') */

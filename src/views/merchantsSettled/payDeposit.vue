@@ -16,7 +16,7 @@
         <li class="reault-text">
           <b>300USDT</b>
         </li>
-        <svg-icon class="pay-deposit-background" icon-class="pay-deposit-background"></svg-icon>
+        <!-- <svg-icon class="pay-deposit-background" icon-class="pay-deposit-background"></svg-icon> -->
       </ul>
     </section>
     <div class="pay-btn">
