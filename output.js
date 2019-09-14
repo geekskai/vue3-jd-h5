@@ -60,7 +60,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '532994c8'
+              cacheIdentifier: '6dd448de'
             }
           },
           {
@@ -70,7 +70,7 @@
                 preserveWhitespace: false
               },
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '532994c8'
+              cacheIdentifier: '6dd448de'
             }
           }
         ]
@@ -968,7 +968,7 @@
             loader: 'cache-loader',
             options: {
               cacheDirectory: 'E:\\Data\\codeSpace\\Work\\whatech-saas-h5\\node_modules\\.cache\\babel-loader',
-              cacheIdentifier: '6a9fdca9'
+              cacheIdentifier: 'f3c72e42'
             }
           },
           {
@@ -988,6 +988,15 @@
             options: {
               symbolId: 'icon-[name]'
             }
+          }
+        ]
+      },
+      /* config.module.rule('svg-inline-loade') */
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-inline-loader'
           }
         ]
       }

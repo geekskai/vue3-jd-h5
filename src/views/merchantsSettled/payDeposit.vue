@@ -17,6 +17,7 @@
           <b>300USDT</b>
         </li>
         <!-- <svg-icon class="pay-deposit-background" icon-class="pay-deposit-background"></svg-icon> -->
+        <img src="@/assets/image/logistics/pay-deposit-background.png" alt="">
       </ul>
     </section>
     <div class="pay-btn">

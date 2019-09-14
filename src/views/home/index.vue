@@ -5,7 +5,7 @@
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
         <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
       </div>
-      <!-- <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon> -->
+      <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
     <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in images" :key="index">

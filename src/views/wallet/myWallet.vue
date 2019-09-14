@@ -12,7 +12,8 @@
           <svg-icon class="main-icon" icon-class="consumption-pool"></svg-icon>
           <b class="pool-text">消费矿池</b>
           <div class="consumption-info">
-            <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
+            <!-- <svg-icon class="count-svg" icon-class="pool-count"></svg-icon> -->
+            <img class="count-svg" src="@/assets/image/mime/pool-count.png">
             <span class="pool-count">{{walletForm.shoppingPool}}</span>
           </div>
         </router-link>
@@ -20,7 +21,8 @@
           <svg-icon class="main-icon" icon-class="advertisement-pool"></svg-icon>
           <b class="pool-text">广告矿池</b>
           <div class="advertisement-info">
-            <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
+            <img class="count-svg" src="@/assets/image/mime/pool-count.png">
+            <!-- <svg-icon class="count-svg" icon-class="pool-count"></svg-icon> -->
             <span class="pool-count">{{walletForm.adPool}}</span>
           </div>
         </router-link>
@@ -28,7 +30,8 @@
           <svg-icon class="main-icon" icon-class="node-pool"></svg-icon>
           <b class="pool-text">节点矿池</b>
           <div class="node-info">
-            <svg-icon class="count-svg" icon-class="pool-count"></svg-icon>
+            <img class="count-svg" src="@/assets/image/mime/pool-count.png">
+            <!-- <svg-icon class="count-svg" icon-class="pool-count"></svg-icon> -->
             <span class="pool-count">{{walletForm.nodePool}}</span>
           </div>
         </router-link>

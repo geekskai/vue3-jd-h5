@@ -1,8 +1,8 @@
 <template>
   <div class="coin-pay">
     <div class="coin-pay-class">
-      <svg-icon icon-class="coin-pay-logo" class="coin-pay-logo"></svg-icon>
-      <img src="../../assets/image/coinPay/coin-pay-text.png" class="coin-pay-text" />
+      <img src="@/assets/image/coinPay/coin-pay-logo.png">
+      <img src="@/assets/image/coinPay/coin-pay-text.png" class="coin-pay-text" />
       <p class="coin-pay-desc">
         Coin Pay 提供高效便捷、安全有保障的数字
         <br />资产相关服务。

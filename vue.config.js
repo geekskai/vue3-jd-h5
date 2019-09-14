@@ -1,9 +1,42 @@
 // vue inspect > output.js
 const path = require('path')
+const webpack = require('webpack')
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 // https://webpack.docschina.org/plugins/compression-webpack-plugin/
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const dllReference = (config) => {
+  config.plugin('vendorDll')
+    .use(webpack.DllReferencePlugin, [{
+      context: __dirname,
+      manifest: require('./dll/vendor.manifest.json')
+    }])
+
+  config.plugin('utilDll')
+    .use(webpack.DllReferencePlugin, [{
+      context: __dirname,
+      manifest: require('./dll/util.manifest.json')
+    }])
+
+  config.plugin('addAssetHtml')
+    .use(AddAssetHtmlPlugin, [
+      [
+        {
+          filepath: require.resolve(path.resolve(__dirname, 'dll/vendor.dll.js')),
+          outputPath: 'dll',
+          publicPath: '/dll'
+        },
+        {
+          filepath: require.resolve(path.resolve(__dirname, 'dll/util.dll.js')),
+          outputPath: 'dll',
+          publicPath: '/dll'
+        }
+      ]
+    ])
+    .after('html')
+}
+
 // 是否使用gzip
 const productionGzip = true
 // 需要gzip压缩的文件后缀
@@ -18,6 +51,9 @@ module.exports = {
   assetsDir: 'static',
   productionSourceMap: false,
   chainWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      dllReference(config)
+    }
     config.module.rules.delete('svg') // 重点:删除默认配置中处理svg,
     config.module
       .rule('svg-sprite-loader')
@@ -30,6 +66,7 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
+    config.module.rule('svg-inline-loade').test(/\.svg$/).use('svg-inline-loade').loader('svg-inline-loader')
     // 修改images loader 添加svg处理
     const imagesRule = config.module.rule('images')
     imagesRule.exclude.add(path.resolve(__dirname, 'src/icons'))
@@ -78,6 +115,8 @@ module.exports = {
         'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
         // axios
         'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
+        // vue-lazyload
+        'https://unpkg.com/vue-lazyload/vue-lazyload.js',
         // vue-awesome-swiper
         'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
       ]
