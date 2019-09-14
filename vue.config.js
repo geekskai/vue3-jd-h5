@@ -66,13 +66,6 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-    config.module.rule('svg-inline-loade').test(/\.svg$/).use('svg-inline-loade').loader('svg-inline-loader')
-    // 修改images loader 添加svg处理
-    const imagesRule = config.module.rule('images')
-    imagesRule.exclude.add(path.resolve(__dirname, 'src/icons'))
-    config.module
-      .rule('images')
-      .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
     // 压缩代码
     config.optimization.minimize(true)
     // 分割代码
@@ -104,7 +97,8 @@ module.exports = {
     config.externals(externals)
     const cdn = {
       css: [
-        'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css',
+        'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/index.css'
       ],
       js: [
         // vue
@@ -117,6 +111,8 @@ module.exports = {
         'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
         // vue-lazyload
         'https://unpkg.com/vue-lazyload/vue-lazyload.js',
+        // vant
+        'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/vant.min.js',
         // vue-awesome-swiper
         'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
       ]
