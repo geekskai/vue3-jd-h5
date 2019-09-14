@@ -3,7 +3,6 @@
     <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <img src="../../assets/icons/left-green-white.png" />
-        <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
       </span>
       <div>看相似</div>
     </cm-header>
