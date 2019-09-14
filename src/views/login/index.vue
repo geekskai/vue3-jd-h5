@@ -44,7 +44,6 @@ export default {
       }
     };
   },
-  created() {},
   methods: {
     handleUserLogin() {
       this.$http.post(`/api/user/login`, this.loginForm).then(response => {
