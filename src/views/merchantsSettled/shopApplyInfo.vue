@@ -26,7 +26,6 @@
             <van-cell title="店铺所在地区" />
             <div class="address-name" @click="showPicker">
               <ValidationProvider v-slot="{ errors }" :rules="{required:true}">
-                <!-- <van-field v-model="applyInfo.provinceCityDisStr" disabled placeholder="请选择省市区" /> -->
                 <van-field
                   v-model="provinceCityDisStr"
                   :error-message="errors[0]"
