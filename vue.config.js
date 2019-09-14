@@ -53,6 +53,41 @@ module.exports = {
   chainWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       dllReference(config)
+      var externals = {
+        vue: 'Vue',
+        axios: 'axios',
+        'vue-router': 'VueRouter',
+        vuex: 'Vuex'
+      }
+      config.externals(externals)
+      const cdn = {
+        css: [
+          'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css',
+          'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/index.css'
+        ],
+        js: [
+          // vue
+          'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
+          // vue-router
+          'https://unpkg.com/vue-router@3.1.3/dist/vue-router.min.js',
+          // vuex
+          'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
+          // axios
+          'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
+          // vue-lazyload
+          'https://unpkg.com/vue-lazyload/vue-lazyload.js',
+          // vant
+          'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/vant.min.js',
+          // vue-awesome-swiper
+          'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
+        ]
+      }
+      config.plugin('html')
+        .tap(args => {
+          args[0].cdn = cdn
+          args[0].minify.removeComments = false
+          return args
+        })
     }
     config.module.rules.delete('svg') // 重点:删除默认配置中处理svg,
     config.module
@@ -87,50 +122,16 @@ module.exports = {
           limit: 10
         }
       ))
-    // { limit: 1024 }
-    var externals = {
-      vue: 'Vue',
-      axios: 'axios',
-      'vue-router': 'VueRouter',
-      vuex: 'Vuex'
-    }
-    config.externals(externals)
-    const cdn = {
-      css: [
-        'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css',
-        'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/index.css'
-      ],
-      js: [
-        // vue
-        'https://unpkg.com/vue@2.6.10/dist/vue.min.js',
-        // vue-router
-        'https://unpkg.com/vue-router@3.1.3/dist/vue-router.min.js',
-        // vuex
-        'https://unpkg.com/vuex@3.1.1/dist/vuex.min.js',
-        // axios
-        'https://unpkg.com/axios@0.19.0/dist/axios.min.js',
-        // vue-lazyload
-        'https://unpkg.com/vue-lazyload/vue-lazyload.js',
-        // vant
-        'https://cdn.jsdelivr.net/npm/vant@2.2.1/lib/vant.min.js',
-        // vue-awesome-swiper
-        'https://cdn.jsdelivr.net/npm/vue-awesome-swiper@3.1.3/dist/vue-awesome-swiper.min.js'
-      ]
-    }
-    config.plugin('html')
-      .tap(args => {
-        args[0].cdn = cdn
-        return args
-      })
   },
   configureWebpack: config => {
     const configs = {}
+    configs.plugins = []
     if (process.env.NODE_ENV === 'production') {
       // 1. 生产环境npm包转CDN
-      //  configs.externals = externals
-      configs.plugins = [
+      configs.plugins.push(
         new BundleAnalyzerPlugin()
-      ]
+      )
+      //  configs.externals = externals
       // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
       productionGzip && configs.plugins.push(
         new CompressionWebpackPlugin({
