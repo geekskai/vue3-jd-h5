@@ -509,10 +509,6 @@ export default {
       this.cityVal = this.list2[this.cityIndex].areaId;
       this.val.areaVal = this.list3[this.districtIndex];
       this.areaVal = this.list3[this.districtIndex].areaId;
-      // this.val.cityVal = this.addressData[this.provinceIndex].city[this.cityIndex].name
-      // this.val.areaVal = this.addressData[this.provinceIndex].city[this.cityIndex].area[this.districtIndex]
-      // this.$emit('getAddress', this.val)
-      // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
     }
   },
   watch: {

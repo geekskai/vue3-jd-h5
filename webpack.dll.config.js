@@ -5,7 +5,7 @@ const webpack = require('webpack')
 module.exports = {
   mode: 'production',
   entry: {
-    vendor: ['swiper/dist/js/swiper.js', 'better-scroll/dist/bscroll.esm.js', 'vue-lazyload/vue-lazyload.js'],
+    vendor: ['swiper/dist/js/swiper.js', 'better-scroll/dist/bscroll.esm.js', 'vue-lazyload/vue-lazyload.js', 'qrcodejs2/qrcode.js'],
     util: ['lodash']
   },
   output: {

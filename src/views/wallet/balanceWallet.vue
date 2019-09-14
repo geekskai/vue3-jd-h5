@@ -12,7 +12,7 @@
       </li>
     </header>
     <div class="empty-icon" v-if="!balanceWallets.length">
-      <svg-icon icon-class="pool-empty" class="pool-empty-cls"></svg-icon>
+      <img src="../../assets/image/node/pool-empty.png" class="pool-empty-cls">
       <p class="empty-text">暂无相关记录</p>
     </div>
     <section

@@ -10,7 +10,7 @@
     <ul class="list-item">
       <li class="card-item">
         <div class="card-img">
-          <img src="../../assets/image/premiumRanking/demo1.png" />
+          <img src="../../assets/image/home/demo12.png" />
         </div>
         <ul class="card-info">
           <li class="info-top">

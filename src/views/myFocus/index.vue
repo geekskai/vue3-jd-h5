@@ -20,7 +20,7 @@
           <van-swipe-cell :right-width="60" :on-close="onClose" name="111">
             <li class="card-item">
               <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
+                <img src="../../assets/image/home/demo3.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
@@ -49,7 +49,7 @@
           <van-swipe-cell :right-width="120" :on-close="onClose" name="111">
             <li class="card-item">
               <div class="card-img">
-                <img class="item-img" src="../../assets/image/premiumRanking/demo1.png" />
+                <img class="item-img" src="../../assets/image/home/demo11.png" />
               </div>
               <ul class="card-info">
                 <li class="info-top">

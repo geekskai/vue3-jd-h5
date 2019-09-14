@@ -66,7 +66,6 @@
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <!-- <img src="../../assets/image/product/store-header.png" class="store-header" /> -->
           <img v-lazy="detailForm.shopLogo" class="store-header" />
           <span class="store-name">{{detailForm.shopName}}</span>
         </div>
