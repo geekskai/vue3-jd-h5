@@ -1,5 +1,5 @@
 export default [{
-  path: 'index',
+  path: '/index',
   name: 'index',
   meta: {
     index: 1
@@ -7,7 +7,7 @@ export default [{
   component: () => import('@/views/home/index.vue')
 },
 {
-  path: 'classify',
+  path: '/classify',
   name: 'classify',
   meta: {
     index: 1
@@ -15,7 +15,7 @@ export default [{
   component: () => import('@/views/classify/index.vue')
 },
 {
-  path: 'shopCart',
+  path: '/shopCart',
   name: 'shopCart',
   meta: {
     index: 1
@@ -23,7 +23,7 @@ export default [{
   component: () => import('@/views/shopCart/index.vue')
 },
 {
-  path: 'mine',
+  path: '/mine',
   name: 'mine',
   meta: {
     index: 1

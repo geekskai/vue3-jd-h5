@@ -7,12 +7,12 @@
       <i>查看物流</i>
     </cm-header>
 
-    <!-- 0代表是京东物流 -->
-    <!-- <section class="order-card" v-if="logisticsInfo.jdFlag==0">
+    <section class="order-card" v-if="logisticsInfo.jdFlag==0">
       <ul class="order-list">
         <li class="order-info">
           <svg-icon icon-class="logistics-jd"></svg-icon>
           <div class="order-detail">
+            <!-- 0代表是京东物流 -->
             <div class="info-content">
               <p class="info-two">
                 <span>
@@ -26,8 +26,8 @@
           </div>
         </li>
       </ul>
-    </section>-->
-    <section class="order-card">
+    </section>
+    <section v-else class="order-card">
       <ul class="order-list">
         <li class="order-info">
           <img class="logist-logo" src="@/assets/image/logistics/self-logist-logo.png" />

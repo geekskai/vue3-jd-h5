@@ -15,7 +15,7 @@
 
 `whale-mall-h5`是一个电商H5页面前端项目，基于Vue+Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
 
-<a href='http://47.106.147.83'>demo地址</a>
+<a href='http://jc.cmall.world/#/'>项目地址</a>
 
 ### 技术选型
 

@@ -7,8 +7,8 @@
       <ul v-if="token" class="user-info">
         <li class="user-name">{{userInfo.nickName}}</li>
         <li class="node-info">
-          <span class="sharing-node" @click="toShow">链猫掌柜</span>
-          <span class="business-node">商家节点</span>
+          <span v-if="nodeName" class="sharing-node" @click="toShow">{{nodeName}}</span>
+          <span v-if="merchantsSettledStatus == 1" class="business-node">商家节点</span>
         </li>
       </ul>
       <div v-else class="login-regist">
@@ -157,27 +157,51 @@
         >我的节点数据</van-divider>
         <ul class="my-node-data">
           <li class="data-item">
-            <img src="../../assets/image/product/share-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&1) === 1)"
+              src="../../assets/image/product/share-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">链猫掌柜</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/area-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&2) === 2)"
+              src="../../assets/image/product/area-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">区级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/municipal-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&4) === 4)"
+              src="../../assets/image/product/municipal-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">市级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/state-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&8) === 8)"
+              src="../../assets/image/product/state-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">州级节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/industry-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&16) === 16)"
+              src="../../assets/image/product/industry-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">行业节点</span>
           </li>
           <li class="data-item">
-            <img src="../../assets/image/product/super-node-img.png" alt />
+            <img
+              v-if="((userInfo.nodeType&32) === 32)"
+              src="../../assets/image/product/super-node-img.png"
+            />
+            <img v-else src="../../assets/image/product/gray-node-img.png" />
             <span class="node-text">超级节点</span>
           </li>
         </ul>
@@ -200,6 +224,7 @@ export default {
   data() {
     return {
       show: false,
+      nodeName: "",
       userInfo: {},
       merchantsSettledStatus: null, // 商家入驻消息
       token: localStorage.token,
@@ -237,9 +262,29 @@ export default {
     initUserInfo() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
+        // this.userInfo.nodeType = 33;
         this.merchantsSettledStatus = response.data.content.merchantStatus;
         this.status = response.data.content.status;
+        this.setNodeType(this.userInfo.nodeType);
       });
+    },
+    setNodeType(nodeType) {
+      let resType = [];
+      [1, 2, 4, 8, 16, 32].forEach(it => {
+        if ((nodeType & it) === it) {
+          resType.push(it);
+        }
+      });
+      let nodeObj = {
+        1: "链猫掌柜",
+        2: "区级节点",
+        4: "市级节点",
+        8: "州级节点",
+        16: "行业节点",
+        32: "超级节点"
+      };
+      let index = resType.pop();
+      this.nodeName = nodeObj[index];
     },
     handleClose() {
       this.show = false;

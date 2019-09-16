@@ -1,23 +1,24 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view />
+      <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" />
   </div>
 </template>
 
 <script>
 // 禁止在iOS端将页面手动放大缩小的事件
 window.onload = function() {
-  document.addEventListener('touchstart', function(event) {
+  document.addEventListener("touchstart", function(event) {
     if (event.touches.length > 1) {
-      event.preventDefault()
+      event.preventDefault();
     }
-  })
-  document.addEventListener('gesturestart', function(event) {
-    event.preventDefault()
-  })
-}
+  });
+  document.addEventListener("gesturestart", function(event) {
+    event.preventDefault();
+  });
+};
 export default {
   name: "App",
   data() {

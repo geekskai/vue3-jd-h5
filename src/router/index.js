@@ -3,58 +3,17 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const indexRouter = {
-  // 默认页面
+let routes = [{
   path: '/',
-  component: () => import(/* webpackChunkName: "index" */ '@/views/index'),
-  redirect: '/index',
-  children: []
-}
-const routes = [
-  // 登录页面
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   meta: {
-  //     index: 2
-  //   },
-  //   component: () => import( /* webpackChunkName: "login" */ '@/views/login/index')
-  // },
-  // // 注册页面
-  // {
-  //   path: '/register',
-  //   name: 'register',
-  //   meta: {
-  //     index: 2
-  //   },
-  //   component: () => import( /* webpackChunkName: "register" */ '@/views/register/index')
-  // },
-  // 无权限页面
-  {
-    path: '/nopermission',
-    name: 'nopermission',
-    meta: {
-      index: 1
-    },
-    component: () => import(/* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
-  },
-  {
-    path: '*',
-    name: '404',
-    meta: {
-      index: 1
-    },
-    component: () => import(/* webpackChunkName: "404" */ '@/views/error/404')
-  },
-  indexRouter
-]
+  redirect: '/index'
+}]
 const routerContext = require.context('./modules', true, /\.js$/)
 routerContext.keys().forEach(route => {
   const routerModule = routerContext(route)
   /**
    * 兼容 import export 和 require module.export 两种规范
    */
-  indexRouter.children = [...indexRouter.children, ...(routerModule.default || routerModule)]
+  routes = [...routes, ...(routerModule.default || routerModule)]
 })
 
 const router = new Router({
