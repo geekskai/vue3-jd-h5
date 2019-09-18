@@ -9,7 +9,7 @@
     "standard": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\"",
     "standfix": "standard \"jsbundles/**/*.js\" \"src/**/*.js\" \"components/**/*.js\" --fix",
     "lint": "vue-cli-service lint",
-    "dll": "webpack -p --progress --config webpack.dll.config.js",
+    "dll": "webpack -p --progress --config ./build/webpack.dll.config.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "standard": {
