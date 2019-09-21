@@ -6,17 +6,17 @@
       </span>
       <div>看相似</div>
     </cm-header>
-    <ul class="list-item">
+    <ul class="list-item" v-if="tabItemLists.length" @click="handleToProductDetail(tabItemLists[0].productId)">
       <li class="card-item">
         <div class="card-img">
-          <img src="../../assets/image/home/demo12.png" />
+          <img class="lazy-img" v-lazy="tabItemLists[0].productMainImage" />
         </div>
         <ul class="card-info">
           <li class="info-top">
-            <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
+            <div class="item-title">{{tabItemLists[0].productName}}</div>
           </li>
           <li class="info-buttom">
-            <b class="item-focus">￥777</b>
+            <b class="item-focus">￥{{tabItemLists[0].productCnyPrice}}</b>
           </li>
         </ul>
       </li>
@@ -27,7 +27,6 @@
       <b>更多相似推荐</b>
     </van-divider>
     <div ref="similarWrapper">
-      <!-- :scroll-data="tabItemLists" -->
       <list-scroll
         ref="listScroll"
         :pullup="true"
@@ -35,8 +34,13 @@
         :pulldown="true"
       >
         <ul class="goods-content">
-          <li class="goods-item" v-for="(item,index) in tabItemLists" :key="index">
-            <div @click="handleToProductDetail(item.productId)">
+          <li
+            class="goods-item"
+            @click="handleToProductDetail(item.productId)"
+            v-for="(item,index) in tabItemLists.slice(1)"
+            :key="index"
+          >
+            <div>
               <img class="lazy-img" v-lazy="item.productMainImage" />
             </div>
             <div class="goods-layout">
@@ -73,10 +77,20 @@ export default {
     this.setHomeWrapperHeight();
   },
   methods: {
+    handleToProductDetail(productId) {
+      this.$router.push({
+        path: "/product/index",
+        query: { productId: productId }
+      });
+    },
     initData() {
       this.$http
         .get(
-          `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=30`
+          `/api/product/list?categoryId=${this.$route.query.categoryId}
+          &sortName=update_time
+          &pageNum=${this.pageNum}
+          &sortType=desc
+          &clientType=0`
         )
         .then(response => {
           this.tabItemLists.push(...response.data.content);
@@ -113,8 +127,10 @@ export default {
       justify-content: space-between;
       font-size: 14px;
       .card-img {
-        width: 110px;
-        height: 110px;
+        .lazy-img {
+          width: 110px;
+          height: 110px;
+        }
       }
       .card-info {
         display: flex;

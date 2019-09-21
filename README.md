@@ -10,30 +10,44 @@
 </a>
 </p>
 
-
 ## 项目介绍
 
-`whale-mall-h5`是一个电商H5页面前端项目，基于Vue+Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
+`whale-mall-h5`是一个电商 H5 页面前端项目，基于 Vue+Vant UI 实现，主要包括首页、分类页面、我的页面、购物车等。
 
 <a href='http://jc.cmall.world/#/'>项目地址</a>
 
+## 搭建步骤
+
+- 下载 node 并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
+- 克隆源代码到本地，使用 IDEA 打开，并完成编译;
+
+- 在 IDEA 命令行中运行命令：npm install,下载相关依赖;
+
+  **development**
+
+- 在 IDEA 命令行中运行命令：npm run dev,运行项目;
+
+  **production**
+
+- 在 IDEA 命令行中运行命令：npm run dll:build,运行项目;
+
+
 ### 技术选型
 
-技术 | 说明 | 官网
-----|----|----
-Vue | 前端框架 | [https://vuejs.org/](https://vuejs.org/)
-Vue-router | 路由框架 | [https://router.vuejs.org/](https://router.vuejs.org/)
-Vuex | 全局状态管理框架 | [https://vuex.vuejs.org/](https://vuex.vuejs.org/)
-Vant | 前端UI框架 | [https://youzan.github.io/vant/#/zh-CN/intro](https://youzan.github.io/vant/#/zh-CN/intro)
-Axios | 前端HTTP框架 | [https://github.com/axios/axios](https://github.com/axios/axios)
-nprogress | 进度条控件 | [https://github.com/rstacruz/nprogress](https://github.com/rstacruz/nprogress)
-vue-clipboard2 | 复制控件 | [https://github.com/Inndy/vue-clipboard2](https://github.com/Inndy/vue-clipboard2)
-vue-element-admin | 项目脚手架参考 | [https://github.com/PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-前端H5 UI地址 | UI高保真地址 | [https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d](https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d)
+| 技术              | 说明             | 官网                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Vue               | 前端框架         | [https://vuejs.org/](https://vuejs.org/)                                                                                                                                                                                                                                                                                                                                                   |
+| Vue-router        | 路由框架         | [https://router.vuejs.org/](https://router.vuejs.org/)                                                                                                                                                                                                                                                                                                                                     |
+| Vuex              | 全局状态管理框架 | [https://vuex.vuejs.org/](https://vuex.vuejs.org/)                                                                                                                                                                                                                                                                                                                                         |
+| Vant              | 前端 UI 框架     | [https://youzan.github.io/vant/#/zh-CN/intro](https://youzan.github.io/vant/#/zh-CN/intro)                                                                                                                                                                                                                                                                                                 |
+| Axios             | 前端 HTTP 框架   | [https://github.com/axios/axios](https://github.com/axios/axios)                                                                                                                                                                                                                                                                                                                           |
+| vue-clipboard2    | 复制控件         | [https://github.com/Inndy/vue-clipboard2](https://github.com/Inndy/vue-clipboard2)                                                                                                                                                                                                                                                                                                         |
+| vue-element-admin | 项目脚手架参考   | [https://github.com/PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)                                                                                                                                                                                                                                                                                         |
+| 前端 H5 UI 地址   | UI 高保真地址    | [https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d](https://lanhuapp.com/web/#/item/project/board/detail?pid=cf279f00-9937-489e-975c-b35a1130f643&project_id=cf279f00-9937-489e-975c-b35a1130f643&image_id=764b8364-b1a0-4533-90c9-793ff584f07d) |
 
 ### 项目布局
 
-``` lua
+```lua
 src -- 源码目录
 ├── api -- axios网络请求定义
 ├── assets -- 静态图片资源文件
@@ -52,19 +66,5 @@ src -- 源码目录
     ├── shopCart -- 购物车页面
     └── error -- 错误页面
 ```
-
-## 搭建步骤
-- 下载node并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
-- 该项目为前后端分离项目，访问本地访问接口需搭建后台环境，搭建请参考后端项目[传送门](https://github.com/macrozheng/mall);
-- 访问在线接口无需搭建后台环境，只需将config/dev.env.js文件中的BASE_API改为[http://39.98.190.128:8080](http://39.98.190.128:8080)即可;
-- 克隆源代码到本地，使用IDEA打开，并完成编译;
-- 在IDEA命令行中运行命令：npm install,下载相关依赖;
-- 在IDEA命令行中运行命令：npm run dev,运行项目;
-- 访问地址：[http://localhost:8090](http://localhost:8090) 即可打开后台管理系统页面;
-- 如果遇到无法运行该命令，需要配置npm的环境变量，如在path变量中添加：C:\Users\zhenghong\AppData\Roaming\npm。
-
-## 许可证
-
-[Apache License 2.0](https://github.com/macrozheng/mall-admin-web/blob/master/LICENSE)
 
 Copyright (c) 2018-2019 whatech

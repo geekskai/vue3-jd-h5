@@ -10,7 +10,7 @@
     <section class="cart-empty" v-if="clearCart">
       <ul class="empty-content">
         <li class="img-cart">
-          <svg-icon icon-class="shopping-cart"></svg-icon>
+          <img src="../../assets/image/logistics/empty-cart.png" />
         </li>
         <li class="item-text">
           <p>您的购物车空空的哦~</p>
@@ -287,7 +287,7 @@ export default {
       padding-top: 40px;
       padding-bottom: 50px;
       .img-cart {
-        margin-bottom: 50px;
+        margin-top: 50px;
         .svg-icon {
           width: 156px;
           height: 161px;

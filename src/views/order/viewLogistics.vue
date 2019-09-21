@@ -10,7 +10,7 @@
     <section class="order-card" v-if="logisticsInfo.jdFlag==0">
       <ul class="order-list">
         <li class="order-info">
-          <svg-icon icon-class="logistics-jd"></svg-icon>
+          <img src="../../assets/image/logistics/jd-logist-logo.png">
           <div class="order-detail">
             <!-- 0代表是京东物流 -->
             <div class="info-content">

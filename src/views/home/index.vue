@@ -275,12 +275,11 @@ export default {
       this.pageNum++;
       this.handleTabChange();
     },
- 
+
     //动态设置searc-wrap的高
     setHomeWrapperHeight() {
       let $screenHeight = document.documentElement.clientHeight;
       this.$refs.homeWrapper.style.height = $screenHeight - 100 + "px";
-      // this.$refs.homeWrapper.style.height = $screenHeight - 170 + "px";
     },
     handleToProductDetail(productId) {
       this.$router.push({

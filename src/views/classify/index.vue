@@ -56,7 +56,7 @@ export default {
   components: {
     ListScroll
   },
-  name: "Classify",
+  name: "classify",
   data() {
     return {
       tags: [],

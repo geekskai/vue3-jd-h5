@@ -10,13 +10,12 @@
     <section class="apply-content">
       <ul class="address-list">
         <li class="pay-item">
-          <svg-icon class="pay-deposit-svg" icon-class="pay-deposit"></svg-icon>
+          <img class="pay-deposit-svg" src="../../assets/image/logistics/pay-deposit.png" alt="">
           <span class="thanks-text">您还需缴纳保证金</span>
         </li>
         <li class="reault-text">
           <b>300USDT</b>
         </li>
-        <!-- <svg-icon class="pay-deposit-background" icon-class="pay-deposit-background"></svg-icon> -->
         <img src="@/assets/image/logistics/pay-deposit-background.png" alt="">
       </ul>
     </section>

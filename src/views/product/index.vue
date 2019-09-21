@@ -3,7 +3,6 @@
     <van-swipe :autoplay="3000" :height="350">
       <van-swipe-item v-for="(image, index) in productImages" :key="index">
         <img class="lazy_img" v-if="image" v-lazy="image" />
-        <!-- <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/> -->
       </van-swipe-item>
     </van-swipe>
 
@@ -37,9 +36,8 @@
         <div class="text-left">
           <span v-if="detailForm.calculate" class="force-value">{{detailForm.calculate}}算力值</span>
           {{detailForm.productName}}
-          <!-- <span class="item-desc">{{detailForm.productName}}</span> -->
         </div>
-        <span class="heart-full" @click="isLike=!isLike">
+        <span class="heart-full" @click="handleIsLise(detailForm.productId)">
           <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
           <svg-icon v-else icon-class="heart-null"></svg-icon>
         </span>
@@ -162,6 +160,13 @@ export default {
   },
 
   methods: {
+    handleIsLise(productId) {
+      this.isLike = !this.isLike;
+      this.$http.post(`/api/user/addAttention`, {
+        id: productId,
+        type: 0
+      });
+    },
     skuSelected({ skuValue, selectedSku, selectedSkuComb }) {
       if (selectedSkuComb) {
         this.specsName = this.specsName + ";" + skuValue.specsName;
@@ -249,8 +254,8 @@ export default {
         .then(response => {
           this.productImages = response.data.content.productImages;
           this.goods.picture = response.data.content.productImages[0];
-          // this.goods.title = response.data.content.productName;
           this.detailForm = response.data.content;
+          this.isLike = Boolean(this.detailForm.attentionFlag);
         });
     },
     handleViewDetail() {
@@ -525,6 +530,15 @@ export default {
     }
   }
   .product-sku {
+    /deep/ .van-sku-actions {
+      padding: 0;
+    }
+    /deep/ .van-button:last-of-type {
+      border-radius: 0;
+    }
+    /deep/ .van-button:first-of-type {
+      border-radius: 0;
+    }
     /deep/ .van-sku-row__item.van-sku-row__item--active {
       color: #ec3924;
       background: #fff;
@@ -538,7 +552,6 @@ export default {
     /deep/ .van-sku-actions {
       /deep/ .van-button--warning {
         background-color: #f3ca43;
-        border: 1px solid #f3ca43;
         height: 44px;
         line-height: 44px;
       }
@@ -719,9 +732,17 @@ export default {
   .product-footer {
     /deep/ .van-button--warning {
       background-color: #f3ca43;
-      border: 1px solid #f3ca43;
+      // border: 1px solid #f3ca43;
       height: 44px;
       line-height: 44px;
+    }
+    /deep/ .van-goods-action-button--first {
+      border-radius: 0;
+      margin: 0;
+    }
+    /deep/ .van-goods-action-button--last {
+      border-radius: 0;
+      margin: 0;
     }
     /deep/ .van-button--danger {
       height: 44px;

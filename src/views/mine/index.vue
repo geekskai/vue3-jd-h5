@@ -1,37 +1,41 @@
 <template>
   <div class="mine-layout">
-    <section class="mine-header">
-      <router-link to="/mine/personInfo">
-        <img :src="userInfo.headImageUrl" class="header-image" />
-      </router-link>
-      <ul v-if="token" class="user-info">
-        <li class="user-name">{{userInfo.nickName}}</li>
-        <li class="node-info">
-          <span v-if="nodeName" class="sharing-node" @click="toShow">{{nodeName}}</span>
-          <span v-if="merchantsSettledStatus == 1" class="business-node">商家节点</span>
-        </li>
-      </ul>
-      <div v-else class="login-regist">
-        <router-link to="/login" class="order-item" tag="span">登录</router-link>
-        <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
-      </div>
-    </section>
-    <!-- <section class="my-info">
-      <ul class="info-list">
-        <li class="info-item">
-          <b>09</b>
-          <span>商品关注</span>
-        </li>
-        <li class="info-item">
-          <b>09</b>
-          <span>店铺关注</span>
-        </li>
-        <li class="info-item">
-          <b>09</b>
-          <span>我的足迹</span>
-        </li>
-      </ul>
-    </section>-->
+    <div class="header-layout">
+      <section class="mine-header">
+        <router-link to="/mine/personInfo">
+          <img v-if="userInfo.headImageUrl" :src="userInfo.headImageUrl" class="header-image" />
+          <img v-else src="../../assets/image/setting/logo.png" class="header-image" />
+        </router-link>
+        <ul v-if="token" class="user-info">
+          <li class="user-name">{{userInfo.nickName}}</li>
+          <li class="node-info">
+            <span v-if="nodeName" class="sharing-node" @click="toShow">{{nodeName}}</span>
+            <span v-if="merchantsSettledStatus == 1" class="business-node">商家节点</span>
+          </li>
+        </ul>
+        <div v-else class="login-regist">
+          <router-link to="/login" class="order-item" tag="span">登录</router-link>
+          <router-link to="/register/phoneRegister" class="order-item" tag="span">/注册</router-link>
+        </div>
+      </section>
+      <section class="my-info">
+        <ul class="info-list">
+          <router-link class="info-item" to="/myFocus" tag="li">
+            <b>{{userInfo.goodsAttention}}</b>
+            <span>商品关注</span>
+          </router-link>
+          <router-link class="info-item" :to="`/myFocus?tabName=merchant`" tag="li">
+            <b>{{userInfo.shopAttention}}</b>
+            <span>店铺关注</span>
+          </router-link>
+          <router-link class="info-item" :to="`/myFocus/myFootprint?tabName=product`" tag="li">
+            <b>{{userInfo.footAttention}}</b>
+            <span>我的足迹</span>
+          </router-link>
+        </ul>
+      </section>
+    </div>
+
     <section class="order-all">
       <router-link to="/order" class="look-orders" tag="span">查看全部订单>></router-link>
       <ul class="order-list">
@@ -209,8 +213,8 @@
           :style="{ color: '#3A3A3A', borderColor: '#FFE31F',fontWeight:'600' ,fontSize:'14px', padding: '0 15px' }"
         />
         <div class="node-bottom">
-          <span class="know-btn" @click="handleClose">我知道啦</span>
-          <img class="gray-img" src="../../assets/image/product/gray-node-img.png" />
+          <b class="know-btn" @click="handleClose">我知道啦</b>
+          <!-- <img class="gray-img" src="../../assets/image/product/gray-node-img.png" /> -->
         </div>
       </article>
     </van-dialog>
@@ -262,7 +266,7 @@ export default {
     initUserInfo() {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
         this.userInfo = response.data.content;
-        // this.userInfo.nodeType = 33;
+        // this.userInfo.nodeType = 63;
         this.merchantsSettledStatus = response.data.content.merchantStatus;
         this.status = response.data.content.status;
         this.setNodeType(this.userInfo.nodeType);
@@ -298,91 +302,106 @@ export default {
 
 <style scoped lang="scss">
 .mine-layout {
-  padding: 30px 16px;
   min-height: 812px;
   padding-bottom: 50px;
-
-  background: linear-gradient(#ec3924, #ff7428);
-  .mine-header {
-    display: flex;
-    padding-left: 24px;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    padding-bottom: 20px;
-    .header-image {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-    }
-    .user-info {
-      padding-left: 16px;
-      font-size: 15px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      .node-info {
-        padding-top: 5px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        .sharing-node {
-          padding-left: 18px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 78px;
-          height: 25px;
-          font-size: 11px;
-          text-align: center;
-          background: url("../../assets/image/product/sharing-node.png")
-            no-repeat center center;
-          background-size: 100% 100%;
-          border-radius: 11px 11px;
-        }
-        .business-node {
-          margin-left: 5px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 60px;
-          height: 22px;
-          font-size: 11px;
-          text-align: center;
-          background-color: #71c0f6;
-          border-radius: 11px 11px;
-        }
-      }
-    }
-
-    .login-regist {
-      font-size: 15px;
-      color: #fff;
-      padding-left: 16px;
-    }
+  .header-layout:after {
+    width: 140%;
+    position: absolute;
+    height: 218px;
+    left: -20%;
+    top: 0;
+    z-index: -1;
+    content: "";
+    border-radius: 0 0 35% 35%;
+    background: linear-gradient(#ec3924, #ff7428);
   }
-  .my-info {
-    font-size: 13px;
-    color: #fff;
-    padding-bottom: 16px;
-    .info-list {
+  .header-layout {
+    padding: 30px 16px;
+    height: 218px;
+    .mine-header {
       display: flex;
-      justify-content: space-around;
+      padding-left: 24px;
+      justify-content: flex-start;
       align-items: center;
-      .info-item {
+      flex-direction: row;
+      padding-bottom: 10px;
+      .header-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+      .user-info {
+        padding-left: 16px;
+        font-size: 15px;
+        color: #fff;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start;
+        .node-info {
+          padding-top: 5px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .sharing-node {
+            padding-left: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 78px;
+            height: 25px;
+            font-size: 11px;
+            text-align: center;
+            background: url("../../assets/image/product/sharing-node.png")
+              no-repeat center center;
+            background-size: 100% 100%;
+            border-radius: 11px 11px;
+          }
+          .business-node {
+            margin-left: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 22px;
+            font-size: 11px;
+            text-align: center;
+            background-color: #71c0f6;
+            border-radius: 11px 11px;
+          }
+        }
+      }
+
+      .login-regist {
+        font-size: 15px;
+        color: #fff;
+        padding-left: 16px;
+      }
+    }
+    .my-info {
+      font-size: 13px;
+      color: #fff;
+      // padding-bottom: 16px;
+      .info-list {
+        display: flex;
+        justify-content: space-around;
         align-items: center;
-        b {
-          font-size: 16px;
+        .info-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          b {
+            font-size: 16px;
+          }
         }
       }
     }
   }
+
   .order-all {
+    margin: 0 16px;
+    margin-top: -50px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -419,6 +438,7 @@ export default {
     background-color: #fff;
     border-radius: 8px;
     padding: 0 16px;
+    margin: 0 16px;
     margin-top: 18px;
     .options-list {
       padding-top: 20px;

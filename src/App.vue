@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" />
+    <keep-alive include="home,classify">
+      <router-view v-if="isRouterAlive" />
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" />
   </div>
 </template>
 
@@ -21,8 +20,23 @@ window.onload = function() {
 };
 export default {
   name: "App",
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
   data() {
-    return {};
+    return {
+      isRouterAlive: true
+    };
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(() => {
+        this.isRouterAlive = true;
+      });
+    }
   }
 };
 </script>
@@ -34,6 +48,8 @@ body,
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: -2;
   background-color: #efeff4;
   -webkit-overflow-scrolling: touch;
 }

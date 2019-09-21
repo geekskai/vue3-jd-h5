@@ -1,9 +1,8 @@
 <template>
   <div class="my-focus">
     <cm-header>
-      <span slot="left" @click="$router.go(-1)">
+      <span slot="left" @click="$router.push('/mine')">
         <img src="../../assets/icons/left-green-white.png" />
-        <!-- <svg-icon icon-class="green-btn"></svg-icon> -->
       </span>
       <div>我的关注</div>
     </cm-header>
@@ -11,50 +10,57 @@
       color="#000"
       line-width="36"
       v-model="active"
-      background="#efefef"
-      swipeable
+      background="#EFEFF4"
       title-active-color="#3A3A3A"
     >
-      <van-tab title="商品">
-        <ul class="list-item">
-          <van-swipe-cell :right-width="60" :on-close="onClose" name="111">
+      <van-tab title="商品" name="product" :to="`/myFocus?tabName=product`">
+        <ul class="list-item" v-for="(item,index) in productAttentions" :key="index">
+          <van-swipe-cell :right-width="60" :on-close="onClose" :name="item.id">
             <li class="card-item">
               <div class="card-img">
-                <img src="../../assets/image/home/demo3.png" />
+                <img class="item-img" v-lazy="item.mainImage" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">22人关注</span>
+                  <div class="item-title">{{item.originalName}}</div>
+                  <span class="item-desc">{{item.quantity}}人关注</span>
                 </li>
                 <li class="info-buttom">
-                  <b class="item-focus">￥777</b>
-                  <span>
+                  <b class="item-focus">￥{{item.price}}</b>
+                  <router-link
+                    tag="span"
+                    :to="`/myFocus/lookSimilar?categoryId=${item.categoryId}`"
+                  >
                     <van-tag color="#EC3924" size="large" plain>找相似</van-tag>
-                  </span>
+                  </router-link>
                 </li>
               </ul>
             </li>
             <template slot="right">
-              <van-button square type="danger">
-                取消
-                <br />关注
-              </van-button>
+              <van-button square type="danger">取消关注</van-button>
             </template>
           </van-swipe-cell>
         </ul>
+        <van-divider
+          v-if="productAttentions.length>4"
+          :style="{ color: '#3A3A3A', borderColor: '#FFF' ,fontSize:'12px', padding: '15px' }"
+        >
+          <van-loading v-if="loading" color="#EC3924" size="25px" type="spinner" />
+          <i v-else>我是有底线的</i>
+        </van-divider>
       </van-tab>
-      <van-tab title="店铺">
-        <ul class="shop-list">
-          <van-swipe-cell :right-width="120" :on-close="onClose" name="111">
+
+      <van-tab title="店铺" name="merchant" :to="`/myFocus?tabName=merchant`">
+        <ul class="shop-list" v-for="(item,index) in merchantAttentions" :key="index">
+          <van-swipe-cell :right-width="120" :on-close="onCloseMerchant" :name="item.id">
             <li class="card-item">
               <div class="card-img">
-                <img class="item-img" src="../../assets/image/home/demo11.png" />
+                <img class="item-img" v-lazy="item.logoUrl" />
               </div>
               <ul class="card-info">
                 <li class="info-top">
-                  <b class="item-title">大众专卖店</b>
-                  <span class="item-desc">1869人关注</span>
+                  <div class="item-title">{{item.shopName}}</div>
+                  <span class="item-desc">{{item.quantity}}人关注</span>
                 </li>
                 <li class="info-buttom">
                   <svg-icon icon-class="three-point"></svg-icon>
@@ -62,8 +68,18 @@
               </ul>
             </li>
             <template slot="right">
-              <van-button square type="danger" text="取消关注"></van-button>
-              <van-button square type="primary" text="置顶店铺"></van-button>
+              <van-button
+                square
+                type="danger"
+                @click.stop.prevent="handleCancleFocus(item.id)"
+                text="取消关注"
+              ></van-button>
+              <van-button
+                square
+                type="primary"
+                @click.stop.prevent="handleShopTop(item.id)"
+                text="置顶店铺"
+              ></van-button>
             </template>
           </van-swipe-cell>
         </ul>
@@ -75,26 +91,115 @@
 <script>
 export default {
   name: "MyFocus", // 我的关注
+  inject: ["reload"],
   data() {
     return {
-      active: 0,
-      isLike: true
+      active: this.$route.query.tabName || "product",
+      isLike: true,
+      loading: true,
+      productAttentions: [],
+      merchantAttentions: [],
+      pageNum: 1
     };
   },
-  created() {},
+  created() {
+    this.initProductAttentions();
+    this.initMerchantAttentions();
+  },
+  mounted() {
+    let self = this;
+    window.onscroll = function() {
+      //变量scrollTop是滚动条滚动时，距离顶部的距离
+      var scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop; //变量windowHeight是可视区的高度
+      var windowHeight =
+        document.documentElement.clientHeight || document.body.clientHeight; //变量scrollHeight是滚动条的总高度
+      var scrollHeight =
+        document.documentElement.scrollHeight || document.body.scrollHeight; //滚动条到底部的条件
+      if (scrollTop + windowHeight == scrollHeight) {
+        self.pageNum++;
+        self.initProductAttentions();
+      }
+    };
+  },
   methods: {
-    onClose(clickPosition, instance, detail) {
+    handleCancleFocus(merchantId) {
       this.$http
-        .post(`/api/message/updateMessage`, { ids: [detail.name], type: 1 })
+        .post(`/api/user/updateAttention`, {
+          id: [merchantId],
+          type: 0
+        })
         .then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "删除成功！"
+            message: "取消成功！"
           });
+          this.initMerchantAttentions();
         });
+    },
+    handleShopTop(merchantId) {
+      this.$http
+        .post(`/api/user/updateAttention`, {
+          id: [merchantId],
+          type: 1
+        })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "置顶成功！"
+          });
+          this.reload();
+        });
+    },
+    onCloseMerchant(clickPosition, instance, detail) {
+      console.log("=====clickPosition==>", clickPosition);
+      console.log("=====instance==>", instance);
       instance.close();
-      this.inintData();
+    },
+    initMerchantAttentions() {
+      this.$http
+        .post(`/api/user/merchantAttentions`, {
+          pageNum: this.pageNum,
+          pageSize: 5
+        })
+        .then(response => {
+          this.merchantAttentions = response.data.content;
+        });
+    },
+    initProductAttentions(flag) {
+      this.$http
+        .post(`/api/user/productAttentions`, {
+          pageNum: flag ? 1 : this.pageNum,
+          pageSize: 5
+        })
+        .then(response => {
+          if (response.data.content.length === 0) {
+            this.loading = false;
+          }
+          if (flag) {
+            this.loading = true;
+            this.pageNum = 1;
+            this.productAttentions = response.data.content;
+          } else {
+            this.productAttentions.push(...response.data.content);
+          }
+        });
+    },
+
+    onClose(clickPosition, instance, detail) {
+      this.$http
+        .post(`/api/user/updateAttention`, { id: [detail.name], type: 0 })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "取消成功！"
+          });
+          this.initProductAttentions(true);
+          instance.close();
+        });
     }
   }
 };
@@ -102,9 +207,14 @@ export default {
 
 <style scoped lang="scss">
 .my-focus {
-  background-color: #efefef;
-  min-height: 812px;
+  // background-color: #efefef;
   padding: 0 16px;
+  .scroll-content {
+    /deep/ .van-divider {
+      margin: 0;
+      margin-bottom: 40px;
+    }
+  }
   /deep/ .van-tab--active {
     font-size: 18px;
     font-weight: 600;
@@ -132,8 +242,11 @@ export default {
       font-size: 14px;
       .card-img {
         margin: 14px;
-        width: 110px;
-        height: 110px;
+        .item-img {
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+        }
       }
       .card-info {
         display: flex;

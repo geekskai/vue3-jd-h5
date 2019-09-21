@@ -10,29 +10,43 @@
         <i v-else>完成</i>
       </span>
     </cm-header>
-    <van-checkbox-group v-model="shopCart.merchantCheckboxGroup">
-      <section class="order-card" v-for="(item, i) in shopCartArray" :key="i">
-        <ul class="order-list">
-          <div class="order-info">
-            <li class="check-item">
-              <van-checkbox :key="i" checked-color="#91C95B" :name="item"></van-checkbox>
-            </li>
-            <img v-lazy="item.productImg" />
-            <li class="order-detail">
-              <b class="product-name">{{item.productName}}</b>
-              <div class="info-count">
-                <span>￥{{item.productPrice}}</span>
-                <span class="slimiar-btn">
-                  <van-tag color="#EC3924" size="large" plain>找相似</van-tag>
-                </span>
+    <van-checkbox-group v-model="footprintForm.ids" ref="wrapper">
+      <!-- :scroll-data="tabItemLists" -->
+      <list-scroll :pullup="true" :scroll-data="footPrintArrays" @scrollToEnd="handleScrollToEnd">
+        <div>
+          <section class="order-card" v-for="(item, i) in footPrintArrays" :key="i">
+            <b class="foot-date" v-if="i===0||item.dateFlag">{{item.date}}</b>
+            <!-- <b class="foot-date" v-if="i===0">{{item.date}}</b> -->
+            <!-- <ul class="order-list" v-for="(item,index) in items" :key="index"> -->
+            <ul class="order-list">
+              <div class="order-info">
+                <li class="check-item">
+                  <van-checkbox :key="i" checked-color="#91C95B" :name="item.id"></van-checkbox>
+                </li>
+                <img v-lazy="item.image" />
+                <li class="order-detail">
+                  <b class="product-name">{{item.name}}</b>
+                  <div class="info-count">
+                    <span>￥{{item.price}}</span>
+                    <span class="slimiar-btn">
+                      <van-tag color="#EC3924" size="large" plain>找相似</van-tag>
+                    </span>
+                  </div>
+                </li>
               </div>
-            </li>
-          </div>
-        </ul>
-      </section>
+            </ul>
+          </section>
+          <van-divider
+            :style="{ color: '#3A3A3A', borderColor: '#FFF' ,fontSize:'12px', padding: '15px' }"
+          >
+            <van-loading v-if="loading" color="#EC3924" size="25px" type="spinner" />
+            <i v-else>我是有底线的</i>
+          </van-divider>
+        </div>
+      </list-scroll>
     </van-checkbox-group>
     <div class="pay-btn" v-show="showButton">
-      <van-button type="danger" size="large">删除</van-button>
+      <van-button type="danger" @click="handleDeleteFootprint" size="large">删除</van-button>
     </div>
   </div>
 </template>
@@ -42,67 +56,77 @@ export default {
   name: "myFootprint",
   data() {
     return {
-      shopCart: {},
+      pageNum: 1,
+      loading: true,
+      footprintForm: {},
       showButton: false,
-      shopCartArray: [
-        {
-          fullName: "松下（Panasonic）",
-          id: 555,
-          productId: 271,
-          productImg:
-            "http://img13.360buyimg.com/n12/jfs/t15079/17/2197602489/215395/30dac426/5a796eb3N142b9d43.jpg",
-          productName:
-            "松下（Panasonic）LX10 1英寸大底数码相机/卡片机 F1.4-2.8大光圈 触摸屏 Vlog相机 WIFI 4K全家桶",
-          productPrice: 4417.4,
-          productTotalPrice: 4417.4,
-          quantity: 1,
-          skuId: 288,
-          stock: 100
-        },
-        {
-          fullName: "中号",
-          id: 556,
-          productId: 271,
-          productImg:
-            "https://chain-mall.oss-cn-shenzhen.aliyuncs.com/goods/1568079770402.jpg",
-          productName: "龙猫玩偶",
-          productPrice: 4417.4,
-          productTotalPrice: 4417.4,
-          quantity: 1,
-          skuId: 288,
-          stock: 100
-        },
-        {
-          fullName: "中号",
-          id: 556,
-          productId: 271,
-          productImg:
-            "https://chain-mall.oss-cn-shenzhen.aliyuncs.com/goods/1568079770402.jpg",
-          productName: "龙猫玩偶",
-          productPrice: 4417.4,
-          productTotalPrice: 4417.4,
-          quantity: 1,
-          skuId: 288,
-          stock: 100
-        },
-        {
-          fullName: "中号",
-          id: 556,
-          productId: 271,
-          productImg:
-            "https://chain-mall.oss-cn-shenzhen.aliyuncs.com/goods/1568079770402.jpg",
-          productName: "龙猫玩偶",
-          productPrice: 4417.4,
-          productTotalPrice: 4417.4,
-          quantity: 1,
-          skuId: 288,
-          stock: 100
-        }
-      ]
+      footPrintArrays: []
     };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.initData();
+  },
+  mounted() {
+    this.setHomeWrapperHeight();
+  },
+  methods: {
+    handleScrollToEnd() {
+      if (this.loading) {
+        this.pageNum++;
+        this.initData();
+      }
+    },
+    //动态设置searc-wrap的高
+    setHomeWrapperHeight() {
+      let $screenHeight = document.documentElement.clientHeight;
+      this.$refs.wrapper.$el.style.height = $screenHeight - 30 + "px";
+    },
+    handleDeleteFootprint() {
+      this.$http
+        .post(`/api/user/delFootPrint`, { ids: this.footprintForm.ids })
+        .then(response => {
+          this.$toast({
+            mask: false,
+            duration: 1000,
+            message: "删除成功！"
+          });
+          this.initData(true);
+        });
+    },
+
+    initData(flag) {
+      this.$http
+        .post(`/api/user/footPrint`, {
+          pageNum: flag ? 1 : this.pageNum,
+          pageSize: 10
+        })
+        .then(response => {
+          if (!response.data.content) {
+            this.loading = false;
+            return;
+          }
+          let responseArrays = response.data.content.userFootPrintInfoVos;
+          if (responseArrays.length === 1) {
+            responseArrays[0].dateFlag = true;
+          } else {
+            for (let index = 1; index < responseArrays.length; index++) {
+              if (
+                responseArrays[index].date !== responseArrays[index - 1].date
+              ) {
+                responseArrays[index].dateFlag = true;
+              }
+            }
+          }
+          if (flag) {
+            this.loading = true;
+            this.pageNum = 1;
+            this.footPrintArrays = responseArrays;
+          } else {
+            this.footPrintArrays.push(...responseArrays);
+          }
+        });
+    }
+  }
 };
 </script>
 
@@ -110,11 +134,12 @@ export default {
 .my-footprint {
   padding: 0 16px;
   .order-card {
-    margin-top: 10px;
     margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+    .foot-date {
+      font-size: 17px;
+      color: #3a3a3a;
+      padding-bottom: 10px;
+    }
     /deep/ .van-checkbox {
       padding-left: 0;
       .van-checkbox__label {
@@ -140,7 +165,11 @@ export default {
       }
     }
     .order-list {
-      padding: 0 16px;
+      padding: 0 16px 0 5px;
+      background-color: #fff;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
       .order-info {
         width: 100%;
         padding: 16px 0;
@@ -187,10 +216,13 @@ export default {
       }
     }
   }
+  .van-divider {
+    margin: 0;
+  }
   .pay-btn {
     position: fixed;
     width: 100%;
-    bottom: 10px;
+    bottom: 5px;
     left: 0;
     right: 0;
     padding: 0 16px;

@@ -1,6 +1,6 @@
 <template>
   <div class="store-detail">
-    <cm-header>
+    <cm-header class="cm-header">
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
@@ -10,7 +10,13 @@
     <section class="store-info">
       <ul class="store-top">
         <img :src="storeDetail.logoUrl" class="store-header" />
-        <li class="store-name">{{storeDetail.shopName}}</li>
+        <li class="store-name">
+          <p>{{storeDetail.shopName}}</p>
+          <span class="heart-full" @click="handleIsLise">
+            <svg-icon v-if="isLike" icon-class="heart-full"></svg-icon>
+            <svg-icon v-else icon-class="heart-null"></svg-icon>
+          </span>
+        </li>
       </ul>
       <ul class="store-center">
         <li class="store-introd">
@@ -30,15 +36,7 @@
       </ul>
     </section>
 
-    <div v-if="serarchResult.length === 0" class="empty-box">
-      <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
-      <span class="empty-text">
-        <i>没有搜索结果</i>
-        <i>抱歉没有找到相关的商品~</i>
-      </span>
-    </div>
-
-    <div v-else class="goods-all">
+    <div class="goods-all" ref="wrapper">
       <section class="select-menu">
         <div
           class="select-item default-sort"
@@ -86,30 +84,47 @@
           <svg-icon icon-class="search"></svg-icon>
         </div>
       </section>
-      <section class="goods-box">
-        <ul class="goods-content">
-          <template v-for="(item,index) in serarchResult">
-            <router-link
-              :key="index"
-              tag="li"
-              class="goods-item"
-              :to="`/product/index?productId=${item.productId}`"
-            >
-              <img class="goods-productMainImage" v-lazy="item.productMainImage" />
-              <div class="goods-layout">
-                <div class="goods-title">{{item.productName}}</div>
-                <span class="goods-div">{{item.labels}}</span>
-                <div class="goods-desc">
-                  <span class="goods-price">
-                    <i>￥{{item.productCnyPrice}}</i>
-                    <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
-                  </span>
-                </div>
-              </div>
-            </router-link>
-          </template>
-        </ul>
-      </section>
+      <list-scroll :pullup="true" @scrollToEnd="handleScrollToEnd" :pulldown="true">
+        <div>
+          <div v-if="serarchResult.length">
+            <section class="goods-box">
+              <ul class="goods-content">
+                <template v-for="(item,index) in serarchResult">
+                  <router-link
+                    :key="index"
+                    tag="li"
+                    class="goods-item"
+                    :to="`/product/index?productId=${item.productId}`"
+                  >
+                    <img class="goods-productMainImage" v-lazy="item.productMainImage" />
+                    <div class="goods-layout">
+                      <div class="goods-title">{{item.productName}}</div>
+                      <span class="goods-div">{{item.labels}}</span>
+                      <div class="goods-desc">
+                        <span class="goods-price">
+                          <i>￥{{item.productCnyPrice}}</i>
+                          <span v-if="item.calculate" class="force-value">{{item.calculate}}倍算力值</span>
+                        </span>
+                      </div>
+                    </div>
+                  </router-link>
+                </template>
+              </ul>
+            </section>
+            <van-divider :style="{ color: '#3A3A3A', borderColor: '#FFF' ,fontSize:'12px' }">
+              <van-loading v-if="loading" color="#EC3924" size="25px" type="spinner" />
+              <i v-else>我是有底线的</i>
+            </van-divider>
+          </div>
+          <div v-else class="empty-box">
+            <svg-icon icon-class="search-empty" class="search-empty"></svg-icon>
+            <span class="empty-text">
+              <i>没有搜索结果</i>
+              <i>抱歉没有找到相关的商品~</i>
+            </span>
+          </div>
+        </div>
+      </list-scroll>
     </div>
   </div>
 </template>
@@ -117,7 +132,6 @@
 <script>
 export default {
   name: "storeDetail",
-
   components: {},
   props: {},
   data() {
@@ -126,6 +140,8 @@ export default {
       sortType: "desc",
       orderBy: "update_time",
       page: 1,
+      isLike: false, // 是否点赞喜欢
+      loading: false,
       storeDetail: {},
       serarchResult: []
     };
@@ -133,7 +149,25 @@ export default {
   created() {
     this.initData();
   },
+  mounted() {
+    this.setHomeWrapperHeight();
+  },
   methods: {
+    handleIsLise() {
+      this.isLike = !this.isLike;
+      this.$http.post(`/api/user/addAttention`, {
+        id: this.storeDetail.merchantId,
+        type: 1
+      });
+    },
+    setHomeWrapperHeight() {
+      let $screenHeight = document.documentElement.clientHeight;
+      this.$refs.wrapper.style.height = $screenHeight - 40 + "px";
+    },
+    handleScrollToEnd() {
+      this.pageNum++;
+      this.initData();
+    },
     initData() {
       this.$http
         .get(
@@ -141,6 +175,7 @@ export default {
         )
         .then(response => {
           this.storeDetail = response.data.content;
+          this.isLike = Boolean(this.storeDetail.attentionFlag);
         });
       this.initSortData();
     },
@@ -172,13 +207,16 @@ export default {
       }
       this.activeOrderBy = this.orderBy + "_" + sortType;
       this.initSortData();
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss">
 .store-detail {
+  .cm-header {
+    background-color: #fff;
+  }
   .store-info {
     background-color: #fff;
     min-height: 300px;
@@ -195,8 +233,14 @@ export default {
         padding-bottom: 10px;
       }
       .store-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #3a3a3a;
         font-size: 18px;
+         .heart-full {
+          margin-left: 10px;
+        }
       }
     }
     .store-center {
@@ -220,25 +264,7 @@ export default {
       }
     }
   }
-  .empty-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 90px;
-    .search-empty {
-      width: 155px;
-      height: 155px;
-    }
-    .empty-text {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-size: 17px;
-      color: #949497;
-    }
-  }
+
   .goods-all {
     padding-top: 10px;
     .select-menu {
@@ -372,6 +398,28 @@ export default {
           }
         }
       }
+    }
+    .empty-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 90px;
+      .search-empty {
+        width: 155px;
+        height: 155px;
+      }
+      .empty-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 17px;
+        color: #949497;
+      }
+    }
+    .van-divider {
+      margin: 0;
     }
   }
 }
