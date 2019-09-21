@@ -43,10 +43,6 @@ const dllReference = (config) => {
     .after('html')
 }
 
-// 是否使用gzip
-const productionGzip = true
-// 需要gzip压缩的文件后缀
-const productionGzipExtensions = ['js', 'css']
 module.exports = {
   publicPath: './',
   // 输出文件目录
@@ -119,27 +115,33 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-    // 压缩代码
-    config.optimization.minimize(true)
-    // 分割代码
-    config.optimization.splitChunks({
-      chunks: 'all'
-    })
+
     config.module
       .rule('images')
-      .use('url-loader')
-      .loader('url-loader')
-      .tap(options => Object.assign(
-        options,
-        {
-          mozjpeg: { progressive: true, quality: 65 },
-          optipng: { enabled: false },
-          pngquant: { quality: '65-90', speed: 4 },
-          gifsicle: { interlaced: false },
-          webp: { quality: 75 },
-          limit: 10
+      .test(/\.(gif|png|jpe?g|svg|webp)$/i)
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options({
+        mozjpeg: {
+          progressive: true,
+          quality: 65
+        },
+        // optipng.enabled: false will disable optipng
+        optipng: {
+          enabled: false,
+        },
+        pngquant: {
+          quality: [0.65, 0.90],
+          speed: 4
+        },
+        gifsicle: {
+          interlaced: false,
+        },
+        // the webp option will enable WEBP
+        webp: {
+          quality: 75
         }
-      ))
+      })
   },
   configureWebpack: config => {
     const configs = {}
@@ -148,7 +150,7 @@ module.exports = {
 
       configs.plugins.push(
         new PurgecssPlugin({
-          paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+          paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
         }),
       )
       // 1. 生产环境npm包转CDN
@@ -157,10 +159,10 @@ module.exports = {
       )
       //  configs.externals = externals
       // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
-      productionGzip && configs.plugins.push(
+      configs.plugins.push(
         new CompressionWebpackPlugin({
-          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-          threshold: 0, // 超过8192KB的数据进行压缩
+          test: /\.(gif|png|jpe?g|svg|webp)$/i,
+          threshold: 0, // 超过threshold KB的数据进行压缩
           minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理 默认0.8
         })
       )
