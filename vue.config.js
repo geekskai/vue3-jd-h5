@@ -9,10 +9,8 @@ const PATHS = {
 }
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-// https://webpack.docschina.org/plugins/compression-webpack-plugin/
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
-const dllReference = (config) => {
+const dllReference = config => {
   config.plugin('vendorDll')
     .use(webpack.DllReferencePlugin, [{
       context: __dirname,
@@ -126,7 +124,6 @@ module.exports = {
           progressive: true,
           quality: 65
         },
-        // optipng.enabled: false will disable optipng
         optipng: {
           enabled: false,
         },
@@ -137,7 +134,6 @@ module.exports = {
         gifsicle: {
           interlaced: false,
         },
-        // the webp option will enable WEBP
         webp: {
           quality: 75
         }
@@ -147,7 +143,6 @@ module.exports = {
     const configs = {}
     configs.plugins = []
     if (process.env.NODE_ENV === 'production') {
-
       configs.plugins.push(
         new PurgecssPlugin({
           paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
@@ -156,15 +151,6 @@ module.exports = {
       // 1. 生产环境npm包转CDN
       configs.plugins.push(
         new BundleAnalyzerPlugin()
-      )
-      //  configs.externals = externals
-      // 2. 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
-      configs.plugins.push(
-        new CompressionWebpackPlugin({
-          test: /\.(gif|png|jpe?g|svg|webp)$/i,
-          threshold: 0, // 超过threshold KB的数据进行压缩
-          minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理 默认0.8
-        })
       )
     }
     if (process.env.NODE_ENV === 'development') {
