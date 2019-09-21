@@ -9,7 +9,6 @@ import 'amfe-flexible'
 import axios from './plugins/axios'
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
-// import Vconsole from 'vconsole'
 import VueClipboard from 'vue-clipboard2'
 import './utils/validator.js'
 import {
