@@ -1,6 +1,12 @@
 // vue inspect > output.js
 const path = require('path')
 const webpack = require('webpack')
+const glob = require('glob');
+//  去除无用css代码
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const PATHS = {
+  src: path.join(__dirname, 'src')
+}
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 // https://webpack.docschina.org/plugins/compression-webpack-plugin/
@@ -139,6 +145,12 @@ module.exports = {
     const configs = {}
     configs.plugins = []
     if (process.env.NODE_ENV === 'production') {
+
+      configs.plugins.push(
+        new PurgecssPlugin({
+          paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+        }),
+      )
       // 1. 生产环境npm包转CDN
       configs.plugins.push(
         new BundleAnalyzerPlugin()
