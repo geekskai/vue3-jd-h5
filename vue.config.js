@@ -89,6 +89,18 @@ module.exports = {
           return args
         })
     }
+    // 开启多线程打包
+    config.module
+      .rule('thread-loader')
+      .test(/.js$/)
+      .include
+      .add(path.resolve(__dirname, 'src'))
+      .end()
+      .use('thread-loader')
+      .loader('thread-loader')
+      .options({
+        workers: 3
+      })
     config.module.rules.delete('svg') // 重点:删除默认配置中处理svg,
     config.module
       .rule('svg-sprite-loader')
