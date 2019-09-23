@@ -65,14 +65,16 @@
       </div>
       <van-button type="danger" @click="handleSubmitOrder" size="large">提交订单</van-button>
     </div>
-    <vue-pickers
-      :show="show"
-      :columns="columns"
-      :defaultData="defaultData"
-      :selectData="pickData"
-      @cancel="close"
-      @confirm="confirmFn"
-    ></vue-pickers>
+
+    <van-popup v-model="show" round position="bottom" :style="{ height: '10%' }"></van-popup>
+      <vue-pickers
+        :show="show"
+        :columns="columns"
+        :defaultData="defaultData"
+        :selectData="pickData"
+        @cancel="close"
+        @confirm="confirmFn"
+      ></vue-pickers>
   </div>
 </template>
 
@@ -87,27 +89,15 @@ export default {
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
-          text: "Top-Pay",
-          value: "Top-Pay"
+          text: "CoinPay",
+          value: "CoinPay"
         }
       ],
       pickData: {
         data1: [
           {
-            text: "Top-Pay",
-            value: "Top-Pay"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
+            text: "CoinPay",
+            value: "CoinPay"
           }
         ]
       },
@@ -358,7 +348,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
-         border-radius: 4px;
+      border-radius: 4px;
     }
   }
 }

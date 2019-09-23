@@ -106,7 +106,7 @@
         </li>
       </ul>
     </section>
-
+<van-popup v-model="show" round position="bottom" :style="{ height: '10%' }"></van-popup>
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -134,28 +134,16 @@ export default {
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
-        {
-          text: "Top-Pay",
-          value: "Top-Pay"
-        }
+         {
+            text: "CoinPay",
+            value: "CoinPay"
+          }
       ],
       pickData: {
         data1: [
           {
-            text: "Top-Pay",
-            value: "Top-Pay"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
+            text: "CoinPay",
+            value: "CoinPay"
           }
         ]
       },

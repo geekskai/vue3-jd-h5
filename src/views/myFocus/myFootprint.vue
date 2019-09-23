@@ -11,16 +11,13 @@
       </span>
     </cm-header>
     <van-checkbox-group v-model="footprintForm.ids" ref="wrapper">
-      <!-- :scroll-data="tabItemLists" -->
       <list-scroll :pullup="true" :scroll-data="footPrintArrays" @scrollToEnd="handleScrollToEnd">
         <div>
           <section class="order-card" v-for="(item, i) in footPrintArrays" :key="i">
             <b class="foot-date" v-if="i===0||item.dateFlag">{{item.date}}</b>
-            <!-- <b class="foot-date" v-if="i===0">{{item.date}}</b> -->
-            <!-- <ul class="order-list" v-for="(item,index) in items" :key="index"> -->
             <ul class="order-list">
               <div class="order-info">
-                <li class="check-item">
+                <li class="check-item" v-if="showButton">
                   <van-checkbox :key="i" checked-color="#91C95B" :name="item.id"></van-checkbox>
                 </li>
                 <img v-lazy="item.image" />
@@ -28,9 +25,13 @@
                   <b class="product-name">{{item.name}}</b>
                   <div class="info-count">
                     <span>￥{{item.price}}</span>
-                    <span class="slimiar-btn">
+                    <router-link
+                      tag="span"
+                      class="slimiar-btn"
+                      :to="`/myFocus/lookSimilar?categoryId=${item.categoryId}`"
+                    >
                       <van-tag color="#EC3924" size="large" plain>找相似</van-tag>
-                    </span>
+                    </router-link>
                   </div>
                 </li>
               </div>

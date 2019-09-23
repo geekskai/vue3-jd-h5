@@ -1,12 +1,6 @@
 // vue inspect > output.js
 const path = require('path')
 const webpack = require('webpack')
-const glob = require('glob');
-//  去除无用css代码
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const PATHS = {
-  src: path.join(__dirname, 'src')
-}
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
@@ -113,10 +107,9 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-
     config.module
       .rule('images')
-      .test(/\.(gif|png|jpe?g|svg|webp)$/i)
+      .test(/\.(gif|png|jpe?g|webp)$/i)
       .use('image-webpack-loader')
       .loader('image-webpack-loader')
       .options({
@@ -143,12 +136,6 @@ module.exports = {
     const configs = {}
     configs.plugins = []
     if (process.env.NODE_ENV === 'production') {
-      configs.plugins.push(
-        new PurgecssPlugin({
-          paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
-        }),
-      )
-      // 1. 生产环境npm包转CDN
       configs.plugins.push(
         new BundleAnalyzerPlugin()
       )

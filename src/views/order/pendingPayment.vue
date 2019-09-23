@@ -74,7 +74,7 @@
         </li>
       </ul>
     </section>
-
+<van-popup v-model="show" round position="bottom" :style="{ height: '10%' }"></van-popup>
     <vue-pickers
       :show="show"
       :columns="columns"
@@ -144,28 +144,16 @@ export default {
         toPhone: "string"
       },
       defaultData: [
-        {
-          text: "Top-Pay",
-          value: "Top-Pay"
-        }
+       {
+            text: "CoinPay",
+            value: "CoinPay"
+          }
       ],
       pickData: {
         data1: [
-          {
-            text: "Top-Pay",
-            value: "Top-Pay"
-          },
-          {
-            text: "支付宝",
-            value: "支付宝"
-          },
-          {
-            text: "微信",
-            value: "微信"
-          },
-          {
-            text: "银行卡",
-            value: "银行卡"
+         {
+            text: "CoinPay",
+            value: "CoinPay"
           }
         ]
       },

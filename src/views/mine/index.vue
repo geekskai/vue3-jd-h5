@@ -97,15 +97,15 @@
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
         </router-link>
-        <!-- <router-link :to="`/mine/linkFan`" class="option-item" tag="li"> -->
-        <li class="option-item">
+        <router-link :to="`/mine/linkFan`" class="option-item" tag="li">
+          <!-- <li class="option-item"> -->
           <div class="item-info">
             <svg-icon class="incon" icon-class="link-fan"></svg-icon>
             <span>链接粉丝</span>
           </div>
           <van-icon name="arrow" color="#DBDBDB" />
-        </li>
-        <!-- </router-link> -->
+          <!-- </li> -->
+        </router-link>
       </ul>
     </section>
 

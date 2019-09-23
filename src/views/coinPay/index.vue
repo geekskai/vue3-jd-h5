@@ -1,7 +1,7 @@
 <template>
   <div class="coin-pay">
     <div class="coin-pay-class">
-      <img src="@/assets/image/coinPay/coin-pay-logo.png">
+      <img src="@/assets/image/coinPay/coin-pay-logo.png" />
       <img src="@/assets/image/coinPay/coin-pay-text.png" class="coin-pay-text" />
       <p class="coin-pay-desc">
         Coin Pay 提供高效便捷、安全有保障的数字
@@ -10,14 +10,14 @@
     </div>
     <section class="down-btns">
       <a
-        href="itms-services://?action=download-manifest&url=https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
+        href="itms-services://?action=download-manifest&url=https://coinpay-down.oss-cn-shenzhen.aliyuncs.com/download/manifest.plist"
       >
         <div class="down-btn">
           <svg-icon icon-class="apple-icon-coin-pay"></svg-icon>&nbsp;&nbsp;&nbsp;
           <span>iOS下载</span>
         </div>
       </a>
-      <a href="https://topimg-test.oss-cn-shenzhen.aliyuncs.com/download/app-release.apk">
+      <a href="https://coinpay-down.oss-cn-shenzhen.aliyuncs.com/download/app-release.apk">
         <div class="down-btn">
           <svg-icon icon-class="android-icon-coin-pay"></svg-icon>
           <span>&nbsp;Android下载</span>
