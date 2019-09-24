@@ -112,7 +112,10 @@ export default {
       result: ["a", "b"]
     };
   },
-  created() {
+  // created() {
+  //   this.initData();
+  // },
+  activated() {
     this.initData();
   },
   watch: {},

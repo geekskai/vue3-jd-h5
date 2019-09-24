@@ -170,7 +170,6 @@
         @change="handleTabChange"
         swipeable
       >
-        <!-- animated -->
         <div ref="homeWrapper">
           <list-scroll
             ref="listScroll"
@@ -209,6 +208,13 @@
                     </li>
                   </ul>
                 </section>
+                <van-loading
+                  class="home-loading"
+                  v-show="loading"
+                  color="#EC3924"
+                  size="25px"
+                  type="spinner"
+                />
               </van-tab>
             </div>
           </list-scroll>
@@ -226,16 +232,12 @@ export default {
     return {
       iconList: [],
       active: 0,
+      loading: true,
       pageNum: 1,
       timeData: 36000000,
       catList: [],
       tabItemLists: [],
       tabList: [],
-      ball: {
-        show: false,
-        el: ""
-      },
-      isLogin: false,
       headerActive: false,
       images: [],
       adList: [],
@@ -254,8 +256,7 @@ export default {
       }
     };
   },
-
-  created() {
+  activated() {
     this.initData();
     this.handleTabChange();
   },
@@ -266,7 +267,6 @@ export default {
   },
   mounted() {
     this.$eventBus.$emit("changeTag", 0);
-    // window.addEventListener("scroll", this.pageScroll);
     this.setHomeWrapperHeight();
   },
   methods: {
@@ -275,7 +275,6 @@ export default {
       this.pageNum++;
       this.handleTabChange();
     },
-
     //动态设置searc-wrap的高
     setHomeWrapperHeight() {
       let $screenHeight = document.documentElement.clientHeight;
@@ -296,12 +295,16 @@ export default {
       });
     },
     handleTabChange() {
+      this.loading = true;
       this.$http
         .get(
-          `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=30`
+          `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=20`
         )
         .then(response => {
-          this.tabItemLists.push(...response.data.content);
+          this.loading = false;
+          if (response) {
+            this.tabItemLists.push(...response.data.content);
+          }
         });
     },
     handleClick(linkUrl) {
@@ -661,6 +664,9 @@ export default {
         font-size: 10px;
         display: inline-block;
       }
+    }
+    .home-loading {
+      text-align: center;
     }
     .goods-box {
       padding: 0 16px;

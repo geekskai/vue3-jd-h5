@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const CompressionPlugin = require("compression-webpack-plugin")
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const dllReference = config => {
   config.plugin('vendorDll')
@@ -107,30 +108,6 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-    config.module
-      .rule('images')
-      .test(/\.(gif|png|jpe?g|webp)$/i)
-      .use('image-webpack-loader')
-      .loader('image-webpack-loader')
-      .options({
-        mozjpeg: {
-          progressive: true,
-          quality: 65
-        },
-        optipng: {
-          enabled: false,
-        },
-        pngquant: {
-          quality: [0.65, 0.90],
-          speed: 4
-        },
-        gifsicle: {
-          interlaced: false,
-        },
-        webp: {
-          quality: 75
-        }
-      })
   },
   configureWebpack: config => {
     const configs = {}
@@ -138,6 +115,13 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       configs.plugins.push(
         new BundleAnalyzerPlugin()
+      )
+      configs.plugins.push(
+        new CompressionPlugin({
+          test: /\.js$|\.html$|.\css/, //匹配文件名
+          threshold: 10240,//对超过1k的数据压缩
+          deleteOriginalAssets: false //不删除源文件
+        })
       )
     }
     if (process.env.NODE_ENV === 'development') {

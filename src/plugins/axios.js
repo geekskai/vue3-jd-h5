@@ -35,7 +35,7 @@ const toLogin = () => {
  * 请求失败后的错误统一处理
  * @param {Number} code 请求失败的状态码
  */
-const errorHandle = (code, other) => {
+const errorHandle = code => {
   // 状态码判断
   switch (code) {
     // 401: 未登录状态，跳转登录页
@@ -56,7 +56,7 @@ const errorHandle = (code, other) => {
       tip('请求的资源不存在')
       break
     default:
-      tip(other)
+      tip('服务器错误！')
   }
 }
 
@@ -91,7 +91,6 @@ instance.interceptors.response.use(
     if (response.data.code === 0) {
       return Promise.resolve(response)
     } else {
-      errorHandle(response.data.code, response.data.msg)
       return Promise.reject(response)
     }
   },
@@ -102,7 +101,7 @@ instance.interceptors.response.use(
     } = error
     if (response) {
       // 请求已发出，但是不在2xx的范围
-      errorHandle(response.status, response.data.message)
+      errorHandle(response.status)
       return Promise.reject(response)
     } else {
       // 处理断网的情况
@@ -114,7 +113,7 @@ instance.interceptors.response.use(
   })
 
 export default {
-  install (Vue) {
+  install(Vue) {
     Object.defineProperty(Vue.prototype, '$http', {
       value: instance
     })

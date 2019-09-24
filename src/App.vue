@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive include="home,classify">
+    <keep-alive include="home,shopCart,mine">
       <router-view v-if="isRouterAlive" />
     </keep-alive>
   </div>

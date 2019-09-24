@@ -1,6 +1,13 @@
 <template>
   <div class="classify">
     <header class="home-header">商品分类</header>
+     <van-loading
+          class="home-loading"
+          v-show="loading"
+          color="#EC3924"
+          size="25px"
+          type="spinner"
+        />
     <section class="search-wrap" ref="searchWrap">
       <list-scroll :scroll-data="categoryData" class="nav-side-wrapper">
         <ul class="nav-side">
@@ -61,19 +68,25 @@ export default {
     return {
       tags: [],
       currentIndex: 0,
+      loading: true,
       categoryData: [],
       templateCategoryData: []
     };
   },
+  // activated() {
+  //   this.getGoodsList();
+  // },
   created() {
     this.getGoodsList();
   },
   methods: {
     // 获取分类
     getGoodsList() {
+      this.loading = true;
       this.$http.get(`/api/product/category`).then(response => {
         const categoryData = response.data.content;
         this.categoryData = categoryData;
+        this.loading = false;
       });
     },
     handleSearch() {
@@ -108,13 +121,16 @@ export default {
 @import "../../styles/mixin.scss";
 .classify {
   height: 100%;
+  background-color: #fff;
   .home-header {
     font-size: 18px;
     color: #3a3a3a;
     font-weight: 600;
     text-align: center;
     line-height: 50px;
-    background-color: #fff;
+  }
+  .home-loading {
+    text-align: center;
   }
   .search-wrap {
     @include fj;

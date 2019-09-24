@@ -224,7 +224,7 @@
 
 <script>
 export default {
-  name: "Mine",
+  name: "mine",
   data() {
     return {
       show: false,
@@ -235,7 +235,7 @@ export default {
       columns: 1
     };
   },
-  created() {
+  activated() {
     this.initUserInfo();
   },
   computed: {},

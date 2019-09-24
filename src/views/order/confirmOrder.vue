@@ -67,14 +67,14 @@
     </div>
 
     <van-popup v-model="show" round position="bottom" :style="{ height: '10%' }"></van-popup>
-      <vue-pickers
-        :show="show"
-        :columns="columns"
-        :defaultData="defaultData"
-        :selectData="pickData"
-        @cancel="close"
-        @confirm="confirmFn"
-      ></vue-pickers>
+    <vue-pickers
+      :show="show"
+      :columns="columns"
+      :defaultData="defaultData"
+      :selectData="pickData"
+      @cancel="close"
+      @confirm="confirmFn"
+    ></vue-pickers>
   </div>
 </template>
 
@@ -154,9 +154,6 @@ export default {
     },
     confirmFn() {
       this.show = false;
-      this.$http
-        .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
-        .then(response => {});
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
@@ -164,14 +161,12 @@ export default {
         loadingType: "spinner",
         message: "支付中..."
       });
-
-      setTimeout(() => {
-        // this.$toast({
-        //   mask: false,
-        //   message: "支付成功~"
-        // });
-        this.$router.push("/order/transactionDetails");
-      }, 1300);
+      this.$http
+        .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
+        .then(response => {
+          this.$toast.clear();
+          this.$router.push("/order/transactionDetails");
+        });
     },
     handleToChooseAddress() {
       this.$router.push({
