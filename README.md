@@ -18,9 +18,9 @@
 `whale-mall-h5`是一个电商 H5 页面前端项目，基于 Vue+Vant UI 实现，主要包括首页、分类页面、我的页面、购物车等。
 
 
-<a href='http://gankai.gitee.io/vue-jd-h5/index'>产品原型地址</a>
+<a href='http://gankai.gitee.io/vue-jd-h5/index'>第一版本地址</a>
 
-<a href='http://jc.cmall.world/#/'>项目线上地址(后天部分接口已经挂了)</a>
+<a href='http://jc.cmall.world/#/'>项目线上地址(后台部分接口已经挂了)</a>
 
 ## 搭建步骤
 
