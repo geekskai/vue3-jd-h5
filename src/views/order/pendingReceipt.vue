@@ -93,17 +93,17 @@
 
 <script>
 export default {
-  name: "pendingReceipt",
-  data() {
+  name: 'pendingReceipt',
+  data () {
     return {
       orderForm: {}
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .post(`/api/order/detail`, {
           pageNum: 1,
@@ -111,18 +111,18 @@ export default {
           orderNo: this.$route.query.orderNo
         })
         .then(response => {
-          this.orderForm = response.data.content;
-        });
+          this.orderForm = response.data.content
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
 .pending-receipt {
   height: 100%;
   padding: 0 16px;
-  
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;

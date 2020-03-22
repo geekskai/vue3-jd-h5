@@ -80,36 +80,36 @@
 
 <script>
 export default {
-  name: "ConfirmOrder",
-  data() {
+  name: 'ConfirmOrder',
+  data () {
     return {
       orderForm: {},
       columns: 1,
-      orderNo: "",
+      orderNo: '',
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
-          text: "CoinPay",
-          value: "CoinPay"
+          text: 'CoinPay',
+          value: 'CoinPay'
         }
       ],
       pickData: {
         data1: [
           {
-            text: "CoinPay",
-            value: "CoinPay"
+            text: 'CoinPay',
+            value: 'CoinPay'
           }
         ]
       },
       show: false
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
 
   methods: {
-    initData() {
+    initData () {
       let paramsObj = {
         skuInfoForm: {
           quantity: this.$route.query.quantity,
@@ -118,57 +118,57 @@ export default {
         cartItemIds: this.$route.query.selectedGoodsId,
         userAddrId: this.$route.query.userAddrId
           ? this.$route.query.userAddrId
-          : ""
-      };
+          : ''
+      }
       if (this.$route.query.selectedGoodsId) {
-        paramsObj.skuInfoForm = null;
+        paramsObj.skuInfoForm = null
       }
       this.$http.post(`/api/order/checkout`, paramsObj).then(response => {
-        this.orderForm = response.data.content;
-      });
+        this.orderForm = response.data.content
+      })
     },
-    handleSubmitOrder() {
+    handleSubmitOrder () {
       if (!this.orderForm.fullAddress) {
         this.$toast({
           mask: false,
           duration: 2000,
-          message: "请选择收货地址！"
-        });
-        return;
+          message: '请选择收货地址！'
+        })
+        return
       }
       this.$toast.loading({
         mask: true,
         duration: 0, // 持续展示 toast
         forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "订单提交中..."
-      });
+        loadingType: 'spinner',
+        message: '订单提交中...'
+      })
       this.$http.post(`/api/order/submit`, this.orderForm).then(response => {
-        this.orderNo = response.data.content.orderNo;
-        this.show = true;
-        this.$toast.clear();
-      });
+        this.orderNo = response.data.content.orderNo
+        this.show = true
+        this.$toast.clear()
+      })
     },
-    close() {
-      this.show = false;
+    close () {
+      this.show = false
     },
-    confirmFn() {
-      this.show = false;
+    confirmFn () {
+      this.show = false
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
         forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "支付中..."
-      });
+        loadingType: 'spinner',
+        message: '支付中...'
+      })
       this.$http
         .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
         .then(response => {
-          this.$toast.clear();
-          this.$router.push("/order/transactionDetails");
-        });
+          this.$toast.clear()
+          this.$router.push('/order/transactionDetails')
+        })
     },
-    handleToChooseAddress() {
+    handleToChooseAddress () {
       this.$router.push({
         path: `/order/chooseAddress`,
         query: {
@@ -176,10 +176,10 @@ export default {
           cartItemIds: this.$route.query.selectedGoodsId,
           skuId: this.$route.query.skuId
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -1,3 +1,13 @@
+/*
+ * @Description:
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:50:04
+ * @FilePath: /vue-jd-h5/src/components/DropList/index.js
+ */
 import Vue from 'vue'
 import './index.css'
 

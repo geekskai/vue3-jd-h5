@@ -114,20 +114,20 @@
 
 <script>
 export default {
-  name: "product",
-  data() {
+  name: 'product',
+  data () {
     return {
       show: false,
       calculate: 0,
       stockNum: 0,
-      specsName: "",
+      specsName: '',
       showDetail: false,
       detailForm: {},
       skuObj: {},
       isSpike: false, // 是否是秒杀商品 默认是false
       isLike: false, // 是否点赞喜欢
       current: 0,
-      stepperValue: "",
+      stepperValue: '',
       productImages: [],
       // sku:{},
       sku: {
@@ -141,57 +141,57 @@ export default {
         // 所有 sku 的组合列表，如下是：白色1、白色2、天蓝色1、天蓝色2
         list: [{}],
         messages: [],
-        price: "0.00",
+        price: '0.00',
         stock_num: 0, // 商品总库存
         none_sku: false, // 是否无规格商品
         hide_stock: false // 是否隐藏剩余库存
       },
       goods: {
         // 商品标题
-        title: "",
+        title: '',
         // 默认商品 sku 缩略图
-        picture: ""
+        picture: ''
       },
-      goodsId: ""
-    };
+      goodsId: ''
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
 
   methods: {
-    handleIsLise(productId) {
-      this.isLike = !this.isLike;
+    handleIsLise (productId) {
+      this.isLike = !this.isLike
       this.$http.post(`/api/user/addAttention`, {
         id: productId,
         type: 0
-      });
+      })
     },
-    skuSelected({ skuValue, selectedSku, selectedSkuComb }) {
+    skuSelected ({ skuValue, selectedSku, selectedSkuComb }) {
       if (selectedSkuComb) {
-        this.specsName = this.specsName + ";" + skuValue.specsName;
-        this.calculate = selectedSkuComb.calculate;
-        this.stockNum = selectedSkuComb.stock_num;
+        this.specsName = this.specsName + ';' + skuValue.specsName
+        this.calculate = selectedSkuComb.calculate
+        this.stockNum = selectedSkuComb.stock_num
       } else {
-        this.specsName = "";
-        this.stockNum = 0;
-        this.sku.stock_num = 0;
+        this.specsName = ''
+        this.stockNum = 0
+        this.sku.stock_num = 0
       }
     },
-    onBuyClicked() {},
-    handleShowSpecs() {
-      this.show = true;
+    onBuyClicked () {},
+    handleShowSpecs () {
+      this.show = true
       this.$http
         .get(
           `/api/product/chooseSku?productId=${this.$route.query.productId}&clientType=0`
         )
         .then(response => {
-          let responseDataList = response.data.content;
+          let responseDataList = response.data.content
           if (responseDataList.length === 1) {
-            this.calculate = responseDataList[0].calculate;
-            this.stockNum = responseDataList[0].stock;
+            this.calculate = responseDataList[0].calculate
+            this.stockNum = responseDataList[0].stock
           }
-          let skuSpecesTree = [];
+          let skuSpecesTree = []
           // 先获取所有的规格类型的key
           skuSpecesTree = responseDataList[0].speces.map(it => {
             return {
@@ -199,71 +199,71 @@ export default {
               k_id: it.specsId,
               v: [],
               k_s: it.specsId
-            };
-          });
+            }
+          })
           // 筛选value
-          let allSpecesArray = [];
+          let allSpecesArray = []
           for (let i = 0; i < responseDataList.length; i++) {
             for (let j = 0; j < responseDataList[i].speces.length; j++) {
               allSpecesArray.push(
                 JSON.stringify(responseDataList[i].speces[j])
-              );
+              )
             }
           }
-          let specesArray = [];
+          let specesArray = []
           Array.from(new Set(allSpecesArray)).map(it => {
-            specesArray.push(JSON.parse(it));
-          });
+            specesArray.push(JSON.parse(it))
+          })
           for (let i = 0; i < skuSpecesTree.length; i++) {
             for (let j = 0; j < specesArray.length; j++) {
               if (skuSpecesTree[i].k_id === specesArray[j].specsId) {
-                specesArray[j].name = specesArray[j].specsValue;
-                specesArray[j].id = specesArray[j].specsValueId;
-                skuSpecesTree[i].v.push(specesArray[j]);
+                specesArray[j].name = specesArray[j].specsValue
+                specesArray[j].id = specesArray[j].specsValueId
+                skuSpecesTree[i].v.push(specesArray[j])
               }
             }
           }
           // 开始筛选list 所有sku的组合列表
-          let templeArray = [];
+          let templeArray = []
           templeArray = responseDataList.map((it, i) => {
-            let listObj = {};
-            listObj.stock_num = it.stock;
-            listObj.id = it.id;
-            listObj.price = it.price;
-            listObj.calculate = it.calculate;
+            let listObj = {}
+            listObj.stock_num = it.stock
+            listObj.id = it.id
+            listObj.price = it.price
+            listObj.calculate = it.calculate
             for (let j = 0; j < responseDataList[i].speces.length; j++) {
               listObj[responseDataList[i].speces[j].specsId] =
-                responseDataList[i].speces[j].specsValueId;
+                responseDataList[i].speces[j].specsValueId
             }
-            return listObj;
-          });
-          this.sku.tree = skuSpecesTree;
-          this.sku.list = templeArray;
-        });
+            return listObj
+          })
+          this.sku.tree = skuSpecesTree
+          this.sku.list = templeArray
+        })
     },
-    handleProductSpeces() {
+    handleProductSpeces () {
       if (this.detailForm.productSpeces) {
-        return this.detailForm.productSpeces.join(",");
+        return this.detailForm.productSpeces.join(',')
       }
     },
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/product/info?productId=${this.$route.query.productId}&clientType=0`
         )
         .then(response => {
-          this.productImages = response.data.content.productImages;
-          this.goods.picture = response.data.content.productImages[0];
-          this.detailForm = response.data.content;
-          this.isLike = Boolean(this.detailForm.attentionFlag);
-        });
+          this.productImages = response.data.content.productImages
+          this.goods.picture = response.data.content.productImages[0]
+          this.detailForm = response.data.content
+          this.isLike = Boolean(this.detailForm.attentionFlag)
+        })
     },
-    handleViewDetail() {
-      this.showDetail = true;
+    handleViewDetail () {
+      this.showDetail = true
     },
 
-    handleAddToCart(skuObj) {
-      this.skuObj = skuObj;
+    handleAddToCart (skuObj) {
+      this.skuObj = skuObj
       this.$http
         .post(`/api/cart/update`, {
           quantity: this.skuObj.selectedNum,
@@ -272,39 +272,39 @@ export default {
         .then(response => {
           if (response.data.code === 0) {
             this.$toast.success({
-              message: "添加成功~",
+              message: '添加成功~',
               duration: 1500,
-              icon: "like-o"
-            });
+              icon: 'like-o'
+            })
           } else {
             this.$toast.fail({
               message: response.data.msg,
               duration: 1500
-            });
+            })
           }
-        });
+        })
     },
-    handleToBuy(skuObj) {
-      this.skuObj = skuObj;
+    handleToBuy (skuObj) {
+      this.skuObj = skuObj
       this.$router.push({
-        path: "/order/confirmOrder",
+        path: '/order/confirmOrder',
         query: {
           quantity: this.skuObj.selectedNum,
           skuId: this.skuObj.selectedSkuComb.id
         }
-      });
+      })
     },
-    handleStoreName() {
-      this.$router.push("/storeDetail");
+    handleStoreName () {
+      this.$router.push('/storeDetail')
     },
-    handleConnectStore() {
+    handleConnectStore () {
       this.$router.push({
-        path: "/storeDetail",
+        path: '/storeDetail',
         query: { merchantInfoId: this.detailForm.merchantShopId }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:52:15
+ * @FilePath: /vue-jd-h5/src/components/tabbar/index.vue
+ -->
 <template>
   <div class="tabbar">
     <ul>
@@ -47,38 +56,38 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  name: "tabbar",
-  data() {
+  name: 'tabbar',
+  data () {
     return {
       icon_home: {
-        normal: require("@/assets/icons/tabbar/home.png"),
-        active: require("@/assets/icons/tabbar/home_active.png")
+        normal: require('@/assets/icons/tabbar/home.png'),
+        active: require('@/assets/icons/tabbar/home_active.png')
       },
       icon_classify: {
-        normal: require("@/assets/icons/tabbar/classify.png"),
-        active: require("@/assets/icons/tabbar/classify_active.png")
+        normal: require('@/assets/icons/tabbar/classify.png'),
+        active: require('@/assets/icons/tabbar/classify_active.png')
       },
       icon_cart: {
-        normal: require("@/assets/icons/tabbar/cart.png"),
-        active: require("@/assets/icons/tabbar/cart_active.png")
+        normal: require('@/assets/icons/tabbar/cart.png'),
+        active: require('@/assets/icons/tabbar/cart_active.png')
       },
       icon_mine: {
-        normal: require("@/assets/icons/tabbar/mine.png"),
-        active: require("@/assets/icons/tabbar/mine_active.png")
+        normal: require('@/assets/icons/tabbar/mine.png'),
+        active: require('@/assets/icons/tabbar/mine_active.png')
       },
       active: 0
-    };
+    }
   },
-  created() {
+  created () {
     this.$eventBus.$on(
-      "changeTag",
+      'changeTag',
       tag => {
-        this.active = tag;
+        this.active = tag
       },
       this
-    );
+    )
   },
   computed: {
     ...mapState({
@@ -86,7 +95,7 @@ export default {
     })
   },
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

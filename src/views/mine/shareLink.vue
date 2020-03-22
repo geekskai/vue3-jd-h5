@@ -34,37 +34,37 @@
 </template>
 
 <script>
-import QRCode from "qrcodejs2";
+import QRCode from 'qrcodejs2'
 export default {
-  name: "shareLink",
-  data() {
+  name: 'shareLink',
+  data () {
     return {
       systemMessage: {},
       checked: false,
       mallMessage: {}
-    };
+    }
   },
-  mounted() {
-    this.qrcode();
+  mounted () {
+    this.qrcode()
   },
-  created() {},
+  created () {},
   methods: {
-    qrcode() {
-      let qrcode = new QRCode("qrcode", {
+    qrcode () {
+      let qrcode = new QRCode('qrcode', {
         width: 200, // 设置宽度，单位像素
         height: 200, // 设置高度，单位像素
-        text: "http://jc.cmall.world/#/mine/linkDownload" // 设置二维码内容或跳转地址
-      });
+        text: 'http://jc.cmall.world/#/mine/linkDownload' // 设置二维码内容或跳转地址
+      })
     },
-    copySuccess() {
+    copySuccess () {
       this.$toast({
         mask: false,
         duration: 1000,
-        message: "复制成功！"
-      });
+        message: '复制成功！'
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

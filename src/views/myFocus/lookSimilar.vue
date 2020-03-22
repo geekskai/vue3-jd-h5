@@ -62,28 +62,28 @@
 
 <script>
 export default {
-  name: "lookSimilar",
-  data() {
+  name: 'lookSimilar',
+  data () {
     return {
       tabItemLists: [],
       active: 0,
       pageNum: 1
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
-  mounted() {
-    this.setHomeWrapperHeight();
+  mounted () {
+    this.setHomeWrapperHeight()
   },
   methods: {
-    handleToProductDetail(productId) {
+    handleToProductDetail (productId) {
       this.$router.push({
-        path: "/product/index",
+        path: '/product/index',
         query: { productId: productId }
-      });
+      })
     },
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/product/list?categoryId=${this.$route.query.categoryId}
@@ -93,21 +93,21 @@ export default {
           &clientType=0`
         )
         .then(response => {
-          this.tabItemLists.push(...response.data.content);
-        });
+          this.tabItemLists.push(...response.data.content)
+        })
     },
     // 当滑块滑动到底部的时候。
-    handleScrollToEnd() {
-      this.pageNum++;
-      this.initData();
+    handleScrollToEnd () {
+      this.pageNum++
+      this.initData()
     },
-    //动态设置searc-wrap的高
-    setHomeWrapperHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.similarWrapper.style.height = $screenHeight - 50 + "px";
+    // 动态设置searc-wrap的高
+    setHomeWrapperHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.similarWrapper.style.height = $screenHeight - 50 + 'px'
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

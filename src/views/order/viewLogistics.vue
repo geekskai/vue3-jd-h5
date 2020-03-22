@@ -151,38 +151,38 @@
 
 <script>
 export default {
-  name: "ViewLogistics",
-  data() {
+  name: 'ViewLogistics',
+  data () {
     return {
       logisticsInfo: {}
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .post(`/api/order/expressInquiry?orderNd=${this.$route.query.orderNo}`)
         .then(response => {
-          this.logisticsInfo = response.data.content;
-        });
+          this.logisticsInfo = response.data.content
+        })
     },
-    formatDate(inputTime) {
-      inputTime = inputTime.replace(/\-/g, "/");
-      var date = new Date(inputTime);
-      var m = date.getMonth() + 1;
-      m = m < 10 ? "0" + m : m;
-      var d = date.getDate();
-      d = d < 10 ? "0" + d : d;
-      var h = date.getHours();
-      h = h < 10 ? "0" + h : h;
-      var minute = date.getMinutes();
-      minute = minute < 10 ? "0" + minute : minute;
-      return m + "/" + d + "-" + h + ":" + minute;
+    formatDate (inputTime) {
+      inputTime = inputTime.replace(/-/g, '/')
+      var date = new Date(inputTime)
+      var m = date.getMonth() + 1
+      m = m < 10 ? '0' + m : m
+      var d = date.getDate()
+      d = d < 10 ? '0' + d : d
+      var h = date.getHours()
+      h = h < 10 ? '0' + h : h
+      var minute = date.getMinutes()
+      minute = minute < 10 ? '0' + minute : minute
+      return m + '/' + d + '-' + h + ':' + minute
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

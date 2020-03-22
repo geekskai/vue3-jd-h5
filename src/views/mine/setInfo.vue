@@ -11,13 +11,13 @@
 
 <script>
 export default {
-  name: "setInfo",
-  data() {
-    return {};
+  name: 'setInfo',
+  data () {
+    return {}
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

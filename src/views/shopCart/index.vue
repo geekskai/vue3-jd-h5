@@ -94,8 +94,8 @@
 
 <script>
 export default {
-  name: "shopCart",
-  data() {
+  name: 'shopCart',
+  data () {
     return {
       merchantChecked: false,
       allChecked: false,
@@ -107,97 +107,97 @@ export default {
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       show: false,
-      list: ["a"],
-      stepperValue: "",
-      result: ["a", "b"]
-    };
+      list: ['a'],
+      stepperValue: '',
+      result: ['a', 'b']
+    }
   },
   // created() {
   //   this.initData();
   // },
-  activated() {
-    this.initData();
+  activated () {
+    this.initData()
   },
   watch: {},
-  mounted() {
-    this.$eventBus.$emit("changeTag", 2);
+  mounted () {
+    this.$eventBus.$emit('changeTag', 2)
   },
   methods: {
-    submitDeleteCartGoods() {
+    submitDeleteCartGoods () {
       // type: 1 全部清空，可以不传idList ， 默认type 0
       this.shopCartArray.forEach(it => {
         it.merchantCheckboxGroup.forEach(item => {
-          this.idList.push(item.id);
-        });
-      });
-      if (this.idList.length == 0) {
+          this.idList.push(item.id)
+        })
+      })
+      if (this.idList.length === 0) {
         this.$toast({
           mask: false,
-          message: "请选择你要删除的商品！"
-        });
-        return;
+          message: '请选择你要删除的商品！'
+        })
+        return
       }
       this.$http
         .post(`/api/cart/remove`, { idList: this.idList, type: 0 })
         .then(response => {
           if (response.data.code === 0) {
-            this.initData();
+            this.initData()
           }
-        });
+        })
     },
-    handleSelectedAll(allChecked) {
+    handleSelectedAll (allChecked) {
       if (allChecked) {
-        let tempTotalPrice = 0;
+        let tempTotalPrice = 0
         this.shopCartArray.forEach(item => {
           item.merchantItemList.forEach(it => {
-            tempTotalPrice += it.productTotalPrice;
-          });
-        });
-        this.productTotalPrice = tempTotalPrice * 100;
+            tempTotalPrice += it.productTotalPrice
+          })
+        })
+        this.productTotalPrice = tempTotalPrice * 100
 
         this.shopCartArray.forEach(it => {
-          this.$set(it, "merchantChecked", true);
-          this.$set(it, "merchantCheckboxGroup", it.merchantItemList);
-        });
+          this.$set(it, 'merchantChecked', true)
+          this.$set(it, 'merchantCheckboxGroup', it.merchantItemList)
+        })
       } else {
         this.shopCartArray.forEach(it => {
-          this.$set(it, "merchantChecked", false);
-          this.$set(it, "merchantCheckboxGroup", []);
-        });
-        this.productTotalPrice = 0;
+          this.$set(it, 'merchantChecked', false)
+          this.$set(it, 'merchantCheckboxGroup', [])
+        })
+        this.productTotalPrice = 0
       }
     },
-    handleSelectAllGoods(shopCart, flag) {
+    handleSelectAllGoods (shopCart, flag) {
       if (!shopCart.merchantChecked && flag) {
-        this.$set(shopCart, "merchantCheckboxGroup", shopCart.merchantItemList);
+        this.$set(shopCart, 'merchantCheckboxGroup', shopCart.merchantItemList)
       } else if (shopCart.merchantChecked && flag) {
-        this.$set(shopCart, "merchantCheckboxGroup", []);
+        this.$set(shopCart, 'merchantCheckboxGroup', [])
       }
       if (!flag) {
-        this.$set(shopCart, "merchantChecked", false);
+        this.$set(shopCart, 'merchantChecked', false)
       }
     },
-    handleMerchantCheckboxGroup(shopCart) {
+    handleMerchantCheckboxGroup (shopCart) {
       if (shopCart.merchantCheckboxGroup.length === 1) {
         this.productTotalPrice =
-          shopCart.merchantCheckboxGroup[0].productTotalPrice * 100;
+          shopCart.merchantCheckboxGroup[0].productTotalPrice * 100
       } else {
-        let tempProductTotalPrice = 0;
+        let tempProductTotalPrice = 0
         shopCart.merchantCheckboxGroup.forEach(it => {
-          tempProductTotalPrice += it.productTotalPrice;
-        });
-        this.productTotalPrice = tempProductTotalPrice * 100;
+          tempProductTotalPrice += it.productTotalPrice
+        })
+        this.productTotalPrice = tempProductTotalPrice * 100
       }
       if (
         shopCart.merchantCheckboxGroup.length ===
         shopCart.merchantItemList.length
       ) {
-        this.$set(shopCart, "merchantChecked", true);
+        this.$set(shopCart, 'merchantChecked', true)
       } else {
-        this.handleSelectAllGoods(shopCart, false);
+        this.handleSelectAllGoods(shopCart, false)
       }
     },
-    handleGoodsCountChange(item) {
+    handleGoodsCountChange (item) {
       this.$http
         .post(`/api/cart/update`, {
           quantity: item.quantity,
@@ -205,60 +205,60 @@ export default {
         })
         .then(response => {
           if (response.data.code === 0) {
-            this.initData();
+            this.initData()
           }
-        });
+        })
     },
 
-    initData() {
+    initData () {
       this.$http.get(`/api/cart/list`).then(response => {
-        this.shopCartArray = response.data.content;
+        this.shopCartArray = response.data.content
         if (this.shopCartArray.length === 0) {
-          this.clearCart = true;
+          this.clearCart = true
         }
         this.shopCartArray.forEach(element => {
-          this.$set(element, "merchantChecked", false);
-          this.$set(element, "merchantCheckboxGroup", []);
-        });
-      });
+          this.$set(element, 'merchantChecked', false)
+          this.$set(element, 'merchantCheckboxGroup', [])
+        })
+      })
     },
-    close() {
-      this.show = false;
+    close () {
+      this.show = false
     },
-    submitDelete() {
+    submitDelete () {
       this.$dialog
         .confirm({
-          message: "确认删除这些商品？",
-          confirmButtonColor: "#EC3924",
-          cancelButtonColor: "#EC3924"
+          message: '确认删除这些商品？',
+          confirmButtonColor: '#EC3924',
+          cancelButtonColor: '#EC3924'
         })
         .then(() => {
-          this.clearCart = true;
-        });
+          this.clearCart = true
+        })
     },
-    submitSettlement() {
+    submitSettlement () {
       if (this.productTotalPrice) {
         // this.show = true;
         this.shopCartArray.forEach(it => {
           it.merchantCheckboxGroup.forEach(item => {
-            this.selectedGoodsId.push(item.id);
-          });
-        });
+            this.selectedGoodsId.push(item.id)
+          })
+        })
         this.$router.push({
-          path: "/order/confirmOrder",
+          path: '/order/confirmOrder',
           query: {
             selectedGoodsId: this.selectedGoodsId
           }
-        });
+        })
       } else {
         this.$toast({
           mask: false,
-          message: "请选择你要结算的商品！"
-        });
+          message: '请选择你要结算的商品！'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

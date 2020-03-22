@@ -1,3 +1,13 @@
+<!--
+ * @Description:
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:52:34
+ * @FilePath: /vue-jd-h5/src/components/ProgressBar/index.vue
+ -->
 <template>
   <div class="progress-bar-box">
     <div class="progress-bar">
@@ -11,15 +21,15 @@
 
 <script>
 export default {
-  name: "ProgressBar",
-  data() {
-    return {};
+  name: 'ProgressBar',
+  data () {
+    return {}
   },
-  created() {},
+  created () {},
   methods: {
-    processbar() {}
+    processbar () {}
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -36,10 +46,10 @@ export default {
       display: inline-block;
       position: relative;
       .clip {
-        background: linear-gradient(to right, #EC3924,#EC3924 );
+        background: linear-gradient(to right, #ec3924, #ec3924);
         width: 34px;
         margin: 0px;
-        box-shadow: 0px 0px 2px #EC392433;
+        box-shadow: 0px 0px 2px #ec392433;
         height: 10px;
         border-radius: 20px;
       }

@@ -34,37 +34,37 @@
 
 <script>
 export default {
-  name: "countryRegion",
-  data() {
+  name: 'countryRegion',
+  data () {
     return {
       indexList: [
-        "G",
-        "H",
-        "W",
-        "J",
-        "X",
-        "K",
-        "Y",
-        "Z",
-        "M",
-        "N",
-        "A",
-        "B",
-        "P",
-        "X",
-        "Q",
-        "D",
-        "R",
-        "S",
-        "F",
-        "T",
-        "E"
+        'G',
+        'H',
+        'W',
+        'J',
+        'X',
+        'K',
+        'Y',
+        'Z',
+        'M',
+        'N',
+        'A',
+        'B',
+        'P',
+        'X',
+        'Q',
+        'D',
+        'R',
+        'S',
+        'F',
+        'T',
+        'E'
       ]
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

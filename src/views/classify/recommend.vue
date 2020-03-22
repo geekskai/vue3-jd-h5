@@ -46,60 +46,60 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
+import ListScroll from '../../components/scroll/ListScroll'
 export default {
-  name: "recommend",
+  name: 'recommend',
   components: {
     ListScroll
   },
-  data() {
+  data () {
     return {
       likeList: [],
       page: 1
-    };
+    }
   },
-  mounted() {
-    this.setWrapHeight();
+  mounted () {
+    this.setWrapHeight()
   },
-  created() {
-    this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
-      const { data } = res.data;
-      this.likeList = data;
-    });
+  created () {
+    this.$http.get('http://test.happymmall.com/home/recommend').then(res => {
+      const { data } = res.data
+      this.likeList = data
+    })
   },
   methods: {
     // 当滑块滑动到底部的时候。
-    handleScrollToEnd() {
-      this.page++;
-      this.initData();
+    handleScrollToEnd () {
+      this.page++
+      this.initData()
     },
-    handlePullDown() {
+    handlePullDown () {
     },
-    handleToDetail(productId) {
+    handleToDetail (productId) {
       this.$router.push({
-        path: "/product/index",
+        path: '/product/index',
         query: { productId: productId }
-      });
+      })
     },
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/product/list?categoryId=${this.$route.query.categoryId}&page=${this.page}&size=15&clientType=0`
         )
         .then(response => {
-          this.likeList = response.data.content;
-        });
+          this.likeList = response.data.content
+        })
     },
-    handleSearch() {
-      this.$router.push("/search");
+    handleSearch () {
+      this.$router.push('/search')
     },
-    //动态设置searc-wrap的高
-    setWrapHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
+    // 动态设置searc-wrap的高
+    setWrapHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.wrapper.style.height = $screenHeight - 90 + 'px'
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

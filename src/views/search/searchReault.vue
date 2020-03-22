@@ -96,72 +96,72 @@
 
 <script>
 export default {
-  name: "searchReault",
-  data() {
+  name: 'searchReault',
+  data () {
     return {
       serarchResult: [],
       page: 1,
-      searchText: this.$route.query.searchWord || "",
-      activeOrderBy: "update_time",
-      sortType: "desc",
-      orderBy: "update_time"
-    };
+      searchText: this.$route.query.searchWord || '',
+      activeOrderBy: 'update_time',
+      sortType: 'desc',
+      orderBy: 'update_time'
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData(flag) {
-      flag && (this.activeOrderBy = "update_time");
+    initData (flag) {
+      flag && (this.activeOrderBy = 'update_time')
       this.$http
         .get(
           `/api/product/list?categoryId=${
-            this.$route.query.categoryId ? this.$route.query.categoryId : ""
+            this.$route.query.categoryId ? this.$route.query.categoryId : ''
           }&merchantShopId=${
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
-              : ""
+              : ''
           }&productName=${this.searchText}&sortName=${
-            flag ? "update_time" : this.orderBy
-          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            flag ? 'update_time' : this.orderBy
+          }&sortType=${flag ? 'desc' : this.sortType}&page=${
             this.page
           }&size=15&clientType=0`
         )
         .then(response => {
-          this.serarchResult = response.data.content;
-        });
+          this.serarchResult = response.data.content
+        })
     },
-    getSearch() {
-      this.searchText = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+    getSearch () {
+      this.searchText = this.searchText.replace(/^\s+|\s+$/g, '') // 去除两头空格
       if (!this.searchText) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入搜索内容"
-        });
-        return;
+          message: '请输入搜索内容'
+        })
+        return
       }
-      this.initData();
+      this.initData()
     },
-    selectOrder(e, sortType) {
-      this.sortType = sortType;
-      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+    selectOrder (e, sortType) {
+      this.sortType = sortType
+      this.orderBy = e.currentTarget.getAttribute('data-order-by')
       if (this.orderBy === this.activeOrderBy) {
-        return;
+        return
       }
-      this.activeOrderBy = this.orderBy + "_" + sortType;
-      this.initData();
+      this.activeOrderBy = this.orderBy + '_' + sortType
+      this.initData()
     }
   },
   directives: {
     focus: {
       // 指令的定义
-      inserted: function(el) {
-        el.focus();
+      inserted: function (el) {
+        el.focus()
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

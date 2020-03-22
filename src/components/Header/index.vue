@@ -1,10 +1,19 @@
+<!--
+ * @Description:
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:50:29
+ * @FilePath: /vue-jd-h5/src/components/Header/index.vue
+ -->
 <template>
   <div class="header-box">
     <div class="header-left">
       <slot name="left"></slot>
     </div>
     <div class="header-content">
-      <!-- <slot :user="user">{{user.lastName}}</slot> -->
       <slot></slot>
     </div>
     <div class="header-right">
@@ -15,18 +24,18 @@
 
 <script>
 export default {
-  name: "CmHeader",
-  data() {
+  name: 'CmHeader',
+  data () {
     return {
       user: {
-        firstName: "gan",
-        lastName: "kai"
+        firstName: 'gan',
+        lastName: 'kai'
       }
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

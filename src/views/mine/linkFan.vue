@@ -28,24 +28,24 @@
 
 <script>
 export default {
-  name: "linkFan",
-  data() {
+  name: 'linkFan',
+  data () {
     return {
       communityFunsNum: 0,
       myFansNum: 0,
       funsList: []
-    };
+    }
   },
-  created() {
+  created () {
     this.$http.get(`/api/user/getMyFuns`).then(response => {
-      console.log("=====content==>", response.data.content);
-      this.funsList = response.data.content.funsList;
-      this.myFansNum = response.data.content.myFansNum;
-      this.communityFunsNum = response.data.content.communityFunsNum;
-    });
+      console.log('=====content==>', response.data.content)
+      this.funsList = response.data.content.funsList
+      this.myFansNum = response.data.content.myFansNum
+      this.communityFunsNum = response.data.content.communityFunsNum
+    })
   },
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -73,15 +73,15 @@
 
 <script>
 export default {
-  name: "helpCenter",
-  data() {
+  name: 'helpCenter',
+  data () {
     return {
-      activeNames: ["1"]
-    };
+      activeNames: ['1']
+    }
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

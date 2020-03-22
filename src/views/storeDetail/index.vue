@@ -131,85 +131,85 @@
 
 <script>
 export default {
-  name: "storeDetail",
+  name: 'storeDetail',
   components: {},
   props: {},
-  data() {
+  data () {
     return {
-      activeOrderBy: "update_time",
-      sortType: "desc",
-      orderBy: "update_time",
+      activeOrderBy: 'update_time',
+      sortType: 'desc',
+      orderBy: 'update_time',
       page: 1,
       isLike: false, // 是否点赞喜欢
       loading: false,
       storeDetail: {},
       serarchResult: []
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
-  mounted() {
-    this.setHomeWrapperHeight();
+  mounted () {
+    this.setHomeWrapperHeight()
   },
   methods: {
-    handleIsLise() {
-      this.isLike = !this.isLike;
+    handleIsLise () {
+      this.isLike = !this.isLike
       this.$http.post(`/api/user/addAttention`, {
         id: this.storeDetail.merchantId,
         type: 1
-      });
+      })
     },
-    setHomeWrapperHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.wrapper.style.height = $screenHeight - 40 + "px";
+    setHomeWrapperHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.wrapper.style.height = $screenHeight - 40 + 'px'
     },
-    handleScrollToEnd() {
-      this.pageNum++;
-      this.initData();
+    handleScrollToEnd () {
+      this.pageNum++
+      this.initData()
     },
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/merchant/merchantShopInfo?merchantInfoId=${this.$route.query.merchantInfoId}`
         )
         .then(response => {
-          this.storeDetail = response.data.content;
-          this.isLike = Boolean(this.storeDetail.attentionFlag);
-        });
-      this.initSortData();
+          this.storeDetail = response.data.content
+          this.isLike = Boolean(this.storeDetail.attentionFlag)
+        })
+      this.initSortData()
     },
-    initSortData(flag) {
-      flag && (this.activeOrderBy = "update_time");
+    initSortData (flag) {
+      flag && (this.activeOrderBy = 'update_time')
       this.$http
         .get(
           `/api/product/list?merchantShopId=${
             this.$route.query.merchantInfoId
-          }&sortName=${flag ? "update_time" : this.orderBy}&sortType=${
-            flag ? "desc" : this.sortType
+          }&sortName=${flag ? 'update_time' : this.orderBy}&sortType=${
+            flag ? 'desc' : this.sortType
           }&page=${this.page}&size=20&clientType=0`
         )
         .then(response => {
-          this.serarchResult = response.data.content;
-        });
+          this.serarchResult = response.data.content
+        })
     },
-    handleSearch() {
+    handleSearch () {
       this.$router.push({
-        path: "/search",
+        path: '/search',
         query: { merchantShopId: this.$route.query.merchantInfoId }
-      });
+      })
     },
-    selectOrder(e, sortType) {
-      this.sortType = sortType;
-      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+    selectOrder (e, sortType) {
+      this.sortType = sortType
+      this.orderBy = e.currentTarget.getAttribute('data-order-by')
       if (this.orderBy === this.activeOrderBy) {
-        return;
+        return
       }
-      this.activeOrderBy = this.orderBy + "_" + sortType;
-      this.initSortData();
+      this.activeOrderBy = this.orderBy + '_' + sortType
+      this.initSortData()
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

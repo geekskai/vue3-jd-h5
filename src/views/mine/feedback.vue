@@ -48,24 +48,24 @@
 
 <script>
 export default {
-  name: "feedback",
-  data() {
+  name: 'feedback',
+  data () {
     return {
-      type: "",
-      detail: "",
+      type: '',
+      detail: '',
       isDisInput: false,
       remnant: 0
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleSubmit() {
+    handleSubmit () {
       if (!this.type || !this.detail) {
         this.$toast({
           mask: false,
-          message: "请选择类型或者填写问题描述！"
-        });
-        return;
+          message: '请选择类型或者填写问题描述！'
+        })
+        return
       }
       this.$http
         .post(`/api/help/feedback`, {
@@ -75,26 +75,26 @@ export default {
         .then(response => {
           this.$toast({
             mask: false,
-            message: "提交成功！"
-          });
-          this.$router.go(-1);
-        });
+            message: '提交成功！'
+          })
+          this.$router.go(-1)
+        })
     },
-    descInput(detail) {
-      var txtVal = this.detail.length;
-      this.remnant = 200 - txtVal;
+    descInput (detail) {
+      var txtVal = this.detail.length
+      this.remnant = 200 - txtVal
       if (this.remnant < 0) {
-        this.remnant = 0;
+        this.remnant = 0
       }
       if (200 - txtVal < 0) {
-        this.detail = detail.slice(0, 200);
-        this.isDisInput = true;
+        this.detail = detail.slice(0, 200)
+        this.isDisInput = true
       } else {
-        this.isDisInput = false;
+        this.isDisInput = false
       }
     }
   }
-};
+}
 </script>
 <style scoped lang="scss">
 .feedback {

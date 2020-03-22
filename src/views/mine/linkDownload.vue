@@ -25,18 +25,18 @@
 
 <script>
 export default {
-  name: "linkDownload",
-  data() {
+  name: 'linkDownload',
+  data () {
     return {
       systemMessage: {},
       checked: false,
       mallMessage: {}
-    };
+    }
   },
-  mounted() {},
-  created() {},
+  mounted () {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

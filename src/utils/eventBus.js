@@ -1,3 +1,12 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:53:54
+ * @FilePath: /vue-jd-h5/src/utils/eventBus.js
+ */
 class EventBus {
   constructor (vue) {
     if (!this.handles) {

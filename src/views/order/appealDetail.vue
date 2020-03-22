@@ -63,36 +63,36 @@
 
 <script>
 export default {
-  name: "appealDetail",
-  data() {
+  name: 'appealDetail',
+  data () {
     return {
-      username: "",
-      phone: "",
+      username: '',
+      phone: '',
       appealContent: {},
       appealDetailForm: this.$route.params || {}
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/order/complainDetail?appealNo=${this.appealDetailForm.appealNo}`
         )
         .then(response => {
-          this.appealContent = response.data.content;
-        });
+          this.appealContent = response.data.content
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
 .appeal-detail {
   padding: 0 16px;
- 
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;
@@ -206,4 +206,3 @@ export default {
   }
 }
 </style>
-

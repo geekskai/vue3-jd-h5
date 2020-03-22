@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:58:36
+ * @FilePath: /vue-jd-h5/src/views/merchantsSettled/waitingReviewResults.vue
+ -->
 <template>
   <div class="waiting-review-results">
      <cm-header>
@@ -10,7 +19,7 @@
       <ul class="address-list">
         <li>
           <svg-icon class="green-ok" icon-class="green-ok"></svg-icon>
-          
+
           <span class="thanks-text">感谢您的配合！</span>
         </li>
         <li class="reault-text">
@@ -24,14 +33,14 @@
 
 <script>
 export default {
-  name: "waitingReviewResults",
-  data() {
+  name: 'waitingReviewResults',
+  data () {
     return {
       applyInfo: {}
-    };
+    }
   },
-  created() {}
-};
+  created () {}
+}
 </script>
 
 <style scoped lang="scss">

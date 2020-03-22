@@ -1,6 +1,6 @@
 <template>
   <div class="enterprise-certification">
-     <cm-header>
+    <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
@@ -69,8 +69,8 @@
 
 <script>
 export default {
-  name: "enterpriseCertification",
-  data() {
+  name: 'enterpriseCertification',
+  data () {
     return {
       systemMessage: {},
       checked: false,
@@ -81,66 +81,66 @@ export default {
       idCardNoUrlC: [],
       businessLicenseUrl: [],
       mallMessage: {}
-    };
+    }
   },
-  created() {
+  created () {
     if (this.$route.query.isEdit) {
-      this.idCardNoUrlA.push({ url: this.$route.query.idCardNoUrlA });
-      this.idCardNoUrlB.push({ url: this.$route.query.idCardNoUrlB });
-      this.idCardNoUrlC.push({ url: this.$route.query.idCardNoUrlC });
+      this.idCardNoUrlA.push({ url: this.$route.query.idCardNoUrlA })
+      this.idCardNoUrlB.push({ url: this.$route.query.idCardNoUrlB })
+      this.idCardNoUrlC.push({ url: this.$route.query.idCardNoUrlC })
       this.businessLicenseUrl.push({
         url: this.$route.query.businessLicenseUrl
-      });
+      })
     }
   },
   methods: {
     //   /api/shop/submit
-    handleSubmitShopInfo() {
+    handleSubmitShopInfo () {
       //  需要验证
       this.$http
         .post(
-          `/api/shop${this.applyInfo.isEdit ? "/again" : ""}/submit`,
+          `/api/shop${this.applyInfo.isEdit ? '/again' : ''}/submit`,
           this.applyInfo
         )
         .then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "店铺信息提交成功"
-          });
-          this.$router.push("/merchantsSettled/payDeposit");
-        });
+            message: '店铺信息提交成功'
+          })
+          this.$router.push('/merchantsSettled/payDeposit')
+        })
     },
-    afterReadA(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterReadA (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.applyInfo.idCardNoUrlA = response.data.content.imageUrl;
-      });
+        this.applyInfo.idCardNoUrlA = response.data.content.imageUrl
+      })
     },
-    afterReadB(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterReadB (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.applyInfo.idCardNoUrlB = response.data.content.imageUrl;
-      });
+        this.applyInfo.idCardNoUrlB = response.data.content.imageUrl
+      })
     },
-    afterReadC(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterReadC (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.applyInfo.idCardNoUrlC = response.data.content.imageUrl;
-      });
+        this.applyInfo.idCardNoUrlC = response.data.content.imageUrl
+      })
     },
-    afterReadBusinessLicenseUrl(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterReadBusinessLicenseUrl (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/shop/upload/image`, formData).then(response => {
-        this.applyInfo.businessLicenseUrl = response.data.content.imageUrl;
-      });
+        this.applyInfo.businessLicenseUrl = response.data.content.imageUrl
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -223,7 +223,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
-         border-radius: 4px;
+      border-radius: 4px;
     }
   }
 }

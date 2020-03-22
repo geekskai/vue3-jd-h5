@@ -111,9 +111,8 @@ instance.interceptors.response.use(
       //   store.commit('changeNetwork', false);
     }
   })
-
 export default {
-  install(Vue) {
+  install (Vue) {
     Object.defineProperty(Vue.prototype, '$http', {
       value: instance
     })

@@ -61,48 +61,48 @@
 
 <script>
 export default {
-  name: "Appeal",
-  data() {
+  name: 'Appeal',
+  data () {
     return {
-      username: "",
-      phone: "",
+      username: '',
+      phone: '',
       radios: {},
       appealForms: {
-        context: "",
+        context: '',
         imagUrls: []
       },
       fileList: [],
       appealObject: {}
-    };
+    }
   },
-  created() {
-    this.appealObject = this.$route.params;
+  created () {
+    this.appealObject = this.$route.params
     this.appealObject.appOrderProductVos = this.appealObject.appOrderProductVos.filter(
       it => it.appealFlag === 0
-    );
+    )
   },
   methods: {
-    change(id) {
-      this.appealForms.id = id;
+    change (id) {
+      this.appealForms.id = id
     },
-    afterRead(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterRead (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/order/upload/image`, formData).then(response => {
         if (response.data.code === 0) {
-          this.appealForms.imagUrls.push(...response.data.content.imageUrls);
+          this.appealForms.imagUrls.push(...response.data.content.imageUrls)
         }
-      });
+      })
     },
-    handleSubmitAppeal() {
-      this.appealForms.orderNo = this.appealObject.orderNo;
+    handleSubmitAppeal () {
+      this.appealForms.orderNo = this.appealObject.orderNo
       if (!this.appealForms.id) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请选中你要申诉的商品！"
-        });
-        return;
+          message: '请选中你要申诉的商品！'
+        })
+        return
       }
 
       this.$http
@@ -111,13 +111,13 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "商品申诉成功！"
-          });
-          this.$router.go(-1);
-        });
+            message: '商品申诉成功！'
+          })
+          this.$router.go(-1)
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

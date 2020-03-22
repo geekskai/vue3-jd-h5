@@ -54,48 +54,48 @@
 
 <script>
 export default {
-  name: "myFootprint",
-  data() {
+  name: 'myFootprint',
+  data () {
     return {
       pageNum: 1,
       loading: true,
       footprintForm: {},
       showButton: false,
       footPrintArrays: []
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
-  mounted() {
-    this.setHomeWrapperHeight();
+  mounted () {
+    this.setHomeWrapperHeight()
   },
   methods: {
-    handleScrollToEnd() {
+    handleScrollToEnd () {
       if (this.loading) {
-        this.pageNum++;
-        this.initData();
+        this.pageNum++
+        this.initData()
       }
     },
-    //动态设置searc-wrap的高
-    setHomeWrapperHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.wrapper.$el.style.height = $screenHeight - 30 + "px";
+    // 动态设置searc-wrap的高
+    setHomeWrapperHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.wrapper.$el.style.height = $screenHeight - 30 + 'px'
     },
-    handleDeleteFootprint() {
+    handleDeleteFootprint () {
       this.$http
         .post(`/api/user/delFootPrint`, { ids: this.footprintForm.ids })
         .then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "删除成功！"
-          });
-          this.initData(true);
-        });
+            message: '删除成功！'
+          })
+          this.initData(true)
+        })
     },
 
-    initData(flag) {
+    initData (flag) {
       this.$http
         .post(`/api/user/footPrint`, {
           pageNum: flag ? 1 : this.pageNum,
@@ -103,32 +103,32 @@ export default {
         })
         .then(response => {
           if (!response.data.content) {
-            this.loading = false;
-            return;
+            this.loading = false
+            return
           }
-          let responseArrays = response.data.content.userFootPrintInfoVos;
+          let responseArrays = response.data.content.userFootPrintInfoVos
           if (responseArrays.length === 1) {
-            responseArrays[0].dateFlag = true;
+            responseArrays[0].dateFlag = true
           } else {
             for (let index = 1; index < responseArrays.length; index++) {
               if (
                 responseArrays[index].date !== responseArrays[index - 1].date
               ) {
-                responseArrays[index].dateFlag = true;
+                responseArrays[index].dateFlag = true
               }
             }
           }
           if (flag) {
-            this.loading = true;
-            this.pageNum = 1;
-            this.footPrintArrays = responseArrays;
+            this.loading = true
+            this.pageNum = 1
+            this.footPrintArrays = responseArrays
           } else {
-            this.footPrintArrays.push(...responseArrays);
+            this.footPrintArrays.push(...responseArrays)
           }
-        });
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

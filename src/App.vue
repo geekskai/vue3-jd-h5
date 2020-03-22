@@ -8,37 +8,37 @@
 
 <script>
 // 禁止在iOS端将页面手动放大缩小的事件
-window.onload = function() {
-  document.addEventListener("touchstart", function(event) {
+window.onload = function () {
+  document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
-      event.preventDefault();
+      event.preventDefault()
     }
-  });
-  document.addEventListener("gesturestart", function(event) {
-    event.preventDefault();
-  });
-};
+  })
+  document.addEventListener('gesturestart', function (event) {
+    event.preventDefault()
+  })
+}
 export default {
-  name: "App",
-  provide() {
+  name: 'App',
+  provide () {
     return {
       reload: this.reload
-    };
+    }
   },
-  data() {
+  data () {
     return {
       isRouterAlive: true
-    };
+    }
   },
   methods: {
-    reload() {
-      this.isRouterAlive = false;
+    reload () {
+      this.isRouterAlive = false
       this.$nextTick(() => {
-        this.isRouterAlive = true;
-      });
+        this.isRouterAlive = true
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss">
 @import "./styles/base.scss";

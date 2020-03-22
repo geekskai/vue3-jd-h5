@@ -89,32 +89,32 @@
 </template>
 
 <script>
-import ClickOutside from "vue-click-outside";
+import ClickOutside from 'vue-click-outside'
 export default {
-  name: "NodeApplication",
+  name: 'NodeApplication',
   directives: {
     ClickOutside
   },
-  data() {
+  data () {
     return {
       show: false,
       isActive: false,
       shareNode: {},
-      price: "",
+      price: '',
       item: {},
       configData: {
         position: {
-          top: "135px",
-          right: "8px",
-          bottom: "",
-          left: ""
+          top: '135px',
+          right: '8px',
+          bottom: '',
+          left: ''
         },
-        width: "30%", // 设置宽度
+        width: '30%', // 设置宽度
         list: [
           // 设置下拉列表数据和对应的点击事件
           {
-            text: "CoinPay",
-            icon: "coin-pay",
+            text: 'CoinPay',
+            icon: 'coin-pay',
             action: this.handleCoinPay
           }
           // {
@@ -124,26 +124,26 @@ export default {
           // }
         ]
       }
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleCoinPay(item) {
-      this.item = item;
+    handleCoinPay (item) {
+      this.item = item
     },
-    handleAlipay(item) {
-      this.item = item;
+    handleAlipay (item) {
+      this.item = item
     },
-    handleShow() {
-      this.isActive = true;
-      this.$refs.droplist.show();
+    handleShow () {
+      this.isActive = true
+      this.$refs.droplist.show()
     },
-    hidden() {
-      this.isActive = false;
-      this.$refs.droplist.hidden();
+    hidden () {
+      this.isActive = false
+      this.$refs.droplist.hidden()
     },
-    handleConfirmDialog() {
-      this.show = false;
+    handleConfirmDialog () {
+      this.show = false
       this.$http
         .post(`/api/node/apply`, {
           id: this.shareNode.id,
@@ -153,18 +153,18 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "申请成功！"
-          });
-        });
+            message: '申请成功！'
+          })
+        })
     },
-    handleShareNode() {
-      this.show = true;
+    handleShareNode () {
+      this.show = true
       this.$http.get(`/api/node/getSettingJson?type=6`).then(response => {
-        this.shareNode = response.data.content[0];
-      });
+        this.shareNode = response.data.content[0]
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -266,4 +266,3 @@ export default {
   }
 }
 </style>
-

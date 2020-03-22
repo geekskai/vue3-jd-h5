@@ -1,6 +1,5 @@
 <template>
   <div class="cancel-order">
-   
 
        <cm-header>
       <span slot="left" @click="$router.go(-1)">
@@ -58,19 +57,19 @@
 
 <script>
 export default {
-  name: "CancelOrder",
-  data() {
+  name: 'CancelOrder',
+  data () {
     return {
-      cancelReason: "",
-      otherCancelReason: "",
+      cancelReason: '',
+      otherCancelReason: '',
       remnant: 0
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleSubmitOrder() {
-      if (this.cancelReason === "其他原因") {
-        this.cancelReason = this.otherCancelReason;
+    handleSubmitOrder () {
+      if (this.cancelReason === '其他原因') {
+        this.cancelReason = this.otherCancelReason
       }
       this.$http
         .post(`/api/order/cancel`, {
@@ -81,26 +80,26 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "提交成功！"
-          });
-          this.$router.go(-1);
-        });
+            message: '提交成功！'
+          })
+          this.$router.go(-1)
+        })
     },
-    descInput(value) {
-      var txtVal = value.length;
-      this.remnant = 100 - txtVal;
+    descInput (value) {
+      var txtVal = value.length
+      this.remnant = 100 - txtVal
       if (this.remnant < 0) {
-        this.remnant = 0;
+        this.remnant = 0
       }
       if (100 - txtVal < 0) {
-        this.otherCancelReason = value.slice(0, 100);
-        this.isDisInput = true;
+        this.otherCancelReason = value.slice(0, 100)
+        this.isDisInput = true
       } else {
-        this.isDisInput = false;
+        this.isDisInput = false
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -111,7 +110,7 @@ export default {
   justify-content: flex-start;
   min-height: 667px;
   max-height: 812px;
- 
+
   .content-box {
     display: flex;
     justify-content: center;

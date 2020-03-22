@@ -1,3 +1,13 @@
+<!--
+ * @Description:
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:02:58
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:51:15
+ * @FilePath: /vue-jd-h5/src/components/popup/index.vue
+ -->
 <template>
   <div class="popup" v-show="popupShow">
     <div class="popup-content">
@@ -17,7 +27,7 @@
 
 <script>
 export default {
-  name: "popup",
+  name: 'popup',
   props: {
     popupShow: {
       type: Boolean,
@@ -25,18 +35,18 @@ export default {
     },
     popupTitle: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   methods: {
-    cancelPopup() {
-      this.$emit("cancelPopup");
+    cancelPopup () {
+      this.$emit('cancelPopup')
     },
-    confirmPopup() {
-      this.$emit("confirmPopup");
+    confirmPopup () {
+      this.$emit('confirmPopup')
     }
   }
-};
+}
 </script>
 
 <style lang="scss" type="text/scss" scoped>

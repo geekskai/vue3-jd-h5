@@ -13,7 +13,7 @@
       <span class="phone-number">设置密码</span>
       <p class="number-tips">6-8位数字和字母的组成的字符</p>
       <van-cell-group class="info-list">
-        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+        <ValidationObserver ref="observer" tag="form">
           <ValidationProvider
             v-if="pwdEyes1"
             v-slot="{ errors }"
@@ -85,20 +85,20 @@
 
 <script>
 export default {
-  name: "emailRegisterTwo",
-  data() {
+  name: 'emailRegisterTwo',
+  data () {
     return {
       pwdEyes1: false,
       pwdEyes2: false,
       emailRegisterTwo: {
-        password: ""
+        password: ''
       }
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    async handleConfirmRegister() {
-      const isValid = await this.$refs.observer.validate();
+    async handleConfirmRegister () {
+      const isValid = await this.$refs.observer.validate()
       if (
         this.emailRegisterTwo.password === this.emailRegisterTwo.password1 &&
         isValid
@@ -110,28 +110,28 @@ export default {
           )
           .then(response => {
             if (response.data.code === 0) {
-              localStorage.setItem("token", response.data.content.token);
+              localStorage.setItem('token', response.data.content.token)
               this.$toast({
                 mask: false,
-                message: "注册成功！"
-              });
-              this.$router.push("/index");
+                message: '注册成功！'
+              })
+              this.$router.push('/index')
             } else {
               this.$toast({
                 mask: false,
                 message: response.data.msg
-              });
+              })
             }
-          });
+          })
       } else {
         this.$toast({
           mask: false,
-          message: "两次密码不一致！"
-        });
+          message: '两次密码不一致！'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

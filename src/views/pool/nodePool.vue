@@ -38,27 +38,27 @@
 
 <script>
 export default {
-  name: "nodePool",
-  data() {
+  name: 'nodePool',
+  data () {
     return {
       walletUserPoolLogVOs: []
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .get(`/api/wallet/getPoolLogs?poolType=3&page=1&size=10`)
         .then(response => {
           this.walletUserPoolLogVOs =
-            response.data.content.walletUserPoolLogVOs;
-          this.communityCalculate = response.data.content.communityCalculate;
-        });
+            response.data.content.walletUserPoolLogVOs
+          this.communityCalculate = response.data.content.communityCalculate
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

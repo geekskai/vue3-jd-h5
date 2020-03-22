@@ -89,17 +89,17 @@
 
 <script>
 export default {
-  name: "toBeDelivered",
-  data() {
+  name: 'toBeDelivered',
+  data () {
     return {
       orderForm: {}
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .post(`/api/order/detail`, {
           pageNum: 1,
@@ -107,11 +107,11 @@ export default {
           orderNo: this.$route.query.orderNo
         })
         .then(response => {
-          this.orderForm = response.data.content;
-        });
+          this.orderForm = response.data.content
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

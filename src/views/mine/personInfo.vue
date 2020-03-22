@@ -61,69 +61,69 @@
 
 <script>
 export default {
-  name: "personInfo",
-  data() {
+  name: 'personInfo',
+  data () {
     return {
       show: false,
       userInfo: {
-        areaCode: "86"
+        areaCode: '86'
       },
-      name: ""
-    };
+      name: ''
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    afterRead(res) {
-      let formData = new FormData();
-      formData.append("file", res.file);
+    afterRead (res) {
+      let formData = new FormData()
+      formData.append('file', res.file)
       this.$http.post(`/api/user/upload/image`, formData).then(response => {
-        this.userInfo.headImageUrl = response.data.content.imageUrl;
-      });
+        this.userInfo.headImageUrl = response.data.content.imageUrl
+      })
     },
-    handleEditPassword() {
+    handleEditPassword () {
       this.$router.push({
         path: `/mine/changePassword`,
         query: this.userInfo
-      });
+      })
     },
-    handleEditEmail() {
+    handleEditEmail () {
       this.$router.push({
         path: `/mine/settingMail`,
         query: this.userInfo
-      });
+      })
     },
-    handleEditPhoneNumber() {
+    handleEditPhoneNumber () {
       this.$router.push({
         path: `/mine/phoneNumberSetting`,
         query: this.userInfo
-      });
+      })
     },
-    initData() {
+    initData () {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
-        this.userInfo = response.data.content;
-      });
+        this.userInfo = response.data.content
+      })
     },
-    handleConfirmNickName() {
+    handleConfirmNickName () {
       this.$http
         .post(`/api/user/updateUserNickname`, {
           nickname: this.userInfo.nickName
         })
         .then(response => {
-          this.show = false;
+          this.show = false
           this.$toast({
             mask: false,
             duration: 1000,
             message: response.data.msg
-          });
-        });
+          })
+        })
     },
-    handlePhone() {
-      this.show = true;
+    handlePhone () {
+      this.show = true
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

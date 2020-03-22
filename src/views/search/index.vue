@@ -45,67 +45,63 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
 export default {
-  name: "search",
-  components: {
-    ListScroll
-  },
-  data() {
+  name: 'search',
+  data () {
     return {
-      searchText: "",
+      searchText: '',
       // seclectActive: false,
       hotSerach: [],
       serarchResult: [],
       page: 1,
       historySearch: []
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    handleGoHistory(item) {
+    handleGoHistory (item) {
       this.$router.push({
         path: `/search/searchReault`,
         query: {
           // categoryId: categoryId,
           searchWord: item
         }
-      });
+      })
     },
-    initData() {
+    initData () {
       this.$http
         .get(
           `/api/product/hotAndHistorySearch?merchantShopId=${
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
-              : ""
+              : ''
           }`
         )
         .then(response => {
-          this.historySearch = response.data.content.historySearch;
-          this.hotSerach = response.data.content.hotSerach;
-        });
+          this.historySearch = response.data.content.historySearch
+          this.hotSerach = response.data.content.hotSerach
+        })
     },
-    handleHotSerach(categoryId) {
+    handleHotSerach (categoryId) {
       this.$router.push({
         path: `/search/searchReault`,
         query: {
           categoryId: categoryId,
-          merchantShopId: this.$route.query.merchantShopId || ""
+          merchantShopId: this.$route.query.merchantShopId || ''
         }
-      });
+      })
     },
-    getSearch() {
-      let keyword = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+    getSearch () {
+      let keyword = this.searchText.replace(/^\s+|\s+$/g, '') // 去除两头空格
       if (!keyword) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入搜索内容"
-        });
-        return;
+          message: '请输入搜索内容'
+        })
+        return
       }
       this.$router.push({
         path: `/search/searchReault`,
@@ -113,14 +109,14 @@ export default {
           searchWord: keyword,
           merchantShopId: this.$route.query.merchantShopId
         }
-      });
+      })
     },
 
-    deleteHistory() {
+    deleteHistory () {
       this.$dialog
         .confirm({
-          title: "提示！",
-          message: "确认删除所有历史搜索吗？"
+          title: '提示！',
+          message: '确认删除所有历史搜索吗？'
         })
         .then(() => {
           this.$http
@@ -129,22 +125,22 @@ export default {
               this.$toast({
                 mask: false,
                 duration: 1000,
-                message: "删除成功！"
-              });
-              this.initData();
-            });
-        });
+                message: '删除成功！'
+              })
+              this.initData()
+            })
+        })
     }
   },
   directives: {
     focus: {
       // 指令的定义
-      inserted: function(el) {
-        el.focus();
+      inserted: function (el) {
+        el.focus()
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" type="text/scss" scoped>

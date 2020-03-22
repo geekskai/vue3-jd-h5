@@ -30,21 +30,21 @@
 
 <script>
 export default {
-  name: "auditFailure",
-  data() {
+  name: 'auditFailure',
+  data () {
     return {
       applyInfo: {
-        reason: "",
-        reviewTime: ""
+        reason: '',
+        reviewTime: ''
       }
-    };
+    }
   },
-  created() {
+  created () {
     this.$http.post(`/api/shop/again/display`).then(response => {
-      this.applyInfo = response.data.content;
-    });
+      this.applyInfo = response.data.content
+    })
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -101,7 +101,7 @@ export default {
       background-color: #ec3924;
       line-height: 44px;
       font-size: 18px;
-         border-radius: 4px;
+      border-radius: 4px;
     }
   }
 }

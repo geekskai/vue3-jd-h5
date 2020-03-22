@@ -108,8 +108,8 @@
 
 <script>
 export default {
-  name: "pendingPayment",
-  data() {
+  name: 'pendingPayment',
+  data () {
     return {
       columns: 1,
       orderForm: {
@@ -117,54 +117,54 @@ export default {
         appOrderProductVos: [
           {
             appealFlag: 0,
-            appealNo: "string",
-            fullName: "string",
+            appealNo: 'string',
+            fullName: 'string',
             id: 0,
             productAmount: 0,
-            productMainUrl: "string",
-            productName: "string",
+            productMainUrl: 'string',
+            productName: 'string',
             quantity: 0,
             skuId: 0
           }
         ],
-        createDate: "2019-08-16T07:49:33.452Z",
-        deliveryDate: "2019-08-16T07:49:33.452Z",
-        finishDate: "2019-08-16T07:49:33.452Z",
+        createDate: '2019-08-16T07:49:33.452Z',
+        deliveryDate: '2019-08-16T07:49:33.452Z',
+        finishDate: '2019-08-16T07:49:33.452Z',
         freightAmount: 0,
-        fullAddress: "string",
-        logoUrl: "string",
-        orderNo: "string",
+        fullAddress: 'string',
+        logoUrl: 'string',
+        orderNo: 'string',
         outPayAmount: 0,
-        outerOrderNo: "string",
-        payDate: "2019-08-16T07:49:33.452Z",
+        outerOrderNo: 'string',
+        payDate: '2019-08-16T07:49:33.452Z',
         quantity: 0,
-        shopName: "string",
+        shopName: 'string',
         status: 0,
-        toName: "string",
-        toPhone: "string"
+        toName: 'string',
+        toPhone: 'string'
       },
       defaultData: [
-       {
-            text: "CoinPay",
-            value: "CoinPay"
-          }
+        {
+          text: 'CoinPay',
+          value: 'CoinPay'
+        }
       ],
       pickData: {
         data1: [
-         {
-            text: "CoinPay",
-            value: "CoinPay"
+          {
+            text: 'CoinPay',
+            value: 'CoinPay'
           }
         ]
       },
       show: false
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http
         .post(`/api/order/detail`, {
           pageNum: 1,
@@ -172,34 +172,34 @@ export default {
           orderNo: this.$route.query.orderNo
         })
         .then(response => {
-          this.orderForm = response.data.content;
-        });
+          this.orderForm = response.data.content
+        })
     },
-    close() {
-      this.show = false;
+    close () {
+      this.show = false
     },
-    confirmFn() {
-      this.show = false;
+    confirmFn () {
+      this.show = false
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
         forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "支付中..."
-      });
+        loadingType: 'spinner',
+        message: '支付中...'
+      })
       setTimeout(() => {
         // this.$toast({
         //   mask: false,
         //   message: "支付成功~"
         // });
-        this.$router.push("/order/transactionDetails");
-      }, 1300);
+        this.$router.push('/order/transactionDetails')
+      }, 1300)
     },
-    handlePay() {
-      this.show = true;
+    handlePay () {
+      this.show = true
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

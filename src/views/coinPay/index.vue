@@ -29,18 +29,18 @@
 
 <script>
 export default {
-  name: "coinPay",
-  data() {
+  name: 'coinPay',
+  data () {
     return {
       systemMessage: {},
       checked: false,
       mallMessage: {}
-    };
+    }
   },
-  mounted() {},
-  created() {},
+  mounted () {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

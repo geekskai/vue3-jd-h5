@@ -75,23 +75,23 @@
 
 <script>
 export default {
-  name: "MyWallet",
-  data() {
+  name: 'MyWallet',
+  data () {
     return {
       walletForm: {}
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   methods: {
-    initData() {
+    initData () {
       this.$http.get(`/api/wallet/info`).then(response => {
-        this.walletForm = response.data.content;
-      });
+        this.walletForm = response.data.content
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -242,4 +242,3 @@ export default {
   }
 }
 </style>
-

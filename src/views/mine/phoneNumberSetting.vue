@@ -46,15 +46,15 @@
 
 <script>
 export default {
-  name: "phoneNumberSetting",
-  data() {
+  name: 'phoneNumberSetting',
+  data () {
     return {
       userInfo: this.$route.query
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleSavePhoneNumber() {
+    handleSavePhoneNumber () {
       if (this.userInfo.password === this.userInfo.password1) {
         this.$http
           .post(`/api/user/updateUserInfo`, this.userInfo)
@@ -63,38 +63,38 @@ export default {
               mask: false,
               duration: 1000,
               message: response.data.msg
-            });
-            this.$router.go(-1);
-          });
+            })
+            this.$router.go(-1)
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "两次输入的密码不一致！"
-        });
+          message: '两次输入的密码不一致！'
+        })
       }
     },
-    handleGetVerifyCode() {
+    handleGetVerifyCode () {
       if (this.userInfo.mobile) {
         this.$http
-          .post(`/api/user/getVerifyCode`, { mobile: this.userInfo.mobile,type:3 })
+          .post(`/api/user/getVerifyCode`, { mobile: this.userInfo.mobile, type: 3 })
           .then(response => {
             this.$toast({
               mask: false,
               duration: 1000,
-              message: "验证码获取成功！"
-            });
-          });
+              message: '验证码获取成功！'
+            })
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入手机号"
-        });
+          message: '请输入手机号'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

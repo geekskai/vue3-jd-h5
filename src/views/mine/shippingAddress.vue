@@ -62,30 +62,30 @@
 
 <script>
 export default {
-  name: "ShippingAddress",
-  data() {
+  name: 'ShippingAddress',
+  data () {
     return {
       addressArray: []
-    };
+    }
   },
-  created() {
-    this.getUserList();
+  created () {
+    this.getUserList()
   },
   methods: {
-    handleGoToEditAddrss(address) {
+    handleGoToEditAddrss (address) {
       this.$router.push({
-        path: "/mine/editAddress",
+        path: '/mine/editAddress',
         query: Object.assign({}, address)
-      });
+      })
     },
-    getUserList() {
+    getUserList () {
       // 获取用户列表
       this.$http.get(`/api/address/getUserAddrList`).then(response => {
-        this.addressArray = response.data.content;
-      });
+        this.addressArray = response.data.content
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -187,4 +187,3 @@ export default {
   }
 }
 </style>
-

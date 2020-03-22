@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 // npm i webpack - bundle - analyzer - D
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const CompressionPlugin = require("compression-webpack-plugin")
+const CompressionPlugin = require('compression-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const dllReference = config => {
   config.plugin('vendorDll')
@@ -41,7 +41,7 @@ module.exports = {
   // 输出文件目录
   outputDir: 'dist',
   // eslint-loader 是否在保存的时候检查
-  lintOnSave: false,
+  lintOnSave: true,
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
   assetsDir: 'static',
   productionSourceMap: false,
@@ -118,9 +118,9 @@ module.exports = {
       )
       configs.plugins.push(
         new CompressionPlugin({
-          test: /\.js$|\.html$|.\css/, //匹配文件名
-          threshold: 10240,//对超过1k的数据压缩
-          deleteOriginalAssets: false //不删除源文件
+          test: /\.js$|\.html$|.\css/, // 匹配文件名
+          threshold: 10240, // 对超过1k的数据压缩
+          deleteOriginalAssets: false // 不删除源文件
         })
       )
     }

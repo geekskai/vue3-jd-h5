@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:58:56
+ * @FilePath: /vue-jd-h5/src/views/mine/addAddress.vue
+ -->
 <template>
   <div class="add-address">
     <cm-header>
@@ -146,13 +155,13 @@
 </template>
 <script>
 export default {
-  name: "addAddress",
-  data() {
+  name: 'addAddress',
+  data () {
     return {
       show: false,
       parentAreaId: 0,
       addressInfo: {
-        tag: "家",
+        tag: '家',
         receiverGender: 0,
         defaultAddrFlag: 0
       },
@@ -161,13 +170,13 @@ export default {
       list2: [],
       list3: [],
       provinceStyle: {
-        WebkitTransform: "translate3d(0px,0px,0px)"
+        WebkitTransform: 'translate3d(0px,0px,0px)'
       },
       cityStyle: {
-        WebkitTransform: "translate3d(0px,0px,0px)"
+        WebkitTransform: 'translate3d(0px,0px,0px)'
       },
       districtStyle: {
-        WebkitTransform: "translate3d(0px,0px,0px)"
+        WebkitTransform: 'translate3d(0px,0px,0px)'
       },
       startTop: 0,
       provinceIndex: 0,
@@ -177,19 +186,19 @@ export default {
       maxScroll: 0,
       addHeight: 0,
       addSelect: false,
-      provinceVal: "",
-      cityVal: "",
-      areaVal: "",
+      provinceVal: '',
+      cityVal: '',
+      areaVal: '',
       val: {
-        provinceVal: "",
-        cityVal: "",
-        areaVal: ""
+        provinceVal: '',
+        cityVal: '',
+        areaVal: ''
       }
-    };
+    }
   },
   watch: {
     // 监听省滑动
-    provinceVal(value) {
+    provinceVal (value) {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
         .then(res => {
@@ -197,16 +206,16 @@ export default {
             this.list2 =
               res.data.content.length > 0
                 ? res.data.content
-                : [{ areaName: "-" }];
+                : [{ areaName: '-' }]
             if (res.data.content.length < 1) {
-              this.list3 = [{ areaName: "-" }];
+              this.list3 = [{ areaName: '-' }]
             }
           }
-          this.dataProcessing();
-        });
+          this.dataProcessing()
+        })
     },
     // 监听市滑动
-    cityVal(value) {
+    cityVal (value) {
       if (value) {
         this.$http
           .get(`/api/address/getCnAreaList?parentAreaId=${value}`)
@@ -215,30 +224,30 @@ export default {
               this.list3 =
                 res.data.content.length > 0
                   ? res.data.content
-                  : [{ areaName: "-" }];
+                  : [{ areaName: '-' }]
             }
-            this.dataProcessing();
-          });
+            this.dataProcessing()
+          })
       }
     }
   },
 
-  created() {
-    this.getProvinces();
-    this.getCitys();
-    this.getAreas();
+  created () {
+    this.getProvinces()
+    this.getCitys()
+    this.getAreas()
     // 第一条数据为直辖市 so '-' 符号表示为第三列
-    this.list3 = [{ areaName: "-", areaId: "" }];
+    this.list3 = [{ areaName: '-', areaId: '' }]
   },
   methods: {
-    handleChooseHome(tag) {
-      this.addressInfo.tag = tag;
+    handleChooseHome (tag) {
+      this.addressInfo.tag = tag
     },
-    handleChooseGender(gender) {
-      this.addressInfo.receiverGender = gender;
+    handleChooseGender (gender) {
+      this.addressInfo.receiverGender = gender
     },
 
-    handleSeveAddresInfo() {
+    handleSeveAddresInfo () {
       if (
         !this.addressInfo.receiverName ||
         !this.addressInfo.receiverPhone ||
@@ -248,245 +257,245 @@ export default {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入你的完整的地址信息！"
-        });
-        return;
+          message: '请输入你的完整的地址信息！'
+        })
+        return
       }
       this.addressInfo.fullAddress = this.addressInfo.fullAddress + this.addressInfo.address
       this.$http
         .post(`/api/address/updateUserAddr`, this.addressInfo)
         .then(response => {
           if (response.data.code === 0) {
-            this.$router.push("/mine/shippingAddress");
+            this.$router.push('/mine/shippingAddress')
           }
-        });
+        })
     },
 
-    showPicker() {
-      this.show = true;
+    showPicker () {
+      this.show = true
     },
     // 分层获取中国地址信息
-    getProvinces() {
+    getProvinces () {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
         .then(response => {
-          this.list = response.data.content;
-          this.val.provinceVal = this.list[0];
-        });
+          this.list = response.data.content
+          this.val.provinceVal = this.list[0]
+        })
     },
-    getCitys() {
+    getCitys () {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=1`)
         .then(response => {
-          this.list2 = response.data.content;
-          this.val.cityVal = this.list2[0];
-        });
+          this.list2 = response.data.content
+          this.val.cityVal = this.list2[0]
+        })
     },
-    getAreas() {
+    getAreas () {
       this.$http
         .get(`/api/address/getCnAreaList?parentAreaId=72`)
         .then(response => {
-          this.list3 = response.data.content;
-          this.val.areaVal = this.list3[0];
-        });
+          this.list3 = response.data.content
+          this.val.areaVal = this.list3[0]
+        })
     },
 
-    complete() {
+    complete () {
       if (!this.val.areaVal.areaId) {
         this.val.areaVal = {
-          areaId: "",
-          areaName: ""
-        };
+          areaId: '',
+          areaName: ''
+        }
       }
       if (!this.val.cityVal.areaId) {
         this.val.cityVal = {
-          areaName: "",
-          areaId: ""
-        };
+          areaName: '',
+          areaId: ''
+        }
       }
-      this.show = false;
-      this.addressInfo.province = this.val.provinceVal.areaId;
-      this.addressInfo.city = this.val.cityVal.areaId;
-      this.addressInfo.district = this.val.areaVal.areaId;
+      this.show = false
+      this.addressInfo.province = this.val.provinceVal.areaId
+      this.addressInfo.city = this.val.cityVal.areaId
+      this.addressInfo.district = this.val.areaVal.areaId
 
       this.addressInfo.fullAddress =
         this.val.provinceVal.areaName +
         this.val.cityVal.areaName +
-        this.val.areaVal.areaName;
+        this.val.areaVal.areaName
     },
-    cancel() {
-      this.show = false;
+    cancel () {
+      this.show = false
     },
 
     // 滑动开始
-    touchStart(e, val) {
-      e.preventDefault();
-      this.addSelect = false;
-      this.addHeight = e.currentTarget.children[0].offsetHeight;
-      this.maxScroll = this.addHeight * e.currentTarget.children.length;
-      this.startTop = e.targetTouches[0].pageY;
+    touchStart (e, val) {
+      e.preventDefault()
+      this.addSelect = false
+      this.addHeight = e.currentTarget.children[0].offsetHeight
+      this.maxScroll = this.addHeight * e.currentTarget.children.length
+      this.startTop = e.targetTouches[0].pageY
       switch (val) {
-        case "province":
+        case 'province':
           this.translateY = parseInt(
             this.provinceStyle.WebkitTransform.slice(
-              this.provinceStyle.WebkitTransform.indexOf(",") + 1,
-              this.provinceStyle.WebkitTransform.lastIndexOf(",")
+              this.provinceStyle.WebkitTransform.indexOf(',') + 1,
+              this.provinceStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          break;
-        case "city":
+          )
+          break
+        case 'city':
           this.translateY = parseInt(
             this.cityStyle.WebkitTransform.slice(
-              this.cityStyle.WebkitTransform.indexOf(",") + 1,
-              this.cityStyle.WebkitTransform.lastIndexOf(",")
+              this.cityStyle.WebkitTransform.indexOf(',') + 1,
+              this.cityStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          break;
-        case "district":
+          )
+          break
+        case 'district':
           this.translateY = parseInt(
             this.districtStyle.WebkitTransform.slice(
-              this.districtStyle.WebkitTransform.indexOf(",") + 1,
-              this.districtStyle.WebkitTransform.lastIndexOf(",")
+              this.districtStyle.WebkitTransform.indexOf(',') + 1,
+              this.districtStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          break;
+          )
+          break
         default:
-          break;
+          break
       }
     },
     // 滑动进行中
-    touchMove(e, val) {
-      e.preventDefault();
+    touchMove (e, val) {
+      e.preventDefault()
       switch (val) {
-        case "province":
+        case 'province':
           if (e.targetTouches[0].pageY - this.startTop + this.translateY > 0) {
-            this.provinceStyle.WebkitTransform = "translate3d(0px,0px,0px)";
+            this.provinceStyle.WebkitTransform = 'translate3d(0px,0px,0px)'
           } else if (
             e.targetTouches[0].pageY - this.startTop + this.translateY <
             -(this.maxScroll - this.addHeight)
           ) {
             this.provinceStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               -(this.maxScroll - this.addHeight) +
-              "px,0px)";
+              'px,0px)'
           } else {
             this.provinceStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               (e.targetTouches[0].pageY - this.startTop + this.translateY) +
-              "px,0px)";
+              'px,0px)'
           }
-          break;
-        case "city":
+          break
+        case 'city':
           if (e.targetTouches[0].pageY - this.startTop + this.translateY > 0) {
-            this.cityStyle.WebkitTransform = "translate3d(0px,0px,0px)";
+            this.cityStyle.WebkitTransform = 'translate3d(0px,0px,0px)'
           } else if (
             e.targetTouches[0].pageY - this.startTop + this.translateY <
             -(this.maxScroll - this.addHeight)
           ) {
             this.cityStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               -(this.maxScroll - this.addHeight) +
-              "px,0px)";
+              'px,0px)'
           } else {
             this.cityStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               (e.targetTouches[0].pageY - this.startTop + this.translateY) +
-              "px,0px)";
+              'px,0px)'
           }
-          break;
-        case "district":
+          break
+        case 'district':
           if (e.targetTouches[0].pageY - this.startTop + this.translateY > 0) {
-            this.districtStyle.WebkitTransform = "translate3d(0px,0px,0px)";
+            this.districtStyle.WebkitTransform = 'translate3d(0px,0px,0px)'
           } else if (
             e.targetTouches[0].pageY - this.startTop + this.translateY <
             -(this.maxScroll - this.addHeight)
           ) {
             this.districtStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               -(this.maxScroll - this.addHeight) +
-              "px,0px)";
+              'px,0px)'
           } else {
             this.districtStyle.WebkitTransform =
-              "translate3d(0px," +
+              'translate3d(0px,' +
               (e.targetTouches[0].pageY - this.startTop + this.translateY) +
-              "px,0px)";
+              'px,0px)'
           }
-          break;
+          break
         default:
-          break;
+          break
       }
     },
     // 滑动结束
-    touchEnd(e, val) {
-      e.preventDefault();
-      this.addSelect = true;
+    touchEnd (e, val) {
+      e.preventDefault()
+      this.addSelect = true
       switch (val) {
-        case "province":
+        case 'province':
           let provinceTranslateY = parseInt(
             this.provinceStyle.WebkitTransform.slice(
-              this.provinceStyle.WebkitTransform.indexOf(",") + 1,
-              this.provinceStyle.WebkitTransform.lastIndexOf(",")
+              this.provinceStyle.WebkitTransform.indexOf(',') + 1,
+              this.provinceStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          this.provinceIndex = -Math.round(provinceTranslateY / this.addHeight);
+          )
+          this.provinceIndex = -Math.round(provinceTranslateY / this.addHeight)
           this.provinceStyle.WebkitTransform =
-            "translate3d(0px," +
+            'translate3d(0px,' +
             Math.round(provinceTranslateY / this.addHeight) * this.addHeight +
-            "px,0px)";
+            'px,0px)'
           this.cityStyle.WebkitTransform = this.districtStyle.WebkitTransform =
-            "translate3d(0px,0px,0px)";
-          this.cityIndex = this.districtIndex = 0;
-          break;
-        case "city":
+            'translate3d(0px,0px,0px)'
+          this.cityIndex = this.districtIndex = 0
+          break
+        case 'city':
           let cityTranslateY = parseInt(
             this.cityStyle.WebkitTransform.slice(
-              this.cityStyle.WebkitTransform.indexOf(",") + 1,
-              this.cityStyle.WebkitTransform.lastIndexOf(",")
+              this.cityStyle.WebkitTransform.indexOf(',') + 1,
+              this.cityStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          this.cityIndex = -Math.round(cityTranslateY / this.addHeight);
+          )
+          this.cityIndex = -Math.round(cityTranslateY / this.addHeight)
           this.cityStyle.WebkitTransform =
-            "translate3d(0px," +
+            'translate3d(0px,' +
             Math.round(cityTranslateY / this.addHeight) * this.addHeight +
-            "px,0px)";
-          this.districtStyle.WebkitTransform = "translate3d(0px,0px,0px)";
-          this.districtIndex = 0;
-          break;
-        case "district":
+            'px,0px)'
+          this.districtStyle.WebkitTransform = 'translate3d(0px,0px,0px)'
+          this.districtIndex = 0
+          break
+        case 'district':
           let districtTranslateY = parseInt(
             this.districtStyle.WebkitTransform.slice(
-              this.districtStyle.WebkitTransform.indexOf(",") + 1,
-              this.districtStyle.WebkitTransform.lastIndexOf(",")
+              this.districtStyle.WebkitTransform.indexOf(',') + 1,
+              this.districtStyle.WebkitTransform.lastIndexOf(',')
             )
-          );
-          this.districtIndex = -Math.round(districtTranslateY / this.addHeight);
+          )
+          this.districtIndex = -Math.round(districtTranslateY / this.addHeight)
           this.districtStyle.WebkitTransform =
-            "translate3d(0px," +
+            'translate3d(0px,' +
             Math.round(districtTranslateY / this.addHeight) * this.addHeight +
-            "px,0px)";
-          break;
+            'px,0px)'
+          break
         default:
-          break;
+          break
       }
       // 滑动结束后 处理数据
-      this.dataProcessing();
+      this.dataProcessing()
     },
     // 数据处理
-    dataProcessing() {
+    dataProcessing () {
       // 滑动数据传输 数据处理
-      this.val.provinceVal = this.list[this.provinceIndex];
-      this.provinceVal = this.list[this.provinceIndex].areaId;
-      this.val.cityVal = this.list2[this.cityIndex];
-      this.cityVal = this.list2[this.cityIndex].areaId;
-      this.val.areaVal = this.list3[this.districtIndex];
-      this.areaVal = this.list3[this.districtIndex].areaId;
+      this.val.provinceVal = this.list[this.provinceIndex]
+      this.provinceVal = this.list[this.provinceIndex].areaId
+      this.val.cityVal = this.list2[this.cityIndex]
+      this.cityVal = this.list2[this.cityIndex].areaId
+      this.val.areaVal = this.list3[this.districtIndex]
+      this.areaVal = this.list3[this.districtIndex].areaId
       // this.val.cityVal = this.addressData[this.provinceIndex].city[this.cityIndex].name
       // this.val.areaVal = this.addressData[this.provinceIndex].city[this.cityIndex].area[this.districtIndex]
       // this.$emit('getAddress', this.val)
       // this.test([this.val.provinceVal, this.cityIndex, this.districtIndex])
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

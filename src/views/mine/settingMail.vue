@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 20:00:57
+ * @FilePath: /vue-jd-h5/src/views/mine/settingMail.vue
+ -->
 <template>
   <div class="phone-number-setting">
      <cm-header>
@@ -36,36 +45,36 @@
 
 <script>
 export default {
-  name: "phoneNumberSetting",
-  data() {
+  name: 'phoneNumberSetting',
+  data () {
     return {
       userInfo: this.$route.query
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleGetVerifyCode() {
+    handleGetVerifyCode () {
       if (this.userInfo.email) {
         this.$http
-          .post(`/api/user/getVerifyCode`, { email: this.userInfo.email,type:3 })
+          .post(`/api/user/getVerifyCode`, { email: this.userInfo.email, type: 3 })
           .then(response => {
             this.$toast({
               mask: false,
               duration: 1000,
-              message: "验证码获取成功！"
-            });
-          });
+              message: '验证码获取成功！'
+            })
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入邮箱号"
-        });
+          message: '请输入邮箱号'
+        })
       }
     },
-    handleSetEmail() {
+    handleSetEmail () {
       if (this.userInfo.password === this.userInfo.password1) {
-        this.userInfo.mobile =null
+        this.userInfo.mobile = null
         this.$http
           .post(`/api/user/updateUserInfo`, this.userInfo)
           .then(response => {
@@ -73,19 +82,19 @@ export default {
               mask: false,
               duration: 1000,
               message: response.data.msg
-            });
-            this.$router.go(-1);
-          });
+            })
+            this.$router.go(-1)
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "两次输入的密码不一致！"
-        });
+          message: '两次输入的密码不一致！'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

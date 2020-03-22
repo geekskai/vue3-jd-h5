@@ -58,63 +58,63 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
+import ListScroll from '../../components/scroll/ListScroll'
 export default {
   components: {
     ListScroll
   },
-  name: "classify",
-  data() {
+  name: 'classify',
+  data () {
     return {
       tags: [],
       currentIndex: 0,
       loading: true,
       categoryData: [],
       templateCategoryData: []
-    };
+    }
   },
   // activated() {
   //   this.getGoodsList();
   // },
-  created() {
-    this.getGoodsList();
+  created () {
+    this.getGoodsList()
   },
   methods: {
     // 获取分类
-    getGoodsList() {
-      this.loading = true;
+    getGoodsList () {
+      this.loading = true
       this.$http.get(`/api/product/category`).then(response => {
-        const categoryData = response.data.content;
-        this.categoryData = categoryData;
-        this.loading = false;
-      });
+        const categoryData = response.data.content
+        this.categoryData = categoryData
+        this.loading = false
+      })
     },
-    handleSearch() {
-      this.$router.push("/search");
+    handleSearch () {
+      this.$router.push('/search')
     },
-    //左侧菜单和右侧区域联动
-    selectMenu($index) {
-      this.currentIndex = $index;
+    // 左侧菜单和右侧区域联动
+    selectMenu ($index) {
+      this.currentIndex = $index
     },
-    //动态设置searc-wrap的高
-    setSearchWrapHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
+    // 动态设置searc-wrap的高
+    setSearchWrapHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.searchWrap.style.height = $screenHeight - 100 + 'px'
     },
-    selectProduct(product) {
+    selectProduct (product) {
       this.$router.push({
-        path: "/classify/classifySearch",
+        path: '/classify/classifySearch',
         query: { categoryId: product.value, product: product }
-      });
+      })
     }
   },
-  mounted() {
+  mounted () {
     if (!this.loading) {
-      this.setSearchWrapHeight();
+      this.setSearchWrapHeight()
     }
-    this.$eventBus.$emit("changeTag", 1);
+    this.$eventBus.$emit('changeTag', 1)
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

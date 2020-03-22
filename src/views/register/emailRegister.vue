@@ -14,7 +14,7 @@
       <span class="phone-number">请输入邮箱号</span>
       <p class="number-tips">请输入4位数验证码</p>
       <van-cell-group class="info-list">
-        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+        <ValidationObserver ref="observer" tag="form">
           <ValidationProvider name="email" v-slot="{ errors }" rules="required|email">
             <van-field
               v-model="emailRegister.email"
@@ -56,21 +56,21 @@
 
 <script>
 export default {
-  name: "emailRegister",
-  data() {
+  name: 'emailRegister',
+  data () {
     return {
       emailRegister: {}
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    async goToNextStep() {
-      const isValid = await this.$refs.observer.validate();
+    async goToNextStep () {
+      const isValid = await this.$refs.observer.validate()
       if (isValid) {
         this.$router.push({
-          path: "/register/emailRegisterTwo",
+          path: '/register/emailRegisterTwo',
           query: this.emailRegister
-        });
+        })
       }
       // if (!this.emailRegister.email || !this.emailRegister.verifyCode) {
       // if (!isValid) {
@@ -85,33 +85,33 @@ export default {
       //   });
       // }
     },
-    handleGetVerifyCode() {
+    handleGetVerifyCode () {
       if (!this.emailRegister.email) {
         this.$toast({
           mask: false,
-          message: "邮箱不能为空！"
-        });
-        return;
+          message: '邮箱不能为空！'
+        })
+        return
       }
-      this.emailRegister.type = 1;
+      this.emailRegister.type = 1
       this.$http
         .post(`/api/user/getVerifyCode`, this.emailRegister)
         .then(response => {
           if (response.data.code === 0) {
             this.$toast({
               mask: false,
-              message: "发送成功！"
-            });
+              message: '发送成功！'
+            })
           } else {
             this.$toast({
               mask: false,
               message: response.data.msg
-            });
+            })
           }
-        });
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -100,13 +100,13 @@
 </template>
 
 <script>
-import ClickOutside from "vue-click-outside";
+import ClickOutside from 'vue-click-outside'
 export default {
-  name: "industryNode",
+  name: 'industryNode',
   directives: {
     ClickOutside
   },
-  data() {
+  data () {
     return {
       show: false,
       item: {},
@@ -116,30 +116,30 @@ export default {
       columns: 1,
       configData: {
         position: {
-          top: "135px",
-          right: "8px",
-          bottom: "",
-          left: ""
+          top: '135px',
+          right: '8px',
+          bottom: '',
+          left: ''
         },
-        width: "30%", // 设置宽度
+        width: '30%', // 设置宽度
         list: [
           // 设置下拉列表数据和对应的点击事件
           {
-            text: "CoinPay",
-            icon: "coin-pay",
+            text: 'CoinPay',
+            icon: 'coin-pay',
             action: this.handleCoinPay
           },
           {
-            text: "支付宝",
-            icon: "alipay-icon",
+            text: '支付宝',
+            icon: 'alipay-icon',
             action: this.handleAlipay
           }
         ]
       },
       defaultData: [
         {
-          text: "中国",
-          value: "China"
+          text: '中国',
+          value: 'China'
         }
       ],
       pickData: {
@@ -150,41 +150,41 @@ export default {
           // }
         ]
       },
-      applyNum: "",
+      applyNum: '',
       areaNode: {
         limitNum: 0,
         totalNum: 0,
-        city: "",
+        city: '',
         price: 0
       }
-    };
+    }
   },
   watch: {
-    applyNum(value) {
+    applyNum (value) {
       if (value > this.areaNode.limitNum) {
-        this.applyNum = this.areaNode.limitNum;
+        this.applyNum = this.areaNode.limitNum
         this.$toast({
           mask: false,
           duration: 1000,
           message: `超过购买限制，限购${this.areaNode.limitNum}份`
-        });
+        })
       }
     }
   },
-  created() {},
+  created () {},
   methods: {
-    handleCountsClick() {
+    handleCountsClick () {
       if (!this.areaNode.industry) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请选择行业节点！"
-        });
-        this.applyNum = "";
+          message: '请选择行业节点！'
+        })
+        this.applyNum = ''
       }
     },
-    handleClose() {
-      this.showDialog = false;
+    handleClose () {
+      this.showDialog = false
       this.$http
         .post(`/api/node/apply`, {
           applyNum: this.applyNum,
@@ -194,63 +194,63 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "申请成功！"
-          });
-          this.$router.go(-1);
-        });
+            message: '申请成功！'
+          })
+          this.$router.go(-1)
+        })
     },
-    handleCoinPay(item) {
-      this.item = item;
+    handleCoinPay (item) {
+      this.item = item
     },
-    handleAlipay(item) {
-      this.item = item;
+    handleAlipay (item) {
+      this.item = item
     },
-    hidden() {
-      this.isActive = false;
-      this.$refs.droplist.hidden();
+    hidden () {
+      this.isActive = false
+      this.$refs.droplist.hidden()
     },
-    handleShow() {
-      this.isActive = true;
-      this.$refs.droplist.show();
+    handleShow () {
+      this.isActive = true
+      this.$refs.droplist.show()
     },
-    handleApplication() {
+    handleApplication () {
       if (this.areaNode.industry && this.applyNum > 0) {
-        this.showDialog = true;
+        this.showDialog = true
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入申请份数！"
-        });
+          message: '请输入申请份数！'
+        })
       }
     },
-    handleShowIndustry() {
-      this.show = true;
+    handleShowIndustry () {
+      this.show = true
       this.$http.get(`/api/node/getSetting?type=5`).then(response => {
-        let responseArray = response.data.content;
-        this.areaData = responseArray;
+        let responseArray = response.data.content
+        this.areaData = responseArray
         this.pickData.data1 = responseArray.map(element => {
           return {
             text: element.name,
             value: element.id
-          };
-        });
-      });
+          }
+        })
+      })
     },
-    confirmFn(select) {
-      this.show = false;
-      this.areaNode.industry = select.select1.text;
-      this.areaNode.industryId = select.select1.value;
+    confirmFn (select) {
+      this.show = false
+      this.areaNode.industry = select.select1.text
+      this.areaNode.industryId = select.select1.value
       this.areaData.map(it => {
-        if (it.id == select.select1.value) {
-          this.areaNode.totalNum = it.totalNum;
-          this.areaNode.price = it.price;
-          this.areaNode.limitNum = it.limitNum;
+        if (it.id === select.select1.value) {
+          this.areaNode.totalNum = it.totalNum
+          this.areaNode.price = it.price
+          this.areaNode.limitNum = it.limitNum
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

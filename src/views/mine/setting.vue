@@ -28,39 +28,39 @@
 
 <script>
 export default {
-  name: "Setting",
+  name: 'Setting',
 
   components: {},
   props: {},
-  data() {
+  data () {
     return {
       checked: false,
       token: localStorage.token
-    };
+    }
   },
   methods: {
-    handleLogout() {
+    handleLogout () {
       this.$http
         .post(`/api/user/logout`, { token: this.token })
         .then(response => {
           if (response.data.code === 0) {
-            localStorage.setItem("token", "");
+            localStorage.setItem('token', '')
             this.$toast({
               mask: false,
               duration: 1000,
-              message: "退出成功！"
-            });
-            this.$router.push("/index");
+              message: '退出成功！'
+            })
+            this.$router.push('/index')
           } else {
             this.$toast({
               mask: false,
               message: response.data.msg
-            });
+            })
           }
-        });
+        })
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped lang="scss">

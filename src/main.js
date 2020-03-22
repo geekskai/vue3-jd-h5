@@ -1,3 +1,12 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 18:25:50
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:55:01
+ * @FilePath: /vue-jd-h5/src/main.js
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'

@@ -119,55 +119,55 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
+import ListScroll from '../../components/scroll/ListScroll'
 export default {
-  name: "Order",
+  name: 'Order',
   components: {
     ListScroll
   },
-  data() {
+  data () {
     return {
       type: this.$route.query.type || 0,
-      orderStatus: ["等待付款", "待发货", "待收货", "交易完成", "已取消"],
+      orderStatus: ['等待付款', '待发货', '待收货', '交易完成', '已取消'],
       orderLists: [],
-      orderNo: "",
+      orderNo: '',
       columns: 1,
       cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
-         {
-            text: "CoinPay",
-            value: "CoinPay"
-          }
+        {
+          text: 'CoinPay',
+          value: 'CoinPay'
+        }
       ],
       pickData: {
         data1: [
           {
-            text: "CoinPay",
-            value: "CoinPay"
+            text: 'CoinPay',
+            value: 'CoinPay'
           }
         ]
       },
       show: false
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
-  mounted() {
-    this.setSearchWrapWidth();
-    this.$eventBus.$emit("changeTag", 1);
+  mounted () {
+    this.setSearchWrapWidth()
+    this.$eventBus.$emit('changeTag', 1)
   },
   methods: {
-    handleConfirmReceipt(orderList) {
+    handleConfirmReceipt (orderList) {
       let flagArrays = orderList.appOrderProductVos.filter(
-        it => it.appealStatus == 0
-      );
+        it => it.appealStatus === 0
+      )
       if (flagArrays.length > 0) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "改订单存在申诉商品，无法完成收货！"
-        });
+          message: '改订单存在申诉商品，无法完成收货！'
+        })
       } else {
         this.$http
           .post(`/api/order/confirmOrder`, { orderNo: orderList.orderNo })
@@ -175,30 +175,30 @@ export default {
             this.$toast({
               mask: false,
               duration: 1000,
-              message: "操作成功!"
-            });
-            this.initData();
-          });
+              message: '操作成功!'
+            })
+            this.initData()
+          })
       }
     },
-    handleToAppeal(orderList) {
+    handleToAppeal (orderList) {
       let flagArrays = orderList.appOrderProductVos.filter(
         it => it.appealStatus === null
-      );
+      )
       if (flagArrays.length > 0) {
         this.$router.push({
           name: `appeal`,
           params: orderList
-        });
+        })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "所有商品已经申诉过，无法再次申诉！"
-        });
+          message: '所有商品已经申诉过，无法再次申诉！'
+        })
       }
     },
-    initData() {
+    initData () {
       this.$http
         .post(`/api/order/list`, {
           pageNum: 1,
@@ -206,80 +206,80 @@ export default {
           type: this.type
         })
         .then(response => {
-          this.orderLists = response.data.content;
-        });
+          this.orderLists = response.data.content
+        })
     },
-    handleGoToOrderDetail(status, orderNo, complain) {
+    handleGoToOrderDetail (status, orderNo, complain) {
       switch (status) {
         case 0:
           this.$router.push(
             `/order/pendingPayment?orderNo=${orderNo}&complain=${complain}`
-          );
-          break;
+          )
+          break
         case 1:
           this.$router.push(
             `/order/toBeDelivered?orderNo=${orderNo}&complain=${complain}`
-          );
-          break;
+          )
+          break
         case 2:
           this.$router.push(
             `/order/pendingReceipt?orderNo=${orderNo}&complain=${complain}`
-          );
-          break;
+          )
+          break
         case 3:
           this.$router.push(
             `/order/completedOrder?orderNo=${orderNo}&complain=${complain}`
-          );
-          break;
+          )
+          break
         case 4:
           // this.$router.push(`/order/cancelOrder?orderNo=${orderNo}`);
-          break;
+          break
 
         default:
-          break;
+          break
       }
     },
-    setSearchWrapWidth() {
-      let $screenWidth = document.documentElement.clientWidth;
-      this.$refs.searchWrap.style.width = $screenWidth + 100 + "px";
+    setSearchWrapWidth () {
+      let $screenWidth = document.documentElement.clientWidth
+      this.$refs.searchWrap.style.width = $screenWidth + 100 + 'px'
     },
-    selectTag(type) {
-      this.type = type;
-      this.initData();
+    selectTag (type) {
+      this.type = type
+      this.initData()
     },
-    close() {
-      this.show = false;
+    close () {
+      this.show = false
     },
-    handleGoToPay(orderList) {
+    handleGoToPay (orderList) {
       // this.show = true;
       // this.orderNo = orderNo;
       this.$router.push({
-        name: "orderDetail",
+        name: 'orderDetail',
         params: orderList
-      });
+      })
     },
-    confirmFn() {
-      this.show = false;
+    confirmFn () {
+      this.show = false
       this.$http
         .get(`/api/coinPay/testPay?orderNo=${this.orderNo}`)
-        .then(response => {});
+        .then(response => {})
       this.$toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
         forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "支付中..."
-      });
+        loadingType: 'spinner',
+        message: '支付中...'
+      })
       setTimeout(() => {
         // this.$toast({
         //   mask: false,
         //   message: "支付成功~"
         // });
-        this.$router.push("/order/transactionDetails");
-      }, 1300);
+        this.$router.push('/order/transactionDetails')
+      }, 1300)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -289,7 +289,7 @@ export default {
   .scroll-wrapper {
     height: 40px;
   }
- 
+
   .order-tag {
     display: flex;
     justify-content: space-between;

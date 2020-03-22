@@ -1,6 +1,6 @@
 <template>
   <div class="change-password">
-     <cm-header>
+    <cm-header>
       <span slot="left" @click="$router.go(-1)">
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
@@ -38,15 +38,15 @@
 
 <script>
 export default {
-  name: "changePassword",
-  data() {
+  name: 'changePassword',
+  data () {
     return {
       userInfo: this.$route.query
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleSaveChangePassword() {
+    handleSaveChangePassword () {
       if (this.userInfo.password === this.userInfo.password1) {
         this.$http
           .post(`/api/user/updatePassword`, this.userInfo)
@@ -54,20 +54,20 @@ export default {
             this.$toast({
               mask: false,
               duration: 1000,
-              message: response.data.msg||'修改密码成功！'
-            });
-            this.$router.go(-1);
-          });
+              message: response.data.msg || '修改密码成功！'
+            })
+            this.$router.go(-1)
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "两次输入的密码不一致！"
-        });
+          message: '两次输入的密码不一致！'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -117,7 +117,7 @@ export default {
       line-height: 44px;
     }
     /deep/ .van-button--danger {
-      background-color: #EC3924;
+      background-color: #ec3924;
     }
     /deep/ .van-button__text {
       color: #fff;

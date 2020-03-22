@@ -27,13 +27,13 @@
 
 <script>
 export default {
-  name: "aboutAs",
-  data() {
-    return {};
+  name: 'aboutAs',
+  data () {
+    return {}
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

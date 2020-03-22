@@ -103,16 +103,16 @@
 
 <script>
 export default {
-  name: "refundAfterSale",
-  data() {
+  name: 'refundAfterSale',
+  data () {
     return {
       active: 2,
-      orderStatus: ["待付款", "待发货", "待收货", "已完成", "已取消"],
+      orderStatus: ['待付款', '待发货', '待收货', '已完成', '已取消'],
       orderLists: [],
-      orderRecordLists: [] //申请记录
-    };
+      orderRecordLists: [] // 申请记录
+    }
   },
-  created() {
+  created () {
     this.$http
       .post(`/api/order/canComplainList`, {
         pageNum: 1,
@@ -120,8 +120,8 @@ export default {
         type: 0
       })
       .then(response => {
-        this.orderLists = response.data.content;
-      });
+        this.orderLists = response.data.content
+      })
     // 申请记录
     this.$http
       .post(`/api/order/complainList`, {
@@ -129,25 +129,25 @@ export default {
         pageSize: 10
       })
       .then(response => {
-        this.orderRecordLists = response.data.content;
-      });
+        this.orderRecordLists = response.data.content
+      })
   },
   methods: {
-    handleGoToOrderDetail(orderList) {
+    handleGoToOrderDetail (orderList) {
       //  this.$router.push(`/order/appealDetail?appealNo=${appealNo}`);
       this.$router.push({
         name: `appealDetail`,
         params: orderList
-      });
+      })
     },
-    handleToAppeal(orderList) {
+    handleToAppeal (orderList) {
       this.$router.push({
         name: `appeal`,
         params: orderList
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

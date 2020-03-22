@@ -36,41 +36,41 @@
 
 <script>
 export default {
-  name: "forgetPassword",
-  data() {
+  name: 'forgetPassword',
+  data () {
     return {
       userInfo: {}
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handleGetVerifyCode() {
-      let paramsObj = {};
-      if (~this.userInfo.mobile.indexOf("@")) {
-        paramsObj = { email: this.userInfo.mobile, type: 2 };
+    handleGetVerifyCode () {
+      let paramsObj = {}
+      if (~this.userInfo.mobile.indexOf('@')) {
+        paramsObj = { email: this.userInfo.mobile, type: 2 }
       } else {
-        paramsObj = { mobile: this.userInfo.mobile, type: 2 };
+        paramsObj = { mobile: this.userInfo.mobile, type: 2 }
       }
       if (this.userInfo.mobile) {
         this.$http.post(`/api/user/getVerifyCode`, paramsObj).then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "验证码获取成功！"
-          });
-        });
+            message: '验证码获取成功！'
+          })
+        })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入手机/邮箱号"
-        });
+          message: '请输入手机/邮箱号'
+        })
       }
     },
-    handleSaveForgetPwd() {
-      if (~this.userInfo.mobile.indexOf("@")) {
-        this.userInfo.email = this.userInfo.mobile;
-        this.userInfo.mobile = null;
+    handleSaveForgetPwd () {
+      if (~this.userInfo.mobile.indexOf('@')) {
+        this.userInfo.email = this.userInfo.mobile
+        this.userInfo.mobile = null
       }
       if (this.userInfo.password === this.userInfo.password1) {
         this.$http
@@ -80,19 +80,19 @@ export default {
               mask: false,
               duration: 1000,
               message: response.data.msg
-            });
-            this.$router.go(-1);
-          });
+            })
+            this.$router.go(-1)
+          })
       } else {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "两次输入的密码不一致！"
-        });
+          message: '两次输入的密码不一致！'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

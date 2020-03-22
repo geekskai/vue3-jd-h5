@@ -90,40 +90,40 @@
 
 <script>
 export default {
-  name: "MyFocus", // 我的关注
-  inject: ["reload"],
-  data() {
+  name: 'MyFocus', // 我的关注
+  inject: ['reload'],
+  data () {
     return {
-      active: this.$route.query.tabName || "product",
+      active: this.$route.query.tabName || 'product',
       isLike: true,
       loading: true,
       productAttentions: [],
       merchantAttentions: [],
       pageNum: 1
-    };
+    }
   },
-  created() {
-    this.initProductAttentions();
-    this.initMerchantAttentions();
+  created () {
+    this.initProductAttentions()
+    this.initMerchantAttentions()
   },
-  mounted() {
-    let self = this;
-    window.onscroll = function() {
-      //变量scrollTop是滚动条滚动时，距离顶部的距离
+  mounted () {
+    let self = this
+    window.onscroll = function () {
+      // 变量scrollTop是滚动条滚动时，距离顶部的距离
       var scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop; //变量windowHeight是可视区的高度
+        document.documentElement.scrollTop || document.body.scrollTop // 变量windowHeight是可视区的高度
       var windowHeight =
-        document.documentElement.clientHeight || document.body.clientHeight; //变量scrollHeight是滚动条的总高度
+        document.documentElement.clientHeight || document.body.clientHeight // 变量scrollHeight是滚动条的总高度
       var scrollHeight =
-        document.documentElement.scrollHeight || document.body.scrollHeight; //滚动条到底部的条件
-      if (scrollTop + windowHeight == scrollHeight) {
-        self.pageNum++;
-        self.initProductAttentions();
+        document.documentElement.scrollHeight || document.body.scrollHeight // 滚动条到底部的条件
+      if (scrollTop + windowHeight === scrollHeight) {
+        self.pageNum++
+        self.initProductAttentions()
       }
-    };
+    }
   },
   methods: {
-    handleCancleFocus(merchantId) {
+    handleCancleFocus (merchantId) {
       this.$http
         .post(`/api/user/updateAttention`, {
           id: [merchantId],
@@ -133,12 +133,12 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "取消成功！"
-          });
-          this.initMerchantAttentions();
-        });
+            message: '取消成功！'
+          })
+          this.initMerchantAttentions()
+        })
     },
-    handleShopTop(merchantId) {
+    handleShopTop (merchantId) {
       this.$http
         .post(`/api/user/updateAttention`, {
           id: [merchantId],
@@ -148,27 +148,27 @@ export default {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "置顶成功！"
-          });
-          this.reload();
-        });
+            message: '置顶成功！'
+          })
+          this.reload()
+        })
     },
-    onCloseMerchant(clickPosition, instance, detail) {
-      console.log("=====clickPosition==>", clickPosition);
-      console.log("=====instance==>", instance);
-      instance.close();
+    onCloseMerchant (clickPosition, instance, detail) {
+      console.log('=====clickPosition==>', clickPosition)
+      console.log('=====instance==>', instance)
+      instance.close()
     },
-    initMerchantAttentions() {
+    initMerchantAttentions () {
       this.$http
         .post(`/api/user/merchantAttentions`, {
           pageNum: this.pageNum,
           pageSize: 5
         })
         .then(response => {
-          this.merchantAttentions = response.data.content;
-        });
+          this.merchantAttentions = response.data.content
+        })
     },
-    initProductAttentions(flag) {
+    initProductAttentions (flag) {
       this.$http
         .post(`/api/user/productAttentions`, {
           pageNum: flag ? 1 : this.pageNum,
@@ -176,33 +176,33 @@ export default {
         })
         .then(response => {
           if (response.data.content.length === 0) {
-            this.loading = false;
+            this.loading = false
           }
           if (flag) {
-            this.loading = true;
-            this.pageNum = 1;
-            this.productAttentions = response.data.content;
+            this.loading = true
+            this.pageNum = 1
+            this.productAttentions = response.data.content
           } else {
-            this.productAttentions.push(...response.data.content);
+            this.productAttentions.push(...response.data.content)
           }
-        });
+        })
     },
 
-    onClose(clickPosition, instance, detail) {
+    onClose (clickPosition, instance, detail) {
       this.$http
         .post(`/api/user/updateAttention`, { id: [detail.name], type: 0 })
         .then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "取消成功！"
-          });
-          this.initProductAttentions(true);
-          instance.close();
-        });
+            message: '取消成功！'
+          })
+          this.initProductAttentions(true)
+          instance.close()
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

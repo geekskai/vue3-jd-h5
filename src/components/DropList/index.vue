@@ -1,10 +1,20 @@
+<!--
+ * @Description:
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:02:58
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:50:20
+ * @FilePath: /vue-jd-h5/src/components/DropList/index.vue
+ -->
 <template>
   <div>
     <div class="wrap" v-show="isShow">
       <div
         class="wrap-content"
         :style="'width:'+width+';top:'+top+';right:'+right+';bottom:'+bottom+';left:'+left"
-       >
+      >
         <div class="item" v-for="(item,index) in list" :key="index" @click="Action(item)">
           <svg-icon :icon-class="item.icon"></svg-icon>
           <span>{{item.text}}</span>
@@ -14,13 +24,12 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "DropList",
-  props: ["config"],
+  name: 'DropList',
+  props: ['config'],
 
-  data() {
+  data () {
     return {
       top: (this.config.position && this.config.position.top) || null,
       right: (this.config.position && this.config.position.right) || null,
@@ -29,25 +38,25 @@ export default {
       width: this.config.width || null,
       list: this.config.list || [],
       isShow: this.config.isShow || false
-    };
+    }
   },
   methods: {
-    show() {
-      this.isShow = true;
+    show () {
+      this.isShow = true
     },
-    hidden() {
-      this.isShow = false;
+    hidden () {
+      this.isShow = false
     },
-    Action(item) {
-      item.action(item);
-      this.hidden();
+    Action (item) {
+      item.action(item)
+      this.hidden()
     }
   },
   computed: {},
-  created() {},
-  mounted() {},
+  created () {},
+  mounted () {},
   watch: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

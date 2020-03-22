@@ -62,13 +62,13 @@
 </template>
 
 <script>
-import ClickOutside from "vue-click-outside";
+import ClickOutside from 'vue-click-outside'
 export default {
-  name: "waitingReviewResults",
+  name: 'waitingReviewResults',
   directives: {
     ClickOutside
   },
-  data() {
+  data () {
     return {
       applyInfo: {},
       item: {},
@@ -76,17 +76,17 @@ export default {
       isActive: false,
       configData: {
         position: {
-          top: "135px",
-          right: "12px",
-          bottom: "",
-          left: ""
+          top: '135px',
+          right: '12px',
+          bottom: '',
+          left: ''
         },
-        width: "30%", // 设置宽度
+        width: '30%', // 设置宽度
         list: [
           // 设置下拉列表数据和对应的点击事件
           {
-            text: "CoinPay",
-            icon: "coin-pay",
+            text: 'CoinPay',
+            icon: 'coin-pay',
             action: this.handleCoinPay
           }
           // {
@@ -96,35 +96,35 @@ export default {
           // }
         ]
       }
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    handlePayDeposit() {
-      this.showDialog = true;
+    handlePayDeposit () {
+      this.showDialog = true
     },
-    handleClose() {
-      this.showDialog = false;
+    handleClose () {
+      this.showDialog = false
       this.$http.post(`/api/shop/pay/deposit`).then(response => {
-        this.$router.push(`/merchantsSettled/waitingReviewResults`);
-      });
+        this.$router.push(`/merchantsSettled/waitingReviewResults`)
+      })
     },
-    handleCoinPay(item) {
-      this.item = item;
+    handleCoinPay (item) {
+      this.item = item
     },
-    handleAlipay(item) {
-      this.item = item;
+    handleAlipay (item) {
+      this.item = item
     },
-    hidden() {
-      this.isActive = false;
-      this.$refs.droplist.hidden();
+    hidden () {
+      this.isActive = false
+      this.$refs.droplist.hidden()
     },
-    handleShow() {
-      this.isActive = true;
-      this.$refs.droplist.show();
+    handleShow () {
+      this.isActive = true
+      this.$refs.droplist.show()
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

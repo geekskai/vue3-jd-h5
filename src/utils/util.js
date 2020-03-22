@@ -1,3 +1,12 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2019-09-20 14:07:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-03-22 19:54:08
+ * @FilePath: /vue-jd-h5/src/utils/util.js
+ */
 // 存储localStorage
 export const setStore = (name, content) => {
   if (!name) return

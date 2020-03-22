@@ -224,80 +224,80 @@
 
 <script>
 export default {
-  name: "mine",
-  data() {
+  name: 'mine',
+  data () {
     return {
       show: false,
-      nodeName: "",
+      nodeName: '',
       userInfo: {},
       merchantsSettledStatus: null, // 商家入驻消息
       token: localStorage.token,
       columns: 1
-    };
+    }
   },
-  activated() {
-    this.initUserInfo();
+  activated () {
+    this.initUserInfo()
   },
   computed: {},
-  mounted() {
-    this.$eventBus.$emit("changeTag", 3);
+  mounted () {
+    this.$eventBus.$emit('changeTag', 3)
   },
   methods: {
-    handleMerchantsSettled() {
+    handleMerchantsSettled () {
       // this.merchantsSettledStatus = 2
       switch (this.merchantsSettledStatus) {
         case 0: // 待审核
-          this.$router.push(`/merchantsSettled/waitingReviewResults`);
-          break;
+          this.$router.push(`/merchantsSettled/waitingReviewResults`)
+          break
         case 1: // 通过
-          break;
+          break
         case 2: // 不通过
-          this.$router.push(`/merchantsSettled/auditFailure`);
-          break;
+          this.$router.push(`/merchantsSettled/auditFailure`)
+          break
         case 3: // 未缴纳保证金
-          this.$router.push(`/merchantsSettled/payDeposit`);
-          break;
+          this.$router.push(`/merchantsSettled/payDeposit`)
+          break
         default:
           // -1未申请入驻
-          this.$router.push(`/merchantsSettled/index`);
-          break;
+          this.$router.push(`/merchantsSettled/index`)
+          break
       }
     },
-    initUserInfo() {
+    initUserInfo () {
       this.$http.get(`/api/user/getUserInfo`).then(response => {
-        this.userInfo = response.data.content;
+        this.userInfo = response.data.content
         // this.userInfo.nodeType = 63;
-        this.merchantsSettledStatus = response.data.content.merchantStatus;
-        this.status = response.data.content.status;
-        this.setNodeType(this.userInfo.nodeType);
-      });
+        this.merchantsSettledStatus = response.data.content.merchantStatus
+        this.status = response.data.content.status
+        this.setNodeType(this.userInfo.nodeType)
+      })
     },
-    setNodeType(nodeType) {
+    setNodeType (nodeType) {
       let resType = [];
       [1, 2, 4, 8, 16, 32].forEach(it => {
         if ((nodeType & it) === it) {
-          resType.push(it);
+          resType.push(it)
         }
-      });
+      })
       let nodeObj = {
-        1: "链猫掌柜",
-        2: "区级节点",
-        4: "市级节点",
-        8: "州级节点",
-        16: "行业节点",
-        32: "超级节点"
-      };
-      let index = resType.pop();
-      this.nodeName = nodeObj[index];
+        1: '链猫掌柜',
+        2: '区级节点',
+        4: '市级节点',
+        8: '州级节点',
+        16: '行业节点',
+        32: '超级节点'
+      }
+      let index = resType.pop()
+      this.nodeName = nodeObj[index]
     },
-    handleClose() {
-      this.show = false;
+    handleClose () {
+      this.show = false
     },
-    toShow() {
-      this.show = true;
+    toShow () {
+      this.show = true
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

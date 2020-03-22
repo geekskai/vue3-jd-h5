@@ -48,13 +48,13 @@
 
 <script>
 export default {
-  name: "transactionDetails",
-  data() {
-    return {};
+  name: 'transactionDetails',
+  data () {
+    return {}
   },
-  created() {},
+  created () {},
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

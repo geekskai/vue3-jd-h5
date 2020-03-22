@@ -13,7 +13,7 @@
       <span class="phone-number">请输入手机号</span>
       <p class="number-tips">请输入4位数验证码</p>
       <van-cell-group class="info-list">
-        <ValidationObserver v-slot="{ invalid }" ref="observer" tag="form">
+        <ValidationObserver ref="observer" tag="form">
           <ValidationProvider v-slot="{ errors }" :rules="{regex:/^1[3456789]\d{9}$/,required:true}">
             <van-field
               v-model="phoneRegisterForm.mobile"
@@ -52,23 +52,23 @@
 
 <script>
 export default {
-  name: "phoneRegister",
-  data() {
+  name: 'phoneRegister',
+  data () {
     return {
       phoneRegisterForm: {
-        areaCode: "86"
+        areaCode: '86'
       }
-    };
+    }
   },
-  created() {},
+  created () {},
   methods: {
-    async goToNextStep() {
-      const isValid = await this.$refs.observer.validate();
+    async goToNextStep () {
+      const isValid = await this.$refs.observer.validate()
       if (isValid) {
         this.$router.push({
-          path: "/register/phoneRegisterTwo",
+          path: '/register/phoneRegisterTwo',
           query: this.phoneRegisterForm
-        });
+        })
       }
       // if (
       //   !this.phoneRegisterForm.mobile ||
@@ -85,35 +85,35 @@ export default {
       //   });
       // }
     },
-    handlePhoneBlur() {},
+    handlePhoneBlur () {},
 
-    handleGetVerifyCode() {
+    handleGetVerifyCode () {
       if (!this.phoneRegisterForm.mobile) {
         this.$toast({
           mask: false,
-          message: "手机号不能为空！"
-        });
-        return;
+          message: '手机号不能为空！'
+        })
+        return
       }
-      this.phoneRegisterForm.type = 1;
+      this.phoneRegisterForm.type = 1
       this.$http
         .post(`/api/user/getVerifyCode`, this.phoneRegisterForm)
         .then(response => {
           if (response.data.code === 0) {
             this.$toast({
               mask: false,
-              message: "发送成功！"
-            });
+              message: '发送成功！'
+            })
           } else {
             this.$toast({
               mask: false,
               message: response.data.msg
-            });
+            })
           }
-        });
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

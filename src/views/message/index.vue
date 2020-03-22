@@ -42,22 +42,22 @@
 
 <script>
 export default {
-  name: "messageCenter",
-  data() {
+  name: 'messageCenter',
+  data () {
     return {
       systemMessage: {},
       mallMessage: {}
-    };
+    }
   },
-  created() {
+  created () {
     this.$http.get(`/api/message/messageTypeCount`).then(response => {
       response.data.content.forEach(it => {
-        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it);
-      });
-    });
+        it.type === 1 ? (this.mallMessage = it) : (this.systemMessage = it)
+      })
+    })
   },
   methods: {}
-};
+}
 </script>
 
 <style scoped lang="scss">

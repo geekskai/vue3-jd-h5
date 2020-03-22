@@ -35,32 +35,32 @@
 
 <script>
 export default {
-  name: "login",
-  data() {
+  name: 'login',
+  data () {
     return {
       loginForm: {
-        user: "",
-        password: ""
+        user: '',
+        password: ''
       }
-    };
+    }
   },
   methods: {
-    handleUserLogin() {
+    handleUserLogin () {
       this.$http.post(`/api/user/login`, this.loginForm).then(response => {
         if (response.data.code === 0) {
-          localStorage.setItem("token", response.data.content.token);
-          this.$router.push("/index");
+          localStorage.setItem('token', response.data.content.token)
+          this.$router.push('/index')
         } else {
           this.$toast({
             mask: false,
             duration: 1000,
             message: response.data.msg
-          });
+          })
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

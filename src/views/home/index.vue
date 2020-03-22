@@ -227,8 +227,8 @@
 
 <script>
 export default {
-  name: "home",
-  data() {
+  name: 'home',
+  data () {
     return {
       iconList: [],
       active: 0,
@@ -246,72 +246,71 @@ export default {
         autoplay: false,
         width: 480,
         notNextTick: true,
-        observer: true, //修改swiper自己或子元素时，自动初始化swiper
-        observeParents: true, //修改swiper的父元素时，自动初始化swiper
-        direction: "horizontal", //水平方向移动
-        setWrapperSize: true, //Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, // 修改swiper的父元素时，自动初始化swiper
+        direction: 'horizontal', // 水平方向移动
+        setWrapperSize: true, // Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
         height: window.innerHeight, // 高度设置，占满设备高度
-        observeParents: true, //将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
-        slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
+        slidesPerView: 2 // 设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
       }
-    };
-  },
-  activated() {
-    this.initData();
-    this.handleTabChange();
-  },
-  watch: {
-    active() {
-      this.tabItemLists = [];
     }
   },
-  mounted() {
-    this.$eventBus.$emit("changeTag", 0);
-    this.setHomeWrapperHeight();
+  activated () {
+    this.initData()
+    this.handleTabChange()
+  },
+  watch: {
+    active () {
+      this.tabItemLists = []
+    }
+  },
+  mounted () {
+    this.$eventBus.$emit('changeTag', 0)
+    this.setHomeWrapperHeight()
   },
   methods: {
     // 当滑块滑动到底部的时候。
-    handleScrollToEnd() {
-      this.pageNum++;
-      this.handleTabChange();
+    handleScrollToEnd () {
+      this.pageNum++
+      this.handleTabChange()
     },
-    //动态设置searc-wrap的高
-    setHomeWrapperHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.homeWrapper.style.height = $screenHeight - 100 + "px";
+    // 动态设置searc-wrap的高
+    setHomeWrapperHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.homeWrapper.style.height = $screenHeight - 100 + 'px'
     },
-    handleToProductDetail(productId) {
+    handleToProductDetail (productId) {
       this.$router.push({
-        path: "/product/index",
+        path: '/product/index',
         query: { productId: productId }
-      });
+      })
     },
-    initData() {
+    initData () {
       this.$http.get(`api/index`).then(response => {
-        this.images = response.data.content.bannerList;
-        this.adList = response.data.content.adList;
-        this.catList = response.data.content.catList;
-        this.iconList = response.data.content.iconList;
-      });
+        this.images = response.data.content.bannerList
+        this.adList = response.data.content.adList
+        this.catList = response.data.content.catList
+        this.iconList = response.data.content.iconList
+      })
     },
-    handleTabChange() {
-      this.loading = true;
+    handleTabChange () {
+      this.loading = true
       this.$http
         .get(
           `/api/index/choiceness?type=${this.active}&clientType=0&pageNum=${this.pageNum}&pageSize=20`
         )
         .then(response => {
-          this.loading = false;
+          this.loading = false
           if (response) {
-            this.tabItemLists.push(...response.data.content);
+            this.tabItemLists.push(...response.data.content)
           }
-        });
+        })
     },
-    handleClick(linkUrl) {
-      this.$router.push("/product/index");
+    handleClick (linkUrl) {
+      this.$router.push('/product/index')
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

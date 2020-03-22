@@ -63,26 +63,26 @@
 
 <script>
 export default {
-  name: "ChooseAddress",
-  data() {
+  name: 'ChooseAddress',
+  data () {
     return {
       addressArray: [],
       orderForm: this.$route.query
-    };
+    }
   },
-  created() {
-    this.getUserList();
+  created () {
+    this.getUserList()
   },
   methods: {
-    handleChooseAddress(userAddrId) {
-      let skuInfoForm = {};
+    handleChooseAddress (userAddrId) {
+      let skuInfoForm = {}
       if (this.$route.query.skuId) {
         skuInfoForm = {
           quantity: this.$route.query.quantity,
           skuId: this.$route.query.skuId
-        };
+        }
       } else {
-        skuInfoForm = null;
+        skuInfoForm = null
       }
       this.$http
         .post(`/api/order/checkout`, {
@@ -103,24 +103,24 @@ export default {
               selectedGoodsId: this.$route.query.cartItemIds,
               userAddrId: userAddrId
             }
-          });
-        });
+          })
+        })
     },
-    getUserList() {
+    getUserList () {
       // 获取用户列表
       this.$http.get(`/api/address/getUserAddrList`).then(response => {
-        this.addressArray = response.data.content;
-      });
+        this.addressArray = response.data.content
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
 .choose-address {
   height: 100%;
   padding: 0 16px;
-  
+
   .address-no {
     display: flex;
     justify-content: center;
@@ -215,4 +215,3 @@ export default {
   }
 }
 </style>
-

@@ -91,100 +91,96 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
 export default {
-  name: "classifySearch",
-  components: {
-    ListScroll
-  },
-  data() {
+  name: 'classifySearch',
+  data () {
     return {
-      searchText: this.$route.query.product.label || "",
-      activeOrderBy: "update_time",
-      sortType: "desc",
-      orderBy: "update_time",
+      searchText: this.$route.query.product.label || '',
+      activeOrderBy: 'update_time',
+      sortType: 'desc',
+      orderBy: 'update_time',
       hotSerach: [],
       serarchResult: [],
       page: 1,
       historySearch: []
-    };
+    }
   },
-  created() {
-    this.initData();
+  created () {
+    this.initData()
   },
   computed: {},
   methods: {
-    handleGoToProduct(item) {
+    handleGoToProduct (item) {
       this.$router.push({
         path: `/product/index`,
         query: { productId: item.productId }
-      });
+      })
     },
-    initData(flag) {
-      flag && (this.activeOrderBy = "update_time");
+    initData (flag) {
+      flag && (this.activeOrderBy = 'update_time')
       this.$http
         .get(
           `/api/product/list?categoryId=${
-            this.$route.query.categoryId ? this.$route.query.categoryId : ""
+            this.$route.query.categoryId ? this.$route.query.categoryId : ''
           }&merchantShopId=${
             this.$route.query.merchantShopId
               ? this.$route.query.merchantShopId
-              : ""
+              : ''
           }&productName=${this.searchText}&sortName=${
-            flag ? "update_time" : this.orderBy
-          }&sortType=${flag ? "desc" : this.sortType}&page=${
+            flag ? 'update_time' : this.orderBy
+          }&sortType=${flag ? 'desc' : this.sortType}&page=${
             this.page
           }&size=15&clientType=0`
         )
         .then(response => {
-          this.serarchResult = response.data.content;
-        });
+          this.serarchResult = response.data.content
+        })
     },
-    selectOrder(e, sortType) {
-      this.sortType = sortType;
-      this.orderBy = e.currentTarget.getAttribute("data-order-by");
+    selectOrder (e, sortType) {
+      this.sortType = sortType
+      this.orderBy = e.currentTarget.getAttribute('data-order-by')
       if (this.orderBy === this.activeOrderBy) {
-        return;
+        return
       }
-      this.activeOrderBy = this.orderBy + "_" + sortType;
-      this.initData();
+      this.activeOrderBy = this.orderBy + '_' + sortType
+      this.initData()
     },
     // 当滑块滑动到低不低的时候。
-    handleScrollToEnd() {
-      this.page++;
-      this.initData();
+    handleScrollToEnd () {
+      this.page++
+      this.initData()
     },
-    handlePullDown() {
+    handlePullDown () {
     },
-    handleToDetail(sku) {
+    handleToDetail (sku) {
       this.$router.push({
-        path: "/product/index",
+        path: '/product/index',
         query: { sku: sku }
-      });
+      })
     },
-    //动态设置searc-wrap的高
-    setWrapHeight() {
-      let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.wrapper.style.height = $screenHeight - 90 + "px";
+    // 动态设置searc-wrap的高
+    setWrapHeight () {
+      let $screenHeight = document.documentElement.clientHeight
+      this.$refs.wrapper.style.height = $screenHeight - 90 + 'px'
     },
-    getSearch() {
-      this.searchText = this.searchText.replace(/^\s+|\s+$/g, ""); //去除两头空格
+    getSearch () {
+      this.searchText = this.searchText.replace(/^\s+|\s+$/g, '') // 去除两头空格
       if (!this.searchText) {
         this.$toast({
           mask: false,
           duration: 1000,
-          message: "请输入搜索内容"
-        });
-        return;
+          message: '请输入搜索内容'
+        })
+        return
       }
-      this.initData();
+      this.initData()
     },
 
-    deleteHistory() {
+    deleteHistory () {
       this.$dialog
         .confirm({
-          title: "提示！",
-          message: "确认删除所有历史搜索吗？"
+          title: '提示！',
+          message: '确认删除所有历史搜索吗？'
         })
         .then(() => {
           this.$http
@@ -195,24 +191,24 @@ export default {
                   mask: false,
                   duration: 1000,
                   message: response.data.msg
-                });
+                })
               }
-            });
-        });
+            })
+        })
     },
-    goBack() {
-      this.$router.go(-1);
+    goBack () {
+      this.$router.go(-1)
     }
   },
   directives: {
     focus: {
       // 指令的定义
-      inserted: function(el) {
-        el.focus();
+      inserted: function (el) {
+        el.focus()
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" type="text/scss" scoped>

@@ -30,38 +30,38 @@
 
 <script>
 export default {
-  name: "mallMessage",
-  data() {
+  name: 'mallMessage',
+  data () {
     return {
       messageArrays: []
-    };
+    }
   },
-  created() {
-    this.inintData();
+  created () {
+    this.inintData()
   },
   methods: {
-    inintData() {
+    inintData () {
       this.$http
         .post(`/api/message/messageList`, { type: this.$route.query.type })
         .then(response => {
-          this.messageArrays = response.data.content;
-        });
+          this.messageArrays = response.data.content
+        })
     },
-    onClose(clickPosition, instance, detail) {
+    onClose (clickPosition, instance, detail) {
       this.$http
         .post(`/api/message/updateMessage`, { ids: [detail.name], type: 1 })
         .then(response => {
           this.$toast({
             mask: false,
             duration: 1000,
-            message: "删除成功！"
-          });
-        });
-      instance.close();
-      this.inintData();
+            message: '删除成功！'
+          })
+        })
+      instance.close()
+      this.inintData()
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
