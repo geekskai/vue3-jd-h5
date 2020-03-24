@@ -5,13 +5,10 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-03-22 19:43:06
+ * @LastEditTime: 2020-03-24 23:38:52
  * @FilePath: /vue-jd-h5/README.md
  -->
 # whale-mall-h5
-
-<!-- <img src="./src/assets/WechatIMG14.png" alt="npm">
-<img src="./src/assets/WechatIMG15.png" alt="npm"> -->
 
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E9%B2%B8%E5%88%9B%E7%A7%91%E6%8A%80-%E5%95%86%E5%AE%B6%E5%95%86%E5%9F%8E-green.svg" alt="后台项目"></a>
@@ -83,4 +80,3 @@ src -- 源码目录
     └── error -- 错误页面
 ```
 
-Copyright (c) 2018-2019 whatech
