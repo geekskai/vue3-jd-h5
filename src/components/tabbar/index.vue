@@ -87,12 +87,15 @@ export default {
         this.active = tag
       },
       this
-    )
+    )  // 注意eventBus第三个参数需要传当前组件的this，如果不传则需要手动销毁
   },
   computed: {
     ...mapState({
       count: state => state.cart.count
     })
+  },
+  beforeDestroy () {
+    // 如果传递了this，这里就不需要手动的off销毁eventBus订阅的事件了
   },
   methods: {}
 }
