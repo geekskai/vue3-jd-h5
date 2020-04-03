@@ -5,7 +5,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-03 11:24:47
+ * @LastEditTime: 2020-04-03 11:45:31
  * @FilePath: /vue-jd-h5/README.md
  -->
 # whale-mall-h5
@@ -25,9 +25,9 @@
 
 `whale-mall-h5`是一个电商 H5 页面前端项目，基于 Vue+Vant UI 实现，主要包括首页、分类页面、我的页面、购物车等。
 
-📖本地线下代码在分支<a href='https://github.com/GitHubGanKai/vue-jd-h5/blob/demo/README.md'>demo</a>中，使用mockjs数据进行开发，效果图请点击🔗<a href='http://gankai.gitee.io/vue-jd-h5/index'>这里</a>
+📖本地线下代码在分支<a target='_blank' href='https://github.com/GitHubGanKai/vue-jd-h5/blob/demo/README.md'>demo</a>中，使用mockjs数据进行开发，效果图请点击🔗<a target='_blank' href='http://gankai.gitee.io/vue-jd-h5/index'>这里</a>
 
-⚠️master分支是线上生产环境代码，因为部分后台接口已经挂了😫，可能无法看到实际效果<a href='http://jc.cmall.world/#/'>🔗项目线上地址</a>
+⚠️master分支是线上生产环境代码，因为部分后台接口已经挂了😫，可能无法看到实际效果<a target='_blank' href='http://jc.cmall.world/#/'>🔗项目线上地址</a>
 
 📌 本项目还有很多不足之处，如果有想为此做贡献的伙伴，也欢迎给我们提出PR，或者issue ；
 
