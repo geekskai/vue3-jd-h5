@@ -5,15 +5,16 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-03-24 23:38:52
+ * @LastEditTime: 2020-04-03 11:24:47
  * @FilePath: /vue-jd-h5/README.md
  -->
 # whale-mall-h5
 
+![](./src/assets/image/WechatIMG14.png)
+![](./src/assets/image/WechatIMG15.png)
+
 <p algin='center'>
-  <a href="#"><img src="https://img.shields.io/badge/%E9%B2%B8%E5%88%9B%E7%A7%91%E6%8A%80-%E5%95%86%E5%AE%B6%E5%95%86%E5%9F%8E-green.svg" alt="后台项目"></a>
   <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
-  
   <a href="#"><img src="https://img.shields.io/badge/npm-6.9.0-green.svg" alt="npm"></a>
  <a href="https://codecov.io/gh/GitHubGanKai/vue-jd-h5">
   <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
@@ -24,10 +25,14 @@
 
 `whale-mall-h5`是一个电商 H5 页面前端项目，基于 Vue+Vant UI 实现，主要包括首页、分类页面、我的页面、购物车等。
 
+📖本地线下代码在分支<a href='https://github.com/GitHubGanKai/vue-jd-h5/blob/demo/README.md'>demo</a>中，使用mockjs数据进行开发，效果图请点击🔗<a href='http://gankai.gitee.io/vue-jd-h5/index'>这里</a>
 
-<a href='http://gankai.gitee.io/vue-jd-h5/index'>第一版本地址</a>
+⚠️master分支是线上生产环境代码，因为部分后台接口已经挂了😫，可能无法看到实际效果<a href='http://jc.cmall.world/#/'>🔗项目线上地址</a>
 
-<a href='http://jc.cmall.world/#/'>项目线上地址(后台部分接口已经挂了)</a>
+📌 本项目还有很多不足之处，如果有想为此做贡献的伙伴，也欢迎给我们提出PR，或者issue ；
+
+🔑 本项目是免费开源的，如果有伙伴想要在次基础上进行二次开发，可以clone或者fork整个仓库，如果能帮助到您，我将感到非常高兴，如果您觉得这个项目不错还请给个start！🙏
+
 
 ## 搭建步骤
 
