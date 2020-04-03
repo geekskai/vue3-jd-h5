@@ -6,6 +6,7 @@ function resolve(dir) {
 
 module.exports = {
   lintOnSave: false,
+  publicPath: './',
   chainWebpack: config => {
     config.module.rules.delete("svg"); //重点:删除默认配置中处理svg,
     config.module
