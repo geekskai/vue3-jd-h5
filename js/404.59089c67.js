@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["404"],{2754:function(n,t,e){"use strict";e.r(t);var a=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"container"},[n._v("404")])},c=[],o={name:"notFoned",data:function(){return{}},created:function(){},methods:{}},r=o,s=e("2877"),i=Object(s["a"])(r,a,c,!1,null,"484a805c",null);t["default"]=i.exports}}]);
-//# sourceMappingURL=404.59089c67.js.map
