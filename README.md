@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-04-03 11:51:26
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-04-03 11:52:09
+ * @FilePath: /vue-jd-h5/README.md
+ -->
 # jd-mall-h5
 
 <p algin='center'>
@@ -15,7 +24,7 @@
 
 `whale-mall-h5`是一个电商H5页面前端项目，基于Vue+Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
 
-<a href='http://47.106.147.83'>demo地址</a>
+<a href='http://gankai.gitee.io/vue-jd-h5/#/index'>demo地址</a>
 
 ### 技术选型
 
