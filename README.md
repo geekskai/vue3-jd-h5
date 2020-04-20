@@ -5,14 +5,15 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-20 23:43:14
+ * @LastEditTime: 2020-04-21 00:16:24
  * @FilePath: /vue-jd-h5/README.md
  -->
+![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif)
+
 # whale-mall-h5
 
-<!-- ![](./src/assets/image/home_img.jpg)
-![](./src/assets/image/WechatIMG15.png) -->
-![](./src/assets/image/title-gif.gif)
+![](./src/assets/image/home_img.jpg)
+![](./src/assets/image/WechatIMG15.png)
 
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
@@ -36,7 +37,7 @@
 
 ## 手机扫描二维码预览 👇
 
-![](./src/assets/image/qrcode.png)
+![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png)
 
 ## 搭建步骤
 
