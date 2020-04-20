@@ -5,16 +5,13 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-21 00:27:04
+ * @LastEditTime: 2020-04-21 00:30:15
  * @FilePath: /vue-jd-h5/README.md
  -->
 <!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
-![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif)
+<!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
 
 # whale-mall-h5
-
-![](./src/assets/image/home_img.jpg)
-![](./src/assets/image/WechatIMG15.png)
 
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
@@ -23,6 +20,13 @@
   <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
 </a>
 </p>
+
+<div style="text-align:center">
+<img style='width:200px;height:100%;' src='src/assets/image/title-gif.gif' />
+</div>
+<!-- ![](./src/assets/image/home_img.jpg)
+![](./src/assets/image/WechatIMG15.png) -->
+
 
 ## 项目介绍
 
@@ -40,7 +44,7 @@
 
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png) -->
 <div style="text-align:center">
-<img style='width:200px;height:200px;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png' />
+<img style='width:150px;height:150px;' src='src/assets/image/qrcode.png' />
 </div>
 
 ## 搭建步骤
