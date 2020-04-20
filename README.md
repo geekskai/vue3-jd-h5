@@ -5,10 +5,11 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-21 00:16:24
+ * @LastEditTime: 2020-04-21 00:27:04
  * @FilePath: /vue-jd-h5/README.md
  -->
-![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif)
+<!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
+![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif)
 
 # whale-mall-h5
 
@@ -37,7 +38,10 @@
 
 ## 手机扫描二维码预览 👇
 
-![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png)
+<!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png) -->
+<div style="text-align:center">
+<img style='width:200px;height:200px;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png' />
+</div>
 
 ## 搭建步骤
 
