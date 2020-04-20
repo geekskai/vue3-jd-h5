@@ -10,8 +10,9 @@
  -->
 # whale-mall-h5
 
-![](./src/assets/image/home_img.jpg)
-![](./src/assets/image/WechatIMG15.png)
+<!-- ![](./src/assets/image/home_img.jpg)
+![](./src/assets/image/WechatIMG15.png) -->
+![](./src/assets/image/title-gif.gif)
 
 <p algin='center'>
   <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
