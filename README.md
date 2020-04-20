@@ -5,12 +5,12 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-03 11:45:31
+ * @LastEditTime: 2020-04-20 23:43:14
  * @FilePath: /vue-jd-h5/README.md
  -->
 # whale-mall-h5
 
-![](./src/assets/image/WechatIMG14.png)
+![](./src/assets/image/home_img.jpg)
 ![](./src/assets/image/WechatIMG15.png)
 
 <p algin='center'>
@@ -33,6 +33,9 @@
 
 🔑 本项目是免费开源的，如果有伙伴想要在次基础上进行二次开发，可以clone或者fork整个仓库，如果能帮助到您，我将感到非常高兴，如果您觉得这个项目不错还请给个start！🙏
 
+## 手机扫描二维码预览 👇
+
+![](./src/assets/image/qrcode.png)
 
 ## 搭建步骤
 
