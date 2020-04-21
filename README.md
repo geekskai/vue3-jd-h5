@@ -22,7 +22,7 @@
 </p>
 
 <div style="text-align:center">
-<img style='width:200px;height:100%;' src='src/assets/image/title-gif.gif' />
+<img style='width:200px;height:80%;' src='src/assets/image/title-gif.gif' />
 </div>
 <!-- ![](./src/assets/image/home_img.jpg)
 ![](./src/assets/image/WechatIMG15.png) -->
@@ -43,7 +43,7 @@
 ## 手机扫描二维码预览 👇
 
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png) -->
-<div style="text-align:center">
+<div style="text-align:center;width:200px;height:200px;">
 <img style='width:150px;height:150px;' src='src/assets/image/qrcode.png' />
 </div>
 
