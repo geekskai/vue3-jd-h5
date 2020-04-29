@@ -154,8 +154,6 @@ export default {
         })
     },
     onCloseMerchant (clickPosition, instance, detail) {
-      console.log('=====clickPosition==>', clickPosition)
-      console.log('=====instance==>', instance)
       instance.close()
     },
     initMerchantAttentions () {
