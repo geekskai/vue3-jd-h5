@@ -1,3 +1,12 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-04-29 22:08:12
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-04-29 22:14:29
+ * @FilePath: /vue-jd-h5/src/main.js
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
@@ -14,11 +23,11 @@ import '@/icons' // icon
 import EventBus from './utils/eventBus'
 Vue.use(EventBus)
 
-import Vconsole from 'vconsole'
-if (process.env.NODE_ENV !== 'production') {
-  // const vConsole = new Vconsole()
-  // Vue.use(vConsole)
-}
+// import Vconsole from 'vconsole'
+// if (process.env.NODE_ENV !== 'production') {
+//   const vConsole = new Vconsole()
+//   Vue.use(vConsole)
+// }
 
 
 import {
