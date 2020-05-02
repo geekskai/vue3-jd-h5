@@ -77,7 +77,6 @@ const actions = {
 const mutations = {
   addToCart(state) {
     state.count++
-    console.log('=====res==>',state.count);
   },
   pushProductToCart(state, {
     id

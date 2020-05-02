@@ -2,10 +2,10 @@
   <div class="classify">
     <header class="home-header">商品分类</header>
     <section class="search-wrap" ref="searchWrap">
-      <list-scroll :scroll-data="categoryData" class="nav-side-wrapper">
+      <list-scroll class="nav-side-wrapper">
         <ul class="nav-side">
           <li
-            v-for="(item,index) in categoryData"
+            v-for="(item,index) in categoryDatas.value"
             :key="index"
             :class="{'active' : currentIndex === index}"
             @click="selectMenu(index)"
@@ -15,10 +15,10 @@
           </li>
         </ul>
       </list-scroll>
-      <list-scroll class="search-content" :scroll-data="categoryData">
+      <list-scroll class="search-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <template v-for="(category,index) in categoryData">
+            <template v-for="(category,index) in categoryDatas.value">
               <div class="swiper-slide" :key="index" v-if="currentIndex === index">
                 <img
                   @click="selectProduct(category.value)"
@@ -51,68 +51,55 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
+import ListScroll from "@/components/scroll/ListScroll";
+import {
+  ref,
+  reactive,
+  onMounted,
+  computed,
+  toRefs
+} from "@vue/composition-api";
 export default {
+  name: "classify",
   components: {
     ListScroll
   },
-  name: "",
-  data() {
-    return {
-      tags: [],
-      currentIndex: 0,
-      categoryData: [],
-      templateCategoryData: []
-    };
-  },
-  created() {
-    this.$http
-      .get("http://test.happymmall.com/category/categoryData")
+  setup(props, { root }) {
+    const tags = ref([]);
+    const currentIndex = ref(0);
+    const categoryDatas = reactive({
+      value:[]
+    });
+    const searchWrap = ref(null);
+    root.$http.get("http://test.happymmall.com/category/categoryData")
       .then(res => {
         const { categoryData } = res.data;
-        this.categoryData = categoryData;
-        // console.log("=====categoryData==>", this.categoryData);
-        // this.templateCategoryData = categoryData;
+        categoryDatas.value = categoryData;
       });
-    // this.getGoodsList();
-  },
-  methods: {
-    handleSplit(name) {
-      if (~name.indexOf("、")) {
-        let temName = name;
-        return temName.slice(0, 2) + name.slice(3);
-      } else {
-        return name;
-      }
-    },
-    // 获取分类
-    getGoodsList() {
-      // this.$http.get(`/api/product/category`).then(response => {
-      this.$http.get(`/api/goods/category`).then(response => {
-        const categoryData = response.data.content;
-        this.categoryData = categoryData;
-      });
-    },
-    handleSearch() {
-      this.$router.push("/search");
-    },
     //左侧菜单和右侧区域联动
-    selectMenu($index) {
-      this.currentIndex = $index;
-      // this.getGoodsList();
-    },
+    const selectMenu = index => {
+      currentIndex.value = index;
+    };
     //动态设置searc-wrap的高
-    setSearchWrapHeight() {
+    const setSearchWrapHeight = () => {
       let $screenHeight = document.documentElement.clientHeight;
-      this.$refs.searchWrap.style.height = $screenHeight - 100 + "px";
-    },
-    selectProduct(sku) {
-      this.$router.push({ path: "/classify/recommend", query: { sku: sku } });
-    }
-  },
-  mounted() {
-    this.setSearchWrapHeight();
-    this.$eventBus.$emit("changeTag", 1);
+      searchWrap.value.style.height = $screenHeight - 100 + "px";
+    };
+    const selectProduct = sku => {
+      root.$router.push({ path: "/classify/recommend", query: { sku: sku } });
+    };
+    onMounted(() => {
+      setSearchWrapHeight();
+      root.$eventBus.$emit("changeTag", 1);
+    });
+    return {
+      tags,
+      currentIndex,
+      searchWrap,
+      categoryDatas,
+      selectProduct,
+      selectMenu
+    };
   }
 };
 </script>

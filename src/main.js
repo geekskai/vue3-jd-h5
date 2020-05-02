@@ -4,12 +4,13 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-29 22:14:29
+ * @LastEditTime: 2020-05-02 16:25:20
  * @FilePath: /vue-jd-h5/src/main.js
  */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
+import Vue3 from '@vue/composition-api'
 import store from './store/index'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -22,6 +23,7 @@ import './mock/mock'
 import '@/icons' // icon
 import EventBus from './utils/eventBus'
 Vue.use(EventBus)
+Vue.use(Vue3)
 
 // import Vconsole from 'vconsole'
 // if (process.env.NODE_ENV !== 'production') {

@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-04-29 22:08:12
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-05-02 15:52:38
+ * @FilePath: /vue-jd-h5/src/App.vue
+ -->
 <template>
   <div id="app">
     <keep-alive>
@@ -9,9 +18,6 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {};
-  }
 };
 </script>
 <style lang="scss">

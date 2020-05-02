@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-03 11:51:26
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-03 11:54:43
+ * @LastEditTime: 2020-05-02 19:08:29
  * @FilePath: /vue-jd-h5/README.md
  -->
 # jd-mall-h5
@@ -21,7 +21,7 @@
 
 ## 项目介绍
 
-`whale-mall-h5`是一个电商H5页面前端项目，基于Vue+Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
+`whale-mall-h5`是一个电商H5页面前端项目，基于Vue 3.0.0-beta.1 Vant UI实现，主要包括首页、分类页面、我的页面、购物车等。
 
 <a href='http://gankai.gitee.io/vue-jd-h5/#/index'>demo地址</a>
 
@@ -42,23 +42,155 @@ vue-element-admin | 项目脚手架参考 | [https://github.com/PanJiaChen/vue-e
 ### 项目布局
 
 ``` lua
-src -- 源码目录
-├── api -- axios网络请求定义
-├── assets -- 静态图片资源文件
-├── components -- 通用组件封装
-├── icons -- svg矢量图片文件
-├── router -- vue-router路由配置
-├── store -- vuex的状态管理
-├── styles -- 全局css样式
-├── utils -- 工具类
-├── App.vue -- 入口页面
-└── views -- 前端页面
-    ├── home -- 首页
-    ├── classify -- 分类
-    ├── login -- 登录页
-    ├── mine -- 我的页面
-    ├── shopCart -- 购物车页面
-    └── error -- 错误页面
+|-- work
+    |-- .DS_Store
+    |-- .editorconfig
+    |-- .env.development
+    |-- .env.production
+    |-- .env.test
+    |-- .eslintrc.js
+    |-- .gitignore
+    |-- README.md
+    |-- babel.config.js
+    |-- package.json
+    |-- postcss.config.js
+    |-- vue.config.js
+    |-- yarn.lock
+    |-- public
+    |   |-- favicon.ico
+    |   |-- index.html
+    |-- src
+        |-- .DS_Store
+        |-- App.vue
+        |-- main.js
+        |-- api
+        |   |-- index.js
+        |-- assets
+        |   |-- icons
+        |   |-- image
+        |-- components
+        |   |-- index.js
+        |   |-- DropList
+        |   |   |-- index.js
+        |   |   |-- index.vue
+        |   |-- ProgressBar
+        |   |   |-- index.vue
+        |   |-- SvgIcon
+        |   |   |-- index.vue
+        |   |-- picker
+        |   |   |-- index.vue
+        |   |-- popup
+        |   |   |-- index.vue
+        |   |-- scroll
+        |   |   |-- ListScroll.vue
+        |   |-- tabbar
+        |       |-- index.vue
+        |-- icons
+        |   |-- index.js
+        |   |-- svg
+        |-- mock
+        |   |-- area.js
+        |   |-- mock.js
+        |-- plugins
+        |   |-- axios.js
+        |-- router
+        |   |-- index.js
+        |   |-- modules
+        |-- store
+        |   |-- index.js
+        |   |-- modules
+        |       |-- cart.js
+        |       |-- search.js
+        |-- styles
+        |   |-- base.scss
+        |   |-- index.scss
+        |   |-- mixin.scss
+        |-- utils
+        |   |-- eventBus.js
+        |   |-- util.js
+        |-- views
+            |-- index.vue
+            |-- brandSpike
+            |   |-- index.vue
+            |-- chainCatSpike
+            |   |-- index.vue
+            |-- classify
+            |   |-- index.vue
+            |   |-- recommend.vue
+            |-- error
+            |   |-- 404.vue
+            |   |-- NoPermission.vue
+            |-- foundGoodGoods
+            |   |-- index.vue
+            |-- home
+            |   |-- index.vue
+            |-- login
+            |   |-- index.vue
+            |-- loveShop
+            |   |-- index.vue
+            |-- mine
+            |   |-- aboutAs.vue
+            |   |-- addAddress.vue
+            |   |-- changePassword.vue
+            |   |-- countryRegion.vue
+            |   |-- feedback.vue
+            |   |-- forgetPassword.vue
+            |   |-- helpCenter.vue
+            |   |-- index.vue
+            |   |-- messageCenter.vue
+            |   |-- personInfo.vue
+            |   |-- phoneNumberSetting.vue
+            |   |-- setInfo.vue
+            |   |-- setting.vue
+            |   |-- settingMail.vue
+            |   |-- shippingAddress.vue
+            |-- myFocus
+            |   |-- index.vue
+            |-- newProductLaunch
+            |   |-- index.vue
+            |-- node
+            |   |-- areaNode.vue
+            |   |-- cityNode.vue
+            |   |-- industryNode.vue
+            |   |-- nodeApplication.vue
+            |   |-- stateNode.vue
+            |   |-- superNode.vue
+            |-- order
+            |   |-- appeal.vue
+            |   |-- appealDetail.vue
+            |   |-- appealRecord.vue
+            |   |-- cancelOrder.vue
+            |   |-- index.vue
+            |   |-- orderDetail.vue
+            |   |-- pendingReceipt.vue
+            |   |-- toBeDelivered.vue
+            |   |-- transactionDetails.vue
+            |   |-- viewLogistics.vue
+            |-- pool
+            |   |-- advertisementPool.vue
+            |   |-- consumptionPool.vue
+            |   |-- nodePool.vue
+            |-- premiumRanking
+            |   |-- index.vue
+            |-- product
+            |   |-- index.vue
+            |-- register
+            |   |-- emailRegister.vue
+            |   |-- emailRegisterTwo.vue
+            |   |-- phoneRegister.vue
+            |   |-- phoneRegisterTwo.vue
+            |-- search
+            |   |-- index.vue
+            |-- shopCart
+            |   |-- index.vue
+            |-- specialSpike
+            |   |-- index.vue
+            |-- storeDetail
+            |   |-- index.vue
+            |-- wallet
+                |-- balanceWallet.vue
+                |-- consumerWallet.vue
+                |-- myWallet.vue
 ```
 
 ## 搭建步骤

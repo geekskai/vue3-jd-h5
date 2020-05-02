@@ -1,9 +1,8 @@
 <template>
   <div class="product-layout">
     <van-swipe :autoplay="3000" :height="350">
-      <van-swipe-item v-for="(image, index) in productImages" :key="index">
-        <!-- <img class="lazy_img" v-if="image.path" v-lazy="image.path"/> -->
-        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl"/>
+      <van-swipe-item v-for="(image, index) in productImgs" :key="index">
+        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
 
@@ -154,18 +153,32 @@
 </template>
 
 <script>
+import {
+  ref,
+  reactive,
+  onMounted,
+  computed,
+  toRefs
+} from "@vue/composition-api";
 export default {
   name: "product",
-  data() {
-    return {
-      show: false,
-      showDetail: false,
-      detailForm: {},
-      isSpike: false, // 是否是秒杀商品 默认是false
-      isLike: false, // 是否点赞喜欢
-      current: 0,
-      stepperValue: "",
-      listData: [
+
+  setup() {
+    const show = ref(false);
+    const showDetail = ref(false);
+    const detailForm = reactive({
+      value: []
+    });
+    const isSpike = ref(false);
+    const isLike = ref(false);
+    const current = ref(0);
+    const stepperValue = ref("");
+    const productImgs = reactive({
+      value: []
+    });
+    const imgSrc = ref(require("../../assets/image/home/test2.png"));
+    const listData = reactive({
+      value: [
         {
           imgSrc: require("../../assets/image/home/store3.png"),
           colorName: "黑色",
@@ -191,62 +204,58 @@ export default {
           colorName: "黑色",
           selected: false
         }
-      ],
-      imgSrc: require("../../assets/image/home/test2.png"),
-      productImages: []
-    };
-  },
-  created() {
-    this.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
+      ]
+    });
+
+    root.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
       const { productImages } = res.data;
       let i = Math.floor(Math.random() * 6);
-      this.productImages = productImages[i];
+      productImgs = productImages[i];
     });
-    // this.initData();
-  },
-  // updated() {
-  //   let obj = document.getElementById("htmlClass");
-  //   let imgs = obj.getElementsByTagName("img");
-  //   for (let index = 0; index < imgs.length; index++) {
-  //     imgs[i].style.width = "100%";
-  //     imgs[i].style.height = "100%";
-  //   }
-  // },
-  methods: {
-    initData() {
-      this.$http
-        .get(`/api/goods/detail?sku=${this.$route.query.sku}`)
-        .then(response => {
-          this.productImages = response.data.images;
-          this.detailForm = response.data.detail;
-          console.log("=====content==>", response.data);
-        });
-    },
-    handleViewDetail() {
-      this.showDetail = true;
-    },
-    handleSelected(item) {
-      item.selected = true;
-      this.listData.map(it => {
-        it == item ? (it.selected = true) : (it.selected = false);
-      });
-    },
-    handleAddToCart() {
-      this.$toast.success({
+
+    const handleViewDetail = () => {
+      showDetail.value = true;
+    };
+    const handleToBuy = () => {
+      root.$router.push("/order/orderDetail");
+    };
+    const handleAddToCart = () => {
+      root.$toast.success({
         message: "添加成功~",
         duration: 1500,
         icon: "like-o"
       });
-    },
-    handleToBuy() {
-      this.$router.push("/order/orderDetail");
-    },
-    handleStoreName() {
-      this.$router.push("/storeDetail");
-    },
-    handleConnectStore() {
-      this.$router.push("/storeDetail");
-    }
+    };
+    const handleSelected = item => {
+      item.selected = true;
+      listData.value.map(it => {
+        it == item ? (it.selected = true) : (it.selected = false);
+      });
+    };
+    const handleStoreName = () => {
+      root.$router.push("/storeDetail");
+    };
+    const handleConnectStore = () => {
+      root.$router.push("/storeDetail");
+    };
+    return {
+      productImgs,
+      listData,
+      imgSrc,
+      stepperValue,
+      current,
+      isLike,
+      isSpike,
+      detailForm,
+      showDetail,
+      show,
+      handleViewDetail,
+      handleAddToCart,
+      handleConnectStore,
+      handleStoreName,
+      handleToBuy,
+      handleSelected
+    };
   }
 };
 </script>

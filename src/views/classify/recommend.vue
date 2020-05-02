@@ -65,7 +65,6 @@ export default {
     this.$http.get("http://test.happymmall.com/home/recommend").then(res => {
       const { data } = res.data;
       this.likeList = data;
-      console.log('=====likeList==>',this.likeList);
     });
     // this.initData();
   },

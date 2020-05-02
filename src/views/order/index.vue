@@ -269,7 +269,6 @@ export default {
     setSearchWrapWidth() {
       let $screenWidth = document.documentElement.clientWidth;
       this.$refs.searchWrap.style.width = $screenWidth + 100 + "px";
-      console.log("=====res==>", this.$refs.searchWrap.style.width);
     },
     selectTag(e) {
       let $type = parseInt(e.currentTarget.getAttribute("data-type"));
