@@ -159,9 +159,9 @@
         animated
       >
         <!-- @click="handleTabClick" -->
-          <!-- v-for="(list,index) in catList" -->
+        <!-- v-for="(list,index) in catList" -->
         <van-tab
-        v-for="(list,index) in tabList"
+          v-for="(list,index) in tabList"
           :title="list.describe"
           :name="list.type"
           :key="index"
@@ -175,7 +175,7 @@
           <section class="goods-box search-wrap">
             <ul class="goods-content">
               <!-- <li v-for="(item,index) in tabItemLists" :key="index"> -->
-                <li v-for="(item,index) in list.list" :key="index">
+              <li v-for="(item,index) in list.list" :key="index">
                 <router-link class="goods-img" tag="div" to="/classify/product">
                   <!-- <img v-lazy="item.productMainImage" /> -->
                   <img :src="item.img" />
@@ -258,7 +258,6 @@ export default {
 
   created() {
     // this.initData();
-
 
     this.$http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { tabList } = res.data;
