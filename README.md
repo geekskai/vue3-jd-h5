@@ -5,7 +5,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-03-22 19:42:39
  * @LastEditors: gankai
- * @LastEditTime: 2020-04-21 22:45:27
+ * @LastEditTime: 2020-05-02 19:33:31
  * @FilePath: /vue-jd-h5/README.md
  -->
 <!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
@@ -49,6 +49,10 @@
 <img style='width:150px;height:150px;' src='src/assets/image/qrcode.png' />
 </div>
 
+## Vue 3
+
+🎉 如果想体验一下vue3的小伙伴，可以切换到分支 <a href='https://github.com/GitHubGanKai/vue-jd-h5/tree/demo_vue3'>demo_vue3</a>，这个分支是从vue2过渡到vue3的使用  "@vue/composition-api": "^0.5.0"的一个体验版本！
+
 ## 搭建步骤
 
 - 下载 node 并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
@@ -81,22 +85,63 @@
 ### 项目布局
 
 ```lua
-src -- 源码目录
-├── assets -- 静态图片资源文件
-├── components -- 通用组件封装
-├── icons -- svg矢量图片文件
-├── plugins -- axios网络请求定义
-├── router -- vue-router路由配置
-├── store -- vuex的状态管理
-├── styles -- 全局css样式
-├── utils -- 工具类
-├── App.vue -- 入口页面
-└── views -- 前端页面
-    ├── home -- 首页
-    ├── classify -- 分类
-    ├── login -- 登录页
-    ├── mine -- 我的页面
-    ├── shopCart -- 购物车页面
-    └── error -- 错误页面
+|-- work
+    |-- .editorconfig
+    |-- .env.development     // 开发环境配置
+    |-- .env.production      // 生产环境配置
+    |-- .env.test
+    |-- .eslintrc.js
+    |-- .gitignore
+    |-- CHANGELOG.md
+    |-- README.md
+    |-- babel.config.js
+    |-- package-lock.json
+    |-- package.json
+    |-- postcss.config.js
+    |-- vue.config.js           // vue 配置文件
+    |-- webpack.dll.config.js   // dll配置文件
+    |-- yarn.lock
+    |-- dll                     // dll动态链接库
+    |   |-- util.dll.js
+    |   |-- util.manifest.json
+    |   |-- vendor.dll.js
+    |   |-- vendor.manifest.json
+    |-- public
+    |-- src
+        |-- App.vue
+        |-- main.js
+        |-- assets
+        |-- components
+        |-- icons             // 使用svg生成 icon 图片
+        |   |-- index.js
+        |   |-- svg
+        |-- plugins
+        |   |-- axios.js   // 封装异步请求
+        |-- router
+        |-- store
+        |-- styles
+        |-- utils
+        |   |-- eventBus.js     // 发布订阅者模式封装中央事件总线，无须$off()操作！
+        |   |-- util.js
+        |   |-- validator.js
+        |-- views
+            |-- classify   // 商品分类
+            |-- coinPay
+            |-- home
+            |-- login   // 登录
+            |-- merchantsSettled
+            |-- message
+            |-- mine
+            |-- myFocus
+            |-- node
+            |-- order
+            |-- pool
+            |-- product
+            |-- register
+            |-- search
+            |-- shopCart
+            |-- storeDetail
+            |-- wallet
+
 ```
 
