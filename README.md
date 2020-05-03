@@ -17,7 +17,17 @@
 </div> -->
 
 
+##  项目介绍
 
+`vue3-jd-h5`是一个电商H5页面前端项目，基于**Vue 3.0.0-beta.1** +  Vant 实现，主要包括首页、分类页面、我的页面、购物车等。
+
+📖本地线下代码**vue2.6**在分支<a target='_blank' href='https://github.com/GitHubGanKai/vue-jd-h5/blob/demo/README.md'>demo</a>中，使用**mockjs**数据进行开发，效果图请点击🔗<a target='_blank' href='http://gankai.gitee.io/vue-jd-h5/index'>这里</a>
+
+⚠️master分支是线上生产环境代码，因为部分后台接口已经挂了😫，可能无法看到实际效果。
+
+📌 本项目还有很多不足之处，如果有想为此做贡献的伙伴，也欢迎给我们提出PR，或者issue ；
+
+🔑 本项目是免费开源的，如果有伙伴想要在次基础上进行二次开发，可以clone或者fork整个仓库，如果能帮助到您，我将感到非常高兴，如果您觉得这个项目不错还请给个start！🙏
 
 
 ## vue3搭建步骤
