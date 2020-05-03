@@ -1,21 +1,15 @@
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg) -->
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png) -->
-<style>
-.markdown-body img {
-    max-width: 20%;
-    box-sizing: initial;
-    background-color: #fff;
-}
-</style>
+
 <div style="text-align:center">
-<img width='100px' height='200px'  src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/cart_home.jpg' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/me_home.jpg' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/shal_home.jpg' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/buy_home.jpg' />
-<img width='100px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/hotal_home.jpg' height='200px' />
-<img width='100px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/search_img.jpg' />
+<img width='110' height='200'  src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/cart_home.jpg' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/me_home.jpg' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/shal_home.jpg' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/buy_home.jpg' />
+<img width='110px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/hotal_home.jpg' height='200' />
+<img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/search_img.jpg' />
 </div>
 
 # vue3-jd-h5
@@ -79,7 +73,7 @@ gankaideMacBook-Pro:vue-jd-h5 gankai$ git branch -a
 
 
 <div style="text-align:center">
-<img width='100px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png' />
+<img width='200px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png' />
 </div>
 
 
