@@ -212,6 +212,8 @@
 import {
   ref,
   reactive,
+  watch,
+  getCurrentInstance,
   onMounted,
   computed,
   toRefs
@@ -221,8 +223,6 @@ export default {
   setup(props, { attrs, slots, parent, root, emit, refs }) {
     const active = ref("");
     const timeData = ref(36000000);
-
-  
     const tabArray = reactive({ value: [] });
     const headerActive = ref(false);
     const homeImgs = reactive({
@@ -257,7 +257,6 @@ export default {
       debugger: true,
       slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
     };
-
     root.$http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { images, images2, tabList } = res.data;
       tabArray.value = tabList;
@@ -267,9 +266,8 @@ export default {
     onMounted(() => {
       root.$eventBus.$emit("changeTag", 0);
       mySwiper.value.swiper.slideTo(3, 1000, false);
-      window.addEventListener("scroll", root.pageScroll);
+      window.addEventListener("scroll", pageScroll);
     });
-
     const addToCart = (event, tag) => {
       root.$store.commit("cart/addToCart", tag);
       ball.show = true;
@@ -299,17 +297,15 @@ export default {
     const handleClick = linkUrl => {
       root.$router.push("/classify/product");
     };
-
     const pageScroll = () => {
       let scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
       scrollTop > 100
-        ? (root.headerActive = true)
-        : (root.headerActive = false);
+        ? (headerActive.value = true)
+        : (headerActive.value = false);
     };
-
     return {
       active,
       timeData,

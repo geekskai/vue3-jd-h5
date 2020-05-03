@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-02 17:26:59
+ * @LastEditTime: 2020-05-02 23:58:59
  * @FilePath: /vue-jd-h5/src/components/SvgIcon/index.vue
  -->
 <template>
@@ -14,7 +14,13 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, computed } from "@vue/composition-api";
+import {
+  ref,
+  reactive,
+  onMounted,
+  computed,
+  getCurrentInstance
+} from "@vue/composition-api";
 export default {
   name: "svg-icon",
   props: {
@@ -26,13 +32,14 @@ export default {
       type: String
     }
   },
-  setup(props) { 
+  setup(initProps, setupContext) {
+    const ctx = getCurrentInstance();
     const iconName = computed(() => {
-      return `#icon-${props.iconClass}`;
+      return `#icon-${initProps.iconClass}`;
     });
     const svgClass = computed(() => {
-      if (props.className) {
-        return "svg-icon " + props.className;
+      if (initProps.className) {
+        return "svg-icon " + initProps.className;
       } else {
         return "svg-icon";
       }
