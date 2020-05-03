@@ -1,6 +1,15 @@
-![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg)
+<!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg) -->
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png) -->
-
+<div style="text-align:center">
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/cart_home.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/me_home.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/shal_home.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/buy_home.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/hotal_home.jpg' />
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/search_img.jpg' />
+</div>
 
 # vue3-jd-h5
 
@@ -11,10 +20,6 @@
   <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
 </a>
 </p>
-
-<!-- <div style="text-align:center">
-<img style='width:200px;height:300px;' src='src/assets/image/title-gif.gif' />
-</div> -->
 
 
 ##  项目介绍
@@ -63,10 +68,13 @@ gankaideMacBook-Pro:vue-jd-h5 gankai$ git branch -a
 
 5. 🔧 开发环境 在 IDEA 命令行中运行命令：`npm run dev`,运行项目;
 
-6. 📦在 IDEA 命令行中运行命令：`npm run dll:build`,打包项目;
+6. 📦在 IDEA 命令行中运行命令：`npm run dll:build`,打包项目,📱手机扫描下面👇二维码进行查看！
 
 
-![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png)
+<div style="text-align:center">
+<img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png' />
+</div>
+
 
 ## 项目的初始化
 
