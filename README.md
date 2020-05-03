@@ -1,5 +1,12 @@
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg) -->
 <!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png) -->
+<style>
+.markdown-body img {
+    max-width: 20%;
+    box-sizing: initial;
+    background-color: #fff;
+}
+</style>
 <div style="text-align:center">
 <img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg' />
 <img style='max-width: 20%;' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/cart_home.jpg' />
