@@ -1,15 +1,6 @@
-<!--
- * @Description: 
- * @version: v 1.0.0
- * @Github: https://github.com/GitHubGanKai
- * @Author: GitHubGanKai
- * @Date: 2020-03-22 19:42:39
- * @LastEditors: gankai
- * @LastEditTime: 2020-05-03 19:36:00
- * @FilePath: /vue-jd-h5/README.md
- -->
-<!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
-<!-- ![image](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/title-gif.gif) -->
+![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg)
+<!-- ![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/WechatIMG15.png) -->
+
 
 # vue3-jd-h5
 
@@ -25,8 +16,8 @@
 <img style='width:200px;height:300px;' src='src/assets/image/title-gif.gif' />
 </div> -->
 
-![](./src/assets/image/home_img.jpg)
-![](./src/assets/image/WechatIMG15.png)
+
+
 
 
 ## vue3搭建步骤
@@ -63,6 +54,9 @@ gankaideMacBook-Pro:vue-jd-h5 gankai$ git branch -a
 5. 🔧 开发环境 在 IDEA 命令行中运行命令：`npm run dev`,运行项目;
 
 6. 📦在 IDEA 命令行中运行命令：`npm run dll:build`,打包项目;
+
+
+![](https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/qrcode.png)
 
 ## 项目的初始化
 
