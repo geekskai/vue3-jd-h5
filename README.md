@@ -14,13 +14,13 @@
 
 # vue3-jd-h5
 
-<p algin='center'>
-  <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
-  <a href="#"><img src="https://img.shields.io/badge/npm-6.9.0-green.svg" alt="npm"></a>
- <a href="https://codecov.io/gh/GitHubGanKai/vue-jd-h5">
-  <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
-</a>
+<p align='center'>
+	<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FGitHubGanKai%2Fvue3-jd-h5"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/GitHubGanKai/vue3-jd-h5.svg?style=social"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/GitHubGanKai/vue3-jd-h5.svg"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/GitHubGanKai/vue3-jd-h5.svg"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/GitHubGanKai/vue3-jd-h5.svg"></a>
 </p>
+
 
 
 ##  项目介绍
