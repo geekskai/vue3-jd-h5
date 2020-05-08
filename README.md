@@ -4,21 +4,19 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-03 11:51:26
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-03 19:26:10
+ * @LastEditTime: 2020-05-08 22:28:53
  * @FilePath: /vue-jd-h5/README.md
  -->
-# jd-mall-h5
+# vue3-jd-h5
 
-<p algin='center'>
-  <a href="#"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-v0.1.1-green.svg" alt="github"></a>
-  
-  <a href="#"><img src="https://img.shields.io/badge/npm-6.9.0-green.svg" alt="npm"></a>
- <a href="https://codecov.io/gh/GitHubGanKai/vue-jd-h5">
-  <img src="https://codecov.io/gh/GitHubGanKai/vue-jd-h5/branch/master/graph/badge.svg" />
-</a>
+<p align='center'>
+	<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FGitHubGanKai%2Fvue3-jd-h5"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/GitHubGanKai/vue3-jd-h5.svg?style=social"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/GitHubGanKai/vue3-jd-h5.svg"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/GitHubGanKai/vue3-jd-h5.svg"></a>
+	<a href="https://github.com/GitHubGanKai/vue3-jd-h5/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/GitHubGanKai/vue3-jd-h5.svg"></a>
 </p>
-# 🔥基于vue3.0.1 beta搭建仿京东淘宝的电商商城项目！
 
+# 🔥基于vue3.0.1 beta搭建仿京东淘宝的电商商城项目！
 
 
 就在前段时间，vue官方发布了3.0.0-beta.1 版本，趁着五一假期有时间，就把之前的一个电商商城的项目，用最新的[Composition API](https://vue-composition-api-rfc.netlify.com/)i拿来改造一下！

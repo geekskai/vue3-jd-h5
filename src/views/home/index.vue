@@ -220,7 +220,7 @@ import {
 } from "@vue/composition-api";
 export default {
   name: "home",
-  setup(props, { attrs, slots, parent, root, emit, refs }) {
+  setup(props, { attrs, slots, parent, root, emit, refs }) { 
     const active = ref("");
     const timeData = ref(36000000);
     const tabArray = reactive({ value: [] });
