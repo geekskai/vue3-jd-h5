@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-02 16:25:20
+ * @LastEditTime: 2020-05-20 23:47:21
  * @FilePath: /vue-jd-h5/src/main.js
  */
 import Vue from 'vue'
