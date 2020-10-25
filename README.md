@@ -697,7 +697,7 @@ vue3中，新增 `Composition API`。而且新的`API`兼容 `Vue2.x`，只需�
 
 ## 抱歉
 
-⚠️本项目当前只修改了`src/views/home/index.vue`和`src/views/classify/index.vue这两个`文件，但是，其他的修改也都一样，如果有兴趣的小伙伴可以自己fork过去，将其他页面也用Composition API3写一遍，自己练练手！熟悉一下新API，同时我也会将其他的页面慢慢完善起来！大家一起⛽️加油！当官方正式发布版本之后，我们可以快速上手！希望和大家江湖再见！
+⚠️本项目当前只修改了分支**demo_vue3**下的  `src/views/home/index.vue`和`src/views/classify/index.vue`这两个文件，但是，其他的修改也都一样，如果有兴趣的小伙伴可以自己fork过去，将其他页面也用Composition API3写一遍，自己练练手！熟悉一下新API，同时我也会将其他的页面慢慢完善起来！大家一起⛽️加油！当官方正式发布版本之后，我们可以快速上手！希望和大家江湖再见！
 
 
 
