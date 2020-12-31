@@ -1,28 +1,44 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-12-27 20:41:48
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-12-27 23:15:00
+ * @FilePath: /refactor-with-vue3/src/views/home/index.vue
+-->
 <template>
   <div class="home">
-    <header class="home-header" :class="{'active' : headerActive}">
+    <header class="home-header" :class="{ active: headerActive }">
       <div class="header-search">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
+        <router-link tag="span" class="search-title" to="./search"
+          >推荐搜索 关键词</router-link
+        >
       </div>
-      <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
+      <svg-icon
+        class="customer-service-icon"
+        icon-class="customer-service"
+      ></svg-icon>
     </header>
-    <van-swipe class="swiper-carousel" :autoplay="3000" :show-indicators="false">
+    <van-swipe
+      class="swiper-carousel"
+      lazy-render
+      :autoplay="3000"
+      :show-indicators="false"
+    >
       <van-swipe-item v-for="(image, index) in homeImgs.value" :key="index">
-        <img class="lazy_img" @click="handleClick" v-lazy="image.imgUrl" />
+        <img class="lazy_img" @click="handleClick" :src="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
-    <div class="swiper-cls">
-      <swiper :options="swiperOption" ref="mySwiper">
-        <swiper-slide v-for="(img ,index) in tabImgs.value" :key="index">
-          <img class="slide_img" @click="handleClick(img.linkUrl)" :src="img.imgUrl" />
-        </swiper-slide>
-      </swiper>
-    </div>
+
     <section class="home-tags">
       <ul class="tags-content">
         <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
+          <svg-icon
+            class="tags-icon"
+            icon-class="chain-cat-boutique"
+          ></svg-icon>
           <span class="item-text">链猫精品</span>
         </router-link>
         <router-link tag="li" class="tags-item" to="./search">
@@ -53,13 +69,19 @@
               <span class="eight-time">8点场</span>
               <van-count-down :time="timeData" class="time-count-down">
                 <template v-slot="timeData">
-                  <span class="time-item" v-if="timeData.hours<10">{{ '0'+timeData.hours }}</span>
+                  <span class="time-item" v-if="timeData.hours < 10">{{
+                    "0" + timeData.hours
+                  }}</span>
                   <span class="time-item" v-else>{{ timeData.hours }}</span>
                   <i class="tow-point">:</i>
-                  <span class="time-item" v-if="timeData.minutes<10">{{'0'+ timeData.minutes }}</span>
+                  <span class="time-item" v-if="timeData.minutes < 10">{{
+                    "0" + timeData.minutes
+                  }}</span>
                   <span class="time-item" v-else>{{ timeData.minutes }}</span>
                   <i class="tow-point">:</i>
-                  <span class="time-item" v-if="timeData.seconds<10">{{ '0'+timeData.seconds }}</span>
+                  <span class="time-item" v-if="timeData.seconds < 10">{{
+                    "0" + timeData.seconds
+                  }}</span>
                   <span class="time-item" v-else>{{ timeData.seconds }}</span>
                 </template>
               </van-count-down>
@@ -104,7 +126,7 @@
         </router-link>
         <router-link class="center-item" to="/brandSpike" tag="li">
           <span class="center-title">品牌秒杀</span>
-          <span class="center-descr" style="color:#DD3749">笔记本秒杀</span>
+          <span class="center-descr" style="color: #dd3749">笔记本秒杀</span>
           <img src="../../assets/image/home/demo7.png" />
         </router-link>
         <router-link class="center-item" to="/newProductLaunch" tag="li">
@@ -114,7 +136,7 @@
         </router-link>
         <router-link class="center-item" to="/premiumRanking" tag="li">
           <span class="center-title">优品排行</span>
-          <span class="center-descr" style="color:#91C95B">榜上好物购</span>
+          <span class="center-descr" style="color: #91c95b">榜上好物购</span>
           <img src="../../assets/image/home/demo9.png" />
         </router-link>
       </ul>
@@ -157,32 +179,36 @@
         animated
       >
         <van-tab
-          v-for="(list,index) in tabArray.value"
+          v-for="(list, index) in tabArray.value"
           :title="list.describe"
           :name="list.type"
           :key="index"
         >
-          <div slot="title" class="slot-title">
-            <b class="tab-title">{{list.title}}</b>
-            <!-- <span class="tab-name">{{list.describe}}</span> -->
-            <span class="tab-name">{{list.name}}</span>
-          </div>
+          <template #title>
+            <div class="slot-title">
+              <b class="tab-title">{{ list.title }}</b>
+              <!-- <span class="tab-name">{{list.describe}}</span> -->
+              <span class="tab-name">{{ list.name }}</span>
+            </div>
+          </template>
 
           <section class="goods-box search-wrap">
             <ul class="goods-content">
-              <li v-for="(item,index) in list.list" :key="index">
+              <li v-for="(item, index) in list.list" :key="index">
                 <router-link class="goods-img" tag="div" to="/classify/product">
                   <img :src="item.img" />
                 </router-link>
                 <div class="goods-layout">
-                  <div class="goods-title">{{item.productName}}</div>
-                  <span class="goods-div">{{item.title}}</span>
+                  <div class="goods-title">{{ item.productName }}</div>
+                  <span class="goods-div">{{ item.title }}</span>
                   <div class="goods-desc">
                     <span class="goods-price">
-                      <i>{{item.productCnyPrice}}</i>
-                      <span class="force-value">{{item.forceValue}}倍算力</span>
+                      <i>{{ item.productCnyPrice }}</i>
+                      <span class="force-value"
+                        >{{ item.forceValue }}倍算力</span
+                      >
                     </span>
-                    <span class="add-icon" @click="addToCart($event,item)">
+                    <span class="add-icon" @click="addToCart($event, item)">
                       <svg-icon icon-class="add"></svg-icon>
                     </span>
                   </div>
@@ -194,86 +220,65 @@
       </van-tabs>
     </div>
     <div class="ballWrap">
-      <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @afterEnter="afterEnter"
+      >
         <div class="ball" v-if="show">
           <li class="inner">
-            <span class="cubeic-add" @click="addToCart($event,item)">
+            <span class="cubeic-add" @click="addToCart($event, item)">
               <svg-icon class="add-icon" icon-class="add"></svg-icon>
             </span>
           </li>
         </div>
       </transition>
     </div>
-    <tabbar></tabbar>
+    <!-- <tabbar></tabbar> -->
   </div>
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  watch,
-  getCurrentInstance,
-  onMounted,
-  computed,
-  toRefs
-} from "@vue/composition-api";
+import { ref, reactive, onMounted, toRefs } from "vue";
+import axios from "@/plugins/axios";
+// import Tabbat from "@/components/tabbar";
 export default {
   name: "home",
-  setup(props, { attrs, slots, parent, root, emit, refs }) { 
+  components: {
+    // Tabbat,
+  },
+  setup(props, context) {
     const active = ref("");
     const timeData = ref(36000000);
     const tabArray = reactive({ value: [] });
     const headerActive = ref(false);
     const homeImgs = reactive({
-      value: []
+      value: [],
     });
     const tabImgs = reactive({
-      value: []
+      value: [],
     });
-    const mySwiper = ref(null);
+
     const ball = reactive({
       show: false,
-      el: ""
+      el: "",
     });
-    const swiperOption = {
-      loop: true,
-      autoplay: false,
-      width: 480,
-      loadOnTransitionStart: true,
-      notNextTick: true, //notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-      direction: "horizontal", //水平方向移动
-      grabCursor: true, //鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状
-      setWrapperSize: true, //Swiper使用flexbox布局(display: flex)，开启这个设定会在Wrapper上添加等于slides相加的宽或高，在对flexbox布局的支持不是很好的浏览器中可能需要用到。
-      autoHeight: true, //自动高度。设置为true时，wrapper和container会随着当前slide的高度而发生变化
-      mousewheel: false, //开启鼠标滚轮控制Swiper切换。可设置鼠标选项，默认值false
-      mousewheelControl: false, //同上
-      height: window.innerHeight, // 高度设置，占满设备高度
-      resistanceRatio: 0, //抵抗率。边缘抵抗力的大小比例。值越小抵抗越大越难将slide拖离边缘，0时完全无法拖离。本业务需要
-      observeParents: true, //将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
-      observer: true, //修改swiper自己或子元素时，自动初始化swiper
-      touchRatio: 1, // 默认为1，按照1:1的触摸比例滑动。设置为0时，完全无法滑动
-      // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-      debugger: true,
-      slidesPerView: 2 //设置slider容器能够同时显示的slides数量(carousel模式)。可以设置为数字（可为小数，小数不可loop），或者 'auto'则自动根据slides的宽度来设定数量。loop模式下如果设置为'auto'还需要设置另外一个参数loopedSlides。
-    };
-    root.$http.get("http://test.happymmall.com/home/homeData").then(res => {
-      const { images, images2, tabList } = res.data;
+
+    axios.get("http://test.happymmall.com/home/homeData").then((res) => {
+      const { images, tabList } = res.data;
       tabArray.value = tabList;
       homeImgs.value = images;
-      tabImgs.value = images2;
     });
     onMounted(() => {
-      root.$eventBus.$emit("changeTag", 0);
-      mySwiper.value.swiper.slideTo(3, 1000, false);
-      window.addEventListener("scroll", pageScroll);
+      //   $eventBus.$emit("changeTag", 0);
+      //   window.addEventListener("scroll", pageScroll);
     });
     const addToCart = (event, tag) => {
-      root.$store.commit("cart/addToCart", tag);
+      //   root.$store.commit('cart/addToCart', tag)
       ball.show = true;
       ball.el = event.target;
     };
-    const beforeEnter = el => {
+    const beforeEnter = (el) => {
       const dom = ball.el;
       const rect = dom.getBoundingClientRect();
       const x = rect.left - window.innerWidth * 0.6;
@@ -285,20 +290,20 @@ export default {
     };
     const enter = (el, done) => {
       document.body.offsetHeight;
-      el.style.transform = `translate3d(0,0,0)`;
+      el.style.transform = "translate3d(0,0,0)";
       const inner = el.querySelector(".inner");
-      inner.style.transform = `translate3d(0,0,0)`;
+      inner.style.transform = "translate3d(0,0,0)";
       el.addEventListener("transitionend", done);
     };
-    const afterEnter = el => {
+    const afterEnter = (el) => {
       ball.show = false;
       el.style.display = "none";
     };
-    const handleClick = linkUrl => {
+    const handleClick = (linkUrl) => {
       root.$router.push("/classify/product");
     };
     const pageScroll = () => {
-      let scrollTop =
+      const scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
@@ -312,18 +317,15 @@ export default {
       tabArray,
       headerActive,
       homeImgs,
-      tabImgs,
       ...toRefs(ball),
-      mySwiper,
-      swiperOption,
       addToCart,
       beforeEnter,
       enter,
       afterEnter,
       handleClick,
-      pageScroll
+      pageScroll,
     };
-  }
+  },
 };
 </script>
 

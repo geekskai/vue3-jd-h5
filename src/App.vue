@@ -4,8 +4,8 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-02 15:52:38
- * @FilePath: /vue-jd-h5/src/App.vue
+ * @LastEditTime: 2020-12-28 00:36:36
+ * @FilePath: /refactor-with-vue3/src/App.vue
  -->
 <template>
   <div id="app">
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "App"
 };
 </script>
 <style lang="scss">

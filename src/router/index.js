@@ -1,81 +1,34 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-12-27 20:10:38
+ * @LastEditors: gankai
+ * @LastEditTime: 2020-12-27 20:41:27
+ * @FilePath: /refactor-with-vue3/src/router/index.js
+ */
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '@/views/home/index.vue'
 
-Vue.use(Router)
-
-
-
-let indexRouter = {
-  // 默认页面
-  path: '/',
-  component: () => import( /* webpackChunkName: "index" */ '@/views/index'),
-  redirect: '/index',
-  children: []
-}
-let routes = [
-  // 登录页面
-  // {
-  //   path: '/login',
-  //   name: 'login',
-  //   meta: {
-  //     index: 2
-  //   },
-  //   component: () => import( /* webpackChunkName: "login" */ '@/views/login/index')
-  // },
-  // // 注册页面
-  // {
-  //   path: '/register',
-  //   name: 'register',
-  //   meta: {
-  //     index: 2
-  //   },
-  //   component: () => import( /* webpackChunkName: "register" */ '@/views/register/index')
-  // },
-  // 无权限页面
+const routes = [
   {
-    path: '/nopermission',
-    name: 'nopermission',
-    meta: {
-      index: 1
-    },
-    component: () => import( /* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
-  },
-  {
-    path: '*',
-    name: '404',
-    meta: {
-      index: 1
-    },
-    component: () => import( /* webpackChunkName: "404" */ '@/views/error/404')
-  },
-  indexRouter
-]
-const routerContext = require.context('./modules', true, /\.js$/)
-routerContext.keys().forEach(route => {
-  const routerModule = routerContext(route)
-  /**
-   * 兼容 import export 和 require module.export 两种规范
-   */
-  indexRouter.children = [...indexRouter.children, ...(routerModule.default || routerModule)]
-})
-
-let router = new Router({
-  // mode: 'history',
-  base: process.env.BASE_URL,
-  routes: routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return {
-        x: 0,
-        y: 0
-      }
-    }
+    path: '/',
+    name: 'Home',
+    component: Home
   }
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // }
+]
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 })
 
-// router.beforeEach((to, from, next) => {
-
-// })
 export default router

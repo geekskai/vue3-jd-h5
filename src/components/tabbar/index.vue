@@ -48,10 +48,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
   name: "tabbar",
-  data() {
+  setup() {
     return {
       icon_home: {
         normal: require("@/assets/icons/tabbar/home.png"),
@@ -72,25 +72,25 @@ export default {
       active: 0
     };
   },
-  created() {
-    this.$eventBus.$on(
-      "changeTag",
-      tag => {
-        this.active = tag;
-      },
-      this
-    );
-  },
-  computed: {
-    ...mapState({
-      count: state => state.cart.count
-    })
-  },
-  methods: {
-    tabChange(active) {
-      console.log("==active=====>", active);
-    }
-  }
+  // setup() {
+  //   this.$eventBus.$on(
+  //     "changeTag",
+  //     tag => {
+  //       this.active = tag;
+  //     },
+  //     this
+  //   );
+  // },
+  // computed: {
+  //   ...mapState({
+  //     count: state => state.cart.count
+  //   })
+  // },
+  // methods: {
+  //   tabChange(active) {
+  //     console.log("==active=====>", active);
+  //   }
+  // }
 };
 </script>
 

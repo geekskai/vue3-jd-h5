@@ -14,26 +14,19 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  onMounted,
-  computed,
-  getCurrentInstance
-} from "@vue/composition-api";
+import { computed } from "vue";
 export default {
   name: "svg-icon",
   props: {
     iconClass: {
       type: String,
-      required: true
+      required: true,
     },
     className: {
-      type: String
-    }
+      type: String,
+    },
   },
   setup(initProps, setupContext) {
-    const ctx = getCurrentInstance();
     const iconName = computed(() => {
       return `#icon-${initProps.iconClass}`;
     });
@@ -46,9 +39,9 @@ export default {
     });
     return {
       iconName,
-      svgClass
+      svgClass,
     };
-  }
+  },
 };
 </script>
 

@@ -2,91 +2,34 @@
  * @version: v 1.0.0
  * @Github: https://github.com/GitHubGanKai
  * @Author: GitHubGanKai
- * @Date: 2020-04-29 22:08:12
+ * @Date: 2020-12-27 20:10:38
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-20 23:47:21
- * @FilePath: /vue-jd-h5/src/main.js
+ * @LastEditTime: 2020-12-28 00:10:06
+ * @FilePath: /refactor-with-vue3/src/main.js
  */
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router/index'
-import Vue3 from '@vue/composition-api'
-import store from './store/index'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */ )
-import './components'
-import 'amfe-flexible'
-import axios from './plugins/axios'
-Vue.use(axios)
+import router from './router'
+import store from './store'
+
+import SvgIcon from '@/components/SvgIcon'// svg组件
+import 'lib-flexible/flexible'
+
+import Vant from 'vant'
+import 'vant/lib/index.css' // 全局引入样式
+
 import './mock/mock'
-import '@/icons' // icon
-import EventBus from './utils/eventBus'
-Vue.use(EventBus)
-Vue.use(Vue3)
 
-// import Vconsole from 'vconsole'
-// if (process.env.NODE_ENV !== 'production') {
-//   const vConsole = new Vconsole()
-//   Vue.use(vConsole)
-// }
+// import EventBus from './utils/eventBus'
 
+// .use(EventBus)
 
-import {
-  DropdownMenu, DropdownItem,
-  Swipe,
-  Toast,
-  SwipeItem,
-  Button,
-  RadioGroup,
-  Radio,
-  Tabbar,
-  Tab,
-  Tabs,
-  CountDown,
-  Loading,
-  Switch,
-  TabbarItem,
-  NavBar,
-  GoodsAction,
-  GoodsActionIcon,
-  GoodsActionButton,
-  Search,
-  Lazyload,
-  Card,
-  Popup,
-  Dialog,
-  Picker,
-  Checkbox,
-  Area,
-  CheckboxGroup,
-  ActionSheet,
-  Field,
-  Uploader,
-  Cell,
-  Step,
-  Steps,
-  IndexBar,
-  IndexAnchor,
-  Tag,
-  CellGroup,
-  SubmitBar,
-  Stepper,
-  Collapse,
-  CollapseItem,
-  Divider,
-  Icon
-} from 'vant';
-Vue.use(Tabbar).use(TabbarItem).use(Button).use(NavBar).use(Search).use(Icon).use(Picker).use(ActionSheet).use(Field).use(Cell).use(CellGroup)
-  .use(Swipe).use(SwipeItem).use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Popup).use(Uploader).use(Dialog).use(Checkbox).use(CheckboxGroup)
-  .use(Switch).use(Step).use(Steps).use(Card).use(Stepper).use(SubmitBar).use(Tag).use(Toast).use(Area).use(IndexBar).use(IndexAnchor).use(Loading)
-  .use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Tab).use(Tabs).use(Divider).use(CountDown).use(DropdownMenu).use(DropdownItem);
+const app = createApp(App);
+
+app.use(Vant).use(store).use(router).mount('#app');
+app.component('svg-icon', SvgIcon);
 
 
-Vue.config.productionTip = false
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('./icons/svgs/', false, /\.svg$/)
+requireAll(req)
