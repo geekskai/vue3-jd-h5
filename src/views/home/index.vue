@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-12-27 20:41:48
  * @LastEditors: gankai
- * @LastEditTime: 2020-12-27 23:15:00
+ * @LastEditTime: 2021-01-01 15:52:58
  * @FilePath: /refactor-with-vue3/src/views/home/index.vue
 -->
 <template>
@@ -234,18 +234,18 @@
         </div>
       </transition>
     </div>
-    <!-- <tabbar></tabbar> -->
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import { ref, reactive, onMounted, toRefs } from "vue";
 import axios from "@/plugins/axios";
-// import Tabbat from "@/components/tabbar";
+import Tabbat from "@/components/tabbar";
 export default {
   name: "home",
   components: {
-    // Tabbat,
+    Tabbat,
   },
   setup(props, context) {
     const active = ref("");
@@ -270,6 +270,7 @@ export default {
       homeImgs.value = images;
     });
     onMounted(() => {
+       // TODO:
       //   $eventBus.$emit("changeTag", 0);
       //   window.addEventListener("scroll", pageScroll);
     });
