@@ -49,21 +49,21 @@ git clone https://github.com/GitHubGanKai/vue-jd-h5.git
 ```bash
 gankaideMacBook-Pro:vue-jd-h5 gankai$ git branch -a
   demo
-  demo_vue3
+  vue-composition-api
   dev
   feature
   gh-pages
 * master
   remotes/origin/HEAD -> origin/master
   remotes/origin/demo
-  remotes/origin/demo_vue3
+  remotes/origin/vue-composition-api
   remotes/origin/dev
   remotes/origin/feature
   remotes/origin/gh-pages
   remotes/origin/master
 ```
 
-3. 切换到分支**demo_vue3**开始进行开发！
+3. 切换到分支**vue-composition-api**开始进行开发！
 
 4. 在 IDEA 命令行中运行命令：npm install,下载相关依赖;
 
@@ -697,7 +697,7 @@ vue3中，新增 `Composition API`。而且新的`API`兼容 `Vue2.x`，只需�
 
 ## 抱歉
 
-⚠️本项目当前只修改了分支**demo_vue3**下的  `src/views/home/index.vue`和`src/views/classify/index.vue`这两个文件，但是，其他的修改也都一样，如果有兴趣的小伙伴可以自己fork过去，将其他页面也用Composition API3写一遍，自己练练手！熟悉一下新API，同时我也会将其他的页面慢慢完善起来！大家一起⛽️加油！当官方正式发布版本之后，我们可以快速上手！希望和大家江湖再见！
+⚠️本项目当前只修改了分支**vue-composition-api**下的  `src/views/home/index.vue`和`src/views/classify/index.vue`这两个文件，但是，其他的修改也都一样，如果有兴趣的小伙伴可以自己fork过去，将其他页面也用Composition API3写一遍，自己练练手！熟悉一下新API，同时我也会将其他的页面慢慢完善起来！大家一起⛽️加油！当官方正式发布版本之后，我们可以快速上手！希望和大家江湖再见！
 
 
 
