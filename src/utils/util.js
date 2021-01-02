@@ -10,11 +10,11 @@ export const getStore = name => {
   return JSON.parse(localStorage.getItem(name))
 }
 
-export function removeSpace (value) {
+export function removeSpace(value) {
   return value.replace(/\s+/g, '')
 }
 
-export function formValidate (val, type) {
+export function formValidate(val, type) {
   const phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
   const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/
   if (val === '') {
@@ -34,36 +34,13 @@ export function formValidate (val, type) {
 }
 
 // 获取url参数
-export function getUrlKey (name) {
+export function getUrlKey(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')) || null
 }
 
 // 数组去重
-export function dedupe (array) {
+export function dedupe(array) {
   return Array.from(new Set(array))
-}
-
-// 去除重复对象
-export function dedupeObject (obj) {
-  var uniques = []
-  var stringify = {}
-  for (var i = 0; i < obj.length; i++) {
-    var keys = Object.keys(obj[i])
-    keys.sort(function (a, b) {
-      return (Number(a) - Number(b))
-    })
-    var str = ''
-    for (var j = 0; j < keys.length; j++) {
-      str += JSON.stringify(keys[j])
-      str += JSON.stringify(obj[i][keys[j]])
-    }
-    if (!stringify.hasOwnProperty(str)) {
-      uniques.push(obj[i])
-      stringify[str] = true
-    }
-  }
-  uniques = uniques
-  return uniques
 }
 
 export const ModalHelper = ((bodyCls) => {

@@ -2,7 +2,7 @@
   <div class="product-layout">
     <van-swipe :autoplay="3000" :height="350">
       <van-swipe-item v-for="(image, index) in productImgs" :key="index">
-        <img class="lazy_img" v-if="image.imgUrl" v-lazy="image.imgUrl" />
+        <img v-if="image.imgUrl" :src="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
 
@@ -35,7 +35,6 @@
       <li class="product-title">
         <div class="text-left">
           <span class="force-value">0.5倍算力</span>
-          <span class="item-desc">{{ detailForm.name }}</span>
         </div>
         <div>
           <span class="heart-full" @click="isLike = !isLike">
@@ -54,20 +53,9 @@
       </li>
 
       <li class="item-info">
-        <van-field
-          label="发货地"
-          disabled
-          :placeholder="detailForm.productArea"
-        >
-          <span slot="left-icon" class="anchor-point">
-            <svg-icon icon-class="anchor-point"></svg-icon>
-          </span>
-        </van-field>
+        <van-field label="发货地" left-icon="location-o" disabled> </van-field>
       </li>
-      <li class="item-info">
-        <van-field label="品牌" disabled :placeholder="detailForm.brandName" />
-      </li>
-      <li class="item-info" @click="show = true">
+      <li class="item-info" @click="showPopup">
         <van-field
           label="选择"
           disabled
@@ -93,15 +81,10 @@
     </ul>
     <div class="item-details">
       <span @click="handleViewDetail">宝贝详情</span>
-      <div
-        v-html="detailForm.appintroduce"
-        v-show="showDetail"
-        class="html-class"
-      ></div>
     </div>
     <van-popup
       class="select-popup"
-      v-model="show"
+      v-model:show="show"
       round
       position="bottom"
       :style="{ height: '75%' }"
@@ -111,7 +94,7 @@
           <svg-icon icon-class="close-popup"></svg-icon>
         </span>
         <ul class="popup-top">
-          <img :src="imgSrc" />
+          <img src="http://gankai.gitee.io/vue-jd-h5/img/test2.f21b029b.png" />
           <li class="item-specification">
             <span class="item-price">￥568</span>
             <span class="item-count">库存2279件</span>
@@ -124,8 +107,8 @@
             <div class="color-list">
               <span
                 class="color-tag"
-                :class="{ active: item.selected }"
                 v-for="(item, index) in listData"
+                :class="{ active: item.selected }"
                 :key="index"
                 @click="handleSelected(item)"
               >
@@ -158,89 +141,95 @@
         </ul>
       </section>
       <div class="product-footer">
-        <van-goods-action>
-          <van-goods-action-button
+        <van-action-bar>
+          <van-action-bar-button
             @click="handleAddToCart"
             type="warning"
             text="加入购物车"
           />
-          <van-goods-action-button
+          <van-action-bar-button
             type="danger"
             @click="handleToBuy"
             text="立即购买"
           />
-        </van-goods-action>
+        </van-action-bar>
       </div>
     </van-popup>
     <div class="product-footer">
-      <van-goods-action>
-        <van-goods-action-button
+      <van-action-bar>
+        <van-action-bar-button
           @click="handleAddToCart"
           type="warning"
           text="加入购物车"
         />
-        <van-goods-action-button
+        <van-action-bar-button
           type="danger"
           @click="handleToBuy"
           text="立即购买"
         />
-      </van-goods-action>
+      </van-action-bar>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, reactive, onMounted, computed, toRefs } from "vue";
+import { ref, reactive, onMounted, toRefs, getCurrentInstance } from "vue";
+import { useRouter } from "vue-router";
 export default {
   name: "product",
 
   setup() {
+    const { ctx } = getCurrentInstance();
     const show = ref(false);
+    const $router = useRouter();
     const showDetail = ref(false);
-    const detailForm = reactive({
-      value: []
-    });
-    const isSpike = ref(false);
-    const isLike = ref(false);
-    const current = ref(0);
-    const stepperValue = ref("");
-    const productImgs = reactive({
-      value: []
-    });
-    const imgSrc = ref(require("../../assets/image/home/test2.png"));
-    const listData = reactive({
-      value: [
+
+    let productImgs = [];
+
+    const state = reactive({
+      listData: [
         {
-          imgSrc: require("../../assets/image/home/store3.png"),
+          imgSrc: "http://gankai.gitee.io/vue-jd-h5/img/store3.cc632dc8.png",
           colorName: "黑色",
           selected: false
         },
         {
-          imgSrc: require("../../assets/image/home/store3.png"),
+          imgSrc: "http://gankai.gitee.io/vue-jd-h5/img/store3.cc632dc8.png",
           colorName: "黑色",
           selected: false
         },
         {
-          imgSrc: require("../../assets/image/home/store3.png"),
+          imgSrc: "http://gankai.gitee.io/vue-jd-h5/img/store3.cc632dc8.png",
           colorName: "黑色",
           selected: false
         },
         {
-          imgSrc: require("../../assets/image/home/store3.png"),
+          imgSrc: "http://gankai.gitee.io/vue-jd-h5/img/store3.cc632dc8.png",
           colorName: "黑色",
           selected: false
         },
         {
-          imgSrc: require("../../assets/image/home/store3.png"),
+          imgSrc: "http://gankai.gitee.io/vue-jd-h5/img/store3.cc632dc8.png",
           colorName: "黑色",
           selected: false
         }
       ]
     });
 
-    root.$http.get("http://test.happymmall.com/home/remderImg").then(res => {
-      const { productImages } = res.data;
-      let i = Math.floor(Math.random() * 6);
+    const isSpike = ref(false);
+    const isLike = ref(false);
+    const current = ref(0);
+    const stepperValue = ref("");
+    const showPopup = () => {
+      show.value = true;
+    };
+
+    onMounted(async () => {
+      const { data } = await ctx.$http.get(
+        "http://test.happymmall.com/home/remderImg"
+      );
+      const { productImages } = data;
+      const i = Math.floor(Math.random() * 6);
       productImgs = productImages[i];
     });
 
@@ -248,38 +237,38 @@ export default {
       showDetail.value = true;
     };
     const handleToBuy = () => {
-      root.$router.push("/order/orderDetail");
+      $router.push("/order/orderDetail");
     };
     const handleAddToCart = () => {
-      root.$toast.success({
+      ctx.$toast.success({
         message: "添加成功~",
         duration: 1500,
         icon: "like-o"
       });
     };
+
     const handleSelected = item => {
       item.selected = true;
-      listData.value.map(it => {
+      state.listData.map(it => {
         it == item ? (it.selected = true) : (it.selected = false);
       });
     };
     const handleStoreName = () => {
-      root.$router.push("/storeDetail");
+      $router.push("/storeDetail");
     };
     const handleConnectStore = () => {
-      root.$router.push("/storeDetail");
+      $router.push("/storeDetail");
     };
     return {
+      ...toRefs(state),
       productImgs,
-      listData,
-      imgSrc,
       stepperValue,
       current,
       isLike,
       isSpike,
-      detailForm,
       showDetail,
       show,
+      showPopup,
       handleViewDetail,
       handleAddToCart,
       handleConnectStore,
@@ -513,6 +502,7 @@ export default {
   .select-popup {
     padding: 20px;
     .popup-content {
+      padding: 15px;
       .close-icon {
         float: right;
       }

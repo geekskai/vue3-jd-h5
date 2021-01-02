@@ -4,15 +4,13 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-12-28 00:36:36
+ * @LastEditTime: 2021-01-02 14:32:14
  * @FilePath: /refactor-with-vue3/src/App.vue
  -->
 <template>
-  <div id="app">
-    <keep-alive>
-      <router-view />
-    </keep-alive>
-  </div>
+  <keep-alive>
+    <router-view />
+  </keep-alive>
 </template>
 
 <script>

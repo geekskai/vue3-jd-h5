@@ -59,16 +59,17 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "MyFocus", // 我的关注
-  data() {
+  setup() {
+    const active = ref("1");
+    const isLike = ref(true);
     return {
-      active: "1",
-      isLike: true
+      active,
+      isLike
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

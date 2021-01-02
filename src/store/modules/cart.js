@@ -1,7 +1,7 @@
 const state = {
   items: [],
   name: 'test',
-  count:0,
+  count: 0,
   // cartArray: JSON.parse(localStorage.getItem('cartArray')) || [],
   checkoutStatus: null
 }

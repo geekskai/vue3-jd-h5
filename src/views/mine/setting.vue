@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:05:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 16:39:20
+ * @FilePath: /refactor-with-vue3/src/views/mine/setting.vue
+-->
 <template>
   <div class="setting-page">
     <header class="page-header">
@@ -26,21 +35,15 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "Setting",
-
-  components: {},
-  props: {},
-  data() {
+  setup() {
+    const checked = ref(false);
     return {
-      checked: false
+      checked
     };
-  },
-  methods: {},
-  computed: {},
-  created() {},
-  mounted() {},
-  watch: {}
+  }
 };
 </script>
 

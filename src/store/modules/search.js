@@ -1,10 +1,10 @@
-import { setStore, dedupeObject } from "../../utils/util";
+import { setStore } from "../../utils/util";
 const state = {
   searchHistory: []
 }
 const getters = {}
 const mutations = {
-  addHistory(state, searchHistory){
+  addHistory(state, searchHistory) {
     state.searchHistory.unshift(searchHistory)
   },
   setHistory(state, searchHistory) {
@@ -13,9 +13,6 @@ const mutations = {
   },
 }
 const actions = {}
-
-
-
 
 export default {
   namespaced: true,

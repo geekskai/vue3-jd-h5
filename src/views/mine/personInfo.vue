@@ -61,19 +61,22 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "personInfo",
-  data() {
-    return {
-      show: false,
-      name: ""
+  setup() {
+    const show = ref(false);
+    const name = ref("");
+
+    const handlePhone = () => {
+      show.value = true;
     };
-  },
-  created() {},
-  methods: {
-    handlePhone() {
-      this.show = true;
-    }
+    
+    return {
+      show,
+      name,
+      handlePhone
+    };
   }
 };
 </script>

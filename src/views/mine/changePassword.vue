@@ -5,7 +5,6 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">修改密码</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -35,15 +34,15 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "changePassword",
-  data() {
+  setup() {
+    const value = ref("");
     return {
-      value: ""
+      value
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

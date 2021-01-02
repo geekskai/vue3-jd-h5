@@ -311,38 +311,46 @@
 </template>
 
 <script>
-import ListScroll from "../../components/scroll/ListScroll";
+import ListScroll from "@/components/scroll/ListScroll";
+import { getCurrentInstance, onMounted, reactive, ref, toRefs } from "vue";
 export default {
   name: "Order",
   components: {
     ListScroll
   },
-  data() {
-    return {
-      orderType: 1,
+  setup() {
+    const orderType = ref(1);
+    const { ctx } = getCurrentInstance();
+
+    const searchWrap = ref(null);
+    const setSearchWrapWidth = () => {
+      const { clientWidth } = document.documentElement;
+      searchWrap.value.style.width = clientWidth + 100 + "px";
+    };
+
+    const selectTag = e => {
+      orderType.value = parseInt(e.currentTarget.getAttribute("data-type"));
+    };
+
+    const state = reactive({
       categoryData: []
+    });
+
+    onMounted(() => {
+      setSearchWrapWidth();
+      ctx.$eventBus.$emit("changeTag", 1);
+    });
+
+    return {
+      orderType,
+      setSearchWrapWidth,
+      selectTag,
+      searchWrap,
+      ...toRefs(categoryData)
     };
   },
-  created() {},
-  mounted() {
-    this.setSearchWrapWidth();
-    // TODO:
-    // this.$eventBus.$emit("changeTag", 1);
-  },
-  methods: {
-    setSearchWrapWidth() {
-      let $screenWidth = document.documentElement.clientWidth;
-      this.$refs.searchWrap.style.width = $screenWidth + 100 + "px";
-    },
-    selectTag(e) {
-      let $type = parseInt(e.currentTarget.getAttribute("data-type"));
-      this.orderType = $type;
-      // this.$router.replace('./order-list?orderType='+$type)
-      // this.orderList = []
-      // this.emptyMsg = ''
-      // this.getOrderList()
-    }
-  }
+
+  methods: {}
 };
 </script>
 

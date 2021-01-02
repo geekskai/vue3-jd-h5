@@ -82,30 +82,30 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default: false,
+      default: false
     },
     defaultData: {
       type: Array,
       default() {
         return [];
-      },
+      }
     },
     columns: {
       type: Number,
-      default: 1,
+      default: 1
     },
     link: {
       type: Boolean,
-      default: false,
+      default: false
     },
     selectData: {
       type: Object,
-      default: {},
+      default: {}
     },
     isRemember: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
@@ -116,18 +116,18 @@ export default {
       selects: {
         select1: "",
         select2: "",
-        select3: "",
+        select3: ""
       },
       noData: false,
-      isOpened: 0,
+      isOpened: 0
     };
   },
   methods: {
-    close: function (e) {
+    close: function(e) {
       this.$emit("cancel");
       e.preventDefault();
     },
-    finish: function (e) {
+    finish: function(e) {
       this.$emit("confirm", JSON.parse(JSON.stringify(this.selects)));
       e.preventDefault();
     },
@@ -217,7 +217,7 @@ export default {
         stopGear = true;
       }
       clearInterval(target["int_" + target.id]);
-      target["int_" + target.id] = setInterval(function () {
+      target["int_" + target.id] = setInterval(function() {
         var pos = target["pos_" + target.id];
         var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
         pos += speed;
@@ -399,25 +399,25 @@ export default {
         this.selects.select2 = this.pData2[0];
         this.selects.select3 = this.pData3[0];
       }
-    },
+    }
   },
   mounted() {
     this.init();
   },
   watch: {
     selectData: {
-      handler: function () {
+      handler: function() {
         this.init();
       },
-      deep: true,
+      deep: true
     },
     show(val) {
       if (val) {
         this.isOpened += 1;
         this.setTop(this.defaultData || []);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,3 +1,12 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:19:50
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 13:41:13
+ * @FilePath: /refactor-with-vue3/src/plugins/axios.js
+ */
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
@@ -42,8 +51,8 @@ const errorHandle = (status, other) => {
     case 401:
       toLogin()
       break
-      // 403 token过期
-      // 清除token并跳转登录页
+    // 403 token过期
+    // 清除token并跳转登录页
     case 403:
       tip('登录过期，请重新登录')
       localStorage.removeItem('token')
@@ -52,7 +61,7 @@ const errorHandle = (status, other) => {
         toLogin()
       }, 1000)
       break
-      // 404请求不存在
+    // 404请求不存在
     case 404:
       tip('请求的资源不存在')
       break
@@ -109,5 +118,9 @@ instance.interceptors.response.use(
     }
   })
 
-  export default instance
+export default {
+  install(app) {
+    app.config.globalProperties.$http = instance
+  }
+};
 

@@ -75,129 +75,6 @@
               </li>
             </ul>
           </section>
-
-          <!-- <ul class="list-item">
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo0.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-            <li class="card-item">
-              <div class="card-img">
-                <img src="../../assets/image/premiumRanking/demo1.png" />
-              </div>
-              <ul class="card-info">
-                <li class="info-top">
-                  <div class="item-title">高解析度无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳无线蓝牙降噪 头戴耳</div>
-                  <span class="item-desc">正品大牌 产家直营</span>
-                </li>
-                <li>
-                  <p class="item-price">¥1988</p>
-                  <span class="item-hot">
-                    <span class="hot-text">热卖指数</span>
-                    <span class="hot-index">
-                      <i>99</i>
-                    </span>
-                  </span>
-                </li>
-              </ul>
-            </li>
-          </ul>-->
         </van-tab>
       </van-tabs>
     </section>
@@ -255,17 +132,18 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "LoveShop", // 爱逛好店
-  data() {
+  setup() {
+    const active = ref("1");
+    const show = ref(false);
     return {
-      active: "1",
-      show: false,
+      active,
+      show,
       tabList: ["链猫好店", "有趣好店", "品牌店", "发现好店"]
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

@@ -12,11 +12,9 @@
 <script>
 export default {
   name: "setInfo",
-  data() {
+  setup() {
     return {};
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

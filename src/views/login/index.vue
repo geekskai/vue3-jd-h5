@@ -43,20 +43,28 @@
 </template>
 
 <script>
+import { reactive, getCurrentInstance } from "vue";
+import { useRouter } from "vue-router";
 export default {
   name: "login",
-  data() {
+
+  setup() {
+    const $router = useRouter();
+    const { ctx } = getCurrentInstance();
+    const loginForm = reactive({
+      emailPhone: "",
+      password: ""
+    });
+    const handleUserLogin = () => {};
+    const handleUserRegister = () => {};
+
     return {
-      loginForm: {
-        emailPhone: "",
-        password: ""
-      }
+      $router,
+      loginForm,
+      handleUserRegister,
+      $toast: ctx.$toast,
+      handleUserLogin
     };
-  },
-  created() {},
-  methods: {
-    handleUserLogin() {},
-    handleUserRegister() {}
   }
 };
 </script>
