@@ -196,27 +196,27 @@
 </template>
 
 <script>
+import { ref, onMounted, getCurrentInstance } from "vue";
 export default {
-  name: "",
-  data() {
-    return {
-      show: false,
-      columns: 1
+  name: "mine",
+  setup() {
+    const show = ref(false);
+    const columns = ref(1);
+    const { ctx } = getCurrentInstance();
+
+    const handleClose = () => {
+      show.value = false;
     };
-  },
-  created() {},
-  computed: {},
-  mounted() {
-    //   TODO:
-    // this.$eventBus.$emit("changeTag", 3);
-  },
-  methods: {
-    handleClose() {
-      this.show = false;
-    },
-    toShow() {
-      this.show = true;
-    }
+
+    const toShow = () => {
+      show.value = true;
+    };
+
+    onMounted(() => {
+      ctx.$eventBus.$emit("changeTag", 3);
+    });
+
+    return { show, columns, toShow, handleClose };
   }
 };
 </script>

@@ -5,7 +5,6 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">忘记密码</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
@@ -21,14 +20,10 @@
           </div>
         </li>
         <li class="address-item">
-          <!-- <div class="address-name"> -->
           <van-field v-model="value" placeholder="设置登录密码" />
-          <!-- </div> -->
         </li>
         <li class="address-item">
-          <!-- <div class="address-name"> -->
           <van-field v-model="value" placeholder="重复登录密码" />
-          <!-- </div> -->
         </li>
       </ul>
     </section>
@@ -42,15 +37,15 @@
 </template>
 
 <script>
+import { ref } from "vue";
 export default {
   name: "forgetPassword",
-  data() {
+  setup() {
+    const value = ref();
     return {
-      value: ""
+      value
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

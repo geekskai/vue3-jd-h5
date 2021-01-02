@@ -17,6 +17,7 @@
       width: 88px;
       height: 100%;
       overflow: hidden;
+      overflow-y: scroll;
       .nav-side {
         width: 100%;
         @include boxSizing;

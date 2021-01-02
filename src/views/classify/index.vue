@@ -5,7 +5,7 @@
       <list-scroll class="nav-side-wrapper">
         <ul class="nav-side">
           <li
-            v-for="(item, index) in categoryDatas.value"
+            v-for="(item, index) in categoryDatas"
             :key="index"
             :class="{ active: currentIndex === index }"
             @click="selectMenu(index)"
@@ -18,7 +18,7 @@
       <list-scroll class="search-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <template v-for="(category, index) in categoryDatas.value">
+            <template v-for="(category, index) in categoryDatas">
               <div
                 class="swiper-slide"
                 :key="index"
@@ -56,49 +56,52 @@
 
 <script>
 import ListScroll from "@/components/scroll/ListScroll";
-import { ref, reactive, onMounted, computed, toRefs } from "vue";
+import { ref, reactive, onMounted, toRefs, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
-import axios from "@/plugins/axios";
 
 export default {
   name: "classify",
   components: {
     ListScroll
   },
-  async setup(props) {
+  setup(props) {
+    
+    const { ctx } = getCurrentInstance();
     const $router = useRouter();
-    const tags = ref([]);
-    const currentIndex = ref(0);
-    const searchWrap = ref(null);
-    const categoryDatas = reactive({ value: [] });
 
-    const { data } = await axios.get(
-      "http://test.happymmall.com/category/categoryData"
-    );
-    const { categoryData } = data;
-    categoryDatas.value = categoryData;
+    const searchWrap = ref(null);
+
+    const state = reactive({
+      categoryDatas: [],
+      currentIndex: 0
+    });
 
     const selectMenu = index => {
-      currentIndex.value = index;
+      state.currentIndex = index;
     };
 
     const setSearchWrapHeight = () => {
       const { clientHeight } = document.documentElement;
       searchWrap.value.style.height = clientHeight - 100 + "px";
     };
+
     const selectProduct = sku => {
       $router.push({ path: "/classify/recommend", query: { sku } });
     };
-    onMounted(() => {
+
+    onMounted(async () => {
       setSearchWrapHeight();
-      // TODO:
-      // root.$eventBus.$emit("changeTag", 1);
+      ctx.$eventBus.$emit("changeTag", 1);
+      const { data } = await ctx.$http.get(
+        "http://test.happymmall.com/category/categoryData"
+      );
+      const { categoryData } = data;
+      state.categoryDatas = categoryData;
     });
+
     return {
-      tags,
-      currentIndex,
       searchWrap,
-      categoryDatas,
+      ...toRefs(state),
       selectProduct,
       selectMenu
     };

@@ -4,8 +4,8 @@
  * @Author: GitHubGanKai
  * @Date: 2020-04-29 22:08:12
  * @LastEditors: gankai
- * @LastEditTime: 2020-05-02 23:58:59
- * @FilePath: /vue-jd-h5/src/components/SvgIcon/index.vue
+ * @LastEditTime: 2021-01-02 20:34:09
+ * @FilePath: /refactor-with-vue3/src/components/SvgIcon/index.vue
  -->
 <template>
   <svg :class="svgClass" aria-hidden="true">
@@ -14,13 +14,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  onMounted,
-  computed,
-  getCurrentInstance
-} from "vue";
+import { ref, reactive, onMounted, computed, getCurrentInstance } from "vue";
 export default {
   name: "svg-icon",
   props: {

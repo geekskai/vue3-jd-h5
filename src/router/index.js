@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-12-27 20:10:38
  * @LastEditors: gankai
- * @LastEditTime: 2021-01-01 15:57:36
+ * @LastEditTime: 2021-01-02 15:25:39
  * @FilePath: /refactor-with-vue3/src/router/index.js
  */
 import { createRouter, createWebHistory } from 'vue-router'
@@ -38,14 +38,6 @@ const routes = [
     component: () => import( /* webpackChunkName: "404" */ '@/views/error/404')
   },
 ]
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Home',
-//     component: Home
-//   }
-// ]
 
 const routerContext = require.context('./modules', true, /\.js$/)
 routerContext.keys().forEach(route => {

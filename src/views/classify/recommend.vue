@@ -17,18 +17,14 @@
 
     <section class="recommend-classify" ref="wrapper">
       <list-scroll
-        :scroll-data="likeList.value"
+        :scroll-data="likeList"
         class="likeList"
         :pullup="true"
         @scrollToEnd="handleScrollToEnd"
         :pulldown="true"
       >
         <div>
-          <ul
-            class="like-list"
-            v-for="(item, index) in likeList.value"
-            :key="index"
-          >
+          <ul class="like-list" v-for="(item, index) in likeList" :key="index">
             <li class="like-item" @click="handleToDetail(item)">
               <img class="item-picture" v-lazy="item.imagePath" />
               <div class="item-detail">
@@ -56,27 +52,26 @@
 <script>
 import ListScroll from "@/components/scroll/ListScroll";
 import { useRouter } from "vue-router";
-import { reactive, ref, onMounted } from "vue";
-import axios from "@/plugins/axios";
+import { reactive, ref, onMounted, getCurrentInstance, toRef } from "vue";
+
 export default {
   name: "recommend",
   components: {
     ListScroll
   },
-  async setup() {
-    const likeList = reactive({ value: [] });
+  setup() {
+    const { ctx } = getCurrentInstance();
+    const state = reactive({
+      likeList: [],
+      page: 1
+    });
+
     const $router = useRouter();
     const page = ref(1);
     const wrapper = ref(null);
 
-    const { data } = await axios.get(
-      "http://test.happymmall.com/home/recommend"
-    );
-    const { data: likes } = data;
-    likeList.value = likes;
-
     const handleScrollToEnd = () => {
-      page.value++;
+      state.page++;
       fetchData();
     };
 
@@ -91,12 +86,11 @@ export default {
       });
     };
 
-    const fetchData = () => {
-      axios
-        .get(`/api/goods/list?page=${page.value}&size=15`)
-        .then(({ data }) => {
-          likeList.value.push(...data);
-        });
+    const fetchData = async () => {
+      const { data } = await ctx.$http.get(
+        `/api/goods/list?page=${page.value}&size=15`
+      );
+      state.likeList.push(...data);
     };
 
     const handleSearch = () => {
@@ -108,14 +102,18 @@ export default {
       wrapper.value.style.height = clientHeight - 90 + "px";
     };
 
-    onMounted(() => {
+    onMounted(async () => {
       setWrapHeight();
+      const { data } = await ctx.$http.get(
+        "http://test.happymmall.com/home/recommend"
+      );
+      const { data: likes } = data;
+      state.likeList = likes;
     });
 
     return {
       wrapper,
-      likeList,
-      page,
+      ...toRefs(state),
       handleScrollToEnd,
       handleToDetail,
       handleSearch,

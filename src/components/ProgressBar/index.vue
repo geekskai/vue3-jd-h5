@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:19:50
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 20:33:51
+ * @FilePath: /refactor-with-vue3/src/components/ProgressBar/index.vue
+-->
 <template>
   <div class="progress-bar-box">
     <div class="progress-bar">
@@ -17,8 +26,8 @@ export default {
   },
   created() {},
   methods: {
-    processbar() {},
-  },
+    processbar() {}
+  }
 };
 </script>
 

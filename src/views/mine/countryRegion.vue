@@ -3,7 +3,7 @@
     <header class="header-box">
       <div class="header-search">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="./search"
+        <router-link tag="span" class="search-title" to="/search"
           >搜索</router-link
         >
       </div>
@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "countryRegion",
-  data() {
+  setup() {
     return {
       indexList: [
         "G",
@@ -63,9 +63,7 @@ export default {
         "E"
       ]
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

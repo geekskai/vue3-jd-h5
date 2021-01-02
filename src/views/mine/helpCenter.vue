@@ -26,7 +26,7 @@
           <span>产品帮助</span>
         </li>
         <li class="option-item">
-          <van-collapse v-model="activeNames" class="collapse-box">
+          <van-collapse v-model="activeNames.values" class="collapse-box">
             <van-collapse-item title="会员帮助" name="1">
               <template>
                 <li class="help-item">如何修改登录密码？</li>
@@ -72,15 +72,15 @@
 </template>
 
 <script>
+import { reactive } from "vue";
 export default {
   name: "helpCenter",
-  data() {
+  setup() {
+    const activeNames = reactive({ values: ["1"] });
     return {
-      activeNames: ["1"]
+      activeNames
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

@@ -2,11 +2,12 @@
  * @version: v 1.0.0
  * @Github: https://github.com/GitHubGanKai
  * @Author: GitHubGanKai
- * @Date: 2020-12-27 20:10:38
+ * @Date: 2021-01-01 17:19:50
  * @LastEditors: gankai
- * @LastEditTime: 2021-01-01 14:38:31
+ * @LastEditTime: 2021-01-02 20:35:02
  * @FilePath: /refactor-with-vue3/src/store/index.js
  */
+
 import { createStore } from 'vuex'
 
 import cart from './modules/cart'

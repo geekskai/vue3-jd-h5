@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:19:50
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 20:33:24
+ * @FilePath: /refactor-with-vue3/src/components/popup/index.vue
+-->
 <template>
   <div class="popup" v-show="popupShow">
     <div class="popup-content">
@@ -21,12 +30,12 @@ export default {
   props: {
     popupShow: {
       type: Boolean,
-      default: false,
+      default: false
     },
     popupTitle: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   methods: {
     cancelPopup() {
@@ -34,8 +43,8 @@ export default {
     },
     confirmPopup() {
       this.$emit("confirmPopup");
-    },
-  },
+    }
+  }
 };
 </script>
 

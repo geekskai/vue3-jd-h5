@@ -13,34 +13,24 @@
           <span class="node-text">分享节点</span>
         </li>
         <router-link tag="li" to="/node/areaNode" class="list-item">
-          <!-- <li class="list-item"> -->
           <img src="../../assets/image/product/area-node.png" />
           <span class="node-text">区域节点</span>
-          <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/cityNode" class="list-item">
-          <!-- <li class="list-item" @click="toShow"> -->
           <img src="../../assets/image/product/municipal-node.png" />
           <span class="node-text">城市节点</span>
-          <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/stateNode" class="list-item">
-          <!-- <li class="list-item" @click="toShow"> -->
           <img src="../../assets/image/product/state-node.png" />
           <span class="node-text">州级节点</span>
-          <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/industryNode" class="list-item">
-          <!-- <li class="list-item" @click="toShow"> -->
           <img src="../../assets/image/product/industry-node.png" />
           <span class="node-text">行业节点</span>
-          <!-- </li> -->
         </router-link>
         <router-link tag="li" to="/node/superNode" class="list-item">
-          <!-- <li class="list-item" @click="toShow"> -->
           <img src="../../assets/image/product/super-node.png" />
           <span class="node-text">超级节点</span>
-          <!-- </li> -->
         </router-link>
       </ul>
     </main>
@@ -66,7 +56,6 @@
         <li class="coin-pay">
           <div>
             <label>支付</label>
-            <!-- <label>xxxx</label> -->
           </div>
           <span
             @click="handleShow"

@@ -193,14 +193,12 @@
 <script>
 export default {
   name: "BrandSpike", // 品牌秒杀
-  data() {
+  setup() {
     return {
       active: "1",
       tabList: ["秒杀", "疯抢", "生活电器", "家居软饰", "平板电视"]
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

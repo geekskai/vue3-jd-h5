@@ -132,49 +132,59 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
   name: "FoundGoodGoods", // 发现好货
-  data() {
+  setup() {
+    const $router = useRouter();
+    const active = ref("1");
+    const droplist = ref(null);
+    const show = ref(false);
+    const isLike = ref(false);
+
+    const handleMyFocus = () => {
+      $router.push("/myFocus");
+    };
+
+    const handleMeun = () => {
+      droplist.value.show();
+    };
+
+    const handleShare = () => {
+      show.value = true;
+    };
+
+    const hidden = () => {
+      droplist.value.hidden();
+    };
+
     return {
-      active: "1",
-      show: false,
-      isLike: false,
+      handleMeun,
+      active,
+      show,
+      $router,
+      isLike,
+      droplist,
       configData: {
         position: {
-          // 设置显示位置，position
           top: "60px",
           right: "8px",
           bottom: "",
           left: ""
         },
-        width: "33%", // 设置宽度
+        width: "33%",
         list: [
-          // 设置下拉列表数据和对应的点击事件
           { text: "分享", icon: "share-btn-black", action: this.handleShare },
           {
             text: "我的关注",
             icon: "heart-null-black",
-            action: this.handleMyFocus
+            action: handleMyFocus
           }
         ]
       },
       tabList: ["推荐", "生活家", "数码控", "手机控", "时髦精", "型男精"]
     };
-  },
-  created() {},
-  methods: {
-    handleMeun() {
-      this.$refs.droplist.show();
-    },
-    handleMyFocus() {
-      this.$router.push("/myFocus");
-    },
-    handleShare() {
-      this.show = true;
-    },
-    hidden() {
-      this.$refs.droplist.hidden();
-    }
   }
 };
 </script>

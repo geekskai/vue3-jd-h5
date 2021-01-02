@@ -2,16 +2,10 @@
   <div class="shop-cart">
     <header class="page-header">
       <div class="header-content">购物车</div>
-      <span
-        v-if="cartMode === false"
-        class="appeal-record"
-        @click="cartMode = true"
+      <span v-if="cartMode === false" class="appeal-record" @click="setCartMode"
         >完成</span
       >
-      <span
-        v-if="cartMode === true"
-        class="appeal-record"
-        @click="cartMode = false"
+      <span v-if="cartMode === true" class="appeal-record" @click="setCartMode"
         >编辑</span
       >
     </header>
@@ -157,13 +151,66 @@
 </template>
 
 <script>
+import { onMounted, ref, getCurrentInstance } from "vue";
+import { useRouter } from 'vue-router';
 export default {
   name: "shopCart",
-  data() {
+  setup() {
+    useRouter
+    const { ctx } = getCurrentInstance();
+    const $router = useRouter();
+
+    const clearCart = ref(false);
+    const columns = ref(1);
+    const cartMode = ref(true);
+    const show = ref(false);
+    const checked = ref(false);
+    const stepperValue = ref("");
+
+    const close = () => {
+      show.value = false;
+    };
+
+    const confirmFn = () => {
+      show.value = false;
+      ctx.$toast.loading({
+        mask: true,
+        duration: 1000, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "支付中..."
+      });
+
+      setTimeout(() => {
+        $router.push("/order/transactionDetails");
+      }, 1300);
+    };
+
+    const submitDelete = async () => {
+      await ctx.$dialog.confirm({
+        message: "确认删除这些商品？",
+        confirmButtonColor: "#D8182D",
+        cancelButtonColor: "#D8182D"
+      });
+      clearCart.value = true;
+    };
+
+    const submitSettlement = () => {
+      show.value = true;
+    };
+
+    const setCartMode = () => {
+      cartMode.value = !cartMode.value;
+    };
+
+    onMounted(() => {
+      ctx.$eventBus.$emit("changeTag", 2);
+    });
+
     return {
-      clearCart: false,
-      columns: 1,
-      cartMode: true, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
+      clearCart,
+      columns,
+      cartMode, // 购物车的模式，true 是显示出编辑按钮 false 是显示完成按钮,默认是false;
       defaultData: [
         {
           text: "Top-Pay",
@@ -190,7 +237,7 @@ export default {
           }
         ]
       },
-      show: false,
+      show,
       list: ["a"],
       lists: [
         {
@@ -236,54 +283,15 @@ export default {
           desc: "三彩预售新款短裙淑女裙淑女裙淑女裙淑女"
         }
       ],
-      checked: false,
-      stepperValue: "",
-      result: ["a", "b"]
+      checked,
+      stepperValue,
+      result: ["a", "b"],
+      close,
+      confirmFn,
+      submitSettlement,
+      submitDelete,
+      setCartMode
     };
-  },
-  created() {
-    console.log("======cart=>");
-  },
-  mounted() {
-    // TODO:
-    // this.$eventBus.$emit("changeTag", 2);
-  },
-  methods: {
-    close() {
-      this.show = false;
-    },
-    confirmFn() {
-      this.show = false;
-      this.$toast.loading({
-        mask: true,
-        duration: 1000, // 持续展示 toast
-        forbidClick: true, // 禁用背景点击
-        loadingType: "spinner",
-        message: "支付中..."
-      });
-
-      setTimeout(() => {
-        // this.$toast({
-        //   mask: false,
-        //   message: "支付成功~"
-        // });
-        this.$router.push("/order/transactionDetails");
-      }, 1300);
-    },
-    submitDelete() {
-      this.$dialog
-        .confirm({
-          message: "确认删除这些商品？",
-          confirmButtonColor: "#D8182D",
-          cancelButtonColor: "#D8182D"
-        })
-        .then(() => {
-          this.clearCart = true;
-        });
-    },
-    submitSettlement() {
-      this.show = true;
-    }
   }
 };
 </script>

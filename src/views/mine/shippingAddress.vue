@@ -78,11 +78,9 @@
 <script>
 export default {
   name: "",
-  data() {
+  setup() {
     return {};
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

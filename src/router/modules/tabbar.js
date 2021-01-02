@@ -1,5 +1,14 @@
+/*
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:05:34
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 15:26:00
+ * @FilePath: /refactor-with-vue3/src/router/modules/tabbar.js
+ */
 export default [{
-    path: 'index',
+    path: '/index',
     name: 'index',
     meta: {
       index: 1
@@ -7,7 +16,7 @@ export default [{
     component: () => import('@/views/home/index.vue')
   },
   {
-    path: 'classify',
+    path: '/classify',
     name: 'classify',
     meta: {
       index: 1
@@ -15,7 +24,7 @@ export default [{
     component: () => import('@/views/classify/index.vue')
   },
   {
-    path: 'shopCart',
+    path: '/shopCart',
     name: 'shopCart',
     meta: {
       index: 1
@@ -23,7 +32,7 @@ export default [{
     component: () => import('@/views/shopCart/index.vue')
   },
   {
-    path: 'mine',
+    path: '/mine',
     name: 'mine',
     meta: {
       index: 1

@@ -4,7 +4,7 @@
  * @Author: GitHubGanKai
  * @Date: 2020-12-27 20:41:48
  * @LastEditors: gankai
- * @LastEditTime: 2021-01-01 15:52:58
+ * @LastEditTime: 2021-01-02 20:29:34
  * @FilePath: /refactor-with-vue3/src/views/home/index.vue
 -->
 <template>
@@ -27,7 +27,7 @@
       :autoplay="3000"
       :show-indicators="false"
     >
-      <van-swipe-item v-for="(image, index) in homeImgs.value" :key="index">
+      <van-swipe-item v-for="(image, index) in homeImgs" :key="index">
         <img class="lazy_img" @click="handleClick" :src="image.imgUrl" />
       </van-swipe-item>
     </van-swipe>
@@ -179,7 +179,7 @@
         animated
       >
         <van-tab
-          v-for="(list, index) in tabArray.value"
+          v-for="(list, index) in tabArray"
           :title="list.describe"
           :name="list.type"
           :key="index"
@@ -239,47 +239,54 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, toRefs } from "vue";
-import axios from "@/plugins/axios";
+import { ref, reactive, onMounted, toRefs, getCurrentInstance } from "vue";
+import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
 import Tabbat from "@/components/tabbar";
 export default {
   name: "home",
   components: {
-    Tabbat,
+    Tabbat
   },
   setup(props, context) {
+    const { ctx } = getCurrentInstance();
+    const $store = useStore();
+    // ctx.$store === $store  ==>true 其实是同一个对象！
+
+    const $router = useRouter();
+    const $route = useRoute(); // 可以拿到所有和路由相关的参数
     const active = ref("");
     const timeData = ref(36000000);
-    const tabArray = reactive({ value: [] });
     const headerActive = ref(false);
-    const homeImgs = reactive({
-      value: [],
-    });
-    const tabImgs = reactive({
-      value: [],
+
+    const state = reactive({
+      homeImgs: [],
+      tabArray: []
     });
 
     const ball = reactive({
       show: false,
-      el: "",
+      el: ""
     });
 
-    axios.get("http://test.happymmall.com/home/homeData").then((res) => {
+    ctx.$http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { images, tabList } = res.data;
-      tabArray.value = tabList;
-      homeImgs.value = images;
+      state.tabArray = tabList;
+      state.homeImgs = images;
     });
+
     onMounted(() => {
-       // TODO:
-      //   $eventBus.$emit("changeTag", 0);
-      //   window.addEventListener("scroll", pageScroll);
+      ctx.$eventBus.$emit("changeTag", 0);
+      window.addEventListener("scroll", pageScroll);
     });
+
     const addToCart = (event, tag) => {
-      //   root.$store.commit('cart/addToCart', tag)
+      $store.commit("cart/addToCart", tag);
       ball.show = true;
       ball.el = event.target;
     };
-    const beforeEnter = (el) => {
+
+    const beforeEnter = el => {
       const dom = ball.el;
       const rect = dom.getBoundingClientRect();
       const x = rect.left - window.innerWidth * 0.6;
@@ -289,6 +296,7 @@ export default {
       const inner = el.querySelector(".inner");
       inner.style.transform = `translate3d(${x}px,0,0)`;
     };
+
     const enter = (el, done) => {
       document.body.offsetHeight;
       el.style.transform = "translate3d(0,0,0)";
@@ -296,13 +304,16 @@ export default {
       inner.style.transform = "translate3d(0,0,0)";
       el.addEventListener("transitionend", done);
     };
-    const afterEnter = (el) => {
+
+    const afterEnter = el => {
       ball.show = false;
       el.style.display = "none";
     };
-    const handleClick = (linkUrl) => {
-      root.$router.push("/classify/product");
+
+    const handleClick = linkUrl => {
+      $router.push("/classify/product");
     };
+
     const pageScroll = () => {
       const scrollTop =
         window.pageYOffset ||
@@ -312,23 +323,22 @@ export default {
         ? (headerActive.value = true)
         : (headerActive.value = false);
     };
+
     return {
       active,
       timeData,
-      tabArray,
       headerActive,
-      homeImgs,
       ...toRefs(ball),
+      ...toRefs(state),
       addToCart,
       beforeEnter,
       enter,
       afterEnter,
       handleClick,
-      pageScroll,
+      pageScroll
     };
-  },
+  }
 };
 </script>
 
-<style scoped lang="scss" src='./index.scss'>
-</style>
+<style scoped lang="scss" src="./index.scss"></style>

@@ -64,11 +64,9 @@
 <script>
 export default {
   name: "messageCenter",
-  data() {
+  setup() {
     return {};
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

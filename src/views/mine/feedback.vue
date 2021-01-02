@@ -31,11 +31,11 @@
             :autosize="{ minHeight: 280, maxHeight: 280 }"
             v-model="value"
             type="textarea"
+            :right-icon="`${remnant}/200`"
             placeholder="请填写问题描述"
             @input="descInput"
             :error="isDisInput"
           >
-            <span slot="right-icon">{{ remnant }}/200</span>
           </van-field>
         </van-cell-group>
       </ul>

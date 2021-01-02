@@ -1,3 +1,12 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2021-01-01 17:19:50
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 16:20:57
+ * @FilePath: /refactor-with-vue3/src/views/mine/addAddress.vue
+-->
 <template>
   <div class="add-address">
     <header class="page-header">
@@ -5,14 +14,13 @@
         <svg-icon icon-class="green-btn"></svg-icon>
       </span>
       <div class="header-content">新增所在地区</div>
-      <!-- <router-link class="appeal-record" to="/order/appealRecord" tag="span">删除</router-link> -->
     </header>
     <section class="address-content">
       <ul class="address-list">
         <li class="address-item">
           <van-cell title="联系人" />
           <div class="address-name">
-            <van-field v-model="value" placeholder="请输入姓名" />
+            <van-field v-model="userName" placeholder="请输入姓名" />
             <div class="gender-tags">
               <van-tag color="#E96258" plain>女士</van-tag>
               <van-tag color="#3A3A3A" plain>男士</van-tag>
@@ -22,13 +30,13 @@
         <li class="address-item">
           <van-cell title="电话" />
           <div class="address-name">
-            <van-field v-model="value" placeholder="手机号码" />
+            <van-field v-model="phoneNum" placeholder="手机号码" />
           </div>
         </li>
         <li class="address-item">
           <van-cell title="所在地区" />
           <div class="address-name" @click="show = true">
-            <van-field v-model="value" disabled placeholder="请选择省市区" />
+            <van-field v-model="are" disabled placeholder="请选择省市区" />
             <div>
               <svg-icon icon-class="arrow"></svg-icon>
             </div>
@@ -38,7 +46,7 @@
           <van-cell title="地址" />
           <div class="address-name">
             <van-field
-              v-model="value"
+              v-model="room"
               placeholder="如：道路、门牌号、小区、楼栋号、单元室等"
             />
           </div>
@@ -71,37 +79,37 @@
 </template>
 
 <script>
+import { ref, getCurrentInstance } from "vue";
 import areaList from "../../mock/area";
 export default {
   name: "addAddress",
-  data() {
-    return {
-      value: "",
-      show: false,
-      parentAreaId: 0,
-      areaList: areaList
-      // areaList: []
+  setup() {
+    const { ctx } = getCurrentInstance();
+    const userName = ref("gk");
+    const phoneNum = ref(15797802021);
+    const are = ref("gd");
+    const room = ref(110);
+    const show = ref(false);
+    const parentAreaId = ref(0);
+
+    const handleCancel = () => {
+      show.value = false;
     };
-  },
-  created() {
-    this.getAreas();
-  },
-  methods: {
-    // 分层获取中国地址信息
-    getAreas() {
-      this.$http
-        .get(`/api/address/getCnAreaList?parentAreaId=${this.parentAreaId}`)
-        .then(response => {
-          console.log("=====response.data==>", response.data.content);
-          // this.areaList = response.data.content
-        });
-    },
-    handleCancel() {
-      this.show = false;
-    },
-    handleConfirm() {
-      this.show = false;
-    }
+
+    const handleConfirm = () => {
+      show.value = false;
+    };
+
+    return {
+      userName,
+      phoneNum,
+      are,
+      room,
+      show: false,
+      handleCancel,
+      handleConfirm,
+      areaList
+    };
   }
 };
 </script>

@@ -35,10 +35,12 @@
           :title="item.name"
           :key="index"
         >
-          <div class="slot-title" slot="title">
-            <p class="tab-title">{{ item.title }}</p>
-            <span class="tab-name">{{ item.name }}</span>
-          </div>
+          <template #title>
+            <div class="slot-title">
+              <p class="tab-title">{{ item.title }}</p>
+              <span class="tab-name">{{ item.name }}</span>
+            </div>
+          </template>
 
           <main class="main-box">
             <ul class="card-box" v-for="(item, index) in cardList" :key="index">
@@ -118,7 +120,7 @@
 <script>
 export default {
   name: "newProductLaunch", // 新品首发
-  data() {
+  setup() {
     return {
       active: "1",
       show: false,
@@ -240,9 +242,7 @@ export default {
         }
       }
     };
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 

@@ -11,18 +11,6 @@
       <h6>Chain Mall</h6>
       <span class="version">版本1.0.1</span>
     </div>
-    <!-- <section class="setting-content">
-      <ul class="setting-list">
-        <li class="setting-item">
-          <span class="setting-msg">服务协议</span>
-          <van-icon class="icon" name="arrow" />
-        </li>
-        <router-link tag="li" class="setting-item" to="/setting/aboutAs">
-          <span class="setting-msg">隐私条款</span>
-          <van-icon class="icon" name="arrow" />
-        </router-link>
-      </ul>
-    </section>-->
   </div>
 </template>
 
