@@ -1,3 +1,13 @@
+<!--
+ * @version: v 1.0.0
+ * @Github: https://github.com/GitHubGanKai
+ * @Author: GitHubGanKai
+ * @Date: 2020-04-03 11:51:26
+ * @LastEditors: gankai
+ * @LastEditTime: 2021-01-02 20:55:34
+ * @FilePath: /vue-jd-h5/README.md
+ -->
+
 <div style="text-align:center">
 <img width='110' height='200'  src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/home_img.jpg' />
 <img width='110px' height='200' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/cart_home.jpg' />
@@ -22,7 +32,7 @@
 
 ##  项目介绍
 
-`vue3-jd-h5`是一个电商H5页面前端项目，基于**Vue 3.0.0-beta.1** +  Vant 实现，主要包括首页、分类页面、我的页面、购物车等。
+`vue3-jd-h5`是一个电商H5页面前端项目，基于**Vue 3.0.0** +  **Vant 3.0.0** 实现，主要包括首页、分类页面、我的页面、购物车等。
 
 📖本地线下代码**vue2.6**在分支<a target='_blank' href='https://github.com/GitHubGanKai/vue-jd-h5/blob/demo/README.md'>demo</a>中，使用**mockjs**数据进行开发，效果图请点击🔗<a target='_blank' href='http://gankai.gitee.io/vue-jd-h5/index'>这里</a>
 
@@ -46,21 +56,21 @@ git clone https://github.com/GitHubGanKai/vue-jd-h5.git
 ```bash
 gankaideMacBook-Pro:vue-jd-h5 gankai$ git branch -a
   demo
-  demo_vue3
+  vue-next
   dev
   feature
   gh-pages
 * master
   remotes/origin/HEAD -> origin/master
   remotes/origin/demo
-  remotes/origin/demo_vue3
+  remotes/origin/vue-next
   remotes/origin/dev
   remotes/origin/feature
   remotes/origin/gh-pages
   remotes/origin/master
 ```
 
-3. 切换到分支**demo_vue3**开始进行开发！
+3. 切换到分支**vue-next**开始进行开发！
 
 4. 在 IDEA 命令行中运行命令：npm install,下载相关依赖;
 
@@ -94,31 +104,27 @@ gankaideMacBook-Pro:~ gankai$ nrm ls
 
 ### 安装
 
-进入刚才clone下来的项目根目录，安装`@vue/composition-api` 体验 vue3 新特性。
+进入刚才clone下来的项目根目录，安装相关依赖，体验 vue3 新特性。
 
 `npm`安装：
 
 ```javascript
-npm install @vue/composition-api --save
+npm install 
 ```
 
 `yarn`安装：
 
 ```javascript
-yarn add @vue/composition-api
+yarn 
 ```
 
 **CDN**
 
 ```html
-<script src="https://unpkg.com/@vue/composition-api/dist/vue-composition-api.umd.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
 ```
 
-通过全局变量 `window.vueCompositionApi` 来使用。
-
 ### 使用
-
-在使用任何 `@vue/composition-api` 提供的能力前，必须先通过 `Vue.use()` 进行安装:
 
 在入口文件`main.js`中：
 
@@ -264,8 +270,8 @@ export default {
     }
   },
   setup(initProps,setupContext) { 
-    // ⚠️注意，如果是通过vue add vue-next添加的这个地方需要结构出ctx
-    const ctx = getCurrentInstance();
+  
+    const { ctx } = getCurrentInstance();
     const iconName = computed(() => {
       return `#icon-${initProps.iconClass}`;
     });
@@ -593,8 +599,6 @@ watch(
 
 ```
 
-
-
 `watch`和组件的生命周期绑定，当组件卸载后，watch也将自动停止。在其他情况下，它返回停止句柄，可以调用该句柄以显式停止观察程序：
 
 ```javascript
@@ -690,12 +694,4 @@ vue3中，新增 `Composition API`。而且新的`API`兼容 `Vue2.x`，只需�
 
 
 在[bilibili](https://search.bilibili.com/all?keyword=VUE3.0&from_source=nav_search&spm_id_from=333.851.b_696e7465726e6174696f6e616c486561646572.10)直播的时候，Evan You也说了，目前vue3 beta版本，最重要的是**提升稳定性**，和对**第三方工具库的支持**，如果你是第三方库的作者，可以现在开始，熟悉熟悉源码了，我们开发者可以先读懂所有API的使用。
-
-
-## 抱歉
-
-⚠️本项目当前只修改了分支**demo_vue3**下的  `src/views/home/index.vue`和`src/views/classify/index.vue`这两个文件，但是，其他的修改也都一样，如果有兴趣的小伙伴可以自己fork过去，将其他页面也用Composition API3写一遍，自己练练手！熟悉一下新API，同时我也会将其他的页面慢慢完善起来！大家一起⛽️加油！当官方正式发布版本之后，我们可以快速上手！希望和大家江湖再见！
-
-
-
 
