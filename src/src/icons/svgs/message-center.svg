@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="73px" viewBox="0 0 72 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>订单信息 copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-copy" transform="translate(-96.000000, -1781.000000)" fill-rule="nonzero">
+            <g id="Group-7" transform="translate(48.000000, 1718.988709)">
+                <g id="Group-5" transform="translate(48.000000, 62.686763)">
+                    <g id="消息中心">
+                        <circle id="椭圆形-copy-5" fill="#FFBF44" cx="36" cy="36" r="36"></circle>
+                        <path d="M56,52 C56,50.3677663 52.1015818,48.467638 51.9891842,46.8948276 C50.7704968,29.8414001 49.1788421,17 35.9435894,17 C22.7083366,17 20.9155085,29.5234165 19.8474177,46.8948276 C19.7636369,48.2574384 16,50.5940435 16,52 L56,52 Z" id="Path" stroke="#FFFFFF" stroke-width="3"></path>
+                        <path d="M39.5381869,16.4006453 C39.8330381,15.9825468 40,15.5058969 40,15 C40,13.3431458 38.209139,12 36,12 C33.790861,12 32,13.3431458 32,15 C32,15.5267632 32.181019,16.0218171 32.4989476,16.4520793" id="Path" stroke="#FFFFFF" stroke-width="3"></path>
+                        <path d="M29,52 C29,55.3137085 32.1340068,58 36,58 C39.8659932,58 43,55.3137085 43,52" id="Path" stroke="#FFFFFF" stroke-width="3"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg id="组_8" data-name="组 8" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d8182d;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g id="组_60" data-name="组 60">
+    <circle id="椭圆_1" data-name="椭圆 1" class="cls-1" cx="30" cy="30" r="30"/>
+    <line id="直线_1" data-name="直线 1" class="cls-2" y2="28" transform="translate(30.5 16.5)"/>
+    <line id="直线_2" data-name="直线 2" class="cls-2" y2="28" transform="translate(44.5 30.5) rotate(90)"/>
+  </g>
+</svg>

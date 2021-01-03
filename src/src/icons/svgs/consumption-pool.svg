@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="132px" height="132px" viewBox="0 0 132 132" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3 Copy 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="25.6507995%" y1="0%" x2="80.3874739%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FF9349" offset="0%"></stop>
+            <stop stop-color="#FEC428" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="66" cy="66" r="66"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的钱包" transform="translate(-141.000000, -367.000000)">
+            <g id="Group-3-Copy-5" transform="translate(141.000000, 367.000000)">
+                <g id="Path-Copy">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="Mask" fill="url(#linearGradient-1)" fill-rule="nonzero" xlink:href="#path-2"></use>
+                    <path d="M37.8202247,77.5126652 L53.567388,77.5126652 L63.7035829,50.4222935 C64.0906633,49.3877682 65.2431023,48.8629103 66.2776276,49.2499907 C66.8879434,49.4783478 67.3487423,49.9897187 67.5125414,50.6204342 L80.783411,101.7205 C81.0610612,102.789604 82.1528215,103.431205 83.2219259,103.153554 C83.8657928,102.98634 84.3843793,102.509934 84.6054869,101.882529 L93.1938226,77.5126652 L110.186196,77.5126652" stroke="#FFFFFF" stroke-width="8" opacity="0.100000001" stroke-linecap="round" fill-rule="nonzero" mask="url(#mask-3)"></path>
+                </g>
+                <path d="M27,67.3618012 L44.190758,67.3618012 L55.4572419,36.9860789 C55.8413609,35.9504504 56.9922937,35.4222975 58.0279222,35.8064165 C58.6421888,36.0342506 59.1059198,36.548492 59.2692592,37.1829619 L74.0517906,94.6037423 C74.327174,95.6734328 75.4175719,96.3173459 76.4872624,96.0419624 C77.1348108,95.8752562 77.656211,95.395971 77.876737,94.7647198 L87.4498795,67.3618012 L106,67.3618012" id="Path" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>
