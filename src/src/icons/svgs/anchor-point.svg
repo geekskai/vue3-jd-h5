@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>订单信息 copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="商品详情" transform="translate(-261.000000, -1903.000000)" fill-rule="nonzero" stroke="#949497" stroke-width="3">
+            <g id="Group-4" transform="translate(48.000000, 1896.000000)">
+                <g id="订单信息-copy-3" transform="translate(213.000000, 7.000000)">
+                    <g id="详情页-发货地">
+                        <path d="M22.5,42.4038462 C32.8846154,30.8987408 38.0769231,22.3692108 38.0769231,16.8152561 C38.0769231,8.48432405 31.1028971,1.73076923 22.5,1.73076923 C13.8971029,1.73076923 6.92307692,8.48432405 6.92307692,16.8152561 C6.92307692,22.3692108 12.1153846,30.8987408 22.5,42.4038462 Z" id="椭圆形"></path>
+                        <circle id="椭圆形" cx="22.5" cy="18.1730769" r="6.05769231"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

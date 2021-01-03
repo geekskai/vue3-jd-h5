@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="210px" height="204px" viewBox="0 0 210 204" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle Copy 10</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="帮助中心" transform="translate(-687.000000, -354.000000)">
+            <rect fill="#EFEFF4" x="0" y="0" width="1125" height="2436"></rect>
+            <rect id="Rectangle-Copy-8" fill="#FFFFFF" fill-rule="nonzero" x="48" y="294" width="1029" height="417" rx="24"></rect>
+            <g id="Group-9" transform="translate(687.000000, 354.000000)" fill-rule="nonzero">
+                <g id="Group-10" fill="#FF9351">
+                    <rect id="Rectangle-Copy-10" x="0" y="0" width="210" height="204" rx="24"></rect>
+                </g>
+                <g id="Group-2-Copy" transform="translate(61.000000, 43.000000)">
+                    <path d="M85,62.510977 L85,101.518152 C85,104.83186 82.3137085,107.518152 79,107.518152 L6,107.518152 C2.6862915,107.518152 4.05812251e-16,104.83186 0,101.518152 L0,21.5181518 C-4.05812251e-16,18.2044433 2.6862915,15.5181518 6,15.5181518 L48.2253378,15.5181518" id="Path" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"></path>
+                    <path d="M71.8671231,4.98808039 L84.3888622,4.98808039 L84.3888622,51.0061503 L71.8671231,51.0061503 L71.8671231,4.98808039 Z M78.1279926,-4.81904926 C81.5857754,-4.81904926 84.3888622,-2.01596248 84.3888622,1.4418203 L84.3888622,2.72489662 L71.8671231,2.72489662 L71.8671231,1.4418203 C71.8671231,-2.01596248 74.6702098,-4.81904926 78.1279926,-4.81904926 Z M78.1279926,63.8308583 L71.8671231,53.269334 L84.3888622,53.269334 L78.1279926,63.8308583 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(78.127993, 29.505905) rotate(-315.000000) translate(-78.127993, -29.505905) "></path>
+                    <rect id="Rectangle" fill="#FFFFFF" x="18" y="41.5181518" width="29" height="5" rx="2.5"></rect>
+                    <rect id="Rectangle-Copy-5" fill="#FFFFFF" x="18" y="58.5181518" width="29" height="5" rx="2.5"></rect>
+                    <rect id="Rectangle-Copy-6" fill="#FFFFFF" x="18" y="76.5181518" width="48" height="5" rx="2.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96px" height="96px" viewBox="0 0 96 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>取消订单 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="取消原因" transform="translate(-516.000000, -354.000000)">
+            <g id="取消订单-2" transform="translate(516.000000, 354.000000)">
+                <g id="取消订单">
+                    <g id="分组-3">
+                        <circle id="椭圆形" fill="#D8182D" fill-rule="nonzero" cx="48" cy="48" r="48"></circle>
+                        <path d="M46.3694054,19 L48.6418816,19 C51.9555901,19 54.6418816,21.6862915 54.6418816,25 C54.6418816,25.1797506 54.6338041,25.3594103 54.6176734,25.5384357 L52.0646444,53.8730547 C51.8540901,56.2098775 49.8954206,58 47.5491312,58 L47.5491312,58 C45.2012043,58 43.2395664,56.211943 43.0226509,53.8740575 L40.3950658,25.554316 C40.0889255,22.2547793 42.5155527,19.3318007 45.8150894,19.0256604 C45.9993667,19.0085626 46.1843365,19 46.3694054,19 Z" id="矩形" fill="#FFFFFF" fill-rule="nonzero"></path>
+                        <circle id="椭圆形" fill="#FFFFFF" fill-rule="nonzero" cx="47.5" cy="72.5" r="5.5"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

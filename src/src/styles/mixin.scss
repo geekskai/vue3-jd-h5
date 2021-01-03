@@ -1,0 +1,125 @@
+@import './base.scss';
+$orange: #FF6B01;
+$red: #F63515;
+$bc: #F7F7F7;
+$fc:#fff;
+
+@mixin border-top-1px($color) {
+    &:before {
+        border-top: 1px solid $color;
+    }
+}
+
+@mixin border-right-1px($color) {
+    &:before {
+        border-right: 1px solid $color;
+    }
+}
+
+@mixin border-bottom-1px($color) {
+    &:before {
+        border-bottom: 1px solid $color;
+    }
+}
+
+@mixin border-left-1px($color) {
+    &:before {
+        border-left: 1px solid $color;
+    }
+}
+
+@mixin border-1px($color) {
+    position: relative;
+
+    &:after {
+        content: '';
+        pointer-events: none; //解决iphone上的点击无效Bug
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-origin: 0 0;
+        border: 1px solid $color;
+    }
+}
+
+//圆角
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+//1px底部边框
+@mixin border-1px($color) {
+    position: relative;
+
+    &:after {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid $color;
+        content: '';
+    }
+}
+
+//定位全屏
+@mixin allcover {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+//定位上下左右居中
+@mixin center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin ct {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin cl {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+//宽高
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+    font: #{$size}/#{$line-height} $family;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin boxSizing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between) {
+    display: flex;
+    justify-content: $type;
+}

@@ -4,27 +4,30 @@
  * @Author: GitHubGanKai
  * @Date: 2020-12-27 20:10:38
  * @LastEditors: gankai
- * @LastEditTime: 2021-01-03 15:53:33
- * @FilePath: /vue-jd-h5/src/router/index.js
+ * @LastEditTime: 2021-01-02 15:25:39
+ * @FilePath: /refactor-with-vue3/src/router/index.js
  */
 import { createRouter, createWebHistory } from 'vue-router'
+// import Home from '@/views/home/index.vue'
 
 const indexRouter = {
+  // 默认页面
   path: '/',
-  component: () => import('@/views/index'),
+  component: () => import( /* webpackChunkName: "index" */ '@/views/index'),
   redirect: '/index',
   children: []
 }
 
 const routes = [
   indexRouter,
+  // 无权限页面
   {
     path: '/nopermission',
     name: 'nopermission',
     meta: {
       index: 1
     },
-    component: () => import('@/views/error/NoPermission')
+    component: () => import( /* webpackChunkName: "NoPermission" */ '@/views/error/NoPermission')
   },
   {
     path: '/*',
@@ -32,7 +35,7 @@ const routes = [
     meta: {
       index: 1
     },
-    component: () => import('@/views/error/404')
+    component: () => import( /* webpackChunkName: "404" */ '@/views/error/404')
   },
 ]
 

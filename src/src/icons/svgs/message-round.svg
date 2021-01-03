@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>订单信息 copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="订单详情-待收货" transform="translate(-108.000000, -1470.000000)" fill-rule="nonzero">
+            <g id="Group" transform="translate(48.000000, 1006.000000)">
+                <g id="分组-7" transform="translate(60.000000, 464.000000)">
+                    <g id="订单信息-copy-3">
+                        <g id="买家留言">
+                            <circle id="椭圆形-copy-5" fill="#F3CA43" cx="36" cy="36" r="36"></circle>
+                            <path d="M36.5,57.1035636 L43.2717319,48.5 L53,48.5 C55.4852814,48.5 57.5,46.4852814 57.5,44 L57.5,25 C57.5,22.5147186 55.4852814,20.5 53,20.5 L20,20.5 C17.5147186,20.5 15.5,22.5147186 15.5,25 L15.5,44 C15.5,46.4852814 17.5147186,48.5 20,48.5 L29.7282681,48.5 L36.5,57.1035636 Z" id="矩形" stroke="#FFFFFF" stroke-width="3"></path>
+                            <circle id="椭圆形" fill="#FFFFFF" cx="25.5" cy="34.5" r="2.5"></circle>
+                            <circle id="椭圆形-copy" fill="#FFFFFF" cx="36.5" cy="34.5" r="2.5"></circle>
+                            <circle id="椭圆形-copy-2" fill="#FFFFFF" cx="47.5" cy="34.5" r="2.5"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
