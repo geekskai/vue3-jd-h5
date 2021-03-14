@@ -29,7 +29,7 @@
 </p>
 
 <p align='center'>
-  <a target='_blank' href='https://github.com/GitHubGanKai/vue3-jd-h5/blob/vue-next/README.md'> English</a>|<a target='_blank' href='https://github.com/GitHubGanKai/vue3-jd-h5/blob/vue-next/README-zh-CN.md'> 简体中文</a>
+  <a target='_blank' href='https://github.com/GitHubGanKai/vue3-jd-h5/blob/vue-next/README.md'> English</a>|<a target='_blank' href='https://github.com/GitHubGanKai/vue3-jd-h5/blob/vue-next/README-zh_CN.md'> 简体中文</a>
 </p>
 
 ##  Project Introduction
