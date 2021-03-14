@@ -178,8 +178,8 @@ In addition to the 2.x life cycle equivalent, the Composition API also provides 
 
 Both hooks received the options of `DebuggerEvent` and `onTrack` and `onTrigger` observers:
 
-javascript
-Export default value {
+```javascript
+export default  {
     onRenderTriggered(e){
       Debugger
       //Check which dependency caused the component to re-render
