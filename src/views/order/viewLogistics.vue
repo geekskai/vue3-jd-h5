@@ -109,9 +109,7 @@
             </span>
             <svg-icon icon-class="point"></svg-icon>
           </i>
-          <p>
-            【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门1111
-          </p>
+          <p>【深圳市】快件从深圳龙华区二部发出，正在发往江苏 是连云港三部门1111</p>
         </van-step>
         <van-step>
           <i slot="inactive-icon">
@@ -238,10 +236,10 @@ export default {
       display: flex;
       flex-direction: column;
     }
-    /deep/ .van-steps__items {
+    ::v-deep .van-steps__items {
       padding-left: 30px;
     }
-    /deep/ .van-step__title {
+    ::v-deep .van-step__title {
       padding-left: 12px;
       .active-text {
         color: #d8182d;

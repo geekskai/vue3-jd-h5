@@ -5,18 +5,13 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">商品申诉</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span"
-        >申诉记录</router-link
-      >
+      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img
-              src="../../assets/image/product/store-headerM.png"
-              class="header-img"
-            />
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
         </li>
@@ -41,12 +36,7 @@
     </section>
     <section class="info-form">
       <van-cell-group>
-        <van-field
-          v-model="username"
-          clearable
-          label="用户名"
-          placeholder="请输入姓名"
-        />
+        <van-field v-model="username" clearable label="用户名" placeholder="请输入姓名" />
         <van-field v-model="phone" label="手机号" placeholder="请输入手机号" />
         <van-field
           v-model="content"
@@ -55,11 +45,7 @@
           label="申诉内容"
           placeholder="请输入申诉内容"
         />
-        <van-field
-          label-width="200px"
-          disabled
-          label="图片上传（最多可上传5张）"
-        />
+        <van-field label-width="200px" disabled label="图片上传（最多可上传5张）" />
       </van-cell-group>
       <van-uploader v-model="fileList" multiple :max-count="5" />
     </section>
@@ -188,11 +174,11 @@ export default {
     margin-top: 20px;
     border-radius: 5px;
     background-color: #fff;
-    /deep/ .van-cell {
+    ::v-deep .van-cell {
       padding-left: 0;
       padding-right: 0;
     }
-    /deep/ .van-image img {
+    ::v-deep .van-image img {
       border-radius: 8px;
     }
   }
@@ -201,7 +187,7 @@ export default {
     padding: 0 16px;
     padding-top: 50px;
     padding-bottom: 10px;
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;

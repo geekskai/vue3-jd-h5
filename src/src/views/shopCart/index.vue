@@ -2,12 +2,8 @@
   <div class="shop-cart">
     <header class="page-header">
       <div class="header-content">购物车</div>
-      <span v-if="cartMode === false" class="appeal-record" @click="setCartMode"
-        >完成</span
-      >
-      <span v-if="cartMode === true" class="appeal-record" @click="setCartMode"
-        >编辑</span
-      >
+      <span v-if="cartMode === false" class="appeal-record" @click="setCartMode">完成</span>
+      <span v-if="cartMode === true" class="appeal-record" @click="setCartMode">编辑</span>
     </header>
     <section class="cart-empty" v-if="clearCart === true">
       <ul class="empty-content">
@@ -19,9 +15,7 @@
           <p>去看看心仪的商品吧~</p>
         </li>
         <li class="item-btn">
-          <router-link to="/classify" class="hairline-btn" tag="span"
-            >立即去购物</router-link
-          >
+          <router-link to="/classify" class="hairline-btn" tag="span">立即去购物</router-link>
         </li>
       </ul>
     </section>
@@ -30,10 +24,7 @@
         <van-checkbox v-model="checked" checked-color="#91C95B">
           <li class="checkbox-all">
             <div class="store-info">
-              <img
-                src="../../assets/image/product/store-headerM.png"
-                class="header-img"
-              />
+              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
               <span>店铺名称</span>
             </div>
           </li>
@@ -42,11 +33,7 @@
           <ul v-for="(item, index) in list" :key="index">
             <div class="order-info">
               <li class="check-item">
-                <van-checkbox
-                  :key="index"
-                  checked-color="#91C95B"
-                  :name="item"
-                ></van-checkbox>
+                <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
               </li>
               <img src="../../assets/image/shopCart/购物车-1.png" />
               <li class="order-detail">
@@ -75,10 +62,7 @@
         <van-checkbox v-model="checked" checked-color="#91C95B">
           <li class="checkbox-all">
             <div class="store-info">
-              <img
-                src="../../assets/image/product/store-headerM.png"
-                class="header-img"
-              />
+              <img src="../../assets/image/product/store-headerM.png" class="header-img" />
               <span>店铺名称</span>
             </div>
           </li>
@@ -87,11 +71,7 @@
           <ul v-for="(item, index) in lists" :key="index">
             <div class="order-info">
               <li class="check-item">
-                <van-checkbox
-                  :key="index"
-                  checked-color="#91C95B"
-                  :name="item"
-                ></van-checkbox>
+                <van-checkbox :key="index" checked-color="#91C95B" :name="item"></van-checkbox>
               </li>
               <img :src="item.imgSrc" />
               <li class="order-detail">
@@ -119,21 +99,13 @@
     </div>
     <div v-if="clearCart === false">
       <section v-if="cartMode" class="options-edit">
-        <van-submit-bar
-          :price="20000"
-          button-text="结算"
-          @submit="submitSettlement"
-        >
-          <van-checkbox v-model="checked" checked-color="#91C95B"
-            >全选</van-checkbox
-          >
+        <van-submit-bar :price="20000" button-text="结算" @submit="submitSettlement">
+          <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
         </van-submit-bar>
       </section>
       <section v-else class="options-delete">
         <van-submit-bar button-text="删除" @submit="submitDelete">
-          <van-checkbox v-model="checked" checked-color="#91C95B"
-            >全选</van-checkbox
-          >
+          <van-checkbox v-model="checked" checked-color="#91C95B">全选</van-checkbox>
         </van-submit-bar>
       </section>
     </div>
@@ -350,14 +322,14 @@ export default {
     }
   }
   .options-edit {
-    /deep/ .van-checkbox {
+    ::v-deep .van-checkbox {
       padding-left: 24px;
       .van-checkbox__label {
         font-size: 13px;
         color: #949497;
       }
     }
-    /deep/ .van-submit-bar {
+    ::v-deep .van-submit-bar {
       .van-submit-bar__bar {
         height: 44px;
         line-height: 44px;
@@ -368,7 +340,7 @@ export default {
         color: #333333;
       }
     }
-    /deep/ .van-submit-bar__price {
+    ::v-deep .van-submit-bar__price {
       color: #d8182d;
       font-size: 17px;
       font-weight: 600;
@@ -376,7 +348,7 @@ export default {
     }
   }
   .options-delete {
-    /deep/ .van-checkbox {
+    ::v-deep .van-checkbox {
       padding-left: 24px;
       float: left;
       .van-checkbox__label {
@@ -384,7 +356,7 @@ export default {
         color: #949497;
       }
     }
-    /deep/ .van-submit-bar {
+    ::v-deep .van-submit-bar {
       .van-submit-bar__bar {
         display: flex;
         justify-content: space-between;
@@ -398,7 +370,7 @@ export default {
       }
     }
   }
-  /deep/ .van-button--danger {
+  ::v-deep .van-button--danger {
     background-color: #d8182d;
     height: 44px;
     line-height: 44px;
@@ -412,7 +384,7 @@ export default {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-top: 20px;
-    /deep/ .van-checkbox {
+    ::v-deep .van-checkbox {
       padding-left: 0;
       .van-checkbox__label {
         font-size: 13px;
@@ -486,7 +458,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /deep/ .van-stepper__input {
+            ::v-deep .van-stepper__input {
               width: 31px;
               height: 22px;
               padding: 0;
@@ -495,14 +467,14 @@ export default {
               background-color: transparent;
               border: 1px solid #dbdbdb;
             }
-            /deep/ .van-stepper__plus {
+            ::v-deep .van-stepper__plus {
               border: 1px solid #dbdbdb;
               background-color: transparent;
               width: 16px;
               height: 22px;
               border-radius: 0;
             }
-            /deep/ .van-stepper__minus {
+            ::v-deep .van-stepper__minus {
               border-radius: 0;
               border: 1px solid #dbdbdb;
               background-color: transparent;

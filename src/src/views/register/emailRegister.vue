@@ -4,9 +4,7 @@
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <router-link class="appeal-record" to="/register/phoneRegister" tag="span"
-        >手机注册</router-link
-      >
+      <router-link class="appeal-record" to="/register/phoneRegister" tag="span">手机注册</router-link>
     </header>
     <div class="mall-logo">
       <img src="../../assets/image/setting/logo.png" />
@@ -15,29 +13,15 @@
       <span class="phone-number">请输入邮箱号</span>
       <p class="number-tips">请输入6位数验证码</p>
       <van-cell-group class="info-list">
-        <van-field
-          v-model="password"
-          type="textarea"
-          clearable
-          placeholder="请输入邮箱"
-        />
-        <van-field
-          v-model="sms"
-          label-width="150"
-          clearable
-          placeholder="邮箱验证码"
-        >
-          <van-button slot="button" size="small" type="default"
-            >获取验证码</van-button
-          >
+        <van-field v-model="password" type="textarea" clearable placeholder="请输入邮箱" />
+        <van-field v-model="sms" label-width="150" clearable placeholder="邮箱验证码">
+          <van-button slot="button" size="small" type="default">获取验证码</van-button>
         </van-field>
         <van-field class="temp-empty" />
       </van-cell-group>
     </section>
     <div class="login-register-btns">
-      <router-link class="login-btn" to="/register/emailRegisterTwo" tag="span"
-        >下一步</router-link
-      >
+      <router-link class="login-btn" to="/register/emailRegisterTwo" tag="span">下一步</router-link>
     </div>
     <van-popup v-model="showPicker" position="bottom">
       <van-picker
@@ -106,16 +90,16 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
-    /deep/ .van-hairline--top-bottom::after {
+    ::v-deep .van-hairline--top-bottom::after {
       display: none;
     }
-    /deep/ .temp-empty {
+    ::v-deep .temp-empty {
       display: none;
     }
-    /deep/ .van-cell-group {
+    ::v-deep .van-cell-group {
       background-color: transparent;
     }
-    /deep/ .van-cell {
+    ::v-deep .van-cell {
       background-color: transparent;
       padding-left: 0;
       padding-right: 0;

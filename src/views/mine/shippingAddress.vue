@@ -67,9 +67,7 @@
 
     <div class="address-btn">
       <router-link to="/mine/addAddress">
-        <van-button plain type="danger" icon="plus" size="large"
-          >新增地址</van-button
-        >
+        <van-button plain type="danger" icon="plus" size="large">新增地址</van-button>
       </router-link>
     </div>
   </div>
@@ -170,11 +168,11 @@ export default {
     position: fixed;
     bottom: 10px;
     width: 92%;
-    /deep/ .van-button--large {
+    ::v-deep .van-button--large {
       height: 44px;
       line-height: 44px;
     }
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       color: #d8182d;
     }
   }

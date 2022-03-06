@@ -30,11 +30,7 @@
         swipeable
         :line-width="0"
       >
-        <van-tab
-          v-for="(item, index) in tabList"
-          :title="item.name"
-          :key="index"
-        >
+        <van-tab v-for="(item, index) in tabList" :title="item.name" :key="index">
           <template #title>
             <div class="slot-title">
               <p class="tab-title">{{ item.title }}</p>
@@ -45,10 +41,7 @@
           <main class="main-box">
             <ul class="card-box" v-for="(item, index) in cardList" :key="index">
               <aside>
-                <img
-                  class="card-img"
-                  src="../../assets/image/premiumRanking/demo1.png"
-                />
+                <img class="card-img" src="../../assets/image/premiumRanking/demo1.png" />
               </aside>
               <ul class="card-right">
                 <li class="item-title">
@@ -81,8 +74,7 @@
             padding: '0 10px',
             margin: '15px 0'
           }"
-          >分享到</van-divider
-        >
+        >分享到</van-divider>
         <ul class="share-list">
           <li class="share-item">
             <svg-icon icon-class="we-char"></svg-icon>
@@ -303,16 +295,16 @@ export default {
   }
   .new-product-tags {
     padding-top: 10px;
-    /deep/ .van-tabs--line .van-tabs__wrap {
+    ::v-deep .van-tabs--line .van-tabs__wrap {
       height: 50px;
     }
-    /deep/ .van-tab {
+    ::v-deep .van-tab {
       line-height: 18px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    /deep/ .van-tab--active {
+    ::v-deep .van-tab--active {
       display: flex;
       justify-content: center;
       .tab-title {

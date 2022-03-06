@@ -10,20 +10,13 @@
       <ul class="setting-list">
         <li class="setting-item">
           <van-field label="头像" disabled />
-          <img
-            src="../../assets/image/product/store-headerM.png"
-            class="header-img"
-          />
+          <img src="../../assets/image/product/store-headerM.png" class="header-img" />
         </li>
         <li @click="handlePhone" class="setting-item">
           <van-field label="昵称" disabled placeholder="昵称显示" />
           <van-icon class="icon" name="arrow" />
         </li>
-        <router-link
-          class="setting-item"
-          to="/mine/phoneNumberSetting"
-          tag="li"
-        >
+        <router-link class="setting-item" to="/mine/phoneNumberSetting" tag="li">
           <van-field label="手机号" disabled placeholder="13547008799" />
           <van-icon class="icon" name="arrow" />
         </router-link>
@@ -110,10 +103,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding-bottom: 20px;
-        /deep/ .van-cell {
+        ::v-deep .van-cell {
           padding: 0;
         }
-        /deep/ .van-cell::after {
+        ::v-deep .van-cell::after {
           border: none;
         }
         .header-img {
@@ -134,7 +127,7 @@ export default {
   }
   .popup-content {
     padding: 16px;
-    /deep/ .van-field {
+    ::v-deep .van-field {
       border: 1px solid #949497;
       border-radius: 2px;
     }

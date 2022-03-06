@@ -47,12 +47,7 @@
         </li>
         <li class="option-item">
           <div class="item-info">
-            <van-field
-              v-model="areaNode.country"
-              disabled
-              label="份数"
-              placeholder="20009"
-            />
+            <van-field v-model="areaNode.country" disabled label="份数" placeholder="20009" />
           </div>
           <span style="color:#3A3A3A">份</span>
         </li>
@@ -69,9 +64,7 @@
       </ul>
     </section>
     <div class="application-btn">
-      <van-button type="danger" @click="handleApplication" size="large"
-        >申请</van-button
-      >
+      <van-button type="danger" @click="handleApplication" size="large">申请</van-button>
     </div>
     <vue-pickers
       :show="show"
@@ -114,11 +107,7 @@
             <svg-icon icon-class="arrow-down"></svg-icon>
           </span>
         </li>
-        <drop-list
-          class="drop-list-play"
-          :config="configData"
-          ref="droplist"
-        ></drop-list>
+        <drop-list class="drop-list-play" :config="configData" ref="droplist"></drop-list>
         <li class="content-btn">
           <span class="know-btn" @click="handleClose">确认</span>
         </li>
@@ -323,7 +312,7 @@ export default {
     left: 0;
     right: 0;
     padding: 0 16px;
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;
