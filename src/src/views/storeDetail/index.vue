@@ -11,10 +11,7 @@
     </header>
     <section class="store-info">
       <ul class="store-top">
-        <img
-          src="../../assets/image/product/store-headerM.png"
-          class="store-header"
-        />
+        <img src="../../assets/image/product/store-headerM.png" class="store-header" />
         <li class="store-name">店铺名称</li>
         <li class="store-introd">
           <div>
@@ -45,18 +42,12 @@
           :class="{ active: orderBy === 'default' }"
           data-order-by="default"
           @click="selectOrder($event)"
-        >
-          默认排序
-        </div>
+        >默认排序</div>
         <div class="select-item" :class="{ active: orderBy === 'price_asc' }">
           按价格
           <!-- <i class="iconfont icon-up1" :class="{'active' : orderBy === 'price_asc'}"></i> -->
           <span class="select-arrows">
-            <i
-              class="sort-caret ascending"
-              data-order-by="price_asc"
-              @click="selectOrder($event)"
-            ></i>
+            <i class="sort-caret ascending" data-order-by="price_asc" @click="selectOrder($event)"></i>
             <i
               class="sort-caret descending"
               data-order-by="price_desc"
@@ -260,7 +251,7 @@ export default {
       .store-btn {
         text-align: center;
         padding-top: 20px;
-        /deep/ .van-button--danger {
+        ::v-deep .van-button--danger {
           background-color: #d8182d;
         }
       }

@@ -3,9 +3,7 @@
     <header class="header-box">
       <div class="header-search">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="/search"
-          >搜索</router-link
-        >
+        <router-link tag="span" class="search-title" to="/search">搜索</router-link>
       </div>
     </header>
     <section class="index-box">
@@ -96,13 +94,13 @@ export default {
   }
   .index-box {
     padding: 0 16px;
-    /deep/ .van-index-bar {
+    ::v-deep .van-index-bar {
       border-radius: 8px;
     }
-    /deep/ .van-index-bar__sidebar {
+    ::v-deep .van-index-bar__sidebar {
       color: #2b8bff;
     }
-    /deep/ .letter-idnex {
+    ::v-deep .letter-idnex {
       color: #2a2a2a;
       font-size: 20px;
       font-weight: 700;

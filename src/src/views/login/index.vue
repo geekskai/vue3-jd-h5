@@ -16,12 +16,7 @@
           placeholder="手机/邮箱"
           @click-right-icon="$toast('question')"
         />
-        <van-field
-          v-model="loginForm.password"
-          type="password"
-          clearable
-          placeholder="请输入密码"
-        />
+        <van-field v-model="loginForm.password" type="password" clearable placeholder="请输入密码" />
         <van-field class="temp-empty" />
         <span class="forget-pwd">
           <svg-icon icon-class="question-mark"></svg-icon>
@@ -108,18 +103,18 @@ export default {
         }
       }
     }
-    /deep/ .temp-empty {
+    ::v-deep .temp-empty {
       display: none;
     }
-    /deep/ .van-cell-group {
+    ::v-deep .van-cell-group {
       background-color: transparent;
     }
-    /deep/ .van-cell {
+    ::v-deep .van-cell {
       background-color: transparent;
       font-size: 17px;
       padding-top: 60px;
     }
-    /deep/ .van-hairline--top-bottom::after {
+    ::v-deep .van-hairline--top-bottom::after {
       font-size: 17px;
       border-width: 0;
     }

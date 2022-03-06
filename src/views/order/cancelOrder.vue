@@ -5,9 +5,7 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">取消原因</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span"
-        >申诉记录</router-link
-      >
+      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
     <div class="content-box">
       <span class="icon-svg" @click="$router.go(-1)">
@@ -31,8 +29,7 @@
             <van-cell title="地址填写错误" clickable @click="radio = '4'">
               <van-radio slot="right-icon" checked-color="#91C95B" name="4" />
             </van-cell>
-            <van-cell title="其他原因" clickable @click="radio = '5'">
-            </van-cell>
+            <van-cell title="其他原因" clickable @click="radio = '5'"></van-cell>
           </van-cell-group>
         </van-radio-group>
         <van-field
@@ -71,7 +68,7 @@ export default {
       radio: "1"
     };
   },
-  created() {},
+  created() { },
   methods: {
     onChange(picker, value, index) {
       console.log(`当前值：${value}, 当前索引：${index}`);
@@ -146,18 +143,18 @@ export default {
     border-radius: 8px;
     background-color: white;
     .item-content {
-      /deep/ .van-cell:not(:last-child)::after {
+      ::v-deep .van-cell:not(:last-child)::after {
         display: none;
       }
-      /deep/ .van-hairline--top-bottom::after {
+      ::v-deep .van-hairline--top-bottom::after {
         display: none;
       }
-      /deep/ .van-field__right-icon {
+      ::v-deep .van-field__right-icon {
         position: absolute;
         bottom: 5px;
         right: 0;
       }
-      /deep/ .van-cell {
+      ::v-deep .van-cell {
         padding: 10px 0;
         // padding-top: 20px;
       }
@@ -179,7 +176,7 @@ export default {
       font-size: 14px;
       padding-bottom: 10px;
     }
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;

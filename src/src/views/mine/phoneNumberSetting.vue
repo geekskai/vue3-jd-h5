@@ -101,14 +101,14 @@ export default {
         align-items: flex-start;
         flex-direction: column;
         padding: 10px 0;
-        /deep/ .van-cell {
+        ::v-deep .van-cell {
           padding-left: 0;
         }
-        /deep/ .van-cell__title span {
+        ::v-deep .van-cell__title span {
           font-size: 14px;
           color: #3a3a3a;
         }
-        /deep/ .van-cell:not(:last-child)::after {
+        ::v-deep .van-cell:not(:last-child)::after {
           border: none;
         }
         .address-name {
@@ -120,10 +120,10 @@ export default {
             flex: 1;
             justify-content: center;
             align-items: center;
-            /deep/ .van-tag::after {
+            ::v-deep .van-tag::after {
               border-radius: 8px;
             }
-            /deep/ .van-tag {
+            ::v-deep .van-tag {
               width: 78px;
               text-align: center;
               height: 22px;
@@ -140,14 +140,14 @@ export default {
     width: 92%;
     color: #fff;
 
-    /deep/ .van-button--large {
+    ::v-deep .van-button--large {
       height: 44px;
       line-height: 44px;
     }
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
     }
-    /deep/ .van-button__text {
+    ::v-deep .van-button__text {
       color: #fff;
     }
   }

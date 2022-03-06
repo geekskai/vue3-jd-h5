@@ -42,10 +42,7 @@
             </ul>
             <ul class="card-content">
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/err0.png"
-                />
+                <img class="item-img" src="../../assets/image/product/err0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -53,10 +50,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/err1.png"
-                />
+                <img class="item-img" src="../../assets/image/product/err1.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -64,10 +58,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/err1.png"
-                />
+                <img class="item-img" src="../../assets/image/product/err1.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -96,10 +87,7 @@
             </ul>
             <ul class="card-content">
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/watch0.png"
-                />
+                <img class="item-img" src="../../assets/image/product/watch0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -107,10 +95,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/watch1.png"
-                />
+                <img class="item-img" src="../../assets/image/product/watch1.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -118,10 +103,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/watch2.png"
-                />
+                <img class="item-img" src="../../assets/image/product/watch2.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -150,10 +132,7 @@
             </ul>
             <ul class="card-content">
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/bule0.png"
-                />
+                <img class="item-img" src="../../assets/image/product/bule0.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -161,10 +140,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/bule1.png"
-                />
+                <img class="item-img" src="../../assets/image/product/bule1.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -172,10 +148,7 @@
                 </div>
               </li>
               <li class="item-content">
-                <img
-                  class="item-img"
-                  src="../../assets/image/product/bule2.png"
-                />
+                <img class="item-img" src="../../assets/image/product/bule2.png" />
                 <svg-icon icon-class="processbar"></svg-icon>
                 <div class="prices-content">
                   <span class="real-price">¥988</span>
@@ -242,7 +215,7 @@ export default {
   }
   .page-content {
     margin-top: 60px;
-    /deep/ .van-tabs--line .van-tabs__wrap {
+    ::v-deep .van-tabs--line .van-tabs__wrap {
       height: 35px;
     }
 

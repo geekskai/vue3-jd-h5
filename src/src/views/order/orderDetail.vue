@@ -12,10 +12,7 @@
       <ul class="order-list">
         <li class="list-item">
           <div class="store-info">
-            <img
-              src="../../assets/image/product/store-headerM.png"
-              class="header-img"
-            />
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
           <span>待支付</span>
@@ -83,9 +80,7 @@
         </span>
         <span>59：59后取消订单</span>
       </div>
-      <van-button type="danger" @click="handlePay" size="large"
-        >立即支付</van-button
-      >
+      <van-button type="danger" @click="handlePay" size="large">立即支付</van-button>
     </div>
   </div>
 </template>
@@ -323,7 +318,7 @@ export default {
         font-weight: 700;
       }
     }
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;

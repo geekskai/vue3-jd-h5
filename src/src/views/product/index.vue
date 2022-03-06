@@ -53,29 +53,20 @@
       </li>
 
       <li class="item-info">
-        <van-field label="发货地" left-icon="location-o" disabled> </van-field>
+        <van-field label="发货地" left-icon="location-o" disabled></van-field>
       </li>
       <li class="item-info" @click="showPopup">
-        <van-field
-          label="选择"
-          disabled
-          placeholder="选择颜色分类，尺码 "
-        ></van-field>
+        <van-field label="选择" disabled placeholder="选择颜色分类，尺码 "></van-field>
         <van-icon name="arrow" />
       </li>
       <li class="store-info">
         <div class="store-detail" @click="handleStoreName">
-          <img
-            src="../../assets/image/product/store-header.png"
-            class="store-header"
-          />
+          <img src="../../assets/image/product/store-header.png" class="store-header" />
           <span class="store-name">店铺名称</span>
         </div>
         <div class="store-btn">
           <svg-icon icon-class="message-round"></svg-icon>
-          <van-button size="small" @click="handleConnectStore" type="danger"
-            >进店逛逛</van-button
-          >
+          <van-button size="small" @click="handleConnectStore" type="danger">进店逛逛</van-button>
         </div>
       </li>
     </ul>
@@ -132,41 +123,21 @@
           </li>
           <li class="popup-quantity">
             <span class="quantity-text">购买数量</span>
-            <van-stepper
-              v-model="stepperValue"
-              input-width="31px"
-              button-size="12px"
-            />
+            <van-stepper v-model="stepperValue" input-width="31px" button-size="12px" />
           </li>
         </ul>
       </section>
       <div class="product-footer">
         <van-action-bar>
-          <van-action-bar-button
-            @click="handleAddToCart"
-            type="warning"
-            text="加入购物车"
-          />
-          <van-action-bar-button
-            type="danger"
-            @click="handleToBuy"
-            text="立即购买"
-          />
+          <van-action-bar-button @click="handleAddToCart" type="warning" text="加入购物车" />
+          <van-action-bar-button type="danger" @click="handleToBuy" text="立即购买" />
         </van-action-bar>
       </div>
     </van-popup>
     <div class="product-footer">
       <van-action-bar>
-        <van-action-bar-button
-          @click="handleAddToCart"
-          type="warning"
-          text="加入购物车"
-        />
-        <van-action-bar-button
-          type="danger"
-          @click="handleToBuy"
-          text="立即购买"
-        />
+        <van-action-bar-button @click="handleAddToCart" type="warning" text="加入购物车" />
+        <van-action-bar-button type="danger" @click="handleToBuy" text="立即购买" />
       </van-action-bar>
     </div>
   </div>
@@ -289,7 +260,7 @@ export default {
   min-height: 100vh;
   margin-bottom: 45px;
   padding-bottom: 45px;
-  /deep/ .van-swipe-item {
+  ::v-deep .van-swipe-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -436,7 +407,7 @@ export default {
       justify-content: space-between;
       margin-top: 10px;
       margin-bottom: 10px;
-      /deep/ .van-button--danger {
+      ::v-deep .van-button--danger {
         background-color: #d8182d;
         border: 1px solid #d8182d;
       }
@@ -458,7 +429,7 @@ export default {
       .store-btn {
         padding-right: 16px;
         padding-top: 10px;
-        /deep/ .van-button {
+        ::v-deep .van-button {
           margin-left: 10px;
         }
       }
@@ -494,10 +465,10 @@ export default {
     }
     .html-class {
       margin-top: 20px;
-      /deep/ img {
+      ::v-deep img {
         width: 375px;
       }
-      /deep/ div {
+      ::v-deep div {
         background-size: 50% 100%;
       }
     }
@@ -620,7 +591,7 @@ export default {
             font-size: 14px;
             color: #3a3a3a;
           }
-          /deep/ .van-stepper__input {
+          ::v-deep .van-stepper__input {
             width: 31px;
             height: 20px;
             padding: 0;
@@ -629,14 +600,14 @@ export default {
             background-color: transparent;
             border: 1px solid #dbdbdb;
           }
-          /deep/ .van-stepper__plus {
+          ::v-deep .van-stepper__plus {
             border: 1px solid #dbdbdb;
             background-color: transparent;
             width: 16px;
             height: 22px;
             border-radius: 0;
           }
-          /deep/ .van-stepper__minus {
+          ::v-deep .van-stepper__minus {
             border-radius: 0;
             border: 1px solid #dbdbdb;
             background-color: transparent;
@@ -647,17 +618,17 @@ export default {
       }
     }
   }
-  /deep/ .van-popup--bottom {
+  ::v-deep .van-popup--bottom {
     border-radius: 16px 16px 0 0;
   }
   .product-footer {
-    /deep/ .van-button--warning {
+    ::v-deep .van-button--warning {
       background-color: #f3ca43;
       border: 1px solid #f3ca43;
       height: 44px;
       line-height: 44px;
     }
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       height: 44px;
       line-height: 44px;
       background-color: #d8182d;

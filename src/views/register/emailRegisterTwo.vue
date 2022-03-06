@@ -4,9 +4,7 @@
       <span class="btn-left" @click="$router.go(-1)">
         <svg-icon icon-class="gray-btn"></svg-icon>
       </span>
-      <router-link class="appeal-record" to="/register/phoneRegister" tag="span"
-        >手机注册</router-link
-      >
+      <router-link class="appeal-record" to="/register/phoneRegister" tag="span">手机注册</router-link>
     </header>
     <div class="mall-logo">
       <img src="../../assets/image/setting/logo.png" />
@@ -100,16 +98,16 @@ export default {
       padding-bottom: 32px;
       font-size: 11px;
     }
-    /deep/ .van-hairline--top-bottom::after {
+    ::v-deep .van-hairline--top-bottom::after {
       display: none;
     }
-    /deep/ .temp-empty {
+    ::v-deep .temp-empty {
       display: none;
     }
-    /deep/ .van-cell-group {
+    ::v-deep .van-cell-group {
       background-color: transparent;
     }
-    /deep/ .van-cell {
+    ::v-deep .van-cell {
       background-color: transparent;
       padding-left: 0;
       padding-right: 0;

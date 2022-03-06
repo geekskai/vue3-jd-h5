@@ -168,22 +168,22 @@ export default {
         padding-bottom: 22px;
         .collapse-box {
           width: 100%;
-          /deep/ .van-collapse-item__content {
+          ::v-deep .van-collapse-item__content {
             padding-left: 0;
             padding-right: 0;
           }
-          /deep/ .van-cell {
+          ::v-deep .van-cell {
             padding-left: 0;
             padding-right: 0;
           }
-          /deep/ .van-cell:not(:last-child)::after {
+          ::v-deep .van-cell:not(:last-child)::after {
             border: none;
           }
-          /deep/ .van-cell__title {
+          ::v-deep .van-cell__title {
             color: #3a3a3a;
             font-size: 17px;
           }
-          /deep/ .van-collapse-item__content {
+          ::v-deep .van-collapse-item__content {
             padding: 0;
             .help-item {
               padding: 5px 0;
@@ -192,7 +192,7 @@ export default {
             }
           }
         }
-        /deep/ .van-hairline--top-bottom::after {
+        ::v-deep .van-hairline--top-bottom::after {
           display: none;
         }
         .item-info {

@@ -5,18 +5,13 @@
         <svg-icon icon-class="white-btn"></svg-icon>
       </span>
       <div class="header-content">申诉详情</div>
-      <router-link class="appeal-record" to="/order/appealRecord" tag="span"
-        >申诉记录</router-link
-      >
+      <router-link class="appeal-record" to="/order/appealRecord" tag="span">申诉记录</router-link>
     </header>
     <section class="order-card">
       <ul class="order-list">
         <li class="order-item">
           <div class="store-info">
-            <img
-              src="../../assets/image/product/store-headerM.png"
-              class="header-img"
-            />
+            <img src="../../assets/image/product/store-headerM.png" class="header-img" />
             <span>店铺名称</span>
           </div>
         </li>
@@ -65,9 +60,7 @@
       </ul>
     </section>
     <div class="pay-btn">
-      <van-button type="danger" @click="handlePay" size="large"
-        >补充申诉信息</van-button
-      >
+      <van-button type="danger" @click="handlePay" size="large">补充申诉信息</van-button>
     </div>
   </div>
 </template>
@@ -190,15 +183,15 @@ export default {
     margin-top: 20px;
     border-radius: 5px;
     background-color: #fff;
-    /deep/ .van-cell {
+    ::v-deep .van-cell {
       padding-left: 0;
       padding-right: 0;
     }
-    /deep/ .van-field__control:disabled {
+    ::v-deep .van-field__control:disabled {
       color: #3a3a3a;
       font-size: 13px;
     }
-    /deep/ .van-image img {
+    ::v-deep .van-image img {
       border-radius: 8px;
     }
   }
@@ -207,7 +200,7 @@ export default {
     padding: 0 16px;
     padding-top: 50px;
     padding-bottom: 10px;
-    /deep/ .van-button--danger {
+    ::v-deep .van-button--danger {
       background-color: #d8182d;
       line-height: 44px;
       font-size: 18px;
