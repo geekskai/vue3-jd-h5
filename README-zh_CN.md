@@ -46,6 +46,9 @@
 
 🎉 我们公司正在快速发展中，需要 0 ～ 10 年工作经验的前端，如果各位大佬需要正在寻求机会需要内推的，可以随时联系我(欢迎打扰): gerke.gan@airgram.io
 
+
+https://user-images.githubusercontent.com/37830362/173991179-71272ccb-bf69-441f-8f15-46e8da403d2a.mov
+
 ## vue3 搭建步骤
 
 1. 首先,在本地选择一个文件，将代码 clone 到本地：
