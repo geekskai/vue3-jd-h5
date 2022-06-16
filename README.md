@@ -20,6 +20,8 @@
 <img width='110px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/master/src/assets/image/search_img.jpg' />
 </div>
 
+https://user-images.githubusercontent.com/37830362/173991179-71272ccb-bf69-441f-8f15-46e8da403d2a.mov
+
 # vue3-jd-h5
 
 <p align='center'>
