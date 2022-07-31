@@ -46,9 +46,9 @@
 
 🎉 如果您乐意捐赠，我们也非常欢迎，可以通过以下渠道进行捐款：
 
-<div style="text-align:center">
+<p style="text-align:center;margin:0">
 <img width='200px' height='200px' src='https://gitee.com/gankai/vue-jd-h5/raw/vue-next/src/assets/WechatIMG117.jpeg' />
-</div>
+</p>
 
 https://user-images.githubusercontent.com/37830362/173991179-71272ccb-bf69-441f-8f15-46e8da403d2a.mov
 
