@@ -128,7 +128,6 @@ import { useRouter } from 'vue-router';
 export default {
   name: "shopCart",
   setup() {
-    useRouter
     const { ctx } = getCurrentInstance();
     const $router = useRouter();
 
