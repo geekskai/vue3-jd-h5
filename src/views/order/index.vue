@@ -346,7 +346,7 @@ export default {
       setSearchWrapWidth,
       selectTag,
       searchWrap,
-      ...toRefs(categoryData)
+      ...toRefs(state)
     };
   },
 
