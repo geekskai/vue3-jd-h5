@@ -8,7 +8,7 @@
     "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "better-scroll": "^2.0.7",
     "core-js": "^3.6.5",
     "lib-flexible": "^0.3.2",
