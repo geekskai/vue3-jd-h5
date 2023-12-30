@@ -2,10 +2,10 @@
  * @version: v 1.0.0
  * @Github: https://github.com/GitHubGanKai
  * @Author: GitHubGanKai
- * @Date: 2020-04-03 11:51:26
+ * @Date: 2024-01-01 11:51:26
  * @LastEditors: gankai
- * @LastEditTime: 2021-01-02 20:55:34
- * @FilePath: /vue-jd-h5/README.md
+ * @LastEditTime: 2024-01-02 20:55:34
+ * @FilePath: /vue-jd-h5/README_CN.md
  -->
 
 <div style="text-align:center">
@@ -43,6 +43,8 @@
 📌 本项目还有很多不足之处，如果有想为此做贡献的伙伴，也欢迎给我们提出 PR，或者 issue ；
 
 🔑 本项目是免费开源的，如果有伙伴想要在次基础上进行二次开发，可以 clone 或者 fork 整个仓库，如果能帮助到您，我将感到非常高兴，如果您觉得这个项目不错还请给个 start！🙏
+
+💥 2024 年 Vue3.x ,Vite5.x, Vant,TypeScript 最新版本更新分支：👉 <a target='_blank' href='https://github.com/geekskai/vue3-jd-h5/tree/vue3-vite-vant-ts'>vue3-vite-vant-ts</a>
 
 🎉 如果您乐意捐赠，我们也非常欢迎，可以通过以下渠道进行捐款：
 
