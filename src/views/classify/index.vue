@@ -4,12 +4,8 @@
     <section class="search-wrap" ref="searchWrap">
       <list-scroll class="nav-side-wrapper">
         <ul class="nav-side">
-          <li
-            v-for="(item, index) in categoryDatas"
-            :key="index"
-            :class="{ active: currentIndex === index }"
-            @click="selectMenu(index)"
-          >
+          <li v-for="(item, index) in categoryDatas" :key="index" :class="{ active: currentIndex === index }"
+            @click="selectMenu(index)">
             <span>{{ item.name.slice(0, 2) }}</span>
             <span>{{ item.name.slice(2) }}</span>
           </li>
@@ -19,26 +15,14 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <template v-for="(category, index) in categoryDatas">
-              <div
-                class="swiper-slide"
-                :key="index"
-                v-if="currentIndex === index"
-              >
-                <img
-                  @click="selectProduct(category.value)"
-                  class="category-main-img"
-                  :src="category.imgUrl"
-                  v-if="category.imgUrl"
-                />
+              <div class="swiper-slide" :key="index" v-if="currentIndex === index">
+                <img @click="selectProduct(category.value)" class="category-main-img" :src="category.imgUrl"
+                  v-if="category.imgUrl" />
                 <div v-for="(products, index) in category.list" :key="index">
                   <p class="goods-title">{{ products.title }}</p>
                   <div class="category-list">
-                    <div
-                      class="product-item"
-                      @click="selectProduct(product.value)"
-                      v-for="(product, index) in products.productList"
-                      :key="index"
-                    >
+                    <div class="product-item" @click="selectProduct(product.value)"
+                      v-for="(product, index) in products.productList" :key="index">
                       <img class="item-img" :src="product.imgUrl" />
                       <p class="product-title">{{ product.title }}</p>
                     </div>
@@ -65,8 +49,10 @@ export default {
     ListScroll
   },
   setup(props) {
-    
-    const { ctx } = getCurrentInstance();
+
+    // const { ctx } = getCurrentInstance();
+    const { ctx, appContext } = getCurrentInstance();
+    const { $http, $eventBus } = appContext.config.globalProperties;
     const $router = useRouter();
 
     const searchWrap = ref(null);
@@ -91,8 +77,8 @@ export default {
 
     onMounted(async () => {
       setSearchWrapHeight();
-      ctx.$eventBus.$emit("changeTag", 1);
-      const { data } = await ctx.$http.get(
+      $eventBus.$emit("changeTag", 1);
+      const { data } = await $http.get(
         "http://test.happymmall.com/category/categoryData"
       );
       const { categoryData } = data;

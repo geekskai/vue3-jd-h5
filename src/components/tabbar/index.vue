@@ -9,26 +9,15 @@
 -->
 <template>
   <div class="tabbar">
-    <van-tabbar
-      route
-      v-model="active"
-      @change="tabChange(active)"
-      active-color="#FE4F70"
-      inactive-color="#949497"
-      style="z-index: 100"
-    >
+    <van-tabbar route v-model="active" @change="tabChange(active)" active-color="#FE4F70" inactive-color="#949497"
+      style="z-index: 100">
       <van-tabbar-item name="index" icon="home-o" to="/index">
         首页
       </van-tabbar-item>
       <van-tabbar-item name="classify" icon="apps-o" to="/classify">
         分类
       </van-tabbar-item>
-      <van-tabbar-item
-        name="shopCart"
-        icon="shopping-cart-o"
-        to="/shopCart"
-        :badge="count"
-      >
+      <van-tabbar-item name="shopCart" icon="shopping-cart-o" to="/shopCart" :badge="count">
         购物车
       </van-tabbar-item>
       <van-tabbar-item name="mine" icon="user-o" to="/mine">
@@ -47,11 +36,16 @@ export default {
     const { attrs, emit, slots } = context;
     const currentInstance = getCurrentInstance();
 
-    const { ctx } = currentInstance;
+    const { ctx, appContext } = currentInstance;
+    const { $http, $eventBus } = appContext.config.globalProperties;
+
+
+
+
     const active = ref(0);
     const store = useStore();
 
-    ctx.$eventBus.$on(
+    $eventBus.$on(
       "changeTag",
       tag => {
         active.value = tag;
@@ -59,7 +53,7 @@ export default {
       currentInstance
     );
 
-    const count = computed(() => store.state.cart.count);
+    const count = computed(() => 1);
     return {
       active,
       count

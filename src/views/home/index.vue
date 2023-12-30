@@ -12,21 +12,11 @@
     <header class="home-header" :class="{ active: headerActive }">
       <div class="header-search">
         <svg-icon class="search-icon" icon-class="search"></svg-icon>
-        <router-link tag="span" class="search-title" to="./search"
-          >推荐搜索 关键词</router-link
-        >
+        <router-link tag="span" class="search-title" to="./search">推荐搜索 关键词</router-link>
       </div>
-      <svg-icon
-        class="customer-service-icon"
-        icon-class="customer-service"
-      ></svg-icon>
+      <svg-icon class="customer-service-icon" icon-class="customer-service"></svg-icon>
     </header>
-    <van-swipe
-      class="swiper-carousel"
-      lazy-render
-      :autoplay="3000"
-      :show-indicators="false"
-    >
+    <van-swipe class="swiper-carousel" lazy-render :autoplay="3000" :show-indicators="false">
       <van-swipe-item v-for="(image, index) in homeImgs" :key="index">
         <img class="lazy_img" @click="handleClick" :src="image.imgUrl" />
       </van-swipe-item>
@@ -35,10 +25,7 @@
     <section class="home-tags">
       <ul class="tags-content">
         <router-link tag="li" class="tags-item" to="./search">
-          <svg-icon
-            class="tags-icon"
-            icon-class="chain-cat-boutique"
-          ></svg-icon>
+          <svg-icon class="tags-icon" icon-class="chain-cat-boutique"></svg-icon>
           <span class="item-text">链猫精品</span>
         </router-link>
         <router-link tag="li" class="tags-item" to="./search">
@@ -170,20 +157,9 @@
     </section>
 
     <div class="content-tabs">
-      <van-tabs
-        :swipe-threshold="5"
-        title-inactive-color="#3a3a3a"
-        title-active-color="#D8182D"
-        background="transparent"
-        v-model="active"
-        animated
-      >
-        <van-tab
-          v-for="(list, index) in tabArray"
-          :title="list.describe"
-          :name="list.type"
-          :key="index"
-        >
+      <van-tabs :swipe-threshold="5" title-inactive-color="#3a3a3a" title-active-color="#D8182D" background="transparent"
+        v-model="active" animated>
+        <van-tab v-for="(list, index) in tabArray" :title="list.describe" :name="list.type" :key="index">
           <template #title>
             <div class="slot-title">
               <b class="tab-title">{{ list.title }}</b>
@@ -204,9 +180,7 @@
                   <div class="goods-desc">
                     <span class="goods-price">
                       <i>{{ item.productCnyPrice }}</i>
-                      <span class="force-value"
-                        >{{ item.forceValue }}倍算力</span
-                      >
+                      <span class="force-value">{{ item.forceValue }}倍算力</span>
                     </span>
                     <span class="add-icon" @click="addToCart($event, item)">
                       <svg-icon icon-class="add"></svg-icon>
@@ -220,11 +194,7 @@
       </van-tabs>
     </div>
     <div class="ballWrap">
-      <transition
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @afterEnter="afterEnter"
-      >
+      <transition @before-enter="beforeEnter" @enter="enter" @afterEnter="afterEnter">
         <div class="ball" v-if="show">
           <li class="inner">
             <span class="cubeic-add" @click="addToCart($event, item)">
@@ -249,7 +219,8 @@ export default {
     Tabbat
   },
   setup(props, context) {
-    const { ctx } = getCurrentInstance();
+    const { ctx, appContext } = getCurrentInstance();
+    const { $http, $eventBus } = appContext.config.globalProperties;
     const $store = useStore();
     // ctx.$store === $store  ==>true 其实是同一个对象！
 
@@ -269,14 +240,14 @@ export default {
       el: ""
     });
 
-    ctx.$http.get("http://test.happymmall.com/home/homeData").then(res => {
+    $http.get("http://test.happymmall.com/home/homeData").then(res => {
       const { images, tabList } = res.data;
       state.tabArray = tabList;
       state.homeImgs = images;
     });
 
     onMounted(() => {
-      ctx.$eventBus.$emit("changeTag", 0);
+      $eventBus.$emit("changeTag", 0);
       window.addEventListener("scroll", pageScroll);
     });
 

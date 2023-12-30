@@ -110,14 +110,8 @@
       </section>
     </div>
 
-    <vue-pickers
-      :show="show"
-      :columns="columns"
-      :defaultData="defaultData"
-      :selectData="pickData"
-      @cancel="close"
-      @confirm="confirmFn"
-    ></vue-pickers>
+    <vue-pickers :show="show" :columns="columns" :defaultData="defaultData" :selectData="pickData" @cancel="close"
+      @confirm="confirmFn"></vue-pickers>
     <tabbar></tabbar>
   </div>
 </template>
@@ -128,7 +122,9 @@ import { useRouter } from 'vue-router';
 export default {
   name: "shopCart",
   setup() {
-    const { ctx } = getCurrentInstance();
+    // const { ctx } = getCurrentInstance();
+    const { ctx, appContext } = getCurrentInstance();
+    const { $http, $eventBus } = appContext.config.globalProperties;
     const $router = useRouter();
 
     const clearCart = ref(false);
@@ -144,7 +140,7 @@ export default {
 
     const confirmFn = () => {
       show.value = false;
-      ctx.$toast.loading({
+      $toast.loading({
         mask: true,
         duration: 1000, // 持续展示 toast
         forbidClick: true, // 禁用背景点击
@@ -158,7 +154,7 @@ export default {
     };
 
     const submitDelete = async () => {
-      await ctx.$dialog.confirm({
+      await $dialog.confirm({
         message: "确认删除这些商品？",
         confirmButtonColor: "#D8182D",
         cancelButtonColor: "#D8182D"
@@ -175,7 +171,7 @@ export default {
     };
 
     onMounted(() => {
-      ctx.$eventBus.$emit("changeTag", 2);
+      $eventBus.$emit("changeTag", 2);
     });
 
     return {
@@ -271,22 +267,26 @@ export default {
 .shop-cart {
   padding: 0 16px;
   margin-bottom: 100px;
+
   .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+
     .header-content {
       text-align: center;
       font-size: 18px;
       font-weight: 600;
       color: #3a3a3a;
     }
+
     .appeal-record {
       color: #d8182d;
       font-size: 13px;
     }
   }
+
   .cart-empty {
     .empty-content {
       display: flex;
@@ -295,19 +295,24 @@ export default {
       flex-direction: column;
       padding-top: 40px;
       padding-bottom: 50px;
+
       .img-cart {
         margin-bottom: 50px;
+
         .svg-icon {
           width: 156px;
           height: 161px;
         }
       }
+
       .item-text {
         color: #3a3a3a;
         font-size: 17px;
       }
+
       .item-btn {
         margin-top: 18px;
+
         .hairline-btn {
           width: 150px;
           height: 44px;
@@ -320,25 +325,31 @@ export default {
       }
     }
   }
+
   .options-edit {
     ::v-deep .van-checkbox {
       padding-left: 24px;
+
       .van-checkbox__label {
         font-size: 13px;
         color: #949497;
       }
     }
+
     ::v-deep .van-submit-bar {
       .van-submit-bar__bar {
         height: 44px;
         line-height: 44px;
       }
+
       bottom: 50px;
+
       .van-submit-bar__text {
         font-size: 17px;
         color: #333333;
       }
     }
+
     ::v-deep .van-submit-bar__price {
       color: #d8182d;
       font-size: 17px;
@@ -346,15 +357,18 @@ export default {
       padding-left: 5px;
     }
   }
+
   .options-delete {
     ::v-deep .van-checkbox {
       padding-left: 24px;
       float: left;
+
       .van-checkbox__label {
         font-size: 13px;
         color: #949497;
       }
     }
+
     ::v-deep .van-submit-bar {
       .van-submit-bar__bar {
         display: flex;
@@ -362,43 +376,53 @@ export default {
         height: 44px;
         line-height: 44px;
       }
+
       bottom: 50px;
+
       .van-submit-bar__text {
         font-size: 17px;
         color: #333333;
       }
     }
   }
+
   ::v-deep .van-button--danger {
     background-color: #d8182d;
     height: 44px;
     line-height: 44px;
+
     .van-button__text {
       font-size: 18px;
     }
   }
+
   .order-card {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-top: 20px;
+
     ::v-deep .van-checkbox {
       padding-left: 0;
+
       .van-checkbox__label {
         font-size: 13px;
         color: #949497;
       }
     }
+
     .checkbox-all {
       .store-info {
         display: flex;
         justify-content: center;
         align-items: center;
+
         .header-img {
           width: 24px;
           height: 24px;
         }
+
         span {
           color: #3a3a3a;
           font-size: 11px;
@@ -406,6 +430,7 @@ export default {
         }
       }
     }
+
     .order-list {
       .order-info {
         width: 100%;
@@ -413,10 +438,12 @@ export default {
         padding-bottom: 16px;
         display: flex;
         justify-content: flex-start;
+
         .check-item {
           display: flex;
           align-items: center;
         }
+
         img {
           margin-left: 5px;
           width: 100px;
@@ -425,12 +452,14 @@ export default {
           background-color: #d8182d;
           border-radius: 4px;
         }
+
         .order-detail {
           width: 55%;
           padding-left: 10px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+
           .info-one,
           .info-two {
             display: flex;
@@ -438,18 +467,22 @@ export default {
             justify-content: space-between;
             font-size: 13px;
           }
+
           .info-one {
             color: #3a3a3a;
             padding-bottom: 5px;
+
             span {
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
             }
           }
+
           .info-two {
             color: #949497;
           }
+
           .info-count {
             color: #d8182d;
             font-size: 14px;
@@ -457,6 +490,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             ::v-deep .van-stepper__input {
               width: 31px;
               height: 22px;
@@ -466,6 +500,7 @@ export default {
               background-color: transparent;
               border: 1px solid #dbdbdb;
             }
+
             ::v-deep .van-stepper__plus {
               border: 1px solid #dbdbdb;
               background-color: transparent;
@@ -473,6 +508,7 @@ export default {
               height: 22px;
               border-radius: 0;
             }
+
             ::v-deep .van-stepper__minus {
               border-radius: 0;
               border: 1px solid #dbdbdb;
@@ -483,15 +519,16 @@ export default {
           }
         }
       }
+
       .order-total {
         color: #949497;
         font-size: 14px;
         text-align: right;
+
         span {
           font-weight: 600;
         }
       }
     }
   }
-}
-</style>
+}</style>

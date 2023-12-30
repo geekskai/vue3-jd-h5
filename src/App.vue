@@ -1,32 +1,24 @@
-<!--
- * @version: v 1.0.0
- * @Github: https://github.com/GitHubGanKai
- * @Author: GitHubGanKai
- * @Date: 2020-04-29 22:08:12
- * @LastEditors: gankai
- * @LastEditTime: 2021-01-02 14:32:14
- * @FilePath: /refactor-with-vue3/src/App.vue
- -->
 <template>
-  <keep-alive>
-    <router-view />
-  </keep-alive>
+  <router-view />
 </template>
 
-<script>
-export default {
-  name: "App"
-};
+
+<script setup lang="ts">
 </script>
-<style lang="scss">
-@import "./styles/base.scss";
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background-color: #efeff4;
-  -webkit-overflow-scrolling: touch;
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
